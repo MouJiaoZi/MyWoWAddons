@@ -1,0 +1,6 @@
+## Interface: 110200
+## Title: playerInfo
+## Version: 1.0
+## SavedVariables:  PLAYER_INFO_SAVED
+
+PlayerInfo.lua

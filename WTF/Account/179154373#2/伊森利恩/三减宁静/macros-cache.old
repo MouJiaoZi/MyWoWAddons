@@ -1,0 +1,17 @@
+VER 3 0100000000000004 "1" "134400"
+#showtooltip
+/cast 夺魂咆哮
+/cancelaura 熊形态
+END
+VER 3 0100000000000003 "1" "134400"
+#showtooltip
+/cast [@cursor] 百花齐放
+END
+VER 3 0100000000000002 "愈合" "136085"
+#showtooltip 
+/cast [modifier:alt] 阳炎之怒;愈合
+END
+VER 3 0100000000000001 "阳炎" "236216"
+#showtooltip 阳炎术
+/cast [modifier:alt]  月火术;阳炎术
+END

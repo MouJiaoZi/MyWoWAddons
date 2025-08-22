@@ -1,0 +1,8 @@
+VER 3 0100000000000001 "DB_DHHavoc" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/click DB_DHHavoc
+END
+VER 3 0100000000000002 "DB_havocsingle" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/click DB_havocsingle
+END

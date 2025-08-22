@@ -1,0 +1,42 @@
+## Interface: 110107, 110200
+## Author: p3lim
+## Version: 110200.133-Release
+## Title: Molinari
+## Notes: One-click Milling, Prospecting, Disenchanting, Lockpicking, and more!
+## IconTexture: Interface\Icons\ability_miling
+## SavedVariables: MolinariDB2, MolinariDB3
+
+## X-Curse-Project-ID: 20338
+## X-WoWI-ID: 13188
+## X-Wago-ID: WqKQQEKx
+
+libs\Dashi\embed.xml
+
+locale\deDE.lua
+locale\esES.lua
+locale\esMX.lua
+locale\frFR.lua
+locale\itIT.lua
+locale\koKR.lua
+locale\ptBR.lua
+locale\ruRU.lua
+locale\zhCN.lua
+locale\zhTW.lua
+
+utils.lua
+addon.lua
+settings.lua
+
+data\openable.lua
+data\keys.lua
+data\nondisenchantable.lua
+data\prospectable.lua
+data\millable.lua
+data\disenchantable.lua
+data\scrappable.lua
+data\crushable.lua
+data\shatterable.lua
+data\transmutable.lua
+
+api\items.lua
+api\colors.lua

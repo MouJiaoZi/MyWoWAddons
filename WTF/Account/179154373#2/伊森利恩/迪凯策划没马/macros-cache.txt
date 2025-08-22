@@ -1,0 +1,9 @@
+VER 3 0100000000000002 "假死" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast 假死
+/cast 装死
+END
+VER 3 0100000000000001 "误导" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [@focus,exists]误导;[@pet]误导
+END

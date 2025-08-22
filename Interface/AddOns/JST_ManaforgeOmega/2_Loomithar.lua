@@ -1,0 +1,757 @@
+local T, C, L, G = unpack(JST)
+
+local function soundfile(filename, arg)
+	return string.format("[1302\\%s]%s", filename, arg or "")
+end
+
+--------------------------------Locals--------------------------------
+if G.Client == "zhCN" or G.Client == "zhTW" then
+	L["围墙"] = "围墙"
+	L["小组状态监控"] = "小组状态监控"
+	L["开始挡线"] = "开始挡线"
+elseif G.Client == "ruRU" then
+	--L["围墙"] = "Wall"
+	--L["小组状态监控"] = "Group status monitoring"
+	--L["开始挡线"] = "start soaking"
+else
+	L["围墙"] = "Wall"
+	L["小组状态监控"] = "Group status monitoring"
+	L["开始挡线"] = "start soaking"
+end
+---------------------------------Notes--------------------------------
+
+---------------------------------Data--------------------------------
+-- engage_id = 1810, -- 测试用
+-- npc_id = {"91784"}, -- 测试用
+
+G.Encounters[2686] = {
+	engage_id = 3131,
+	npc_id = {"233815"},
+	alerts = {
+		{ -- 巢穴编织
+			spells = {
+				{1237272, "1,5"},--【巢穴编织】
+				{1238502, "0"},--【织造结界】
+			},
+			options = {
+				{ -- 文字 巢穴编织 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["围墙"]..L["倒计时"],
+					data = {
+						spellID = 1237272,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_SUCCEEDED"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+							self.next_count = 1
+							self.diffcultyID = select(3, ...)
+							
+							if self.diffcultyID == 14 or self.diffcultyID == 17 then
+								T.Start_Text_DelayTimer(self, 44, L["围墙"], true)
+							else
+								T.Start_Text_DelayTimer(self, .5, L["围墙"], true)
+							end
+						elseif event == "ENCOUNTER_PHASE" then
+							T.Stop_Text_Timer(self)
+						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, _, spellID = ...
+							if unit == "boss1" and spellID == 1237272 then -- 巢穴编织
+								self.next_count = self.next_count + 1
+								
+								local dur
+								if self.diffcultyID == 15 then
+									dur = self.next_count % 2 == 1 and 41.5 or 43.5
+								elseif self.diffcultyID == 16 then
+									dur = self.next_count % 2 == 1 and (self.next_count % 4 == 3 and 36.5 or 34.5)
+								else
+									dur = 85
+								end
+								
+								if dur then
+									T.Start_Text_DelayTimer(self, dur, L["围墙"], true)
+								end
+							end
+						end
+					end,
+				},
+				{ -- 计时条 巢穴编织（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1237272,
+					text = L["围墙"],
+				},
+				{ -- 图标 巢穴编织（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1237307,
+					tip = L["定身"],
+				},
+				{ -- 团队框架高亮 巢穴编织（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 1237307,
+				},
+				{ -- 首领模块 姓名板标记 织造结界（✓）
+					category = "BossMod",
+					spellID = 1238502,
+					enable_tag = "none",
+					name = string.format(L["NAME姓名板标记"], T.GetNameFromNpcID("245173")..T.GetIconLink(1238502)),
+					points = {hide = true},
+					events = {
+						["NAME_PLATE_UNIT_ADDED"] = true,
+						["UNIT_AURA"] = true,
+					},
+					custom = {
+						{
+							key = "test_btn", 
+							text = L["测试姓名板标记"],
+							onclick = function(alert)
+								T.ShowAllNameplateExtraTex("check")
+								C_Timer.After(3, function()
+									T.HideAllNameplateExtraTex()
+								end)
+							end
+						},
+					},
+					init = function(frame)
+						frame.mobID = "245173"
+						frame.auraID = 1238502
+					end,
+					update = function(frame, event, ...)
+						if event == "NAME_PLATE_UNIT_ADDED" then
+							local unit = ...
+							local GUID = UnitGUID(unit)
+							local npcID = select(6, strsplit("-", GUID))
+							if npcID == frame.mobID then
+								if not AuraUtil.FindAuraBySpellID(frame.auraID, unit, "HELPFUL") then
+									T.ShowNameplateExtraTex(unit, "check")
+								else
+									T.HideNameplateExtraTex(unit)
+								end
+							end
+						elseif event == "UNIT_AURA" then
+							local unit = ...
+							if string.find(unit, "nameplate") then
+								local unit = ...
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								if npcID == frame.mobID then
+									if not AuraUtil.FindAuraBySpellID(frame.auraID, unit, "HELPFUL") then
+										T.ShowNameplateExtraTex(unit, "check")
+									else
+										T.HideNameplateExtraTex(unit)
+									end
+								end
+							end
+						end
+					end,
+					reset = function(frame, event)
+						T.HideAllNameplateExtraTex()
+					end,
+				},
+			},
+		},		
+		{ -- 注能晶塔
+			spells = {
+				{1247672, "12"},--【注能晶塔】
+				{1247029, "12"},--【超能新星】
+				{1247045, "12"},--【超能灌注】
+			},
+			options = {
+				{ -- 图标 超能灌注（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1247045,
+					tip = L["易伤"].."%s100%",
+				},
+			},
+		},
+		{ -- 注能束缚
+			spells = {
+				{1226315, "5"},--【注能束缚】
+				{1226366, "5"},--【活体流丝】
+				{1226721},--【缠丝陷阱】
+			},
+			options = {
+				{ -- 文字 注能束缚 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					ficon = "2",
+					preview = L["连线"]..L["倒计时"],
+					data = {
+						spellID = 1226315,
+						events =  {
+							["UNIT_AURA_ADD"] = true,
+							["ENCOUNTER_PHASE"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+							self.next_count = 1
+							self.last_cast = 0	
+							
+							T.Start_Text_DelayTimer(self, 22, L["连线"], true)
+						elseif event == "ENCOUNTER_PHASE" then
+							T.Stop_Text_Timer(self)
+							
+						elseif event == "UNIT_AURA_ADD" then
+							local unit, spellID = ...
+							if spellID == 1226311 and GetTime() - self.last_cast > 2 then
+								self.last_cast = GetTime()
+								self.next_count = self.next_count + 1
+								
+								local dur = self.next_count % 2 == 1 and 41 or 44
+								T.Start_Text_DelayTimer(self, dur, L["连线"], true)
+							end
+						end
+					end,
+				},
+				{ -- 图标 注能束缚（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1226311,
+					tip = L["连线"],
+					hl = "org",
+					sound = "[defense]",
+				},
+				{ -- 文字 注能束缚（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["拉断连线"],
+					data = {
+						spellID = 1226311,
+						events =  {
+							["UNIT_AURA_ADD"] = true,
+							["UNIT_AURA_REMOVED"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "UNIT_AURA_ADD" then
+							local unit, spellID = ...
+							if unit == "player" and spellID == self.data.spellID then
+								self.text:SetText(L["拉断连线"])
+								self:Show()
+								T.PlaySound("break")
+							end
+						elseif event == "UNIT_AURA_REMOVED" then
+							local unit, spellID = ...
+							if unit == "player" and spellID == self.data.spellID then
+								self:Hide()
+							end
+						end
+					end,
+				},
+				{ -- 团队框架高亮 注能束缚（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 1226311,
+				},
+				{ -- 图标 活体流丝（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1226366,
+					tip = L["快走开"],
+					sound = "[sound_dd]",
+				},
+				{ -- 图标 缠丝陷阱（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1226721,
+					tip = L["昏迷"],
+				},
+			},
+		},		
+		{ -- 过量输能爆发
+			spells = {
+				{1226395, "4"},--【过量输能爆发】
+			},
+			options = {
+				{ -- 文字 过量输能爆发 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["全团AE"].."+"..L["远离"]..L["倒计时"],
+					data = {
+						spellID = 1226395,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_SUCCEEDED"] = true,
+						},					
+						info = {
+							["all"] = {
+								[1] = {76.0, 85.0, 85.0, 85.0},
+							},
+						},
+						cd_args = {
+							round = true,
+						},
+					},
+					update = function(self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_SUCCEEDED", "boss1", 1226395, L["全团AE"].."+"..L["远离"], self, event, ...)
+					end,
+				},
+				{ -- 计时条 过量输能爆发（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1226395,
+					sound = "[aoe]cast",
+					text = L["全团AE"].."+"..L["远离"],
+					glow = true,
+				},
+				{ -- 图标 过量输能爆发（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1226395,
+					tip = L["DOT"],
+				},
+			},
+		},
+		{ -- 原始法术风暴
+			spells = {
+				{1226867},--【原始法术风暴】
+			},
+			options = {
+				{ -- 文字 原始法术风暴 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					ficon = "12",
+					preview = T.GetIconLink(1226867)..L["躲圈"],
+					data = {
+						spellID = 1226867,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["JST_CUSTOM"] = true,
+						},
+						sound = "mindstep",
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+							self.show_time = 1.5
+							
+							T.Start_Text_DelayTimer(self, 14, L["躲圈"])	
+							C_Timer.After(14, function()
+								if self.data and self.data.spellID then
+									T.FireEvent("JST_CUSTOM", "textalert"..self.data.spellID)
+								end
+							end)							
+						elseif event == "ENCOUNTER_PHASE" then
+							T.Stop_Text_Timer(self)
+							T.Start_Text_DelayTimer(self, 10, L["躲圈"])
+							C_Timer.After(10, function()
+								if self.data and self.data.spellID then
+									T.FireEvent("JST_CUSTOM", "textalert"..self.data.spellID)
+								end
+							end)
+						elseif event == "JST_CUSTOM" then
+							local tag = ...
+							if tag == "textalert"..self.data.spellID then
+								if C.DB["TextAlert"]["spell"][self.data.spellID]["sound"] then
+									T.PlaySound(self.data.sound)
+								end
+								
+								local dur = T.GetCurrentPhase() == 1 and 14.5 or 8
+								T.Start_Text_DelayTimer(self, dur, L["躲圈"])
+								C_Timer.After(dur, function()
+									if self.data and self.data.spellID then
+										T.FireEvent("JST_CUSTOM", "textalert"..self.data.spellID)
+									end
+								end)
+							end
+						end
+					end,
+				},
+			},
+		},
+		{ -- 奥术满溢
+			spells = {
+				{1231408, "2"},--【奥术满溢】
+			},
+			options = {
+				
+			},
+		},
+		{ -- 贯体束丝
+			spells = {
+				{1227263, "0"},--【贯体束丝】
+			},
+			options = {
+				{ -- 文字 贯体束丝 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					ficon = "0",
+					preview = L["射线"]..L["倒计时"],
+					data = {
+						spellID = 1227263,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_START"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then	
+							self.round = true
+							self.next_count = 1
+							self.diffcultyID = select(3, ...)
+							
+							local count = mod(self.next_count, 2) == 1 and "(1)" or "(2)"
+							if self.diffcultyID == 16 then
+								T.Start_Text_DelayTimer(self, 12.7, L["射线"].." "..count, true)
+							else
+								T.Start_Text_DelayTimer(self, 9.5, L["射线"].." "..count, true)
+							end
+							
+						elseif event == "ENCOUNTER_PHASE" then
+							T.Stop_Text_Timer(self)
+							
+						elseif event == "UNIT_SPELLCAST_START" then
+							local unit, _, spellID = ...
+							if unit == "boss1" and spellID == 1227263 then
+								self.next_count = self.next_count + 1
+								
+								local count = mod(self.next_count, 2) == 1 and "(1)" or "(2)"
+								local dur
+								if self.next_count % 2 == 0 then
+									dur = self.diffcultyID == 16 and 4 or 7
+								elseif self.next_count % 4 == 3 then
+									dur = 39.5
+								else
+									dur = self.diffcultyID == 16 and 36.5 or 33.5
+								end
+								
+								T.Start_Text_DelayTimer(self, dur, L["射线"].." "..count, true)
+							end
+						end
+					end,
+				},
+				{ -- 计时条 贯体束丝（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1227263,
+					show_tar = true,
+					sound = soundfile("1227263cast", "cast"),
+					text = L["射线"],
+				},
+				{ -- 嘲讽提示 贯体束丝（待测试）
+					category = "BossMod",
+					spellID = 1237212,
+					ficon = "0",
+					enable_tag = "role",					
+					name = L["嘲讽提示"]..T.GetIconLink(1237212),
+					points = {hide = true},
+					events = {					
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_STOP"] = true,
+						["UNIT_THREAT_SITUATION_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.aura_spellIDs = {
+							[1237212] = 1, -- 贯体束丝
+						}
+						frame.cast_spellIDs = {
+							[1227263] = true, -- 贯体束丝
+						}
+						
+						T.InitTauntAlert(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateTauntAlert(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetTauntAlert(frame)
+					end,
+				},
+				{ -- 换坦计时条 贯体束丝（✓）
+					category = "AlertTimerbar",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "group",
+					spellID = 1237212,
+					ficon = "0",
+					tank = true,
+				},
+			},
+		},
+		{ -- 流丝冲击
+			spells = {
+				{1231403, "0"},--【流丝冲击】
+			},
+			options = {
+				
+			},
+		},
+		{ -- 无缚狂怒
+			spells = {
+				{1228059, "1"},--【无缚狂怒】
+				{1243771, "1"},--【奥能黏液】
+			},
+			options = {
+				{ -- 图标 奥能黏液（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1243771,
+					tip = L["快走开"],
+					sound = "[sound_dd]",
+				},
+			},
+		},
+		{ -- 奥术暴怒
+			spells = {
+				{1227782},--【奥术暴怒】
+			},
+			options = {
+				{ -- 文字 奥术暴怒 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["推人"]..L["倒计时"],
+					data = {
+						spellID = 1227782,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_START"] = true,
+						},					
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+							self.count_down_start = 5						
+						elseif event == "ENCOUNTER_PHASE" then
+							T.Start_Text_DelayTimer(self, 17.2, L["推人"], true)
+						elseif event == "UNIT_SPELLCAST_START" then
+							local unit, _, spellID = ...
+							if unit == "boss1" and spellID == 1227782 then
+								T.Start_Text_DelayTimer(self, 20, L["推人"], true)
+							end
+						end
+					end,
+				},
+				{ -- 计时条 奥术暴怒（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1227782, -- 施法
+					spellIDs = {1227784}, -- 引导
+					sound = "[push]cast",
+					text = L["推人"],
+					glow = true,
+				},
+			},
+		},
+		{ -- 蠕行波
+			spells = {
+				{1227226, "0"},--【蠕行波】
+				{1242303, "12"},--【蠕行缠裹】
+			},
+			options = {
+				{ -- 文字 蠕行波 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["头前"]..L["倒计时"],
+					data = {
+						spellID = 1227226,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_START"] = true,
+						},					
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+						elseif event == "ENCOUNTER_PHASE" then							
+							T.Start_Text_DelayTimer(self, 10, L["头前"], true)
+						elseif event == "UNIT_SPELLCAST_START" then
+							local unit, _, spellID = ...
+							if unit == "boss1" and spellID == 1227226 then
+								T.Start_Text_DelayTimer(self, 20, L["头前"], true)
+							end
+						end
+					end,
+				},
+				{ -- 计时条 蠕行波（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1227226,
+					text = L["头前"],
+					glow = true,
+				},
+				{ -- 嘲讽提示 蠕行波（待测试）
+					category = "BossMod",
+					spellID = 1227163,
+					ficon = "0",
+					enable_tag = "role",					
+					name = L["嘲讽提示"]..T.GetIconLink(1227163),
+					points = {hide = true},
+					events = {					
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_STOP"] = true,
+						["UNIT_THREAT_SITUATION_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.aura_spellIDs = {
+							[1227163] = 1, -- 蠕行波
+						}
+						frame.cast_spellIDs = {
+							[1227226] = true, -- 蠕行波
+						}
+						
+						T.InitTauntAlert(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateTauntAlert(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetTauntAlert(frame)
+					end,
+				},
+				{ -- 换坦计时条 蠕行波（✓）
+					category = "AlertTimerbar",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "group",
+					spellID = 1227163,
+					ficon = "0",
+					tank = true,
+				},
+				{ -- 图标 蠕行波（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1227163,
+					tip = L["DOT"],
+				},
+				{ -- 首领模块 蠕行波 MRT轮次分配（✓）
+					category = "BossMod", 
+					spellID = 1227226,
+					ficon = "3,12",
+					enable_tag = "spell",
+					name = string.format(L["NAME技能轮次安排"], T.GetIconLink(1227226)),
+					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -270},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					custom = {
+						{
+							key = "hp_perc_sl",
+							text = L["血量阈值百分比"],
+							default = 65,
+							min = 20,
+							max = 100,
+						},
+					},
+					init = function(frame)
+						frame.sub_event = "SPELL_CAST_START"
+						frame.cast_id = 1227226
+						
+						frame.loop = true
+						frame.assign_count = 2
+						frame.alert_dur = 4
+						frame.raid_glow = "pixel"
+						
+						function frame:override_action(count, display_count)
+							T.PlaySound("sharedmg")
+							T.Start_Text_Timer(self.text_frame, self.alert_dur, string.format("|cff00ff00%s|r", L["分担"]), true)
+							
+							T.AddPersonalSpellCheckTag("bossmod"..self.config_id, C.DB["BossMod"][self.config_id]["hp_perc_sl"], {"TANK"})
+							C_Timer.After(self.alert_dur, function()
+								T.RemovePersonalSpellCheckTag("bossmod"..self.config_id)
+							end)
+						end
+						
+						function frame:override_action_inactive(count, display_count)
+							if UnitGroupRolesAssigned(unit) ~= "TANK" then
+								T.PlaySound("dontsharedmg")
+								T.Start_Text_Timer(self.text_frame, 4, string.format("|cffff0000%s|r", L["不分担"]), true)
+							end
+						end
+						
+						function frame:AutoSplit()
+							if not next(self.assignment) then
+								self.assignment = table.wipe(self.assignment)
+								self.assignment[1] = {}
+								self.assignment[2] = {}
+								
+								local GUIDs = {}
+								
+								for unit in T.IterateGroupMembers() do
+									local visible = UnitIsVisible(unit)
+									local online = UnitIsConnected(unit)
+
+									if visible and online and UnitGroupRolesAssigned(unit) ~= "TANK" then
+										local GUID = UnitGUID(unit)
+										table.insert(GUIDs, GUID)
+									end
+								end
+								
+								T.SortTable(GUIDs)
+								
+								for i, GUID in ipairs(GUIDs) do
+									if i <= #GUIDs / 2 then
+										table.insert(self.assignment[1], GUID)
+									else
+										table.insert(self.assignment[2], GUID)
+									end
+								end
+							end
+						end
+						
+						T.InitSpellBars(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateSpellBars(frame, event, ...)
+						
+						if event == "ENCOUNTER_START" then
+							 frame:AutoSplit()
+						end
+					end,
+					reset = function(frame, event)
+						T.ResetSpellBars(frame)
+					end,
+				},
+				{ -- 图标 蠕行缠裹（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "boss",
+					spellID = 1242303,
+					tip = L["BOSS吸收"],
+				},
+			},
+		},		
+		{ -- 阶段转换
+			title = L["阶段转换"],
+			options = {
+				{
+					category = "PhaseChangeData",
+					phase = 2,					
+					type = "CLEU",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 1228070, -- 无缚狂怒（✓）
+					count = 1,
+				},
+			},
+		},
+	},
+}

@@ -1,0 +1,4 @@
+VER 3 0100000000000005 "烈焰风暴" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [@cursor] 烈焰风暴
+END

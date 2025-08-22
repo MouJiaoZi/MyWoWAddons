@@ -1,0 +1,86 @@
+VER 3 010000000000007E " 战复" "INV_Misc_QuestionMark"
+#showtooltip 复活盟友
+/cast [@mouseover,exists,dead,help] 复活盟友
+END
+VER 3 010000000000007F " 白骨风暴" "INV_Misc_QuestionMark"
+#showtooltip  [talent:7/3] 白骨风暴;幻影步
+/use 棱彩装饰
+/cast [talent:7/3] 白骨风暴;幻影步
+END
+VER 3 0100000000000080 " 骨髓分裂" "INV_Misc_QuestionMark"
+#showtooltip
+/cast 精髓分裂
+/cast 亡者复生
+/cancleaura 203812
+/use 偷来的清扫器
+/use 荣誉旗帜
+/use 部落战争旌旗
+/use 黑冰
+/use 地精天气制造机 - 原型机01-B
+/use 可链接的罪碑
+/use 可链接的瓦格里王冠
+/use 暗月永久烟火
+/use 泡泡棒
+/use 洞穴探索者的火炬
+/use 艾泽里特焰火发射器
+/use 烟花之帽
+END
+VER 3 0100000000000081 "1" "INV_Misc_QuestionMark"
+#showtooltip
+/cast [@cursor] 反魔法领域
+END
+VER 3 0100000000000082 "天灾打击" "INV_Misc_QuestionMark"
+#showtooltip [talent:1/3]暗影之爪;天灾打击
+/cast [talent:1/3]暗影之爪;天灾打击
+/cancleaura 203812
+/use 偷来的清扫器
+/use 荣誉旗帜
+/use 部落战争旌旗
+/use 黑冰
+/use 地精天气制造机 - 原型机01-B
+/use 可链接的罪碑
+/use 可链接的瓦格里王冠
+/use 暗月永久烟火
+/use 泡泡棒
+/use 洞穴探索者的火炬
+/use 艾泽里特焰火发射器
+END
+VER 3 0100000000000083 "心灵冰冻" "INV_Misc_QuestionMark"
+#showtooltip 心灵冰冻
+/cast [@focus,exists,harm] 心灵冰冻
+/cast [@target,exists,harm] 心灵冰冻
+END
+VER 3 0100000000000084 "死亡凋零" "INV_Misc_QuestionMark"
+#showtooltip
+/cast [@cursor] 枯萎凋零
+/use [@cursor] 反末日扫帚
+END
+VER 3 0100000000000085 "爆发" "INV_Misc_QuestionMark"
+#showtooltip 爆发
+/targetenemy [nodead]
+/click LFDRoleCheckPopupAcceptButton
+/cast 爆发
+/cast 跳跃
+END
+VER 3 0100000000000086 "牺牲契约" "INV_Misc_QuestionMark"
+#showtooltip 牺牲契约
+/cast 亡者复生
+/cast 牺牲契约
+END
+VER 3 0100000000000087 "窒息" "INV_Misc_QuestionMark"
+#showtooltip[modifier:alt]撕扯;窒息
+/cast [modifier:alt]撕扯;窒息
+END
+VER 3 0100000000000088 "符文分流" "INV_Misc_QuestionMark"
+#showtooltip [modifier:alt]活力分流;符文分流
+/cast 活力分流
+/cast 符文分流
+END
+VER 3 010000000000008A "群拉白骨" "134400"
+#showtooltip
+/cast [known:108199] 血魔之握;[known:194844] 白骨风暴
+END
+VER 3 0100000000000089 "邪恶狂热" "INV_Misc_QuestionMark"
+#showtooltip
+/cast [talent:4/3]灵魂收割;[talent:7/3]邪恶突袭
+END

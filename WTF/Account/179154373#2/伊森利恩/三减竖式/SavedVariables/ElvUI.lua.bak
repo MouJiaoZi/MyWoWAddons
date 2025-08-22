@@ -1,0 +1,30 @@
+
+ElvCharacterDB = {
+["ConvertKeybindings"] = true,
+["ChatEditHistory"] = {
+},
+["ChatHistoryLog"] = {
+{
+"|cffffd000|Henchant:445354|h[卡兹阿加附魔: 附魔鎏金先驱纹章]|h|r|cffffd000|Henchant:445347|h[卡兹阿加附魔: 附魔符文先驱纹章]|h|r 全1星材料 下个人订单秒做",
+"叱咤丸-伊森利恩",
+"",
+"5. 大脚世界频道",
+"叱咤丸-伊森利恩",
+"",
+27,
+5,
+"大脚世界频道",
+0,
+1645,
+"Player-940-056514CD",
+0,
+false,
+false,
+false,
+false,
+[52] = "|cff8788ee叱咤丸|r",
+[51] = 1729911578,
+[50] = "CHAT_MSG_CHANNEL",
+},
+},
+}

@@ -1,0 +1,10 @@
+## Interface: 110100
+## Title: AddonSkin
+## Author: AddonSkin
+## Version: 1.0.0
+## Notes: AddonSkin
+## RequiredDeps: ElvUI
+## Group: ElvUI
+## DefaultState: Enabled
+
+load.xml

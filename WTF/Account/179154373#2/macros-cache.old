@@ -1,0 +1,42 @@
+VER 3 000000000000012D " " "INV_Misc_QuestionMark"
+#showtooltip item:168907
+#macro version 1
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","全息数字化炉石") end
+/click RHTB LeftButton 1
+END
+VER 3 000000000000012E "mount" "INV_Misc_QuestionMark"
+#showtooltip
+/use [advflyable,flyable,nochanneling]冰川狂潮;[nochanneling]劈背凿孔蟹
+END
+VER 3 000000000000012F "保护" "135833"
+/cancelaura 保护祝福
+END
+VER 3 0000000000000130 "取消治疗" "132095"
+/click StaticPopup1Button1
+/w 休闲小牛犊-试炼之环 帅牛
+END
+VER 3 0000000000000131 "披风" "INV_Misc_QuestionMark"
+#showtooltip
+/use 15
+END
+VER 3 0000000000000132 "排本" "134400"
+/run StaticPopup1Button1:Click()
+/run LFDRoleCheckPopupAcceptButton:Click()
+/run LFGDungeonReadyDialogEnterDungeonButton:Click()
+/script print("RUN")
+END
+VER 3 0000000000000133 "火箭腰带" "INV_Misc_QuestionMark"
+#showtooltip
+/use 6
+END
+VER 3 0000000000000134 "额外" "1044088"
+/click ExtraActionButton1
+END
+VER 3 0000000000000135 "饰品1" "INV_Misc_QuestionMark"
+#showtooltip
+/use 13
+END
+VER 3 0000000000000136 "饰品2" "INV_Misc_QuestionMark"
+#showtooltip
+/use 14
+END

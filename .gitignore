@@ -1,0 +1,7 @@
+*
+!.gitignore
+!Interface
+!Interface/AddOns
+!/Interface/AddOns/**
+!WTF
+!WTF/**

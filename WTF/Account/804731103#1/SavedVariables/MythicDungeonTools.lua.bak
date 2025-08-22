@@ -1,0 +1,11 @@
+
+MythicDungeonToolsDB = {
+["profileKeys"] = {
+["Fasas - Aegwynn"] = "Fasas - Aegwynn",
+},
+["global"] = {
+["minimap"] = {
+["showInCompartment"] = true,
+},
+},
+}

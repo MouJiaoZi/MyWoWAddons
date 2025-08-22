@@ -1,0 +1,8 @@
+## Interface: 11505, 40401, 110005
+## Title: Baganator (ElvUI Skin)
+## Version: 11
+## Author: plusmouse
+## RequiredDeps: Baganator, ElvUI
+## SavedVariables: BAGANATOR_ELVUI_USE_BAG_FONT
+
+Main.lua

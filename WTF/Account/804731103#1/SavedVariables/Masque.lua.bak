@@ -1,0 +1,152 @@
+
+MasqueDB = {
+["namespaces"] = {
+["LibDualSpec-1.0"] = {
+},
+},
+["profileKeys"] = {
+["Fasas - Aegwynn"] = "Default",
+},
+["profiles"] = {
+["Default"] = {
+["LDB"] = {
+["position"] = 2,
+["showInCompartment"] = true,
+["hide"] = true,
+},
+["CB_Warn"] = {
+["ElvUI"] = false,
+},
+["Groups"] = {
+["ElvUI_ActionBar 14"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 6"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 3"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 2"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 13"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar Leave Vehicle"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_Buffs"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Plater Nameplates_Cast Bar Icons"] = {
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Plater Nameplates_Buff Special"] = {
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Plater Nameplates_Boss Mod Icons"] = {
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 10"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Plater Nameplates_Aura Frame 1"] = {
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Plater Nameplates"] = {
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar Flyouts"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 5"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 4"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_Debuffs"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 8"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 15"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 9"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Plater Nameplates_Aura Frame 2"] = {
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 1"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_Stance Bar"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_ActionBar 7"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["ElvUI_Pet Bar"] = {
+["Backdrop"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["Masque"] = {
+["SkinID"] = "Zoomed",
+},
+},
+["API_VERSION"] = 110000,
+},
+},
+}

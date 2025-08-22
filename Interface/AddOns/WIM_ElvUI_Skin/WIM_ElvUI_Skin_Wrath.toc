@@ -1,0 +1,15 @@
+## Interface: 30404
+## Title: WIM - ElvUI Skin
+## Version: 110200.01-Release
+## Author: fuba
+## IconTexture: Interface\AddOns\WIM_ElvUI_Skin\fubaLogo
+## Original Author: Divico / Alleria EU
+## Notes: A simple skin matching the Design of Elvui
+## Dependencies: WIM
+
+## X-Curse-Project-ID: 299798
+## X-Wago-ID: 2jK8ZXNy
+
+# Core files
+skin.xml
+skin.lua

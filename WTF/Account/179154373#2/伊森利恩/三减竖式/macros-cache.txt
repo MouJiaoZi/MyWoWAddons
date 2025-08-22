@@ -1,0 +1,21 @@
+VER 3 0100000000000008 "传送门" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [@cursor] 恶魔传送门
+END
+VER 3 010000000000000A "打断" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [@focus,harm,exists,nodead]巨斧投掷(恶魔掌控技能);巨斧投掷(恶魔掌控技能)
+END
+VER 3 0100000000000009 "暗怒" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [@cursor] 暗影之怒
+END
+VER 3 0100000000000006 "爆燃冲刺" "538043"
+#showtooltip
+/cast 爆燃冲刺
+/cancelaura 爆燃冲刺
+END
+VER 3 0100000000000007 "马桶" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast [mod:alt]治疗石;制造灵魂之井
+END
