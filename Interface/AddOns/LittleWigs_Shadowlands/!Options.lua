@@ -136,16 +136,18 @@ BigWigs:AddSounds("Echelon", {
 
 BigWigs:AddColors("High Adjudicator Aleez", {
 	[323538] = "red",
-	[323597] = "cyan",
 	[323650] = {"blue","green","yellow"},
+	[323743] = "cyan",
+	[323848] = "cyan",
 	[329340] = "orange",
 	[1236512] = {"blue","orange"},
 })
 
 BigWigs:AddSounds("High Adjudicator Aleez", {
 	[323538] = "alert",
-	[323597] = "long",
 	[323650] = {"info","warning"},
+	[323743] = "long",
+	[323848] = "info",
 	[329340] = "alarm",
 	[1236512] = "alarm",
 })
@@ -713,6 +715,7 @@ BigWigs:AddColors("Myza's Oasis", {
 	[359019] = "green",
 	[359028] = "purple",
 	[1241032] = {"green","yellow"},
+	["notes"] = "cyan",
 	["stages"] = "cyan",
 })
 
@@ -729,7 +732,8 @@ BigWigs:AddSounds("Myza's Oasis", {
 	[357542] = "alarm",
 	[359019] = "info",
 	[359028] = "alert",
-	[1241032] = {"info","long"},
+	[1241032] = {"info","long","warning"},
+	["notes"] = "info",
 	["stages"] = "long",
 })
 

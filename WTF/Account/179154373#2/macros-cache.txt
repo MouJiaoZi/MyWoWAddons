@@ -1,7 +1,7 @@
 VER 3 000000000000012D " " "INV_MISC_QUESTIONMARK"
-#showtooltip item:180290
+#showtooltip item:162973
 #macro version 1
-/run if not InCombatLockdown() then RHT.b:SetAttribute("item","法夜炉石") end
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","冬天爷爷的炉石") end
 /click RHTB LeftButton 1
 END
 VER 3 000000000000012E "mount" "INV_Misc_QuestionMark"

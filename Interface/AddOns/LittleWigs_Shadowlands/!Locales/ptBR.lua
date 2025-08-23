@@ -28,6 +28,11 @@ end
 
 -- Halls of Atonement
 
+L = BigWigs:NewBossLocale("High Adjudicator Aleez", "ptBR")
+if L then
+	L.empty_anima_vessel = "Receptáculo de Ânima Vazio"
+end
+
 L = BigWigs:NewBossLocale("Halls of Atonement Trash", "ptBR")
 if L then
 	L.depraved_houndmaster = "Mestre de Matilha Depravado"
@@ -162,7 +167,8 @@ end
 
 L = BigWigs:NewBossLocale("Myza's Oasis", "ptBR")
 if L then
-	L.add_wave_killed = "Onda de adds derrotada (%d/%d)"
+	--L.notes = "Notes"
+	--L.notes_desc = "Show a message when the notes are available. Hit the notes with your instrument's ability to gain 'Jazzy'.\n\n|T237554:16|tJazzy\n{348567}"
 end
 
 L = BigWigs:NewBossLocale("So'leah", "ptBR")

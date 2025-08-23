@@ -1,7 +1,7 @@
 
 KeystoneLootCharDB = {
 ["selectedRaidItemLevel"] = 0,
-["selectedSlotId"] = 13,
+["selectedSlotId"] = 9,
 ["statHighlightingHasteEnabled"] = true,
 ["selectedDungeonItemLevel"] = 0,
 ["selectedClassId"] = 10,

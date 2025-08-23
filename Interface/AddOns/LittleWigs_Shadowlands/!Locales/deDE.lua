@@ -28,6 +28,11 @@ end
 
 -- Halls of Atonement
 
+L = BigWigs:NewBossLocale("High Adjudicator Aleez", "deDE")
+if L then
+	L.empty_anima_vessel = "Leeres Animagefäß"
+end
+
 L = BigWigs:NewBossLocale("Halls of Atonement Trash", "deDE")
 if L then
 	L.depraved_houndmaster = "Verkommener Hundemeister"
@@ -162,7 +167,8 @@ end
 
 L = BigWigs:NewBossLocale("Myza's Oasis", "deDE")
 if L then
-	L.add_wave_killed = "Add Welle getötet (%d/%d)"
+	L.notes = "Noten"
+	L.notes_desc = "Zeigt eine Nachricht an, sobald die Noten verfügbar sind. Noten mit der Instrumentenfähigkeit treffen um 'Jazzig' zu erhalten.\n\n|T237554:16|tJazzig\n{348567}"
 end
 
 L = BigWigs:NewBossLocale("So'leah", "deDE")

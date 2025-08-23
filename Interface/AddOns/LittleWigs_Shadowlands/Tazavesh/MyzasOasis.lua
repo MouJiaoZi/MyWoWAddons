@@ -37,7 +37,9 @@ local finalWarningCount = 1
 
 local L = mod:GetLocale()
 if L then
-	L.add_wave_killed = "Add wave killed (%d/%d)"
+	L.notes = "Notes"
+	L.notes_desc = "Show a message when the notes are available. Hit the notes with your instrument's ability to gain 'Jazzy'.\n\n|T237554:16|tJazzy\n{348567}"
+	L.notes_icon = "inv_misc_trinket_goldenharp"
 end
 
 --------------------------------------------------------------------------------
@@ -47,6 +49,7 @@ end
 function mod:GetOptions()
 	return {
 		"stages",
+		"notes",
 		359019, -- Up Tempo
 		-- Unruly Patron
 		356482, -- Rotten Food
@@ -67,7 +70,7 @@ function mod:GetOptions()
 		{357436, "NAMEPLATE"}, -- Infectious Solo
 		{357542, "NAMEPLATE"}, -- Rip Chord
 	}, {
-		[359019] = -23096, -- Stage One: Unruly Patrons
+		["notes"] = -23096, -- Stage One: Unruly Patrons
 		[350919] = -23749, -- Stage Two: Closing Time
 		[357404] = CL.hard,
 	}
@@ -105,6 +108,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "CrowdControl", 350919)
 	self:Log("SPELL_CAST_START", "SuppressionSpark", 355438)
 	self:Log("SPELL_CAST_START", "FinalWarning", 1241032)
+	self:Log("SPELL_CAST_SUCCESS", "FinalWarningSuccess", 1241032)
 	self:Log("SPELL_AURA_REMOVED", "FinalWarningRemoved", 1241023)
 
 	-- Hard Mode
@@ -143,22 +147,28 @@ function mod:ENCOUNTER_END(_, encounterId, _, _, _, status)
 	end
 end
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE()
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(event)
 	if self:IsEngaged() then
 		-- [CHAT_MSG_RAID_BOSS_EMOTE] Get to your spotlight and hit notes when they light up!#[DNT] Encounter Controller
 		self:StopBar(353706) -- Rowdy
-		-- There is one performance phase immediately at the start of the fight and then one after each add wave
+		-- notes appear after 4s and are active at 5s
+		self:Bar("notes", 5.0, L.notes, L.notes_icon)
+		self:ScheduleTimer("Notes", 5.0)
+		-- There is one performance phase immediately at the start of the fight and then one after the add wave
 		if addWave >= 1 then
-			self:Message("stages", "cyan", L.add_wave_killed:format(addWave, 2), "achievement_dungeon_brokerdungeon")
+			self:UnregisterEvent(event)
+			self:Message("stages", "cyan", CL.other:format(CL.killed:format(CL.adds), CL.soon:format(self:SpellName(-23098))), "achievement_dungeon_brokerdungeon") -- Adds killed: Zo'gron soon
 			self:PlaySound("stages", "long")
 		end
 		addWave = addWave + 1
 	end
 end
 
-function mod:CHAT_MSG_RAID_BOSS_WHISPER(_, msg)
+function mod:CHAT_MSG_RAID_BOSS_WHISPER(event, msg)
 	-- [CHAT_MSG_RAID_BOSS_WHISPER] |TInterface\\Icons\\Spell_Shadow_DeathPact.blp:20|t Unruly patrons rush the stage!#Oasis Security
-	if msg:find("Spell_Shadow_DeathPact", nil, true) and addWave <= 2 then
+	if msg:find("Spell_Shadow_DeathPact", nil, true) then
+		-- only one add wave
+		self:UnregisterEvent(event)
 		self:CDBar(353706, 41.3) -- Rowdy
 	end
 end
@@ -177,6 +187,12 @@ function mod:EncounterEvent(args) -- Zo'gron engaged
 end
 
 -- General
+
+function mod:Notes()
+	-- alerts when the notes are fully spawned and ready to be collected
+	self:Message("notes", "cyan", L.notes, L.notes_icon)
+	self:PlaySound("notes", "info")
+end
 
 function mod:UpTempoApplied(args)
 	if self:Me(args.destGUID) then
@@ -269,6 +285,9 @@ end
 
 function mod:SuppressionSpark(args)
 	self:Message(args.spellId, "red")
+	-- 6s cast, notes appear after 4s and are active at 5s
+	self:Bar("notes", 5.0, L.notes, L.notes_icon)
+	self:ScheduleTimer("Notes", 5.0)
 	self:CDBar(args.spellId, 37.7)
 	self:PlaySound(args.spellId, "info")
 end
@@ -283,19 +302,30 @@ do
 	local finalWarningStart = 0
 
 	function mod:FinalWarning(args)
+		-- boss gains a shield (1241023) and starts a 20s cast (1241032), at the end of the cast if the shield is still
+		-- up then the boss will start channeling pulsing AOE until the original shield has been broken.
 		finalWarningStart = args.time
 		if finalWarningCount == 1 then
-			self:Message(args.spellId, "yellow", CL.percent:format(65, args.spellName))
+			self:Message(args.spellId, "yellow", CL.percent:format(65, CL.other:format(args.spellName, CL.shield)))
 		else -- 2nd cast
-			self:Message(args.spellId, "yellow", CL.percent:format(35, args.spellName))
+			self:Message(args.spellId, "yellow", CL.percent:format(35, CL.other:format(args.spellName, CL.shield)))
 		end
 		finalWarningCount = finalWarningCount + 1
+		-- 20s cast, notes appear after 4s and are active at 5s
+		self:Bar("notes", 5.0, L.notes, L.notes_icon)
+		self:ScheduleTimer("Notes", 5.0)
 		self:CastBar(args.spellId, 20)
 		self:PlaySound(args.spellId, "long")
 	end
 
+	function mod:FinalWarningSuccess(args)
+		-- pulsing AOE channel starts, continues until the shield is broken
+		self:Message(args.spellId, "yellow", CL.other:format(args.spellName, CL.group_damage))
+		self:PlaySound(args.spellId, "warning")
+	end
+
 	function mod:FinalWarningRemoved(args)
-		-- the cast now automatically ends when the shield is removed
+		-- the cast automatically ends when the shield is removed
 		self:StopCastBar(1241032)
 		if args.amount == 0 then -- shield was broken
 			local finalWarningDuration = args.time - finalWarningStart

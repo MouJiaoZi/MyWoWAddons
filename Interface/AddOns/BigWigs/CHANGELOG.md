@@ -1,8 +1,8 @@
 # BigWigs
 
-## [v395.4](https://github.com/BigWigsMods/BigWigs/tree/v395.4) (2025-08-19)
-[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v395.3...v395.4) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
+## [v396.2](https://github.com/BigWigsMods/BigWigs/tree/v396.2) (2025-08-22)
+[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v396.1...v396.2) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
 
-- ManaforgeOmega/Dimensius: Add more heroic timings, closes #2183  
-- ManaforgeOmega/Fractillus: Use CDBar  
-- ManaforgeOmega/Fractillus: Mythic update  
+- Update zhCN (#2199)  
+- Tools/Keystones: Fix some display issues when showing all players on the text frame  
+- Update deDE (#2198)  

@@ -28,6 +28,11 @@ end
 
 -- Halls of Atonement
 
+L = BigWigs:NewBossLocale("High Adjudicator Aleez", "zhCN")
+if L then
+	L.empty_anima_vessel = "空的心能容器"
+end
+
 L = BigWigs:NewBossLocale("Halls of Atonement Trash", "zhCN")
 if L then
 	L.depraved_houndmaster = "堕落的驯犬者"
@@ -162,7 +167,8 @@ end
 
 L = BigWigs:NewBossLocale("Myza's Oasis", "zhCN")
 if L then
-	L.add_wave_killed = "击退保安 (%d/%d)"
+	L.notes = "音符"
+	L.notes_desc = "当音符可用时显示提示信息。使用你的乐器击中音符可获得'爵士乐'增益。\n\n|T237554:16|t爵士乐\n{348567}"
 end
 
 L = BigWigs:NewBossLocale("So'leah", "zhCN")

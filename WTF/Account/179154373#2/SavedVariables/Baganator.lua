@@ -1,12 +1,16 @@
 
 BAGANATOR_CONFIG = {
+["Version"] = 1,
 ["CharacterSpecific"] = {
 ["sort_ignore_bank_slots_count"] = {
 },
-["currencies_tracked_imported"] = {
+["sort_ignore_slots_count_2"] = {
 },
 ["currencies_tracked"] = {
 ["某饺子-伊森利恩"] = {
+{
+["currencyID"] = 3290,
+},
 },
 ["我们完蛋啦-伊森利恩"] = {
 },
@@ -21,10 +25,9 @@ BAGANATOR_CONFIG = {
 ["迪凯策划没马-伊森利恩"] = {
 },
 },
-["sort_ignore_slots_count_2"] = {
+["currencies_tracked_imported"] = {
 },
 },
-["Version"] = 1,
 ["Profiles"] = {
 ["DEFAULT"] = {
 ["guild_view_width"] = 14,
@@ -43,20 +46,20 @@ BAGANATOR_CONFIG = {
 ["default_battlepet"] = true,
 ["default_food"] = true,
 ["default_reagent"] = true,
-["default_junk"] = true,
+["default_weapon"] = true,
 ["default_special_empty"] = true,
-["default_miscellaneous"] = true,
-["default_key"] = true,
+["default_recipe"] = true,
+["default_gem"] = true,
 ["default_consumable"] = true,
 ["default_tradegoods"] = true,
-["default_container"] = true,
-["default_keystone"] = true,
-["default_auto_equipment_sets"] = true,
-["default_profession"] = true,
 ["default_potion"] = true,
-["default_gem"] = true,
-["default_recipe"] = true,
-["default_weapon"] = true,
+["default_keystone"] = true,
+["default_profession"] = true,
+["default_auto_equipment_sets"] = true,
+["default_container"] = true,
+["default_key"] = true,
+["default_miscellaneous"] = true,
+["default_junk"] = true,
 },
 ["show_search_box"] = true,
 ["debug_categories_search"] = false,
@@ -69,7 +72,7 @@ BAGANATOR_CONFIG = {
 ["tradeskill"] = false,
 ["void_storage"] = false,
 ["guild_bank"] = false,
-["forge_of_bonds"] = false,
+["trade_partner"] = false,
 ["merchant"] = true,
 ["item_upgrade"] = true,
 ["character_panel"] = false,
@@ -77,13 +80,13 @@ BAGANATOR_CONFIG = {
 ["item_interaction"] = true,
 ["mail"] = false,
 ["sockets"] = false,
-["trade_partner"] = false,
+["forge_of_bonds"] = false,
 ["bank"] = true,
 },
 ["icon_corners_auto_insert_applied"] = {
 ["battle_pet_level"] = true,
-["keystone_level"] = true,
 ["bag_type"] = true,
+["keystone_level"] = true,
 },
 ["show_recents_tabs_main_view"] = false,
 ["upgrade_plugin_ignored"] = {
@@ -160,29 +163,22 @@ BAGANATOR_CONFIG = {
 30,
 75,
 },
-["icon_context_fading"] = true,
+["character_bank_view_width"] = 14,
 ["recent_include_owned"] = false,
-["custom_categories"] = {
+["currency_headers_collapsed"] = {
 },
-["icon_mark_unusable"] = false,
+["migrated_sort_method"] = true,
 ["guild_view_position_2"] = {
 "TOPLEFT",
 30,
 -235,
 },
-["category_sections"] = {
-["1"] = {
-["name"] = "EQUIPMENT",
-},
-["2"] = {
-["name"] = "CRAFTING",
-},
-},
+["new_items_flashing"] = true,
 ["debug_timers"] = false,
 ["seen_welcome"] = 1,
 ["hide_special_container"] = {
 },
-["lock_frames"] = false,
+["icon_equipment_set_border"] = true,
 ["character_select_position"] = {
 "RIGHT",
 "Baganator_CategoryViewBackpackViewFrameelvui",
@@ -192,31 +188,33 @@ BAGANATOR_CONFIG = {
 },
 ["category_sort_method"] = "type",
 ["category_horizontal_spacing_2"] = 0.3,
-["category_group_empty_slots"] = true,
-["category_default_import"] = 2,
 ["bag_view_position"] = {
 "BOTTOMRIGHT",
--470.0474853515625,
-218.0475311279297,
+-368.9677734375,
+112.2538070678711,
 },
+["category_default_import"] = 2,
+["debug_categories"] = false,
 ["character_bank_current_tab"] = 0,
-["sort_start_at_bottom"] = false,
+["bag_view_show_bag_slots"] = true,
 ["bag_empty_space_at_top"] = false,
-["recent_timeout"] = 300,
+["bag_icon_size"] = 37,
 ["sort_ignore_bank_slots_count"] = {
 ["某餃子-伊森利恩"] = 0,
 },
-["sort_ignore_slots_at_end"] = false,
 ["saved_searches"] = {
 },
-["category_section_toggled"] = {
-["装备"] = false,
+["category_migration"] = 5,
+["guild_view_position"] = {
+"LEFT",
+20,
+0,
 },
 ["category_modifications"] = {
 ["default_armor"] = {
 ["addedItems"] = {
-["i:223006"] = true,
 ["i:219313"] = true,
+["i:223006"] = true,
 },
 },
 ["default_gem"] = {
@@ -239,60 +237,23 @@ BAGANATOR_CONFIG = {
 },
 },
 ["warband_bank_view_width"] = 14,
-["guild_view_position"] = {
-"LEFT",
-20,
-0,
+["category_section_toggled"] = {
+["装备"] = false,
 },
 ["add_to_category_buttons_2"] = "drag",
 ["view_type"] = "unset",
 ["bank_current_tab"] = 2,
 ["icon_text_quality_colors"] = false,
-["currencies_tracked"] = {
-["三减竖式-伊森利恩"] = {
-},
-["凤凰基友之三-凤凰之神"] = {
-},
-["三减宁静-伊森利恩"] = {
-{
-["currencyID"] = 1710,
-},
-{
-["currencyID"] = 1718,
-},
-{
-["currencyID"] = 1755,
-},
-},
-["凤凰基友之四-凤凰之神"] = {
-},
-["某餃子-伊森利恩"] = {
-{
-["currencyID"] = 3008,
-},
-{
-["currencyID"] = 2917,
-},
-{
-["currencyID"] = 2916,
-},
-},
-["开门的搞-伊森利恩"] = {
-},
-["迪凯策划没马-伊森利恩"] = {
-},
+["currencies_tracked_imported"] = {
 },
 ["icon_text_font_size"] = 14,
-["sort_ignore_slots_count_2"] = {
-["某餃子-伊森利恩"] = 0,
-},
-["bag_view_width"] = 12,
+["show_buttons_on_alt"] = false,
 ["disabled_skins"] = {
 },
+["view_alpha"] = 1,
 ["setting_anchors"] = false,
-["guild_current_tab"] = 0,
+["upgrade_plugin"] = "none",
 ["guild_bank_sort_method"] = "unset",
-["debug_keywords"] = false,
 ["skins"] = {
 ["elvui"] = {
 ["use_bag_font"] = false,
@@ -323,11 +284,46 @@ BAGANATOR_CONFIG = {
 "凤凰基友之二-凤凰之神",
 "Afdfaf-苏拉玛",
 },
+["debug_keywords"] = false,
 ["auto_sort_on_open"] = false,
-["upgrade_plugin"] = "none",
-["view_alpha"] = 1,
-["show_buttons_on_alt"] = false,
-["currencies_tracked_imported"] = {
+["guild_current_tab"] = 0,
+["bag_view_width"] = 12,
+["sort_ignore_slots_count_2"] = {
+["某餃子-伊森利恩"] = 0,
+},
+["currencies_tracked"] = {
+["三减竖式-伊森利恩"] = {
+},
+["某餃子-伊森利恩"] = {
+{
+["currencyID"] = 3008,
+},
+{
+["currencyID"] = 2917,
+},
+{
+["currencyID"] = 2916,
+},
+},
+["三减宁静-伊森利恩"] = {
+{
+["currencyID"] = 1710,
+},
+{
+["currencyID"] = 1718,
+},
+{
+["currencyID"] = 1755,
+},
+},
+["凤凰基友之四-凤凰之神"] = {
+},
+["凤凰基友之三-凤凰之神"] = {
+},
+["开门的搞-伊森利恩"] = {
+},
+["迪凯策划没马-伊森利恩"] = {
+},
 },
 ["guild_view_dialog_position"] = {
 "BOTTOM",
@@ -336,16 +332,16 @@ BAGANATOR_CONFIG = {
 0,
 0,
 },
-["category_migration"] = 5,
+["sort_ignore_slots_at_end"] = false,
 ["bank_only_view_position"] = {
 "LEFT",
 20,
 0,
 },
-["bag_icon_size"] = 37,
+["recent_timeout"] = 300,
 ["show_sort_button_2"] = true,
-["bag_view_show_bag_slots"] = true,
-["debug_categories"] = false,
+["sort_start_at_bottom"] = false,
+["category_group_empty_slots"] = true,
 ["currency_panel_position"] = {
 "RIGHT",
 "Baganator_CategoryViewBackpackViewFrameelvui",
@@ -353,12 +349,19 @@ BAGANATOR_CONFIG = {
 0,
 0,
 },
-["icon_equipment_set_border"] = true,
-["new_items_flashing"] = true,
-["migrated_sort_method"] = true,
-["currency_headers_collapsed"] = {
+["lock_frames"] = false,
+["category_sections"] = {
+["1"] = {
+["name"] = "EQUIPMENT",
 },
-["character_bank_view_width"] = 14,
+["2"] = {
+["name"] = "CRAFTING",
+},
+},
+["icon_mark_unusable"] = false,
+["custom_categories"] = {
+},
+["icon_context_fading"] = true,
 },
 },
 }

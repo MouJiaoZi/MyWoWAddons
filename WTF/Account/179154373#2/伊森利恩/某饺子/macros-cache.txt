@@ -1,3 +1,12 @@
+VER 3 0100000000000099 "1" "INV_Misc_QuestionMark"
+#showtooltip
+/cast [@player] 爆炸酒桶
+END
+VER 3 010000000000009A "1" "INV_Misc_QuestionMark"
+#showtooltip 切喉手
+/cast [@focus,exists,harm] 切喉手
+/cast [@target,exists,harm] 切喉手
+END
 VER 3 010000000000009B "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@cursor] 召唤玄牛雕像
@@ -13,14 +22,13 @@ VER 3 010000000000009D "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast 迅如猛虎
 END
-VER 3 0100000000000099 "1" "INV_Misc_QuestionMark"
-#showtooltip
-/cast [@cursor] 爆炸酒桶
+VER 3 01000000000000A0 "1" "134400"
+#showtooltips
+/castsequence reset=7 碧玉疾风,旭日东升踢
 END
-VER 3 010000000000009A "1" "INV_Misc_QuestionMark"
-#showtooltip 切喉手
-/cast [@focus,exists,harm] 切喉手
-/cast [@target,exists,harm] 切喉手
+VER 3 01000000000000A1 "1" "134400"
+#showtooltips
+/castsequence reset=4 幻灭踢,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌
 END
 VER 3 010000000000009E "分身" "INV_Misc_QuestionMark"
 #showtooltips

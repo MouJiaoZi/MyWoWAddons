@@ -246,6 +246,10 @@ do
 
 		self:RegisterMessage("Blizz_StartCountdown")
 		self:RegisterMessage("Blizz_StopCountdown")
+
+		if BigWigsLoader.isRetail then
+			self:RegisterEvent("CHALLENGE_MODE_START")
+		end
 	end
 end
 
@@ -361,6 +365,9 @@ do
 			self:SendMessage("BigWigs_StopBar", self, L.pull)
 			self:SendMessage("BigWigs_StopCountdown", self, "pulling time")
 		end
+	end
+	function plugin:CHALLENGE_MODE_START()
+		self:Blizz_StopCountdown() -- Stop any active pull timers when a Mythic+ countdown is started
 	end
 end
 
