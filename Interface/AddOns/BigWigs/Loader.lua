@@ -14,7 +14,7 @@ local strfind = string.find
 
 local BIGWIGS_VERSION = 396
 local CONTENT_PACK_VERSIONS = {
-	["LittleWigs"] = {11, 2, 16},
+	["LittleWigs"] = {11, 2, 20},
 	["BigWigs_Classic"] = {11, 2, 0},
 	["BigWigs_BurningCrusade"] = {11, 1, 4},
 	["BigWigs_WrathOfTheLichKing"] = {11, 1, 7},
@@ -56,7 +56,7 @@ do
 	local ALPHA = "ALPHA"
 
 	local releaseType
-	local myGitHash = "3324061" -- The ZIP packager will replace this with the Git hash.
+	local myGitHash = "240d703" -- The ZIP packager will replace this with the Git hash.
 	local releaseString
 	--[=[@alpha@
 	-- The following code will only be present in alpha ZIPs.
@@ -232,7 +232,6 @@ do
 	local lw_tww = "LittleWigs_TheWarWithin"
 	local lw_delves = "LittleWigs_Delves"
 	local lw_cs = "LittleWigs_CurrentSeason"
-	local cap = "Capping"
 
 	if public.isVanilla then
 		public.currentExpansion = {
@@ -596,24 +595,6 @@ do
 		[2826] = lw_delves, -- Sidestreet Sluice
 		[2831] = lw_delves, -- Demolition Dome
 		[2951] = lw_delves, -- Voidrazor Sanctuary
-
-		--[[ Capping ]]--
-		[30] = cap, -- Alterac Valley
-		[2197] = cap, -- Alterac Valley (Korrak's Revenge)
-		[2107] = cap, -- Arathi Basin
-		[1681] = cap, -- Arathi Basin (Snowy PvP Brawl)
-		[2177] = cap, -- Arathi Basin (Players vs AI Brawl)
-		[529] = cap, -- Arathi Basin (Classic)
-		[1191] = cap, -- Ashran
-		[2245] = cap, -- Deepwind Gorge
-		[566] = cap, -- Eye of the Storm
-		[968] = cap, -- Eye of the Storm (Rated BG)
-		[761] = cap, -- Gilneas
-		[628] = cap, -- Isle of Conquest
-		[726] = cap, -- Twin Peaks
-		[2106] = cap, -- Warsong Gulch
-		[489] = cap, -- Warsong Gulch (Classic)
-		[2118] = cap, -- Wintergrasp
 	}
 	public.remappedZones = {
 		[2827] = 2213, -- Horrific Vision of Stormwind (Revisited) -> Horrific Vision of Stormwind
@@ -1128,6 +1109,9 @@ if not public.isVanilla then -- XXX Support for LoadSavedVariablesFirst [Mainlin
 			showZoneMessages = true,
 			fakeDBMVersion = false,
 			englishSayMessages = false,
+			bossModMessagesDisabled = false,
+			bossModNameplatesDisabled = false,
+			bossModVoiceDisabled = false,
 		},
 		global = {
 			watchedMovies = {},
@@ -1147,6 +1131,15 @@ if not public.isVanilla then -- XXX Support for LoadSavedVariablesFirst [Mainlin
 	db.RegisterCallback(mod, "OnProfileCopied", profileUpdate)
 	db.RegisterCallback(mod, "OnProfileReset", profileUpdate)
 	public.db = db
+
+	for k, v in next, db.profile do
+		local defaultType = type(defaults.profile[k])
+		if defaultType == "nil" then
+			db.profile[k] = nil
+		elseif type(v) ~= defaultType then
+			db.profile[k] = defaults.profile[k]
+		end
+	end
 
 	local _, _, _, _, addonState = GetAddOnInfo("QuaziiUI")
 	if type(BigWigs3DB.namespaces) == "table" and addonState ~= "MISSING" then
@@ -1471,19 +1464,19 @@ do
 		--ruRU = "Russian (ruRU)",
 		--zhCN = "Simplified Chinese (zhCN)",
 		--zhTW = "Traditional Chinese (zhTW)",
-		--itIT = "Italian (itIT)",
+		itIT = "Italian (itIT)",
 		--koKR = "Korean (koKR)",
 		--esES = "Spanish (esES)",
-		--esMX = "Spanish (esMX)",
+		esMX = "Spanish (esMX)",
 		--deDE = "German (deDE)",
-		--ptBR = "Portuguese (ptBR)",
+		ptBR = "Portuguese (ptBR)",
 		--frFR = "French (frFR)",
 	}
 	local realms = {
 		--[542] = locales.frFR, -- frFR
-		--[3207] = locales.ptBR, [3208] = locales.ptBR, [3209] = locales.ptBR, [3210] = locales.ptBR, [3234] = locales.ptBR, -- ptBR
-		--[1425] = locales.esMX, [1427] = locales.esMX, [1428] = locales.esMX, -- esMX
-		--[1309] = locales.itIT, [1316] = locales.itIT, -- itIT
+		[3207] = locales.ptBR, [3208] = locales.ptBR, [3209] = locales.ptBR, [3210] = locales.ptBR, [3234] = locales.ptBR, -- ptBR
+		[1425] = locales.esMX, [1427] = locales.esMX, [1428] = locales.esMX, -- esMX
+		[1309] = locales.itIT, [1316] = locales.itIT, -- itIT
 		--[1378] = locales.esES, [1379] = locales.esES, [1380] = locales.esES, [1381] = locales.esES, [1382] = locales.esES, [1383] = locales.esES, -- esES
 		--[1384] = locales.esES, [1385] = locales.esES, [1386] = locales.esES, [1387] = locales.esES, [1395] = locales.esES, -- esES
 	}
@@ -1604,9 +1597,9 @@ end
 --
 
 do
-	local DBMdotRevision = "20250821062949" -- The changing version of the local client, changes with every new zip using the project-date-integer packager replacement.
-	local DBMdotDisplayVersion = "11.2.11" -- "N.N.N" for a release and "N.N.N alpha" for the alpha duration.
-	local DBMdotReleaseRevision = "20250821000000" -- Hardcoded time, manually changed every release, they use it to track the highest release version, a new DBM release is the only time it will change.
+	local DBMdotRevision = "20250825161927" -- The changing version of the local client, changes with every new zip using the project-date-integer packager replacement.
+	local DBMdotDisplayVersion = "11.2.12" -- "N.N.N" for a release and "N.N.N alpha" for the alpha duration.
+	local DBMdotReleaseRevision = "20250824000000" -- Hardcoded time, manually changed every release, they use it to track the highest release version, a new DBM release is the only time it will change.
 	local protocol = 3
 	local versionPrefix = "V"
 	local PForceDisable = 19
@@ -1875,22 +1868,46 @@ do
 		end
 	end
 
+	local cap = "Capping"
+	local additionalPrintZones = {
+		[30] = cap, -- Alterac Valley
+		[2197] = cap, -- Alterac Valley (Korrak's Revenge)
+		[2107] = cap, -- Arathi Basin
+		[1681] = cap, -- Arathi Basin (Snowy PvP Brawl)
+		[2177] = cap, -- Arathi Basin (Players vs AI Brawl)
+		[529] = cap, -- Arathi Basin (Classic)
+		[1191] = cap, -- Ashran
+		[2245] = cap, -- Deepwind Gorge
+		[566] = cap, -- Eye of the Storm
+		[968] = cap, -- Eye of the Storm (Rated BG)
+		[761] = cap, -- Gilneas
+		[628] = cap, -- Isle of Conquest
+		[726] = cap, -- Twin Peaks
+		[2106] = cap, -- Warsong Gulch
+		[489] = cap, -- Warsong Gulch (Classic)
+		[2118] = cap, -- Wintergrasp
+	}
+
 	local warnedThisZone = {}
 	function mod:PLAYER_ENTERING_WORLD() -- Raid bosses
 		local _, instanceType, _, _, _, _, _, instanceID = GetInstanceInfoModified()
 
+		-- Core loading
+		local isInCoreZone = public.zoneTbl[instanceID]
+		if isInCoreZone or (BigWigs3DB and BigWigs3DB.breakTime) then -- A zone the core should always load on, or break timer restoration
+			loadAndEnableCore()
+		end
+
 		-- Module loading
-		if enableZones[instanceID] then
-			if loadAndEnableCore() then
-				loadZone(instanceID)
+		if enableZones[instanceID] then -- A zone a content addon has told us to load in
+			if not isInCoreZone then
+				loadAndEnableCore()
 			end
+			loadZone(instanceID)
 			RegisterUnitTargetEvents()
 			bwFrame:UnregisterEvent("ZONE_CHANGED")
 		else
-			if BigWigs3DB and BigWigs3DB.breakTime then -- Break timer restoration
-				loadAndEnableCore()
-			end
-			if disabledZones[instanceID] then -- We have content for the zone but it is disabled in the addons menu
+			if disabledZones[instanceID] then -- We have a content addon for the this zone but it is disabled in the addons menu
 				local msg = L.disabledAddOn:format(disabledZones[instanceID])
 				sysprint(msg)
 				Popup(msg)
@@ -1910,7 +1927,7 @@ do
 
 		-- Lacking zone modules
 		if not public.db.profile.showZoneMessages then return end
-		local zoneAddon = public.zoneTbl[instanceID]
+		local zoneAddon = isInCoreZone or additionalPrintZones[instanceID]
 		if zoneAddon and instanceID > 0 and not fakeZones[instanceID] and not warnedThisZone[instanceID] then
 			if public.usingBigWigsRepo and public.currentExpansion.bigWigsBundled[zoneAddon] then return end -- If we are a BW Git user, then bundled content can't be missing, so return
 			if strfind(zoneAddon, "LittleWigs", nil, true) and public.usingLittleWigsRepo then return end -- If we are a LW Git user, then nothing can be missing, so return

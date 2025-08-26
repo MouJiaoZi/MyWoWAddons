@@ -79,6 +79,9 @@ local CallbackEvents = {
 	["UNIT_AURA_ADD"] = true,
 	["UNIT_AURA_UPDATE"] = true,
 	["UNIT_AURA_REMOVED"] = true,
+	["ENCOUNTER_ENGAGE_UNIT"] = true,
+	["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
+	["ENCOUNTER_HIDE_BOSS_UNIT"] = true,	
 }
 
 T.RegisterEventAndCallbacks = function(frame, events, update)
@@ -121,10 +124,13 @@ T.UnregisterEventAndCallbacks = function(frame, events)
 end
 
 ----------------------------------------------------------
--------------------[[    通讯事件    ]]-------------------
+------------------[[     自定义事件    ]]-----------------
 ----------------------------------------------------------
 
 local eventframe = CreateFrame("Frame", nil, UIParent)
+
+eventframe.engaged = {}
+eventframe.active = {}
 
 eventframe:SetScript("OnEvent", function(self, event, ...)
 	if event == "CHAT_MSG_ADDON" then
@@ -135,11 +141,41 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "CHAT_MSG_RAID_BOSS_WHISPER" then
 		local msg = ...
 		T.addon_msg("boss_whisper,"..msg, "GROUP")
+	elseif event == "ENCOUNTER_START" then
+		self.engaged = table.wipe(self.engaged)
+		self.active = table.wipe(self.active)
+	elseif event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
+		C_Timer.After(.5, function()
+			for GUID in pairs(self.active) do
+				local unit = UnitTokenFromGUID(GUID)
+				if not unit then
+					self.active[GUID] = nil
+					T.FireEvent("ENCOUNTER_HIDE_BOSS_UNIT", GUID)
+					--local npcID = select(6, strsplit("-", GUID))
+					--print("ENCOUNTER_HIDE_BOSS_UNIT", GUID, T.GetFomattedNameFromNpcID(npcID))
+				end
+			end
+			for unit in T.IterateBoss() do
+				local GUID = UnitGUID(unit)
+				if not self.engaged[GUID] then
+					self.engaged[GUID] = true
+					T.FireEvent("ENCOUNTER_ENGAGE_UNIT", unit, GUID)
+					--print("ENCOUNTER_ENGAGE_UNIT", unit, GUID, UnitName(unit))
+				end
+				if not self.active[GUID] then
+					self.active[GUID] = true
+					T.FireEvent("ENCOUNTER_SHOW_BOSS_UNIT", unit, GUID)
+					--print("ENCOUNTER_SHOW_BOSS_UNIT", unit, GUID, UnitName(unit))
+				end
+			end
+		end)
 	end
 end)
 
 eventframe:RegisterEvent("CHAT_MSG_ADDON")
 eventframe:RegisterEvent("CHAT_MSG_RAID_BOSS_WHISPER")
+eventframe:RegisterEvent("ENCOUNTER_START")
+eventframe:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
 ----------------------------------------------------------
 ----------------[[    怪物进战斗事件    ]]----------------
 ----------------------------------------------------------

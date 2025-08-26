@@ -539,11 +539,6 @@ G.Encounters[2684] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1219263, L["坦克"]..L["炸弹"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 湮灭奥能重炮（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1219263,
-				},
 				{ -- 嘲讽提示 湮灭奥能重炮（待测试）
 					category = "BossMod",
 					spellID = 1233999,
@@ -562,17 +557,20 @@ G.Encounters[2684] = {
 						frame.aura_spellIDs = {
 							[1233999] = 1, -- 湮灭奥能重炮
 						}
+						
 						frame.cast_spellIDs = {
 							[1219263] = true, -- 湮灭奥能重炮
 							[1220489] = true, -- 协议：净化
 							[1220553] = true, -- 协议：净化
 							[1220555] = true, -- 协议：净化
 						}
+						
 						frame.boss_aura_spellIDs = {
-							[1220489] = true, -- 协议：净化
-							[1220553] = true, -- 协议：净化
-							[1220555] = true, -- 协议：净化
+							[1220618] = true, -- 协议：净化
+							[1220981] = true, -- 协议：净化
+							[1220982] = true, -- 协议：净化
 						}
+						
 						function frame:override_check_boss()
 							local pass
 							
@@ -600,11 +598,19 @@ G.Encounters[2684] = {
 					end,
 					update = function(frame, event, ...)
 						T.UpdateTauntAlert(frame, event, ...)
-						T.RegisterWatchAuraSpellID(1220618)
+						
+						if event == "ENCOUNTER_START" then
+							for spellID in pairs(frame.boss_aura_spellIDs) do
+								T.RegisterWatchAuraSpellID(spellID)
+							end
+						end
 					end,
 					reset = function(frame, event)
 						T.ResetTauntAlert(frame)
-						T.UnregisterWatchAuraSpellID(1220618)
+						
+						for spellID in pairs(frame.boss_aura_spellIDs) do
+							T.UnregisterWatchAuraSpellID(spellID)
+						end
 					end,
 				},
 				{ -- 计时条 湮灭奥能重炮（✓）
@@ -623,7 +629,7 @@ G.Encounters[2684] = {
 					unit = "group",
 					spellID = 1233999,
 					ficon = "0",
-					tank = true,				
+					tank = true,
 				},
 			},
 		},

@@ -986,13 +986,10 @@ G.Encounters[2642] = {
 						frame.support_spells = 10
 						frame.bar_num = 3
 						
-						frame.pos_pro = {
-							["TANK"] = 1,	
-							["MELEE"] = 2,
-							["RANGED"] = 3,
-							["HEALER"] = 4,	
-						}
-												
+						function frame:custom_sort(cache)
+							T.SortTable(cache)
+						end		
+						
 						frame.info = {
 							{text = "1"},
 							{text = "2"},

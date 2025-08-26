@@ -433,8 +433,7 @@ L["朗读请求内容"]			= "TTS"
 L["请求技能提示"]			= [[|cFFFF0000*|rMacro format：
 Request a spell from a teammate:|cffFFFF00/jst name spell10060|r
 Request a spell from current target:|cffFFFF00/jst %t spell10060|r
-Name can be changed to nickname.
-10060 can be changed to other spell IDs.]]
+Name can be changed to nickname.10060 can be changed to other spell IDs.]]
 L["法术请求目标不在队伍中"] 	= "Spell request error:The target is not in the team"
 L["法术请求玩家不在队伍中"]	= "Spell request error:%s is not in the team"
 L["法术请求法术ID错误"]	= "Spell request error:Spell ID %s error"
@@ -454,8 +453,7 @@ L["请稍后再请求单体减伤"]		= "The team's single-target denfense spell 
 L["当前没有可用的单体减伤技能"]	= "There are currently no available single-target denfense spell available."
 
 L["玩家自保技能提示"]			= "Personal defensive spells prompt"
-L["玩家单体减伤技能提示"]		= [[|cFFFF0000*|rinstructions:
-Prompt the current health percentage and available personal defensive spells, healing stones and heal potions before the arrival of dangerous spells.]]
+L["玩家单体减伤技能提示"]		= [[|cFFFF0000*|rinstructions:Prompt the current health percentage and available personal defensive spells, healing stones and heal potions before the arrival of dangerous spells.]]
 L["低血量时显示自保技能提示"]	= "Show personal defensive spells when HP is low."
 L["血量阈值百分比"]			= "HP threshold (percentage)"
 L["血量阈值百分比提示"]			= [[|cFFFF0000*|rWhen enabled, it will be displayed when the HP is below the threshold, and it will only be hidden when the HP returns to 10% above the threshold.
@@ -466,6 +464,9 @@ L["团队PA光环"]				= "Raid Private Aura Monitoring"
 L["单个框架宽度"]			= "Single frame width"
 L["单个框架高度"]			= "Single frame height"	
 L["图标个数"]				= "Number of icons"
+
+-- 团队控制链
+L["团队技能监控"]			= "Raid spell monitor"
 
 -- AlertIcon
 L["图标提示"]				= "Icon alert"
@@ -582,6 +583,7 @@ L["所有人加载"]				= "|cffFFFFFFEveryone|r"
 L["所有人加载tip"]			= "Suggest everyone to enable it"
 L["技能分配加载"]			= "|cffFFFFFFAssign|r"
 L["技能分配加载tip"]		= "Suggest players assigned to the spell to enable"
+L["持续时间"] 				= "Duration"
 
 L["显示名字方式"]			= "Name Display Mode"
 L["不显示"]					= "None"
@@ -599,6 +601,7 @@ L["标记"] 					= "mark"
 
 L["NAME小怪血量"]			= "Show %s's health bar"
 L["NAME小怪能量"]			= "Show %s's power bar"
+L["NAME小怪血量和能量"]		= "Show %s's health&power bar"
 
 L["NAME吸收盾"]				= "Show %s's remaining absorption capacity"
 

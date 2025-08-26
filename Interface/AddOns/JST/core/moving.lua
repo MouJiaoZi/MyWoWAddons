@@ -139,7 +139,7 @@ T.CreateDragFrame = function(frame)
 	local name = frame:GetName()
 	
 	if tContains(G.dragFrameList, name) then
-		print(name, "首领模块名字重复")
+		T.msg(name, "首领模块名字重复")
 	end
 	
 	table.insert(G.dragFrameList, frame) --add frame object to the list

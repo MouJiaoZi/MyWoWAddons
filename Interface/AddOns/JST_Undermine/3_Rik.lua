@@ -521,10 +521,11 @@ G.Encounters[2641] = {
 					name = string.format(L["NAME小怪血量"], T.GetFomattedNameFromNpcID("233623")),
 					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -300},
 					events = {
-						["INSTANCE_ENCOUNTER_ENGAGE_UNIT"] = true,
+						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
+						["ENCOUNTER_HIDE_BOSS_UNIT"] = true,
 						["UNIT_HEALTH"] = true,
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
 						["UNIT_AURA"] = true,
+						["RAID_TARGET_UPDATE"] = true,
 					},
 					init = function(frame)
 						frame.format = "value"
@@ -753,12 +754,9 @@ G.Encounters[2641] = {
 						frame.raid_index = true						
 						frame.bar_num = 4
 						
-						frame.pos_pro = {
-							["TANK"] = 1,	
-							["MELEE"] = 2,
-							["RANGED"] = 3,
-							["HEALER"] = 4,	
-						}
+						function frame:custom_sort(cache)
+							T.SortTable(cache)
+						end
 						
 						frame.total_info = {
 							{"近战", "稍后远程"}, -- 1
