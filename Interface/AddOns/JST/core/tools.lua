@@ -50,9 +50,18 @@ local function MyItemCheck(itemID)
 	end
 end
 
-local function CreateSpellLineFrame(name, text, anchor, x, y)
+local function CreateSpellLineFrame(name, text, size, dir, anchor, x, y)
 	local frame = CreateFrame("Frame", addon_name..name, FrameHolder)
-	frame:SetSize(180, 40)
+	
+	local width, height
+	if dir == "vertical" then
+		width = size
+		height = size*5 + 5*4
+	else
+		width = size*5 + 5*4
+		height = size
+	end
+	frame:SetSize(width, height)
 	
 	frame.movingname = text
 	frame.point = { a1 = anchor, a2 = "CENTER", x = x, y = y}
@@ -533,7 +542,7 @@ local function SortBySpellPrority(t)
 	end)
 end
 
-local GroupSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["团队单体减伤技能监控和分配"], "TOPLEFT", 450, 0)
+local GroupSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["团队单体减伤技能监控和分配"], 40, "horizontal", "TOPLEFT", 450, 0)
 
 function GroupSpellFrame:lineup()
 	SortBySpellPrority(self.active_byindex)
@@ -889,12 +898,18 @@ end
 local almost_ready_dur = 3
 local checking_hp_tags = {}
 
-local PersonalSpellFrame = CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"], "CENTER", 0, 100)
+local PersonalSpellFrame = CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"],  40, "horizontal", "CENTER", 0, 100)
 PersonalSpellFrame:Hide()
 
 PersonalSpellFrame.text = T.createtext(PersonalSpellFrame, "OVERLAY", 30, "OUTLINE", "LEFT")
 PersonalSpellFrame.text:SetPoint("LEFT", PersonalSpellFrame, "LEFT", 0, 0)
 
+PersonalSpellFrame.events = {
+	["UNIT_HEALTH"] = true,
+	["PLAYER_DEAD"] = true,
+	["PLAYER_ALIVE"] = true,
+}
+		
 local typePrority = {	
 	["buff"] = 1,
 	["spell"] = 2,
@@ -959,29 +974,39 @@ T.Play_personlspell_sound = function()
 end
 
 function PersonalSpellFrame:Update()
-	local hp = UnitHealth("player")
-	local max_hp = UnitHealthMax("player")
-	if hp and max_hp then
-		local perc = hp/max_hp*100
-		self.text:SetTextColor(1, perc/100, 0)
-		self.text:SetText(string.format("%d%%", perc))
-		
-		if not self:IsShown() then
-			if self:ShowCheck(perc) then
-				self:Show()
-				T.Play_personlspell_sound()
-			end
-		else
-			if self:HideCheck(perc) then
-				self:Hide()
+	if UnitIsDead("player") then
+		if self:IsShown() then
+			self:Hide()
+		end
+	else
+		local hp = UnitHealth("player")
+		local max_hp = UnitHealthMax("player")
+		if hp and max_hp then
+			local perc = hp/max_hp*100
+			self.text:SetTextColor(1, perc/100, 0)
+			self.text:SetText(string.format("%d%%", perc))
+			
+			if not self:IsShown() then
+				if self:ShowCheck(perc) then
+					self:Show()
+					T.Play_personlspell_sound()
+				end
+			else
+				if self:HideCheck(perc) then
+					self:Hide()
+				end
 			end
 		end
 	end
 end
 
 PersonalSpellFrame:SetScript("OnEvent", function(self, event, ...)
-	local unit = ...
-	if unit == "player" then
+	if event == "UNIT_HEALTH" then
+		local unit = ...
+		if unit == "player" then
+			self:Update()
+		end
+	elseif event == "PLAYER_DEAD" or event == "PLAYER_ALIVE" then
 		self:Update()
 	end
 end)
@@ -1329,10 +1354,10 @@ T.EditPersonalSpellFrame = function(option)
 	if option == "all" or option == "enable" then
 		if C.DB["GeneralOption"]["personal_spell_enable"] then
 			T.RestoreDragFrame(PersonalSpellFrame)
-			PersonalSpellFrame:RegisterEvent("UNIT_HEALTH")
+			T.RegisterEventAndCallbacks(PersonalSpellFrame, PersonalSpellFrame.events)
 		else
 			T.ReleaseDragFrame(PersonalSpellFrame)
-			PersonalSpellFrame:UnregisterEvent("UNIT_HEALTH")
+			T.UnregisterEventAndCallbacks(PersonalSpellFrame, PersonalSpellFrame.events)
 			PersonalSpellFrame:Hide()
 		end
 	end
@@ -1380,11 +1405,6 @@ end)
 -------------------[[    转阶段监控    ]]-------------------
 ----------------------------------------------------------
 local PhaseTrigger = CreateFrame("Frame", nil, FrameHolder)
-PhaseTrigger:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
-PhaseTrigger:RegisterEvent("PLAYER_ENTERING_WORLD")
-PhaseTrigger:RegisterEvent("ENCOUNTER_START")
-PhaseTrigger:RegisterEvent("ENCOUNTER_END")
-PhaseTrigger:RegisterEvent("ADDON_LOADED")
 
 local phase_data = {} -- 所有首领的转阶段数据
 local current_engageID -- 当前战斗
@@ -1486,7 +1506,6 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 		
 		if phase_data[engageID] then
 			if phase_data[engageID].CLEU then
-				self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 				for i, data in pairs(phase_data[engageID].CLEU) do
 					if not data.ficon or T.CheckDifficulty(data.ficon, difficultyID) then
 						current_phase_data[data.phase] = 0
@@ -1494,7 +1513,6 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 			if phase_data[engageID].UNIT then
-				self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
 				for i, data in pairs(phase_data[engageID].UNIT) do
 					if not data.ficon or T.CheckDifficulty(data.ficon, difficultyID) then
 						current_phase_data[data.phase] = 0
@@ -1513,9 +1531,6 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 		engaged_npc = table.wipe(engaged_npc)
 		spell_count = table.wipe(spell_count)
 		current_phase_data = table.wipe(current_phase_data)
-		
-		self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-		self:UnregisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
 		
 	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then		
 		local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID, _, _, extraSpellID = CombatLogGetCurrentEventInfo()
@@ -1587,20 +1602,19 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
-	elseif event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then	
+	elseif event == "ENCOUNTER_ENGAGE_UNIT" then
 		if not current_engageID or not phase_data[current_engageID] or not phase_data[current_engageID].UNIT then return end
-		for unit in T.IterateBoss() do
-			local npcID = T.GetUnitNpcID(unit)
-			if not engaged_npc[npcID] then -- 有新的NPC加入战斗
-				engaged_npc[npcID] = true
-				
-				for i, data in pairs(phase_data[current_engageID].UNIT) do
-					if data.npcID == npcID and (not data.ficon or T.CheckDifficulty(data.ficon, current_diffcultyID)) then
-						current_phase = data.phase
-						current_phase_data[current_phase] = current_phase_data[current_phase] + 1
-						T.FireEvent("ENCOUNTER_PHASE", current_phase, current_phase_data[current_phase])
-						self:outputMsg()
-					end
+		local unit = ...
+		local npcID = T.GetUnitNpcID(unit)
+		if not engaged_npc[npcID] then -- 有新的NPC加入战斗
+			engaged_npc[npcID] = true
+			
+			for i, data in pairs(phase_data[current_engageID].UNIT) do
+				if data.npcID == npcID and (not data.ficon or T.CheckDifficulty(data.ficon, current_diffcultyID)) then
+					current_phase = data.phase
+					current_phase_data[current_phase] = current_phase_data[current_phase] + 1
+					T.FireEvent("ENCOUNTER_PHASE", current_phase, current_phase_data[current_phase])
+					self:outputMsg()
 				end
 			end
 		end
@@ -1650,6 +1664,15 @@ T.GetCurrentPhase = function()
 	return current_phase
 end
 
+T.RegisterEventAndCallbacks(PhaseTrigger, {
+	["PLAYER_SPECIALIZATION_CHANGED"] = true,
+	["PLAYER_ENTERING_WORLD"] = true,
+	["ENCOUNTER_START"] = true,
+	["ENCOUNTER_END"] = true,
+	["ENCOUNTER_ENGAGE_UNIT"] = true,
+	["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+	["ADDON_LOADED"] = true,
+})
 ----------------------------------------------------------
 -------------------[[    动态战术板    ]]-----------------
 ----------------------------------------------------------
@@ -2605,4 +2628,84 @@ RaidPAFrame:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "ENCOUNTER_END" then
 		self.release_all()
 	end
+end)
+
+----------------------------------------------------------
+-------------------[[    控制链    ]]---------------------
+----------------------------------------------------------
+local group_spell_tag = "JSTSpells"
+
+local ControlSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["团队技能监控"], 40, "vertical", "TOPLEFT", -300, 200)
+ControlSpellFrame:Hide()
+
+ControlSpellFrame.data = {}
+
+function ControlSpellFrame:PreviewShow()
+	self:generate_all()
+end
+
+function ControlSpellFrame:lineup()
+	local lastframe		
+	for index, icon in pairs(self.active_byindex) do
+		if icon:IsShown() then
+			icon:ClearAllPoints()
+			if not lastframe then
+				icon:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+			else
+				icon:SetPoint("TOPLEFT", lastframe, "BOTTOMLEFT", 0, -5)	
+			end
+			lastframe = icon
+		end
+	end
+end
+
+local function CreateControlSpellIcon(updater, group, tag)	
+	local icon = CreateSpellIconBase(ControlSpellFrame, tag)
+	
+	icon.source_text = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "CENTER") -- 玩家名字
+	icon.source_text:SetPoint("LEFT", icon, "RIGHT", 2, 0)
+	
+	function icon:update_onedit(option)
+		if option == "all" or option == "icon_size" then
+			self:SetSize(C.DB["GeneralOption"]["control_spell_size"], C.DB["GeneralOption"]["control_spell_size"])
+		end
+	end
+	
+	function icon:init_display(GUID, spellID, charge)
+		self.GUID = GUID
+		self.spellID = spellID
+		self.charge = charge
+		
+		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
+		self.source_text:SetText(T.ColorNickNameByGUID(GUID))
+		self:update_charge()
+		
+		self:update_onedit("all")
+		self:Show()
+	end
+	
+	function icon:cancel()
+		self:Hide()
+		self.texture:SetDesaturated(false)
+	end
+	
+	updater.actives_bytag[tag] = icon
+	
+	return icon
+end
+
+local ControlSpell_Updater = T.CreateUpdater(CreateControlSpellIcon, ControlSpellFrame)
+
+ControlSpell_Updater.active_byGUID = {}
+
+function ControlSpellFrame:get_assignment()
+	
+end
+
+function ControlSpellFrame:generate_all()
+	
+end
+
+ControlSpell_Updater:SetScript("OnEvent", function(self, event, ...)	
+	
 end)

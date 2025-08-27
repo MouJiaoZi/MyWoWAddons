@@ -66,6 +66,7 @@ local Character_default_Settings = {
 		raid_pa_height = 20,
 		raid_pa_fsize = 14,
 		raid_pa_icon_num = 2,
+		control_spell_size = 25,
 	},
 	IconAlertOption = {		
 		test = false,
@@ -160,16 +161,27 @@ local LoadNewSettings = function(enable_tag)
 	end
 end
 
+local only_character_keys = {
+	["option_list_btn"] = true
+}
+
 local InitSettings = function(path, enable_tag, ficon, details)	
 	local detail_table = details or {}
 	detail_table.enable = LoadNewSettings(enable_tag, ficon)
 	
 	for key, value in pairs(detail_table) do
-		local key_path = T.CopyTableInsertElement(path, key)
-		local DB_setting = T.ValueFromDB(key_path)
-		if DB_setting == nil then
-			T.ValueToDB(key_path, value)
-		end
+		local key_path = T.CopyTableInsertElement(path, key)	
+		if only_character_keys[key] then
+			local DB_setting = T.ValueFromPath(JST_CDB, key_path)
+			if DB_setting == nil then
+				T.ValueToPath(JST_CDB, key_path, value)
+			end
+		else
+			local DB_setting = T.ValueFromDB(key_path)
+			if DB_setting == nil then
+				T.ValueToDB(key_path, value)
+			end
+		end		
 	end
 end
 T.InitSettings = InitSettings

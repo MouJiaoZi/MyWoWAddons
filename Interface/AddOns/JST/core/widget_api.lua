@@ -932,11 +932,13 @@ local code_of_raid_marks = {
 }
 
 T.GetRaidFlagsMark = function(RaidFlags)
-	local check = bit.band(RaidFlags, COMBATLOG_OBJECT_RAIDTARGET_MASK)
-	if check and code_of_raid_marks[check] then
-		return code_of_raid_marks[check]
-	else
-		return 0
+	if RaidFlags and RaidFlags > 0 then
+		local check = bit.band(RaidFlags, COMBATLOG_OBJECT_RAIDTARGET_MASK)
+		if check and code_of_raid_marks[check] then
+			return code_of_raid_marks[check]
+		else
+			return 0
+		end
 	end
 end
 

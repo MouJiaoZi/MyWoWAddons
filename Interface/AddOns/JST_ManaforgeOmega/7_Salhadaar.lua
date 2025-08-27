@@ -125,6 +125,224 @@ G.Encounters[2690] = {
 					ficon = "0",
 					tank = true,
 				},
+				{ -- 计时条 主宰（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1224812,
+					ficon = "0",
+					show_tar = true,
+					sound = soundfile("1224812cast", "cast"),
+				},
+				{ -- 换坦计时条 主宰（✓）
+					category = "AlertTimerbar",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "group",
+					spellID = 1224816,
+					ficon = "0",
+					tank = true,
+				},
+				{ -- 首领模块 分段计时条 镇压统治（待测试）
+					category = "BossMod",
+					spellID = 1224795,
+					name = string.format(L["计时条%s"], T.GetIconLink(1238975)..T.GetIconLink(1224812)),
+					enable_tag = "none",
+					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 400, width = 415, height = 25},
+					events = {
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+					},
+					init = function(frame)
+						frame.bars = {}
+						frame.order = {}
+						frame.count = 0
+						
+						for i = 1, 4 do
+							local bar = T.CreateTimerBar(frame, nil, false, false, false, 100, 25)
+							bar.index = i
+							if i == 1 then
+								bar:SetPoint("LEFT", frame, "LEFT", 0, 0)
+							else
+								bar:SetPoint("LEFT", frame.bars[i-1], "RIGHT", 5, 0)
+							end
+							table.insert(frame.bars, bar)
+						end
+						
+						function frame:update_bar(index, spell, assigned)
+							local bar = frame.bars[index]
+							bar.castType = spell
+							bar.assigned = assigned
+							
+							bar:SetMinMaxValues(0, 1)
+							if spell == "UNKNOWN" then
+								bar:SetValue(0)
+							elseif self.count > index then
+								bar:SetValue(1)
+							else
+								bar:SetValue(0)
+							end
+							
+							if spell == "CONQUER" then
+								bar.left:SetText(L["分担"])
+								bar:SetStatusBarColor(1, 1, 0)								
+							elseif spell == "VANQUISH" then
+								bar.left:SetText(L["冲击波"])
+								bar:SetStatusBarColor(.6, 0, 1)
+							else
+								bar.left:SetText("?")
+								bar:SetStatusBarColor(.3, .3, .3)
+							end
+						end
+						
+						function frame:SetConquer(index)
+							local isTank = UnitGroupRolesAssigned("player") == "TANK"
+							local isTanking = UnitDetailedThreatSituation("player", "boss1")
+							local assigned = false
+							
+							if isTank and isTanking then
+								local othersAssigned
+								if self.order[1] == "CONQUER" and index == 1 then
+									othersAssigned = true
+								elseif self.order[1] == "VANQUISH" and index == 3 then
+									othersAssigned = true
+								end
+								
+								assigned = not othersAssigned
+							else -- Non-active tank
+								if self.order[1] == "CONQUER" and index == 1 then
+									assigned = true
+								elseif self.order[1] == "VANQUISH" and index == 3 then
+									assigned = true
+								end
+							end
+							
+							self:update_bar(index, "CONQUER", assigned)
+						end
+						
+						function frame:SetVanquish(index)
+							self:update_bar(index, "VANQUISH")
+						end
+						
+						function frame:SetUnknown(index)
+							self:update_bar(index, "UNKNOWN")
+						end
+						
+						function frame:Start(index)
+							local bar = frame.bars[index]
+							local castType = bar.castType
+							local duration = castType == "CONQUER" and 4 or 2.5
+							
+							bar:SetMinMaxValues(0, duration)
+							
+							bar.exp_time = GetTime() + duration
+							bar:SetScript("OnUpdate", function(s, e)
+								s.t = s.t + e
+								if s.t > s.update_rate then		
+									local remain = s.exp_time - GetTime()
+									if remain > 0 then
+										s.right:SetText(T.FormatTime(remain))
+										s:SetValue(duration - remain)
+									else
+										s:SetScript("OnUpdate", nil)
+										s.right:SetText("")
+										s:SetValue(duration)
+									end
+									s.t = 0
+								end
+							end)
+						end
+						
+						function frame:UpdateOrder()
+							local order = self.order
+							
+							if order[1] == "CONQUER" then -- 征服
+								order[3] = "VANQUISH"
+								
+								if order[2] == "CONQUER" then -- 征服 > 征服
+									order[3] = "VANQUISH"
+									order[4] = "VANQUISH"
+								elseif order[2] == "VANQUISH" then -- 征服 > 主宰
+									order[3] = "VANQUISH"
+									order[4] = "CONQUER"
+								end
+							elseif order[1] == "VANQUISH" then -- 主宰
+								order[3] = "CONQUER"
+								
+								if order[2] == "CONQUER" then -- 主宰 > 征服
+									order[3] = "CONQUER"
+									order[4] = "VANQUISH"
+								elseif order[2] == "VANQUISH" then -- 主宰 > 主宰
+									order[3] = "CONQUER"
+									order[4] = "CONQUER"
+								end
+							end
+						end
+						
+						function frame:UpdateStates()
+							for index = 1, 4 do
+								local castType = self.order[index]
+								
+								if castType == "CONQUER" then
+									self:SetConquer(index)
+								elseif castType == "VANQUISH" then
+									self:SetVanquish(index)
+								else
+									self:SetUnknown(index)
+								end
+							end
+						end
+						
+						function frame:PreviewShow()
+							local orders = {
+								{"VANQUISH", "VANQUISH", "CONQUER", "CONQUER"},
+								{"CONQUER", "CONQUER", "VANQUISH", "VANQUISH"},
+								{"VANQUISH", "CONQUER", "CONQUER", "VANQUISH"},
+								{"CONQUER", "VANQUISH", "VANQUISH", "CONQUER"},
+							}
+							
+							self.order = orders[math.random(4)]
+							self.assignments = {false, true}
+							self.count = 2 + math.random(2)
+							self:UpdateStates()
+							self:Start(self.count)
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_START" then
+							local unit, _, spellID = ...
+							if string.find(unit, "boss") and (spellID == 1224787 or spellID == 1224812) then
+								frame.count = frame.count + 1
+								frame.order[frame.count] = spellID == 1224787 and "CONQUER" or "VANQUISH"
+								
+								frame:UpdateOrder()
+								frame:UpdateStates()
+								frame:Start(frame.count)
+							end
+
+						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, _, spellID = ...
+							if string.find(unit, "boss") and (spellID == 1224787 or spellID == 1224812) then
+								-- Hide states after the 4th cast completes
+								if frame.count == 4 then
+									frame.order = table.wipe(frame.order)
+									frame.count = 0
+									for _, bar in pairs(frame.bars) do
+										T.StopTimerBar(bar, true, true)
+									end
+								end
+							end
+							
+						elseif event == "ENCOUNTER_START" then
+							frame.order = table.wipe(frame.order)
+							frame.count = 0
+						end
+					end,
+					reset = function(frame, event)
+						for _, bar in pairs(frame.bars) do
+							T.StopTimerBar(bar, true, true)
+						end
+					end,
+				},
 				{ -- 首领模块 征服 MRT轮次分配（待测试）
 					category = "BossMod", 
 					spellID = 1224787,
@@ -164,24 +382,7 @@ G.Encounters[2690] = {
 					reset = function(frame, event)
 						T.ResetSpellBars(frame)
 					end,
-				},
-				{ -- 计时条 主宰（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1224812,
-					ficon = "0",
-					show_tar = true,
-					sound = soundfile("1224812cast", "cast"),
-				},
-				{ -- 换坦计时条 主宰（✓）
-					category = "AlertTimerbar",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "group",
-					spellID = 1224816,
-					ficon = "0",
-					tank = true,
-				},
+				},	
 			},
 		},
 		{ -- 放逐
@@ -683,6 +884,14 @@ G.Encounters[2690] = {
 					tip = L["快走开"],
 					sound = "[sound_dd]",
 				},
+				{ -- 姓名板打断图标 虚无震击
+					category = "PlateAlert",
+					type = "PlateInterrupt",
+					spellID = 1230263,
+					mobID = "241803,241798",
+					interrupt = 2,
+					ficon = "6",
+				},
 			},
 		},
 		{ -- 影卫收割者
@@ -695,10 +904,19 @@ G.Encounters[2690] = {
 				--{1228053, "2"},--【收割】
 			},
 			options = {
-				{ -- 计时条 暮光屠戮（史诗待测试）
+				{ -- 计时条 暮光屠戮（✓）
 					category = "AlertTimerbar",
-					type = "cast",
+					type = "cleu",
+					event = "SPELL_CAST_SUCCESS",
 					spellID = 1237106,
+					dur = 5,
+				},
+				{ -- 声音 暮光屠戮（分配后更改音效）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 1237108,
+					private_aura = true,
+					file = soundfile("1237108aura"),
 				},
 				{ -- 图标 收割（✓）
 					category = "AlertIcon",

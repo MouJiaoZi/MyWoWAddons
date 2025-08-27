@@ -1,6 +1,6 @@
 VER 3 0100000000000099 "1" "INV_Misc_QuestionMark"
 #showtooltip
-/cast [@cursor] 爆炸酒桶
+/cast [@player] 爆炸酒桶
 END
 VER 3 010000000000009A "1" "INV_Misc_QuestionMark"
 #showtooltip 切喉手

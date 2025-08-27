@@ -3,15 +3,33 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.49
+Plexus Sentinel mythic timeline data.
+Soulbinder Naazindhri mythic timeline data.
+Loom'ithar Infusion Pylons soak assignment and player status monitoring.
+Loom'ithar prompt defensive spells for Infusion Tether/Arcane Outrage
+Loom'ithar Infusion Tether raid list and raid frame index.
+Loom'ithar Fix Primal Spellstorm count down.
+Loom'ithar mythic timeline data.
+Forgeweaver Araz collector heath/power monitoring and HP difference check.
+Forgeweaver Araz Astral Harvest/Void Harvest timing circles.
+Forgeweaver Araz Astral Harvest/Void Harvest raid list and raid frame index.
+Forgeweaver Araz Arcane Echo HP monitoring and killing countdown.
+Forgeweaver Araz prompt defensive spells for Arcane Expulsion.
+Forgeweaver Araz Mana Sacrifice add countdown text.
+Forgeweaver Araz Photon Blast add countdown text and timing bar for targeted collector.
+Forgeweaver Araz mythic timeline data.
+Remove useless functions and correct other errors.
+
 5.20
-Plexus Sentinel prompt defensive spells when soak Eradicating Salvo.
+Plexus Sentinel prompt defensive spells for soak Eradicating Salvo.
 Soulbinder Naazindhri prompt dispel sound when Void Burst 2+ stacks. 
-Soulbinder Naazindhri prompt defensive spells when Void Burst 3+ stacks.
-Soulbinder Naazindhri prompt defensive spells when casting Arcane Expulsion.
+Soulbinder Naazindhri prompt defensive spells for Void Burst 3+ stacks.
+Soulbinder Naazindhri prompt defensive spells for casting Arcane Expulsion.
 Forgeweaver Araz automatic mark for Collector(Order of appearance)
 Forgeweaver Araz add power bar for Collector, show nameplate mark for highest power Collector.
 Forgeweaver Araz add timing bar and countdown for Astral Harvest.
-Forgeweaver Araz prompt defensive spells when soak Arcane Obliteration.
+Forgeweaver Araz prompt defensive spells for soak Arcane Obliteration.
 Remove useless functions and correct other errors.
 
 5.10

@@ -1081,8 +1081,14 @@ local function CreateRingCD(parent, color, cd_reverse, bg_alpha)
 						s:SetColor(unpack(self.next_color))
 						s:UpdateColorData(duration, tag_info)
 					end
+					
 					s:SetTime(duration, exp_time)
-					s.dur_text:SetText(string.format("%.1f", remain))
+					
+					if s.cur_text then
+						s.dur_text:SetText(string.format("%s %.1f", cd.cur_text, remain))
+					else
+						s.dur_text:SetText(string.format("%.1f", remain))
+					end
 				else
 					s:Hide()
 					s:SetScript("OnUpdate", nil)
@@ -1713,7 +1719,7 @@ T.GetBarsCustomData = function(frame)
 		data.custom = {}
 	end
 	
-	table.insert(data.custom, {key = "width_sl", text = L["长度"], default = 180, min = 100, max = 300, apply = function(value, alert)
+	table.insert(data.custom, {key = "width_sl", text = L["长度"], default = frame.default_bar_width or 180, min = 100, max = 300, apply = function(value, alert)
 		alert:SetWidth(value)
 		if alert.bars then
 			for tag, bar in pairs(alert.bars) do
@@ -1722,7 +1728,7 @@ T.GetBarsCustomData = function(frame)
 		end
 	end})
 	
-	table.insert(data.custom, {key = "height_sl", text = L["高度"], default = 20, min = 16, max = 30, apply = function(value, alert)		
+	table.insert(data.custom, {key = "height_sl", text = L["高度"], default = frame.default_bar_height or 20, min = 16, max = 40, apply = function(value, alert)		
 		if alert.bar_num then
 			alert:SetHeight((value+2)*alert.bar_num-2)
 		elseif alert.ficon == "0" then
@@ -2375,7 +2381,7 @@ end
 --------------------------------------------------------
 ---------------  [首领模块]自动标记模板  ---------------
 --------------------------------------------------------
--- event: INSTANCE_ENCOUNTER_ENGAGE_UNIT
+-- event: ENCOUNTER_ENGAGE_UNIT
 -- event: NAME_PLATE_UNIT_ADDED
 -- event: UNIT_TARGET
 
@@ -2409,16 +2415,12 @@ T.InitRaidTarget = function(frame)
 end
 
 T.UpdateRaidTarget = function(frame, event, ...)
-	if event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
-		T.DelayFunc(.5, function()
-			for unit in T.IterateBoss() do
-				local GUID = UnitGUID(unit)
-				local npcID = select(6, strsplit("-", GUID))
-				if npcID and npcID == frame.mob_npcID and not frame.marked[GUID] then
-					frame:Mark(unit, GUID)
-				end
-			end
-		end)
+	if event == "ENCOUNTER_ENGAGE_UNIT" then
+		local unit, GUID = ...
+		local npcID = select(6, strsplit("-", GUID))
+		if npcID and npcID == frame.mob_npcID and not frame.marked[GUID] then
+			frame:Mark(unit, GUID)
+		end
 	elseif event == "NAME_PLATE_UNIT_ADDED" then
 		local unit = ...
 		local GUID = UnitGUID(unit)
@@ -2458,36 +2460,370 @@ T.ResetRaidTarget = function(frame)
 end
 
 --------------------------------------------------------
----------------  [首领模块]小怪血量模板  ---------------
+------------------   小怪监控模板 API  -----------------
 --------------------------------------------------------
--- BOSS
--- event: INSTANCE_ENCOUNTER_ENGAGE_UNIT
--- event: UNIT_HEALTH
 
--- NON-BOSS
--- event: NAME_PLATE_UNIT_ADDED
--- event: UNIT_TARGET
+local CreatePreviewBar = function(frame, npcID, info, i, extra_bar)	
+	if not frame.bars[npcID..i] then
+		local w = C.DB["BossMod"][frame.config_id]["width_sl"]
+		local h = C.DB["BossMod"][frame.config_id]["height_sl"]
+		
+		local bar = CreateTimerBar(frame, nil, false, true, false, w, h, info.color)
+		bar:SetMinMaxValues(0, 1000000)
+		
+		if extra_bar then
+			bar.extra_bar = CreateFrame("StatusBar", nil, bar)
+			bar.extra_bar:SetPoint("BOTTOMLEFT", bar, "BOTTOMLEFT")
+			bar.extra_bar:SetWidth(w)
+			bar.extra_bar:SetHeight(h*.25)
+			bar.extra_bar:SetStatusBarTexture(G.media.blank)
+			bar.extra_bar:SetStatusBarColor(unpack(info.color2))
+			bar.extra_bar:SetMinMaxValues(0, 100)
+			
+			bar:HookScript("OnSizeChanged", function(self, width, height)
+				self.extra_bar:SetWidth(width)
+				self.extra_bar:SetHeight(height*.25)
+			end)
+		end
+		
+		bar.rt_icon = bar:CreateTexture(nil, "OVERLAY")
+		bar.rt_icon:SetSize(h, h)
+		bar.rt_icon:SetPoint("LEFT", bar, "LEFT", 0, 0)
+		bar.rt_icon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+		SetRaidTargetIconTexture(bar.rt_icon, i)
+		
+		bar.left:ClearAllPoints()
+		bar.left:SetPoint("LEFT", bar.rt_icon, "RIGHT", 5, 0)
+		bar.left:SetText(info.n or T.GetNameFromNpcID(npcID))
+		
+		frame.bars[npcID..i] = bar
+	end
+	
+	local bar = frame.bars[npcID..i]
+	
+	local hp = math.random(1000000)
+	bar:SetValue(hp)
+	if frame.format == "value" then
+		bar.right:SetText(T.ShortValue(hp))
+	else
+		bar.right:SetText(floor(hp/10000))
+	end
+	
+	if extra_bar then
+		bar.extra_bar:SetValue(math.random(100))
+	end
+end
 
--- event: COMBAT_LOG_EVENT_UNFILTERED
--- event: UNIT_NAME_UPDATE(可选 需要刷新名字)
--- event: UNIT_AURA(可选 需要刷新光环)
+local InitUnitFrameMod = function(frame)
+	frame.bars = {}
+	frame.watched_auraTypes = {}
+	
+	T.GetBarsCustomData(frame)
+	
+	if frame.auras then		
+		for k, v in pairs(frame.auras) do
+			if not frame.watched_auraTypes[v.aura_type] then
+				frame.watched_auraTypes[v.aura_type] = true
+			end
+		end
+	end
+	
+	function frame:lineup()
+		local lastbar
+		for GUID, bar in pairs(self.bars) do
+			bar:ClearAllPoints()
+			if not lastbar then
+				bar:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+			else
+				bar:SetPoint("TOPLEFT", lastbar, "BOTTOMLEFT", 0, -2)		
+			end
+			lastbar = bar
+		end
+	end
+	
+	function frame:remove_bar(GUID)
+		if self.bars[GUID] then
+			self.bars[GUID]:Hide()
+			self.bars[GUID] = nil
+			self:lineup()
+		end
+	end
+	
+	function frame:PreviewShow()
+		local num = self.bar_num or 2		
+		for npcID, info in pairs(self.npcIDs) do
+			for i = 1, num do
+				CreatePreviewBar(self, npcID, info, i, info.color2)	
+			end
+		end		
+		self:lineup()
+	end
+	
+	function frame:PreviewHide()
+		for tag, bar in pairs(self.bars) do
+			bar:ClearAllPoints()
+			bar:Hide()
+		end
+		self.bars = table.wipe(self.bars)
+	end
+end
 
---		frame.format = "value" -- "perc" 显示百分比/显示数值
---		frame:post_update_health(bar, unit)
--- 		frame:post_update_absorb(bar, unit)
---		frame:post_update_name(bar, unit)
+local CreateAuraIcon = function(frame, bar, auraID)
+	local icon_size = C.DB["BossMod"][frame.config_id]["height_sl"]
+	
+	local icon = CreateFrame("Frame", nil, bar)
+	icon:SetSize(icon_size, icon_size)
+	
+	T.createborder(icon)
+	icon.t = 0
+	icon.tag = auraID
+	
+	icon.tex = icon:CreateTexture(nil, "ARTWORK")
+	icon.tex:SetAllPoints()
+	icon.tex:SetTexCoord( .1, .9, .1, .9)
+	
+	
+	icon.count = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "RIGHT")
+	icon.count:SetPoint("TOPRIGHT", icon, "TOPRIGHT")
+	
+	icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
+	icon.cooldown:SetAllPoints()
+	icon.cooldown:SetDrawEdge(false)
+	icon.cooldown:SetHideCountdownNumbers(true)
+	icon.cooldown:SetReverse(true)
+	
+	function icon:update_texture(texture)
+		self.tex:SetTexture(texture)
+	end
+	
+	function icon:update_stack(count)
+		self.count:SetText(count > 0 and count or "")
+	end
+	
+	function icon:stop()
+		self:ClearAllPoints()
+		self:Hide()
+		self:SetScript("OnUpdate", nil)
+		
+		bar.icons[self.tag] = nil
+		bar:lineup_icons()
+	end
+	
+	function icon:start(dur, exp_time)
+		if dur and exp_time and dur > 0 and exp_time - GetTime() > 0 then
+			self.cooldown:SetCooldown(exp_time - dur, dur)							
+			self:SetScript("OnUpdate", function(s, e)
+				s.t = s.t + e
+				if s.t > .05 then	
+					local remain = exp_time - GetTime()
+					if remain < 0 then
+						s:stop()
+					end
+					s.t = 0
+				end
+			end)
+		end
+	end
+	
+	return icon
+end
 
---		frame.npcIDs = {
---			["182822"] = {n = "", color = {0, .3, .1}}, -- NpcID 名字，颜色
---		}
---		frame.auras = {
---			[139] = { -- 监视的光环
---				aura_type = "HELPFUL",
---				color = {0, 1, 1},
---			},
---		}
+local AuraFullCheck = function(frame, unit, bar)
+	for _, auraType in pairs({"HELPFUL", "HARMFUL"}) do
+		if frame.watched_auraTypes[auraType] then	
+			AuraUtil.ForEachAura(unit, auraType, nil, function(AuraData)
+				if frame.auras[AuraData.spellId] and not bar.icons[AuraData.auraInstanceID] then
+					bar:add_auraicon(AuraData.auraInstanceID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
+					bar:update_color(unit)
+				end
+			end, true)
+		end
+	end
+end
 
-local cleu_sub_event_hp = {
+local CreateUFBar = function(frame, GUID, extra_bar)	
+	local w = C.DB["BossMod"][frame.config_id]["width_sl"]
+	local h = C.DB["BossMod"][frame.config_id]["height_sl"]
+	local npcID = select(6, strsplit("-", GUID))
+	local info = frame.npcIDs[npcID]
+	
+	local bar = CreateTimerBar(frame, nil, false, false, false, w, h, info.color)
+	bar.GUID = GUID
+	bar.npcID = npcID
+	
+	bar.absorb_bar = CreateFrame("StatusBar", nil, bar)
+	bar.absorb_bar:SetPoint("LEFT", bar, "RIGHT")
+	bar.absorb_bar:SetWidth(w)
+	bar.absorb_bar:SetHeight(h)
+	bar.absorb_bar:SetStatusBarTexture(G.media.blank)
+	bar.absorb_bar:SetStatusBarColor(.6, 1, 1, .4)
+	bar.absorb_bar:Hide()
+	bar.absorb = 0
+	
+	bar:HookScript("OnSizeChanged", function(self, width, height)
+		self.absorb_bar:SetWidth(width)
+		self.absorb_bar:SetHeight(height)
+	end)
+	
+	if extra_bar then
+		bar.extra_bar = CreateFrame("StatusBar", nil, bar)
+		bar.extra_bar:SetPoint("BOTTOMLEFT", bar, "BOTTOMLEFT")
+		bar.extra_bar:SetWidth(w)
+		bar.extra_bar:SetHeight(h*.25)
+		bar.extra_bar:SetStatusBarTexture(G.media.blank)
+		bar.extra_bar:SetStatusBarColor(unpack(info.color2))
+		
+		bar:HookScript("OnSizeChanged", function(self, width, height)
+			self.extra_bar:SetWidth(width)
+			self.extra_bar:SetHeight(height*.25)
+		end)
+	end
+	
+	bar.rt_icon = bar:CreateTexture(nil, "OVERLAY")
+	bar.rt_icon:SetSize(h, h)
+	bar.rt_icon:SetPoint("LEFT", bar, "LEFT", 0, 0)
+	bar.rt_icon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
+	bar.rt_icon:Hide()
+	
+	bar.left:ClearAllPoints()
+	bar.left:SetPoint("LEFT", bar.rt_icon, "RIGHT", 5, 0)
+	
+	bar.icons = {}
+	
+	function bar:lineup_icons()
+		local last_icon
+		for auraID, icon in pairs(self.icons) do
+			icon:ClearAllPoints()
+			if not last_icon then
+				icon:SetPoint("LEFT", self, "RIGHT", 5, 0)
+			else
+				icon:SetPoint("LEFT", last_icon, "RIGHT", 3, 0)
+			end
+			last_icon = icon
+		end	
+	end
+	
+	function bar:add_auraicon(auraID, texture, count, dur, exp_time)
+		if not self.icons[auraID] then
+			local icon = CreateAuraIcon(frame, self)
+			
+			icon:update_texture(texture)
+			icon:update_stack(count)
+			icon:start(dur, exp_time)
+
+			self.icons[auraID] = icon
+			
+			self:lineup_icons()
+		end
+	end
+	
+	function bar:update_auraicon(auraID, texture, count, dur, exp_time)
+		local icon = self.icons[auraID]
+		if icon then
+			icon:update_texture(texture)
+			icon:update_stack(count)
+			icon:start(dur, exp_time)
+		end
+	end
+	
+	function bar:remove_auraicon(auraID)
+		local icon = bar.icons[auraID]
+		if icon then
+			icon:stop()
+		end
+	end
+	
+	function bar:update_color(unit)
+		if frame.auras then
+			local aura_matched
+			for spellID, t in pairs(frame.auras) do
+				if t.color and AuraUtil.FindAuraBySpellID(spellID, unit, t.aura_type) then
+					self:SetStatusBarColor(unpack(t.color))
+					aura_matched = true
+					break
+				end
+			end
+			if not aura_matched then
+				self:SetStatusBarColor(unpack(info.color))
+			end
+		end
+	end
+	
+	function bar:update_mark(unit)
+		local mark = GetRaidTargetIndex(unit)
+		if not mark then
+			self.rt_icon:Hide()
+		else
+			SetRaidTargetIconTexture(self.rt_icon, mark)
+			self.rt_icon:Show()
+		end
+	end
+	
+	function bar:update_mark_by_raidflags(raidFlags)
+		local mark = T.GetRaidFlagsMark(raidFlags)
+		if mark == 0 then
+			self.rt_icon:Hide()
+		else
+			SetRaidTargetIconTexture(self.rt_icon, mark)
+			self.rt_icon:Show()
+		end
+	end
+	
+	function bar:update_name(unit)		
+		if frame.npcIDs[self.npcID]["n"] then
+			self.left:SetText(frame.npcIDs[self.npcID]["n"])
+		elseif UnitName(unit) then
+			self.left:SetText(UnitName(unit))
+		end
+		
+		if frame.post_update_name then
+			frame:post_update_name(self, unit)
+		end
+	end
+	
+	function bar:update_auras(unit, updateInfo)
+		if updateInfo == nil or updateInfo.isFullUpdate then	
+		for auraID, icon in pairs(self.icons) do
+				self:remove_auraicon(auraID)
+			end
+			AuraFullCheck(frame, unit, self)
+		else
+			if updateInfo.addedAuras ~= nil then
+				for _, AuraData in pairs(updateInfo.addedAuras) do
+					if frame.auras[AuraData.spellId] and not self.icons[AuraData.auraInstanceID] then
+						self:add_auraicon(AuraData.auraInstanceID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
+						self:update_color(unit)
+					end
+				end
+			end
+			if updateInfo.updatedAuraInstanceIDs ~= nil then
+				for _, auraID in pairs(updateInfo.updatedAuraInstanceIDs) do		
+					if self.icons[auraID] then
+						local AuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, auraID)
+						if AuraData then
+							self:update_auraicon(auraID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
+						else
+							self:remove_auraicon(auraID)
+							self:update_color(unit)
+						end
+					end
+				end
+			end
+			if updateInfo.removedAuraInstanceIDs ~= nil then
+				for _, auraID in pairs(updateInfo.removedAuraInstanceIDs) do
+					if self.icons[auraID] then
+						self:remove_auraicon(auraID)
+						self:update_color(unit)
+					end
+				end
+			end
+		end
+	end
+	
+	return bar
+end
+
+local UpdateHealthbyCLEU = {
 	["SWING_DAMAGE"] = function(bar, arg12, arg13, arg14, arg15)
 		bar.min = bar.min - arg12
 		if bar.min < 0 then
@@ -2560,283 +2896,107 @@ local cleu_sub_event_hp = {
 }
 
 local UnitFliter = function(frame, unit)
-	if frame.events["INSTANCE_ENCOUNTER_ENGAGE_UNIT"] then
+	if frame.events["ENCOUNTER_SHOW_BOSS_UNIT"] then
 		return string.find(unit, "boss") or string.find(unit, "arena")
 	else
 		return string.find(unit, "nameplate") or string.find(unit, "target")
 	end
 end
 
-local AuraFullCheck = function(frame, unit, bar)
-	for _, auraType in pairs({"HELPFUL", "HARMFUL"}) do
-		if frame.watched_auraTypes[auraType] then	
-			AuraUtil.ForEachAura(unit, auraType, nil, function(AuraData)
-				if frame.auras[AuraData.spellId] and not bar.icons[AuraData.auraInstanceID] then
-					bar:add_auraicon(AuraData.auraInstanceID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
-					bar:update_color(unit)
-				end
-			end, true)
-		end
-	end
-end
+--------------------------------------------------------
+---------------  [首领模块]小怪血量模板  ---------------
+--------------------------------------------------------
+-- BOSS
+-- event: ENCOUNTER_SHOW_BOSS_UNIT
+-- event: ENCOUNTER_HIDE_BOSS_UNIT
+-- event: UNIT_HEALTH
+-- event: RAID_TARGET_UPDATE
+-- event: UNIT_NAME_UPDATE(可选 需要刷新名字)
+-- event: UNIT_AURA(可选 需要刷新光环)
+
+-- NON-BOSS
+-- event: NAME_PLATE_UNIT_ADDED
+-- event: UNIT_TARGET
+-- event: COMBAT_LOG_EVENT_UNFILTERED
+-- event: UNIT_NAME_UPDATE(可选 需要刷新名字)
+-- event: UNIT_AURA(可选 需要刷新光环)
+
+--		frame.format = "value" -- "perc" 显示百分比/显示数值
+--		frame:post_update_health(bar, unit)
+-- 		frame:post_update_absorb(bar, unit)
+--		frame:post_update_name(bar, unit)
+
+--		frame.npcIDs = {
+--			["182822"] = {n = "", color = {0, .3, .1}}, -- NpcID 名字，颜色
+--		}
+--		frame.auras = {
+--			[139] = { -- 监视的光环
+--				aura_type = "HELPFUL",
+--				color = {0, 1, 1},
+--			},
+--		}
 
 T.InitMobHealth = function(frame)
-	frame.bars = {}
-	frame.watched_auraTypes = {}
+	InitUnitFrameMod(frame)
 	
-	T.GetBarsCustomData(frame)
-	
-	if frame.events["INSTANCE_ENCOUNTER_ENGAGE_UNIT"] then
-		frame.cleu_update = false
-	else
-		frame.cleu_update = true
-	end
-	
-	if frame.auras then		
-		for k, v in pairs(frame.auras) do
-			if not frame.watched_auraTypes[v.aura_type] then
-				frame.watched_auraTypes[v.aura_type] = true
-			end
-		end
-	end
-	
-	frame.create_uf_bar = function(unit, GUID)
-		if not frame.bars[GUID] then
-			local w, h = C.DB["BossMod"][frame.config_id]["width_sl"], C.DB["BossMod"][frame.config_id]["height_sl"]
-			local npcID = select(6, strsplit("-", GUID))
-			local info = frame.npcIDs[npcID]
-			local bar = CreateTimerBar(frame, nil, false, false, false, w, h, info.color)
-			
-			bar.absorb_bar = CreateFrame("StatusBar", nil, bar)
-			bar.absorb_bar:SetPoint("LEFT", bar, "RIGHT")
-			bar.absorb_bar:SetWidth(w)
-			bar.absorb_bar:SetHeight(h)
-			bar.absorb_bar:SetStatusBarTexture(G.media.blank)
-			bar.absorb_bar:SetStatusBarColor(.6, 1, 1, .4)
-			
-			bar:HookScript("OnSizeChanged", function(self, width, height)
-				self.absorb_bar:SetWidth(width)
-				self.absorb_bar:SetHeight(height)
-			end)		
-			
-			bar.rt_icon = bar:CreateTexture(nil, "OVERLAY")
-			bar.rt_icon:SetSize(h, h)
-			bar.rt_icon:SetPoint("LEFT", bar, "LEFT", 0, 0)
-			bar.rt_icon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-			bar.rt_icon:Hide()
-			
-			bar.left:ClearAllPoints()
-			bar.left:SetPoint("LEFT", bar.rt_icon, "RIGHT", 5, 0)
-			
-			bar.icons = {}
-			
-			bar.GUID = GUID
-			bar.npcID = npcID
-			bar.min = UnitHealth(unit)
-			bar.max = UnitHealthMax(unit)
-			bar.absorb = 0
+	function frame:create_uf_bar(unit, GUID)		
+		if not self.bars[GUID] then			
+			local bar = CreateUFBar(self, GUID)
+			bar.absorb_bar:Show()
 			
 			function bar:update_value()		
-				self:SetMinMaxValues(0, self.max)
-				self:SetValue(self.min)
+				bar:SetMinMaxValues(0, bar.max)
+				bar:SetValue(bar.min)
 				
-				self.absorb_bar:SetMinMaxValues(0, self.max)
-				self.absorb_bar:SetValue(self.absorb)
+				bar.absorb_bar:SetMinMaxValues(0, bar.max)
+				bar.absorb_bar:SetValue(bar.absorb)
 				
 				if frame.format == "value" then
-					self.right:SetText(T.ShortValue(self.min))
+					bar.right:SetText(T.ShortValue(bar.min))
 				else
-					self.right:SetText(floor(self.min/self.max*100))
+					bar.right:SetText(floor(bar.min/bar.max*100))
 				end
 			end
 			
-			function bar:lineup_icons()
-				local last_icon
-				for auraID, icon in pairs(self.icons) do
-					icon:ClearAllPoints()
-					if not last_icon then
-						icon:SetPoint("LEFT", self, "RIGHT", 5, 0)
-					else
-						icon:SetPoint("LEFT", last_icon, "RIGHT", 3, 0)
-					end
-					last_icon = icon
-				end	
-			end
-			
-			function bar:add_auraicon(auraID, texture, count, dur, exp_time)
-				if not self.icons[auraID] then
-					local icon = CreateFrame("Frame", nil, self)
-					icon:SetSize(C.DB["BossMod"][frame.config_id]["height_sl"], C.DB["BossMod"][frame.config_id]["height_sl"])
-					T.createborder(icon)
-					icon.t = 0
-					
-					icon.tex = icon:CreateTexture(nil, "ARTWORK")
-					icon.tex:SetAllPoints()
-					icon.tex:SetTexCoord( .1, .9, .1, .9)
-					icon.tex:SetTexture(texture)
-					
-					icon.count = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "RIGHT")
-					icon.count:SetPoint("TOPRIGHT", icon, "TOPRIGHT")
-					icon.count:SetText(count > 0 and count or "")
-					
-					icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
-					icon.cooldown:SetAllPoints()
-					icon.cooldown:SetDrawEdge(false)
-					icon.cooldown:SetHideCountdownNumbers(true)
-					icon.cooldown:SetReverse(true)
-					
-					if dur and exp_time and dur > 0 and exp_time > GetTime() then
-						icon.cooldown:SetCooldown(exp_time - dur, dur)							
-						icon.exp = exp_time
-						icon:SetScript("OnUpdate", function(self, e)
-							self.t = self.t + e
-							if self.t > .05 then	
-								local remain = self.exp - GetTime()
-								if remain < 0 then
-									self:ClearAllPoints()
-									self:Hide()
-									self:SetScript("OnUpdate", nil)
-									bar.icons[auraID] = nil
-									bar:lineup_icons()
-								end
-								self.t = 0
-							end
-						end)
-					end
-					
-					self.icons[auraID] = icon
-					self:lineup_icons()
-				end
-			end
-			
-			function bar:update_auraicon(auraID, texture, count, dur, exp_time)
-				local icon = self.icons[auraID]
-				icon.tex:SetTexture(texture)
-				icon.count:SetText(count > 0 and count or "")
-				if dur and exp_time and dur > 0 and exp_time > GetTime() then
-					icon.cooldown:SetCooldown(exp_time - dur, dur)
-					icon.exp = exp_time
-				end
-			end
-			
-			function bar:remove_auraicon(auraID)
-				local icon = bar.icons[auraID]
-				icon:ClearAllPoints()
-				icon:Hide()
-				icon:SetScript("OnUpdate", nil)
-				bar.icons[auraID] = nil
-				bar:lineup_icons()
-			end
-			
-			function bar:update_color(unit)
-				if frame.auras then
-					local aura_matched
-					for spellID, t in pairs(frame.auras) do
-						if t.color and AuraUtil.FindAuraBySpellID(spellID, unit, t.aura_type) then
-							self:SetStatusBarColor(unpack(t.color))
-							aura_matched = true
-							break
-						end
-					end
-					if not aura_matched then
-						self:SetStatusBarColor(unpack(info.color))
-					end
-				end
-			end
-			
-			frame.bars[GUID] = bar
-			frame:lineup()
-		end
-	end
-		
-	function frame:update_health(bar, unit)
-		bar.min, bar.max = UnitHealth(unit), UnitHealthMax(unit)
-		bar:update_value()
-
-		if frame.post_update_health then
-			frame:post_update_health(bar, unit)
-		end
-	end
-	
-	function frame:update_absorb(bar, unit)
-		bar.absorb = UnitGetTotalAbsorbs(unit)
-		bar:update_value()
-		
-		if frame.post_update_absorb then
-			frame:post_update_absorb(bar, unit)
-		end
-	end
-	
-	function frame:update_mark(bar, mark)	
-		if mark == 0 then
-			bar.rt_icon:Hide()
-		else
-			SetRaidTargetIconTexture(bar.rt_icon, mark)
-			bar.rt_icon:Show()
-		end
-	end
-	
-	function frame:update_name(bar, unit)		
-		if frame.npcIDs[bar.npcID]["n"] then
-			bar.left:SetText(frame.npcIDs[bar.npcID]["n"])
-		elseif UnitName(unit) then
-			bar.left:SetText(UnitName(unit))
-		end
-		
-		if frame.post_update_name then
-			frame:post_update_name(bar, unit)
-		end
-	end
-	
-	function frame:lineup()
-		local lastbar
-		for GUID, bar in pairs(frame.bars) do
-			bar:ClearAllPoints()
-			if not lastbar then
-				bar:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, 0)
-			else
-				bar:SetPoint("TOPLEFT", lastbar, "BOTTOMLEFT", 0, -2)		
-			end
-			lastbar = bar
-		end
-	end
-	
-	function frame:PreviewShow()
-		local num
-		if self.bar_num then
-			num = self.bar_num
-		else
-			num = 2
-		end
-		
-		for npcID, info in pairs(frame.npcIDs) do
-			for i = 1, num do
-				local w, h = C.DB["BossMod"][frame.config_id]["width_sl"], C.DB["BossMod"][frame.config_id]["height_sl"]
-				local bar = CreateTimerBar(frame, nil, false, true, false, w, h, info.color)
+			function bar:update_health(unit)
+				bar.min = UnitHealth(unit)
+				bar.max = UnitHealthMax(unit)
 				
-				bar.rt_icon = bar:CreateTexture(nil, "OVERLAY")
-				bar.rt_icon:SetSize(h, h)
-				bar.rt_icon:SetPoint("LEFT", bar, "LEFT", 0, 0)
-				bar.rt_icon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-				SetRaidTargetIconTexture(bar.rt_icon, i)
-				
-				bar.left:ClearAllPoints()
-				bar.left:SetPoint("LEFT", bar.rt_icon, "RIGHT", 5, 0)
-				bar.left:SetText(T.GetNameFromNpcID(npcID))
-				
-				frame.bars[npcID..i] = bar
-			end
-		end
+				bar:update_value()
 		
-		frame:lineup()
+				if frame.post_update_health then
+					frame:post_update_health(bar, unit)
+				end
+			end
+			
+			function bar:update_absorb(unit)
+				bar.absorb = UnitGetTotalAbsorbs(unit)
+				
+				bar:update_value()
+				
+				if frame.post_update_absorb then
+					frame:post_update_absorb(bar, unit)
+				end
+			end
+			
+			self.bars[GUID] = bar
+			self:lineup()
+		end
 	end
 	
-	function frame:PreviewHide()
-		for tag, bar in pairs(frame.bars) do
-			bar:ClearAllPoints()
-			bar:Hide()
+	function frame:init_uf_bar(unit, GUID)
+		local npcID = select(6, strsplit("-", GUID))
+		if npcID and self.npcIDs[npcID] then
+			if not self.bars[GUID] then
+				self:create_uf_bar(unit, GUID)
+			end
+			local bar = self.bars[GUID]
+			bar:update_name(unit)
+			bar:update_mark(unit)
+			bar:update_health(unit)
+			bar:update_absorb(unit)	
+			AuraFullCheck(self, unit, bar)
 		end
-		frame.bars = table.wipe(frame.bars)
 	end
 end
 
@@ -2844,16 +3004,7 @@ T.UpdateMobHealth = function(frame, event, ...)
 	if event == "NAME_PLATE_UNIT_ADDED" then
 		local unit = ...
 		local GUID = UnitGUID(unit)
-		local npcID = select(6, strsplit("-", GUID))
-		if npcID and frame.npcIDs[npcID] then
-			if not frame.bars[GUID] then
-				frame.create_uf_bar(unit, GUID)
-			end
-			local bar = frame.bars[GUID]
-			frame:update_health(bar, unit)
-			frame:update_name(bar, unit)
-			AuraFullCheck(frame, unit, bar)
-		end
+		frame:init_uf_bar(unit, GUID)		
 	elseif event == "UNIT_TARGET" then
 		local unit = ...
 		if T.FilterGroupUnit(unit) then
@@ -2862,97 +3013,55 @@ T.UpdateMobHealth = function(frame, event, ...)
 				local GUID = UnitGUID(target_unit)
 				local npcID = select(6, strsplit("-", GUID))
 				if npcID and frame.npcIDs[npcID] then -- 确认过眼神
-					if not frame.bars[GUID] then
-						frame.create_uf_bar(target_unit, GUID)
-					end
-					local bar = frame.bars[GUID]
-					frame:update_health(bar, target_unit)
-					frame:update_name(bar, target_unit)
-					AuraFullCheck(frame, target_unit, bar)
+					frame:init_uf_bar(unit, GUID)
 				end
 			end
-		end
-	elseif event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
+		end	
+	elseif event == "ENCOUNTER_SHOW_BOSS_UNIT" then
+		local unit, GUID = ...
+		frame:init_uf_bar(unit, GUID)
+	elseif event == "ENCOUNTER_HIDE_BOSS_UNIT" then
+		local GUID = ...
+		frame:remove_bar(GUID)
+	elseif event == "RAID_TARGET_UPDATE" then
 		for unit in T.IterateBoss() do
 			local GUID = UnitGUID(unit)
-			local npcID = select(6, strsplit("-", GUID))
-			if npcID and frame.npcIDs[npcID] then
-				if not frame.bars[GUID] then
-					frame.create_uf_bar(unit, GUID)
-				end
-				local bar = frame.bars[GUID]
-				frame:update_health(bar, unit)
-				frame:update_name(bar, unit)
-				AuraFullCheck(frame, unit, bar)
+			local bar = frame.bars[GUID]
+			if bar then
+				bar:update_mark(unit)
 			end
-		end
+		end	
 	elseif event == "UNIT_NAME_UPDATE" then
 		local unit = ...
+		if not UnitFliter(frame, unit) then return end
+		
 		local GUID = UnitGUID(unit)
-		if frame.bars[GUID] then
-			frame:update_name(frame.bars[GUID], unit)
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_name(unit)
 		end
 	elseif event == "UNIT_AURA" then
-		if not frame.auras then return end
-		
 		local unit = ...
-		if not UnitFliter(frame, unit) then return end
+		
+		if not frame.auras or not UnitFliter(frame, unit) then return end
 		
 		local GUID = UnitGUID(unit)
 		local bar = frame.bars[GUID]
 		
 		if bar then
 			local updateInfo = select(2, ...)
-			if updateInfo == nil or updateInfo.isFullUpdate then	
-				for auraID, icon in pairs(bar.icons) do
-					bar:remove_auraicon(auraID)
-				end
-				
-				AuraFullCheck(frame, unit, bar)
-			else
-				if updateInfo.addedAuras ~= nil then
-					for _, AuraData in pairs(updateInfo.addedAuras) do
-						if frame.auras[AuraData.spellId] and not bar.icons[AuraData.auraInstanceID] then
-							bar:add_auraicon(AuraData.auraInstanceID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
-							bar:update_color(unit)
-						end
-					end
-				end
-				if updateInfo.updatedAuraInstanceIDs ~= nil then
-					for _, auraID in pairs(updateInfo.updatedAuraInstanceIDs) do		
-						if bar.icons[auraID] then
-							local AuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, auraID)
-							if AuraData then
-								bar:update_auraicon(auraID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
-							else
-								bar:remove_auraicon(auraID)
-								bar:update_color(unit)
-							end
-						end				
-					end
-				end
-				if updateInfo.removedAuraInstanceIDs ~= nil then
-					for _, auraID in pairs(updateInfo.removedAuraInstanceIDs) do
-						if bar.icons[auraID] then
-							bar:remove_auraicon(auraID)
-							bar:update_color(unit)
-						end
-					end
-				end
-			end
+			bar:update_auras(unit, updateInfo)
 		end
 	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, sub_event, _, sourceGUID, sourceName, _, _, DestGUID, DestName, _, destRaidFlags, arg12, arg13, arg14, arg15 = CombatLogGetCurrentEventInfo()
-		if sub_event == "UNIT_DIED" and frame.bars[DestGUID] then
-			frame.bars[DestGUID]:Hide()
-			frame.bars[DestGUID] = nil
-			frame:lineup()
-		elseif frame.cleu_update and cleu_sub_event_hp[sub_event] and frame.bars[DestGUID] then
-			local bar = frame.bars[DestGUID]
-			cleu_sub_event_hp[sub_event](bar, arg12, arg13, arg14, arg15)
-			bar:update_value()
-			if destRaidFlags and destRaidFlags > 0 then
-				frame:update_mark(bar, T.GetRaidFlagsMark(destRaidFlags))
+		local _, sub_event, _, _, _, _, _, destGUID, _, _, destRaidFlags, arg12, arg13, arg14, arg15 = CombatLogGetCurrentEventInfo()
+		if sub_event == "UNIT_DIED" then
+			frame:remove_bar(destGUID)
+		elseif UpdateHealthbyCLEU[sub_event] then
+			local bar = frame.bars[destGUID]
+			if bar then
+				UpdateHealthbyCLEU[sub_event](bar, arg12, arg13, arg14, arg15)
+				bar:update_value()
+				bar:update_mark_by_raidflags(destRaidFlags)
 			end
 		end
 	elseif event == "UNIT_HEALTH" then
@@ -2960,19 +3069,18 @@ T.UpdateMobHealth = function(frame, event, ...)
 		if not UnitFliter(frame, unit) then return end
 		
 		local GUID = UnitGUID(unit)
-		if frame.bars[GUID] then
-			local bar = frame.bars[GUID]
-			frame:update_health(bar, unit)
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_health(unit)
 		end
 	elseif event == "UNIT_ABSORB_AMOUNT_CHANGED" then
 		local unit = ...
 		if not UnitFliter(frame, unit) then return end
 		
 		local GUID = UnitGUID(unit)
-		if frame.bars[GUID] then
-			local bar = frame.bars[GUID]
-			frame:update_absorb(bar, unit)
-			bar:update_value()
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_absorb(unit)
 		end
 	end
 end
@@ -2989,11 +3097,10 @@ end
 --------------------------------------------------------
 ---------------  [首领模块]BOSS能量模板  ---------------
 --------------------------------------------------------
--- event: INSTANCE_ENCOUNTER_ENGAGE_UNIT
+-- event: ENCOUNTER_SHOW_BOSS_UNIT
+-- event: ENCOUNTER_HIDE_BOSS_UNIT
 -- event: UNIT_POWER_UPDATE
 -- event: RAID_TARGET_UPDATE
--- event: COMBAT_LOG_EVENT_UNFILTERED
-
 -- event: UNIT_NAME_UPDATE(可选 需要刷新名字)
 -- event: UNIT_AURA(可选 需要刷新光环)
 
@@ -3011,317 +3118,85 @@ end
 --		}
 
 T.InitMobPower = function(frame)
-	frame.bars = {}
-	frame.watched_auraTypes = {}
-	
-	T.GetBarsCustomData(frame)
-	
-	if frame.auras then		
-		for k, v in pairs(frame.auras) do
-			if not frame.watched_auraTypes[v.aura_type] then
-				frame.watched_auraTypes[v.aura_type] = true
-			end
-		end
-	end
-	
-	frame.create_uf_bar = function(unit, GUID)
-		if not frame.bars[GUID] then
-			local w, h = C.DB["BossMod"][frame.config_id]["width_sl"], C.DB["BossMod"][frame.config_id]["height_sl"]
-			local npcID = select(6, strsplit("-", GUID))
-			local info = frame.npcIDs[npcID]
-			local bar = CreateTimerBar(frame, nil, false, false, false, w, h, info.color)
-			
-			bar.rt_icon = bar:CreateTexture(nil, "OVERLAY")
-			bar.rt_icon:SetSize(h, h)
-			bar.rt_icon:SetPoint("LEFT", bar, "LEFT", 0, 0)
-			bar.rt_icon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-			bar.rt_icon:Hide()
-			
-			bar.left:ClearAllPoints()
-			bar.left:SetPoint("LEFT", bar.rt_icon, "RIGHT", 5, 0)
-			
-			bar.icons = {}
-			
-			bar.GUID = GUID
-			bar.npcID = npcID
-			bar.min = UnitPower(unit)
-			bar.max = UnitPowerMax(unit)
+	InitUnitFrameMod(frame)
 
-			function bar:update_value()		
-				self:SetMinMaxValues(0, self.max)
-				self:SetValue(self.min)
-				self.right:SetText(self.min)
-			end
+	function frame:create_uf_bar(unit, GUID)
+		if not self.bars[GUID] then
+			local bar = CreateUFBar(self, GUID)
 			
-			function bar:lineup_icons()
-				local last_icon
-				for auraID, icon in pairs(self.icons) do
-					icon:ClearAllPoints()
-					if not last_icon then
-						icon:SetPoint("LEFT", self, "RIGHT", 5, 0)
-					else
-						icon:SetPoint("LEFT", last_icon, "RIGHT", 3, 0)
-					end
-					last_icon = icon
-				end	
-			end
-			
-			function bar:add_auraicon(auraID, texture, count, dur, exp_time)
-				if not self.icons[auraID] then
-					local icon = CreateFrame("Frame", nil, self)
-					icon:SetSize(C.DB["BossMod"][frame.config_id]["height_sl"], C.DB["BossMod"][frame.config_id]["height_sl"])
-					T.createborder(icon)
-					icon.t = 0
-					
-					icon.tex = icon:CreateTexture(nil, "ARTWORK")
-					icon.tex:SetAllPoints()
-					icon.tex:SetTexCoord( .1, .9, .1, .9)
-					icon.tex:SetTexture(texture)
-					
-					icon.count = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "RIGHT")
-					icon.count:SetPoint("TOPRIGHT", icon, "TOPRIGHT")
-					icon.count:SetText(count > 0 and count or "")
-					
-					icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
-					icon.cooldown:SetAllPoints()
-					icon.cooldown:SetDrawEdge(false)
-					icon.cooldown:SetHideCountdownNumbers(true)
-					icon.cooldown:SetReverse(true)
-					
-					if dur and exp_time and dur > 0 and exp_time > GetTime() then
-						icon.cooldown:SetCooldown(exp_time - dur, dur)							
-						icon.exp = exp_time
-						icon:SetScript("OnUpdate", function(self, e)
-							self.t = self.t + e
-							if self.t > .05 then	
-								local remain = self.exp - GetTime()
-								if remain < 0 then
-									self:ClearAllPoints()
-									self:Hide()
-									self:SetScript("OnUpdate", nil)
-									bar.icons[auraID] = nil
-									bar:lineup_icons()
-								end
-								self.t = 0
-							end
-						end)
-					end
-					
-					self.icons[auraID] = icon
-					self:lineup_icons()
-				end
-			end
-			
-			function bar:update_auraicon(auraID, texture, count, dur, exp_time)
-				local icon = self.icons[auraID]
-				icon.tex:SetTexture(texture)
-				icon.count:SetText(count > 0 and count or "")
-				if dur and exp_time and dur > 0 and exp_time > GetTime() then
-					icon.cooldown:SetCooldown(exp_time - dur, dur)
-					icon.exp = exp_time
-				end
-			end
-			
-			function bar:remove_auraicon(auraID)
-				local icon = bar.icons[auraID]
-				icon:ClearAllPoints()
-				icon:Hide()
-				icon:SetScript("OnUpdate", nil)
-				bar.icons[auraID] = nil
-				bar:lineup_icons()
-			end
-			
-			function bar:update_color(unit)
-				if frame.auras then
-					local aura_matched
-					for spellID, t in pairs(frame.auras) do
-						if t.color and AuraUtil.FindAuraBySpellID(spellID, unit, t.aura_type) then
-							self:SetStatusBarColor(unpack(t.color))
-							aura_matched = true
-							break
-						end
-					end
-					if not aura_matched then
-						self:SetStatusBarColor(unpack(info.color))
-					end
-				end
-			end
-			
-			frame.bars[GUID] = bar
-			frame:lineup()
-		end
-	end
-		
-	function frame:update_power(bar, unit)
-		bar.min, bar.max = UnitPower(unit), UnitPowerMax(unit)
-		bar:update_value()
-
-		if frame.post_update_power then
-			frame:post_update_power(bar, unit)
-		end
-	end
-	
-	
-	function frame:update_mark(bar, mark)	
-		if mark == 0 then
-			bar.rt_icon:Hide()
-		else
-			SetRaidTargetIconTexture(bar.rt_icon, mark)
-			bar.rt_icon:Show()
-		end
-	end
-	
-	function frame:update_name(bar, unit)		
-		if frame.npcIDs[bar.npcID]["n"] then
-			bar.left:SetText(frame.npcIDs[bar.npcID]["n"])
-		elseif UnitName(unit) then
-			bar.left:SetText(UnitName(unit))
-		end
-		
-		if frame.post_update_name then
-			frame:post_update_name(bar, unit)
-		end
-	end
-	
-	function frame:lineup()
-		local lastbar
-		for GUID, bar in pairs(frame.bars) do
-			bar:ClearAllPoints()
-			if not lastbar then
-				bar:SetPoint("TOPLEFT", frame, "TOPLEFT", 0, 0)
-			else
-				bar:SetPoint("TOPLEFT", lastbar, "BOTTOMLEFT", 0, -2)		
-			end
-			lastbar = bar
-		end
-	end
-	
-	function frame:PreviewShow()
-		local num
-		if self.bar_num then
-			num = self.bar_num
-		else
-			num = 2
-		end
-		
-		for npcID, info in pairs(frame.npcIDs) do
-			for i = 1, num do
-				local w, h = C.DB["BossMod"][frame.config_id]["width_sl"], C.DB["BossMod"][frame.config_id]["height_sl"]
-				local bar = CreateTimerBar(frame, nil, false, true, false, w, h, info.color)
+			function bar:update_value()
+				bar:SetMinMaxValues(0, bar.max)
+				bar:SetValue(bar.min)
 				
-				bar.rt_icon = bar:CreateTexture(nil, "OVERLAY")
-				bar.rt_icon:SetSize(h, h)
-				bar.rt_icon:SetPoint("LEFT", bar, "LEFT", 0, 0)
-				bar.rt_icon:SetTexture([[Interface\TargetingFrame\UI-RaidTargetingIcons]])
-				SetRaidTargetIconTexture(bar.rt_icon, i)
-				
-				bar.left:ClearAllPoints()
-				bar.left:SetPoint("LEFT", bar.rt_icon, "RIGHT", 5, 0)
-				bar.left:SetText(T.GetNameFromNpcID(npcID))
-				
-				frame.bars[npcID..i] = bar
+				bar.right:SetText(bar.min)
 			end
-		end
+			
+			function bar:update_power(unit)
+				bar.min = UnitPower(unit)
+				bar.max = UnitPowerMax(unit)
+				
+				bar:update_value()
 		
-		frame:lineup()
+				if frame.post_update_power then
+					frame:post_update_power(bar, unit)
+				end				
+			end
+			
+			self.bars[GUID] = bar
+			self:lineup()
+		end
 	end
 	
-	function frame:PreviewHide()
-		for tag, bar in pairs(frame.bars) do
-			bar:ClearAllPoints()
-			bar:Hide()
+	function frame:init_uf_bar(unit, GUID)
+		local npcID = select(6, strsplit("-", GUID))
+		if npcID and self.npcIDs[npcID] then
+			if not self.bars[GUID] then
+				self:create_uf_bar(unit, GUID)
+			end
+			local bar = self.bars[GUID]
+			bar:update_name(unit)
+			bar:update_mark(unit)
+			bar:update_power(unit)	
+			AuraFullCheck(self, unit, bar)
 		end
-		frame.bars = table.wipe(frame.bars)
 	end
 end
 
 T.UpdateMobPower = function(frame, event, ...)
-	if event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
-		for unit in T.IterateBoss() do
-			local GUID = UnitGUID(unit)
-			local npcID = select(6, strsplit("-", GUID))
-			if npcID and frame.npcIDs[npcID] then
-				if not frame.bars[GUID] then
-					frame.create_uf_bar(unit, GUID)
-				end
-				local bar = frame.bars[GUID]
-				local mark = GetRaidTargetIndex(unit) or 0
-				frame:update_mark(bar, mark)
-				frame:update_power(bar, unit)
-				frame:update_name(bar, unit)
-				AuraFullCheck(frame, unit, bar)
-			end
-		end
-	elseif event == "UNIT_NAME_UPDATE" then
-		local unit = ...
-		local GUID = UnitGUID(unit)
-		if frame.bars[GUID] then
-			frame:update_name(frame.bars[GUID], unit)
-		end
+	if event == "ENCOUNTER_SHOW_BOSS_UNIT" then
+		local unit, GUID = ...
+		frame:init_uf_bar(unit, GUID)			
+	elseif event == "ENCOUNTER_HIDE_BOSS_UNIT" then
+		local GUID = ...
+		frame:remove_bar(GUID)
 	elseif event == "RAID_TARGET_UPDATE" then
 		for unit in T.IterateBoss() do
 			local GUID = UnitGUID(unit)
 			local bar = frame.bars[GUID]
 			if bar then
-				local mark = GetRaidTargetIndex(unit) or 0
-				frame:update_mark(bar, mark)
+				bar:update_mark(unit)
 			end
 		end
-	elseif event == "UNIT_AURA" then
-		if not frame.auras then return end
-		
+	elseif event == "UNIT_NAME_UPDATE" then
 		local unit = ...
 		if not UnitFliter(frame, unit) then return end
+		
+		local GUID = UnitGUID(unit)
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_name(unit)
+		end
+	elseif event == "UNIT_AURA" then
+		local unit = ...
+		
+		if not frame.auras or not UnitFliter(frame, unit) then return end
 		
 		local GUID = UnitGUID(unit)
 		local bar = frame.bars[GUID]
 		
 		if bar then
 			local updateInfo = select(2, ...)
-			if updateInfo == nil or updateInfo.isFullUpdate then	
-				for auraID, icon in pairs(bar.icons) do
-					bar:remove_auraicon(auraID)
-				end
-				
-				AuraFullCheck(frame, unit, bar)
-			else
-				if updateInfo.addedAuras ~= nil then
-					for _, AuraData in pairs(updateInfo.addedAuras) do
-						if frame.auras[AuraData.spellId] and not bar.icons[AuraData.auraInstanceID] then
-							bar:add_auraicon(AuraData.auraInstanceID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
-							bar:update_color(unit)
-						end
-					end
-				end
-				if updateInfo.updatedAuraInstanceIDs ~= nil then
-					for _, auraID in pairs(updateInfo.updatedAuraInstanceIDs) do		
-						if bar.icons[auraID] then
-							local AuraData = C_UnitAuras.GetAuraDataByAuraInstanceID(unit, auraID)
-							if AuraData then
-								bar:update_auraicon(auraID, AuraData.icon, AuraData.applications, AuraData.duration, AuraData.expirationTime)
-							else
-								bar:remove_auraicon(auraID)
-								bar:update_color(unit)
-							end
-						end				
-					end
-				end
-				if updateInfo.removedAuraInstanceIDs ~= nil then
-					for _, auraID in pairs(updateInfo.removedAuraInstanceIDs) do
-						if bar.icons[auraID] then
-							bar:remove_auraicon(auraID)
-							bar:update_color(unit)
-						end
-					end
-				end
-			end
-		end
-	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, sub_event, _, sourceGUID, sourceName, _, _, DestGUID, DestName, _, destRaidFlags, arg12, arg13, arg14, arg15 = CombatLogGetCurrentEventInfo()
-		if sub_event == "UNIT_DIED" and frame.bars[DestGUID] then
-			frame.bars[DestGUID]:Hide()
-			frame.bars[DestGUID] = nil
-			frame:lineup()
+			bar:update_auras(unit, updateInfo)
 		end
 	elseif event == "UNIT_POWER_UPDATE" then
 		local unit = ...
@@ -3330,12 +3205,197 @@ T.UpdateMobPower = function(frame, event, ...)
 		local GUID = UnitGUID(unit)
 		if frame.bars[GUID] then
 			local bar = frame.bars[GUID]
-			frame:update_power(bar, unit)
+			bar:update_power(unit)
 		end
 	end
 end
 
 T.ResetMobPower = function(frame)
+	for tag, bar in pairs(frame.bars) do
+		bar:ClearAllPoints()
+		bar:Hide()
+	end
+	frame.bars = table.wipe(frame.bars)
+	frame:Hide()
+end
+
+--------------------------------------------------------
+------------  [首领模块]BOSS血量+能量模板  -------------
+--------------------------------------------------------
+-- event: ENCOUNTER_SHOW_BOSS_UNIT
+-- event: ENCOUNTER_HIDE_BOSS_UNIT
+-- event: UNIT_HEALTH
+-- event: UNIT_POWER_UPDATE
+-- event: RAID_TARGET_UPDATE
+-- event: UNIT_NAME_UPDATE(可选 需要刷新名字)
+-- event: UNIT_AURA(可选 需要刷新光环)
+
+--		frame.format = "value" -- "perc" 显示百分比/显示数值
+--		frame:post_update_health(bar, unit)
+-- 		frame:post_update_absorb(bar, unit)
+--		frame:post_update_power(bar, unit)
+--		frame:post_update_name(bar, unit)
+
+--		frame.npcIDs = {
+--			["182822"] = {n = "", color = {0, .3, .1}, color2 = {1, 1, 0}}, -- NpcID 名字，颜色
+--		}
+--		frame.auras = {
+--			[139] = { -- 监视的光环
+--				aura_type = "HELPFUL",
+--				color = {0, 1, 1},
+--			},
+--		}
+
+T.InitMobUF = function(frame)
+	frame.default_bar_height = 30
+	frame.default_bar_width = 240
+	
+	InitUnitFrameMod(frame)
+
+	function frame:create_uf_bar(unit, GUID)
+		if not self.bars[GUID] then
+			local bar = CreateUFBar(self, GUID, true)
+			
+			function bar:update_value()
+				bar:SetMinMaxValues(0, bar.max)
+				bar:SetValue(bar.min)
+
+				bar.absorb_bar:SetMinMaxValues(0, bar.max)
+				bar.absorb_bar:SetValue(bar.absorb)
+				
+				if frame.format == "value" then
+					bar.right:SetText(T.ShortValue(bar.min))
+				else
+					bar.right:SetText(floor(bar.min/bar.max*100))
+				end
+			end
+			
+			function bar:update_extra_value()
+				bar.extra_bar:SetMinMaxValues(0, bar.max_power)
+				bar.extra_bar:SetValue(bar.min_power)
+			end
+			
+			function bar:update_health(unit)
+				bar.min = UnitHealth(unit)
+				bar.max = UnitHealthMax(unit)
+				
+				bar:update_value()
+		
+				if frame.post_update_health then
+					frame:post_update_health(bar, unit)
+				end
+			end
+			
+			function bar:update_absorb(unit)
+				bar.absorb = UnitGetTotalAbsorbs(unit)
+				
+				bar:update_value()
+				
+				if frame.post_update_absorb then
+					frame:post_update_absorb(bar, unit)
+				end
+			end
+			
+			function bar:update_power(unit)
+				bar.min_power = UnitPower(unit)
+				bar.max_power = UnitPowerMax(unit)
+				
+				bar:update_extra_value()
+		
+				if frame.post_update_power then
+					frame:post_update_power(bar, unit)
+				end
+			end
+			
+			self.bars[GUID] = bar
+			self:lineup()
+		end
+	end
+	
+	function frame:init_uf_bar(unit, GUID)
+		local npcID = select(6, strsplit("-", GUID))
+		if npcID and self.npcIDs[npcID] then
+			if not self.bars[GUID] then
+				self:create_uf_bar(unit, GUID)
+			end
+			local bar = self.bars[GUID]
+			bar:update_name(unit)
+			bar:update_mark(unit)
+			bar:update_mark(unit)
+			bar:update_health(unit)
+			bar:update_power(unit)
+			AuraFullCheck(self, unit, bar)
+		end
+	end
+end
+
+T.UpdateMobUF = function(frame, event, ...)
+	if event == "ENCOUNTER_SHOW_BOSS_UNIT" then
+		local unit, GUID = ...
+		frame:init_uf_bar(unit, GUID)			
+	elseif event == "ENCOUNTER_HIDE_BOSS_UNIT" then
+		local GUID = ...
+		frame:remove_bar(GUID)
+	elseif event == "RAID_TARGET_UPDATE" then
+		for unit in T.IterateBoss() do
+			local GUID = UnitGUID(unit)
+			local bar = frame.bars[GUID]
+			if bar then
+				bar:update_mark(unit)
+			end
+		end
+	elseif event == "UNIT_NAME_UPDATE" then
+		local unit = ...
+		if not UnitFliter(frame, unit) then return end
+		
+		local GUID = UnitGUID(unit)
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_name(unit)
+		end
+	elseif event == "UNIT_AURA" then
+		local unit = ...
+		
+		if not frame.auras or not UnitFliter(frame, unit) then return end
+		
+		local GUID = UnitGUID(unit)
+		local bar = frame.bars[GUID]
+		
+		if bar then
+			local updateInfo = select(2, ...)
+			bar:update_auras(unit, updateInfo)
+		end
+	elseif event == "UNIT_HEALTH" then
+		local unit = ...
+		if not UnitFliter(frame, unit) then return end
+		
+		local GUID = UnitGUID(unit)
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_health(unit)
+		end
+	elseif event == "UNIT_ABSORB_AMOUNT_CHANGED" then
+		local unit = ...
+		if not UnitFliter(frame, unit) then return end
+		
+		local GUID = UnitGUID(unit)
+		local bar = frame.bars[GUID]
+		if bar then
+			bar:update_absorb(unit)
+		end
+	elseif event == "UNIT_POWER_UPDATE" then
+		local unit = ...
+		if not UnitFliter(frame, unit) then return end
+		
+		local GUID = UnitGUID(unit)
+		if frame.bars[GUID] then
+			local bar = frame.bars[GUID]
+			bar:update_power(unit)
+		end
+	end
+end
+
+T.ResetMobUF = function(frame)
 	for tag, bar in pairs(frame.bars) do
 		bar:ClearAllPoints()
 		bar:Hide()
@@ -4028,8 +4088,8 @@ end
 --		id, name, description, displayInfo, iconImage, uiModelSceneID = EJ_GetCreatureInfo(i)
 
 --		function frame:filter(GUID) 过滤
---		function frame:pre_update_auras -- 触发时挂载功能 可配合frame.skip 跳过轮次
---		function frame:post_update_auras -- 分配结束时挂载功能 仅适用于整体排序
+--		function frame:pre_update_auras() -- 触发时挂载功能 可配合frame.skip 跳过轮次
+--		function frame:post_update_auras(total) -- 分配结束时挂载功能 仅适用于整体排序
 --		function frame:post_display(element, index, unit, GUID) 队友获得序号时挂载功能
 --		function frame:post_remove(element, index, unit, GUID) 队友移除光环时挂载功能
 
@@ -4051,13 +4111,6 @@ end
 --			[15] = 3, -- H
 --			[16] = 4, -- M
 --			[17] = 1, -- LFG
---		}
--- 整体排序根据位置优先级自动排序
---		frame.pos_pro = {
---			["MELEE"] = 1,
---			["HEALER"] = 2,	
---			["RANGED"] = 3,
---			["TANK"] = 4,	
 --		}
 
 -- 逐个填坑MRT模板，以便反向排序
@@ -4297,34 +4350,21 @@ local function GetAssignmentByIndex(frame)
 		end
 	end
 		
-	if frame.pos_pro then	
-		frame.pos_order_cache = table.wipe(frame.pos_order_cache)
-		for unit in T.IterateGroupMembers() do
-			local GUID = UnitGUID(unit)
-			if not tContains(frame.assignment, GUID) then
-				local info = T.GetGroupInfobyGUID(GUID)
-				table.insert(frame.pos_order_cache, {GUID = info.GUID, pos = info.pos})
-			end
+	local cache = {}
+	
+	for unit in T.IterateGroupMembers() do
+		local GUID = UnitGUID(unit)
+		if not tContains(frame.assignment, GUID) then
+			table.insert(cache, GUID)
 		end
-		if #frame.pos_order_cache > 1 then
-			table.sort(frame.pos_order_cache, function(a, b)
-				if frame.pos_pro[a.pos] and frame.pos_pro[b.pos] and frame.pos_pro[a.pos] < frame.pos_pro[b.pos] then
-					return true
-				elseif frame.pos_pro[a.pos] and frame.pos_pro[b.pos] and frame.pos_pro[a.pos] == frame.pos_pro[b.pos] and a.GUID < b.GUID then
-					return true
-				end
-			end)
-		end
-		for i, info in pairs(frame.pos_order_cache) do
-			table.insert(frame.assignment, info.GUID)
-		end
-	else
-		for unit in T.IterateGroupMembers() do
-			local GUID = UnitGUID(unit)
-			if not tContains(frame.assignment, GUID) then
-				table.insert(frame.assignment, GUID)
-			end
-		end
+	end
+	
+	if frame.custom_sort then
+		frame:custom_sort(cache)
+	end
+	
+	for _, GUID in pairs(cache) do
+		table.insert(frame.assignment, GUID)
 	end
 end
 
@@ -6568,10 +6608,11 @@ T.InitTauntAlert = function(frame)
 	end
 	
 	function frame:check()
+		--T.msg("IsTanking", self:IsTanking()  and "true" or "nil", "my_tank_debuffed", self:my_tank_debuffed() and "true" or "nil", "other_tank_debuffed", self:other_tank_debuffed() and "true" or "nil", "check_boss", self:check_boss() and "true" or "nil")
 		if T.GetMyRole() == "TANK"
 			and not self:IsTanking() 
 			and not self:my_tank_debuffed() 
-			and self:other_tank_debuffed() 
+			and self:other_tank_debuffed()
 			and self:check_boss() 
 		then
 			if not self.text_frame:IsShown() then								

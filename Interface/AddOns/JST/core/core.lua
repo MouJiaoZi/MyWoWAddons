@@ -807,7 +807,7 @@ AlertIcon_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
-	elseif event == "DATA_ADDED" or event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
+	elseif event == "DATA_ADDED" then
 		for _, unit in pairs(aura_check_units) do
 			if UnitExists(unit) then
 				local GUID = UnitGUID(unit)
@@ -819,6 +819,11 @@ AlertIcon_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 		for _, icon in pairs(self.actives_bytag) do
 			self:RemoveAlert(icon.tag)
 		end
+	elseif event == "ENCOUNTER_ENGAGE_UNIT" then
+		local unit, GUID = ...
+		if T.FilterAuraUnit(unit) then
+			self:AuraFullCheck(unit, GUID)
+		end
 	end
 end)
 
@@ -826,7 +831,7 @@ T.RegisterEventAndCallbacks(AlertIcon_Aura_Updater, {
 	["UNIT_AURA"] = true,
 	["DATA_ADDED"] = true,
 	["DATA_REMOVED"] = true,
-	["INSTANCE_ENCOUNTER_ENGAGE_UNIT"] = true,
+	["ENCOUNTER_ENGAGE_UNIT"] = true,
 })
 
 -- 图标：私人光环
@@ -1338,7 +1343,9 @@ local CreateAlertBar = function(updater, group, tag)
 		
 		-- Init
 		self.GUID = nil
+		
 		self:SetStatusBarColor(unpack(args.color))
+		
 		if args.glow then		
 			self.glow:Show()
 			self.glow:SetBackdropBorderColor(unpack(args.color))
@@ -1976,8 +1983,6 @@ function AlertBar_Aura_Updater:play_sound(bar, args, GUID)
 end
 
 function AlertBar_Aura_Updater:update(aura_tag, bar, args, GUID, aura_data, applied) -- 待更新
-	bar:display(args)
-
 	local name = aura_data.name
 	local icon = aura_data.icon
 	local count = aura_data.applications
@@ -1987,6 +1992,8 @@ function AlertBar_Aura_Updater:update(aura_tag, bar, args, GUID, aura_data, appl
 	local flagicons = args.ficon and T.GetFlagIconStr(args.ficon) or ""
 	
 	if applied then
+		bar:display(args)
+		
 		-- 序号
 		self:update_index(bar, args)
 		
@@ -2162,7 +2169,7 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
-	elseif event == "DATA_ADDED" or event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
+	elseif event == "DATA_ADDED" then
 		for _, unit in pairs(aura_check_units) do			
 			if UnitExists(unit) then
 				local GUID = UnitGUID(unit)
@@ -2173,6 +2180,11 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "DATA_REMOVED" then
 		for _, bar in pairs(self.actives_bytag) do
 			self:RemoveAlert(bar.tag)
+		end
+	elseif event == "ENCOUNTER_ENGAGE_UNIT" then
+		local unit, GUID = ...
+		if T.FilterAuraUnit(unit) then
+			self:AuraFullCheck(unit, GUID)
 		end
 	elseif event == "ENCOUNTER_START" or event == "ENCOUNTER_PHASE" then -- 战斗开始重置计数
 		self.count_data = table.wipe(self.count_data)
@@ -2185,7 +2197,7 @@ T.RegisterEventAndCallbacks(AlertBar_Aura_Updater, {
 	["UNIT_AURA"] = true,
 	["DATA_ADDED"] = true,
 	["DATA_REMOVED"] = true,
-	["INSTANCE_ENCOUNTER_ENGAGE_UNIT"] = true,
+	["ENCOUNTER_ENGAGE_UNIT"] = true,
 })
 
 -- 计时条：测试
@@ -4693,10 +4705,9 @@ RM_Updater:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "NAME_PLATE_UNIT_ADDED" then
 		local unit = ...
 		placeOnTargetOrMouseover(unit)
-	elseif event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
-		for unit in T.IterateBoss() do
-			placeOnTargetOrMouseover(unit)
-		end
+	elseif event == "ENCOUNTER_ENGAGE_UNIT" then
+		local unit = ...
+		placeOnTargetOrMouseover(unit)
 	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local _, sub_event, _, _, _, _, _, destGUID, _, _, destFlags = CombatLogGetCurrentEventInfo()
 		if sub_event == "UNIT_DIED" and destFlags and destFlags > 0 then
@@ -4739,18 +4750,18 @@ RM_Updater:RegisterEvent("ENCOUNTER_START")
 RM_Updater:RegisterEvent("ENCOUNTER_END")
 
 T.UpdateAutoMarkState = function()
+	local events = {
+		["UNIT_TARGET"] = true,
+		["UPDATE_MOUSEOVER_UNIT"] = true,
+		["NAME_PLATE_UNIT_ADDED"] = true,
+		["ENCOUNTER_ENGAGE_UNIT"] = true,
+		["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
+	}
+	
 	if C.DB["PlateAlertOption"]["interrupt_auto_mark"] then
-		RM_Updater:RegisterEvent("UNIT_TARGET")
-		RM_Updater:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
-		RM_Updater:RegisterEvent("NAME_PLATE_UNIT_ADDED")
-		RM_Updater:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
-		RM_Updater:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")		
+		T.RegisterEventAndCallbacks(RM_Updater, events)	
 	else
-		RM_Updater:UnregisterEvent("UNIT_TARGET")
-		RM_Updater:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
-		RM_Updater:UnregisterEvent("NAME_PLATE_UNIT_ADDED")
-		RM_Updater:UnregisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
-		RM_Updater:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		T.UnregisterEventAndCallbacks(RM_Updater, events)
 	end
 end
 

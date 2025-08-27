@@ -124,8 +124,10 @@ G.Encounters[2611] = {
 					name = string.format(L["NAME小怪血量"], T.GetFomattedNameFromNpcID("221667")..T.GetFomattedNameFromNpcID("221945")),
 					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -300},
 					events = {
-						["INSTANCE_ENCOUNTER_ENGAGE_UNIT"] = true,
+						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
+						["ENCOUNTER_HIDE_BOSS_UNIT"] = true,
 						["UNIT_HEALTH"] = true,
+						["RAID_TARGET_UPDATE"] = true,
 					},
 					init = function(frame)
 						frame.npcIDs = {

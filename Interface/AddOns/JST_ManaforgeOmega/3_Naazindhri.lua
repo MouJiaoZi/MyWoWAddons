@@ -114,7 +114,7 @@ G.Encounters[2685] = {
 					color = "blu",
 					amount = 2,
 				},
-				{ -- 驱散提示音 虚空爆炸（待测试）
+				{ -- 驱散提示音 虚空爆炸（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 1227052,
@@ -580,7 +580,7 @@ G.Encounters[2685] = {
 					},
 					init = function(frame)
 						frame.aura_spellIDs = {
-							[1237607] = 1, -- 秘法鞭笞
+							[1237607] = 6, -- 秘法鞭笞
 						}
 						frame.cast_spellIDs = {
 							[1241100] = true, -- 秘法鞭笞

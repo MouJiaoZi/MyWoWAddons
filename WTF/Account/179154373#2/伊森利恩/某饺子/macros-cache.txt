@@ -10,9 +10,7 @@ END
 VER 3 010000000000009B "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@cursor] 召唤玄牛雕像
-/target 玄牛雕像
-/cast 嚎镇八方
-/targetlasttarget
+/cast [@target=玄牛雕像]  嚎镇八方
 END
 VER 3 010000000000009C "1" "INV_Misc_QuestionMark"
 #showtooltip

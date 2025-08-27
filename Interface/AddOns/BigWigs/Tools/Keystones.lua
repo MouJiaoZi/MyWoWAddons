@@ -856,7 +856,7 @@ do
 				end
 			else -- CHALLENGE_MODE_RESET
 				local _, _, diffID = BigWigsLoader.GetInstanceInfo()
-				if diffID == 8 then
+				if diffID == 8 or diffID == 23 then -- Mythic+, Mythic
 					TimerTracker:UnregisterEvent("START_TIMER")
 					BigWigsLoader.CTimerAfter(1, function()
 						TimerTracker:RegisterEvent("START_TIMER")
@@ -1460,7 +1460,7 @@ do
 			local color = classFile and C_ClassColor.GetClassColor(classFile):GenerateHexColor() or "FFFFFFFF"
 			local decoratedName
 			local _, _, _, _, _, keyMapInstanceID = GetMapUIInfo(keyMap)
-			if dungeonMapWithMultipleKeys[keyMapInstanceID] or (db.profile.instanceKeysShowAllPlayers and keyMapInstanceID ~= currentInstanceID) then
+			if keyMap ~= 0 and (dungeonMapWithMultipleKeys[keyMapInstanceID] or (db.profile.instanceKeysShowAllPlayers and keyMapInstanceID ~= currentInstanceID)) then
 				decoratedName = L.instanceKeysDisplayWithDungeon:format(color, playerName:gsub("%-.+", ""), keyLevel, dungeonNamesTrimmed[keyMap] or keyMap)
 			else
 				decoratedName = L.instanceKeysDisplay:format(color, playerName:gsub("%-.+", ""), keyLevel)
@@ -1515,33 +1515,43 @@ do
 		end
 	end
 	local whosKeyTable = {}
-	local function Delay() -- Difficulty info isn't accurate until 1 frame after PEW
+	local function RequestPartyData(instanceID)
+		instanceKeysWidgets.namesToShow = nil
+		instanceKeysWidgets.otherDungeons = nil
+		instanceKeysWidgets.nameList = {}
+		currentInstanceID = instanceID
+		UpdateProfileFont() -- We delay this to allow enough time for other addons to register their fonts into LSM
+		local fontFlags = nil
+		if db.profile.instanceKeysMonochrome and db.profile.instanceKeysOutline ~= "NONE" then
+			fontFlags = "MONOCHROME," .. db.profile.instanceKeysOutline
+		elseif db.profile.instanceKeysMonochrome then
+			fontFlags = "MONOCHROME"
+		elseif db.profile.instanceKeysOutline ~= "NONE" then
+			fontFlags = db.profile.instanceKeysOutline
+		end
+		header:SetFont(LibSharedMedia:Fetch("font", db.profile.instanceKeysFontName), db.profile.instanceKeysFontSize, fontFlags)
+		for i = 1, 5 do
+			instanceKeysWidgets.playerListText[i]:SetFont(LibSharedMedia:Fetch("font", db.profile.instanceKeysFontName), db.profile.instanceKeysFontSize, fontFlags)
+		end
+		LibKeystone.Register(whosKeyTable, ReceivePartyData)
+		LibKeystone.Request("PARTY")
+		main:RegisterEvent("UNIT_CONNECTION")
+	end
+	local function DelayStartOfDungeon() -- Difficulty info isn't accurate until 1 frame after PEW
 		local _, _, diffID, _, _, _, _, instanceID = BigWigsLoader.GetInstanceInfo()
-		if diffID == 23 then
-			instanceKeysWidgets.namesToShow = nil
-			instanceKeysWidgets.otherDungeons = nil
-			instanceKeysWidgets.nameList = {}
-			currentInstanceID = instanceID
-			UpdateProfileFont() -- We delay this to allow enough time for other addons to register their fonts into LSM
-			local fontFlags = nil
-			if db.profile.instanceKeysMonochrome and db.profile.instanceKeysOutline ~= "NONE" then
-				fontFlags = "MONOCHROME," .. db.profile.instanceKeysOutline
-			elseif db.profile.instanceKeysMonochrome then
-				fontFlags = "MONOCHROME"
-			elseif db.profile.instanceKeysOutline ~= "NONE" then
-				fontFlags = db.profile.instanceKeysOutline
-			end
-			header:SetFont(LibSharedMedia:Fetch("font", db.profile.instanceKeysFontName), db.profile.instanceKeysFontSize, fontFlags)
-			for i = 1, 5 do
-				instanceKeysWidgets.playerListText[i]:SetFont(LibSharedMedia:Fetch("font", db.profile.instanceKeysFontName), db.profile.instanceKeysFontSize, fontFlags)
-			end
+		if diffID == 23 then -- Mythic
 			main:RegisterEvent("CHALLENGE_MODE_COMPLETED")
-			LibKeystone.Register(whosKeyTable, ReceivePartyData)
-			LibKeystone.Request("PARTY")
+			RequestPartyData(instanceID)
 		end
 	end
-	main:SetScript("OnEvent", function(self, event)
-		if instanceKeysWidgets.testing then
+	local function DelayEndOfDungeon()
+		local _, _, diffID, _, _, _, _, instanceID = BigWigsLoader.GetInstanceInfo()
+		if diffID == 8 then -- Mythic+
+			RequestPartyData(instanceID)
+		end
+	end
+	main:SetScript("OnEvent", function(self, event, unit, isConnected)
+		if instanceKeysWidgets.testing and event ~= "UNIT_CONNECTION" then
 			instanceKeysWidgets.testing = false
 			instanceKeysWidgets.main:Hide()
 			instanceKeysWidgets.main:EnableMouse(false)
@@ -1549,10 +1559,15 @@ do
 			instanceKeysWidgets.bg:Hide()
 		end
 		if event == "PLAYER_ENTERING_WORLD" then
-			BigWigsLoader.CTimerAfter(0, Delay)
+			self:UnregisterEvent("CHALLENGE_MODE_COMPLETED")
+			BigWigsLoader.CTimerAfter(0, DelayStartOfDungeon)
 		elseif event == "CHALLENGE_MODE_COMPLETED" then
 			if db.profile.instanceKeysShowDungeonEnd then
-				BigWigsLoader.CTimerAfter(5, Delay)
+				BigWigsLoader.CTimerAfter(5, DelayEndOfDungeon)
+			end
+		elseif event == "UNIT_CONNECTION" then -- Someone new joined the group, or they just logged on after being offline (maybe they were offline when you joined the group)
+			if isConnected then
+				BigWigsLoader.CTimerAfter(1, function() LibKeystone.Request("PARTY") end)
 			end
 		else
 			LibKeystone.Unregister(whosKeyTable)
@@ -1562,8 +1577,8 @@ do
 			instanceKeysWidgets.otherDungeons = nil
 			self:UnregisterEvent("PLAYER_LEAVING_WORLD")
 			self:UnregisterEvent("CHALLENGE_MODE_START")
-			self:UnregisterEvent("CHALLENGE_MODE_COMPLETED")
 			self:UnregisterEvent("PLAYER_REGEN_DISABLED")
+			self:UnregisterEvent("UNIT_CONNECTION")
 		end
 	end)
 	main:RegisterEvent("PLAYER_ENTERING_WORLD")

@@ -240,38 +240,6 @@ local GetGroupInfobyGUID = function(GUID)
 end
 T.GetGroupInfobyGUID = GetGroupInfobyGUID
 
--- 排序
-T.SortTable = function(t, rangedFirst, sortRoles)
-    table.sort(
-        t,
-        function (GUID1, GUID2)
-            if not GUID1 then return false end
-            if not GUID2 then return true end
-            
-			local info1 = GetGroupInfobyGUID(GUID1)
-			local info2 = GetGroupInfobyGUID(GUID2)
-			
-            local type1, spec1, role1 = info1.pos, info1.spec_id, info1.role
-            local type2, spec2, role2 = info2.pos, info2.spec_id, info2.role
-            
-            -- dps > healers > tanks
-            if sortRoles then      
-                if role1 ~= role2 then
-                    return role1 < role2
-                end
-            end
-            
-            if type1 and type2 and type1 ~= type2 then
-                return type1 == (rangedFirst and "RANGED" or "MELEE")
-            elseif spec1 and spec2 and spec1 ~= spec2 then
-                return spec1 < spec2 -- For consistency's sake
-            else
-                return GUID1 < GUID2
-            end
-        end
-    )
-end
-
 -- 生成染色的队友昵称
 local ColorNickNameByGUID = function(GUID)
 	local unit = GUID and GroupInfo[GUID] and GroupInfo[GUID].unit
@@ -337,6 +305,112 @@ local GetNameByName = function(name)
 	end
 end
 T.GetNameByName = GetNameByName
+
+----------------------------------------------------------
+-------------------[[     排序 API     ]]-----------------
+----------------------------------------------------------
+
+-- 排序
+-- sortRoles = "TDH" TANK > DAMAGER > HEALER
+-- sortRoles = "THD" TANK > HEALER > DAMAGER
+-- sortRoles = "DHT" DAMAGER > HEALER > TANK
+-- sortRoles = "HDT" HEALER > DAMAGER > TANK
+
+local role_order_data = {}
+local role_orders = {
+	TDH = {"TANK", "DAMAGER", "HEALER"},
+	THD = {"TANK", "HEALER", "DAMAGER"},
+	DHT = {"DAMAGER", "HEALER", "TANK"},
+	HDT = {"HEALER", "DAMAGER", "TANK"},	
+}
+
+for key, line in pairs(role_orders) do
+	role_order_data[key] = {}
+	for i, role in pairs(line) do
+		role_order_data[key][role] = i
+	end
+end
+
+T.SortTable = function(t, rangedFirst, sortRoles)
+    table.sort(
+        t,
+        function (GUID1, GUID2)
+            if not GUID1 then return false end
+            if not GUID2 then return true end
+            
+			local info1 = GetGroupInfobyGUID(GUID1)
+			local info2 = GetGroupInfobyGUID(GUID2)
+			
+            local type1, spec1, role1 = info1.pos, info1.spec_id, info1.role
+            local type2, spec2, role2 = info2.pos, info2.spec_id, info2.role
+            
+			if sortRoles and role_order_data[sortRoles] then
+				if role1 ~= role2 then
+                    return role1 < role2
+                end
+			end
+            
+            if type1 and type2 and type1 ~= type2 then
+                return type1 == (rangedFirst and "RANGED" or "MELEE")
+            elseif spec1 and spec2 and spec1 ~= spec2 then
+                return spec1 < spec2 -- For consistency's sake
+            else
+                return GUID1 < GUID2
+            end
+        end
+    )
+end
+
+-- 根据移动能力排序
+local classMobility = {
+    PRIEST = 1,
+    DEATHKNIGHT = 2,
+    WARLOCK = 3,
+    PALADIN = 4,
+    DRUID = 5,
+    HUNTER = 6,
+    SHAMAN = 7,
+    ROGUE = 8,
+    EVOKER = 9,
+    WARRIOR = 10,
+    DEMONHUNTER = 11,
+    MONK = 12,
+    MAGE = 13
+}
+
+T.SortTableMobility = function(t, reverse)
+    table.sort(
+        t,
+        function (GUID1, GUID2)
+            if not GUID1 then return false end
+            if not GUID2 then return true end
+            
+            local info1 = GetGroupInfobyGUID(GUID1)
+			local info2 = GetGroupInfobyGUID(GUID2)
+            
+            local class1 = info1.class
+            local class2 = info2.class
+            
+            local mobility1 = classMobility[class1]
+            local mobility2 = classMobility[class2]
+            
+            if reverse then
+                if mobility1 ~= mobility2 then
+                    return mobility1 > mobility2
+                else
+                    return GUID1 > GUID2
+                end
+            else
+                if mobility1 ~= mobility2 then
+                    return mobility1 < mobility2
+                else
+                    return GUID1 < GUID2
+                end
+            end
+        end
+    )
+end
+
 ----------------------------------------------------------
 ---------------------[[     GUI     ]]--------------------
 ----------------------------------------------------------

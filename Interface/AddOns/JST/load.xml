@@ -5,7 +5,8 @@
 	<Include file="lib\LibCustomGlow-1.0\LibCustomGlow-1.0.xml"/>
 	<Include file="lib\LibSpecialization\LibSpecialization.xml"/>	
 	<Script file="lib\LibRangeCheck-3.0\LibRangeCheck-3.0.lua"/>
-	 
+	<Include file="lib\LibOpenRaid\lib.xml"/>
+	
 	<Script file="core\init.lua"/>
 	<Script file="core\icon_color.lua"/>
 	

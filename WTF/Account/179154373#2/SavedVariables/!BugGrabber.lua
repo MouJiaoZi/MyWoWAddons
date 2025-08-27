@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
-["session"] = 642,
 ["lastSanitation"] = 3,
+["session"] = 655,
 ["errors"] = {
 {
 ["message"] = "Interface/AddOns/TinyInspect/Options.lua:270: CreateFrame(): Couldn't find inherited node \"BackdropTemplate,ThinBorderTemplate\"",
@@ -188,14 +188,6 @@ BugGrabberDB = {
 ["counter"] = 1,
 },
 {
-["message"] = "...dOns/JST/lib/LibSpecialization-22/LibSpecialization.lua:417: LibSpecializationEdit-10: Unknown specId \"0\"",
-["time"] = "2025/08/20 00:04:31",
-["locals"] = "self = <table> {\n frame = Frame {\n }\n callbackMap = <table> {\n }\n}\nspec = 2\nspecId = 0\nposition = nil\nrole = nil\nwowID = 1\ncataWowID = 14\npositionTable = <table> {\n 62 = \"RANGED\"\n 1467 = \"RANGED\"\n 63 = \"RANGED\"\n 250 = \"MELEE\"\n 251 = \"MELEE\"\n 252 = \"MELEE\"\n 1468 = \"RANGED\"\n 253 = \"RANGED\"\n 254 = \"RANGED\"\n 255 = \"MELEE\"\n 66 = \"MELEE\"\n 257 = \"RANGED\"\n 258 = \"RANGED\"\n 259 = \"MELEE\"\n 260 = \"MELEE\"\n 577 = \"MELEE\"\n 262 = \"RANGED\"\n 581 = \"MELEE\"\n 264 = \"RANGED\"\n 265 = \"RANGED\"\n 1473 = \"RANGED\"\n 267 = \"RANGED\"\n 268 = \"MELEE\"\n 269 = \"MELEE\"\n 270 = \"MELEE\"\n 70 = \"MELEE\"\n 102 = \"RANGED\"\n 71 = \"MELEE\"\n 103 = \"MELEE\"\n 72 = \"MELEE\"\n 104 = \"MELEE\"\n 266 = \"RANGED\"\n 73 = \"MELEE\"\n 263 = \"MELEE\"\n 105 = \"RANGED\"\n 261 = \"MELEE\"\n 256 = \"RANGED\"\n 65 = \"MELEE\"\n 64 = \"RANGED\"\n}\nroleTable = <table> {\n 62 = \"DAMAGER\"\n 1467 = \"DAMAGER\"\n 63 = \"DAMAGER\"\n 250 = \"TANK\"\n 251 = \"DAMAGER\"\n 252 = \"DAMAGER\"\n 1468 = \"HEALER\"\n 253 = \"DAMAGER\"\n 254 = \"DAMAGER\"\n 255 = \"DAMAGER\"\n 66 = \"TANK\"\n 257 = \"HEALER\"\n 258 = \"DAMAGER\"\n 259 = \"DAMAGER\"\n 260 = \"DAMAGER\"\n 577 = \"DAMAGER\"\n 262 = \"DAMAGER\"\n 581 = \"TANK\"\n 264 = \"HEALER\"\n 265 = \"DAMAGER\"\n 1473 = \"DAMAGER\"\n 267 = \"DAMAGER\"\n 268 = \"TANK\"\n 269 = \"DAMAGER\"\n 270 = \"HEALER\"\n 70 = \"DAMAGER\"\n 102 = \"DAMAGER\"\n 71 = \"DAMAGER\"\n 103 = \"DAMAGER\"\n 72 = \"DAMAGER\"\n 104 = \"TANK\"\n 266 = \"DAMAGER\"\n 73 = \"TANK\"\n 263 = \"DAMAGER\"\n 105 = \"HEALER\"\n 261 = \"DAMAGER\"\n 256 = \"HEALER\"\n 65 = \"HEALER\"\n 64 = \"DAMAGER\"\n}\nstarterSpecs = <table> {\n 1452 = true\n 1456 = true\n 1449 = true\n 1453 = true\n 1446 = true\n 1450 = true\n 1454 = true\n 1447 = true\n 1451 = true\n 1455 = true\n 1444 = true\n 1448 = true\n 1465 = true\n}\n",
-["stack"] = "[Interface/AddOns/JST/lib/LibSpecialization-22/LibSpecialization.lua]:417: in function 'MySpecialization'\n[Interface/AddOns/JST/core/group.lua]:622: in function <Interface/AddOns/JST/core/group.lua:615>\n[Interface/AddOns/JST/core/group.lua]:690: in function <Interface/AddOns/JST/core/group.lua:660>\n[Interface/AddOns/JST/core/group.lua]:743: in function 'cur_func'\n[Interface/AddOns/JST/core/widget_api.lua]:107: in function <Interface/AddOns/JST/core/widget_api.lua:99>",
-["session"] = 609,
-["counter"] = 1,
-},
-{
 ["message"] = "BigWigs: BigWigs is missing timers on \"N\" running 395#7fbc9db, tell the devs!\nNew timer for \"1233539\" at stage 3 with placement 1 and value 99.98.\nNew timer for \"1232973\" at stage 3 with placement 1 and value 33.33.\nNew timer for \"1250055\" at stage 3 with placement 1 and value 33.36.",
 ["time"] = "2025/08/20 23:27:09",
 ["locals"] = "self = <table> {\n enableMobs = <table> {\n }\n optionHeaders = <table> {\n }\n journalId = 2691\n instanceId = 2810\n db = <table> {\n }\n toggleOptions = <table> {\n }\n respawnTime = 30\n stage = 3\n missing = <table> {\n }\n name = \"BigWigs_Bosses_Dimensius, the All-Devouring\"\n localization = <table> {\n }\n engageId = 3135\n toggleDefaults = <table> {\n }\n notes = <table> {\n }\n soundOptions = <table> {\n }\n colorOptions = <table> {\n }\n displayName = \"诸界吞噬者迪门修斯\"\n moduleName = \"Dimensius, the All-Devouring\"\n}\n",
@@ -220,19 +212,27 @@ BugGrabberDB = {
 ["counter"] = 6,
 },
 {
-["message"] = "[ADDON_ACTION_BLOCKED] 插件 'MeetingStone' 尝试调用保护功能 'Frame:SetPropagateKeyboardInput()'。",
-["time"] = "2025/08/17 08:35:29",
-["locals"] = "self = Frame {\n}\nkey = \"W\"\nfound = false\nAutoHideController = <table> {\n ESCHandler = Frame {\n }\n _Objects = <table> {\n }\n _Meta = <table> {\n }\n}\n",
-["stack"] = "[Interface/AddOns/MeetingStone/Libs/NetEaseGUI-2.0-3/Widget/AutoHideController.lua]:26: in function <...ne/Libs/NetEaseGUI-2.0/Widget/AutoHideController.lua:15>",
-["session"] = 636,
-["counter"] = 6,
-},
-{
 ["message"] = "Interface/AddOns/JST/core/api.lua:4440: attempt to perform arithmetic on local 'exp_time' (a nil value)",
 ["time"] = "2025/08/23 22:09:24",
 ["locals"] = "frame = JST_1225616_Mods {\n element_type = \"bar\"\n elements = <table> {\n }\n color = <table> {\n }\n encounterID = 2685\n role = true\n bar_num = 4\n enable_tag = \"everyone\"\n config_id = 1225616\n positive_assignment = <table> {\n }\n disable_copy_mrt = true\n graphs = <table> {\n }\n t = 0\n npcID = <table> {\n }\n info = <table> {\n }\n text_frame = Frame {\n }\n engageID = 3130\n backups = <table> {\n }\n point = <table> {\n }\n enable = true\n raid_index = true\n df = JST_1225616_ModsDragFrame {\n }\n config_name = \"|T1391678:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[魂火汇聚]|r点名排序\"\n reverse_assignment = <table> {\n }\n actives = <table> {\n }\n count = 5\n movingtag = 2685\n aura_num = 1\n graph_bg = Frame {\n }\n events = <table> {\n }\n backup_text = FontString {\n }\n cur_index = 0\n aura_id = 1249065\n aura_name = \"魂火汇聚\"\n movingname = \"缚魂者娜欣达利|T1391678:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[魂火汇聚]|r点名排序\"\n}\nmy_index = 1\ninfo = <table> {\n msg_applied = \"左%name\"\n text = \"左\"\n msg = \"左\"\n}\ntag = 1\ncount = nil\nexp_time = nil\nremain = nil\n(*temporary) = 121642.297000\n(*temporary) = 121642.297000\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = \"attempt to perform arithmetic on local 'exp_time' (a nil value)\"\nC = <table> {\n DB = <table> {\n }\n UseAccountSettings = false\n}\nG = <table> {\n detailFrame = JSTdetailFrame_BG {\n }\n ClassShareSpellData = <table> {\n }\n addon_cname = \"|cffff0000静思|r 副本助手\"\n Ccolors = <table> {\n }\n addon_name = \"JST\"\n Current_Data = <table> {\n }\n Hidden_Interrupt_Npcs = <table> {\n }\n Encounters = <table> {\n }\n Client = \"zhCN\"\n mapIDtoENCIDs = <table> {\n }\n ttsSpeakers = <table> {\n }\n hl_colors = <table> {\n }\n npcIDtoengageID = <table> {\n }\n ChallengeMap_Order = <table> {\n }\n addon_colorStr = \"|cffFF0000\"\n PlayerName = \"某餃子\"\n CantInterruptPlayerGUIDs = <table> {\n }\n myClass = \"DEATHKNIGHT\"\n IconAlertGroupFrames = <table> {\n }\n myClassLocal = \"死亡骑士\"\n sound_suffix = <table> {\n }\n InterruptBar = StatusBar {\n }\n NameplateTextures = <table> {\n }\n IconColor = <table> {\n }\n dragFrameList = <table> {\n }\n PlayerGUID = \"Player-940-0516206F\"\n Init_callbacks = <table> {\n }\n BossModFrames = <table> {\n }\n PASoundTiggerFrames = <table> {\n }\n media = <table> {\n }\n engage_watched_npcs = <table> {\n }\n PlateIconHolders = <table> {\n }\n Npc_InterruptNum = <table> {\n }\n addon_color = <table> {\n }\n Npc = <table> {\n }\n TextAlertGroupFrames = <table> {\n }\n Minimapdata = <table> {\n }\n BarAlertGroupFrames = <table> {\n }\n TestBossModFrames = <table> {\n }\n Encounter_Order = <table> {\n }\n Spec_Pos = <table> {\n }\n raid_options = JSTraidOptionPage {\n }\n GUI_PageFrame = Frame {\n }\n GUI_TabFrame = Frame {\n }\n Options = <table> {\n }\n link = \"https://legacy.curseforge.com/wow/addons/jingsi-tools\"\n GUI = JST_GUI {\n }\n SoundPacks = <table> {\n }\n EnteringWorld_callbacks = <table> {\n }\n Timeline = JSTTLFrame {\n }\n Timeline_Data = <table> {\n }\n Font = \"Interface\\AddOns\\JST\\media\\font.ttf\"\n Version = \"5.20\"\n npcIDtoENCID = <table> {\n }\n Encounter_Data = <table> {\n }\n Contacts = \"Bilibili 开船船的纪老师 QQ群 493691777\"\n Textured_GUIDs = <table> {\n }\n TestMod = false\n}\nT = <table> {\n}\n",
 ["stack"] = "[Interface/AddOns/JST/core/api.lua]:4440: in function <Interface/AddOns/JST/core/api.lua:4427>\n[Interface/AddOns/JST/core/api.lua]:4551: in function <Interface/AddOns/JST/core/api.lua:4507>\n[Interface/AddOns/JST/core/api.lua]:4648: in function 'display'\n[Interface/AddOns/JST/core/api.lua]:5057: in function 'Display'\n[Interface/AddOns/JST/core/api.lua]:5122: in function 'UpdateAuraMods_ByTime'\n[Interface/AddOns/JST_ManaforgeOmega/3_Naazindhri.lua]:494: in function 'update'\n[Interface/AddOns/JST/core/core.lua]:5971: in function <Interface/AddOns/JST/core/core.lua:5966>",
 ["session"] = 639,
+["counter"] = 9,
+},
+{
+["message"] = "...dOns/JST/lib/LibSpecialization-22/LibSpecialization.lua:417: LibSpecializationEdit-10: Unknown specId \"0\"",
+["time"] = "2025/08/20 00:04:31",
+["locals"] = "self = <table> {\n frame = Frame {\n }\n callbackMap = <table> {\n }\n}\nspec = 2\nspecId = 0\nposition = nil\nrole = nil\nwowID = 1\ncataWowID = 14\npositionTable = <table> {\n 62 = \"RANGED\"\n 1467 = \"RANGED\"\n 63 = \"RANGED\"\n 250 = \"MELEE\"\n 251 = \"MELEE\"\n 252 = \"MELEE\"\n 1468 = \"RANGED\"\n 253 = \"RANGED\"\n 254 = \"RANGED\"\n 255 = \"MELEE\"\n 66 = \"MELEE\"\n 257 = \"RANGED\"\n 258 = \"RANGED\"\n 259 = \"MELEE\"\n 260 = \"MELEE\"\n 577 = \"MELEE\"\n 262 = \"RANGED\"\n 581 = \"MELEE\"\n 264 = \"RANGED\"\n 265 = \"RANGED\"\n 1473 = \"RANGED\"\n 267 = \"RANGED\"\n 268 = \"MELEE\"\n 269 = \"MELEE\"\n 270 = \"MELEE\"\n 70 = \"MELEE\"\n 102 = \"RANGED\"\n 71 = \"MELEE\"\n 103 = \"MELEE\"\n 72 = \"MELEE\"\n 104 = \"MELEE\"\n 266 = \"RANGED\"\n 73 = \"MELEE\"\n 263 = \"MELEE\"\n 105 = \"RANGED\"\n 261 = \"MELEE\"\n 256 = \"RANGED\"\n 65 = \"MELEE\"\n 64 = \"RANGED\"\n}\nroleTable = <table> {\n 62 = \"DAMAGER\"\n 1467 = \"DAMAGER\"\n 63 = \"DAMAGER\"\n 250 = \"TANK\"\n 251 = \"DAMAGER\"\n 252 = \"DAMAGER\"\n 1468 = \"HEALER\"\n 253 = \"DAMAGER\"\n 254 = \"DAMAGER\"\n 255 = \"DAMAGER\"\n 66 = \"TANK\"\n 257 = \"HEALER\"\n 258 = \"DAMAGER\"\n 259 = \"DAMAGER\"\n 260 = \"DAMAGER\"\n 577 = \"DAMAGER\"\n 262 = \"DAMAGER\"\n 581 = \"TANK\"\n 264 = \"HEALER\"\n 265 = \"DAMAGER\"\n 1473 = \"DAMAGER\"\n 267 = \"DAMAGER\"\n 268 = \"TANK\"\n 269 = \"DAMAGER\"\n 270 = \"HEALER\"\n 70 = \"DAMAGER\"\n 102 = \"DAMAGER\"\n 71 = \"DAMAGER\"\n 103 = \"DAMAGER\"\n 72 = \"DAMAGER\"\n 104 = \"TANK\"\n 266 = \"DAMAGER\"\n 73 = \"TANK\"\n 263 = \"DAMAGER\"\n 105 = \"HEALER\"\n 261 = \"DAMAGER\"\n 256 = \"HEALER\"\n 65 = \"HEALER\"\n 64 = \"DAMAGER\"\n}\nstarterSpecs = <table> {\n 1452 = true\n 1456 = true\n 1449 = true\n 1453 = true\n 1446 = true\n 1450 = true\n 1454 = true\n 1447 = true\n 1451 = true\n 1455 = true\n 1444 = true\n 1448 = true\n 1465 = true\n}\n",
+["stack"] = "[Interface/AddOns/JST/lib/LibSpecialization-22/LibSpecialization.lua]:417: in function 'MySpecialization'\n[Interface/AddOns/JST/core/group.lua]:622: in function <Interface/AddOns/JST/core/group.lua:615>\n[Interface/AddOns/JST/core/group.lua]:690: in function <Interface/AddOns/JST/core/group.lua:660>\n[Interface/AddOns/JST/core/group.lua]:743: in function 'cur_func'\n[Interface/AddOns/JST/core/widget_api.lua]:107: in function <Interface/AddOns/JST/core/widget_api.lua:99>",
+["session"] = 647,
+["counter"] = 2,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 'MeetingStone' 尝试调用保护功能 'Frame:SetPropagateKeyboardInput()'。",
+["time"] = "2025/08/17 08:35:29",
+["locals"] = "self = Frame {\n}\nkey = \"W\"\nfound = false\nAutoHideController = <table> {\n ESCHandler = Frame {\n }\n _Objects = <table> {\n }\n _Meta = <table> {\n }\n}\n",
+["stack"] = "[Interface/AddOns/MeetingStone/Libs/NetEaseGUI-2.0-3/Widget/AutoHideController.lua]:26: in function <...ne/Libs/NetEaseGUI-2.0/Widget/AutoHideController.lua:15>",
+["session"] = 654,
 ["counter"] = 9,
 },
 },
