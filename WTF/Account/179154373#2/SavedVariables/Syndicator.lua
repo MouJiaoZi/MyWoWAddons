@@ -1,8 +1,8 @@
 
 SYNDICATOR_CONFIG = {
-["tooltips_faction_only"] = false,
-["show_guild_banks_in_tooltips"] = true,
+["show_inventory_tooltips"] = true,
 ["debug"] = false,
+["show_guild_banks_in_tooltips"] = true,
 ["show_tooltips_on_shift"] = false,
 ["show_equipped_items_in_tooltips"] = true,
 ["show_currency_tooltips"] = true,
@@ -10,11 +10,11 @@ SYNDICATOR_CONFIG = {
 ["auction_value_source"] = "none",
 ["show_blank_line_before_inventory"] = false,
 ["tooltips_connected_realms_only_2"] = false,
-["tooltips_sort_by_name"] = false,
 ["debug_timers"] = false,
-["show_total_line_after_characters"] = false,
+["tooltips_sort_by_name"] = false,
 ["tooltips_character_limit"] = 4,
-["show_inventory_tooltips"] = true,
+["show_total_line_after_characters"] = false,
+["tooltips_faction_only"] = false,
 ["no_auction_value_source"] = false,
 }
 SYNDICATOR_DATA = {
@@ -78,16 +78,16 @@ SYNDICATOR_DATA = {
 ["bags"] = {
 {
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
+["itemCount"] = 1,
+["itemID"] = 180653,
+["isBound"] = true,
 ["hasLoot"] = false,
-["iconTexture"] = 134029,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:268:::::::::|h[魔法汉堡]|h|r",
-["quality"] = 1,
+["iconTexture"] = 4352494,
+["itemLink"] = "|cnIQ4:|Hkeystone:180653:499:10:158:9:10:0:0|h[钥石：圣焰隐修院 (10)]|h|r",
+["quality"] = 4,
 },
 {
-["itemCount"] = 6,
+["itemCount"] = 5,
 ["itemID"] = 212277,
 ["isBound"] = false,
 ["hasLoot"] = false,
@@ -150,7 +150,7 @@ SYNDICATOR_DATA = {
 ["quality"] = 2,
 },
 {
-["itemCount"] = 74,
+["itemCount"] = 72,
 ["itemID"] = 222728,
 ["isBound"] = false,
 ["hasLoot"] = false,
@@ -160,21 +160,14 @@ SYNDICATOR_DATA = {
 },
 {
 ["itemCount"] = 1,
-["itemID"] = 180653,
+["itemID"] = 211063,
 ["isBound"] = true,
 ["hasLoot"] = false,
-["iconTexture"] = 4352494,
-["itemLink"] = "|cnIQ4:|Hkeystone:180653:378:3:0:0:0:0:0|h[钥石：赎罪大厅 (3)]|h|r",
+["iconTexture"] = 6012029,
+["itemLink"] = "|cnIQ4:|Hitem:211063::213512:213461:::::80:268::109:6:12291:6652:1589:10255:10879:10396:1:28:2462:::::|h[失落已久的项圈]|h|r",
 ["quality"] = 4,
 },
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
-["hasLoot"] = false,
-["iconTexture"] = 134029,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:268:::::::::|h[魔法汉堡]|h|r",
-["quality"] = 1,
 },
 {
 ["itemCount"] = 3,
@@ -186,13 +179,6 @@ SYNDICATOR_DATA = {
 ["quality"] = 2,
 },
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
-["hasLoot"] = false,
-["iconTexture"] = 134029,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:268:::::::::|h[魔法汉堡]|h|r",
-["quality"] = 1,
 },
 {
 ["itemCount"] = 2,
@@ -204,13 +190,6 @@ SYNDICATOR_DATA = {
 ["quality"] = 3,
 },
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
-["hasLoot"] = false,
-["iconTexture"] = 134029,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:268:::::::::|h[魔法汉堡]|h|r",
-["quality"] = 1,
 },
 {
 ["itemCount"] = 13,
@@ -280,6 +259,13 @@ SYNDICATOR_DATA = {
 ["quality"] = 2,
 },
 {
+["itemCount"] = 1,
+["itemID"] = 236953,
+["isBound"] = true,
+["hasLoot"] = true,
+["iconTexture"] = 5868906,
+["itemLink"] = "|cnIQ3:|Hitem:236953::::::::80:268::11::1:28:3008:::::|h[猩红神勇石]|h|r",
+["quality"] = 3,
 },
 {
 ["itemCount"] = 19,
@@ -291,7 +277,7 @@ SYNDICATOR_DATA = {
 ["quality"] = 1,
 },
 {
-["itemCount"] = 20,
+["itemCount"] = 19,
 ["itemID"] = 212265,
 ["isBound"] = false,
 ["hasLoot"] = false,
@@ -677,9 +663,9 @@ SYNDICATOR_DATA = {
 },
 },
 ["currencies"] = {
-[3286] = 335,
+[3286] = 350,
 [2815] = 18415,
-[3288] = 135,
+[3288] = 120,
 [3056] = 1800,
 [2803] = 2446,
 [3008] = 2000,
@@ -690,13 +676,13 @@ SYNDICATOR_DATA = {
 [3226] = 5,
 [2032] = 2975,
 [2003] = 460,
-[3284] = 352,
+[3284] = 388,
 },
 ["void"] = {
 },
 ["mail"] = {
 },
-["money"] = 1442710580,
+["money"] = 1440527984,
 ["equipped"] = {
 {
 },
@@ -710,10 +696,10 @@ SYNDICATOR_DATA = {
 },
 {
 ["itemCount"] = 1,
-["itemID"] = 211063,
+["itemID"] = 178827,
 ["isBound"] = true,
-["iconTexture"] = 6012029,
-["itemLink"] = "|cnIQ4:|Hitem:211063::213512:213461:::::80:268::109:6:12291:6652:1589:10255:10879:10396:1:28:2462:::::|h[失落已久的项圈]|h|r",
+["iconTexture"] = 1359999,
+["itemLink"] = "|cnIQ4:|Hitem:178827::::::::80:268::35:8:12356:10390:6652:10394:10392:10383:10016:10255:1:28:2462:::::|h[罪污项坠]|h|r",
 ["quality"] = 4,
 },
 {
@@ -779,7 +765,7 @@ SYNDICATOR_DATA = {
 ["itemID"] = 237959,
 ["isBound"] = true,
 ["iconTexture"] = 645146,
-["itemLink"] = "|cnIQ4:|Hitem:237959:7352:213461:213467:::::80:268::110:6:12350:6652:9891:10255:10879:10396:1:28:2462:::::|h[虚痕徽戒]|h|r",
+["itemLink"] = "|cnIQ4:|Hitem:237959:7352:213461:213467:::::80:268::110:6:6652:10879:10396:12353:9925:10255:1:28:2462:::::|h[虚痕徽戒]|h|r",
 ["quality"] = 4,
 },
 {
@@ -1490,9 +1476,9 @@ SYNDICATOR_DATA = {
 },
 ["currencies"] = {
 [1828] = 90,
-[1820] = 55,
-[2032] = 1420,
 [1792] = 0,
+[2032] = 1420,
+[1820] = 55,
 [1767] = 1049,
 [1813] = 2254,
 [1166] = 860,
@@ -7301,21 +7287,21 @@ SYNDICATOR_DATA = {
 },
 {
 ["itemCount"] = 1,
+["itemID"] = 5512,
+["isBound"] = false,
+["hasLoot"] = false,
+["quality"] = 1,
+["itemLink"] = "|cnIQ1:|Hitem:5512::::::::80:250::23::::::Player-940-04EBFBBB:|h[治疗石]|h|r",
+["iconTexture"] = 538745,
+},
+{
+["itemCount"] = 1,
 ["itemID"] = 180653,
 ["isBound"] = true,
 ["hasLoot"] = false,
 ["quality"] = 4,
-["itemLink"] = "|cnIQ4:|Hkeystone:180653:503:12:10:9:147:0:0|h[钥石：艾拉-卡拉，回响之城 (12)]|h|r",
+["itemLink"] = "|cnIQ4:|Hkeystone:180653:378:11:158:9:10:0:0|h[钥石：赎罪大厅 (11)]|h|r",
 ["iconTexture"] = 4352494,
-},
-{
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
-["hasLoot"] = false,
-["quality"] = 1,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:250:::::::::|h[魔法汉堡]|h|r",
-["iconTexture"] = 134029,
 },
 {
 ["itemCount"] = 1,
@@ -7327,7 +7313,7 @@ SYNDICATOR_DATA = {
 ["iconTexture"] = 135028,
 },
 {
-["itemCount"] = 16,
+["itemCount"] = 15,
 ["itemID"] = 212277,
 ["isBound"] = false,
 ["hasLoot"] = false,
@@ -7336,13 +7322,13 @@ SYNDICATOR_DATA = {
 ["iconTexture"] = 5931170,
 },
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
+["itemCount"] = 1,
+["itemID"] = 227659,
+["isBound"] = true,
 ["hasLoot"] = false,
-["quality"] = 1,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:250:::::::::|h[魔法汉堡]|h|r",
-["iconTexture"] = 134029,
+["quality"] = 3,
+["itemLink"] = "|cnIQ3:|Hitem:227659::::::::80:250:::::::::|h[瞬息奥术具象]|h|r",
+["iconTexture"] = 5929585,
 },
 {
 ["itemCount"] = 1,
@@ -7374,13 +7360,6 @@ SYNDICATOR_DATA = {
 ["iconTexture"] = 6999171,
 },
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
-["hasLoot"] = false,
-["quality"] = 1,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:250:::::::::|h[魔法汉堡]|h|r",
-["iconTexture"] = 134029,
 },
 {
 ["itemCount"] = 1,
@@ -7392,13 +7371,6 @@ SYNDICATOR_DATA = {
 ["iconTexture"] = 1416740,
 },
 {
-["itemCount"] = 20,
-["itemID"] = 113509,
-["isBound"] = false,
-["hasLoot"] = false,
-["quality"] = 1,
-["itemLink"] = "|cnIQ1:|Hitem:113509::::::::80:250:::::::::|h[魔法汉堡]|h|r",
-["iconTexture"] = 134029,
 },
 {
 ["itemCount"] = 1,
@@ -7996,7 +7968,7 @@ SYNDICATOR_DATA = {
 ["iconTexture"] = 609892,
 },
 {
-["itemCount"] = 9,
+["itemCount"] = 8,
 ["itemID"] = 224107,
 ["isBound"] = false,
 ["hasLoot"] = false,
@@ -8007,7 +7979,7 @@ SYNDICATOR_DATA = {
 {
 },
 {
-["itemCount"] = 55,
+["itemCount"] = 54,
 ["itemID"] = 222728,
 ["isBound"] = false,
 ["hasLoot"] = false,
@@ -8107,6 +8079,13 @@ SYNDICATOR_DATA = {
 },
 {
 {
+["itemCount"] = 2,
+["itemID"] = 213611,
+["isBound"] = false,
+["hasLoot"] = false,
+["quality"] = 3,
+["itemLink"] = "|cnIQ3:|Hitem:213611::::::::80:250:::::::::|h[蠕动样本]|h|r",
+["iconTexture"] = 5929763,
 },
 {
 ["itemCount"] = 1,
@@ -8118,6 +8097,13 @@ SYNDICATOR_DATA = {
 ["iconTexture"] = 5872060,
 },
 {
+["itemCount"] = 1,
+["itemID"] = 219952,
+["isBound"] = false,
+["hasLoot"] = false,
+["quality"] = 4,
+["itemLink"] = "|cnIQ4:|Hitem:219952::::::::80:250::::1:38:1:::::|h[耀辉水晶 |A:Professions-ChatIcon-Quality-Tier1:17:15::1|a]|h|r",
+["iconTexture"] = 5929570,
 },
 {
 },
@@ -8430,7 +8416,7 @@ SYNDICATOR_DATA = {
 [1716] = 45,
 [3226] = 142,
 [1129] = 0,
-[3290] = 60,
+[3290] = 0,
 [3100] = 0,
 [1828] = 8230,
 [2815] = 14492,
@@ -8441,7 +8427,7 @@ SYNDICATOR_DATA = {
 [2118] = 2303,
 [1718] = 0,
 [1226] = 2268,
-[3008] = 2000,
+[3008] = 400,
 [776] = 0,
 [1560] = 52780,
 [402] = 1,
@@ -8503,7 +8489,7 @@ SYNDICATOR_DATA = {
 },
 ["mail"] = {
 },
-["money"] = 11052564794,
+["money"] = 11092435921,
 ["equipped"] = {
 {
 },
@@ -8552,7 +8538,7 @@ SYNDICATOR_DATA = {
 ["itemID"] = 246287,
 ["isBound"] = true,
 ["quality"] = 4,
-["itemLink"] = "|cnIQ4:|Hitem:246287::::::::80:250::16:8:12352:10390:6652:12921:12239:10383:10013:10255:1:28:2462:::::|h[即兴束腰]|h|r",
+["itemLink"] = "|cnIQ4:|Hitem:246287::::::::80:250::16:8:12352:10390:6652:12921:12239:10383:10013:10255:1:28:2462:::::4223|h[即兴束腰]|h|r",
 ["iconTexture"] = 3395742,
 },
 {
@@ -8624,7 +8610,7 @@ SYNDICATOR_DATA = {
 ["itemID"] = 235499,
 ["isBound"] = true,
 ["quality"] = 6,
-["itemLink"] = "|cnIQ6:|Hitem:235499:7409:238042::::::80:250::11:3:12400:9883:12259:1:28:3008:::::|h[雷什裹布]|h|r",
+["itemLink"] = "|cnIQ6:|Hitem:235499:7409:238042::::::80:250::11:3:12400:9883:12259:1:28:3008:::::3605|h[雷什裹布]|h|r",
 ["iconTexture"] = 7110834,
 },
 {
@@ -8632,7 +8618,7 @@ SYNDICATOR_DATA = {
 ["itemID"] = 242487,
 ["isBound"] = true,
 ["quality"] = 4,
-["itemLink"] = "|cnIQ4:|Hitem:242487:3368:::::::80:250::16:6:10390:40:10384:12352:3193:10255:1:28:2462:::::|h[命缚征战者]|h|r",
+["itemLink"] = "|cnIQ4:|Hitem:242487:3368:::::::80:250::35:6:10390:6652:10384:12360:3212:10255:1:28:2462:::::|h[命缚征战者]|h|r",
 ["iconTexture"] = 6193629,
 },
 {
@@ -12042,6 +12028,7 @@ SYNDICATOR_DATA = {
 SYNDICATOR_SUMMARIES = {
 ["Characters"] = {
 ["Pending"] = {
+["某餃子-伊森利恩"] = 1,
 },
 ["ByRealm"] = {
 ["苏拉玛"] = {
@@ -12090,7 +12077,7 @@ SYNDICATOR_SUMMARIES = {
 },
 ["凤凰之神"] = {
 ["凤凰基友之三"] = {
-["item:132243"] = {
+["item:128956"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12106,7 +12093,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:112459"] = {
+["item:38281"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12130,7 +12117,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133523"] = {
+["item:49641"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12146,7 +12133,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:128956"] = {
+["item:132243"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12186,7 +12173,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:38281"] = {
+["item:112459"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12194,7 +12181,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:172023"] = {
+["item:141650"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12210,7 +12197,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:120945"] = {
+["item:113261"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12266,12 +12253,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:21254"] = {
+["item:133537"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
-["bags"] = 5,
-["equipped"] = 0,
+["bags"] = 0,
+["equipped"] = 1,
 ["bank"] = 0,
 },
 ["item:33154"] = {
@@ -12322,7 +12309,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:113261"] = {
+["item:120945"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12346,12 +12333,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:133537"] = {
+["item:21254"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
+["bags"] = 5,
+["equipped"] = 0,
 ["bank"] = 0,
 },
 ["item:112461"] = {
@@ -12450,12 +12437,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133528"] = {
+["item:133315"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
+["bags"] = 1,
+["equipped"] = 0,
 ["bank"] = 0,
 },
 ["item:112462"] = {
@@ -12482,12 +12469,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133315"] = {
+["item:133528"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
-["bags"] = 1,
-["equipped"] = 0,
+["bags"] = 0,
+["equipped"] = 1,
 ["bank"] = 0,
 },
 ["item:123959"] = {
@@ -12570,7 +12557,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:141650"] = {
+["item:172023"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12578,7 +12565,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:49641"] = {
+["item:133523"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -12900,20 +12887,20 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133528"] = {
-["void"] = 0,
-["auctions"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
-["bank"] = 0,
-},
 ["item:17724"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
 ["bags"] = 1,
 ["equipped"] = 0,
+["bank"] = 0,
+},
+["item:133528"] = {
+["void"] = 0,
+["auctions"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 1,
 ["bank"] = 0,
 },
 ["item:112462"] = {
@@ -13238,7 +13225,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133316"] = {
+["item:151351"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -13286,7 +13273,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:151351"] = {
+["item:133316"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
@@ -13334,12 +13321,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:17709"] = {
+["item:133312"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
-["bags"] = 1,
-["equipped"] = 0,
+["bags"] = 0,
+["equipped"] = 1,
 ["bank"] = 0,
 },
 ["item:133315"] = {
@@ -13374,12 +13361,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133312"] = {
+["item:17709"] = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
+["bags"] = 1,
+["equipped"] = 0,
 ["bank"] = 0,
 },
 ["item:133311"] = {
@@ -13530,13 +13517,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:111820"] = {
+["item:39327"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 1,
+["bags"] = 0,
 ["equipped"] = 0,
-["bank"] = 1,
+["bank"] = 10,
 },
 ["item:232541"] = {
 ["auctions"] = 0,
@@ -13562,6 +13549,14 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
+["item:227659"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 1,
+["equipped"] = 0,
+["bank"] = 0,
+},
 ["item:137223"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -13578,13 +13573,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:132452"] = {
-["auctions"] = 0,
+["item:219952"] = {
+["auctions"] = 36,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
+["bags"] = 1,
 ["equipped"] = 0,
-["bank"] = 1,
+["bank"] = 0,
 },
 ["item:133642"] = {
 ["auctions"] = 0,
@@ -13737,6 +13732,14 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 1,
+},
+["item:5512"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 1,
+["equipped"] = 0,
+["bank"] = 0,
 },
 ["item:71634"] = {
 ["auctions"] = 0,
@@ -13978,8 +13981,8 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:219952"] = {
-["auctions"] = 36,
+["item:219948"] = {
+["auctions"] = 12,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
@@ -14002,7 +14005,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:174167"] = {
+["item:167555"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14010,8 +14013,8 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:219948"] = {
-["auctions"] = 12,
+["item:213610"] = {
+["auctions"] = 3,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
@@ -14022,7 +14025,7 @@ SYNDICATOR_SUMMARIES = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 21,
+["bags"] = 20,
 ["equipped"] = 0,
 ["bank"] = 0,
 },
@@ -14058,8 +14061,8 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:213610"] = {
-["auctions"] = 3,
+["item:225565"] = {
+["auctions"] = 1,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
@@ -14082,12 +14085,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:225565"] = {
-["auctions"] = 1,
+["item:224114"] = {
+["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
-["equipped"] = 0,
+["equipped"] = 1,
 ["bank"] = 0,
 },
 ["item:168970"] = {
@@ -14114,7 +14117,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:224114"] = {
+["item:52252"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14130,12 +14133,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:52252"] = {
+["item:208593"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
+["bags"] = 23,
+["equipped"] = 0,
 ["bank"] = 0,
 },
 ["item:63353"] = {
@@ -14154,14 +14157,6 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:128510"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 1,
-},
 ["item:235499"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14169,6 +14164,14 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 1,
 ["bank"] = 0,
+},
+["item:144280"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
 },
 ["item:143661"] = {
 ["auctions"] = 0,
@@ -14186,14 +14189,6 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 80,
 },
-["item:128402"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 1,
-},
 ["item:215135"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14201,6 +14196,14 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 1,
 ["bank"] = 0,
+},
+["item:50274"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
 },
 ["item:174166"] = {
 ["auctions"] = 0,
@@ -14210,13 +14213,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:238045"] = {
+["item:81055"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 1,
+["bags"] = 0,
 ["equipped"] = 0,
-["bank"] = 0,
+["bank"] = 4,
 },
 ["item:118100"] = {
 ["auctions"] = 0,
@@ -14250,13 +14253,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:50274"] = {
+["item:237629"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 1,
+["equipped"] = 1,
+["bank"] = 0,
 },
 ["item:112384"] = {
 ["auctions"] = 0,
@@ -14282,14 +14285,6 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:237629"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
-["bank"] = 0,
-},
 ["item:222435"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14297,6 +14292,14 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 1,
 ["bank"] = 0,
+},
+["item:169470"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 2,
 },
 ["item:246240"] = {
 ["auctions"] = 0,
@@ -14314,7 +14317,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:129276"] = {
+["item:124637"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14338,14 +14341,6 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:124637"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 1,
-},
 ["item:246287"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14361,6 +14356,14 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 6,
+},
+["item:161135"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
 },
 ["item:23858"] = {
 ["auctions"] = 0,
@@ -14378,13 +14381,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:81055"] = {
+["item:252009"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 4,
+["equipped"] = 1,
+["bank"] = 0,
 },
 ["item:242391"] = {
 ["auctions"] = 0,
@@ -14402,14 +14405,6 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:252009"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
-["bank"] = 0,
-},
 ["item:237628"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14417,6 +14412,14 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 1,
 ["bank"] = 0,
+},
+["item:128402"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
 },
 ["item:242401"] = {
 ["auctions"] = 0,
@@ -14466,7 +14469,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 39,
 },
-["item:158075"] = {
+["item:37863"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14474,23 +14477,15 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:124099"] = {
+["item:114821"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 1053,
+["equipped"] = 1,
+["bank"] = 8,
 },
 ["item:137075"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 1,
-},
-["item:144280"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14506,6 +14501,14 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
+["item:208485"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 1,
+["equipped"] = 0,
+["bank"] = 0,
+},
 ["item:132376"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14513,14 +14516,6 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 1,
-},
-["item:133755"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 1,
-["equipped"] = 0,
-["bank"] = 0,
 },
 ["item:132367"] = {
 ["auctions"] = 0,
@@ -14546,6 +14541,14 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
+["item:132443"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
+},
 ["item:152626"] = {
 ["auctions"] = 0,
 ["void"] = 0,
@@ -14554,7 +14557,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:132443"] = {
+["item:132448"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14570,7 +14573,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:132448"] = {
+["item:133974"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14594,7 +14597,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:133974"] = {
+["item:132452"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14634,7 +14637,15 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 48,
 },
-["item:141002"] = {
+["item:213611"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 2,
+["equipped"] = 0,
+["bank"] = 0,
+},
+["item:128218"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14642,7 +14653,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:128218"] = {
+["item:141002"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14658,21 +14669,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:161135"] = {
+["item:119348"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 1,
-},
-["item:113509"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 80,
-["equipped"] = 0,
-["bank"] = 0,
 },
 ["item:52019"] = {
 ["auctions"] = 0,
@@ -14682,7 +14685,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:33977"] = {
+["item:128510"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14706,15 +14709,15 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:208593"] = {
+["item:222443"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 23,
+["bags"] = 1,
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:50818"] = {
+["item:33977"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14722,7 +14725,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:127770"] = {
+["item:50818"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14746,7 +14749,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 2,
 },
-["item:130320"] = {
+["item:127770"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14762,13 +14765,21 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:222443"] = {
+["item:130320"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 1,
+["bags"] = 0,
 ["equipped"] = 0,
-["bank"] = 0,
+["bank"] = 1,
+},
+["item:138111"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
 },
 ["item:40483"] = {
 ["auctions"] = 0,
@@ -14785,14 +14796,6 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 1,
-},
-["item:169470"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 2,
 },
 ["item:159424"] = {
 ["auctions"] = 0,
@@ -14834,13 +14837,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 20,
 },
-["item:210199"] = {
+["item:129276"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 1,
+["bags"] = 0,
 ["equipped"] = 0,
-["bank"] = 0,
+["bank"] = 1,
 },
 ["item:38682"] = {
 ["auctions"] = 0,
@@ -14850,13 +14853,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:128364"] = {
+["item:210199"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
+["bags"] = 1,
 ["equipped"] = 0,
-["bank"] = 1,
+["bank"] = 0,
 },
 ["item:220756"] = {
 ["auctions"] = 0,
@@ -14866,7 +14869,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:128363"] = {
+["item:128364"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -14882,21 +14885,21 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:128503"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 1,
-["equipped"] = 0,
-["bank"] = 0,
-},
-["item:45585"] = {
+["item:128363"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 1,
+},
+["item:238045"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 1,
+["equipped"] = 0,
+["bank"] = 0,
 },
 ["item:65274"] = {
 ["auctions"] = 0,
@@ -14934,15 +14937,15 @@ SYNDICATOR_SUMMARIES = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 55,
+["bags"] = 54,
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:64884"] = {
+["item:111820"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
+["bags"] = 1,
 ["equipped"] = 0,
 ["bank"] = 1,
 },
@@ -14953,6 +14956,22 @@ SYNDICATOR_SUMMARIES = {
 ["bags"] = 0,
 ["equipped"] = 0,
 ["bank"] = 10,
+},
+["item:45585"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
+},
+["item:64884"] = {
+["auctions"] = 0,
+["void"] = 0,
+["mail"] = 0,
+["bags"] = 0,
+["equipped"] = 0,
+["bank"] = 1,
 },
 ["item:17722"] = {
 ["auctions"] = 0,
@@ -14970,22 +14989,6 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:39327"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 0,
-["bank"] = 10,
-},
-["item:114821"] = {
-["auctions"] = 0,
-["void"] = 0,
-["mail"] = 0,
-["bags"] = 0,
-["equipped"] = 1,
-["bank"] = 8,
-},
 ["item:219954"] = {
 ["auctions"] = 40,
 ["void"] = 0,
@@ -14994,13 +14997,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:119348"] = {
+["item:124099"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
 ["bags"] = 0,
 ["equipped"] = 0,
-["bank"] = 1,
+["bank"] = 1053,
 },
 ["item:215136"] = {
 ["auctions"] = 0,
@@ -15050,7 +15053,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:37863"] = {
+["item:158075"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -15066,13 +15069,13 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:138111"] = {
+["item:128503"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 0,
+["bags"] = 1,
 ["equipped"] = 0,
-["bank"] = 1,
+["bank"] = 0,
 },
 ["item:128353"] = {
 ["auctions"] = 0,
@@ -15098,7 +15101,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:208485"] = {
+["item:133755"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -15126,7 +15129,7 @@ SYNDICATOR_SUMMARIES = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
-["bags"] = 16,
+["bags"] = 15,
 ["equipped"] = 0,
 ["bank"] = 0,
 },
@@ -15138,7 +15141,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 1,
 },
-["item:167555"] = {
+["item:174167"] = {
 ["auctions"] = 0,
 ["void"] = 0,
 ["mail"] = 0,
@@ -15774,12 +15777,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:207795"] = {
+["item:204464"] = {
 ["mail"] = 0,
-["bags"] = 0,
+["bags"] = 2,
 ["void"] = 0,
 ["auctions"] = 0,
-["equipped"] = 1,
+["equipped"] = 0,
 ["bank"] = 0,
 },
 ["item:153763"] = {
@@ -15798,7 +15801,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:167555"] = {
+["item:201412"] = {
 ["mail"] = 0,
 ["bags"] = 1,
 ["void"] = 0,
@@ -15838,7 +15841,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:201412"] = {
+["item:167555"] = {
 ["mail"] = 0,
 ["bags"] = 1,
 ["void"] = 0,
@@ -15918,12 +15921,12 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:204464"] = {
+["item:207795"] = {
 ["mail"] = 0,
-["bags"] = 2,
+["bags"] = 0,
 ["void"] = 0,
 ["auctions"] = 0,
-["equipped"] = 0,
+["equipped"] = 1,
 ["bank"] = 0,
 },
 ["item:201325"] = {
@@ -16290,7 +16293,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:202197"] = {
+["item:6657"] = {
 ["mail"] = 0,
 ["bags"] = 1,
 ["void"] = 0,
@@ -16306,7 +16309,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:6657"] = {
+["item:202197"] = {
 ["mail"] = 0,
 ["bags"] = 1,
 ["void"] = 0,
@@ -16388,9 +16391,9 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:113509"] = {
+["item:244838"] = {
 ["mail"] = 0,
-["bags"] = 80,
+["bags"] = 19,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16444,6 +16447,14 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
+["item:178827"] = {
+["mail"] = 0,
+["bags"] = 0,
+["void"] = 0,
+["auctions"] = 0,
+["equipped"] = 1,
+["bank"] = 0,
+},
 ["item:210936"] = {
 ["mail"] = 0,
 ["bags"] = 4,
@@ -16454,7 +16465,7 @@ SYNDICATOR_SUMMARIES = {
 },
 ["item:236953"] = {
 ["mail"] = 0,
-["bags"] = 1,
+["bags"] = 2,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16502,7 +16513,7 @@ SYNDICATOR_SUMMARIES = {
 },
 ["item:222728"] = {
 ["mail"] = 0,
-["bags"] = 74,
+["bags"] = 72,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16524,17 +16535,9 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:244838"] = {
+["item:221763"] = {
 ["mail"] = 0,
-["bags"] = 19,
-["void"] = 0,
-["auctions"] = 0,
-["equipped"] = 0,
-["bank"] = 0,
-},
-["keystone:180653"] = {
-["mail"] = 0,
-["bags"] = 1,
+["bags"] = 6,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16548,7 +16551,31 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:210800"] = {
+["keystone:180653"] = {
+["mail"] = 0,
+["bags"] = 1,
+["void"] = 0,
+["auctions"] = 0,
+["equipped"] = 0,
+["bank"] = 0,
+},
+["item:237672"] = {
+["mail"] = 0,
+["bags"] = 0,
+["void"] = 0,
+["auctions"] = 0,
+["equipped"] = 1,
+["bank"] = 0,
+},
+["item:223512"] = {
+["mail"] = 0,
+["bags"] = 6,
+["void"] = 0,
+["auctions"] = 0,
+["equipped"] = 0,
+["bank"] = 0,
+},
+["item:211063"] = {
 ["mail"] = 0,
 ["bags"] = 1,
 ["void"] = 0,
@@ -16562,30 +16589,6 @@ SYNDICATOR_SUMMARIES = {
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 1,
-["bank"] = 0,
-},
-["item:221763"] = {
-["mail"] = 0,
-["bags"] = 6,
-["void"] = 0,
-["auctions"] = 0,
-["equipped"] = 0,
-["bank"] = 0,
-},
-["item:211063"] = {
-["mail"] = 0,
-["bags"] = 0,
-["void"] = 0,
-["auctions"] = 0,
-["equipped"] = 1,
-["bank"] = 0,
-},
-["item:223951"] = {
-["mail"] = 0,
-["bags"] = 2,
-["void"] = 0,
-["auctions"] = 0,
-["equipped"] = 0,
 ["bank"] = 0,
 },
 ["item:245510"] = {
@@ -16604,9 +16607,9 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:223512"] = {
+["item:223951"] = {
 ["mail"] = 0,
-["bags"] = 6,
+["bags"] = 2,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16636,9 +16639,9 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:132514"] = {
+["item:210800"] = {
 ["mail"] = 0,
-["bags"] = 3,
+["bags"] = 1,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16660,25 +16663,17 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
-["item:237672"] = {
+["item:132514"] = {
 ["mail"] = 0,
-["bags"] = 0,
-["void"] = 0,
-["auctions"] = 0,
-["equipped"] = 1,
-["bank"] = 0,
-},
-["item:210796"] = {
-["mail"] = 0,
-["bags"] = 2,
+["bags"] = 3,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:212265"] = {
+["item:210796"] = {
 ["mail"] = 0,
-["bags"] = 20,
+["bags"] = 2,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16692,9 +16687,17 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 1,
 ["bank"] = 0,
 },
+["item:212265"] = {
+["mail"] = 0,
+["bags"] = 19,
+["void"] = 0,
+["auctions"] = 0,
+["equipped"] = 0,
+["bank"] = 0,
+},
 ["item:212277"] = {
 ["mail"] = 0,
-["bags"] = 6,
+["bags"] = 5,
 ["void"] = 0,
 ["auctions"] = 0,
 ["equipped"] = 0,
@@ -16910,7 +16913,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:67242"] = {
+["item:153688"] = {
 ["mail"] = 0,
 ["bags"] = 0,
 ["void"] = 0,
@@ -16966,7 +16969,7 @@ SYNDICATOR_SUMMARIES = {
 ["equipped"] = 0,
 ["bank"] = 0,
 },
-["item:153688"] = {
+["item:67242"] = {
 ["mail"] = 0,
 ["bags"] = 0,
 ["void"] = 0,
@@ -17225,26 +17228,26 @@ SYNDICATOR_SUMMARIES = {
 ["item:193053"] = 40,
 ["item:219313"] = 1,
 ["item:218062"] = 2,
-["item:197741"] = 6,
+["item:225588"] = 1,
 ["item:223938"] = 1,
-["item:223006"] = 1,
+["item:221238"] = 1,
 ["item:219183"] = 1,
 ["item:197747"] = 6,
-["item:225588"] = 1,
+["item:197741"] = 6,
 ["item:172232"] = 117,
 ["item:218068"] = 1,
 ["item:163036"] = 32,
 ["item:172230"] = 196,
 ["item:194799"] = 1,
-["item:224575"] = 1,
-["item:172231"] = 80,
 ["item:218048"] = 1,
+["item:172231"] = 80,
+["item:224575"] = 1,
 ["item:197743"] = 3,
-["item:221238"] = 1,
+["item:223006"] = 1,
 ["item:221219"] = 1,
 ["item:219246"] = 1,
-["item:201403"] = 1,
 ["item:202395"] = 1,
+["item:201403"] = 1,
 },
 },
 ["Pending"] = {

@@ -8,6 +8,7 @@
 	<Script file='Hekili.lua'/>
 	<Script file='Immersion.lua'/>
 	<Script file='LibQTip.lua'/>
+	<Script file='MountRoutePlanner.lua'/>
 	<Script file='Myslot.lua'/>
 	<Script file='MythicDungeonTools.lua'/>
 	<Script file='OmniCD.lua'/>
@@ -15,8 +16,10 @@
 	<Script file='PremadeGroupFilter.lua'/>
 	<Script file='RaiderIO.lua'/>
 	<Script file='RareScanner.lua'/>
+	<Script file='SilverDragon.lua'/>
 	<Script file='SimpleAddonManager.lua'/>
 	<Script file='Simulationcraft.lua'/>
+	<Script file='TalentLoadoutsEx.lua'/>
 	<Script file='TinyInspect.lua'/>
 	<Script file='TomCats.lua'/>
 	<Script file='WarpDeplete.lua'/>

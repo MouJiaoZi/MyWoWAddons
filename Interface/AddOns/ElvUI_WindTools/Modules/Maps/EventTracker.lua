@@ -38,6 +38,8 @@ local eventList = {
 	-- TWW
 	-- "TWWProfessions",
 	"KhazAlgarEmissary",
+	"EcologicalSuccession",
+	"Nightfall",
 	"TheaterTroupe",
 	"RingingDeeps",
 	"SpreadingTheLight",
@@ -974,6 +976,63 @@ local eventData = {
 			location = C_Map_GetMapInfo(2339).name,
 			label = L["Khaz Algar Emissary"],
 			onClick = worldMapIDSetter(2339),
+			onClickHelpText = L["Click to show location"],
+		},
+	},
+	EcologicalSuccession = {
+		dbKey = "ecologicalSuccession",
+		args = {
+			icon = 6921877,
+			type = "weekly",
+			questIDs = {
+				85460, -- 生態重構
+			},
+			hasWeeklyReward = true,
+			eventName = L["Ecological Succession"],
+			location = C_Map_GetMapInfo(2371).name,
+			label = L["Ecological Succession"],
+			onClick = worldMapIDSetter(2371),
+			onClickHelpText = L["Click to show location"],
+		},
+	},
+	Nightfall = {
+		dbKey = "nightFall",
+		args = {
+			icon = 6694198,
+			type = "loopTimer",
+			questIDs = {
+				91173,
+				89295,
+			},
+			hasWeeklyReward = true,
+			duration = 15 * 60,
+			interval = 60 * 60,
+			barColor = colorPlatte.blue,
+			flash = true,
+			runningBarColor = colorPlatte.purple,
+			eventName = L["Nightfall"],
+			location = C_Map_GetMapInfo(2215).name,
+			label = L["Nightfall"],
+			runningText = L["Running"],
+			startTimestamp = (function()
+				local timestampTable = {
+					[1] = 1724976005, -- NA
+					[2] = 1724976005, -- KR
+					[3] = 1724976005, -- EU
+					[4] = 1724976005, -- TW
+					[5] = 1724976005, -- CN
+					[72] = 1724976000,
+				}
+
+				local region = GetCurrentRegion()
+				-- TW is not a real region, so we need to check the client language if player in KR
+				if region == 2 and W.Locale ~= "koKR" then
+					region = 4
+				end
+
+				return timestampTable[region]
+			end)(),
+			onClick = worldMapIDSetter(2215),
 			onClickHelpText = L["Click to show location"],
 		},
 	},

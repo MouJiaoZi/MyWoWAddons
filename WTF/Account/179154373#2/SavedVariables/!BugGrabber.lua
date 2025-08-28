@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
 ["lastSanitation"] = 3,
-["session"] = 655,
+["session"] = 661,
 ["errors"] = {
 {
 ["message"] = "Interface/AddOns/TinyInspect/Options.lua:270: CreateFrame(): Couldn't find inherited node \"BackdropTemplate,ThinBorderTemplate\"",

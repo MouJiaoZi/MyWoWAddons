@@ -4,11 +4,15 @@ local LSM = E.Libs.LSM
 local S = W.Modules.Skins
 local C = W.Utilities.Color
 
+local _G = _G
 local format = format
 local pairs = pairs
 local type = type
 
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
+
+local RED_FONT_COLOR = RED_FONT_COLOR
+local YELLOW_FONT_COLOR = YELLOW_FONT_COLOR
 
 options.desc = {
 	order = 1,
@@ -219,6 +223,101 @@ options.general = {
 					min = 1,
 					max = 100,
 					step = 1,
+				},
+			},
+		},
+		uiErrors = {
+			order = 7,
+			type = "group",
+			name = L["UI Errors Frame"],
+			inline = true,
+			disabled = function()
+				return not E.private.WT.skins.enable or not E.private.WT.skins.blizzard.uiErrors
+			end,
+			args = {
+				desc = {
+					order = 1,
+					type = "description",
+					name = L["The middle top errors / messages frame (also used for quest progress text)."],
+				},
+				normalTextClassColor = {
+					order = 2,
+					type = "toggle",
+					name = L["Class Color"],
+					desc = L["Replace the default color used for messages with class color."],
+					get = function(info)
+						return E.private.WT.skins.uiErrors.normalTextClassColor
+					end,
+					set = function(info, value)
+						E.private.WT.skins.uiErrors.normalTextClassColor = value
+					end,
+				},
+				normalTextColor = {
+					order = 3,
+					type = "color",
+					name = L["Default"],
+					desc = L["Replace the default color used for messages."],
+					hasAlpha = true,
+					get = function(info)
+						local db = E.private.WT.skins.uiErrors.normalTextColor
+						local default = V.skins.uiErrors.normalTextColor
+						return db.r, db.g, db.b, db.a, default.r, default.g, default.b, default.a
+					end,
+					set = function(info, r, g, b, a)
+						local db = E.private.WT.skins.uiErrors.normalTextColor
+						db.r, db.g, db.b, db.a = r, g, b, a
+					end,
+					hidden = function()
+						return E.private.WT.skins.uiErrors.normalTextClassColor
+					end,
+				},
+				redTextColor = {
+					order = 4,
+					type = "color",
+					name = L["Red"],
+					desc = L["Replace the default color used for error messages."],
+					hasAlpha = true,
+					get = function(info)
+						local db = E.private.WT.skins.uiErrors.redTextColor
+						local default = V.skins.uiErrors.redTextColor
+						return db.r, db.g, db.b, db.a, default.r, default.g, default.b, default.a
+					end,
+					set = function(info, r, g, b, a)
+						local db = E.private.WT.skins.uiErrors.redTextColor
+						db.r, db.g, db.b, db.a = r, g, b, a
+					end,
+				},
+				yellowTextColor = {
+					order = 4,
+					type = "color",
+					name = L["Yellow"],
+					desc = L["Replace the default color used for warning messages."],
+					hasAlpha = true,
+					get = function(info)
+						local db = E.private.WT.skins.uiErrors.yellowTextColor
+						local default = V.skins.uiErrors.yellowTextColor
+						return db.r, db.g, db.b, db.a, default.r, default.g, default.b, default.a
+					end,
+					set = function(info, r, g, b, a)
+						local db = E.private.WT.skins.uiErrors.yellowTextColor
+						db.r, db.g, db.b, db.a = r, g, b, a
+					end,
+				},
+				testButton = {
+					order = 6,
+					type = "execute",
+					name = L["Test"],
+					func = function()
+						_G.UIErrorsFrame:AddMessage(format("[%s] %s", L["WindTools"], L["This is a test message"]))
+						_G.UIErrorsFrame:AddMessage(
+							format("[%s] %s (%s)", L["WindTools"], L["This is a test message"], L["Red"]),
+							RED_FONT_COLOR:GetRGBA()
+						)
+						_G.UIErrorsFrame:AddMessage(
+							format("[%s] %s (%s)", L["WindTools"], L["This is a test message"], L["Yellow"]),
+							YELLOW_FONT_COLOR:GetRGBA()
+						)
+					end,
 				},
 			},
 		},
@@ -875,6 +974,12 @@ options.blizzard = {
 			type = "toggle",
 			name = L["Tutorials"],
 		},
+		uiErrors = {
+			order = 10,
+			type = "toggle",
+			name = L["UI Errors"],
+			desc = L["The middle top errors / messages frame (also used for quest progress text)."],
+		},
 		uiWidget = {
 			order = 10,
 			type = "toggle",
@@ -1203,6 +1308,12 @@ options.addons = {
 			addonName = "Immersion",
 			addonskinsKey = "Immersion",
 		},
+		mountRoutePlanner = {
+			order = 10,
+			type = "toggle",
+			name = L["Mount Route Planner"],
+			addonName = "MountRoutePlanner",
+		},
 		myslot = {
 			order = 10,
 			type = "toggle",
@@ -1239,6 +1350,16 @@ options.addons = {
 			end,
 			addonName = "OmniCD",
 		},
+		omniCDExtraBar = {
+			order = 10,
+			type = "toggle",
+			name = L["OmniCD Extra Bar"],
+			desc = L["Add a shadowed background to the group title and adjust its position slightly upward."],
+			hidden = function()
+				return not E.private.WT.skins.addons.omniCD
+			end,
+			addonName = "OmniCD",
+		},
 		postal = {
 			order = 10,
 			type = "toggle",
@@ -1266,6 +1387,12 @@ options.addons = {
 			name = L["RareScanner"],
 			addonName = "RareScanner",
 		},
+		silverDragon = {
+			order = 10,
+			type = "toggle",
+			name = L["SilverDragon"],
+			addonName = "SilverDragon",
+		},
 		simpleAddonManager = {
 			order = 10,
 			type = "toggle",
@@ -1278,6 +1405,12 @@ options.addons = {
 			name = L["Simulationcraft"],
 			addonName = "Simulationcraft",
 			addonskinsKey = "Simulationcraft",
+		},
+		talentLoadoutsEx = {
+			order = 10,
+			type = "toggle",
+			name = L["Talent Loadouts Ex"],
+			addonName = "TalentLoadoutsEx",
 		},
 		tinyInspect = {
 			order = 10,

@@ -5,34 +5,74 @@ local S = W.Modules.Skins
 local _G = _G
 local format = format
 local gsub = gsub
+local hooksecurefunc = hooksecurefunc
 local pairs = pairs
 local strfind = strfind
+local strsub = strsub
 
-function S:TT_SetStyle(_, tt)
-	if tt and tt ~= E.ScanTooltip and not tt.IsEmbedded and not tt:IsForbidden() then
-		if tt.widgetContainer then
-			if tt.TopOverlay then
-				tt.TopOverlay:StripTextures()
-			end
-			if tt.BottomOverlay then
-				tt.BottomOverlay:StripTextures()
-			end
-			if tt.NineSlice then
-				self:StripEdgeTextures(tt.NineSlice)
-			end
-			tt:SetTemplate("Transparent")
-		end
-		self:CreateShadow(tt)
+local function styleIconsInLine(line, text)
+	if not line then
+		return
+	end
+
+	text = text or line:GetText()
+	local styledText = S:StyleTextureString(text)
+	if styledText and styledText ~= text then
+		(line.__SetText or line.SetText)(line, styledText)
 	end
 end
 
-function S:TT_GameTooltip_SetDefaultAnchor(_, tt)
-	if tt.StatusBar then
-		self:CreateShadow(tt.StatusBar)
+local function StyleTooltipWidgetContainer(tt)
+	if not tt or (tt == E.ScanTooltip or tt.IsEmbedded or not tt.NineSlice) or tt:IsForbidden() then
+		return
 	end
 
-	if _G.GameTooltipStatusBar then
-		self:CreateShadow(_G.GameTooltipStatusBar, 6)
+	if not tt.widgetContainer or not tt.widgetContainer.widgetPools then
+		return
+	end
+
+	for frame in tt.widgetContainer.widgetPools:EnumerateActive() do
+		if not frame.__windSkin then
+			if frame.Text then
+				frame.Text.__SetText = frame.Text.SetText
+				hooksecurefunc(frame.Text, "SetText", styleIconsInLine)
+				F.SetFontOutline(frame.Text)
+				frame.Text:SetText(frame.Text:GetText())
+			end
+			frame.__windSkin = true
+		end
+	end
+end
+
+function S:StyleIconsInTooltip(tt)
+	if tt:IsForbidden() or not tt.NumLines or not E.db.general.cropIcon then
+		return
+	end
+
+	for i = 2, tt:NumLines() do
+		styleIconsInLine(_G[tt:GetName() .. "TextLeft" .. i])
+		styleIconsInLine(_G[tt:GetName() .. "TextRight" .. i])
+	end
+end
+
+function S:ReskinTooltip(tt)
+	if not tt or (tt == E.ScanTooltip or tt.IsEmbedded or not tt.NineSlice) or tt:IsForbidden() then
+		return
+	end
+
+	self:CreateShadow(tt.NineSlice)
+
+	if tt.TopOverlay then
+		tt.TopOverlay:StripTextures()
+	end
+
+	if tt.BottomOverlay then
+		tt.BottomOverlay:StripTextures()
+	end
+
+	if not self:IsHooked(tt, "Show") then
+		StyleTooltipWidgetContainer(tt)
+		self:SecureHook(tt, "Show", "StyleIconsInTooltip")
 	end
 end
 
@@ -41,75 +81,48 @@ function S:TooltipFrames()
 		return
 	end
 
-	local styleTT = {
-		_G.AceConfigDialogTooltip,
-		_G.AceGUITooltip,
-		_G.BattlePetTooltip,
-		_G.DataTextTooltip,
-		_G.ElvUIConfigTooltip,
-		_G.ElvUISpellBookTooltip,
-		_G.EmbeddedItemTooltip,
-		_G.FriendsTooltip,
-		_G.GameSmallHeaderTooltip,
-		_G.GameTooltip,
+	-- Tooltip list from ElvUI
+	local tooltips = {
+		_G.ItemRefTooltip,
 		_G.ItemRefShoppingTooltip1,
 		_G.ItemRefShoppingTooltip2,
-		_G.ItemRefTooltip,
-		_G.LibDBIconTooltip,
-		_G.QuestScrollFrame and _G.QuestScrollFrame.CampaignTooltip,
-		_G.QuestScrollFrame and _G.QuestScrollFrame.StoryTooltip,
-		_G.QuickKeybindTooltip,
+		_G.FriendsTooltip,
+		_G.EmbeddedItemTooltip,
 		_G.ReputationParagonTooltip,
-		_G.SettingsTooltip,
+		_G.GameTooltip,
+		_G.WorldMapTooltip,
 		_G.ShoppingTooltip1,
 		_G.ShoppingTooltip2,
-		_G.WarCampaignTooltip,
+		_G.QuickKeybindTooltip,
+		-- ours
+		E.ConfigTooltip,
+		E.SpellBookTooltip,
+		-- libs
+		_G.LibDBIconTooltip,
+		_G.SettingsTooltip,
 	}
 
-	for _, tt in pairs(styleTT) do
+	for _, tt in pairs(tooltips) do
 		if tt and tt ~= E.ScanTooltip and not tt.IsEmbedded and not tt:IsForbidden() then
-			self:CreateShadow(tt)
+			self:ReskinTooltip(tt)
 		end
 	end
 
-	self:CreateShadow(_G.FloatingBattlePetTooltip)
-
-	self:SecureHook(TT, "SetStyle", "TT_SetStyle")
-	self:SecureHook(TT, "GameTooltip_SetDefaultAnchor", "TT_GameTooltip_SetDefaultAnchor")
-	self:SecureHook(_G.QueueStatusFrame, "Update", "CreateShadow")
-	self:SecureHook(_G.GameTooltip, "Show", "StyleTooltipsIcons")
-end
-
-local function styleIconString(text)
-	if not text or not strfind(text, "|T.+|t") then
-		return
-	end
-
-	text = gsub(text, "|T([^:]+):0|t", function(texture)
-		if strfind(texture, "Addons") or texture == "0" then
-			return format("|T%s:0|t", texture)
-		else
-			return format("|T%s:0:0:0:0:64:64:5:59:5:59|t", texture)
+	self:SecureHook(TT, "SetStyle", function(_, tt, _, isEmbedded)
+		if not isEmbedded then
+			self:ReskinTooltip(tt)
 		end
 	end)
 
-	return text
-end
+	hooksecurefunc("GameTooltip_AddWidgetSet", StyleTooltipWidgetContainer)
 
-local function styleIconsInLine(line)
-	if line then
-		local styledText = styleIconString(line:GetText())
-		if styledText then
-			line:SetText(styledText)
+	self:SecureHook(_G.QueueStatusFrame, "Update", "CreateShadow")
+	self:CreateBackdropShadow(_G.GameTooltipStatusBar)
+	self:SecureHook(TT, "GameTooltip_SetDefaultAnchor", function(_, tt)
+		if tt.StatusBar and tt.StatusBar.backdrop then
+			self:CreateBackdropShadow(tt.StatusBar)
 		end
-	end
-end
-
-function S:StyleTooltipsIcons(tt)
-	for i = 2, tt:NumLines() do
-		styleIconsInLine(_G[tt:GetName() .. "TextLeft" .. i])
-		styleIconsInLine(_G[tt:GetName() .. "TextRight" .. i])
-	end
+	end)
 end
 
 S:AddCallback("TooltipFrames")

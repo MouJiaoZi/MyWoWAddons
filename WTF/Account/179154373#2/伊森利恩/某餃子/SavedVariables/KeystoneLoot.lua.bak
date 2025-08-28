@@ -1,7 +1,7 @@
 
 KeystoneLootCharDB = {
 ["selectedRaidItemLevel"] = "myth-1",
-["selectedSlotId"] = 2,
+["selectedSlotId"] = 13,
 ["statHighlightingHasteEnabled"] = false,
 ["favoriteLoot"] = {
 },

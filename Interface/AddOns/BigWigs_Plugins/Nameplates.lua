@@ -148,6 +148,7 @@ local iconDefaults = {
 	iconBorder = true,
 	iconBorderSize = 1,
 	iconBorderColor = {0, 0, 0, 1},
+	iconFrameStrata = "MEDIUM",
 }
 
 local textDefaults = {
@@ -165,7 +166,6 @@ local textDefaults = {
 }
 
 plugin.defaultDB = {
-	migratePosition = false,
 }
 for k, v in next, iconDefaults do
 	plugin.defaultDB[k] = v
@@ -176,15 +176,6 @@ end
 
 local function updateProfile()
 	db = plugin.db.profile
-
-	if not db.migratePosition then -- XXX temp
-		db.migratePosition = true
-		db.iconGrowDirectionTarget = db.iconGrowDirection
-		db.iconGrowDirectionStartTarget = db.iconGrowDirectionStart
-		db.iconSpacingTarget = db.iconSpacing
-		db.iconOffsetXTarget = db.iconOffsetX
-		db.iconOffsetYTarget = db.iconOffsetY
-	end
 
 	for k, v in next, db do
 		local defaultType = type(plugin.defaultDB[k])
@@ -310,6 +301,9 @@ local function updateProfile()
 			break -- If 1 entry is bad, reset the whole table
 		end
 	end
+	if db.iconFrameStrata ~= "MEDIUM" and db.iconFrameStrata ~= "LOW" then
+		db.iconFrameStrata = plugin.defaultDB.iconFrameStrata
+	end
 
 	if not validGrowDirections[db.textGrowDirection] then
 		db.textGrowDirection = plugin.defaultDB.textGrowDirection
@@ -369,7 +363,7 @@ local function getTextFrame()
 		textFrame:SetPoint("CENTER")
 		textFrame:SetFrameStrata("MEDIUM")
 		textFrame:SetFixedFrameStrata(true)
-		textFrame:SetFrameLevel(5600)
+		textFrame:SetFrameLevel(6200)
 		textFrame:SetFixedFrameLevel(true)
 
 		local fontString = textFrame:CreateFontString()
@@ -498,8 +492,7 @@ local function getIconFrame()
 		iconFrame = CreateFrame("Frame", nil, UIParent)
 		iconFrame:SetPoint("CENTER")
 		iconFrame:SetFrameStrata("MEDIUM")
-		iconFrame:SetFixedFrameStrata(true)
-		iconFrame:SetFrameLevel(5500)
+		iconFrame:SetFrameLevel(6000)
 		iconFrame:SetClampedToScreen(true)
 		iconFrame:SetSize(db.iconWidthOthers, db.iconHeightOthers)
 
@@ -1302,23 +1295,66 @@ do
 						args = {
 							iconFrameStrata = {
 								type = "select",
-								values = {MEDIUM="MEDIUM"},
-								name = "Icon Strata (NYI)",
-								get = function() return "MEDIUM" end,
+								values = {MEDIUM=L.medium, LOW=L.low},
+								name = L.drawStrata,
 								order = 1,
-								width = 2,
-								disabled = true,
+								width = 1,
 							},
-							iconFrameLevel = {
-								type = "range",
-								name = "Icon Level (NYI)",
-								get = function() return 5500 end,
+							heading = {
+								type = "description",
+								name = function()
+									if not BigWigsLoader.db.profile.bossModNameplatesDisabled then
+										return L.nameplateOptInHeaderOff
+									else
+										return L.nameplateOptInHeaderOn
+									end
+								end,
 								order = 2,
-								min = 0,
-								max = 10000,
-								step = 1,
-								width = 2,
-								disabled = true,
+								width = "full",
+								fontSize = "medium",
+							},
+							optintoggle = {
+								type = "toggle",
+								name = L.nameplateOptInTitle,
+								order = 3,
+								width = "full",
+								get = function()
+									return BigWigsLoader.db.profile.bossModNameplatesDisabled
+								end,
+								set = function(_, value)
+									local profileName = BigWigsLoader.db:GetCurrentProfile()
+									if type(profileName) == "string" and type(BigWigs3DB.namespaces) == "table" then
+										if value then
+											for moduleName, moduleSettings in next, BigWigs3DB.namespaces do
+												if type(moduleName) == "string" and type(moduleSettings) == "table" and strfind(moduleName, "BigWigs_Bosses", nil, true) and type(BigWigs3DB.namespaces[moduleName].profiles) == "table" and type(BigWigs3DB.namespaces[moduleName].profiles[profileName]) == "table" then
+													for optionKey, optionValue in next, BigWigs3DB.namespaces[moduleName].profiles[profileName] do
+														if type(optionValue) == "number" and optionValue > 10 and bit.band(optionValue, BigWigs.C.NAMEPLATE) == BigWigs.C.NAMEPLATE then
+															BigWigs3DB.namespaces[moduleName].profiles[profileName][optionKey] = optionValue - BigWigs.C.NAMEPLATE
+														end
+													end
+												end
+											end
+											BigWigsLoader.db.profile.bossModNameplatesDisabled = true
+										else
+											for moduleName, moduleSettings in next, BigWigs3DB.namespaces do
+												if type(moduleName) == "string" and type(moduleSettings) == "table" and strfind(moduleName, "BigWigs_Bosses", nil, true) and type(BigWigs3DB.namespaces[moduleName].profiles) == "table" and type(BigWigs3DB.namespaces[moduleName].profiles[profileName]) == "table" then
+													for optionKey, optionValue in next, BigWigs3DB.namespaces[moduleName].profiles[profileName] do
+														if type(optionValue) == "number" and optionValue > 10 and bit.band(optionValue, BigWigs.C.NAMEPLATE) ~= BigWigs.C.NAMEPLATE then
+															BigWigs3DB.namespaces[moduleName].profiles[profileName][optionKey] = optionValue + BigWigs.C.NAMEPLATE
+														end
+													end
+												end
+											end
+											BigWigsLoader.db.profile.bossModNameplatesDisabled = false
+										end
+										C_UI.Reload()
+									end
+								end,
+								confirm = function(_, value)
+									if value then
+										return L.nameplateOptInWarning
+									end
+								end,
 							},
 						},
 					},
@@ -1761,12 +1797,13 @@ end
 local function createNameplateIcon(module, guid, key, length, icon)
 	local iconFrame = getIconFrame()
 	local target = module:UnitGUID("target")
+	iconFrame:SetFrameStrata(db.iconFrameStrata)
 	if guid == target then
 		iconFrame:SetSize(db.iconWidthTarget, db.iconHeightTarget)
-		iconFrame:SetFrameLevel(5555)
+		iconFrame:SetFrameLevel(6100)
 	else
 		iconFrame:SetSize(db.iconWidthOthers, db.iconHeightOthers)
-		iconFrame:SetFrameLevel(5500)
+		iconFrame:SetFrameLevel(6000)
 	end
 	iconFrame:Set("bigwigs:key", key)
 	iconFrame:Set("bigwigs:unitGUID", guid)
@@ -1952,7 +1989,7 @@ do
 			for _, tbl in next, nameplateIcons[guid] do
 				if tbl.nameplateFrame then
 					tbl.nameplateFrame:SetSize(db.iconWidthTarget, db.iconHeightTarget)
-					tbl.nameplateFrame:SetFrameLevel(5555)
+					tbl.nameplateFrame:SetFrameLevel(6100)
 				end
 			end
 			rearrangeNameplateIcons(guid)
@@ -1961,7 +1998,7 @@ do
 			for _, tbl in next, nameplateIcons[prevTarget] do
 				if tbl.nameplateFrame then
 					tbl.nameplateFrame:SetSize(db.iconWidthOthers, db.iconHeightOthers)
-					tbl.nameplateFrame:SetFrameLevel(5500)
+					tbl.nameplateFrame:SetFrameLevel(6000)
 				end
 			end
 			rearrangeNameplateIcons(prevTarget)

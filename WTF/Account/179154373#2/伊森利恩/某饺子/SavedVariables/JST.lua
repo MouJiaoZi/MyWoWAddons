@@ -29,10 +29,10 @@ JST_CDB = {
 [1235808] = {
 ["enable"] = true,
 },
-[355980] = {
+[427342] = {
 ["enable"] = true,
 },
-[427342] = {
+[355980] = {
 ["enable"] = true,
 },
 [464240] = {
@@ -47,7 +47,7 @@ JST_CDB = {
 [355640] = {
 ["enable"] = true,
 },
-[450756] = {
+[357229] = {
 ["enable"] = true,
 },
 [1217383] = {
@@ -80,7 +80,7 @@ JST_CDB = {
 [460973] = {
 ["enable"] = true,
 },
-[357229] = {
+[450756] = {
 ["enable"] = true,
 },
 [1237105] = {
@@ -165,8 +165,8 @@ JST_CDB = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
-[355057] = {
-["interrupt_sl"] = 2,
+[460582] = {
+["interrupt_sl"] = 3,
 ["enable"] = true,
 },
 [431303] = {
@@ -205,7 +205,7 @@ JST_CDB = {
 ["interrupt_sl"] = 5,
 ["enable"] = true,
 },
-[434786] = {
+[433841] = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
@@ -233,12 +233,12 @@ JST_CDB = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
-[465595] = {
-["interrupt_sl"] = 3,
-["enable"] = true,
-},
 [1229474] = {
 ["interrupt_sl"] = 1,
+["enable"] = true,
+},
+[465595] = {
+["interrupt_sl"] = 3,
 ["enable"] = true,
 },
 [357188] = {
@@ -265,7 +265,7 @@ JST_CDB = {
 ["interrupt_sl"] = 1,
 ["enable"] = true,
 },
-[356843] = {
+[357284] = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
@@ -289,7 +289,7 @@ JST_CDB = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
-[357284] = {
+[356843] = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
@@ -321,7 +321,7 @@ JST_CDB = {
 ["interrupt_sl"] = 1,
 ["enable"] = true,
 },
-[433841] = {
+[434786] = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
@@ -333,8 +333,8 @@ JST_CDB = {
 ["interrupt_sl"] = 2,
 ["enable"] = true,
 },
-[460582] = {
-["interrupt_sl"] = 3,
+[355057] = {
+["interrupt_sl"] = 2,
 ["enable"] = true,
 },
 },
@@ -1100,10 +1100,10 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1231716] = {
+[466341] = {
 ["enable"] = true,
 },
-[466341] = {
+[1231716] = {
 ["enable"] = true,
 },
 [466340] = {
@@ -1135,7 +1135,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[355584] = {
+[473114] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1177,29 +1177,28 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1228161] = {
-["enable"] = true,
-},
 [465580] = {
 ["enable"] = true,
 },
-[437093] = {
-["sound_bool"] = true,
+[346006] = {
+["enable"] = true,
+},
+[1214369] = {
 ["enable"] = true,
 },
 [1228163] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[471585] = {
-["sound_bool"] = true,
+[434793] = {
 ["enable"] = true,
 },
 [452806] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1214369] = {
+[437093] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [427001] = {
@@ -1297,8 +1296,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[466866] = {
-["sound_bool"] = true,
+[1223085] = {
 ["enable"] = true,
 },
 [351124] = {
@@ -1308,7 +1306,8 @@ JST_CDB = {
 [442210] = {
 ["enable"] = true,
 },
-[1223085] = {
+[466866] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1234328] = {
@@ -1359,7 +1358,7 @@ JST_CDB = {
 [1236614] = {
 ["enable"] = true,
 },
-[357260] = {
+[468658] = {
 ["enable"] = true,
 },
 [454989] = {
@@ -1369,11 +1368,11 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[455373] = {
+[1228213] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1228213] = {
+[455373] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1385,8 +1384,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[460867] = {
-["sound_bool"] = true,
+[1228216] = {
 ["enable"] = true,
 },
 [1215953] = {
@@ -1421,11 +1419,11 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[447456] = {
-["sound_bool"] = true,
+[439791] = {
 ["enable"] = true,
 },
-[439791] = {
+[447456] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1225673] = {
@@ -1455,7 +1453,7 @@ JST_CDB = {
 [438677] = {
 ["enable"] = true,
 },
-[447076] = {
+[428169] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1469,7 +1467,7 @@ JST_CDB = {
 [1232327] = {
 ["enable"] = true,
 },
-[428169] = {
+[1225174] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1509,8 +1507,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[353312] = {
-["sound_bool"] = true,
+[1230302] = {
 ["enable"] = true,
 },
 [423062] = {
@@ -1527,13 +1524,15 @@ JST_CDB = {
 [1218546] = {
 ["enable"] = true,
 },
-[1227745] = {
+[453212] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [471736] = {
 ["enable"] = true,
 },
-[1230302] = {
+[353312] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [346286] = {
@@ -1553,7 +1552,7 @@ JST_CDB = {
 [443888] = {
 ["enable"] = true,
 },
-[442994] = {
+[326997] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1621,7 +1620,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[356001] = {
+[448492] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1633,7 +1632,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1236973] = {
+[328791] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1649,11 +1648,11 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1242088] = {
+[434697] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[434697] = {
+[1242088] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1669,11 +1668,11 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[328791] = {
+[1236973] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[448492] = {
+[356001] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1687,11 +1686,11 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[443003] = {
-["sound_bool"] = true,
+[356133] = {
 ["enable"] = true,
 },
-[356133] = {
+[443003] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [465232] = {
@@ -1719,12 +1718,11 @@ JST_CDB = {
 [1224731] = {
 ["enable"] = true,
 },
-[326997] = {
+[442994] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[453212] = {
-["sound_bool"] = true,
+[1227745] = {
 ["enable"] = true,
 },
 [1232399] = {
@@ -1740,7 +1738,7 @@ JST_CDB = {
 [438245] = {
 ["enable"] = true,
 },
-[1225174] = {
+[447076] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1783,7 +1781,8 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1228216] = {
+[460867] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [438473] = {
@@ -1793,7 +1792,7 @@ JST_CDB = {
 [448248] = {
 ["enable"] = true,
 },
-[468658] = {
+[357260] = {
 ["enable"] = true,
 },
 [462771] = {
@@ -1866,10 +1865,11 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[434793] = {
+[471585] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
-[346006] = {
+[1228161] = {
 ["enable"] = true,
 },
 [465432] = {
@@ -1895,7 +1895,7 @@ JST_CDB = {
 [466545] = {
 ["enable"] = true,
 },
-[473114] = {
+[355584] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1919,7 +1919,7 @@ JST_CDB = {
 },
 },
 ["aura"] = {
-[1245292] = {
+[1226413] = {
 ["enable"] = true,
 },
 [1233999] = {
@@ -1931,7 +1931,7 @@ JST_CDB = {
 [1230529] = {
 ["enable"] = true,
 },
-[1224795] = {
+[1234529] = {
 ["enable"] = true,
 },
 [1237607] = {
@@ -1944,14 +1944,13 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1221490] = {
+[1227163] = {
 ["enable"] = true,
 },
-[346962] = {
-["sound_bool"] = true,
+[1228506] = {
 ["enable"] = true,
 },
-[1226413] = {
+[1245292] = {
 ["enable"] = true,
 },
 [1219439] = {
@@ -1963,16 +1962,16 @@ JST_CDB = {
 [352345] = {
 ["enable"] = true,
 },
-[1241917] = {
+[1230168] = {
 ["enable"] = true,
 },
-[1219731] = {
+[472837] = {
 ["enable"] = true,
 },
-[1227163] = {
+[1221490] = {
 ["enable"] = true,
 },
-[1227142] = {
+[346962] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -1991,7 +1990,7 @@ JST_CDB = {
 [349627] = {
 ["enable"] = true,
 },
-[472837] = {
+[1219731] = {
 ["enable"] = true,
 },
 [1246143] = {
@@ -2000,23 +1999,24 @@ JST_CDB = {
 [1224816] = {
 ["enable"] = true,
 },
-[323650] = {
+[1227142] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1228506] = {
+[323650] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1226493] = {
 ["enable"] = true,
 },
-[1230168] = {
+[1241917] = {
 ["enable"] = true,
 },
 [348451] = {
 ["enable"] = true,
 },
-[1234529] = {
+[1224795] = {
 ["enable"] = true,
 },
 },
@@ -2104,16 +2104,16 @@ JST_CDB = {
 [1221190] = {
 ["enable"] = true,
 },
-[1222815] = {
+[427469] = {
 ["enable"] = true,
 },
 [466545] = {
 ["enable"] = true,
 },
-[427469] = {
+[1222815] = {
 ["enable"] = true,
 },
-[356843] = {
+[452099] = {
 ["enable"] = true,
 },
 [319941] = {
@@ -2125,10 +2125,10 @@ JST_CDB = {
 [1221483] = {
 ["enable"] = true,
 },
-[353836] = {
+[427357] = {
 ["enable"] = true,
 },
-[427357] = {
+[353836] = {
 ["enable"] = true,
 },
 [423536] = {
@@ -2155,7 +2155,7 @@ JST_CDB = {
 [464655] = {
 ["enable"] = true,
 },
-[452099] = {
+[356843] = {
 ["enable"] = true,
 },
 [354297] = {
@@ -2294,10 +2294,10 @@ JST_CDB = {
 [436322] = {
 ["enable"] = true,
 },
-[1248211] = {
+[460135] = {
 ["enable"] = true,
 },
-[460135] = {
+[1248211] = {
 ["enable"] = true,
 },
 [1235766] = {
@@ -2321,7 +2321,7 @@ JST_CDB = {
 [1233105] = {
 ["enable"] = true,
 },
-[322977] = {
+[1243901] = {
 ["enable"] = true,
 },
 [1213803] = {
@@ -2369,13 +2369,13 @@ JST_CDB = {
 [1227152] = {
 ["enable"] = true,
 },
-[347149] = {
-["enable"] = true,
-},
-[468815] = {
-["enable"] = true,
-},
 [431350] = {
+["enable"] = true,
+},
+[335338] = {
+["enable"] = true,
+},
+[347149] = {
 ["enable"] = true,
 },
 [461507] = {
@@ -2408,13 +2408,13 @@ JST_CDB = {
 [427378] = {
 ["enable"] = true,
 },
-[1227549] = {
+[424426] = {
 ["enable"] = true,
 },
 [438618] = {
 ["enable"] = true,
 },
-[424426] = {
+[1227549] = {
 ["enable"] = true,
 },
 [434668] = {
@@ -2444,7 +2444,7 @@ JST_CDB = {
 [469799] = {
 ["enable"] = true,
 },
-[335338] = {
+[468815] = {
 ["enable"] = true,
 },
 [1227052] = {
@@ -2471,7 +2471,7 @@ JST_CDB = {
 [1235060] = {
 ["enable"] = true,
 },
-[1243901] = {
+[322977] = {
 ["enable"] = true,
 },
 [1226444] = {
@@ -2501,12 +2501,12 @@ JST_CDB = {
 ["tl_filter_all"] = true,
 ["tl_use_self"] = true,
 ["tl_use_raid"] = true,
-["personal_spell_size"] = 40,
-["cs"] = true,
 ["sound_channel"] = "Master",
+["cs"] = true,
+["personal_spell_size"] = 40,
 ["sound_file"] = "Interface\\AddOns\\JST_SoundPackCN\\sounds\\",
 ["tts_speaker"] = 0,
-["disable_sound"] = false,
+["sound_pack"] = "JST_SoundPackCN",
 ["tl_text_show_dur"] = false,
 ["moving_name"] = true,
 ["disable_rf"] = false,
@@ -2521,13 +2521,13 @@ JST_CDB = {
 ["tl_filter_class"] = true,
 ["disable_plate"] = false,
 ["group_spell_msg"] = false,
-["tl"] = true,
 ["personal_spell_low_hp_value"] = 30,
+["tl"] = true,
 ["disable_all"] = false,
 ["raid_pa_height"] = 20,
 ["tl_advance"] = 60,
 ["raid_pa_icon_num"] = 2,
-["sound_pack"] = "JST_SoundPackCN",
+["disable_sound"] = false,
 ["tl_sound_volume"] = 100,
 ["tl_bar"] = true,
 ["name_format"] = "nickname",
@@ -2717,10 +2717,10 @@ JST_CDB = {
 ["alert_type_dd"] = "both",
 ["preview_phase_dd"] = 1,
 ["preview_index_dd"] = 1,
-["scale_sl"] = 100,
+["enable"] = true,
 ["preview_diff_dd"] = 15,
 ["direction_dd"] = "vertical",
-["enable"] = true,
+["scale_sl"] = 100,
 },
 [326794] = {
 ["sound_bool"] = true,
@@ -3603,15 +3603,10 @@ JST_CDB = {
 ["preview_index_dd"] = 2,
 ["rl_bool"] = false,
 },
-[443903] = {
-["option_list_btn"] = {
-},
-["say_bool"] = true,
+[434705] = {
+["enable"] = true,
 ["width_sl"] = 180,
 ["height_sl"] = 20,
-["enable"] = true,
-["tag_dd"] = "number",
-["raid_glow_bool"] = true,
 },
 [460973] = {
 ["enable"] = false,
@@ -3674,10 +3669,15 @@ JST_CDB = {
 ["width_sl"] = 300,
 ["height_sl"] = 25,
 },
-[434705] = {
-["enable"] = true,
+[443903] = {
+["option_list_btn"] = {
+},
+["say_bool"] = true,
 ["width_sl"] = 180,
 ["height_sl"] = 20,
+["enable"] = true,
+["tag_dd"] = "number",
+["raid_glow_bool"] = true,
 },
 [349627] = {
 ["enable"] = true,
@@ -4247,10 +4247,10 @@ JST_CDB = {
 [466545] = {
 ["enable"] = true,
 },
-[347716] = {
+[319611] = {
 ["enable"] = true,
 },
-[319611] = {
+[347716] = {
 ["enable"] = true,
 },
 [442660] = {
@@ -4282,7 +4282,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[460164] = {
+[469362] = {
 ["enable"] = true,
 },
 [351960] = {
@@ -4338,8 +4338,7 @@ JST_CDB = {
 [443305] = {
 ["enable"] = true,
 },
-[459785] = {
-["sound_bool"] = true,
+[465917] = {
 ["enable"] = true,
 },
 [1226444] = {
@@ -4395,7 +4394,7 @@ JST_CDB = {
 [1217261] = {
 ["enable"] = true,
 },
-[1213690] = {
+[461068] = {
 ["enable"] = true,
 },
 [1220679] = {
@@ -4410,7 +4409,7 @@ JST_CDB = {
 [1247415] = {
 ["enable"] = true,
 },
-[461068] = {
+[1213690] = {
 ["enable"] = true,
 },
 [434113] = {
@@ -4421,13 +4420,13 @@ JST_CDB = {
 ["msg_bool"] = true,
 ["enable"] = true,
 },
-[460430] = {
-["enable"] = true,
-},
-[469373] = {
+[464518] = {
 ["enable"] = true,
 },
 [435136] = {
+["enable"] = true,
+},
+[469373] = {
 ["enable"] = true,
 },
 [1237696] = {
@@ -4439,10 +4438,12 @@ JST_CDB = {
 [467202] = {
 ["enable"] = true,
 },
-[469375] = {
+[435138] = {
 ["enable"] = true,
+["sound_bool"] = true,
+["msg_bool"] = true,
 },
-[472057] = {
+[425556] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -4452,21 +4453,19 @@ JST_CDB = {
 [1245384] = {
 ["enable"] = true,
 },
-[435138] = {
+[469375] = {
 ["enable"] = true,
-["sound_bool"] = true,
-["msg_bool"] = true,
 },
 [451107] = {
 ["enable"] = true,
 ["sound_bool"] = true,
 ["msg_bool"] = true,
 },
-[349627] = {
-["msg_bool"] = true,
+[461536] = {
 ["enable"] = true,
 },
-[461536] = {
+[349627] = {
+["msg_bool"] = true,
 ["enable"] = true,
 },
 [1220671] = {
@@ -4482,16 +4481,16 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[447532] = {
+[438845] = {
 ["enable"] = true,
 },
-[438845] = {
+[447532] = {
 ["enable"] = true,
 },
 [1218319] = {
 ["enable"] = true,
 },
-[469380] = {
+[462737] = {
 ["enable"] = true,
 },
 [1246930] = {
@@ -4500,13 +4499,13 @@ JST_CDB = {
 [472061] = {
 ["enable"] = true,
 },
-[431309] = {
+[322977] = {
 ["enable"] = true,
 },
 [466185] = {
 ["enable"] = true,
 },
-[1214755] = {
+[1219354] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -4521,13 +4520,15 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[462737] = {
+[1231097] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [349934] = {
 ["enable"] = true,
 },
-[1220375] = {
+[433740] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [424414] = {
@@ -4539,7 +4540,7 @@ JST_CDB = {
 [469326] = {
 ["enable"] = true,
 },
-[1238773] = {
+[356324] = {
 ["enable"] = true,
 },
 [466188] = {
@@ -4548,15 +4549,13 @@ JST_CDB = {
 [441788] = {
 ["enable"] = true,
 },
-[433740] = {
-["sound_bool"] = true,
+[1220375] = {
 ["enable"] = true,
 },
-[1219354] = {
-["sound_bool"] = true,
+[468616] = {
 ["enable"] = true,
 },
-[356324] = {
+[1238773] = {
 ["enable"] = true,
 },
 [1223725] = {
@@ -4574,8 +4573,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1238782] = {
-["sound_bool"] = true,
+[1218342] = {
 ["enable"] = true,
 },
 [471557] = {
@@ -4584,19 +4582,20 @@ JST_CDB = {
 [445623] = {
 ["enable"] = true,
 },
-[1227549] = {
+[451119] = {
 ["enable"] = true,
 },
-[1218342] = {
+[1238782] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1218343] = {
 ["enable"] = true,
 },
-[454311] = {
+[1218344] = {
 ["enable"] = true,
 },
-[1219384] = {
+[1227049] = {
 ["enable"] = true,
 },
 [1220390] = {
@@ -4614,19 +4613,19 @@ JST_CDB = {
 [459678] = {
 ["enable"] = true,
 },
-[451119] = {
+[1227549] = {
 ["enable"] = true,
 },
-[1242883] = {
+[423015] = {
 ["enable"] = true,
 },
 [472837] = {
 ["enable"] = true,
 },
-[1227049] = {
+[1219384] = {
 ["enable"] = true,
 },
-[423015] = {
+[1242883] = {
 ["enable"] = true,
 },
 [455847] = {
@@ -4635,11 +4634,10 @@ JST_CDB = {
 [449332] = {
 ["enable"] = true,
 },
-[438218] = {
+[466834] = {
 ["enable"] = true,
 },
-[460576] = {
-["sound_bool"] = true,
+[1227052] = {
 ["enable"] = true,
 },
 [435410] = {
@@ -4655,17 +4653,17 @@ JST_CDB = {
 [446012] = {
 ["enable"] = true,
 },
-[455849] = {
+[1227051] = {
 ["enable"] = true,
 },
-[1227052] = {
+[460576] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [469391] = {
 ["enable"] = true,
 },
-[434830] = {
-["sound_bool"] = true,
+[346427] = {
 ["enable"] = true,
 },
 [473224] = {
@@ -4689,7 +4687,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[470089] = {
+[434830] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -4730,10 +4728,10 @@ JST_CDB = {
 [438974] = {
 ["enable"] = true,
 },
-[345990] = {
+[472718] = {
 ["enable"] = true,
 },
-[472718] = {
+[468119] = {
 ["enable"] = true,
 },
 [441775] = {
@@ -4749,11 +4747,11 @@ JST_CDB = {
 [1235766] = {
 ["enable"] = true,
 },
-[424430] = {
-["sound_bool"] = true,
+[446403] = {
 ["enable"] = true,
 },
-[446403] = {
+[424430] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [464643] = {
@@ -4772,7 +4770,7 @@ JST_CDB = {
 [470038] = {
 ["enable"] = true,
 },
-[1237307] = {
+[423665] = {
 ["enable"] = true,
 },
 [472338] = {
@@ -4807,14 +4805,14 @@ JST_CDB = {
 [435165] = {
 ["enable"] = true,
 },
-[431333] = {
-["enable"] = true,
-},
 [323001] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[469404] = {
+[431333] = {
+["enable"] = true,
+},
+[466338] = {
 ["enable"] = true,
 },
 [443342] = {
@@ -4823,13 +4821,13 @@ JST_CDB = {
 [474130] = {
 ["enable"] = true,
 },
-[1213817] = {
+[461994] = {
 ["enable"] = true,
 },
 [1221483] = {
 ["enable"] = true,
 },
-[466338] = {
+[469404] = {
 ["enable"] = true,
 },
 [438200] = {
@@ -4841,25 +4839,24 @@ JST_CDB = {
 [455850] = {
 ["enable"] = true,
 },
-[474388] = {
-["sound_bool"] = true,
+[446794] = {
 ["enable"] = true,
 },
-[438618] = {
+[474388] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [434441] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[446794] = {
+[438618] = {
 ["enable"] = true,
 },
-[467108] = {
+[461487] = {
 ["enable"] = true,
 },
-[355581] = {
-["sound_bool"] = true,
+[460847] = {
 ["enable"] = true,
 },
 [1240912] = {
@@ -4875,7 +4872,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[461487] = {
+[467108] = {
 ["enable"] = true,
 },
 [427378] = {
@@ -4905,10 +4902,10 @@ JST_CDB = {
 [1241946] = {
 ["enable"] = true,
 },
-[1231224] = {
+[469795] = {
 ["enable"] = true,
 },
-[427897] = {
+[1227152] = {
 ["enable"] = true,
 },
 [1223042] = {
@@ -4924,20 +4921,20 @@ JST_CDB = {
 [1214878] = {
 ["enable"] = true,
 },
-[439776] = {
+[462771] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
 [472222] = {
 ["enable"] = true,
 },
-[469795] = {
+[1231224] = {
 ["enable"] = true,
 },
-[447439] = {
+[1216406] = {
 ["enable"] = true,
 },
-[1227152] = {
+[469799] = {
 ["enable"] = true,
 },
 [1232760] = {
@@ -4952,20 +4949,20 @@ JST_CDB = {
 [461876] = {
 ["enable"] = true,
 },
-[1227154] = {
+[1216934] = {
 ["enable"] = true,
 },
 [1214369] = {
 ["enable"] = true,
 },
-[462771] = {
+[439776] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[473119] = {
+[466476] = {
 ["enable"] = true,
 },
-[460472] = {
+[472225] = {
 ["enable"] = true,
 },
 [1217439] = {
@@ -4974,19 +4971,19 @@ JST_CDB = {
 [439037] = {
 ["enable"] = true,
 },
-[1227163] = {
+[348567] = {
 ["enable"] = true,
 },
-[353421] = {
+[439780] = {
 ["enable"] = true,
 },
-[469799] = {
+[1217954] = {
 ["enable"] = true,
 },
-[460218] = {
+[434668] = {
 ["enable"] = true,
 },
-[1216934] = {
+[1232775] = {
 ["enable"] = true,
 },
 [1217446] = {
@@ -4996,11 +4993,10 @@ JST_CDB = {
 [369133] = {
 ["enable"] = true,
 },
-[348567] = {
+[1227163] = {
 ["enable"] = true,
 },
-[431350] = {
-["sound_bool"] = true,
+[350101] = {
 ["enable"] = true,
 },
 [443612] = {
@@ -5009,7 +5005,7 @@ JST_CDB = {
 [1218992] = {
 ["enable"] = true,
 },
-[439780] = {
+[353421] = {
 ["enable"] = true,
 },
 [463925] = {
@@ -5026,10 +5022,11 @@ JST_CDB = {
 [473507] = {
 ["enable"] = true,
 },
-[450129] = {
+[1228188] = {
 ["enable"] = true,
 },
-[350101] = {
+[431350] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [325701] = {
@@ -5067,12 +5064,13 @@ JST_CDB = {
 [444608] = {
 ["enable"] = true,
 },
-[439786] = {
-["sound_bool"] = true,
+[467380] = {
 ["enable"] = true,
 },
-[468147] = {
+[445152] = {
 ["enable"] = true,
+["sound_bool"] = true,
+["msg_bool"] = true,
 },
 [439785] = {
 ["enable"] = true,
@@ -5087,18 +5085,18 @@ JST_CDB = {
 [1228206] = {
 ["enable"] = true,
 },
-[467380] = {
-["enable"] = true,
-},
-[464442] = {
-["enable"] = true,
-},
-[445152] = {
-["enable"] = true,
+[439786] = {
 ["sound_bool"] = true,
-["msg_bool"] = true,
+["enable"] = true,
 },
-[471341] = {
+[441958] = {
+["sound_bool"] = true,
+["enable"] = true,
+},
+[468147] = {
+["enable"] = true,
+},
+[454989] = {
 ["enable"] = true,
 },
 [439787] = {
@@ -5123,7 +5121,7 @@ JST_CDB = {
 [1219535] = {
 ["enable"] = true,
 },
-[344874] = {
+[460360] = {
 ["enable"] = true,
 },
 [1228219] = {
@@ -5144,11 +5142,10 @@ JST_CDB = {
 [350885] = {
 ["enable"] = true,
 },
-[460360] = {
+[344874] = {
 ["enable"] = true,
 },
-[466235] = {
-["sound_bool"] = true,
+[472878] = {
 ["enable"] = true,
 },
 [447967] = {
@@ -5170,28 +5167,28 @@ JST_CDB = {
 [348451] = {
 ["enable"] = true,
 },
-[1219039] = {
+[459978] = {
 ["enable"] = true,
 },
 [466748] = {
 ["enable"] = true,
 },
-[463428] = {
+[474159] = {
 ["enable"] = true,
 },
 [471603] = {
 ["enable"] = true,
 },
-[459978] = {
+[442604] = {
 ["enable"] = true,
 },
-[440177] = {
+[464705] = {
 ["enable"] = true,
 },
 [345770] = {
 ["enable"] = true,
 },
-[474159] = {
+[463428] = {
 ["enable"] = true,
 },
 [437343] = {
@@ -5210,7 +5207,7 @@ JST_CDB = {
 [431494] = {
 ["enable"] = true,
 },
-[466751] = {
+[1224669] = {
 ["enable"] = true,
 },
 [465346] = {
@@ -5239,13 +5236,13 @@ JST_CDB = {
 [1226721] = {
 ["enable"] = true,
 },
-[1224669] = {
+[466751] = {
 ["enable"] = true,
 },
-[464705] = {
+[440177] = {
 ["enable"] = true,
 },
-[442604] = {
+[1219039] = {
 ["enable"] = true,
 },
 [458067] = {
@@ -5258,7 +5255,8 @@ JST_CDB = {
 [472631] = {
 ["enable"] = true,
 },
-[472878] = {
+[466235] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1216509] = {
@@ -5273,11 +5271,10 @@ JST_CDB = {
 [438012] = {
 ["enable"] = true,
 },
-[454989] = {
+[471341] = {
 ["enable"] = true,
 },
-[441958] = {
-["sound_bool"] = true,
+[464442] = {
 ["enable"] = true,
 },
 [347949] = {
@@ -5296,31 +5293,31 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1228188] = {
+[450129] = {
 ["enable"] = true,
 },
 [1242071] = {
 ["enable"] = true,
 },
-[1232775] = {
+[1227154] = {
 ["enable"] = true,
 },
-[434668] = {
+[460218] = {
 ["enable"] = true,
 },
 [453345] = {
 ["enable"] = true,
 },
-[1217954] = {
+[427897] = {
 ["enable"] = true,
 },
 [1243609] = {
 ["enable"] = true,
 },
-[472225] = {
+[460472] = {
 ["enable"] = true,
 },
-[1228168] = {
+[473119] = {
 ["enable"] = true,
 },
 [1248211] = {
@@ -5329,10 +5326,10 @@ JST_CDB = {
 [448492] = {
 ["enable"] = true,
 },
-[1216406] = {
+[447439] = {
 ["enable"] = true,
 },
-[466476] = {
+[1228168] = {
 ["enable"] = true,
 },
 [438656] = {
@@ -5342,7 +5339,8 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[460847] = {
+[355581] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1242086] = {
@@ -5361,7 +5359,7 @@ JST_CDB = {
 [357281] = {
 ["enable"] = true,
 },
-[461994] = {
+[1213817] = {
 ["enable"] = true,
 },
 [452245] = {
@@ -5392,7 +5390,7 @@ JST_CDB = {
 [346297] = {
 ["enable"] = true,
 },
-[423665] = {
+[1237307] = {
 ["enable"] = true,
 },
 [448660] = {
@@ -5404,7 +5402,7 @@ JST_CDB = {
 [357029] = {
 ["enable"] = true,
 },
-[468119] = {
+[345990] = {
 ["enable"] = true,
 },
 [443903] = {
@@ -5417,7 +5415,8 @@ JST_CDB = {
 [1243641] = {
 ["enable"] = true,
 },
-[346427] = {
+[470089] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1220648] = {
@@ -5429,19 +5428,19 @@ JST_CDB = {
 [466385] = {
 ["enable"] = true,
 },
-[1227051] = {
+[455849] = {
 ["enable"] = true,
 },
 [1214009] = {
 ["enable"] = true,
 },
-[466834] = {
+[438218] = {
 ["enable"] = true,
 },
 [441865] = {
 ["enable"] = true,
 },
-[1218344] = {
+[454311] = {
 ["enable"] = true,
 },
 [350134] = {
@@ -5458,7 +5457,8 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[351086] = {
+[1214755] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [468815] = {
@@ -5468,7 +5468,7 @@ JST_CDB = {
 [458212] = {
 ["enable"] = true,
 },
-[468616] = {
+[351086] = {
 ["enable"] = true,
 },
 [448248] = {
@@ -5478,14 +5478,13 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1231097] = {
-["sound_bool"] = true,
+[469380] = {
 ["enable"] = true,
 },
 [323437] = {
 ["enable"] = true,
 },
-[322977] = {
+[431309] = {
 ["enable"] = true,
 },
 [1218625] = {
@@ -5503,7 +5502,7 @@ JST_CDB = {
 [1221826] = {
 ["enable"] = true,
 },
-[425556] = {
+[472057] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
@@ -5516,7 +5515,7 @@ JST_CDB = {
 [441362] = {
 ["enable"] = true,
 },
-[464518] = {
+[460430] = {
 ["enable"] = true,
 },
 [1240097] = {
@@ -5539,7 +5538,8 @@ JST_CDB = {
 [469715] = {
 ["enable"] = true,
 },
-[465917] = {
+[459785] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [326891] = {
@@ -5561,7 +5561,7 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[469362] = {
+[460164] = {
 ["enable"] = true,
 },
 [443656] = {
@@ -5601,15 +5601,15 @@ JST_CDB = {
 ["g"] = 0.91,
 ["b"] = 1,
 },
-["RFIcon_size"] = 25,
+["RFValue_size"] = 12,
 ["RFValue_anchor"] = "BOTTOM",
 ["RFIndex_x_offset"] = 0,
 ["RFValue_y_offset"] = 0,
-["RFValue_size"] = 12,
+["RFIcon_size"] = 25,
 ["RFValue_x_offset"] = 0,
 ["RFIndex_y_offset"] = 0,
 ["RFIndex_size"] = 40,
-["RFIndex_anchor"] = "CENTER",
+["y_offset"] = 4,
 ["x_offset"] = 4,
 ["RFValue_color"] = {
 ["r"] = 0.94,
@@ -5619,7 +5619,7 @@ JST_CDB = {
 ["RFIcon_y_offset"] = 0,
 ["glow_type"] = "proc",
 ["RFIcon_x_offset"] = 0,
-["y_offset"] = 4,
+["RFIndex_anchor"] = "CENTER",
 },
 ["TextAlert"] = {
 ["spell"] = {
@@ -5746,13 +5746,14 @@ JST_CDB = {
 [1217327] = {
 ["enable"] = true,
 },
-[1247424] = {
+[1220394] = {
 ["enable"] = true,
 },
 [1227782] = {
 ["enable"] = true,
 },
-[349987] = {
+[469327] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1227529] = {
@@ -5761,26 +5762,25 @@ JST_CDB = {
 [435793] = {
 ["enable"] = true,
 },
-[439811] = {
+[467606] = {
 ["enable"] = true,
 },
-[1239262] = {
+[438471] = {
 ["enable"] = true,
 },
 [352345] = {
 ["enable"] = true,
 },
-[1220394] = {
+[1247424] = {
 ["enable"] = true,
 },
 [427001] = {
 ["enable"] = true,
 },
-[469327] = {
-["sound_bool"] = true,
+[349987] = {
 ["enable"] = true,
 },
-[467606] = {
+[1230087] = {
 ["enable"] = true,
 },
 [1218103] = {
@@ -5792,7 +5792,7 @@ JST_CDB = {
 [438473] = {
 ["enable"] = true,
 },
-[461487] = {
+[349797] = {
 ["enable"] = true,
 },
 [351646] = {
@@ -5801,8 +5801,7 @@ JST_CDB = {
 [466460] = {
 ["enable"] = true,
 },
-[1217357] = {
-["sound_bool"] = true,
+[445936] = {
 ["enable"] = true,
 },
 [1238765] = {
@@ -5817,8 +5816,7 @@ JST_CDB = {
 [435138] = {
 ["enable"] = true,
 },
-[460472] = {
-["sound_bool"] = true,
+[346742] = {
 ["enable"] = true,
 },
 [442428] = {
@@ -5830,20 +5828,20 @@ JST_CDB = {
 [438476] = {
 ["enable"] = true,
 },
-[1241833] = {
+[1242088] = {
 ["enable"] = true,
 },
 [1227809] = {
 ["enable"] = true,
 },
-[1217355] = {
-["sound_bool"] = true,
+[1228065] = {
 ["enable"] = true,
 },
 [1248211] = {
 ["enable"] = true,
 },
-[445936] = {
+[1217357] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [453140] = {
@@ -5856,7 +5854,8 @@ JST_CDB = {
 [1225010] = {
 ["enable"] = true,
 },
-[346742] = {
+[460472] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [460281] = {
@@ -5868,7 +5867,7 @@ JST_CDB = {
 [439536] = {
 ["enable"] = true,
 },
-[455373] = {
+[472458] = {
 ["enable"] = true,
 },
 [1225016] = {
@@ -5928,11 +5927,10 @@ JST_CDB = {
 [1224776] = {
 ["enable"] = true,
 },
-[452127] = {
-["sound_bool"] = true,
+[1226311] = {
 ["enable"] = true,
 },
-[1226311] = {
+[437592] = {
 ["enable"] = true,
 },
 [1236512] = {
@@ -5948,20 +5946,20 @@ JST_CDB = {
 [1226315] = {
 ["enable"] = true,
 },
-[438677] = {
-["sound_bool"] = true,
-["enable"] = true,
-},
-[1227848] = {
+[453212] = {
 ["enable"] = true,
 },
 [353635] = {
 ["enable"] = true,
 },
+[1227848] = {
+["enable"] = true,
+},
 [434089] = {
 ["enable"] = true,
 },
-[469981] = {
+[1240097] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [434407] = {
@@ -5976,14 +5974,13 @@ JST_CDB = {
 [438679] = {
 ["enable"] = true,
 },
-[1219700] = {
+[1228115] = {
 ["enable"] = true,
 },
-[1240102] = {
+[346116] = {
 ["enable"] = true,
 },
-[1240097] = {
-["sound_bool"] = true,
+[469981] = {
 ["enable"] = true,
 },
 [439576] = {
@@ -5993,32 +5990,31 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[1228115] = {
+[1219700] = {
 ["enable"] = true,
 },
 [423062] = {
 ["enable"] = true,
 },
-[346116] = {
+[1240102] = {
 ["enable"] = true,
 },
-[1232973] = {
+[348350] = {
 ["enable"] = true,
 },
 [1217664] = {
 ["enable"] = true,
 },
-[1227355] = {
+[1219450] = {
 ["enable"] = true,
 },
 [328206] = {
 ["enable"] = true,
 },
-[439511] = {
+[443336] = {
 ["enable"] = true,
 },
-[442526] = {
-["sound_bool"] = true,
+[1217232] = {
 ["enable"] = true,
 },
 [464584] = {
@@ -6033,7 +6029,7 @@ JST_CDB = {
 [1219457] = {
 ["enable"] = true,
 },
-[348350] = {
+[461060] = {
 ["enable"] = true,
 },
 [460359] = {
@@ -6046,16 +6042,17 @@ JST_CDB = {
 [467117] = {
 ["enable"] = true,
 },
-[1226347] = {
+[1227367] = {
 ["enable"] = true,
 },
-[1237319] = {
+[1218704] = {
 ["enable"] = true,
 },
-[466751] = {
+[442526] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
-[473748] = {
+[1243690] = {
 ["enable"] = true,
 },
 [467182] = {
@@ -6067,7 +6064,7 @@ JST_CDB = {
 [1234263] = {
 ["enable"] = true,
 },
-[1218704] = {
+[1237319] = {
 ["enable"] = true,
 },
 [469478] = {
@@ -6112,16 +6109,16 @@ JST_CDB = {
 [1219482] = {
 ["enable"] = true,
 },
-[447169] = {
-["enable"] = true,
-},
 [1234529] = {
 ["enable"] = true,
 },
-[439838] = {
+[447169] = {
 ["enable"] = true,
 },
-[1219263] = {
+[319733] = {
+["enable"] = true,
+},
+[1236348] = {
 ["enable"] = true,
 },
 [346766] = {
@@ -6130,7 +6127,7 @@ JST_CDB = {
 [438245] = {
 ["enable"] = true,
 },
-[1236348] = {
+[1219263] = {
 ["enable"] = true,
 },
 [434803] = {
@@ -6142,7 +6139,7 @@ JST_CDB = {
 [1242952] = {
 ["enable"] = true,
 },
-[1228163] = {
+[467380] = {
 ["enable"] = true,
 },
 [346006] = {
@@ -6151,18 +6148,18 @@ JST_CDB = {
 [469293] = {
 ["enable"] = true,
 },
-[347149] = {
+[472354] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [441626] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[349954] = {
+[347149] = {
 ["enable"] = true,
 },
-[472354] = {
-["sound_bool"] = true,
+[349954] = {
 ["enable"] = true,
 },
 [1233539] = {
@@ -6190,7 +6187,7 @@ JST_CDB = {
 [328791] = {
 ["enable"] = true,
 },
-[1226648] = {
+[432130] = {
 ["enable"] = true,
 },
 [355439] = {
@@ -6199,7 +6196,7 @@ JST_CDB = {
 [1226395] = {
 ["enable"] = true,
 },
-[432130] = {
+[1226648] = {
 ["enable"] = true,
 },
 [459671] = {
@@ -6227,10 +6224,10 @@ JST_CDB = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[467380] = {
+[1228163] = {
 ["enable"] = true,
 },
-[319733] = {
+[439838] = {
 ["enable"] = true,
 },
 [1231720] = {
@@ -6249,10 +6246,10 @@ JST_CDB = {
 [1217231] = {
 ["enable"] = true,
 },
-[1217232] = {
+[466751] = {
 ["enable"] = true,
 },
-[1243690] = {
+[473748] = {
 ["enable"] = true,
 },
 [441634] = {
@@ -6265,7 +6262,7 @@ JST_CDB = {
 [1219531] = {
 ["enable"] = true,
 },
-[461060] = {
+[1232973] = {
 ["enable"] = true,
 },
 [1220553] = {
@@ -6274,13 +6271,13 @@ JST_CDB = {
 [350919] = {
 ["enable"] = true,
 },
-[443336] = {
+[439511] = {
 ["enable"] = true,
 },
-[1227367] = {
+[1226347] = {
 ["enable"] = true,
 },
-[1219450] = {
+[1227355] = {
 ["enable"] = true,
 },
 [437620] = {
@@ -6289,13 +6286,15 @@ JST_CDB = {
 [439791] = {
 ["enable"] = true,
 },
-[453212] = {
+[438677] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1236973] = {
 ["enable"] = true,
 },
-[437592] = {
+[452127] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1228213] = {
@@ -6329,10 +6328,11 @@ JST_CDB = {
 [350796] = {
 ["enable"] = true,
 },
-[472458] = {
+[455373] = {
 ["enable"] = true,
 },
-[1228065] = {
+[1217355] = {
+["sound_bool"] = true,
 ["enable"] = true,
 },
 [1236130] = {
@@ -6341,20 +6341,20 @@ JST_CDB = {
 [426787] = {
 ["enable"] = true,
 },
-[1242088] = {
+[1241833] = {
 ["enable"] = true,
 },
 [473070] = {
 ["sound_bool"] = true,
 ["enable"] = true,
 },
-[349797] = {
+[461487] = {
 ["enable"] = true,
 },
-[1230087] = {
+[439811] = {
 ["enable"] = true,
 },
-[438471] = {
+[1239262] = {
 ["enable"] = true,
 },
 [472306] = {
@@ -6389,13 +6389,13 @@ JST_CDB = {
 ["233823"] = {
 ["enable"] = true,
 },
-["211087"] = {
+["228458"] = {
 ["enable"] = true,
 },
 ["175806"] = {
 ["enable"] = true,
 },
-["228458"] = {
+["211087"] = {
 ["enable"] = true,
 },
 ["231075"] = {
@@ -6424,10 +6424,10 @@ JST_CDB = {
 ["215405"] = {
 ["enable"] = true,
 },
-["214504"] = {
+["214506"] = {
 ["enable"] = true,
 },
-["214506"] = {
+["214504"] = {
 ["enable"] = true,
 },
 ["214502"] = {
@@ -7016,11 +7016,11 @@ true,
 ["a1"] = "BOTTOMLEFT",
 ["x"] = 210,
 },
-["JST_1222310_Mods"] = {
-["y"] = -330,
-["a2"] = "TOPLEFT",
-["a1"] = "TOPLEFT",
-["x"] = 30,
+["JST_1234263_Mods"] = {
+["y"] = -25,
+["a2"] = "CENTER",
+["a1"] = "CENTER",
+["x"] = 0,
 },
 ["JST_1219039_Mods"] = {
 ["y"] = 130,
@@ -7058,11 +7058,11 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = 30,
 },
-["JST_1234263_Mods"] = {
-["y"] = -25,
-["a2"] = "CENTER",
-["a1"] = "CENTER",
-["x"] = 0,
+["JST_1222310_Mods"] = {
+["y"] = -330,
+["a2"] = "TOPLEFT",
+["a1"] = "TOPLEFT",
+["x"] = 30,
 },
 ["JST_452245_Mods"] = {
 ["y"] = -25,
@@ -7088,7 +7088,7 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = -700,
 },
-["JST_472893_Mods"] = {
+["JST_439814_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7124,11 +7124,11 @@ true,
 ["a1"] = "BOTTOMLEFT",
 ["x"] = 210,
 },
-["JST_460973_Mods"] = {
-["y"] = -300,
-["a2"] = "TOPLEFT",
-["a1"] = "TOPLEFT",
-["x"] = 20,
+["JST_451117_Mods"] = {
+["y"] = -25,
+["a2"] = "CENTER",
+["a1"] = "CENTER",
+["x"] = 0,
 },
 ["JST_1217122_Mods"] = {
 ["y"] = -500,
@@ -7148,7 +7148,7 @@ true,
 ["a1"] = "CENTER",
 ["x"] = 0,
 },
-["JST_451117_Mods"] = {
+["JST_1227373_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7268,7 +7268,7 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = 30,
 },
-["JST_1227748_Mods"] = {
+["JST_442526_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7310,14 +7310,14 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = -700,
 },
-["JST_461536_Mods_Powerbar"] = {
-["y"] = 300,
+["JST_1218704_Mods"] = {
+["y"] = 65,
 ["a2"] = "CENTER",
-["a1"] = "CENTER",
-["x"] = 0,
+["a1"] = "TOPLEFT",
+["x"] = -700,
 },
-["JST_438708_Mods_Circle"] = {
-["y"] = 0,
+["JST_1217357_Mods"] = {
+["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["x"] = 0,
@@ -7334,7 +7334,7 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = 20,
 },
-["JST_326638_Mods"] = {
+["JST_435152_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7346,13 +7346,19 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = -700,
 },
-["JST_1218704_Mods"] = {
-["y"] = 65,
+["JST_461536_Mods_Powerbar"] = {
+["y"] = 300,
 ["a2"] = "CENTER",
-["a1"] = "TOPLEFT",
-["x"] = -700,
+["a1"] = "CENTER",
+["x"] = 0,
 },
 ["JST_328206_Mods"] = {
+["y"] = -25,
+["a2"] = "CENTER",
+["a1"] = "CENTER",
+["x"] = 0,
+},
+["JST_326638_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7363,12 +7369,6 @@ true,
 ["a2"] = "TOPLEFT",
 ["a1"] = "TOPLEFT",
 ["x"] = 30,
-},
-["JST_435152_Mods"] = {
-["y"] = -25,
-["a2"] = "CENTER",
-["a1"] = "CENTER",
-["x"] = 0,
 },
 ["JST_460281_Mods"] = {
 ["y"] = -500,
@@ -7406,8 +7406,8 @@ true,
 ["a1"] = "BOTTOMLEFT",
 ["x"] = 210,
 },
-["JST_1217357_Mods"] = {
-["y"] = -25,
+["JST_438708_Mods_Circle"] = {
+["y"] = 0,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["x"] = 0,
@@ -7430,7 +7430,7 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = -700,
 },
-["JST_442526_Mods"] = {
+["JST_1227748_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7442,14 +7442,14 @@ true,
 ["a1"] = "CENTER",
 ["x"] = 0,
 },
-["JST_1227276_Mods"] = {
-["y"] = -25,
+["JST_1217231_Mods_Circle"] = {
+["y"] = 0,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["x"] = 0,
 },
-["JST_1217231_Mods_Circle"] = {
-["y"] = 0,
+["JST_1227276_Mods"] = {
+["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["x"] = 0,
@@ -7502,7 +7502,7 @@ true,
 ["a1"] = "BOTTOM",
 ["x"] = 0,
 },
-["JST_439814_Mods"] = {
+["JST_472893_Mods"] = {
 ["y"] = -25,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
@@ -7532,11 +7532,11 @@ true,
 ["a1"] = "CENTER",
 ["x"] = 0,
 },
-["JST_1227373_Mods"] = {
-["y"] = -25,
-["a2"] = "CENTER",
-["a1"] = "CENTER",
-["x"] = 0,
+["JST_460973_Mods"] = {
+["y"] = -300,
+["a2"] = "TOPLEFT",
+["a1"] = "TOPLEFT",
+["x"] = 20,
 },
 ["JST_1249065_Mods"] = {
 ["y"] = -25,
@@ -7628,17 +7628,17 @@ true,
 ["a1"] = "TOPLEFT",
 ["x"] = 20,
 },
-["JST_1227277_Mods"] = {
-["y"] = 400,
-["a2"] = "CENTER",
-["a1"] = "TOPLEFT",
-["x"] = -700,
-},
 ["JSTRaidStatusCheckFrame"] = {
 ["y"] = -50,
 ["a2"] = "TOP",
 ["a1"] = "CENTER",
 ["x"] = 0,
+},
+["JST_1227277_Mods"] = {
+["y"] = 400,
+["a2"] = "CENTER",
+["a1"] = "TOPLEFT",
+["x"] = -700,
 },
 ["JST_1241303_Mods"] = {
 ["y"] = 300,
@@ -7666,19 +7666,19 @@ true,
 },
 },
 ["aura"] = {
-[1228114] = {
+[1241785] = {
 ["enable"] = true,
 },
 [435534] = {
 ["enable"] = true,
 },
-[1241785] = {
-["enable"] = true,
-},
-[451112] = {
+[1228114] = {
 ["enable"] = true,
 },
 [1214760] = {
+["enable"] = true,
+},
+[451112] = {
 ["enable"] = true,
 },
 [1218546] = {
@@ -7690,16 +7690,16 @@ true,
 [453461] = {
 ["enable"] = true,
 },
-[431491] = {
+[1235060] = {
 ["enable"] = true,
 },
-[468811] = {
+[436870] = {
 ["enable"] = true,
 },
 [462737] = {
 ["enable"] = true,
 },
-[439191] = {
+[466155] = {
 ["enable"] = true,
 },
 [434406] = {
@@ -7711,43 +7711,43 @@ true,
 [448248] = {
 ["enable"] = true,
 },
-[347716] = {
+[357229] = {
 ["enable"] = true,
 },
-[461487] = {
-["enable"] = true,
-},
-[439783] = {
-["enable"] = true,
-},
-[1235060] = {
-["enable"] = true,
-},
-[434090] = {
-["enable"] = true,
-},
-[431494] = {
-["enable"] = true,
-},
-[424420] = {
-["enable"] = true,
-},
-[436870] = {
-["enable"] = true,
-},
-[459669] = {
-["enable"] = true,
-},
-[438618] = {
-["enable"] = true,
-},
-[1221483] = {
+[439815] = {
 ["enable"] = true,
 },
 [472354] = {
 ["enable"] = true,
 },
-[428170] = {
+[431491] = {
+["enable"] = true,
+},
+[434090] = {
+["enable"] = true,
+},
+[465325] = {
+["enable"] = true,
+},
+[424420] = {
+["enable"] = true,
+},
+[468811] = {
+["enable"] = true,
+},
+[459669] = {
+["enable"] = true,
+},
+[461487] = {
+["enable"] = true,
+},
+[1221483] = {
+["enable"] = true,
+},
+[439783] = {
+["enable"] = true,
+},
+[451606] = {
 ["enable"] = true,
 },
 [1224864] = {
@@ -7756,7 +7756,7 @@ true,
 [465813] = {
 ["enable"] = true,
 },
-[465325] = {
+[431494] = {
 ["enable"] = true,
 },
 [433841] = {
@@ -7768,7 +7768,7 @@ true,
 [450756] = {
 ["enable"] = true,
 },
-[469799] = {
+[355832] = {
 ["enable"] = true,
 },
 [444728] = {
@@ -7807,7 +7807,7 @@ true,
 [431309] = {
 ["enable"] = true,
 },
-[357029] = {
+[469799] = {
 ["enable"] = true,
 },
 [1226018] = {
@@ -7816,16 +7816,16 @@ true,
 [356324] = {
 ["enable"] = true,
 },
-[439815] = {
+[1219279] = {
 ["enable"] = true,
 },
 [355915] = {
 ["enable"] = true,
 },
-[355832] = {
+[357029] = {
 ["enable"] = true,
 },
-[451606] = {
+[428170] = {
 ["enable"] = true,
 },
 [1223000] = {
@@ -7834,10 +7834,10 @@ true,
 [346844] = {
 ["enable"] = true,
 },
-[1219279] = {
+[438618] = {
 ["enable"] = true,
 },
-[357229] = {
+[347716] = {
 ["enable"] = true,
 },
 [433517] = {
@@ -7849,13 +7849,13 @@ true,
 [424414] = {
 ["enable"] = true,
 },
-[466344] = {
+[439191] = {
 ["enable"] = true,
 },
 [347775] = {
 ["enable"] = true,
 },
-[466155] = {
+[466344] = {
 ["enable"] = true,
 },
 },

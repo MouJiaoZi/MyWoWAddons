@@ -234,6 +234,9 @@ L.imported_countdown_position = "Countdown Position"
 L.imported_countdown_settings = "Countdown Einstellungen"
 L.imported_countdown_color = "Countdown Farbe"
 L.imported_nameplate_settings = "Namensplaketten Einstellungen"
+L.imported_mythicplus_settings = "Mythisch+ Einstellungen"
+L.mythicplus_settings_import_desc = "Alle Mythisch+ Einstellungen importieren."
+L.mythicplus_settings_export_desc = "Alle Mythisch+ Einstellungen exportieren."
 
 -- Statistics
 L.statistics = "Statistiken"
@@ -436,6 +439,9 @@ L.CENTER = "Mitte"
 L.customAnchorPoint = "Erweitert: Benutzerdefinierter Ankerpunkt"
 L.sourcePoint = "Ursprungspunkt"
 L.destinationPoint = "Zielpunkt"
+L.drawStrata = "Schichten zeichnen"
+L.medium = "MITTEL"
+L.low = "NIEDRIG"
 
 -----------------------------------------------------------------------
 -- AltPower.lua
@@ -699,6 +705,11 @@ L.displayTimeDesc = "Bestimmt, wie lange (in Sekunden) Nachrichten angezeigt wer
 L.fadeTime = "Ausblendedauer"
 L.fadeTimeDesc = "Bestimmt, wie lange (in Sekunden) das Ausblenden der Nachrichten dauert."
 
+L.messagesOptInHeaderOff = "Boss-Mod Nachrichten 'Opt-in' Modus: Durch Aktivierung dieser Option werden die Nachrichten ALLER Bossmodule deaktiviert.\n\nEs ist nötig in jedem Modul händisch die gewünschten Nachrichten zu aktivieren.\n\n"
+L.messagesOptInHeaderOn = "Boss-Mod Nachrichten 'Opt-in' Modus ist |cFF33FF99AKTIV|r. Um Boss-Mod Nachrichten zu sehen, muss in den Einstellungen einer spezifischen Bossfähigkeit die '|cFF33FF99Nachrichten|r' Option aktiviert werden.\n\n"
+L.messagesOptInTitle = "Boss-Mod Nachrichten 'Opt-in' Modus"
+L.messagesOptInWarning = "|cffff4411WARNUNG!|r\n\nDurch Aktivierung des 'Opt-in' Modus werden die Nachrichten ALLER Bossmodule deaktiviert. Zur Aktivierung müssen händisch in jeder gewünschten Bossfähigkeit die Nachrichten aktiviert werden.\n\nDas UI wird jetzt neu geladen, bist Du sicher?"
+
 -----------------------------------------------------------------------
 -- Nameplates.lua
 --
@@ -775,6 +786,11 @@ L.scale = "Maßstab"
 L.scale_glow_desc = "Der Maßstab der Funken in der Animation."
 L.startAnimation = "Startanimation"
 L.startAnimation_glow_desc = "Dieses Leuchten hat eine Startanimation, dies aktiviert/deaktiviert diese Animation."
+
+L.nameplateOptInHeaderOff = "\n\n\n\nBoss-Mod Namensplaketten 'Opt-in' Modus: Durch Aktivierung dieser Option werden die Namensplaketten ALLER Bossmodule deaktiviert.\n\nEs ist nötig in jedem Modul händisch die gewünschten Namensplaketten zu aktivieren.\n\n"
+L.nameplateOptInHeaderOn = "\n\n\n\nBoss-Mod Namensplaketten 'Opt-in' Modus ist |cFF33FF99AKTIV|r. Um Boss-Mod Namensplaketten zu sehen, muss in den Einstellungen einer spezifischen Bossfähigkeit die '|cFF33FF99Namensplaketten|r' Option aktiviert werden.\n\n"
+L.nameplateOptInTitle = "Boss-Mod Namensplaketten 'Opt-in' Modus"
+L.nameplateOptInWarning = "|cffff4411WARNUNG!|r\n\nDurch Aktivierung des 'Opt-in' Modus werden die Namensplaketten ALLER Bossmodule deaktiviert. Zur Aktivierung müssen händisch in jeder gewünschten Bossfähigkeit die Namensplaketten aktiviert werden.\n\nDas UI wird jetzt neu geladen, bist Du sicher?"
 
 -----------------------------------------------------------------------
 -- Proximity.lua

@@ -1,135 +1,115 @@
-# Version: 3.97
-2025/08/18 Released
-## ❗ Important
-- Update some libraries.
-- Code cleanup and deprecated code removal.
-- Redesign tooltip settings.
-- Update reset module.
-- Remove guild news update frequency fix as Blizzard has fixed it.
+# Version: 3.98
+2025/08/27 Released
 ## ✳️ New
-- [Misc] Add a new feature to open upgrade menu on middle mouse button click on back slot.
-- [Skins] Add BtWQuests skin.
-- [Extra Item Bars] Add new SLOT group, to allow customization of specific equipment slots. (e.g., SLOT:15, SLOT:13-14)
-- [Turn In] Add a new option 'only repeatable', allowing skipping of non-weekly/daily quests during turn-ins.
+- [Event Tracker] Add the Nightfall event.
+- [Event Tracker] Add the Ecological Succession weekly event.
+- [LFG List] Add a quick access button to the right panel.
+- [Skins] Add a font color replacement feature for the UI Errors frame.
+- [Skins] Add SilverDragon skin. Thanks Dack.
+- [Skins] Add Talent Loadouts Ex skin.
+- [Skins] Add Mount Route Planner skin.
 ## 💪 Improvement
-- [Announcement] Fix the issue with the new cauldrons announce not working.
-- [Skins] BigWigs skin now supports the new keystone frame.
-- [Skins] Optimize RareScanner tooltip appearance.
-- [Skins] Optimize Auctionator appearance.
-- [Tooltips] Title icons now support custom sizes.
-- [Tooltips] Title icons now support macro buttons.
-- [Tooltips] Keystone information can now be retrieved from teammates through LibKeystone(BigWigs).
-- [Turn In] Update ignored NPC list.
-- [Extra Items Bar] Some delve items will not be displayed outdoors.
-- [LFG List] Fix the issue with opening Details! keystone list.
-- [LFG List] Party keystone information can now be retrieved from teammates through LibKeystone(BigWigs).
+- [Skins] Optimize OmniCD skin.
+- [Skins] Optimize BtWQuests skin.
+- [Skins] Optimize Dressing Room skin.
+- [Skins] Optimize Quest skin.
+- [Skins] Optimize Tooltip skin. Now it automatically beautifies all icons within tooltips.
+- [Minimap Buttons] Fix the issue with the small click area of the expansion button.
+- [Minimap Buttons] Optimize the button handling logic of Jingsi Tools.
+- [Minimap Buttons] Optimize the button handling logic of Mount Route Planner.
+- [Misc] - [Skip Cut Scene] When 'Only Watched' is selected, if the cutscene ID cannot be determined, it will not be skipped now.
+- [Exit Phase Diving] Update the appearance of the button a little bit.
 
 ------
-# 版本: 3.97
-2025/08/18 发布
-## ❗ 重要
-- 更新一些库文件.
-- 代码整理和过期代码清理.
-- 重新设计了鼠标提示的设定.
-- 更新重置模块.
-- 由于暴雪已经修复, 移除了公会新闻更新频率修复.
+# 版本: 3.98
+2025/08/27 发布
 ## ✳️ 新增
-- [其他] 新增鼠标中键点击披风打开升级菜单功能.
-- [美化皮肤] 新增 BtWQuests 皮肤.
-- [额外物品条] 额外物品条新增了 SLOT 分组, 可自定义特定的装备栏位.（例如：SLOT:15, SLOT:13-14）
-- [交接] 新增了仅重复任务功能, 可以在交接任务时跳过处理非周长日常任务.
+- [事件追踪器] 新增了夜幕激斗事件.
+- [事件追踪器] 新增了生态演替周常.
+- [预组队列表] 右侧面板新增了快速跳转的按钮.
+- [美化皮肤] 新增了 UI 错误框架的字体颜色替换功能.
+- [美化皮肤] 新增了 SilverDragon 美化外观. 感谢 Dack
+- [美化皮肤] 新增了 Talent Loadouts Ex 美化外观. 感谢 NDui_Plus
+- [美化皮肤] 新增了 Mount Route Planner 美化外观.
 ## 💪 改善
-- [通告] 修正了新版大锅通告失效的问题.
-- [美化皮肤] BigWigs 皮肤现在支持全新的钥石界面.
-- [美化皮肤] 优化 RareScanner 鼠标提示外观.
-- [美化皮肤] 优化 Auctionator 外观.
-- [鼠标提示] 标题图标支持自定义大小了.
-- [鼠标提示] 标题图标功能支持宏按钮.
-- [鼠标提示] 钥石信息现在会同时透过 LibKeystone(BigWigs) 向队友获取.
-- [交接] 更新忽略 NPC 列表.
-- [额外物品条] 部分地下堡物品不会在室外显示.
-- [预组列表] 修正了无法打开 Details! 队伍钥石列表的问题.
-- [预组列表] 队伍钥石信息现在会同时透过 LibKeystone(BigWigs) 向队友获取.
+- [美化皮肤] 优化 OmniCD 外观.
+- [美化皮肤] 优化 BtWQuests 外观.
+- [美化皮肤] 优化试衣间外观.
+- [美化皮肤] 优化任务界面外观.
+- [美化皮肤] 优化鼠标提示的外观, 现在会自动美化全部的鼠标提示内图标.
+- [小地图按钮] 修正了资料片按钮点击区域过小的问题.
+- [小地图按钮] 优化了静思助手的按钮处理逻辑.
+- [小地图按钮] 优化了 Mount Route Planner 的按钮处理逻辑.
+- [其他] - [跳过过场动画] 在选择'仅观看过的'时, 如果过场动画ID无法确定, 现在则不会跳过.
+- [退出相位潜行] 稍微更新了按钮的外观.
 
 ------
-# 版本: 3.97
-2025/08/18 發布
-## ❗ 重要
-- 更新一些庫文件.
-- 代碼整理和過期代碼清理.
-- 重新設計了浮動提示的設定.
-- 更新重置模組.
-- 由於暴雪已經修復, 移除了公會新聞更新頻率修復.
+# 版本: 3.98
+2025/08/27 發布
 ## ✳️ 新增
-- [其他] 新增滑鼠中鍵點擊披風打開升級選單功能.
-- [美化外觀] 新增 BtWQuests 外觀.
-- [額外物品條] 額外物品條新增了 SLOT 分組, 可自定特定的裝備欄位.（例如：SLOT:1, SLOT:13-14）
-- [交接] 新增了僅重複任務功能, 可以在交接任務時跳過處理非週長日常任務.
+- [事件追蹤器] 新增了夜幕激戰事件.
+- [事件追蹤器] 新增了生態重構週常.
+- [預組隊列表] 右側面板新增了快速跳轉的按鈕.
+- [美化皮膚] 新增了 UI 錯誤框架的字體顏色替換功能.
+- [美化皮膚] 新增了 SilverDragon 美化外觀. 感謝 Dack
+- [美化皮膚] 新增了 Talent Loadouts Ex 美化外觀. 感謝 NDui_Plus
+- [美化皮膚] 新增了 Mount Route Planner 美化外觀.
 ## 💪 改善
-- [通告] 修正了新版大鍋通告失效的問題.
-- [美化外觀] BigWigs 外觀現在支援全新的鑰石介面.
-- [美化外觀] 優化 RareScanner 滑鼠提示外觀.
-- [美化外觀] 優化 Auctionator 外觀.
-- [浮動提示] 標題圖示支援自訂大小了.
-- [浮動提示] 標題圖示功能支援巨集按鍵.
-- [浮動提示] 鑰石資訊現在會同時透過 LibKeystone(BigWigs) 向隊友取得.
-- [交接] 更新忽略 NPC 列表.
-- [額外物品條] 部分探究物品不會在室外顯示.
-- [預組列表] 修正了無法打開 Details! 隊伍鑰石列表的問題.
-- [預組列表] 隊伍鑰石資訊現在會同時透過 LibKeystone(BigWigs) 向隊友取得.
+- [美化外觀] 優化 OmniCD 外觀.
+- [美化外觀] 優化 BtWQuests 外觀.
+- [美化外觀] 優化試衣間外觀.
+- [美化外觀] 優化任務界面外觀.
+- [美化外觀] 優化浮動提示的外觀, 現在會自動美化全部的浮動提示內圖示.
+- [小地圖按鍵] 修正了資料片按鍵點擊區域過小的問題.
+- [小地圖按鍵] 優化了靜思助手的按鍵處理邏輯.
+- [小地圖按鍵] 優化了 Mount Route Planner 的按鍵處理邏輯.
+- [其他] - [跳過過場動畫] 在選擇'僅觀看過的'時, 如果過場動畫ID無法確定, 現在則不會跳過.
+- [退出相位深潛] 稍微更新了按鍵的外觀.
 
 ------
-# 버전: 3.97
-2025/08/18 Released
-## ❗ 중요 사항
-- 일부 라이브러리를 업데이트했습니다.
-- 코드 정리 및 더 이상 사용되지 않는 코드 제거.
-- 툴팁 설정을 재설계했습니다.
-- 리셋 모듈을 업데이트했습니다.
-- 공회 뉴스 업데이트 빈도 수정 사항을 제거했습니다.
+# 버전: 3.98
+2025/08/27 Released
 ## ✳️ 신규 사항
-- [기타] 망토에 마우스 중간 버튼 클릭 시 업그레이드 메뉴 열기 기능 추가.
-- [스킨] BtWQuests 스킨 추가.
-- [추가 아이템 바] 새로운 SLOT 그룹 추가, 특정 장비 슬롯의 사용자 지정을 허용합니다. (예: SLOT:15, SLOT:13-14)
-- [교환] 새로운 '오직 반복 가능' 옵션 추가, 교환 중 비주간/일일 퀘스트를 건너뛸 수 있습니다.
+- [이벤트 추적] 새로운 야경 전투 이벤트 추가.
+- [이벤트 추적] 새로운 생태계 계승 주간 이벤트 추가.
+- [LFG 목록] 오른쪽 패널에 빠른 액세스 버튼 추가.
+- [스킨] UI 오류 프레임의 글꼴 색상 교체 기능 추가.
+- [스킨] SilverDragon 외관 추가. Dack에게 감사드립니다.
+- [스킨] Talent Loadouts Ex 외관 추가. NDui_Plus에게 감사드립니다.
+- [스킨] Mount Route Planner 외관 추가.
 ## 💪 개선 사항
-- [알림] 새로운 대형 냄비 알림이 작동하지 않는 문제 수정.
-- [스킨] BigWigs 스킨이 새로운 열쇠석 프레임을 지원합니다.
-- [스킨] RareScanner 툴팁 외관 최적화.
-- [스킨] Auctionator 외관 최적화.
-- [툴팁] 제목 아이콘이 이제 사용자 정의 크기를 지원합니다.
-- [툴팁] 제목 아이콘이 이제 매크로 버튼을 지원합니다.
-- [툴팁] 키스톤 정보가 이제 LibKeystone(BigWigs)를 통해 팀원에게 전달됩니다.
-- [교환] 업데이트된 무시 NPC 목록.
-- [아이템 바] 일부 탐사 아이템이 실외에 표시되지 않습니다.
-- [예비 그룹 목록] 수정된 Details! 팀 키스톤 목록을 열 수 없는 문제.
-- [예비 그룹 목록] 파티 키스톤 정보가 이제 LibKeystone(BigWigs)를 통해 팀원에게 전달됩니다.
+- [스킨] OmniCD 외관 최적화.
+- [스킨] BtWQuests 외관 최적화.
+- [스킨] 드레싱룸 외관 최적화.
+- [스킨] 퀘스트 외관 최적화.
+- [스킨] 툴팁 외관 최적화. 이제 툴팁 내 모든 아이콘이 자동으로 미화됩니다.
+- [미니맵 버튼] 확장 버튼 클릭 영역이 너무 작았던 문제 수정.
+- [미니맵 버튼] 정수 도구의 버튼 처리 논리 최적화.
+- [미니맵 버튼] Mount Route Planner의 버튼 처리 논리 최적화.
+- [기타] - [컷신 건너뛰기] '단지 시청한'이 선택되면 컷신 ID를 확인할 수 없는 경우 이제 건너뛰지 않습니다.
+- [잠수 중 탈출] 버튼의 외관을 약간 업데이트했습니다.
 
 ------
-# Версия: 3.97
-2025/08/18 Релиз
-## ❗ Важные
-- Обновлены некоторые библиотеки.
-- Очистка кода и удаление устаревшего кода.
-- Переработаны настройки подсказок.
-- Обновлен модуль сброса.
-- Удален фикс частоты обновления новостей гильдии, так как Blizzard исправил это.
+# Версия: 3.98
+2025/08/27 Релиз
 ## ✳️ Новые
-- [Другое] Добавлена функция открытия меню улучшения при нажатии средней кнопки мыши на плаще.
-- [Скины] Добавлен скин BtWQuests.
-- [Дополнительные элементы интерфейса] Добавлена новая группа SLOT, позволяющая настраивать конкретные слоты оборудования. (например: SLOT:15, SLOT:13-14)
-- [Сдача квеста] Добавлена новая опция 'только повторяемые', позволяющая пропускать нерегулярные/ежедневные квесты во время сдачи.
+- [Отслеживание событий] Добавлено событие 'Сумерки'.
+- [Отслеживание событий] Добавлено еженедельное событие 'Экологическая сукцессия'.
+- [Список LFG] Добавлена кнопка быстрого доступа на правой панели.
+- [Скины] Добавлена функция замены цвета шрифта для фрейма ошибок интерфейса.
+- [Скины] Добавлен скин для SilverDragon. Спасибо Dack.
+- [Скины] Добавлен скин для Talent Loadouts Ex. Спасибо NDui_Plus.
+- [Скины] Добавлен скин для Mount Route Planner.
 ## 💪 Улучшения
-- [Объявления] Исправлена проблема с неработающим новым уведомлением о новых котлах.
-- [Скины] Скин BigWigs теперь поддерживает новый фрейм ключа М+.
-- [Скины] Оптимизирован внешний вид подсказки RareScanner.
-- [Скины] Оптимизирован внешний вид Auctionator.
-- [Подсказки] Значки заголовков теперь поддерживают пользовательские размеры.
-- [Подсказки] Значки заголовков теперь поддерживают кнопки макросов.
-- [Подсказки] Информация о ключах теперь может быть получена от товарищей по команде через LibKeystone(BigWigs).
-- [Сдача квеста] Обновлен список игнорируемых NPC.
-- [Панель дополнительных предметов] Некоторые предметы вылазок не будут отображаться на открытом воздухе.
-- [Список LFG] Исправлена проблема с открытием списка ключей Details!.
-- [Список LFG] Информация о ключах группы теперь может быть получена от товарищей по команде через LibKeystone(BigWigs).
+- [Скины] Оптимизирован внешний вид OmniCD.
+- [Скины] Оптимизирован внешний вид BtWQuests.
+- [Скины] Оптимизирован внешний вид примерочной.
+- [Скины] Оптимизирован внешний вид интерфейса квестов.
+- [Скины] Оптимизирован внешний вид подсказок. Теперь они автоматически улучшают все значки внутри подсказок.
+- [Кнопки миникарты] Исправлена проблема с маленькой областью нажатия кнопки расширения.
+- [Кнопки миникарты] Оптимизирована логика обработки кнопок Jingsi Tools.
+- [Кнопки миникарты] Оптимизирована логика обработки кнопок Mount Route Planner.
+- [Прочее] - [Пропустить кат-сцену] Если выбрано 'Только просмотренные', и ID кат-сцены не может быть определен, она больше не будет пропущена.
+- [Выход из фазового погружения] Обновлен внешний вид кнопки.
 
 ------

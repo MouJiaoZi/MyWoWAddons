@@ -41,9 +41,9 @@ MEETINGSTONE_CHARACTER_DB = {
 ["AUTO_JOIN"] = false,
 },
 ["searchHistoryList"] = {
+"2-505-1017-0",
 "2-391-1016-0",
 "2-525-1284-0",
-"2-505-1017-0",
 "2-503-1694-0",
 "3-378-1618-0",
 "2-378-1285-0",
@@ -1969,6 +1969,31 @@ MEETINGSTONE_CHARACTER_DB = {
 ["time"] = 1756211513,
 ["class"] = 9,
 },
+{
+["role"] = "HEALER",
+["name"] = "贝依依-影之哀伤",
+["time"] = 1756338366,
+["class"] = 2,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "Kyogree-风暴之怒",
+["time"] = 1756338366,
+["class"] = 9,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "星风雪宇-伊森利恩",
+["time"] = 1756338366,
+["class"] = 2,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "咩咕哒黑-血色十字军",
+["time"] = 1756338366,
+["class"] = 8,
+},
 },
 ["2-280-1016-0"] = {
 {
@@ -2329,7 +2354,7 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 },
 },
-["lastSearchCode"] = "2-391-1016-0",
+["lastSearchCode"] = "2-505-1017-0",
 },
 },
 }

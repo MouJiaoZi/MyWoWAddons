@@ -234,6 +234,9 @@ L.imported_countdown_position = "倒数位置"
 L.imported_countdown_settings = "倒数设置"
 L.imported_countdown_color = "倒数颜色"
 L.imported_nameplate_settings = "姓名板设置"
+L.imported_mythicplus_settings = "史诗钥石设置"
+L.mythicplus_settings_import_desc = "导入全部史诗钥石设置。"
+L.mythicplus_settings_export_desc = "导出全部史诗钥石设置。"
 
 -- Statistics
 L.statistics = "统计"
@@ -384,8 +387,8 @@ L.instanceKeysDisplayWithDungeon = "|c%s%s：|r+%d（%s）" -- "PLAYER_NAME: +DU
 L.instanceKeysShowAll = "始终显示所有玩家"
 L.instanceKeysShowAllDesc = "启用此选项将显示列表中的所有玩家，即使他们的钥石不属于当前地下城。"
 L.instanceKeysOtherDungeonColor = "其他地下城颜色"
-L.instanceKeysOtherDungeonColorDesc = "为持有非当前地下城钥石的玩家选择字体颜色。"
-L.instanceKeysEndOfRunDesc = "默认情况下，列表仅在你进入史诗钥石地下城时显示。启用此选项后，还将在史诗钥石+结束后继续显示列表。"
+L.instanceKeysOtherDungeonColorDesc = "为持有非当前地下城钥石选择字体颜色。"
+L.instanceKeysEndOfRunDesc = "默认情况下，列表仅在你进入史诗钥石地下城时显示。启用此选项后，还将在史诗钥石结束后继续显示列表。"
 
 -----------------------------------------------------------------------
 -- LFGTimer.lua
@@ -436,6 +439,9 @@ L.CENTER = "中"
 L.customAnchorPoint = "高级：自定义锚点"
 L.sourcePoint = "源点"
 L.destinationPoint = "相对锚点"
+L.drawStrata = "层级"
+L.medium = "中"
+L.low = "低"
 
 -----------------------------------------------------------------------
 -- AltPower.lua
@@ -699,6 +705,11 @@ L.displayTimeDesc = "以秒计信息显示时间。"
 L.fadeTime = "消退时间"
 L.fadeTimeDesc = "以秒计信息消退时间。"
 
+L.messagesOptInHeaderOff = "消息'手动选择'模式：启用此选项将关闭所有模块的消息。\n\n您需要逐个进入每个模块的设置，手动开启您想要的消息提示。\n\n"
+L.messagesOptInHeaderOn = "消息'手动选择'模式已|cFF33FF99启用|r。要查看消息，请进入特定技能的设置并开启'|cFF33FF99消息|r'选项。\n\n"
+L.messagesOptInTitle = "消息'手动选择'模式"
+L.messagesOptInWarning = "|cffff4411警告！|r\n\n启用'手动选择'模式将关闭所有模块的消息。您需要逐个进入每个模块的设置，手动开启您想要的消息提示。\n\n界面即将重新加载，是否继续？"
+
 -----------------------------------------------------------------------
 -- Nameplates.lua
 --
@@ -775,6 +786,11 @@ L.scale = "缩放"
 L.scale_glow_desc = "调整发光动画中闪光点的尺寸。"
 L.startAnimation = "起始动画"
 L.startAnimation_glow_desc = "您选择的发光效果有起始动画特效，通常是一个闪烁。这个选项可以选择启用/禁用起始动画。"
+
+L.nameplateOptInHeaderOff = "\n\n\n\n姓名板'手动选择'模式：启用此选项将关闭所有模块的姓名板效果。\n\n您需要逐个进入每个模块的设置，手动开启您想要的姓名板效果。\n\n"
+L.nameplateOptInHeaderOn = "\n\n\n\n姓名板'手动选择'模式已|cFF33FF99启用|r。需要单独启用姓名板，请进入特定技能的设置并开启'|cFF33FF99姓名板|r'选项。\n\n"
+L.nameplateOptInTitle = "姓名板'手动选择'模式"
+L.nameplateOptInWarning = "|cffff4411警告！|r\n\n启用'手动选择'模式将关闭所有模块的姓名板效果。您需要逐个进入每个模块的设置，手动开启您想要的姓名板效果。\n\n界面即将重新加载，是否继续？"
 
 -----------------------------------------------------------------------
 -- Proximity.lua

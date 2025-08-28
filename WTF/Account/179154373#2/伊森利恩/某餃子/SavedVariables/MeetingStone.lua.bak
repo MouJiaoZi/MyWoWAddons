@@ -40,7 +40,7 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 ["AUTO_JOIN"] = false,
 },
-["lastSearchCode"] = "2-525-1284-0",
+["lastSearchCode"] = "2-391-1016-0",
 ["version"] = "11.2.0",
 ["recent"] = {
 ["2-324-1281-0"] = {
@@ -2066,6 +2066,31 @@ MEETINGSTONE_CHARACTER_DB = {
 ["time"] = 1756123559,
 ["class"] = 7,
 },
+{
+["role"] = "DAMAGER",
+["name"] = "夏天蓝了海丶-鬼雾峰",
+["time"] = 1756218817,
+["class"] = 2,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "圣焰咏者-鬼雾峰",
+["time"] = 1756218817,
+["class"] = 8,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "卫士钉子户-鬼雾峰",
+["time"] = 1756218817,
+["class"] = 3,
+},
+{
+["role"] = "HEALER",
+["name"] = "Blackscreen-贫瘠之地",
+["time"] = 1756218817,
+["class"] = 11,
+},
 },
 ["2-281-1017-0"] = {
 {
@@ -2246,9 +2271,9 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 },
 ["searchHistoryList"] = {
+"2-391-1016-0",
 "2-525-1284-0",
 "2-505-1017-0",
-"2-391-1016-0",
 "2-503-1694-0",
 "3-378-1618-0",
 "2-378-1285-0",

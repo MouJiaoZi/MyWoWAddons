@@ -10,7 +10,10 @@ END
 VER 3 010000000000009B "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@cursor] 召唤玄牛雕像
-/cast [@target=玄牛雕像]  嚎镇八方
+/target 玄牛雕像
+/cast [exists, help] 嚎镇八方
+/click TotemFrameTotem1 RightButton
+/targetlasttarget
 END
 VER 3 010000000000009C "1" "INV_Misc_QuestionMark"
 #showtooltip

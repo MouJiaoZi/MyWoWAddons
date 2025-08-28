@@ -43,12 +43,38 @@ true,
 },
 },
 },
+["BigWigs_Plugins_Nameplates"] = {
+["profiles"] = {
+["Default"] = {
+["migratePosition"] = true,
+},
+},
+},
+["MythicPlus"] = {
+["profiles"] = {
+["Default"] = {
+["viewerPosition"] = {
+"TOPLEFT",
+"TOPLEFT",
+24,
+-172,
+},
+},
+},
+},
 ["BigWigs_Plugins_AutoReply"] = {
 ["profiles"] = {
 ["Default"] = {
-["disabled"] = false,
 ["exitCombat"] = 4,
 ["mode"] = 4,
+["disabled"] = false,
+},
+},
+},
+["BigWigs_Plugins_Pull"] = {
+["profiles"] = {
+["Default"] = {
+["voice"] = "中文语音：VV(女)",
 },
 },
 },
@@ -71,52 +97,26 @@ true,
 },
 },
 },
-["BigWigs_Plugins_Nameplates"] = {
-["profiles"] = {
-["Default"] = {
-["migratePosition"] = true,
-},
-},
-},
-["MythicPlus"] = {
-["profiles"] = {
-["Default"] = {
-["viewerPosition"] = {
-"TOPLEFT",
-"TOPLEFT",
-24,
--172,
-},
-},
-},
-},
-["BigWigs_Plugins_Pull"] = {
-["profiles"] = {
-["Default"] = {
-["voice"] = "中文语音：VV(女)",
-},
-},
-},
 },
 ["myKeystones"] = {
 ["Player-940-0516206F"] = {
 ["playerRating"] = 2671,
 ["specId"] = 250,
-["keyMap"] = 503,
+["keyMap"] = 378,
 ["name"] = "某餃子",
-["keyLevel"] = 12,
+["keyLevel"] = 11,
 ["realm"] = "伊森利恩",
 },
 ["Player-940-057FDA40"] = {
-["playerRating"] = 2255,
+["playerRating"] = 2280,
 ["specId"] = 268,
-["keyMap"] = 378,
+["keyMap"] = 0,
 ["name"] = "某饺子",
-["keyLevel"] = 3,
+["keyLevel"] = 0,
 ["realm"] = "伊森利恩",
 },
 },
-["prevWeeklyReset"] = 1755730800,
+["prevWeeklyReset"] = 1756335600,
 ["profiles"] = {
 ["Default"] = {
 },
@@ -1300,6 +1300,24 @@ BigWigsStatsDB = {
 ["fkDate"] = "2024/09/15",
 },
 },
+[2601] = {
+["normal"] = {
+["kills"] = 4,
+["fkDate"] = "2024/09/15",
+["bestDate"] = "2024/11/04",
+["best"] = 137.9020000000019,
+["fkDuration"] = 263.4499999999825,
+},
+["heroic"] = {
+["kills"] = 7,
+["fkDate"] = "2024/09/18",
+["bestDate"] = "2024/11/03",
+["fkWipes"] = 13,
+["best"] = 253.7639999999956,
+["wipes"] = 17,
+["fkDuration"] = 396.2480000000214,
+},
+},
 [2608] = {
 ["heroic"] = {
 ["kills"] = 5,
@@ -1323,24 +1341,6 @@ BigWigsStatsDB = {
 ["bestDate"] = "2024/11/07",
 ["best"] = 219.0160000000033,
 ["fkDuration"] = 279.0580000000009,
-},
-},
-[2601] = {
-["normal"] = {
-["kills"] = 4,
-["fkDate"] = "2024/09/15",
-["bestDate"] = "2024/11/04",
-["best"] = 137.9020000000019,
-["fkDuration"] = 263.4499999999825,
-},
-["heroic"] = {
-["kills"] = 7,
-["fkDate"] = "2024/09/18",
-["bestDate"] = "2024/11/03",
-["fkWipes"] = 13,
-["best"] = 253.7639999999956,
-["wipes"] = 17,
-["fkDuration"] = 396.2480000000214,
 },
 },
 },

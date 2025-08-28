@@ -3,28 +3,36 @@ local S = W.Modules.Skins
 local TT = E:GetModule("Tooltip")
 
 local _G = _G
-local hooksecurefunc = hooksecurefunc
 
--- From MerathilisUI
-function S:LibQTip()
-	-- Handle RareScanner's custom LibQTip-1.0RS tooltips
-	local LQTRS = _G.LibStub("LibQTip-1.0RS", true)
-	if LQTRS then
-		hooksecurefunc(LQTRS, "Acquire", function()
-			for _, tooltip in LQTRS:IterateTooltips() do
-				TT:SetStyle(tooltip)
-			end
-		end)
+function S:ReskinLibQTip(lib)
+	for _, tt in lib:IterateTooltips() do
+		TT:SetStyle(tt)
+		if tt.SetCell and not self:IsHooked(tt, "SetCell") then
+			self:RawHook(tt, "SetCell", function(tooltip, ...)
+				local lineNum, colNum, value = select(1, ...)
+
+				-- Only style if we have valid parameters and string value
+				if type(lineNum) == "number" and type(colNum) == "number" and type(value) == "string" then
+					local styledValue = self:StyleTextureString(value)
+					if styledValue ~= value then
+						-- Replace the value in the argument list
+						return self.hooks[tooltip].SetCell(tooltip, lineNum, colNum, styledValue, select(4, ...))
+					end
+				end
+
+				-- Call original with all original parameters
+				return self.hooks[tooltip].SetCell(tooltip, ...)
+			end)
+		end
 	end
+end
 
-	-- Handle LibQTip-1.0 tooltips
-	local LQT = _G.LibStub("LibQTip-1.0", true)
-	if LQT then
-		hooksecurefunc(LQT, "Acquire", function()
-			for _, tooltip in LQT:IterateTooltips() do
-				TT:SetStyle(tooltip)
-			end
-		end)
+function S:LibQTip()
+	for _, libName in ipairs({ "LibQTip-1.0", "LibQTip-1.0RS" }) do
+		local lib = _G.LibStub(libName, true)
+		if lib and lib.Acquire then
+			self:SecureHook(lib, "Acquire", "ReskinLibQTip")
+		end
 	end
 end
 

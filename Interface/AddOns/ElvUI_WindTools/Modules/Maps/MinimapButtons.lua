@@ -21,6 +21,7 @@ local unpack = unpack
 local CreateFrame = CreateFrame
 local InCombatLockdown = InCombatLockdown
 local RegisterStateDriver = RegisterStateDriver
+local RunNextFrame = RunNextFrame
 local UnregisterStateDriver = UnregisterStateDriver
 
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
@@ -122,58 +123,54 @@ function MB:HandleLibDBIconButton(button, name)
 	return button:IsShown()
 end
 
-do
-	local modified = false
-	function MB:UpdateExpansionLandingPageMinimapIcon(icon)
-		icon = icon or _G.ExpansionLandingPageMinimapButton
+local HandleExpansionButton = EM.HandleExpansionButton
+function EM:HandleExpansionButton()
+	HandleExpansionButton()
 
-		if not icon then
+	-- Run this post hook lazily and safely
+	F.WaitFor(function()
+		return MB ~= nil and MB.db ~= nil
+	end, function()
+		if not MB.db.expansionLandingPage then
 			return
 		end
-		icon:SetIgnoreParentScale(true)
-		icon:SetScale(E.uiscale)
 
-		local box = _G.GarrisonLandingPageTutorialBox
-		if box then
-			box:SetScale(E.uiscale)
-			box:SetClampedToScreen(true)
-		end
+		F.TaskManager:OutOfCombat(function()
+			local button = _G.ExpansionLandingPageMinimapButton or _G.GarrisonLandingPageMinimapButton
+			if not button then
+				return
+			end
 
-		if not modified then
-			icon.AlertText:Hide()
-			icon.AlertText:SetAlpha(0)
-			icon.AlertText.Show = E.noop
-			icon.AlertText.Hide = E.noop
+			EM:SetIconParent(button)
+			button.SetParent = E.noop
+			EM:SetScale(button, 1)
 
-			icon.AlertBG:SetAlpha(0)
-			icon.AlertBG:Hide()
-			icon.AlertBG.Show = E.noop
-			icon.AlertBG.Hide = E.noop
+			local box = _G.GarrisonLandingPageTutorialBox
+			if box then
+				box:SetScale(1)
+				box:SetClampedToScreen(true)
+			end
 
-			icon.AlertText.SetText = function(_, text)
-				if text then
-					print(F.CreateColorString(icon.title or L["Garrison"], E.db.general.valuecolor) .. ": " .. text)
+			button:SetHitRectInsets(0, 0, 0, 0)
+			if button.AlertText then
+				button.AlertText:Kill()
+				button.AlertText.SetText = function(_, text)
+					if text then
+						local event = F.CreateColorString(button.title or L["Garrison"], E.db.general.valuecolor)
+						F.Print(event .. " " .. text)
+					end
 				end
 			end
 
-			modified = true
-		end
+			if button.AlertBG then
+				button.AlertBG:Kill()
+			end
 
-		self:UpdateLayout()
-	end
-end
-
-do
-	local originalFunction = EM.HandleExpansionButton
-	function EM:HandleExpansionButton()
-		local icon = _G.ExpansionLandingPageMinimapButton
-
-		if not icon or not icon.isWindMinimapButton or InCombatLockdown() then
-			return originalFunction(self)
-		else
-			return MB:UpdateExpansionLandingPageMinimapIcon(icon)
-		end
-	end
+			RunNextFrame(function()
+				F.TaskManager:OutOfCombat(MB.UpdateLayout, MB)
+			end)
+		end)
+	end, 0.1, 100)
 end
 
 function MB:SetButtonMouseOver(button, frame, rawhook)
@@ -303,13 +300,6 @@ function MB:SkinButton(frame)
 		frame:SetNormalTexture("Interface\\Icons\\INV_Helmet_87")
 	elseif name == "SmartBuff_MiniMapButton" then
 		frame:SetNormalTexture(C_Spell_GetSpellTexture(12051))
-	elseif name == "ExpansionLandingPageMinimapButton" then
-		if self.db.garrison then
-			if not frame.isWindMinimapButton then
-				frame.isWindMinimapButton = true
-				self:UpdateExpansionLandingPageMinimapIcon(_G.ExpansionLandingPageMinimapButton)
-			end
-		end
 	elseif name == "GRM_MinimapButton" then
 		frame.GRM_MinimapButtonBorder:Hide()
 		frame:SetPushedTexture("")
@@ -330,6 +320,22 @@ function MB:SkinButton(frame)
 			if region ~= _G.BtWQuestsMinimapButtonIcon then
 				region:SetTexture(nil)
 				region:SetAlpha(0)
+				region:Hide()
+			end
+		end
+	elseif name == "JST_MinimapButton" then
+		frame.anim:Stop()
+		frame.anim.Play = E.noop
+		frame.bg:Kill()
+		frame.icon:SetAlpha(1)
+		frame.icon:Show()
+		frame.icon.Hide = E.noop
+		frame.icon2:Kill()
+		frame.timer:SetScript("OnUpdate", nil)
+		frame.timer.SetScript = E.noop
+	elseif name == "MRPMinimapButton" then
+		for _, region in pairs({ frame:GetRegions() }) do
+			if region:GetTexture() > 0 then
 				region:Hide()
 			end
 		end

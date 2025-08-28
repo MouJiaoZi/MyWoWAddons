@@ -10,6 +10,9 @@ BAGANATOR_CONFIG = {
 {
 ["currencyID"] = 3290,
 },
+{
+["currencyID"] = 3008,
+},
 },
 ["我们完蛋啦-伊森利恩"] = {
 },
@@ -173,6 +176,7 @@ BAGANATOR_CONFIG = {
 30,
 -235,
 },
+["debug_timers"] = false,
 ["category_sections"] = {
 ["1"] = {
 ["name"] = "EQUIPMENT",
@@ -181,7 +185,6 @@ BAGANATOR_CONFIG = {
 ["name"] = "CRAFTING",
 },
 },
-["debug_timers"] = false,
 ["seen_welcome"] = 1,
 ["hide_special_container"] = {
 },
@@ -197,11 +200,7 @@ BAGANATOR_CONFIG = {
 ["category_horizontal_spacing_2"] = 0.3,
 ["category_group_empty_slots"] = true,
 ["category_default_import"] = 2,
-["bag_view_position"] = {
-"BOTTOMRIGHT",
--368.9677734375,
-112.2538070678711,
-},
+["debug_categories"] = false,
 ["character_bank_current_tab"] = 0,
 ["sort_start_at_bottom"] = false,
 ["bag_empty_space_at_top"] = false,
@@ -209,12 +208,11 @@ BAGANATOR_CONFIG = {
 ["sort_ignore_bank_slots_count"] = {
 ["某餃子-伊森利恩"] = 0,
 },
-["sort_ignore_slots_at_end"] = false,
-["saved_searches"] = {
-},
 ["category_section_toggled"] = {
 ["装备"] = false,
 },
+["category_migration"] = 5,
+["sort_ignore_slots_at_end"] = false,
 ["category_modifications"] = {
 ["default_armor"] = {
 ["addedItems"] = {
@@ -290,8 +288,7 @@ BAGANATOR_CONFIG = {
 ["某餃子-伊森利恩"] = 0,
 },
 ["bag_view_width"] = 12,
-["disabled_skins"] = {
-},
+["view_alpha"] = 1,
 ["setting_anchors"] = false,
 ["guild_current_tab"] = 0,
 ["guild_bank_sort_method"] = "unset",
@@ -328,7 +325,8 @@ BAGANATOR_CONFIG = {
 },
 ["auto_sort_on_open"] = false,
 ["upgrade_plugin"] = "none",
-["view_alpha"] = 1,
+["disabled_skins"] = {
+},
 ["show_buttons_on_alt"] = false,
 ["currencies_tracked_imported"] = {
 },
@@ -339,7 +337,8 @@ BAGANATOR_CONFIG = {
 0,
 0,
 },
-["category_migration"] = 5,
+["saved_searches"] = {
+},
 ["bank_only_view_position"] = {
 "LEFT",
 20,
@@ -348,7 +347,11 @@ BAGANATOR_CONFIG = {
 ["bag_icon_size"] = 37,
 ["show_sort_button_2"] = true,
 ["bag_view_show_bag_slots"] = true,
-["debug_categories"] = false,
+["bag_view_position"] = {
+"BOTTOMRIGHT",
+-368.9677734375,
+112.2538070678711,
+},
 ["currency_panel_position"] = {
 "RIGHT",
 "Baganator_CategoryViewBackpackViewFrameelvui",
