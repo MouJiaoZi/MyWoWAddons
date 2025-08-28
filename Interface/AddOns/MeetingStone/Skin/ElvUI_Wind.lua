@@ -303,8 +303,8 @@ local function defaultcvar()
           end
           
           -- Meeting Stone EX element (大秘境过滤)
-          if BrowsePanel.ExSearchPanel then
-              local panel = BrowsePanel.ExSearchPanel
+          if BrowsePanel.BlzFilterPanel then
+              local panel = BrowsePanel.BlzFilterPanel
               S:Proxy("HandlePortraitFrame", panel)
               S:CreateShadow(panel)
               for _, child in pairs {panel:GetChildren()} do
@@ -323,8 +323,44 @@ local function defaultcvar()
                   if child.Check then
                       S:Proxy("HandleCheckBox", child.Check)
                   end
+                  if child.Check and child.MaxBox and child.MinBox then
+                    S:Proxy("HandleCheckBox", child.Check)
+                    child.MaxBox:StripTextures()
+                    S:Proxy("HandleEditBox", child.MaxBox)
+                    child.MinBox:StripTextures()
+                    S:Proxy("HandleEditBox", child.MinBox)
+                 end
               end
           end
+          if BrowsePanel.ExFilterPanel then
+            local panel = BrowsePanel.ExFilterPanel
+            S:Proxy("HandlePortraitFrame", panel)
+            S:CreateShadow(panel)
+            for _, child in pairs {panel:GetChildren()} do
+                if child.GetObjectType and child:GetObjectType() == "Button" then
+                    if child.GetText and child:GetText() ~= "" and child:GetText() ~= nil then
+                        S:Proxy("HandleButton", child, nil, nil, nil, true, "Transparent")
+                        child.backdrop:ClearAllPoints()
+                        child.backdrop:SetOutside(child, -1, 0)
+                    else
+                        S:Proxy("HandleCloseButton", child)
+                    end
+                end
+            end
+            
+            for _, child in pairs {panel.Inset:GetChildren()} do
+                if child.Check then
+                    S:Proxy("HandleCheckBox", child.Check)
+                end
+                if child.Check and child.MaxBox and child.MinBox then
+                  S:Proxy("HandleCheckBox", child.Check)
+                  child.MaxBox:StripTextures()
+                  S:Proxy("HandleEditBox", child.MaxBox)
+                  child.MinBox:StripTextures()
+                  S:Proxy("HandleEditBox", child.MinBox)
+               end
+            end
+        end
       end
       
       -- Manager Panel (管理活动)
