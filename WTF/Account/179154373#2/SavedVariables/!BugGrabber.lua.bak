@@ -1,6 +1,6 @@
 
 BugGrabberDB = {
-["session"] = 660,
+["session"] = 666,
 ["lastSanitation"] = 3,
 ["errors"] = {
 {
@@ -106,14 +106,6 @@ BugGrabberDB = {
 ["stack"] = "[Interface/AddOns/Blizzard_ChatFrameBase/Shared/SlashCommands.lua]:859: in function '?'\n[Interface/AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua]:3102: in function <...AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua:3048>\n[C]: in function 'ChatEdit_ParseText'\n[Interface/AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua]:2754: in function 'ChatEdit_SendText'\n[Interface/AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua]:2790: in function <...AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua:2786>\n[C]: in function 'ChatEdit_OnEnterPressed'\n[*ChatFrame.xml:140_OnEnterPressed]:1: in function <[string \"*ChatFrame.xml:140_OnEnterPressed\"]:1>",
 ["session"] = 591,
 ["counter"] = 1,
-},
-{
-["message"] = "...Stone/Libs/LibShowUIPanel-1.0-5/LibShowUIPanel-1.0.lua:65: attempt to index upvalue 'Delegate' (a nil value)",
-["time"] = "2025/08/17 00:45:15",
-["locals"] = "frame = EncounterJournal {\n instanceSelect = EncounterJournalInstanceSelect {\n }\n suggestTab = EncounterJournalSuggestTab {\n }\n MonthlyActivitiesFrame = EncounterJournalMonthlyActivitiesFrame {\n }\n __windShadow = 1\n LootJournalTab = EncounterJournalLootJournalTab {\n }\n TitleContainer = Frame {\n }\n lootJournalView = \"套装物品\"\n suggestFrame = EncounterJournalSuggestFrame {\n }\n lastDifficulty = 8\n shadow = Frame {\n }\n encounter = EncounterJournalEncounterFrame {\n }\n LootJournalItems = Frame {\n }\n Bg = EncounterJournalBg {\n }\n NineSlice = Frame {\n }\n TopEdge = Texture {\n }\n BottomRightCorner = Texture {\n }\n LeftEdge = Texture {\n }\n searchBox = EncounterJournalSearchBox {\n }\n PixelSnapDisabled = true\n instanceID = 1267\n dungeonsTab = EncounterJournalDungeonTab {\n }\n __MERStyle = 1\n MERStyle = Frame {\n }\n lastInstance = 1267\n maxTabWidth = 160\n overviewDefaultRole = 0\n Center = Texture {\n }\n RightEdge = Texture {\n }\n raidsTab = EncounterJournalRaidTab {\n }\n BottomEdge = Texture {\n }\n BottomLeftCorner = Texture {\n }\n TopRightCorner = Texture {\n }\n layoutType = \"PortraitFrameTemplate\"\n TopLeftCorner = Texture {\n }\n creatureDisplayID = 0\n backdropInfo = <table> {\n }\n PortraitContainer = Frame {\n }\n inset = EncounterJournalInset {\n }\n searchResults = EncounterJournalSearchResults {\n }\n LootJournalViewDropdown = Button {\n }\n TopTileStreaks = Texture {\n }\n template = \"Transparent\"\n MonthlyActivitiesTab = EncounterJournalMonthlyActivitiesTab {\n }\n numTabs = 5\n LootJournal = Frame {\n }\n Tabs = <table> {\n }\n navBar = EncounterJournalNavBar {\n }\n selectedTab = 4\n CloseButton = EncounterJournalCloseButton {\n }\n}\nforce = nil\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = \"area\"\n(*temporary) = \"left\"\n(*temporary) = \"attempt to index upvalue 'Delegate' (a nil value)\"\nDelegate = nil\n",
-["stack"] = "[Interface/AddOns/MeetingStone/Libs/LibShowUIPanel-1.0-5/LibShowUIPanel-1.0.lua]:65: in function <...Stone/Libs/LibShowUIPanel-1.0/LibShowUIPanel-1.0.lua:55>\n[tail call]: ?\n[tail call]: ?\n[C]: ?\n[C]: in function 'ShowUIPanel'\n[Interface/AddOns/Blizzard_EncounterJournal/Mainline/Blizzard_EncounterJournal.lua]:2577: in function 'EncounterJournal_OpenJournal'\n[Interface/AddOns/WarpDeplete/State.lua]:197: in function 'GetEJObjectiveNames'\n[Interface/AddOns/WarpDeplete/State.lua]:250: in function 'RefreshObjectiveNames'\n[Interface/AddOns/WarpDeplete/State.lua]:256: in function <Interface/AddOns/WarpDeplete/State.lua:255>",
-["session"] = 591,
-["counter"] = 5,
 },
 {
 ["message"] = "...ddOns/PersonalLootHelper/PersonalLootHelper-Core.lua:2479: attempt to call global 'GetLootMethod' (a nil value)",
@@ -234,6 +226,22 @@ BugGrabberDB = {
 ["stack"] = "[Interface/AddOns/MeetingStone/Libs/NetEaseGUI-2.0-3/Widget/AutoHideController.lua]:26: in function <...ne/Libs/NetEaseGUI-2.0/Widget/AutoHideController.lua:15>",
 ["session"] = 654,
 ["counter"] = 9,
+},
+{
+["message"] = "...Stone/Libs/LibShowUIPanel-1.0-5/LibShowUIPanel-1.0.lua:65: attempt to index upvalue 'Delegate' (a nil value)",
+["time"] = "2025/08/17 00:45:15",
+["locals"] = "frame = EncounterJournal {\n instanceSelect = EncounterJournalInstanceSelect {\n }\n suggestTab = EncounterJournalSuggestTab {\n }\n MonthlyActivitiesFrame = EncounterJournalMonthlyActivitiesFrame {\n }\n __windShadow = 1\n LootJournalTab = EncounterJournalLootJournalTab {\n }\n TitleContainer = Frame {\n }\n lootJournalView = \"套装物品\"\n suggestFrame = EncounterJournalSuggestFrame {\n }\n lastDifficulty = 8\n shadow = Frame {\n }\n encounter = EncounterJournalEncounterFrame {\n }\n LootJournalItems = Frame {\n }\n Bg = EncounterJournalBg {\n }\n NineSlice = Frame {\n }\n TopEdge = Texture {\n }\n BottomRightCorner = Texture {\n }\n LeftEdge = Texture {\n }\n searchBox = EncounterJournalSearchBox {\n }\n PixelSnapDisabled = true\n instanceID = 1267\n dungeonsTab = EncounterJournalDungeonTab {\n }\n __MERStyle = 1\n MERStyle = Frame {\n }\n lastInstance = 1267\n maxTabWidth = 160\n overviewDefaultRole = 0\n Center = Texture {\n }\n RightEdge = Texture {\n }\n raidsTab = EncounterJournalRaidTab {\n }\n BottomEdge = Texture {\n }\n BottomLeftCorner = Texture {\n }\n TopRightCorner = Texture {\n }\n layoutType = \"PortraitFrameTemplate\"\n TopLeftCorner = Texture {\n }\n creatureDisplayID = 0\n backdropInfo = <table> {\n }\n PortraitContainer = Frame {\n }\n inset = EncounterJournalInset {\n }\n searchResults = EncounterJournalSearchResults {\n }\n LootJournalViewDropdown = Button {\n }\n TopTileStreaks = Texture {\n }\n template = \"Transparent\"\n MonthlyActivitiesTab = EncounterJournalMonthlyActivitiesTab {\n }\n numTabs = 5\n LootJournal = Frame {\n }\n Tabs = <table> {\n }\n navBar = EncounterJournalNavBar {\n }\n selectedTab = 4\n CloseButton = EncounterJournalCloseButton {\n }\n}\nforce = nil\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = \"area\"\n(*temporary) = \"left\"\n(*temporary) = \"attempt to index upvalue 'Delegate' (a nil value)\"\nDelegate = nil\n",
+["stack"] = "[Interface/AddOns/MeetingStone/Libs/LibShowUIPanel-1.0-5/LibShowUIPanel-1.0.lua]:65: in function <...Stone/Libs/LibShowUIPanel-1.0/LibShowUIPanel-1.0.lua:55>\n[tail call]: ?\n[tail call]: ?\n[C]: ?\n[C]: in function 'ShowUIPanel'\n[Interface/AddOns/Blizzard_EncounterJournal/Mainline/Blizzard_EncounterJournal.lua]:2577: in function 'EncounterJournal_OpenJournal'\n[Interface/AddOns/WarpDeplete/State.lua]:197: in function 'GetEJObjectiveNames'\n[Interface/AddOns/WarpDeplete/State.lua]:250: in function 'RefreshObjectiveNames'\n[Interface/AddOns/WarpDeplete/State.lua]:256: in function <Interface/AddOns/WarpDeplete/State.lua:255>",
+["session"] = 663,
+["counter"] = 9,
+},
+{
+["message"] = "Interface/AddOns/JST_ManaforgeOmega/2_Loomithar.lua:429: attempt to index field '?' (a nil value)",
+["time"] = "2025/08/29 22:09:11",
+["locals"] = "self = JST_1247672_Mods {\n color = <table> {\n }\n encounterID = 2686\n config_id = 1247672\n sort_bars = <table> {\n }\n assignments = <table> {\n }\n set = 0\n t = 0\n npcID = <table> {\n }\n text_frame_soak = Frame {\n }\n PYLON_DURATION = 27\n engageID = 3131\n backups = <table> {\n }\n point = <table> {\n }\n text_frame_self_highstacks = Frame {\n }\n enable = true\n text_frame_tether = Frame {\n }\n df = JST_1247672_ModsDragFrame {\n }\n config_name = \"|T1033914:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[注能晶塔]|r小组状态监控\"\n movingtag = 2686\n movingname = \"卢米萨尔|T1033914:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[注能晶塔]|r小组状态监控\"\n events = <table> {\n }\n enable_tag = \"everyone\"\n bars = <table> {\n }\n ficon = \"12\"\n text_frame_group_highstacks = Frame {\n }\n}\n(for index) = 1\n(for limit) = 2\n(for step) = 1\ni = 1\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = \"attempt to index field '?' (a nil value)\"\n",
+["stack"] = "[Interface/AddOns/JST_ManaforgeOmega/2_Loomithar.lua]:429: in function 'PreviewHide'\n[Interface/AddOns/JST/core/moving.lua]:214: in function <Interface/AddOns/JST/core/moving.lua:212>\n[C]: in function 'Hide'\n[Interface/AddOns/JST/core/moving.lua]:99: in function <Interface/AddOns/JST/core/moving.lua:94>",
+["session"] = 666,
+["counter"] = 1,
 },
 },
 }

@@ -1,6 +1,7 @@
 -- GENERATE BY script.py
 -- 本次更新得到NGA@雨夜独行客的大力帮助。
 -- 备注：有备注技能名称的是我手里还有保留的资料。
+-- v 11.2
 
 local _, addon = ...
 
@@ -3452,7 +3453,8 @@ addon.FilePaths = {
 	[346116] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 剪切挥舞
 	[346766] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 定期消毒
 	[346957] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 火焰净除
-	[346959] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 火焰净除
+	--[346959] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 火焰净除
+	[346961] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 净化之地
 	[347094] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 泰坦粉碎
 	[353312] = "Shadowlands\\Dungeon\\Tazavesh\\",  -- 净化爆发
 	  -- Timecap'n Hooktail  时空船长钩尾
@@ -5111,6 +5113,7 @@ addon.FilePaths = {
 	[444408] = "TheWarWithin\\Delves\\",  -- 代言人之怒
 	[444479] = "TheWarWithin\\Delves\\",  -- 暗焰齐射
 	[445191] = "TheWarWithin\\Delves\\",  -- 点芯箭雨
+	[445193] = "TheWarWithin\\Delves\\",  -- 烈焰之地
 	[445210] = "TheWarWithin\\Delves\\",  -- 烈焰冲刺
 	[445252] = "TheWarWithin\\Delves\\",  -- 死疽终末
 	[445407] = "TheWarWithin\\Delves\\",  -- 嗜血
@@ -5333,7 +5336,8 @@ addon.FilePaths = {
 	[1245784] = "TheWarWithin\\Delves\\",  -- 粉碎砸击	
 	  -- 钢魂奥能守卫<Steelsoul Arcanoward>
 	[1230608] = "TheWarWithin\\Delves\\",  -- 晕眩试炼
-	[1231893] = "TheWarWithin\\Delves\\",  -- 毁灭践踏		
+	[1231893] = "TheWarWithin\\Delves\\",  -- 毁灭践踏
+	[1231919] = "TheWarWithin\\Delves\\",  -- 核闪穿刺	
 		-- Dungeon 地下城
 	-- Ara-Kara, City of Echoes   艾拉-卡拉，回响之城
 	  -- Avanoxx  阿瓦诺克斯
@@ -5785,6 +5789,7 @@ addon.FilePaths = {
 	[1221190] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 暴食瘴气
 	[1221483] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 电弧能量
 	[1221532] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 异变仪式
+	[1221679] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 远遁者之跃
 	[1222202] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 奥术燃烧
 	[1222341] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 幽暗之咬
 	[1222356] = "TheWarWithin\\Dungeon\\EcoDomeAldani\\",  -- 迁跃
@@ -6247,6 +6252,7 @@ addon.FilePaths = {
 	[1229038] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 吞噬
 	[1230087] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 千钧猛击
 	[1230168] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 凡躯的脆弱
+	[1230674] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 面条效应
 	[1230979] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 暗物质
 	[1231002] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 黑暗能量
 	[1231716] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 熄灭众星
@@ -6256,6 +6262,8 @@ addon.FilePaths = {
 	[1233539] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 吞噬
 	[1234044] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 昏天黑地
 	[1234054] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 暗影震荡
+	[1234243] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 倾压引力
+	[1234244] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 引力倒转
 	[1234263] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 寰宇崩塌
 	[1234266] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 寰宇脆弱
 	[1235114] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 翔空雷什
@@ -6278,5 +6286,6 @@ addon.FilePaths = {
 	[1246541] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 虚无缠缚
 	[1246930] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 星辰之核
 	[1250055] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 虚空之握
+	[1251619] = "TheWarWithin\\Raid\\ManaforgeOmega\\",  -- 星辰碎片冲击
   
 }

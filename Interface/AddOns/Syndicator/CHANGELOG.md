@@ -1,6 +1,7 @@
 # Syndicator
 
-## [228](https://github.com/Baganator/Syndicator/tree/228) (2025-08-23)
-[Full Changelog](https://github.com/Baganator/Syndicator/compare/227...228) 
+## [229](https://github.com/Baganator/Syndicator/tree/229) (2025-08-27)
+[Full Changelog](https://github.com/Baganator/Syndicator/compare/228...229) 
 
-- ATT Expansion Detection: Use map data as a backup patch source  
+- Vanilla: Add fallback for when bid placed when another buyout is queued  
+- Vanilla: Add auction house purchases to inventory counts before checking mail  

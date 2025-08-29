@@ -1,13 +1,13 @@
-VER 3 0100000000000099 "1" "INV_Misc_QuestionMark"
+VER 3 01000000000000AA "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@player] 爆炸酒桶
 END
-VER 3 010000000000009A "1" "INV_Misc_QuestionMark"
+VER 3 01000000000000AB "1" "INV_Misc_QuestionMark"
 #showtooltip 切喉手
 /cast [@focus,exists,harm] 切喉手
 /cast [@target,exists,harm] 切喉手
 END
-VER 3 010000000000009B "1" "INV_Misc_QuestionMark"
+VER 3 01000000000000AC "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@cursor] 召唤玄牛雕像
 /target 玄牛雕像
@@ -15,27 +15,27 @@ VER 3 010000000000009B "1" "INV_Misc_QuestionMark"
 /click TotemFrameTotem1 RightButton
 /targetlasttarget
 END
-VER 3 010000000000009C "1" "INV_Misc_QuestionMark"
+VER 3 01000000000000AD "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@cursor] 平心之环
 END
-VER 3 010000000000009D "1" "INV_Misc_QuestionMark"
+VER 3 01000000000000AE "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast 迅如猛虎
 END
-VER 3 01000000000000A0 "1" "134400"
+VER 3 01000000000000AF "1" "INV_Misc_QuestionMark"
 #showtooltips
 /castsequence reset=7 碧玉疾风,旭日东升踢
 END
-VER 3 01000000000000A1 "1" "134400"
+VER 3 01000000000000B0 "1" "INV_Misc_QuestionMark"
 #showtooltips
 /castsequence reset=4 幻灭踢,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌,猛虎掌
 END
-VER 3 010000000000009E "分身" "INV_Misc_QuestionMark"
+VER 3 01000000000000B1 "分身" "INV_Misc_QuestionMark"
 #showtooltips
 /castsequence reset=1000 魂体双分,魂体双分：转移
 END
-VER 3 010000000000009F "猛虎掌" "INV_Misc_QuestionMark"
+VER 3 01000000000000B2 "猛虎掌" "INV_Misc_QuestionMark"
 #showtooltip
 /cast 猛虎掌
 /cancleaura 203812

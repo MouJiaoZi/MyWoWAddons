@@ -16,9 +16,9 @@ RandomHearthToyDB = {
 },
 ["profiles"] = {
 ["Default"] = {
-[182773] = false,
-[142542] = false,
 [183716] = false,
+[142542] = false,
+[182773] = false,
 [180290] = false,
 },
 },

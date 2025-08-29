@@ -14,7 +14,6 @@ core._2810.Events = CreateFrame("Frame")
 ---- Plexus Sentinel
 ------------------------------------------------------
 local holdingMouseCounter = 0
-local holdingMouseUID = {}
 local intermissionStarted = false
 local miceSpawnedCounter = 0
 local miceSpawnedUID = {}
@@ -104,13 +103,27 @@ function core._2810:PlexusSentinel()
 
     -- Player as collected a mouse
     if core.type == "SPELL_AURA_APPLIED" and core.spellId == 1233449 then
-        if core.destName ~= nil and holdingMouseUID[core.spawn_uid_dest_Player] == nil then
+        if core.destName ~= nil then
+            -- The achievement somtimes bugs and allows players to collect multiple mice so don't limit 1 per player
             holdingMouseCounter = holdingMouseCounter + 1
             collectedMiceDuringIntermissionCounter = collectedMiceDuringIntermissionCounter + 1
-            holdingMouseUID[core.spawn_uid_dest_Player] = core.spawn_uid_dest_Player
             core:sendMessage(core.destName .. " " .. L["Shared_HasGained"] .. " " .. C_Spell.GetSpellLink(1233449) .. " " .. L["Shared_Intermission"] .. " (" .. collectedMiceDuringIntermissionCounter .. "/" .. miceSpawnedCounter .. ") " .. L["Shared_Total"] .. " (" .. holdingMouseCounter .. "/" .. core.groupSize .. ")",true)
             InfoFrame_SetPlayerComplete(core.destName)
         end
+    end
+
+    -- Player has lost the mouse
+    if core.type == "SPELL_AURA_REMOVED" and core.spellId == 1233449 then
+        local playerLostMouse = core.destName
+        C_Timer.After(0.5, function()
+            if playerLostMouse ~= nil then
+                if UnitIsDeadOrGhost(playerLostMouse) == false then
+                    holdingMouseCounter = holdingMouseCounter - 1
+                    InfoFrame_SetPlayerIncomplete(playerLostMouse)
+                    core:getAchievementFailedWithMessageAfter(playerLostMouse .. L["Shared_HasLost"] .. " " .. C_Spell.GetSpellLink(1233449))
+                end
+            end
+        end)
     end
 
     -- Detect end of intermission and and check if all mice have been picked up in time
@@ -129,7 +142,7 @@ function core._2810:PlexusSentinel()
     end
 
     --Announce success once everyone is holding a mouse at some point throughout the fight
-    if holdingMouseCounter == core.groupSize and core:getBlizzardTrackingStatus(42118, 1) == true then
+    if core:getBlizzardTrackingStatus(42118, 1) == true then
         core:getAchievementSuccess()
     end
 end
@@ -258,12 +271,12 @@ function core._2810:Fractillus()
 
     InfoFrame_UpdatePlayersOnInfoFrameWithAdditionalInfo()
     InfoFrame_SetHeaderMessage(
-        InfoFrame_GetIcon(1) .. " : " .. columFCounter .. " " ..
-        InfoFrame_GetIcon(2) .. " : " .. columECounter .. " " ..
-        InfoFrame_GetIcon(3) .. " : " .. columDCounter .. " " ..
-        InfoFrame_GetIcon(4) .. " : " .. columCCounter .. " " ..
-        InfoFrame_GetIcon(7) .. " : " .. columBCounter .. " " ..
-        InfoFrame_GetIcon(6) .. " : " .. columACounter .. "\n"
+        InfoFrame_GetIcon(1) .. ":" .. columFCounter .. " " ..
+        InfoFrame_GetIcon(2) .. ":" .. columECounter .. " " ..
+        InfoFrame_GetIcon(3) .. ":" .. columDCounter .. " " ..
+        InfoFrame_GetIcon(4) .. ":" .. columCCounter .. " " ..
+        InfoFrame_GetIcon(7) .. ":" .. columBCounter .. " " ..
+        InfoFrame_GetIcon(6) .. ":" .. columACounter .. "\n"
     )
     core.IATInfoFrame:SetSubHeading2(L["Shared_Notes"])
     core.IATInfoFrame:SetText2(L["ManaforgeOmega_TrackingLanes"] .."\n\n", 200)
@@ -429,20 +442,8 @@ function core._2810:Fractillus()
             -- We need to wait a moment to see if the player is dead or not
             C_Timer.After(0.5, function()
                 if UnitIsDeadOrGhost(currentName) == false then
-                    -- If any counters are at 4 then increment the fourth wall broken counter
-                    if columACounter == 4 then
-                        pendingWallBreaks["A"] = true
-                    elseif columBCounter == 4 then
-                        pendingWallBreaks["B"] = true
-                    elseif columCCounter == 4 then
-                        pendingWallBreaks["C"] = true
-                    elseif columDCounter == 4 then
-                        pendingWallBreaks["D"] = true
-                    elseif columECounter == 4 then
-                        pendingWallBreaks["E"] = true
-                    elseif columFCounter == 4 then
-                        pendingWallBreaks["F"] = true
-                    end
+                    -- Increment pendingWallbreaks for lane hit
+                    pendingWallBreaks[playerLanes[currentSpawnUIDDestPlayer]] = (pendingWallBreaks[playerLanes[currentSpawnUIDDestPlayer]] or 0) + 1
 
                     if playerLanes[currentSpawnUIDDestPlayer] == "A" then
                         if columACounter ~= 4 and fourthWallsBroken > 0 then
@@ -499,7 +500,9 @@ function core._2810:Fractillus()
                         --core:sendDebugMessage("Column F counter is now " .. columFCounter .. " after wall broken by " .. currentName)
                         InfoFrame_SetPlayerNeutralWithMessage(currentName, InfoFrame_GetIcon(1))
                     end
-
+                else
+                    -- If the player died then set them back to neutral on Infoframe
+                    InfoFrame_SetPlayerNeutralWithMessage(currentName, "")
                 end
 
                 -- Remove from break table
@@ -512,16 +515,63 @@ function core._2810:Fractillus()
         end
 
         if wallbreakLocked == false then
+            core:sendDebugMessage("Running wall break check. Locked")
             wallbreakLocked = true
             -- Wait a moment to see if any other walls are being broken at the same time
             C_Timer.After(3, function()
+                core:sendDebugMessage("Checking for additional wall breaks")
+                local aTemp = columACounter
+                local bTemp = columBCounter
+                local cTemp = columCCounter
+                local dTemp = columDCounter
+                local eTemp = columECounter
+                local fTemp = columFCounter
+                core:sendDebugMessage("Wall break check results: A=" .. aTemp .. ", B=" .. bTemp .. ", C=" .. cTemp .. ", D=" .. dTemp .. ", E=" .. eTemp .. ", F=" .. fTemp)
                 for lane,_ in pairs(pendingWallBreaks) do
-                    if pendingWallBreaks[lane] == true then
-                        fourthWallsBroken = fourthWallsBroken + 1
-                        pendingWallBreaks[lane] = nil
-                        core:sendMessage(core:getAchievement() .. " " .. L["Shared_WallBroken"] .. " (" .. fourthWallsBroken .. "/18)",true)
+                    -- if the lane has walls broken greater than 0
+                    if pendingWallBreaks[lane] > 0 then
+                        -- Add 1 to the temp counter for current lane
+                        core:sendDebugMessage("Wall break detected in lane " .. lane)
+                        if lane == "A" then
+                            aTemp = aTemp + 1
+                        elseif lane == "B" then
+                            bTemp = bTemp + 1
+                        elseif lane == "C" then
+                            cTemp = cTemp + 1
+                        elseif lane == "D" then
+                            dTemp = dTemp + 1
+                        elseif lane == "E" then
+                            eTemp = eTemp + 1
+                        elseif lane == "F" then
+                            fTemp = fTemp + 1
+                        end
+
+                        -- Now check if it meets four for the current lane
+                        local wallFound = false
+                        if lane == "A" and aTemp == 4 then
+                            wallFound = true
+                        elseif lane == "B" and bTemp == 4 then
+                            wallFound = true
+                        elseif lane == "C" and cTemp == 4 then
+                            wallFound = true
+                        elseif lane == "D" and dTemp == 4 then
+                            wallFound = true
+                        elseif lane == "E" and eTemp == 4 then
+                            wallFound = true
+                        elseif lane == "F" and fTemp == 4 then
+                            wallFound = true
+                        end
+                        core:sendDebugMessage("Wall break lane " .. lane .. " check is " .. tostring(wallFound) .. " (A=" .. aTemp .. ", B=" .. bTemp .. ", C=" .. cTemp .. ", D=" .. dTemp .. ", E=" .. eTemp .. ", F=" .. fTemp .. ")")
+
+                        if wallFound == true then
+                            core:sendDebugMessage("Fourth wall broken in lane " .. lane)
+                            fourthWallsBroken = fourthWallsBroken + 1
+                            pendingWallBreaks[lane] = nil
+                            core:sendMessage(core:getAchievement() .. " " .. L["Shared_WallBroken"] .. " (" .. fourthWallsBroken .. "/18)",true)
+                        end
                     end
                 end
+                core:sendDebugMessage("Wall break check complete. Unlocked")
                 wallbreakLocked = false
             end)
         end
@@ -573,47 +623,6 @@ function core._2810:DimensiusTheAllDevouring()
     end
 end
 
-function core._2810:TrackAdditional()
-    -- Loom'ithar - Voted
-    if (core.type == "SPELL_AURA_APPLIED" or core.type == "SPELL_AURA_REMOVED") and core.spellId == 1246718 then
-        core.IATInfoFrame:ToggleOn()
-        core.IATInfoFrame:SetHeading(GetAchievementLink(41613))
-        InfoFrame_SetHeaderCounter(C_Spell.GetSpellLink(1246718) .. " " .. L["Core_Counter"],votedCounter,core.groupSize)
-        InfoFrame_UpdatePlayersOnInfoFrame()
-
-        --Check all players in group for Voted debuff
-        for player2, status in pairs(core.InfoFrame_PlayersTable) do
-            local buffFound = false
-            local _, _, player_UID2 = strsplit("-", UnitGUID(player2))
-
-            local spellInfo = C_Spell.GetSpellInfo(1246718)
-            if spellInfo ~= nil then
-                local aura = C_UnitAuras.GetAuraDataBySpellName(player2, spellInfo.name)
-                if aura then
-                    buffFound = true
-                end
-            end
-
-            if buffFound == true then
-                InfoFrame_SetPlayerComplete(player2)
-                if votedUID[player_UID2] == nil then
-                    votedUID[player_UID2] = player_UID2
-                    votedCounter = votedCounter + 1
-                end
-            end
-        end
-
-        --Update with any changes
-        InfoFrame_SetHeaderCounter(C_Spell.GetSpellLink(1246718) .. " " .. L["Core_Counter"],votedCounter,core.groupSize)
-        InfoFrame_UpdatePlayersOnInfoFrame()
-
-        --Hide if no one has the debuff anymore
-        if votedCounter == 0 then
-            core.IATInfoFrame:ToggleOff()
-        end
-    end
-end
-
 function core._2810:InstanceCleanup()
     core._2810.Events:UnregisterEvent("UNIT_AURA")
     core._2810.Events:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
@@ -643,12 +652,12 @@ function core._2810.Events:UNIT_SPELLCAST_SUCCEEDED(self, unitTarget, castGUID, 
         InfoFrame_UpdatePlayersOnInfoFrameWithAdditionalInfo()
 
        InfoFrame_SetHeaderMessage(
-            InfoFrame_GetIcon(1) .. " : " .. columFCounter .. " " ..
-            InfoFrame_GetIcon(2) .. " : " .. columECounter .. " " ..
-            InfoFrame_GetIcon(3) .. " : " .. columDCounter .. " " ..
-            InfoFrame_GetIcon(4) .. " : " .. columCCounter .. " " ..
-            InfoFrame_GetIcon(7) .. " : " .. columBCounter .. " " ..
-            InfoFrame_GetIcon(6) .. " : " .. columACounter .. "\n"
+            InfoFrame_GetIcon(1) .. ":" .. columFCounter .. " " ..
+            InfoFrame_GetIcon(2) .. ":" .. columECounter .. " " ..
+            InfoFrame_GetIcon(3) .. ":" .. columDCounter .. " " ..
+            InfoFrame_GetIcon(4) .. ":" .. columCCounter .. " " ..
+            InfoFrame_GetIcon(7) .. ":" .. columBCounter .. " " ..
+            InfoFrame_GetIcon(6) .. ":" .. columACounter .. "\n"
         )
         core.IATInfoFrame:SetSubHeading2(L["Shared_Notes"])
         core.IATInfoFrame:SetText2(L["ManaforgeOmega_TrackingLanes"] .."\n\n", 200)
@@ -768,7 +777,55 @@ function core._2810.Events:UNIT_AURA(self, unitID)
                 end
             end
 		end
-	end
+    end
+
+    -- Loom'ithar - Voted
+    if (core.type == "SPELL_AURA_APPLIED" or core.type == "SPELL_AURA_REMOVED") and core.spellId == 1246718 then
+        core.IATInfoFrame:ToggleOn()
+        core.IATInfoFrame:SetHeading(GetAchievementLink(41613))
+        InfoFrame_SetHeaderCounter(C_Spell.GetSpellLink(1246718) .. " " .. L["Core_Counter"],votedCounter,core.groupSize)
+        InfoFrame_UpdatePlayersOnInfoFrame()
+
+        local name, realm = UnitName(unitID)
+        local unitType, destID, spawn_uid_dest = strsplit("-",UnitGUID(unitID));
+
+        local spellInfo = C_Spell.GetSpellInfo(1246718)
+
+        if spellInfo ~= nil then
+            local aura = C_UnitAuras.GetAuraDataBySpellName(unitID, spellInfo.name)
+            if aura then
+                if name ~= nil then
+                    if votedUID[spawn_uid_dest] == nil then
+                        votedUID[spawn_uid_dest] = spawn_uid_dest
+                        votedCounter = votedCounter + 1
+                        core:sendMessage(name .. " " .. L["Shared_HasGained"] .. " " .. C_Spell.GetSpellLink(1246718) .. " (" .. votedCounter .. "/" .. core.groupSize .. ")", true)
+                        InfoFrame_SetPlayerComplete(name)
+                    end
+                end
+            end
+
+            -- If aura is not found
+            if aura == nil then
+                if name ~= nil then
+                    if votedUID[spawn_uid_dest] ~= nil then
+                        votedUID[spawn_uid_dest] = nil
+                        if votedCounter > 0 then
+                            votedCounter = votedCounter - 1
+                        end
+                        InfoFrame_SetPlayerNeutral(name)
+                    end
+                end
+            end
+        end
+
+        --Update with any changes
+        InfoFrame_UpdatePlayersOnInfoFrame()
+
+        --Hide if no one has the debuff anymore
+        if votedCounter == 0 then
+            core.IATInfoFrame:ToggleOff()
+        end
+    end
 end
 
 function core._2810:ClearVariables()
@@ -776,7 +833,6 @@ function core._2810:ClearVariables()
     ---- Plexus Sentinel
     ------------------------------------------------------
     holdingMouseCounter = 0
-    holdingMouseUID = {}
     intermissionStarted = false
     miceSpawnedCounter = 0
     miceSpawnedUID = {}

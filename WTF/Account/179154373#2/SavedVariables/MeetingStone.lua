@@ -92,12 +92,12 @@ MEETINGSTONE_UI_DB = {
 ["enable"] = false,
 ["max"] = 0,
 },
-["Age"] = {
+["Members"] = {
 ["min"] = 0,
 ["enable"] = false,
 ["max"] = 0,
 },
-["Members"] = {
+["Age"] = {
 ["min"] = 0,
 ["enable"] = false,
 ["max"] = 0,
@@ -111,28 +111,28 @@ MEETINGSTONE_UI_DB = {
 {
 ["LeaderScore"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
 },
 ["BossKilled"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
-},
-["ItemLevel"] = {
-["min"] = 0,
 ["max"] = 0,
-["enable"] = false,
-},
-["Age"] = {
-["min"] = 0,
-["max"] = 0,
-["enable"] = false,
 },
 ["Members"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
+},
+["Age"] = {
+["min"] = 0,
+["enable"] = false,
+["max"] = 0,
+},
+["ItemLevel"] = {
+["min"] = 0,
+["enable"] = false,
+["max"] = 0,
 },
 },
 {
@@ -151,12 +151,12 @@ MEETINGSTONE_UI_DB = {
 ["max"] = 0,
 ["enable"] = true,
 },
-["Members"] = {
+["Age"] = {
 ["min"] = 0,
 ["max"] = 0,
 ["enable"] = false,
 },
-["Age"] = {
+["Members"] = {
 ["min"] = 0,
 ["max"] = 0,
 ["enable"] = false,
@@ -178,12 +178,12 @@ MEETINGSTONE_UI_DB = {
 ["max"] = 0,
 ["enable"] = false,
 },
-["Age"] = {
+["Members"] = {
 ["min"] = 0,
 ["max"] = 0,
 ["enable"] = false,
 },
-["Members"] = {
+["Age"] = {
 ["min"] = 0,
 ["max"] = 0,
 ["enable"] = false,
@@ -234,28 +234,28 @@ MEETINGSTONE_UI_DB = {
 ["ItemLevel"] = 580,
 ["HonorLevel"] = 0,
 },
-["麦卡贡车间（史诗钥石）"] = {
-["ItemLevel"] = 629,
+["破晨号（史诗钥石）"] = {
+["ItemLevel"] = 695,
 ["HonorLevel"] = 0,
 },
 ["赎罪大厅（史诗钥石）"] = {
 ["ItemLevel"] = 695,
 ["HonorLevel"] = 0,
 },
-["破晨号（史诗钥石）"] = {
-["ItemLevel"] = 695,
+["麦卡贡车间（史诗钥石）"] = {
+["ItemLevel"] = 629,
 ["HonorLevel"] = 0,
 },
 ["红玉新生法池（史诗钥石）"] = {
 ["ItemLevel"] = 490,
 ["HonorLevel"] = 0,
 },
-["艾拉-卡拉，回响之城（史诗）"] = {
-["ItemLevel"] = 580,
-["HonorLevel"] = 0,
-},
 ["暴富矿区（史诗钥石）"] = {
 ["ItemLevel"] = 629,
+["HonorLevel"] = 0,
+},
+["艾拉-卡拉，回响之城（史诗）"] = {
+["ItemLevel"] = 580,
 ["HonorLevel"] = 0,
 },
 ["自定义PvE"] = {
@@ -266,16 +266,16 @@ MEETINGSTONE_UI_DB = {
 ["ItemLevel"] = 625,
 ["HonorLevel"] = 0,
 },
-["尼鲁巴尔王宫（英雄）"] = {
-["ItemLevel"] = 600,
+["燧酿酒庄（史诗钥石）"] = {
+["ItemLevel"] = 650,
 ["HonorLevel"] = 0,
 },
 ["圣焰隐修院（史诗钥石）"] = {
 ["ItemLevel"] = 690,
 ["HonorLevel"] = 0,
 },
-["燧酿酒庄（史诗钥石）"] = {
-["ItemLevel"] = 650,
+["尼鲁巴尔王宫（英雄）"] = {
+["ItemLevel"] = 600,
 ["HonorLevel"] = 0,
 },
 ["艾拉-卡拉，回响之城（普通）"] = {
@@ -357,8 +357,8 @@ MEETINGSTONE_UI_DB = {
 ["FILTER_DAMAGE"] = false,
 }
 MEETINGSTONE_UI_E_POINTS = {
-["y"] = 34.0400390625,
-["x"] = -90.20711517333984,
+["y"] = -1.007510542869568,
+["x"] = 215.5707244873047,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["QuickJoin"] = true,
