@@ -145,10 +145,17 @@ local iconDefaults = {
 	iconGlowProcStartAnim = true,
 	iconGlowProcAnimDuration = 1,
 	iconGlowTimeLeft = 0,
+	iconGlowOffsetX = 0,
+	iconGlowOffsetY = 0,
 	iconBorder = true,
+	iconBorderName = "Solid",
+	iconBorderOffset = 0,
 	iconBorderSize = 1,
 	iconBorderColor = {0, 0, 0, 1},
 	iconFrameStrata = "MEDIUM",
+	iconEmphasizeTime = 0,
+	iconEmphasizeFontColor = {1, 1, 1, 1},
+	iconEmphasizeFontSize = 8,
 }
 
 local textDefaults = {
@@ -174,6 +181,7 @@ for k, v in next, textDefaults do
 	plugin.defaultDB[k] = v
 end
 
+local iconBorderTable
 local function updateProfile()
 	db = plugin.db.profile
 
@@ -271,6 +279,12 @@ local function updateProfile()
 	if db.iconGlowTimeLeft < 0 or db.iconGlowTimeLeft > 3 then
 		db.iconGlowTimeLeft = plugin.defaultDB.iconGlowTimeLeft
 	end
+	if db.iconGlowOffsetX < -32 or db.iconGlowOffsetX > 32 then
+		db.iconGlowOffsetX = plugin.defaultDB.iconGlowOffsetX
+	end
+	if db.iconGlowOffsetY < -32 or db.iconGlowOffsetY > 32 then
+		db.iconGlowOffsetY = plugin.defaultDB.iconGlowOffsetY
+	end
 	if db.iconZoom < 0 or db.iconZoom > 0.5 then
 		db.iconZoom = plugin.defaultDB.iconZoom
 	end
@@ -291,8 +305,16 @@ local function updateProfile()
 			break -- If 1 entry is bad, reset the whole table
 		end
 	end
-	if db.iconBorderSize < 1 or db.iconBorderSize > 5 then
+	if not media:IsValid("border", db.iconBorderName) then -- If the border is suddenly invalid then reset the size and offset also
+		db.iconBorderName = plugin.defaultDB.iconBorderName
 		db.iconBorderSize = plugin.defaultDB.iconBorderSize
+		db.iconBorderOffset = plugin.defaultDB.iconBorderOffset
+	end
+	if db.iconBorderSize < 1 or db.iconBorderSize > 32 then
+		db.iconBorderSize = plugin.defaultDB.iconBorderSize
+	end
+	if db.iconBorderOffset < 0 or db.iconBorderOffset > 32 then
+		db.iconBorderOffset = plugin.defaultDB.iconBorderOffset
 	end
 	for i = 1, 4 do
 		local n = db.iconBorderColor[i]
@@ -303,6 +325,19 @@ local function updateProfile()
 	end
 	if db.iconFrameStrata ~= "MEDIUM" and db.iconFrameStrata ~= "LOW" then
 		db.iconFrameStrata = plugin.defaultDB.iconFrameStrata
+	end
+	if db.iconEmphasizeTime < 0 or db.iconEmphasizeTime > 12 then
+		db.iconEmphasizeTime = plugin.defaultDB.iconEmphasizeTime
+	end
+	for i = 1, 4 do
+		local n = db.iconEmphasizeFontColor[i]
+		if type(n) ~= "number" or n < 0 or n > 1 then
+			db.iconEmphasizeFontColor = plugin.defaultDB.iconEmphasizeFontColor
+			break -- If 1 entry is bad, reset the whole table
+		end
+	end
+	if db.iconEmphasizeFontSize < 6 or db.iconEmphasizeFontSize > 200 then
+		db.iconEmphasizeFontSize = plugin.defaultDB.iconEmphasizeFontSize
 	end
 
 	if not validGrowDirections[db.textGrowDirection] then
@@ -339,6 +374,11 @@ local function updateProfile()
 	if db.textOutline ~= "NONE" and db.textOutline ~= "OUTLINE" and db.textOutline ~= "THICKOUTLINE" then
 		db.textOutline = plugin.defaultDB.textOutline
 	end
+
+	iconBorderTable = {
+		edgeFile = media:Fetch("border", db.iconBorderName),
+		edgeSize = db.iconBorderSize,
+	}
 end
 
 local function setDefaults(options)
@@ -447,6 +487,18 @@ local function iconLoop(updater)
 	local remaining = math.floor(iconFrame:GetRemaining() * 10 + 0.5) / 10
 	local timeToDisplay = math.ceil(remaining)
 	if timeToDisplay > 0 then
+		if timeToDisplay == db.iconEmphasizeTime then
+			local flags = nil
+			if db.iconFontMonochrome and db.iconFontOutline ~= "NONE" then
+				flags = "MONOCHROME," .. db.iconFontOutline
+			elseif db.iconFontMonochrome then
+				flags = "MONOCHROME"
+			elseif db.iconFontOutline ~= "NONE" then
+				flags = db.iconFontOutline
+			end
+			iconFrame.countdownNumber:SetFont(media:Fetch(FONT, db.iconFontName), db.iconEmphasizeFontSize, flags)
+			iconFrame.countdownNumber:SetTextColor(db.iconEmphasizeFontColor[1], db.iconEmphasizeFontColor[2], db.iconEmphasizeFontColor[3], db.iconEmphasizeFontColor[4])
+		end
 		if db.iconCooldownNumbers then
 			iconFrame.countdownNumber:SetText(timeToDisplay)
 		end
@@ -462,20 +514,11 @@ local function iconLoop(updater)
 	end
 end
 
-local function GetBorderBackdrop(size)
-	local borderBackdrop = {
-		edgeFile = "Interface\\Buttons\\WHITE8X8",
-		edgeSize = size,
-		insets = { left = 0, right = 0, top = 0, bottom = 0 }
-	}
-	return borderBackdrop
-end
-
 local function getGlowSettings(glowType)
 	if glowType == "pixel" then
-		return {db.iconGlowColor, db.iconGlowPixelLines, db.iconGlowFrequency, db.iconGlowPixelLength, db.iconGlowPixelThickness}
+		return {db.iconGlowColor, db.iconGlowPixelLines, db.iconGlowFrequency, db.iconGlowPixelLength, db.iconGlowPixelThickness, db.iconGlowOffsetX, db.iconGlowOffsetY}
 	elseif glowType == "autocast" then
-		return {db.iconGlowColor, db.iconGlowAutoCastParticles, db.iconGlowFrequency, db.iconGlowAutoCastScale}
+		return {db.iconGlowColor, db.iconGlowAutoCastParticles, db.iconGlowFrequency, db.iconGlowAutoCastScale, db.iconGlowOffsetX, db.iconGlowOffsetY}
 	elseif glowType == "proc" then
 		return {{color = db.iconGlowColor, startAnim = db.iconGlowProcStartAnim, duration = db.iconGlowProcAnimDuration}}
 	elseif glowType == "buttoncast" then
@@ -520,6 +563,7 @@ local function getIconFrame()
 		iconFrame.countdownNumber = countdownNumber
 
 		local border = CreateFrame("Frame", nil, iconFrame, "BackdropTemplate")
+		border:SetFrameLevel(border:GetFrameLevel()+1) -- Show the border above the cooldown swipe
 		border:SetPoint("TOPLEFT", iconFrame, "TOPLEFT")
 		border:SetPoint("BOTTOMRIGHT", iconFrame, "BOTTOMRIGHT")
 		border:Hide()
@@ -561,10 +605,16 @@ local function getIconFrame()
 				elseif db.iconFontOutline ~= "NONE" then
 					flags = db.iconFontOutline
 				end
-				self.countdownNumber:SetFont(media:Fetch(FONT, db.iconFontName), db.iconFontSize, flags)
-				self.countdownNumber:SetTextColor(db.iconFontColor[1], db.iconFontColor[2], db.iconFontColor[3], db.iconFontColor[4])
 
 				local timeToDisplay = math.ceil(remaining)
+				if timeToDisplay <= db.iconEmphasizeTime then
+					self.countdownNumber:SetFont(media:Fetch(FONT, db.iconFontName), db.iconEmphasizeFontSize, flags)
+					self.countdownNumber:SetTextColor(db.iconEmphasizeFontColor[1], db.iconEmphasizeFontColor[2], db.iconEmphasizeFontColor[3], db.iconEmphasizeFontColor[4])
+				else
+					self.countdownNumber:SetFont(media:Fetch(FONT, db.iconFontName), db.iconFontSize, flags)
+					self.countdownNumber:SetTextColor(db.iconFontColor[1], db.iconFontColor[2], db.iconFontColor[3], db.iconFontColor[4])
+				end
+
 				self.countdownNumber:SetText(timeToDisplay)
 				self.countdownNumber:Show()
 			end
@@ -613,7 +663,9 @@ local function getIconFrame()
 
 	function iconFrame:ShowBorder(show, color)
 		if show then
-			self.border:SetBackdrop(GetBorderBackdrop(db.iconBorderSize))
+			self.border:SetBackdrop(iconBorderTable)
+			self.border:SetPoint("TOPLEFT", iconFrame, "TOPLEFT", -db.iconBorderOffset, db.iconBorderOffset)
+			self.border:SetPoint("BOTTOMRIGHT", iconFrame, "BOTTOMRIGHT", db.iconBorderOffset, -db.iconBorderOffset)
 			self.border:SetBackdropBorderColor(color[1], color[2], color[3], color[4])
 			self.border:Show()
 		else
@@ -1033,15 +1085,55 @@ do
 								name = L.borderSize,
 								order = 7,
 								min = 1,
-								max = 5,
+								max = 32,
 								step = 1,
+								width = 1,
+								set = function(_, value)
+									db.iconBorderSize = value
+									iconBorderTable = {
+										edgeFile = media:Fetch("border", db.iconBorderName),
+										edgeSize = value,
+									}
+									resetNameplates()
+								end,
+								disabled = function() return not db.iconBorder end,
+							},
+							iconBorderOffset = {
+								type = "range",
+								name = L.borderOffset,
+								order = 8,
+								min = 0,
+								max = 32,
+								step = 1,
+								width = 1,
+								disabled = function() return not db.iconBorder end,
+							},
+							iconBorderName = {
+								type = "select",
+								name = L.borderName,
+								order = 9,
+								values = media:List("border"),
+								get = function()
+									for i, v in next, media:List("border") do
+										if v == db.iconBorderName then return i end
+									end
+								end,
+								set = function(_, value)
+									local list = media:List("border")
+									db.iconBorderName = list[value]
+									iconBorderTable = {
+										edgeFile = media:Fetch("border", db.iconBorderName),
+										edgeSize = db.iconBorderSize,
+									}
+									resetNameplates()
+								end,
 								width = 1,
 								disabled = function() return not db.iconBorder end,
 							},
 							resetHeader = {
 								type = "header",
 								name = "",
-								order = 8,
+								order = 10,
 							},
 							reset = {
 								type = "execute",
@@ -1054,7 +1146,7 @@ do
 										plugin:NAME_PLATE_UNIT_ADDED(nil, "target")
 									end
 								end,
-								order = 9,
+								order = 11,
 							},
 						},
 					},
@@ -1148,6 +1240,49 @@ do
 								order = 9,
 								disabled = checkCooldownTimerDisabled,
 							},
+							emphasizeHeader = {
+								type = "header",
+								name = L.emphasize,
+								order = 10,
+							},
+							emphasizeHeading = {
+								type = "description",
+								name = L.cooldownEmphasizeHeader,
+								order = 11,
+								width = "full",
+								fontSize = "medium",
+							},
+							iconEmphasizeTime = {
+								type = "range",
+								name = L.emphasizeAt,
+								order = 12,
+								min = 0,
+								max = 12,
+								step = 1,
+								width = "full",
+							},
+							iconEmphasizeFontColor = {
+								type = "color",
+								name = L.fontColor,
+								hasAlpha = true,
+								get = function()
+									return db.iconEmphasizeFontColor[1], db.iconEmphasizeFontColor[2], db.iconEmphasizeFontColor[3], db.iconEmphasizeFontColor[4]
+								end,
+								set = function(_, r, g, b, a)
+									db.iconEmphasizeFontColor = {r, g, b, a}
+									resetNameplates()
+								end,
+								order = 13,
+								disabled = function() return db.iconEmphasizeTime == 0 end,
+							},
+							iconEmphasizeFontSize = {
+								type = "range",
+								name = L.fontSize,
+								desc = L.fontSizeDesc,
+								order = 14,
+								softMax = 100, max = 200, min = 6, step = 1,
+								disabled = function() return db.iconEmphasizeTime == 0 end,
+							},
 						},
 					},
 					glow = {
@@ -1239,7 +1374,7 @@ do
 								min = 0.5,
 								max = 3,
 								step = 0.05,
-								width = 1.5,
+								width = 2,
 								isPercent = true,
 								disabled = function() return not db.iconExpireGlow end,
 								hidden = function() return db.iconExpireGlowType ~= "autocast" end,
@@ -1276,15 +1411,38 @@ do
 								disabled = function() return not db.iconExpireGlow end,
 								hidden = function() return db.iconExpireGlowType ~= "pixel" end,
 							},
+							iconGlowOffsetX = {
+								type = "range",
+								name = L.offsetX,
+								order = 12,
+								min = -32,
+								max = 32,
+								step = 1,
+								width = 1.5,
+								disabled = function() return not db.iconExpireGlow end,
+								hidden = function() return db.iconExpireGlowType == "buttoncast" or db.iconExpireGlowType == "proc" end,
+							},
+							iconGlowOffsetY = {
+								type = "range",
+								name = L.offsetY,
+								order = 13,
+								min = -32,
+								max = 32,
+								step = 1,
+								width = 1.5,
+								disabled = function() return not db.iconExpireGlow end,
+								hidden = function() return db.iconExpireGlowType == "buttoncast" or db.iconExpireGlowType == "proc" end,
+							},
 							iconGlowTimeLeft = {
 								type = "range",
 								name = L.glowAt,
 								desc = L.glowAt_desc,
-								order = 12,
+								order = 14,
 								min = 0,
 								max = 3,
 								step = 1,
 								width = 2,
+								disabled = function() return not db.iconExpireGlow end,
 							},
 						},
 					},

@@ -1,0 +1,6 @@
+## Interface: 100002
+## Title: Destroy Totems
+## Author: BallisticBrady
+## Version: 1.01
+
+DestroyTotem.lua

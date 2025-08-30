@@ -254,9 +254,10 @@ BAGANATOR_CONFIG = {
 ["disabled_skins"] = {
 },
 ["view_alpha"] = 1,
-["setting_anchors"] = false,
+["bag_view_width"] = 12,
 ["upgrade_plugin"] = "none",
 ["guild_bank_sort_method"] = "unset",
+["debug_keywords"] = false,
 ["skins"] = {
 ["elvui"] = {
 ["use_bag_font"] = false,
@@ -287,13 +288,12 @@ BAGANATOR_CONFIG = {
 "凤凰基友之二-凤凰之神",
 "Afdfaf-苏拉玛",
 },
-["debug_keywords"] = false,
 ["auto_sort_on_open"] = false,
 ["guild_current_tab"] = 0,
-["bag_view_width"] = 12,
 ["sort_ignore_slots_count_2"] = {
 ["某餃子-伊森利恩"] = 0,
 },
+["setting_anchors"] = false,
 ["currencies_tracked"] = {
 ["三减竖式-伊森利恩"] = {
 },

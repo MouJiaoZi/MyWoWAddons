@@ -200,10 +200,17 @@ local nameplateSettingsToExport = {
 	"iconGlowProcStartAnim",
 	"iconGlowProcAnimDuration",
 	"iconGlowTimeLeft",
+	"iconGlowOffsetX",
+	"iconGlowOffsetY",
 	"iconBorder",
+	"iconBorderName",
+	"iconBorderOffset",
 	"iconBorderSize",
 	"iconBorderColor",
 	"iconFrameStrata",
+	"iconEmphasizeTime",
+	"iconEmphasizeFontColor",
+	"iconEmphasizeFontSize",
 
 	-- Text
 	"textGrowDirection",

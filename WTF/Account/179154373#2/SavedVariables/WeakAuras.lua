@@ -3,7 +3,18 @@ WeakAurasSaved = {
 ["dynamicIconCache"] = {
 },
 ["editor_tab_spaces"] = 4,
+["login_squelch_time"] = 10,
 ["editor_font_size"] = 12,
+["lastArchiveClear"] = 1756120822,
+["minimap"] = {
+["minimapPos"] = 43.86872998930126,
+["hide"] = true,
+},
+["historyCutoff"] = 730,
+["dbVersion"] = 85,
+["migrationCutoff"] = 730,
+["features"] = {
+},
 ["displays"] = {
 ["Life Cocoon"] = {
 ["iconSource"] = -1,
@@ -38,9 +49,11 @@ WeakAurasSaved = {
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -61,9 +74,7 @@ WeakAurasSaved = {
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -182,7 +193,7 @@ true,
 },
 ["displayIcon"] = 627485,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -219,25 +230,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Life Cocoon",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "nboD9YX)DVS",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "nboD9YX)DVS",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Time Dilation"] = {
 ["iconSource"] = -1,
@@ -272,9 +283,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -295,9 +308,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -416,7 +427,7 @@ true,
 },
 ["displayIcon"] = 4622478,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -453,25 +464,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Time Dilation",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "rVlhihrhAhC",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "rVlhihrhAhC",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Cast Bar - LWA - Death Knight"] = {
 ["sparkWidth"] = 10,
@@ -1080,15 +1091,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -1332,17 +1343,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -1372,7 +1376,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Lighter than Air"] = {
 ["iconSource"] = -1,
@@ -1553,7 +1564,7 @@ true,
 },
 },
 ["use_dragonriding"] = false,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -1562,11 +1573,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -1720,13 +1731,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -1738,7 +1749,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -1987,7 +1998,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -1996,11 +2007,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -2198,15 +2209,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -2459,38 +2470,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -2543,6 +2527,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -2670,11 +2667,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Vampiric Strike (Optional - Unholy)"] = {
@@ -2853,12 +2864,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 2,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -2873,11 +2888,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -2885,17 +2896,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -2943,7 +2947,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Dampen Harm "] = {
 ["iconSource"] = -1,
@@ -3105,15 +3116,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -3273,13 +3284,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -3291,7 +3302,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -3540,7 +3551,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -3549,11 +3560,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -3604,7 +3615,7 @@ true,
 ["sortHybridTable"] = {
 ["Timeline Icon waiting"] = false,
 },
-["anchorFrameFrame"] = "WeakAuras:Vertical bar",
+["borderEdge"] = "Square Full White",
 ["fullCircle"] = true,
 ["space"] = 2,
 ["url"] = "https://wago.io/RaidAbilityTimeline/81",
@@ -3705,12 +3716,12 @@ true,
 ["scale"] = 1,
 ["centerType"] = "LR",
 ["border"] = false,
-["borderEdge"] = "Square Full White",
-["stepAngle"] = 15,
-["borderSize"] = 2,
-["limit"] = 5,
-["sort"] = "ascending",
+["anchorFrameFrame"] = "WeakAuras:Vertical bar",
 ["regionType"] = "dynamicgroup",
+["borderSize"] = 2,
+["sort"] = "ascending",
+["limit"] = 5,
+["stepAngle"] = 15,
 ["anchorFrameParent"] = true,
 ["constantFactor"] = "RADIUS",
 ["rowSpace"] = 1,
@@ -3718,8 +3729,8 @@ true,
 ["semver"] = "1.0.80",
 ["tocversion"] = 110002,
 ["id"] = "Timeline Icon waiting group",
-["frameStrata"] = 1,
 ["alpha"] = 1,
+["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["authorOptions"] = {
 },
@@ -3747,7 +3758,7 @@ true,
 ["yOffset"] = -4.6730041503906e-05,
 ["anchorPoint"] = "CENTER",
 ["cooldownSwipe"] = true,
-["keepAspectRatio"] = false,
+["xOffset"] = 1.7166137695313e-05,
 ["customTextUpdate"] = "event",
 ["url"] = "https://wago.io/RaidAbilityTimeline/81",
 ["actions"] = {
@@ -3798,7 +3809,7 @@ true,
 ["customTriggerLogic"] = "function(t)\n    return t[1] \nend\n\n\n",
 ["activeTriggerMode"] = -10,
 },
-["parent"] = "Bigicon",
+["keepAspectRatio"] = false,
 ["internalVersion"] = 85,
 ["progressSource"] = {
 -1,
@@ -3842,11 +3853,11 @@ true,
 ["preset"] = "slidebottom",
 },
 },
-["cooldownEdge"] = false,
+["customText"] = "function()\n    if not aura_env.state or WeakAuras.IsOptionsOpen() then return \"Example\" end \n    -- set variables\n    local state = aura_env.state\n    local config = aura_env.config\n    local text = aura_env.state.name\n    if not text then \n        text = aura_env.state.name\n    end\n    local IDoptions = aura_env.IDoptions\n    local options = aura_env.options\n    local submsg = strtrim(text:gsub(\"~\", \"\")) -- cut ~\n    local cutmsg = strtrim(text:gsub(\"^~ ?\", \"\"):gsub(\"%s+%(%d+%)\",\"\"))  -- cut number and ~\n    local nbmsg = strtrim(text:gsub(\"%s+%(%d+%)\",\"\")) -- cut number\n    \n    \n    -- adjust text according to options if needed\n    if options and options[text] and options[text].replaceSpellName and options[text].spellName  then\n        text = options[text].spellName\n        --spell Name\n    elseif state.spellId and state.spellId ~=0 and IDoptions and IDoptions[state.spellId] and IDoptions[state.spellId].replaceSpellName and IDoptions[state.spellId].spellName then\n        text = IDoptions[state.spellId].spellName\n        --spell ID\n    elseif options and options[submsg] and options[submsg].replaceSpellName and options[submsg].spellName then\n        text = options[submsg].spellName\n        --spell Name ignore ~\n    elseif options and options[cutmsg] and options[cutmsg].replaceSpellName and options[cutmsg].spellName and options[cutmsg].IgnoreAlertNumber then\n        text = options[cutmsg].spellName\n        --spell Name ignore Spellcount\n        \n    elseif config.NameOption == 2 then\n        text = submsg\n        -- hide ~ \n    elseif config.NameOption == 3 then\n        text = nbmsg\n        -- hide number\n    elseif config.NameOption == 4 then\n        text = cutmsg\n        -- hide number and ~\n    end\n    \n    \n    -- more Text Adjustments\n    if not text then return end \n    local IconAdjust = string.len(string.match(text,\"|T.-|t\") or \"\") -- find length of any icon within the name\n    text = strtrim(text) -- Trim   \n    if IconAdjust > 0 then IconAdjust = IconAdjust - 2 end -- Make icons take 2 characters in calculation\n    if (config.textMaxLength or 0)>=5 and text:len()-IconAdjust>config.textMaxLength then -- check if length exceeeds the maximum \n        text = WA_Utf8Sub(text,config.textMaxLength+IconAdjust)..\"..\" -- Truncate     \n    end\n    -- adjust texts for paused options\n    if state.paused and config.textPausedOptions == 1 then   \n        text = \"Paused\"\n    elseif state.paused and config.textPausedOptions == 2 then\n        text = text..\"Paused\"\n    elseif state.paused and config.textPausedOptions == 3 then\n        text = WA_Utf8Sub(text,text:len()-8)..\"..\"\n        text = text..\"Paused\"\n    end \n    \n    -- Adjust color according to custom option (this should be a condition but not possible yet)\n    if state.spellId and state.spellId ~=0 and IDoptions and IDoptions[state.spellId] and IDoptions[state.spellId].replaceTextColor then\n        local r,g,b,a = unpack(IDoptions[state.spellId].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n        \n    elseif options and options[state.message] and options[state.message].replaceTextColor then\n        local r,g,b,a = unpack(options[state.message].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n    elseif options and options[submsg] and options[submsg].replaceTextColor and aura_env.options[submsg].IgnoreAlertNumber then\n        local r,g,b,a = unpack(options[submsg].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n    elseif options and options[cutmsg] and options[cutmsg].replaceTextColor and options[cutmsg].IgnoreAlertNumber then\n        local r,g,b,a = unpack(options[cutmsg].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n        \n    elseif state.dbmColor and aura_env.config.UseBossModsColor then\n        local r,g,b = unpack(state.dbmColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255,255*r,255*g,255*b,text)\n    elseif state.bwTextColor and aura_env.config.UseBossModsColor then\n        local r,g,b = unpack(state.bwTextColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255,255*r,255*g,255*b,text)\n        \n    end\n    return text\nend\n\n\n",
 ["cooldown"] = true,
 ["displayIcon"] = "134376",
 ["desc"] = "",
-["selfPoint"] = "CENTER",
+["parent"] = "Bigicon",
 ["font"] = "Friz Quadrata TT",
 ["version"] = 81,
 ["subRegions"] = {
@@ -3961,7 +3972,7 @@ true,
 },
 },
 ["height"] = 80,
-["stickyDuration"] = false,
+["cooldownEdge"] = false,
 ["load"] = {
 ["use_never"] = true,
 ["talent"] = {
@@ -4014,6 +4025,12 @@ true,
 ["useAdjustededMax"] = false,
 ["fontSize"] = 12,
 ["source"] = "import",
+["selfPoint"] = "CENTER",
+["width"] = 80,
+["frameStrata"] = 1,
+["stickyDuration"] = false,
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -4242,13 +4259,7 @@ true,
 ["default"] = 8,
 },
 },
-["width"] = 80,
-["frameStrata"] = 1,
 ["preferToUpdate"] = true,
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["xOffset"] = 1.7166137695313e-05,
-["customText"] = "function()\n    if not aura_env.state or WeakAuras.IsOptionsOpen() then return \"Example\" end \n    -- set variables\n    local state = aura_env.state\n    local config = aura_env.config\n    local text = aura_env.state.name\n    if not text then \n        text = aura_env.state.name\n    end\n    local IDoptions = aura_env.IDoptions\n    local options = aura_env.options\n    local submsg = strtrim(text:gsub(\"~\", \"\")) -- cut ~\n    local cutmsg = strtrim(text:gsub(\"^~ ?\", \"\"):gsub(\"%s+%(%d+%)\",\"\"))  -- cut number and ~\n    local nbmsg = strtrim(text:gsub(\"%s+%(%d+%)\",\"\")) -- cut number\n    \n    \n    -- adjust text according to options if needed\n    if options and options[text] and options[text].replaceSpellName and options[text].spellName  then\n        text = options[text].spellName\n        --spell Name\n    elseif state.spellId and state.spellId ~=0 and IDoptions and IDoptions[state.spellId] and IDoptions[state.spellId].replaceSpellName and IDoptions[state.spellId].spellName then\n        text = IDoptions[state.spellId].spellName\n        --spell ID\n    elseif options and options[submsg] and options[submsg].replaceSpellName and options[submsg].spellName then\n        text = options[submsg].spellName\n        --spell Name ignore ~\n    elseif options and options[cutmsg] and options[cutmsg].replaceSpellName and options[cutmsg].spellName and options[cutmsg].IgnoreAlertNumber then\n        text = options[cutmsg].spellName\n        --spell Name ignore Spellcount\n        \n    elseif config.NameOption == 2 then\n        text = submsg\n        -- hide ~ \n    elseif config.NameOption == 3 then\n        text = nbmsg\n        -- hide number\n    elseif config.NameOption == 4 then\n        text = cutmsg\n        -- hide number and ~\n    end\n    \n    \n    -- more Text Adjustments\n    if not text then return end \n    local IconAdjust = string.len(string.match(text,\"|T.-|t\") or \"\") -- find length of any icon within the name\n    text = strtrim(text) -- Trim   \n    if IconAdjust > 0 then IconAdjust = IconAdjust - 2 end -- Make icons take 2 characters in calculation\n    if (config.textMaxLength or 0)>=5 and text:len()-IconAdjust>config.textMaxLength then -- check if length exceeeds the maximum \n        text = WA_Utf8Sub(text,config.textMaxLength+IconAdjust)..\"..\" -- Truncate     \n    end\n    -- adjust texts for paused options\n    if state.paused and config.textPausedOptions == 1 then   \n        text = \"Paused\"\n    elseif state.paused and config.textPausedOptions == 2 then\n        text = text..\"Paused\"\n    elseif state.paused and config.textPausedOptions == 3 then\n        text = WA_Utf8Sub(text,text:len()-8)..\"..\"\n        text = text..\"Paused\"\n    end \n    \n    -- Adjust color according to custom option (this should be a condition but not possible yet)\n    if state.spellId and state.spellId ~=0 and IDoptions and IDoptions[state.spellId] and IDoptions[state.spellId].replaceTextColor then\n        local r,g,b,a = unpack(IDoptions[state.spellId].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n        \n    elseif options and options[state.message] and options[state.message].replaceTextColor then\n        local r,g,b,a = unpack(options[state.message].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n    elseif options and options[submsg] and options[submsg].replaceTextColor and aura_env.options[submsg].IgnoreAlertNumber then\n        local r,g,b,a = unpack(options[submsg].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n    elseif options and options[cutmsg] and options[cutmsg].replaceTextColor and options[cutmsg].IgnoreAlertNumber then\n        local r,g,b,a = unpack(options[cutmsg].textColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255*a,255*r,255*g,255*b,text)\n        \n        \n    elseif state.dbmColor and aura_env.config.UseBossModsColor then\n        local r,g,b = unpack(state.dbmColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255,255*r,255*g,255*b,text)\n    elseif state.bwTextColor and aura_env.config.UseBossModsColor then\n        local r,g,b = unpack(state.bwTextColor)\n        text = string.format(\"\\124c%02x%02x%02x%02x%s\\124r\",255,255*r,255*g,255*b,text)\n        \n    end\n    return text\nend\n\n\n",
 ["semver"] = "1.0.80",
 ["zoom"] = 0,
 ["anchorFrameParent"] = false,
@@ -4440,9 +4451,9 @@ true,
 ["talent"] = {
 ["single"] = 3,
 ["multi"] = {
+[124943] = true,
 [103307] = true,
 [101504] = true,
-[124943] = true,
 },
 },
 ["use_vehicle"] = false,
@@ -4456,7 +4467,7 @@ true,
 },
 },
 ["use_dragonriding"] = false,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -4465,11 +4476,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["use_class_and_spec"] = true,
@@ -4737,15 +4748,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -5072,13 +5083,8 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["color"] = {
-1,
-1,
-1,
-1,
-},
 ["icon"] = true,
+["cooldownEdge"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -5133,7 +5139,12 @@ true,
 ["adjustedMax"] = "",
 ["displayIcon"] = "1360980",
 ["cooldown"] = true,
-["cooldownEdge"] = true,
+["color"] = {
+1,
+1,
+1,
+1,
+},
 },
 ["Paralysis "] = {
 ["iconSource"] = -1,
@@ -5296,15 +5307,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -5422,41 +5433,41 @@ true,
 ["triggers"] = {
 {
 ["trigger"] = {
-["use_absorbMode"] = true,
+["ownOnly"] = true,
 ["use_track"] = true,
 ["spellId"] = "49206",
 ["auranames"] = {
 },
-["use_unit"] = true,
-["use_genericShowOn"] = true,
+["unit"] = "player",
+["use_absorbMode"] = true,
 ["genericShowOn"] = "showOnCooldown",
-["names"] = {
-},
+["use_unit"] = true,
 ["use_totemName"] = true,
-["custom"] = "function(event, arg1)\n    if event == \"PLAYER_TOTEM_UPDATE\" and arg1 then\n        local haveTotem, name, startTime, duration, icon = GetTotemInfo(arg1)\n        if haveTotem and icon == aura_env.texture then\n            aura_env.haveTotem, aura_env.name, aura_env.startTime, aura_env.duration, aura_env.icon = haveTotem, name, startTime, duration, icon\n            aura_env.index = arg1\n            return true\n        elseif aura_env.index == arg1 then\n            aura_env.index = 0\n            aura_env.startTime, aura_env.duration = nil, nil\n        end\n    end\nend",
 ["spellIds"] = {
 },
+["events"] = "PLAYER_TOTEM_UPDATE",
 ["use_spellId"] = true,
 ["customDuration"] = "function()\n    if aura_env.startTime then\n        return aura_env.duration, aura_env.startTime + aura_env.duration\n    end\nend",
 ["subeventPrefix"] = "SPELL",
 ["duration"] = "35",
 ["spellName"] = 0,
-["subeventSuffix"] = "_CAST_SUCCESS",
-["type"] = "custom",
-["unevent"] = "auto",
 ["custom_type"] = "status",
+["type"] = "custom",
+["subeventSuffix"] = "_CAST_SUCCESS",
+["unevent"] = "auto",
 ["debuffType"] = "HELPFUL",
 ["useName"] = true,
 ["event"] = "Cooldown Progress (Spell)",
 ["totemName"] = "27829",
 ["realSpellName"] = 0,
 ["use_spellName"] = true,
-["events"] = "PLAYER_TOTEM_UPDATE",
+["custom"] = "function(event, arg1)\n    if event == \"PLAYER_TOTEM_UPDATE\" and arg1 then\n        local haveTotem, name, startTime, duration, icon = GetTotemInfo(arg1)\n        if haveTotem and icon == aura_env.texture then\n            aura_env.haveTotem, aura_env.name, aura_env.startTime, aura_env.duration, aura_env.icon = haveTotem, name, startTime, duration, icon\n            aura_env.index = arg1\n            return true\n        elseif aura_env.index == arg1 then\n            aura_env.index = 0\n            aura_env.startTime, aura_env.duration = nil, nil\n        end\n    end\nend",
 ["use_sourceUnit"] = true,
 ["check"] = "event",
-["unit"] = "player",
+["names"] = {
+},
 ["sourceUnit"] = "player",
-["ownOnly"] = true,
+["use_genericShowOn"] = true,
 },
 ["untrigger"] = {
 ["custom"] = "function()\n    return aura_env.index == 0\nend",
@@ -5585,10 +5596,6 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["progressSource"] = {
--1,
-"",
-},
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -5609,6 +5616,7 @@ true,
 ["easeType"] = "none",
 },
 },
+["icon"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -5764,7 +5772,10 @@ true,
 ["cooldownEdge"] = false,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["icon"] = true,
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Purifying Brew "] = {
 ["iconSource"] = -1,
@@ -5948,15 +5959,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -6304,10 +6315,17 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["progressSource"] = {
 -1,
 "",
+},
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
 },
 ["information"] = {
 ["forceEvents"] = true,
@@ -6470,14 +6488,7 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 1100170,
 ["cooldown"] = true,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 },
 ["Runes - LWA - Death Knight"] = {
 ["grow"] = "CUSTOM",
@@ -6494,13 +6505,18 @@ true,
 ["authorOptions"] = {
 },
 ["preferToUpdate"] = true,
-["alpha"] = 1,
+["gridWidth"] = 5,
 ["yOffset"] = 0,
 ["anchorPoint"] = "CENTER",
-["regionType"] = "dynamicgroup",
+["borderColor"] = {
+0,
+0,
+0,
+1,
+},
 ["sharedFrameLevel"] = true,
 ["fullCircle"] = true,
-["rowSpace"] = 1,
+["space"] = 2,
 ["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["actions"] = {
 ["start"] = {
@@ -6530,7 +6546,10 @@ true,
 },
 ["columnSpace"] = 1,
 ["radius"] = 200,
-["parent"] = "Resources - LWA - Death Knight",
+["xOffset"] = 0,
+["selfPoint"] = "TOP",
+["align"] = "LEFT",
+["growOn"] = "show",
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -6551,12 +6570,9 @@ true,
 ["easeType"] = "none",
 },
 },
-["align"] = "LEFT",
-["growOn"] = "show",
-["selfPoint"] = "TOP",
-["useLimit"] = false,
+["rowSpace"] = 1,
 ["stagger"] = 0,
-["xOffset"] = 0,
+["parent"] = "Resources - LWA - Death Knight",
 ["version"] = 95,
 ["subRegions"] = {
 },
@@ -6603,28 +6619,23 @@ true,
 ["borderEdge"] = "Square Full White",
 ["stepAngle"] = 15,
 ["borderSize"] = 2,
-["limit"] = 6,
 ["sort"] = "ascending",
-["gridWidth"] = 5,
+["regionType"] = "dynamicgroup",
+["frameStrata"] = 1,
 ["constantFactor"] = "RADIUS",
 ["source"] = "import",
 ["borderOffset"] = 4,
 ["semver"] = "11.2.1",
 ["tocversion"] = 110000,
 ["id"] = "Runes - LWA - Death Knight",
-["space"] = 2,
-["frameStrata"] = 1,
+["limit"] = 6,
+["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["borderColor"] = {
-0,
-0,
-0,
-1,
-},
+["rotation"] = 0,
 ["config"] = {
 },
-["rotation"] = 0,
 ["gridType"] = "RD",
+["useLimit"] = false,
 ["conditions"] = {
 },
 ["information"] = {
@@ -6813,15 +6824,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -6950,41 +6961,41 @@ true,
 ["triggers"] = {
 {
 ["trigger"] = {
-["use_absorbMode"] = true,
+["ownOnly"] = true,
 ["use_track"] = true,
 ["spellId"] = "49206",
 ["auranames"] = {
 },
-["use_unit"] = true,
-["use_genericShowOn"] = true,
+["unit"] = "player",
+["use_absorbMode"] = true,
 ["genericShowOn"] = "showOnCooldown",
-["names"] = {
-},
+["use_unit"] = true,
 ["use_totemName"] = true,
-["custom"] = "function(event, arg1)\n    if event == \"PLAYER_TOTEM_UPDATE\" and arg1 then\n        local haveTotem, name, startTime, duration, icon = GetTotemInfo(arg1)\n        if haveTotem and icon == aura_env.texture then\n            aura_env.haveTotem, aura_env.name, aura_env.startTime, aura_env.duration, aura_env.icon = haveTotem, name, startTime, duration, icon\n            aura_env.index = arg1\n            return true\n        elseif aura_env.index == arg1 then\n            aura_env.index = 0\n            aura_env.startTime, aura_env.duration = nil, nil\n        end\n    end\nend",
 ["spellIds"] = {
 },
+["events"] = "PLAYER_TOTEM_UPDATE",
 ["use_spellId"] = true,
 ["customDuration"] = "function()\n    if aura_env.startTime then\n        return aura_env.duration, aura_env.startTime + aura_env.duration\n    end\nend",
 ["subeventPrefix"] = "SPELL",
 ["duration"] = "35",
 ["spellName"] = 0,
-["subeventSuffix"] = "_CAST_SUCCESS",
-["type"] = "custom",
-["unevent"] = "auto",
 ["custom_type"] = "status",
+["type"] = "custom",
+["subeventSuffix"] = "_CAST_SUCCESS",
+["unevent"] = "auto",
 ["debuffType"] = "HELPFUL",
 ["useName"] = true,
 ["event"] = "Cooldown Progress (Spell)",
 ["totemName"] = "27829",
 ["realSpellName"] = 0,
 ["use_spellName"] = true,
-["events"] = "PLAYER_TOTEM_UPDATE",
+["custom"] = "function(event, arg1)\n    if event == \"PLAYER_TOTEM_UPDATE\" and arg1 then\n        local haveTotem, name, startTime, duration, icon = GetTotemInfo(arg1)\n        if haveTotem and icon == aura_env.texture then\n            aura_env.haveTotem, aura_env.name, aura_env.startTime, aura_env.duration, aura_env.icon = haveTotem, name, startTime, duration, icon\n            aura_env.index = arg1\n            return true\n        elseif aura_env.index == arg1 then\n            aura_env.index = 0\n            aura_env.startTime, aura_env.duration = nil, nil\n        end\n    end\nend",
 ["use_sourceUnit"] = true,
 ["check"] = "event",
-["unit"] = "player",
+["names"] = {
+},
 ["sourceUnit"] = "player",
-["ownOnly"] = true,
+["use_genericShowOn"] = true,
 },
 ["untrigger"] = {
 ["custom"] = "function()\n    return aura_env.index == 0\nend",
@@ -7110,10 +7121,6 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["progressSource"] = {
--1,
-"",
-},
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -7134,6 +7141,7 @@ true,
 ["easeType"] = "none",
 },
 },
+["icon"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -7289,7 +7297,10 @@ true,
 ["cooldownEdge"] = false,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["icon"] = true,
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Tank External Group"] = {
 ["grow"] = "RIGHT",
@@ -7349,14 +7360,33 @@ true,
 ["selfPoint"] = "LEFT",
 ["align"] = "CENTER",
 ["frameStrata"] = 1,
-["borderInset"] = 0,
+["useLimit"] = false,
 ["stagger"] = 0,
-["gridType"] = "RD",
+["rotation"] = 0,
 ["version"] = 11,
 ["subRegions"] = {
 },
 ["internalVersion"] = 85,
-["arcLength"] = 360,
+["animation"] = {
+["start"] = {
+["type"] = "none",
+["easeStrength"] = 3,
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["type"] = "none",
+["easeStrength"] = 3,
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["type"] = "none",
+["easeStrength"] = 3,
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
 ["load"] = {
 ["ingroup"] = {
 ["multi"] = {
@@ -7405,7 +7435,7 @@ true,
 },
 ["zoneIds"] = "",
 },
-["rotation"] = 0,
+["gridType"] = "RD",
 ["backdropColor"] = {
 1,
 1,
@@ -7424,31 +7454,11 @@ true,
 ["centerType"] = "LR",
 ["border"] = false,
 ["borderEdge"] = "Square Full White",
-["regionType"] = "dynamicgroup",
+["stepAngle"] = 15,
 ["borderSize"] = 2,
 ["limit"] = 5,
-["config"] = {
-},
-["animation"] = {
-["start"] = {
-["type"] = "none",
-["easeStrength"] = 3,
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["type"] = "none",
-["easeStrength"] = 3,
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["type"] = "none",
-["easeStrength"] = 3,
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
+["borderInset"] = 0,
+["regionType"] = "dynamicgroup",
 ["constantFactor"] = "RADIUS",
 ["gridWidth"] = 5,
 ["borderOffset"] = 16,
@@ -7458,9 +7468,9 @@ true,
 ["sort"] = "none",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["stepAngle"] = 15,
 ["uid"] = "zV(bXgThsXg",
-["useLimit"] = false,
+["config"] = {
+},
 ["sortHybridTable"] = {
 ["Life Cocoon"] = false,
 ["Time Dilation"] = false,
@@ -7472,6 +7482,7 @@ true,
 ["Blessing of Sacrifice"] = false,
 ["Spirit Link Totem"] = false,
 },
+["arcLength"] = 360,
 ["conditions"] = {
 },
 ["information"] = {
@@ -7644,15 +7655,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -7923,12 +7934,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["config"] = {
 },
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["id"] = "凋零",
 ["anchorFrameType"] = "SCREEN",
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["width"] = 32,
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["uid"] = "Drx9e5IZV1M",
 ["inverse"] = false,
 ["color"] = {
@@ -8024,7 +8035,7 @@ true,
 ["yOffset"] = -4.6730041503906e-05,
 ["anchorPoint"] = "CENTER",
 ["cooldownSwipe"] = false,
-["desc"] = "",
+["adjustedMax"] = "",
 ["customTextUpdate"] = "event",
 ["cooldownEdge"] = false,
 ["actions"] = {
@@ -8081,7 +8092,221 @@ true,
 "",
 },
 ["selfPoint"] = "CENTER",
+["desc"] = "",
+["displayText"] = "%p",
+["information"] = {
+["forceEvents"] = true,
+["ignoreOptionsEventErrors"] = true,
+},
+["desaturate"] = false,
+["displayIcon"] = "134376",
+["font"] = "Friz Quadrata TT",
+["version"] = 81,
+["subRegions"] = {
+{
+["type"] = "subbackground",
+},
+{
+["text_shadowXOffset"] = 0,
+["text_text"] = "%c",
+["text_text_format_c.1_format"] = "none",
+["text_text_format_1_format"] = "none",
+["text_shadowColor"] = {
+0,
+0,
+0,
+1,
+},
+["text_selfPoint"] = "AUTO",
+["text_automaticWidth"] = "Auto",
+["text_fixedWidth"] = 64,
+["text_text_format_c_format"] = "none",
+["text_justify"] = "CENTER",
+["rotateText"] = "NONE",
+["type"] = "subtext",
+["text_color"] = {
+1,
+1,
+1,
+1,
+},
+["text_font"] = "ArchivoNarrow-Bold",
+["text_text_format_c.2_format"] = "none",
+["text_shadowYOffset"] = 0,
+["text_wordWrap"] = "WordWrap",
+["text_text_format_c2_format"] = "none",
+["text_visible"] = true,
+["text_text_format_c1_format"] = "none",
+["text_fontType"] = "OUTLINE",
+["anchor_point"] = "OUTER_LEFT",
+["text_fontSize"] = 15,
+["anchorXOffset"] = 0,
+["anchorYOffset"] = 0,
+},
+{
+["text_shadowXOffset"] = 0,
+["text_text"] = "%c",
+["text_text_format_c.1_format"] = "none",
+["text_text_format_1_format"] = "none",
+["text_shadowColor"] = {
+0,
+0,
+0,
+1,
+},
+["text_selfPoint"] = "AUTO",
+["text_automaticWidth"] = "Auto",
+["text_fixedWidth"] = 64,
+["text_text_format_c_format"] = "none",
+["text_justify"] = "CENTER",
+["rotateText"] = "NONE",
+["type"] = "subtext",
+["text_color"] = {
+1,
+1,
+1,
+1,
+},
+["text_font"] = "ArchivoNarrow-Bold",
+["text_text_format_c.2_format"] = "none",
+["text_shadowYOffset"] = 0,
+["text_wordWrap"] = "WordWrap",
+["text_text_format_c2_format"] = "none",
+["text_visible"] = false,
+["text_text_format_c1_format"] = "none",
+["text_fontType"] = "OUTLINE",
+["anchor_point"] = "OUTER_RIGHT",
+["text_fontSize"] = 15,
+["anchorXOffset"] = 0,
+["anchorYOffset"] = 0,
+},
+{
+["text_text_format_p_time_format"] = 0,
+["text_text"] = "%p",
+["text_text_format_p_gcd_cast"] = false,
+["text_shadowColor"] = {
+0,
+0,
+0,
+1,
+},
+["text_fixedWidth"] = 64,
+["text_text_format_p_time_legacy_floor"] = true,
+["rotateText"] = "NONE",
+["text_text_format_p_decimal_precision"] = 0,
+["text_text_format_p_gcd_gcd"] = true,
+["text_color"] = {
+1,
+1,
+0,
+1,
+},
+["text_text_format_p_gcd_channel"] = false,
+["text_shadowYOffset"] = 0,
+["text_wordWrap"] = "WordWrap",
+["text_fontType"] = "OUTLINE",
+["text_text_format_p_gcd_hide_zero"] = false,
+["text_fontSize"] = 13,
+["anchorXOffset"] = 0,
+["text_text_format_p_round_type"] = "ceil",
+["text_text_format_c.2_format"] = "none",
+["text_text_format_p_time_mod_rate"] = true,
+["text_selfPoint"] = "AUTO",
+["text_automaticWidth"] = "Auto",
+["anchorYOffset"] = 0,
+["text_justify"] = "CENTER",
+["type"] = "subtext",
+["text_font"] = "PT Sans Narrow",
+["text_visible"] = true,
+["text_text_format_p_time_precision"] = 1,
+["text_shadowXOffset"] = 0,
+["anchor_point"] = "CENTER",
+["text_text_format_p_time_dynamic_threshold"] = 1,
+["text_text_format_p_format"] = "timed",
+["text_text_format_c2_format"] = "none",
+},
+{
+["glowFrequency"] = 0.25,
+["glow"] = false,
+["glowDuration"] = 1,
+["glowType"] = "Pixel",
+["glowThickness"] = 2,
+["glowYOffset"] = 0,
+["glowColor"] = {
+1,
+1,
+1,
+1,
+},
+["type"] = "subglow",
+["glowLength"] = 10,
+["glowScale"] = 1,
+["glowXOffset"] = 0,
+["useGlowColor"] = true,
+["glowLines"] = 8,
+["glowBorder"] = false,
+},
+},
+["height"] = 31.999906539917,
 ["stickyDuration"] = false,
+["load"] = {
+["ingroup"] = {
+["multi"] = {
+},
+},
+["affixes"] = {
+["multi"] = {
+},
+},
+["talent"] = {
+["multi"] = {
+},
+},
+["spec"] = {
+["multi"] = {
+},
+},
+["zoneIds"] = "",
+["class"] = {
+["multi"] = {
+},
+},
+["difficulty"] = {
+["multi"] = {
+},
+},
+["race"] = {
+["multi"] = {
+},
+},
+["use_never"] = false,
+["faction"] = {
+["multi"] = {
+},
+},
+["role"] = {
+["multi"] = {
+},
+},
+["pvptalent"] = {
+["multi"] = {
+},
+},
+["talent2"] = {
+["multi"] = {
+},
+},
+["size"] = {
+["multi"] = {
+["party"] = true,
+["twenty"] = true,
+["ten"] = true,
+["twentyfive"] = true,
+["fortyman"] = true,
+["flexible"] = true,
+},
+},
+},
 ["authorOptions"] = {
 {
 ["type"] = "number",
@@ -8363,220 +8588,6 @@ true,
 ["width"] = 1,
 },
 },
-["information"] = {
-["forceEvents"] = true,
-["ignoreOptionsEventErrors"] = true,
-},
-["desaturate"] = false,
-["displayIcon"] = "134376",
-["font"] = "Friz Quadrata TT",
-["version"] = 81,
-["subRegions"] = {
-{
-["type"] = "subbackground",
-},
-{
-["text_shadowXOffset"] = 0,
-["text_text"] = "%c",
-["text_text_format_c.1_format"] = "none",
-["text_text_format_1_format"] = "none",
-["text_shadowColor"] = {
-0,
-0,
-0,
-1,
-},
-["text_selfPoint"] = "AUTO",
-["text_automaticWidth"] = "Auto",
-["text_fixedWidth"] = 64,
-["text_text_format_c_format"] = "none",
-["text_justify"] = "CENTER",
-["rotateText"] = "NONE",
-["type"] = "subtext",
-["text_color"] = {
-1,
-1,
-1,
-1,
-},
-["text_font"] = "ArchivoNarrow-Bold",
-["text_text_format_c.2_format"] = "none",
-["text_shadowYOffset"] = 0,
-["text_wordWrap"] = "WordWrap",
-["text_text_format_c2_format"] = "none",
-["text_visible"] = true,
-["text_text_format_c1_format"] = "none",
-["text_fontType"] = "OUTLINE",
-["anchor_point"] = "OUTER_LEFT",
-["text_fontSize"] = 15,
-["anchorXOffset"] = 0,
-["anchorYOffset"] = 0,
-},
-{
-["text_shadowXOffset"] = 0,
-["text_text"] = "%c",
-["text_text_format_c.1_format"] = "none",
-["text_text_format_1_format"] = "none",
-["text_shadowColor"] = {
-0,
-0,
-0,
-1,
-},
-["text_selfPoint"] = "AUTO",
-["text_automaticWidth"] = "Auto",
-["text_fixedWidth"] = 64,
-["text_text_format_c_format"] = "none",
-["text_justify"] = "CENTER",
-["rotateText"] = "NONE",
-["type"] = "subtext",
-["text_color"] = {
-1,
-1,
-1,
-1,
-},
-["text_font"] = "ArchivoNarrow-Bold",
-["text_text_format_c.2_format"] = "none",
-["text_shadowYOffset"] = 0,
-["text_wordWrap"] = "WordWrap",
-["text_text_format_c2_format"] = "none",
-["text_visible"] = false,
-["text_text_format_c1_format"] = "none",
-["text_fontType"] = "OUTLINE",
-["anchor_point"] = "OUTER_RIGHT",
-["text_fontSize"] = 15,
-["anchorXOffset"] = 0,
-["anchorYOffset"] = 0,
-},
-{
-["text_text_format_p_time_format"] = 0,
-["text_text"] = "%p",
-["text_text_format_p_gcd_cast"] = false,
-["text_shadowColor"] = {
-0,
-0,
-0,
-1,
-},
-["text_fixedWidth"] = 64,
-["text_text_format_p_time_legacy_floor"] = true,
-["rotateText"] = "NONE",
-["text_text_format_p_decimal_precision"] = 0,
-["text_text_format_p_gcd_gcd"] = true,
-["text_color"] = {
-1,
-1,
-0,
-1,
-},
-["text_text_format_p_gcd_channel"] = false,
-["text_shadowYOffset"] = 0,
-["text_wordWrap"] = "WordWrap",
-["text_fontType"] = "OUTLINE",
-["text_text_format_p_gcd_hide_zero"] = false,
-["text_fontSize"] = 13,
-["anchorXOffset"] = 0,
-["text_text_format_p_round_type"] = "ceil",
-["text_text_format_c.2_format"] = "none",
-["text_text_format_p_time_mod_rate"] = true,
-["text_selfPoint"] = "AUTO",
-["text_automaticWidth"] = "Auto",
-["anchorYOffset"] = 0,
-["text_justify"] = "CENTER",
-["type"] = "subtext",
-["text_font"] = "PT Sans Narrow",
-["text_visible"] = true,
-["text_text_format_p_time_precision"] = 1,
-["text_shadowXOffset"] = 0,
-["anchor_point"] = "CENTER",
-["text_text_format_p_time_dynamic_threshold"] = 1,
-["text_text_format_p_format"] = "timed",
-["text_text_format_c2_format"] = "none",
-},
-{
-["glowFrequency"] = 0.25,
-["glow"] = false,
-["glowDuration"] = 1,
-["glowType"] = "Pixel",
-["glowThickness"] = 2,
-["glowYOffset"] = 0,
-["glowColor"] = {
-1,
-1,
-1,
-1,
-},
-["type"] = "subglow",
-["glowLength"] = 10,
-["glowScale"] = 1,
-["glowXOffset"] = 0,
-["useGlowColor"] = true,
-["glowLines"] = 8,
-["glowBorder"] = false,
-},
-},
-["height"] = 31.999906539917,
-["parent"] = "Raid Ability Timeline",
-["load"] = {
-["ingroup"] = {
-["multi"] = {
-},
-},
-["affixes"] = {
-["multi"] = {
-},
-},
-["talent"] = {
-["multi"] = {
-},
-},
-["spec"] = {
-["multi"] = {
-},
-},
-["zoneIds"] = "",
-["class"] = {
-["multi"] = {
-},
-},
-["difficulty"] = {
-["multi"] = {
-},
-},
-["race"] = {
-["multi"] = {
-},
-},
-["use_never"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
-["role"] = {
-["multi"] = {
-},
-},
-["pvptalent"] = {
-["multi"] = {
-},
-},
-["talent2"] = {
-["multi"] = {
-},
-},
-["size"] = {
-["multi"] = {
-["party"] = true,
-["twenty"] = true,
-["ten"] = true,
-["twentyfive"] = true,
-["fortyman"] = true,
-["flexible"] = true,
-},
-},
-},
-["url"] = "https://wago.io/RaidAbilityTimeline/81",
 ["useAdjustededMax"] = false,
 ["fontSize"] = 12,
 ["source"] = "import",
@@ -8614,14 +8625,14 @@ true,
 ["reverse"] = false,
 ["textMaxLength"] = 20,
 },
-["icon"] = true,
+["parent"] = "Raid Ability Timeline",
 ["width"] = 32.000034332275,
 ["useCooldownModRate"] = true,
 ["anchorFrameFrame"] = "WeakAuras:Vertical bar",
 ["regionType"] = "icon",
+["url"] = "https://wago.io/RaidAbilityTimeline/81",
+["icon"] = true,
 ["keepAspectRatio"] = false,
-["adjustedMax"] = "",
-["displayText"] = "%p",
 ["semver"] = "1.0.80",
 ["animation"] = {
 ["start"] = {
@@ -8843,6 +8854,95 @@ true,
 ["yOffset"] = -4.6730041503906e-05,
 ["anchorPoint"] = "CENTER",
 ["cooldownSwipe"] = false,
+["xOffset"] = 1.7166137695313e-05,
+["customTextUpdate"] = "event",
+["url"] = "https://wago.io/RaidAbilityTimeline/81",
+["actions"] = {
+["start"] = {
+["do_custom"] = false,
+},
+["init"] = {
+["custom"] = "aura_env.options = {}\nfor _,option in pairs(aura_env.config.spellOptions) do\n    aura_env.options[option.message] = option\nend\naura_env.IDoptions = {}\nfor _,option in pairs(aura_env.config.spellOptions) do\n    aura_env.IDoptions[tostring(option.spellid)] = option\nend\n\nfor k,v in pairs(aura_env.region.subRegions) do\n    if v.type == \"subglow\" then\n        aura_env.glow = v\n    end\nend\n\n\n",
+["do_custom"] = true,
+},
+["finish"] = {
+["do_custom"] = false,
+},
+},
+["triggers"] = {
+{
+["trigger"] = {
+["type"] = "addons",
+["use_count"] = false,
+["subeventSuffix"] = "_CAST_START",
+["remaining_operator"] = ">",
+["event"] = "Boss Mod Timer",
+["names"] = {
+},
+["use_isBarEnabled"] = true,
+["remaining"] = "10",
+["spellIds"] = {
+},
+["use_remaining"] = true,
+["unit"] = "player",
+["subeventPrefix"] = "SPELL",
+["use_cloneId"] = true,
+["debuffType"] = "HELPFUL",
+},
+["untrigger"] = {
+},
+},
+["disjunctive"] = "all",
+["activeTriggerMode"] = -10,
+},
+["selfPoint"] = "CENTER",
+["internalVersion"] = 85,
+["keepAspectRatio"] = false,
+["animation"] = {
+["start"] = {
+["type"] = "none",
+["easeStrength"] = 3,
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["translateType"] = "straightTranslate",
+["scalex"] = 1,
+["colorB"] = 1,
+["colorG"] = 1,
+["use_translate"] = false,
+["colorA"] = 1,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+["translateFunc"] = "function(progress, startX, startY, deltaX, deltaY)\n    return startX + (progress * deltaX), startY + (progress * deltaY)\nend\n",
+["scaley"] = 1,
+["alpha"] = 0,
+["easeStrength"] = 5,
+["y"] = -220,
+["x"] = 0,
+["use_scale"] = false,
+["scaleType"] = "straightScale",
+["scaleFunc"] = "function(progress, startX, startY, scaleX, scaleY)\n    return startX + (progress * (scaleX - startX)), startY + (progress * (scaleY - startY))\nend\n",
+["rotate"] = 0,
+["colorR"] = 1,
+["duration"] = "10",
+},
+["finish"] = {
+["type"] = "none",
+["easeType"] = "none",
+["easeStrength"] = 3,
+["preset"] = "slidebottom",
+["duration_type"] = "seconds",
+},
+},
+["adjustedMax"] = "",
+["information"] = {
+["forceEvents"] = true,
+["ignoreOptionsEventErrors"] = true,
+},
+["displayIcon"] = "134376",
+["desaturate"] = false,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -9100,100 +9200,6 @@ true,
 ["width"] = 1,
 },
 },
-["customTextUpdate"] = "event",
-["url"] = "https://wago.io/RaidAbilityTimeline/81",
-["actions"] = {
-["start"] = {
-["do_custom"] = false,
-},
-["init"] = {
-["custom"] = "aura_env.options = {}\nfor _,option in pairs(aura_env.config.spellOptions) do\n    aura_env.options[option.message] = option\nend\naura_env.IDoptions = {}\nfor _,option in pairs(aura_env.config.spellOptions) do\n    aura_env.IDoptions[tostring(option.spellid)] = option\nend\n\nfor k,v in pairs(aura_env.region.subRegions) do\n    if v.type == \"subglow\" then\n        aura_env.glow = v\n    end\nend\n\n\n",
-["do_custom"] = true,
-},
-["finish"] = {
-["do_custom"] = false,
-},
-},
-["triggers"] = {
-{
-["trigger"] = {
-["type"] = "addons",
-["use_count"] = false,
-["subeventSuffix"] = "_CAST_START",
-["remaining_operator"] = ">",
-["event"] = "Boss Mod Timer",
-["names"] = {
-},
-["use_isBarEnabled"] = true,
-["remaining"] = "10",
-["spellIds"] = {
-},
-["use_remaining"] = true,
-["unit"] = "player",
-["subeventPrefix"] = "SPELL",
-["use_cloneId"] = true,
-["debuffType"] = "HELPFUL",
-},
-["untrigger"] = {
-},
-},
-["disjunctive"] = "all",
-["activeTriggerMode"] = -10,
-},
-["selfPoint"] = "CENTER",
-["internalVersion"] = 85,
-["keepAspectRatio"] = false,
-["animation"] = {
-["start"] = {
-["type"] = "none",
-["easeStrength"] = 3,
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["translateType"] = "straightTranslate",
-["scalex"] = 1,
-["colorB"] = 1,
-["colorG"] = 1,
-["use_translate"] = false,
-["colorA"] = 1,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-["translateFunc"] = "function(progress, startX, startY, deltaX, deltaY)\n    return startX + (progress * deltaX), startY + (progress * deltaY)\nend\n",
-["scaley"] = 1,
-["alpha"] = 0,
-["easeStrength"] = 5,
-["y"] = -220,
-["x"] = 0,
-["use_scale"] = false,
-["scaleType"] = "straightScale",
-["scaleFunc"] = "function(progress, startX, startY, scaleX, scaleY)\n    return startX + (progress * (scaleX - startX)), startY + (progress * (scaleY - startY))\nend\n",
-["rotate"] = 0,
-["colorR"] = 1,
-["duration"] = "10",
-},
-["finish"] = {
-["type"] = "none",
-["easeType"] = "none",
-["easeStrength"] = 3,
-["preset"] = "slidebottom",
-["duration_type"] = "seconds",
-},
-},
-["color"] = {
-1,
-1,
-1,
-1,
-},
-["information"] = {
-["forceEvents"] = true,
-["ignoreOptionsEventErrors"] = true,
-},
-["displayIcon"] = "134376",
-["desaturate"] = false,
-["icon"] = true,
 ["font"] = "Friz Quadrata TT",
 ["version"] = 81,
 ["subRegions"] = {
@@ -9342,7 +9348,12 @@ true,
 },
 },
 ["height"] = 31.999906539917,
-["stickyDuration"] = false,
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["talent"] = {
 ["multi"] = {
@@ -9365,14 +9376,14 @@ true,
 ["useAdjustededMax"] = false,
 ["fontSize"] = 12,
 ["source"] = "import",
-["desc"] = "",
+["icon"] = true,
 ["anchorFrameType"] = "SCREEN",
 ["frameStrata"] = 1,
-["adjustedMin"] = "",
+["stickyDuration"] = false,
 ["anchorFrameFrame"] = "WeakAuras:Vertical bar",
 ["regionType"] = "icon",
-["xOffset"] = 1.7166137695313e-05,
-["adjustedMax"] = "",
+["desc"] = "",
+["adjustedMin"] = "",
 ["justify"] = "LEFT",
 ["cooldownTextDisabled"] = true,
 ["anchorFrameParent"] = false,
@@ -10062,17 +10073,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -10197,7 +10201,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["BGCIRCLE  "] = {
 ["user_y"] = 0,
@@ -10310,14 +10321,11 @@ true,
 ["useAdjustededMax"] = false,
 ["backgroundTexture"] = "Textures\\SpellActivationOverlays\\Eclipse_Sun",
 ["source"] = "import",
-["config"] = {
-},
+["tocversion"] = 110107,
 ["useAdjustedMax"] = false,
 ["mirror"] = false,
-["startAngle"] = 270,
-["tocversion"] = 110107,
-["crop_x"] = 0.41,
-["uid"] = "Z13(mB9(9s1",
+["authorOptions"] = {
+},
 ["load"] = {
 ["ingroup"] = {
 ["multi"] = {
@@ -10365,15 +10373,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -10384,6 +10392,10 @@ true,
 ["use_petbattle"] = false,
 ["use_dragonriding"] = false,
 },
+["crop_x"] = 0.41,
+["config"] = {
+},
+["startAngle"] = 270,
 ["parent"] = "Suidilias Brewmaster Monk ",
 ["adjustedMax"] = "",
 ["anchorFrameType"] = "SCREEN",
@@ -10403,8 +10415,7 @@ true,
 },
 ["useAdjustedMin"] = false,
 ["inverse"] = false,
-["authorOptions"] = {
-},
+["crop"] = 0.41,
 ["orientation"] = "ANTICLOCKWISE",
 ["conditions"] = {
 },
@@ -10412,7 +10423,7 @@ true,
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
 },
-["crop"] = 0.41,
+["uid"] = "Z13(mB9(9s1",
 },
 ["Rune Tap"] = {
 ["iconSource"] = -1,
@@ -10627,17 +10638,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -10802,7 +10806,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["ShiftFocus"] = {
 ["outline"] = "OUTLINE",
@@ -10961,9 +10972,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -10984,9 +10997,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -11105,7 +11116,7 @@ true,
 },
 ["displayIcon"] = 135936,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -11142,25 +11153,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Pain Suppression",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "uC6C739GVRd",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "uC6C739GVRd",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Dancing Rune Weapon"] = {
 ["iconSource"] = -1,
@@ -11336,40 +11347,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -11508,11 +11505,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Anti-Magic Shell (Blood)"] = {
@@ -11675,40 +11686,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -11800,11 +11797,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Celestial Brew "] = {
@@ -11968,15 +11979,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -12149,7 +12160,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -12158,11 +12169,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -12203,13 +12214,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -12221,7 +12232,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -12674,13 +12685,8 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["color"] = {
-1,
-1,
-1,
-1,
-},
 ["icon"] = true,
+["cooldownEdge"] = false,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -12735,7 +12741,12 @@ true,
 ["adjustedMax"] = "",
 ["displayIcon"] = "1360980",
 ["cooldown"] = true,
-["cooldownEdge"] = false,
+["color"] = {
+1,
+1,
+1,
+1,
+},
 },
 ["Obliterate"] = {
 ["iconSource"] = -1,
@@ -12959,17 +12970,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -13144,7 +13148,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Glacial Advance (Optional)"] = {
 ["iconSource"] = 0,
@@ -13312,21 +13323,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -13421,7 +13425,14 @@ true,
 },
 ["displayIcon"] = 537514,
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Frost Strike"] = {
 ["iconSource"] = 0,
@@ -13671,17 +13682,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -13840,7 +13844,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 237520,
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Gnaw"] = {
 ["iconSource"] = 0,
@@ -14048,10 +14059,17 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["progressSource"] = {
 -1,
 "",
+},
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
 },
 ["information"] = {
 ["forceEvents"] = true,
@@ -14282,14 +14300,7 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 237524,
 ["cooldown"] = true,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 },
 ["Ancestral Protection Totem"] = {
 ["iconSource"] = -1,
@@ -14324,9 +14335,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -14347,9 +14360,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -14468,7 +14479,7 @@ true,
 },
 ["displayIcon"] = 136080,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -14505,25 +14516,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Ancestral Protection Totem",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "SL8z)b3fUBx",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "SL8z)b3fUBx",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Mark Order Settings"] = {
 ["iconSource"] = -1,
@@ -14607,28 +14618,36 @@ true,
 ["useAdjustededMax"] = false,
 ["width"] = 24,
 ["source"] = "import",
-["parent"] = "M+ AUTOMARK",
+["url"] = "https://wago.io/1ctv3b91K/49",
 ["xOffset"] = 0,
-["actions"] = {
-["start"] = {
-["do_message"] = false,
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["preferToUpdate"] = true,
 ["information"] = {
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["conditions"] = {
 },
-["progressSource"] = {
--1,
-"",
+["parent"] = "M+ AUTOMARK",
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
 },
-["preferToUpdate"] = true,
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
 ["uid"] = "0n(7FPa2q5h",
 ["frameStrata"] = 1,
 ["useCooldownModRate"] = true,
@@ -14639,6 +14658,52 @@ true,
 ["cooldownTextDisabled"] = false,
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
+["actions"] = {
+["start"] = {
+["do_message"] = false,
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
+["config"] = {
+["Settings"] = {
+["1"] = {
+["Enable"] = false,
+["Order"] = 1,
+},
+["8"] = {
+["Enable"] = false,
+["Order"] = 9,
+},
+["3"] = {
+["Enable"] = true,
+["Order"] = 3,
+},
+["2"] = {
+["Enable"] = false,
+["Order"] = 2,
+},
+["5"] = {
+["Enable"] = true,
+["Order"] = 5,
+},
+["4"] = {
+["Enable"] = true,
+["Order"] = 4,
+},
+["7"] = {
+["Enable"] = true,
+["Order"] = 1,
+},
+["6"] = {
+["Enable"] = true,
+["Order"] = 2,
+},
+},
+},
+["inverse"] = false,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -15139,65 +15204,11 @@ true,
 ["size"] = 10,
 },
 },
-["config"] = {
-["Settings"] = {
-["1"] = {
-["Enable"] = false,
-["Order"] = 1,
-},
-["8"] = {
-["Enable"] = false,
-["Order"] = 9,
-},
-["3"] = {
-["Enable"] = true,
-["Order"] = 3,
-},
-["2"] = {
-["Enable"] = false,
-["Order"] = 2,
-},
-["5"] = {
-["Enable"] = true,
-["Order"] = 5,
-},
-["4"] = {
-["Enable"] = true,
-["Order"] = 4,
-},
-["7"] = {
-["Enable"] = true,
-["Order"] = 1,
-},
-["6"] = {
-["Enable"] = true,
-["Order"] = 2,
-},
-},
-},
-["inverse"] = false,
-["url"] = "https://wago.io/1ctv3b91K/49",
 ["displayIcon"] = "618979",
 ["cooldown"] = false,
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["progressSource"] = {
+-1,
+"",
 },
 },
 ["Soul Reaper (Unholy)"] = {
@@ -15381,40 +15392,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -15593,11 +15590,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["weapon "] = {
@@ -15780,15 +15791,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["class"] = {
 ["single"] = "DRUID",
 ["multi"] = {
@@ -15964,27 +15975,36 @@ true,
 ["useAdjustededMax"] = false,
 ["width"] = 24,
 ["source"] = "import",
-["parent"] = "M+ AUTOMARK",
+["url"] = "https://wago.io/1ctv3b91K/49",
 ["xOffset"] = 0,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["preferToUpdate"] = true,
 ["information"] = {
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["conditions"] = {
 },
-["progressSource"] = {
--1,
-"",
+["parent"] = "M+ AUTOMARK",
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
 },
-["preferToUpdate"] = true,
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
 ["uid"] = "zDPIgrVY(iE",
 ["frameStrata"] = 1,
 ["useCooldownModRate"] = true,
@@ -15995,6 +16015,27 @@ true,
 ["cooldownTextDisabled"] = false,
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
+["config"] = {
+["Settings"] = {
+["Tank"] = {
+["Enable"] = true,
+["Option"] = 2,
+},
+["Healer"] = {
+["Enable"] = true,
+["Option"] = 1,
+},
+},
+},
+["inverse"] = false,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -16157,41 +16198,11 @@ true,
 ["size"] = 10,
 },
 },
-["config"] = {
-["Settings"] = {
-["Tank"] = {
-["Enable"] = true,
-["Option"] = 2,
-},
-["Healer"] = {
-["Enable"] = true,
-["Option"] = 1,
-},
-},
-},
-["inverse"] = false,
-["url"] = "https://wago.io/1ctv3b91K/49",
 ["displayIcon"] = "618979",
 ["cooldown"] = false,
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["progressSource"] = {
+-1,
+"",
 },
 },
 ["Killing Streak (Optional)"] = {
@@ -16362,21 +16373,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -16429,7 +16433,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Remorseless Winter"] = {
 ["iconSource"] = -1,
@@ -16659,17 +16670,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -16841,7 +16845,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Guardian Spirit"] = {
 ["iconSource"] = -1,
@@ -16876,9 +16887,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -16899,9 +16912,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -17020,7 +17031,7 @@ true,
 },
 ["displayIcon"] = 237542,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -17057,25 +17068,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Guardian Spirit",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "4ih1vEM7l)1",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "4ih1vEM7l)1",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Asphyxiate"] = {
 ["iconSource"] = -1,
@@ -17266,38 +17277,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -17350,6 +17334,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -17519,11 +17516,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Luck of the Draw! (Death Knight - S2 - 2-Pieces)"] = {
@@ -17699,9 +17710,9 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["preferToUpdate"] = true,
-["source"] = "import",
 ["icon"] = true,
+["source"] = "import",
+["xOffset"] = 0,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -17758,7 +17769,7 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["xOffset"] = 0,
+["preferToUpdate"] = true,
 },
 ["Roll CD 16 3"] = {
 ["sparkWidth"] = 10,
@@ -17844,7 +17855,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -17853,11 +17864,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -17898,13 +17909,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -17916,7 +17927,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -18313,15 +18324,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["class"] = {
 ["single"] = "DRUID",
 ["multi"] = {
@@ -18620,17 +18631,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -18792,7 +18796,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Chi Torpedo 7 3"] = {
 ["sparkWidth"] = 10,
@@ -18878,7 +18889,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -18887,11 +18898,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -18932,13 +18943,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -18950,7 +18961,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -19323,17 +19334,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -19380,7 +19384,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Army of the Dead"] = {
 ["iconSource"] = 0,
@@ -19552,8 +19563,9 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["xOffset"] = 0,
 ["icon"] = true,
+["authorOptions"] = {
+},
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -19723,8 +19735,7 @@ true,
 },
 ["displayIcon"] = 237511,
 ["cooldown"] = true,
-["authorOptions"] = {
-},
+["xOffset"] = 0,
 },
 ["Improved Roll "] = {
 ["controlledChildren"] = {
@@ -19811,7 +19822,8 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["borderInset"] = 1,
+["config"] = {
+},
 ["borderOffset"] = 4,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -19839,9 +19851,8 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = 0,
+["borderInset"] = 1,
 ["uid"] = "EJSH9VKXk0v",
-["config"] = {
-},
 ["authorOptions"] = {
 },
 ["conditions"] = {
@@ -20017,12 +20028,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 2,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -20037,11 +20052,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = false,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -20049,17 +20060,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -20107,7 +20111,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Icebound Fortitude (Blood)"] = {
 ["iconSource"] = -1,
@@ -20268,40 +20279,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -20393,11 +20390,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Rising Sun Kick "] = {
@@ -20561,15 +20572,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -20821,15 +20832,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -21090,21 +21101,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -21157,7 +21161,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Detox "] = {
 ["iconSource"] = -1,
@@ -21313,7 +21324,7 @@ true,
 },
 },
 ["use_dragonriding"] = false,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -21322,11 +21333,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -21984,38 +21995,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -22068,6 +22052,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -22205,11 +22202,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Pillar of Frost"] = {
@@ -22439,17 +22450,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -22549,7 +22553,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Energybar  "] = {
 ["sparkWidth"] = 10,
@@ -22751,8 +22762,8 @@ true,
 ["text_text_format_p_time_legacy_floor"] = false,
 },
 {
+["border_size"] = 2,
 ["border_offset"] = 0,
-["type"] = "subborder",
 ["anchor_area"] = "bar",
 ["text_color"] = {
 },
@@ -22764,7 +22775,7 @@ true,
 },
 ["border_visible"] = true,
 ["border_edge"] = "1 Pixel",
-["border_size"] = 2,
+["type"] = "subborder",
 },
 },
 ["height"] = 20,
@@ -22983,15 +22994,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -23273,10 +23284,10 @@ true,
 ["text_font"] = "Friz Quadrata TT",
 ["text_text_format_p_time_format"] = 0,
 ["text_anchorYOffset"] = 2,
-["text_text_format_3.s_format"] = "none",
-["text_wordWrap"] = "WordWrap",
-["text_visible"] = true,
 ["text_fontType"] = "OUTLINE",
+["text_wordWrap"] = "WordWrap",
+["text_text_format_3.s_format"] = "none",
+["text_visible"] = true,
 ["text_shadowYOffset"] = 0,
 ["anchor_point"] = "INNER_TOP",
 ["text_fontSize"] = 17,
@@ -23418,7 +23429,7 @@ true,
 },
 },
 ["parent"] = "Suidilias Brewmaster Monk ",
-["xOffset"] = 221,
+["icon"] = true,
 ["uid"] = "OtXOpws1ked",
 ["frameStrata"] = 1,
 ["cooldownTextDisabled"] = false,
@@ -23430,14 +23441,14 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["width"] = 39,
-["cooldownEdge"] = false,
+["adjustedMax"] = "",
 ["config"] = {
 },
 ["inverse"] = false,
-["adjustedMax"] = "",
+["cooldownEdge"] = false,
 ["displayIcon"] = "1495827",
 ["cooldown"] = true,
-["icon"] = true,
+["xOffset"] = 221,
 },
 ["Legion of Souls"] = {
 ["iconSource"] = -1,
@@ -23630,21 +23641,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -23829,7 +23833,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Celerity "] = {
 ["controlledChildren"] = {
@@ -23913,7 +23924,8 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["borderInset"] = 1,
+["config"] = {
+},
 ["borderOffset"] = 4,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -23941,9 +23953,8 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = 0,
+["borderInset"] = 1,
 ["uid"] = "kmWDhLmCEXN",
-["config"] = {
-},
 ["authorOptions"] = {
 },
 ["conditions"] = {
@@ -24121,40 +24132,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -24278,11 +24275,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["BGCIRCLE 2"] = {
@@ -24396,14 +24407,11 @@ true,
 ["useAdjustededMax"] = false,
 ["backgroundTexture"] = "Textures\\SpellActivationOverlays\\Eclipse_Sun",
 ["source"] = "import",
-["config"] = {
-},
+["tocversion"] = 110107,
 ["useAdjustedMax"] = false,
 ["mirror"] = false,
-["startAngle"] = 270,
-["tocversion"] = 110107,
-["crop_x"] = 0.41,
-["uid"] = "vO3ja4inSoM",
+["authorOptions"] = {
+},
 ["load"] = {
 ["ingroup"] = {
 ["multi"] = {
@@ -24455,15 +24463,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -24472,6 +24480,10 @@ true,
 },
 ["use_class_and_spec"] = true,
 },
+["crop_x"] = 0.41,
+["config"] = {
+},
+["startAngle"] = 270,
 ["parent"] = "Suidilias Brewmaster Monk ",
 ["adjustedMax"] = "",
 ["anchorFrameType"] = "SCREEN",
@@ -24491,8 +24503,7 @@ true,
 },
 ["useAdjustedMin"] = false,
 ["inverse"] = false,
-["authorOptions"] = {
-},
+["crop"] = 0.41,
 ["orientation"] = "ANTICLOCKWISE",
 ["conditions"] = {
 },
@@ -24500,7 +24511,7 @@ true,
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
 },
-["crop"] = 0.41,
+["uid"] = "vO3ja4inSoM",
 },
 ["Blackout Combo "] = {
 ["iconSource"] = 1,
@@ -24536,7 +24547,9 @@ true,
 ["duration"] = "1",
 ["type"] = "aura2",
 ["subeventSuffix"] = "_CAST_START",
-["useExactSpellId"] = true,
+["auraspellids"] = {
+"228563",
+},
 ["use_showOn"] = true,
 ["useName"] = false,
 ["event"] = "Cooldown Progress (Spell)",
@@ -24546,10 +24559,8 @@ true,
 ["spellIds"] = {
 22812,
 },
-["auraspellids"] = {
-"228563",
-},
 ["unevent"] = "auto",
+["useExactSpellId"] = true,
 ["subeventPrefix"] = "SPELL",
 ["use_track"] = true,
 ["names"] = {
@@ -24693,15 +24704,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -24959,12 +24970,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 2,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -24979,11 +24994,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = false,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -24991,17 +25002,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -25049,7 +25053,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Death Pact"] = {
 ["iconSource"] = -1,
@@ -25236,38 +25247,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -25320,6 +25304,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -25457,11 +25454,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Weapons of Order Buff "] = {
@@ -25494,10 +25505,12 @@ true,
 ["use_genericShowOn"] = true,
 ["debuffType"] = "HELPFUL",
 ["spellName"] = 387184,
-["subeventSuffix"] = "_CAST_START",
+["auraspellids"] = {
+"387184",
+},
 ["type"] = "aura2",
 ["use_absorbHealMode"] = true,
-["unevent"] = "auto",
+["subeventSuffix"] = "_CAST_START",
 ["use_showOn"] = true,
 ["useExactSpellId"] = true,
 ["event"] = "Health",
@@ -25507,9 +25520,7 @@ true,
 ["spellIds"] = {
 22812,
 },
-["auraspellids"] = {
-"387184",
-},
+["unevent"] = "auto",
 ["ownOnly"] = true,
 ["subeventPrefix"] = "SPELL",
 ["use_track"] = true,
@@ -25650,15 +25661,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -25876,7 +25887,29 @@ true,
 ["borderEdge"] = "Square Full White",
 ["borderSize"] = 2,
 ["sort"] = "none",
+["uid"] = "ewxAiv2vXeC",
+["config"] = {
+},
+["gridType"] = "RD",
+["anchorFrameParent"] = false,
 ["authorOptions"] = {
+},
+["limit"] = 5,
+["hybridPosition"] = "hybridFirst",
+["semver"] = "11.2.1",
+["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
+["id"] = "Utilities - LWA - Death Knight",
+["frameStrata"] = 1,
+["gridWidth"] = 5,
+["anchorFrameType"] = "SELECTFRAME",
+["rotation"] = 0,
+["radius"] = 200,
+["rowSpace"] = 1,
+["stepAngle"] = 15,
+["conditions"] = {
+},
+["information"] = {
+["forceEvents"] = true,
 },
 ["animation"] = {
 ["start"] = {
@@ -25898,28 +25931,6 @@ true,
 ["easeType"] = "none",
 },
 },
-["config"] = {
-},
-["anchorFrameParent"] = false,
-["gridType"] = "RD",
-["limit"] = 5,
-["hybridPosition"] = "hybridFirst",
-["semver"] = "11.2.1",
-["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
-["id"] = "Utilities - LWA - Death Knight",
-["frameStrata"] = 1,
-["gridWidth"] = 5,
-["anchorFrameType"] = "SELECTFRAME",
-["rotation"] = 0,
-["radius"] = 200,
-["rowSpace"] = 1,
-["stepAngle"] = 15,
-["conditions"] = {
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["uid"] = "ewxAiv2vXeC",
 },
 ["Vampiric Blood"] = {
 ["iconSource"] = -1,
@@ -26076,40 +26087,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -26222,11 +26219,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Lichborne (Blood)"] = {
@@ -26383,13 +26394,8 @@ true,
 ["useAdjustededMax"] = false,
 ["source"] = "import",
 ["zoom"] = 0.3,
-["xOffset"] = 0,
-["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
-["information"] = {
-["forceEvents"] = true,
+["authorOptions"] = {
 },
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -26410,15 +26416,14 @@ true,
 ["easeType"] = "none",
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["keepAspectRatio"] = true,
 ["adjustedMax"] = "",
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -26431,15 +26436,15 @@ true,
 ["useCooldownModRate"] = true,
 ["frameStrata"] = 1,
 ["width"] = 48,
-["keepAspectRatio"] = true,
-["uid"] = "gLa(I9wmvCv",
-["inverse"] = true,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "gLa(I9wmvCv",
+["inverse"] = true,
+["xOffset"] = 0,
 ["conditions"] = {
 {
 ["check"] = {
@@ -26515,7 +26520,13 @@ true,
 },
 },
 ["cooldown"] = true,
-["authorOptions"] = {
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
 },
 },
 ["Rune of Razor Ice (Optional)"] = {
@@ -26711,17 +26722,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -26769,7 +26773,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Ara-Kara, City of Echoes - Tealc"] = {
 ["iconSource"] = 0,
@@ -27086,13 +27097,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -27130,7 +27141,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["use_zoneIds"] = true,
@@ -27167,25 +27183,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = 5899326,
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Avanoxx",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213179",
 ["Priority"] = {
@@ -27196,12 +27207,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Avanoxx",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [BOSS ADD] Starved Crawler",
 ["RangeLimiter"] = 2,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "218961",
 ["Priority"] = {
@@ -27212,12 +27223,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Starved Crawler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Anub'zekt",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "215405",
 ["Priority"] = {
@@ -27228,12 +27239,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Anub'zekt",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [BOSS ADD] Bloodstained Webmage",
 ["RangeLimiter"] = 2,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "220599",
 ["Priority"] = {
@@ -27244,12 +27255,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "  [BOSS ADD] Bloodstained Webmage",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Ki'katal the Harvester",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "215407",
 ["Priority"] = {
@@ -27260,12 +27271,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Ki'katal the Harvester",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Black Blood",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "215968",
 ["Priority"] = {
@@ -27276,12 +27287,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Black Blood",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Bloodworker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "215826",
 ["Priority"] = {
@@ -27292,12 +27303,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Bloodworker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Atik",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "217533",
 ["Priority"] = {
@@ -27308,12 +27319,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Atik",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Ixin",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "217531",
 ["Priority"] = {
@@ -27324,12 +27335,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Ixin",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Nakt",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "218324",
 ["Priority"] = {
@@ -27340,12 +27351,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Nakt",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Blood Overseer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "216364",
 ["Priority"] = {
@@ -27356,12 +27367,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Blood Overseer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Bloodstained Assistant",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216333",
 ["Priority"] = {
@@ -27372,12 +27383,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bloodstained Assistant",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Bloodstained Webmage",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "223253",
 ["Priority"] = {
@@ -27388,12 +27399,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bloodstained Webmage",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Bloodworker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216337",
 ["Priority"] = {
@@ -27404,12 +27415,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bloodworker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Engorged Crawler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "214840",
 ["Priority"] = {
@@ -27420,12 +27431,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Engorged Crawler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Hulking Bloodguard",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "228015",
 ["Priority"] = {
@@ -27436,12 +27447,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Hulking Bloodguard",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Hulking Bloodguard",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216338",
 ["Priority"] = {
@@ -27452,12 +27463,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Hulking Bloodguard",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Jabbing Flyer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216341",
 ["Priority"] = {
@@ -27468,12 +27479,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Jabbing Flyer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nerubian Hauler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "217039",
 ["Priority"] = {
@@ -27484,12 +27495,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nerubian Hauler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Ravenous Crawler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216336",
 ["Priority"] = {
@@ -27500,12 +27511,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Ravenous Crawler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Ravenous Crawler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "219221",
 ["Priority"] = {
@@ -27516,12 +27527,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Ravenous Crawler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Reinforced Drone",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216363",
 ["Priority"] = {
@@ -27532,12 +27543,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Reinforced Drone",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Sentry Stagshell",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "216340",
 ["Priority"] = {
@@ -27548,12 +27559,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Sentry Stagshell",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Swarming Flyer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "218325",
 ["Priority"] = {
@@ -27564,12 +27575,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Swarming Flyer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Trilling Attendant",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "216293",
 ["Priority"] = {
@@ -27580,12 +27591,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Trilling Attendant",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Winged Carrier",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "216365",
 ["Priority"] = {
@@ -27596,24 +27607,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Winged Carrier",
+["WhenNotAvailable"] = 1,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Ara-Kara, City of Echoes - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "GMIfJB)aFEI",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -27622,10 +27619,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Ara-Kara, City of Echoes - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "GMIfJB)aFEI",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Festering Wound"] = {
 ["iconSource"] = -1,
@@ -27866,17 +27877,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -28061,7 +28065,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Provoke "] = {
 ["iconSource"] = -1,
@@ -28223,15 +28234,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -28637,13 +28648,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -28681,7 +28692,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["affixes"] = {
@@ -28724,25 +28740,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = "4062727",
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Hylbrande",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175663",
 ["Priority"] = {
@@ -28753,12 +28764,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Hylbrande",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [BOSS ADD] Vault Purifier",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "176551",
 ["Priority"] = {
@@ -28769,12 +28780,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Vault Purifier",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [ENV] Titanic Defense Turret",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175667",
 ["Priority"] = {
@@ -28785,12 +28796,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Titanic Defense Turret",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Timecap'n Hooktail",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175546",
 ["Priority"] = {
@@ -28801,12 +28812,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Timecap'n Hooktail",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Corsair Brute",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177500",
 ["Priority"] = {
@@ -28817,12 +28828,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Corsair Brute",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [ENV] Hourglass Cannon",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176178",
 ["Priority"] = {
@@ -28833,12 +28844,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Hourglass Cannon",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] So'leah",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177269",
 ["Priority"] = {
@@ -28849,12 +28860,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] So'leah",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [BOSS ADD] So' Cartel Assassin",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "177716",
 ["Priority"] = {
@@ -28865,12 +28876,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] So' Cartel Assassin",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Progenitor Relic",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177821",
 ["Priority"] = {
@@ -28881,12 +28892,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Progenitor Relic",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Adorned Starseer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180429",
 ["Priority"] = {
@@ -28897,12 +28908,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Adorned Starseer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Burly Deckhand",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180015",
 ["Priority"] = {
@@ -28913,12 +28924,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Burly Deckhand",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Coastwalker Goliath",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178165",
 ["Priority"] = {
@@ -28929,12 +28940,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Coastwalker Goliath",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Corsair Cannoneer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176302",
 ["Priority"] = {
@@ -28945,12 +28956,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Corsair Cannoneer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Corsair Officer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179386",
 ["Priority"] = {
@@ -28961,12 +28972,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Corsair Officer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Devoted Accomplice",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180432",
 ["Priority"] = {
@@ -28977,12 +28988,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Devoted Accomplice",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Drunk Pirate",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179399",
 ["Priority"] = {
@@ -28993,12 +29004,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Drunk Pirate",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Focused Ritualist",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "180431",
 ["Priority"] = {
@@ -29009,12 +29020,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Focused Ritualist",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Hourglass Tidesage",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "179388",
 ["Priority"] = {
@@ -29025,12 +29036,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Hourglass Tidesage",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "Invigorating Fish Stick",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179733",
 ["Priority"] = {
@@ -29041,12 +29052,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Invigorating Fish Stick",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Murkbrine Fishmancer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "178142",
 ["Priority"] = {
@@ -29057,12 +29068,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Murkbrine Fishmancer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Murkbrine Scalebinder",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178141",
 ["Priority"] = {
@@ -29073,12 +29084,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Murkbrine Scalebinder",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Murkbrine Shellcrusher",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178139",
 ["Priority"] = {
@@ -29089,12 +29100,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Murkbrine Shellcrusher",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Murkbrine Shorerunner",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178163",
 ["Priority"] = {
@@ -29105,12 +29116,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Murkbrine Shorerunner",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Murkbrine Wavejumper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178133",
 ["Priority"] = {
@@ -29121,12 +29132,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Murkbrine Wavejumper",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Stormforged Guardian",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178171",
 ["Priority"] = {
@@ -29137,12 +29148,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Stormforged Guardian",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "Wandering Pulsar",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180433",
 ["Priority"] = {
@@ -29153,24 +29164,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Wandering Pulsar",
+["WhenNotAvailable"] = 2,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Tazavesh: So'leah's Gambit - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "xvqiQ65NSeg",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -29179,10 +29176,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Tazavesh: So'leah's Gambit - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "xvqiQ65NSeg",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Stagger "] = {
 ["sparkWidth"] = 10,
@@ -29193,12 +29204,18 @@ true,
 ["adjustedMin"] = "",
 ["yOffset"] = 21,
 ["anchorPoint"] = "CENTER",
-["config"] = {
-},
+["uid"] = "mdpaiVE3VSV",
 ["sparkRotation"] = 0,
 ["sparkRotationMode"] = "AUTO",
 ["url"] = "https://wago.io/dq8zvSt2N/10",
-["icon"] = false,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 ["triggers"] = {
 {
 ["trigger"] = {
@@ -29406,12 +29423,7 @@ true,
 },
 ["sparkBlendMode"] = "ADD",
 ["useAdjustededMax"] = false,
-["backgroundColor"] = {
-0,
-0,
-0,
-0.75,
-},
+["icon"] = false,
 ["source"] = "import",
 ["internalVersion"] = 85,
 ["selfPoint"] = "CENTER",
@@ -29424,13 +29436,11 @@ true,
 ["smoothProgress"] = false,
 ["useAdjustededMin"] = false,
 ["regionType"] = "aurabar",
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
+["backgroundColor"] = {
+0,
+0,
+0,
+0.75,
 },
 ["xOffset"] = 123.75,
 ["icon_side"] = "RIGHT",
@@ -29438,7 +29448,12 @@ true,
 ["height"] = 15,
 ["sparkHeight"] = 30,
 ["texture"] = "Charcoal",
-["uid"] = "mdpaiVE3VSV",
+["sparkColor"] = {
+1,
+1,
+1,
+1,
+},
 ["zoom"] = 0,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -29447,11 +29462,7 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["width"] = 155.5,
-["sparkColor"] = {
-1,
-1,
-1,
-1,
+["config"] = {
 },
 ["inverse"] = false,
 ["id"] = "Stagger ",
@@ -29493,15 +29504,15 @@ true,
 ["use_unit"] = true,
 ["unit"] = "player",
 ["spellName"] = 124081,
-["useExactSpellId"] = true,
+["subeventSuffix"] = "_CAST_START",
 ["use_remaining"] = false,
 ["debuffType"] = "HELPFUL",
+["unevent"] = "auto",
+["type"] = "aura2",
+["use_itemSlot"] = true,
 ["auraspellids"] = {
 "425571",
 },
-["type"] = "aura2",
-["use_itemSlot"] = true,
-["unevent"] = "auto",
 ["use_showOn"] = true,
 ["event"] = "Cooldown Progress (Equipment Slot)",
 ["use_itemName"] = true,
@@ -29511,7 +29522,7 @@ true,
 ["spellIds"] = {
 },
 ["use_testForCooldown"] = true,
-["subeventSuffix"] = "_CAST_START",
+["useExactSpellId"] = true,
 ["use_genericShowOn"] = true,
 ["use_track"] = true,
 ["duration"] = "1",
@@ -29771,9 +29782,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -29794,9 +29807,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -29915,7 +29926,7 @@ true,
 },
 ["displayIcon"] = 135966,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -29952,25 +29963,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Blessing of Sacrifice",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "SRniX97gH14",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "SRniX97gH14",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Frostscrythe (Optional)"] = {
 ["iconSource"] = -1,
@@ -30170,21 +30181,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -30357,7 +30361,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Death and Decay (Frost - Optional)"] = {
 ["iconSource"] = 0,
@@ -30574,17 +30585,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -30753,7 +30757,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 136144,
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Diffuse Magic "] = {
 ["iconSource"] = -1,
@@ -30916,15 +30927,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -31176,12 +31187,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -31196,11 +31211,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -31208,17 +31219,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -31266,7 +31270,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Shadowmeld  "] = {
 ["iconSource"] = -1,
@@ -31425,15 +31436,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -31769,15 +31780,6 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -31830,6 +31832,8 @@ true,
 ["size"] = 10,
 },
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -32019,7 +32023,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Roll Charge 14 3"] = {
 ["sparkWidth"] = 10,
@@ -32093,13 +32104,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -32111,7 +32122,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -32361,7 +32372,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -32370,11 +32381,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -32646,17 +32657,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -32842,7 +32846,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Roll CD 13 3"] = {
 ["sparkWidth"] = 10,
@@ -32928,7 +32939,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -32937,11 +32948,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -32982,13 +32993,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -33000,7 +33011,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -33561,9 +33572,9 @@ true,
 ["spark"] = false,
 ["actions"] = {
 ["start"] = {
+["custom"] = "",
 ["do_message"] = false,
 ["do_custom"] = false,
-["custom"] = "",
 },
 ["finish"] = {
 },
@@ -33859,40 +33870,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -34038,11 +34035,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Roll Backdrop 7 3"] = {
@@ -34117,13 +34128,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -34135,7 +34146,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -34385,7 +34396,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -34394,11 +34405,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -34591,40 +34602,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -34748,11 +34745,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Soul Reaper (Blood)"] = {
@@ -34957,40 +34968,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -35199,11 +35196,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Blood Boil"] = {
@@ -35415,17 +35426,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -35556,7 +35560,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Roll Charge 13 3"] = {
 ["sparkWidth"] = 10,
@@ -35630,13 +35641,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -35648,7 +35659,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -35897,7 +35908,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -35906,11 +35917,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -36029,15 +36040,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -36070,12 +36081,12 @@ true,
 ["stacks"] = false,
 ["blendMode"] = "BLEND",
 ["adjustedMax"] = "",
-["borderOffset"] = 5,
+["zoom"] = 0,
 ["slantMode"] = "INSIDE",
 ["spark"] = false,
 ["texture"] = "ElvUI Blank",
 ["textFont"] = "Friz Quadrata TT",
-["stacksFont"] = "Friz Quadrata TT",
+["borderOffset"] = 5,
 ["auto"] = true,
 ["tocversion"] = 110107,
 ["width"] = 404,
@@ -36118,7 +36129,7 @@ true,
 ["borderSize"] = 16,
 ["customTextUpdate"] = "update",
 ["timer"] = false,
-["desaturateForeground"] = false,
+["textSize"] = 12,
 ["triggers"] = {
 {
 ["trigger"] = {
@@ -36197,9 +36208,9 @@ true,
 ["useAdjustedMax"] = false,
 ["mirror"] = false,
 ["borderEdge"] = "None",
-["textSize"] = 12,
-["borderInFront"] = true,
 ["displayTextLeft"] = "%n",
+["borderInFront"] = true,
+["desaturateForeground"] = false,
 ["icon_side"] = "RIGHT",
 ["textFlags"] = "None",
 ["sparkOffsetX"] = 0,
@@ -36229,7 +36240,7 @@ true,
 ["frameStrata"] = 2,
 ["anchorFrameType"] = "SCREEN",
 ["compress"] = false,
-["zoom"] = 0,
+["stacksFont"] = "Friz Quadrata TT",
 ["inverse"] = false,
 ["sparkDesature"] = false,
 ["orientation"] = "HORIZONTAL",
@@ -36399,9 +36410,9 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["preferToUpdate"] = true,
-["source"] = "import",
 ["icon"] = true,
+["source"] = "import",
+["xOffset"] = 0,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -36475,7 +36486,7 @@ true,
 },
 ["displayIcon"] = 2032221,
 ["cooldown"] = true,
-["xOffset"] = 0,
+["preferToUpdate"] = true,
 },
 ["Operation: Floodgate - Tealc"] = {
 ["iconSource"] = 0,
@@ -36792,13 +36803,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -36836,7 +36847,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["use_zoneIds"] = true,
@@ -36873,25 +36889,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = "6392629",
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Bront",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "226402",
 ["Priority"] = {
@@ -36902,12 +36913,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Bront",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Keeza Quickfuse",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "226403",
 ["Priority"] = {
@@ -36918,12 +36929,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Keeza Quickfuse",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [ENV] Ticking Time Bomb",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234528",
 ["Priority"] = {
@@ -36934,12 +36945,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Ticking Time Bomb",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Big M.O.M.M.A.",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "226398",
 ["Priority"] = {
@@ -36950,12 +36961,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Big M.O.M.M.A.",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "  [BOSS ADD] Darkfuse Mechadrone",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "228424",
 ["Priority"] = {
@@ -36966,12 +36977,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Darkfuse Mechadrone",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Swampface",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "226396",
 ["Priority"] = {
@@ -36982,12 +36993,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Swampface",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Geezle Gigazap",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "226404",
 ["Priority"] = {
@@ -36998,12 +37009,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Geezle Gigazap",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [ENV] Leaping Spark",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "232690",
 ["Priority"] = {
@@ -37014,12 +37025,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Leaping Spark",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Bombshell Crab",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "231497",
 ["Priority"] = {
@@ -37030,12 +37041,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bombshell Crab",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Bubbles - R.I.P",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "231197",
 ["Priority"] = {
@@ -37046,12 +37057,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bubbles - R.I.P",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Darkfuse Bloodwarper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "230748",
 ["Priority"] = {
@@ -37062,12 +37073,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Darkfuse Bloodwarper",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Darkfuse Demolitionist",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "229212",
 ["Priority"] = {
@@ -37078,12 +37089,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Darkfuse Demolitionist",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Darkfuse Hyena",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "229252",
 ["Priority"] = {
@@ -37094,12 +37105,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Darkfuse Hyena",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Darkfuse Inspector",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "231385",
 ["Priority"] = {
@@ -37110,12 +37121,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Darkfuse Inspector",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Darkfuse Jumpstarter",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "231325",
 ["Priority"] = {
@@ -37126,12 +37137,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Darkfuse Jumpstarter",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Darkfuse Soldier",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "228144",
 ["Priority"] = {
@@ -37142,12 +37153,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Darkfuse Soldier",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Disturbed Kelp",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "231223",
 ["Priority"] = {
@@ -37158,12 +37169,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Disturbed Kelp",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Loaderbot",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "231014",
 ["Priority"] = {
@@ -37174,12 +37185,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Loaderbot",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Mechadrone Sniper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "229069",
 ["Priority"] = {
@@ -37190,12 +37201,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Mechadrone Sniper",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[ENV] Scaffolding",
 ["RangeLimiter"] = 2,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "231176",
 ["Priority"] = {
@@ -37206,12 +37217,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "[ENV] Scaffolding",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Shreddinator 3000",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "230740",
 ["Priority"] = {
@@ -37222,12 +37233,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Shreddinator 3000",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Undercrawler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "231380",
 ["Priority"] = {
@@ -37238,12 +37249,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Undercrawler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Venture Co. Architect",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "229251",
 ["Priority"] = {
@@ -37254,12 +37265,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Venture Co. Architect",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Venture Co. Contractor",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "229250",
 ["Priority"] = {
@@ -37270,12 +37281,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Venture Co. Contractor",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Venture Co. Diver",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "231496",
 ["Priority"] = {
@@ -37286,12 +37297,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Venture Co. Diver",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Venture Co. Electrician",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "231312",
 ["Priority"] = {
@@ -37302,12 +37313,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Venture Co. Electrician",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Venture Co. Surveyor",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "229686",
 ["Priority"] = {
@@ -37318,12 +37329,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Venture Co. Surveyor",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Waterworks Bottomfeeder",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "232228",
 ["Priority"] = {
@@ -37334,12 +37345,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Waterworks Bottomfeeder",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Waterworks Crocolisk",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "227145",
 ["Priority"] = {
@@ -37350,24 +37361,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Waterworks Crocolisk",
+["WhenNotAvailable"] = 1,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Operation: Floodgate - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "DjQdWsWK(lP",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -37376,10 +37373,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Operation: Floodgate - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "DjQdWsWK(lP",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Icy Onslaught"] = {
 ["iconSource"] = -1,
@@ -37549,21 +37560,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -37616,7 +37620,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Anti-Magic Zone"] = {
 ["iconSource"] = -1,
@@ -37828,10 +37839,17 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["progressSource"] = {
 -1,
 "",
+},
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
 },
 ["information"] = {
 ["forceEvents"] = true,
@@ -38030,14 +38048,7 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 237510,
 ["cooldown"] = true,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 },
 ["BGCIRCLE   "] = {
 ["user_y"] = 0,
@@ -38150,14 +38161,11 @@ true,
 ["useAdjustededMax"] = false,
 ["backgroundTexture"] = "Textures\\SpellActivationOverlays\\Eclipse_Sun",
 ["source"] = "import",
-["config"] = {
-},
+["tocversion"] = 110107,
 ["useAdjustedMax"] = false,
 ["mirror"] = false,
-["startAngle"] = 0,
-["tocversion"] = 110107,
-["crop_x"] = 0.41,
-["uid"] = "9jR9lByxKs7",
+["authorOptions"] = {
+},
 ["load"] = {
 ["ingroup"] = {
 ["multi"] = {
@@ -38205,15 +38213,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -38224,6 +38232,10 @@ true,
 ["use_petbattle"] = false,
 ["use_dragonriding"] = false,
 },
+["crop_x"] = 0.41,
+["config"] = {
+},
+["startAngle"] = 0,
 ["parent"] = "Suidilias Brewmaster Monk ",
 ["adjustedMax"] = "",
 ["anchorFrameType"] = "SCREEN",
@@ -38243,8 +38255,7 @@ true,
 },
 ["useAdjustedMin"] = false,
 ["inverse"] = false,
-["authorOptions"] = {
-},
+["crop"] = 0.41,
 ["orientation"] = "ANTICLOCKWISE",
 ["conditions"] = {
 },
@@ -38252,7 +38263,7 @@ true,
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
 },
-["crop"] = 0.41,
+["uid"] = "9jR9lByxKs7",
 },
 ["Dark Simulacrum (PvP Talent)"] = {
 ["iconSource"] = -1,
@@ -38439,38 +38450,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -38523,6 +38507,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -38692,11 +38689,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["DK"] = {
@@ -39003,17 +39014,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -39044,7 +39048,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Death and Decay (Unholy)"] = {
 ["iconSource"] = -1,
@@ -39302,17 +39313,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -39494,7 +39498,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["General Options - LWA - Death Knight"] = {
 ["iconSource"] = 0,
@@ -39520,14 +39531,14 @@ true,
 ["event"] = "GTFO",
 ["unit"] = "player",
 ["debuffType"] = "HELPFUL",
+["custom"] = "function(event, ...)\n    local arg1, arg2 = ...\n    local this = aura_env\n    \n    if \"LWA_INIT\" == event and not arg1 then\n        this.Init()\n        \n    elseif \"LWA_UPDATE_BAR\" == event and arg1 then\n        this.UpdateBar(...)\n        \n    elseif \"LWA_UPDATE_RESOURCES\" == event then\n        this.UpdateResources()\n        \n    elseif \"PLAYER_ENTERING_WORLD\" == event then\n        if arg1 or arg2 then\n            this.ThrottledInit()\n            \n            C_Timer.After(2, function()\n                    WeakAuras.ScanEvents(\"LWA_INIT\", true)\n            end)\n        end\n    else\n        this.ThrottledInit()\n    end\n    \n    return true\nend",
 ["events"] = "OPTIONS LWA_OPTIONS LWA_INIT LWA_UPDATE_RESOURCES LWA_UPDATE_BAR PLAYER_ENTERING_WORLD LOADING_SCREEN_DISABLED PLAYER_SPECIALIZATION_CHANGED PLAYER_TALENT_UPDATE PLAYER_PVP_TALENT_UPDATE PLAYER_LEVEL_UP TRAIT_CONFIG_CREATED TRAIT_CONFIG_UPDATED CINEMATIC_STOP STOP_MOVIE CLIENT_SCENE_CLOSED PET_BATTLE_CLOSE",
-["spellIds"] = {
-},
 ["custom_type"] = "event",
 ["names"] = {
 },
 ["subeventPrefix"] = "SPELL",
-["custom"] = "function(event, ...)\n    local arg1, arg2 = ...\n    local this = aura_env\n    \n    if \"LWA_INIT\" == event and not arg1 then\n        this.Init()\n        \n    elseif \"LWA_UPDATE_BAR\" == event and arg1 then\n        this.UpdateBar(...)\n        \n    elseif \"LWA_UPDATE_RESOURCES\" == event then\n        this.UpdateResources()\n        \n    elseif \"PLAYER_ENTERING_WORLD\" == event then\n        if arg1 or arg2 then\n            this.ThrottledInit()\n            \n            C_Timer.After(2, function()\n                    WeakAuras.ScanEvents(\"LWA_INIT\", true)\n            end)\n        end\n    else\n        this.ThrottledInit()\n    end\n    \n    return true\nend",
+["spellIds"] = {
+},
 ["custom_hide"] = "custom",
 },
 ["untrigger"] = {
@@ -39540,14 +39551,14 @@ true,
 ["event"] = "GTFO",
 ["unit"] = "player",
 ["debuffType"] = "HELPFUL",
+["custom"] = "function(event, ...)\n    if not aura_env.parentFrame then\n        aura_env.parentFrame = WeakAuras.GetRegion(aura_env.parent)\n    end\n    \n    local frame = aura_env.parentFrame\n    \n    if frame then\n        local arg1 = select(1, ...)\n        local cfg = aura_env.config.alpha\n        local alpha = cfg.global\n        local hasSpecialUI = false\n        \n        if \"CLIENT_SCENE_OPENED\" == event then\n            aura_env.currentScene = arg1\n            \n        elseif \"CLIENT_SCENE_CLOSED\" == event then\n            aura_env.currentScene = nil\n        end\n        \n        if aura_env.currentScene == 1 then\n            hasSpecialUI = true\n        end\n        \n        hasSpecialUI = hasSpecialUI or UnitHasVehicleUI(\"player\") or HasOverrideActionBar() or HasVehicleActionBar() or false\n        \n        if \"STATUS\" == event or WeakAuras.IsOptionsOpen() then\n            frame:SetAlpha(1)\n            \n        elseif \"BARBER_SHOP_OPEN\" == event or hasSpecialUI then\n            frame:SetAlpha(0)\n            \n        elseif \"LWA_ALPHA\" == event then\n            local class = UnitClassBase(\"player\")\n            local isMounted = IsMounted() or (\"DRUID\" == class and tContains({3, 4, 27, 29}, GetShapeshiftFormID()))\n            local isSkyriding = WeakAuras.IsRetail() and isMounted and select(2, C_PlayerInfo.GetGlidingInfo())\n            \n            if not UnitAffectingCombat(\"player\") then\n                alpha = min(alpha, cfg.ooc)\n            end\n            \n            if (isSkyriding or (isMounted and (not cfg.skyriding_only or (HasBonusActionBar() and (11 == GetBonusBarIndex() or (\"EVOKER\" == class and 7 == GetBonusBarIndex()))))))\n            then\n                alpha = min(alpha, cfg.mounted)\n            else\n                if UnitExists(\"target\") then\n                    local isEnemy = UnitCanAttack(\"player\", \"target\") or UnitIsEnemy(\"player\", \"target\")\n                    \n                    if (not isEnemy and cfg.ignore_friendly) or (isEnemy and cfg.ignore_enemy) then\n                        alpha = cfg.global\n                    end\n                end\n            end\n            \n            frame:SetAlpha(alpha / 100)\n        else\n            C_Timer.After(0.05, function()\n                    WeakAuras.ScanEvents(\"LWA_ALPHA\")\n            end)\n        end\n        \n        return true\n    end\nend",
 ["events"] = "OPTIONS LWA_INIT PLAYER_ENTERING_WORLD PLAYER_REGEN_ENABLED PLAYER_REGEN_DISABLED PLAYER_TARGET_CHANGED PLAYER_ALIVE PLAYER_DEAD PLAYER_UNGHOST BARBER_SHOP_OPEN BARBER_SHOP_CLOSE CLIENT_SCENE_OPENED CLIENT_SCENE_CLOSED PLAYER_MOUNT_DISPLAY_CHANGED LWA_UPDATE_SHAPESHIFT_FORM STATUS LWA_ALPHA UPDATE_VEHICLE_ACTIONBAR UPDATE_OVERRIDE_ACTIONBAR UPDATE_BONUS_ACTIONBAR",
-["spellIds"] = {
-},
 ["custom_type"] = "event",
 ["names"] = {
 },
 ["subeventPrefix"] = "SPELL",
-["custom"] = "function(event, ...)\n    if not aura_env.parentFrame then\n        aura_env.parentFrame = WeakAuras.GetRegion(aura_env.parent)\n    end\n    \n    local frame = aura_env.parentFrame\n    \n    if frame then\n        local arg1 = select(1, ...)\n        local cfg = aura_env.config.alpha\n        local alpha = cfg.global\n        local hasSpecialUI = false\n        \n        if \"CLIENT_SCENE_OPENED\" == event then\n            aura_env.currentScene = arg1\n            \n        elseif \"CLIENT_SCENE_CLOSED\" == event then\n            aura_env.currentScene = nil\n        end\n        \n        if aura_env.currentScene == 1 then\n            hasSpecialUI = true\n        end\n        \n        hasSpecialUI = hasSpecialUI or UnitHasVehicleUI(\"player\") or HasOverrideActionBar() or HasVehicleActionBar() or false\n        \n        if \"STATUS\" == event or WeakAuras.IsOptionsOpen() then\n            frame:SetAlpha(1)\n            \n        elseif \"BARBER_SHOP_OPEN\" == event or hasSpecialUI then\n            frame:SetAlpha(0)\n            \n        elseif \"LWA_ALPHA\" == event then\n            local class = UnitClassBase(\"player\")\n            local isMounted = IsMounted() or (\"DRUID\" == class and tContains({3, 4, 27, 29}, GetShapeshiftFormID()))\n            local isSkyriding = WeakAuras.IsRetail() and isMounted and select(2, C_PlayerInfo.GetGlidingInfo())\n            \n            if not UnitAffectingCombat(\"player\") then\n                alpha = min(alpha, cfg.ooc)\n            end\n            \n            if (isSkyriding or (isMounted and (not cfg.skyriding_only or (HasBonusActionBar() and (11 == GetBonusBarIndex() or (\"EVOKER\" == class and 7 == GetBonusBarIndex()))))))\n            then\n                alpha = min(alpha, cfg.mounted)\n            else\n                if UnitExists(\"target\") then\n                    local isEnemy = UnitCanAttack(\"player\", \"target\") or UnitIsEnemy(\"player\", \"target\")\n                    \n                    if (not isEnemy and cfg.ignore_friendly) or (isEnemy and cfg.ignore_enemy) then\n                        alpha = cfg.global\n                    end\n                end\n            end\n            \n            frame:SetAlpha(alpha / 100)\n        else\n            C_Timer.After(0.05, function()\n                    WeakAuras.ScanEvents(\"LWA_ALPHA\")\n            end)\n        end\n        \n        return true\n    end\nend",
+["spellIds"] = {
+},
 ["custom_hide"] = "custom",
 },
 ["untrigger"] = {
@@ -39635,206 +39646,7 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["progressSource"] = {
--1,
-"",
-},
 ["cooldownEdge"] = false,
-["information"] = {
-["forceEvents"] = true,
-},
-["conditions"] = {
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["parent"] = "Luxthos - Death Knight",
-["xOffset"] = 0,
-["uid"] = "G0KPiJiU88A",
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-["custom"] = "local this = aura_env\nlocal suffix = this.id:gsub(\"General Options %- LWA %- \", \"\")\nlocal CLASS = suffix:gsub(\"[%s%d]+$\", \"\")\nthis.CLASS = CLASS\n\nlocal CLASS_GROUP = WeakAuras.GetData(this.id).parent\nlocal DYNAMIC_EFFECTS_GROUP = \"Dynamic Effects - LWA - \" .. suffix\nlocal CORE_GROUP = \"Core - LWA - \" .. suffix\nlocal LEFT_SIDE_GROUP = \"Left Side - LWA - \" .. suffix\nlocal RIGHT_SIDE_GROUP = \"Right Side - LWA - \" .. suffix\nlocal UTILITIES_GROUP = \"Utilities - LWA - \" .. suffix\nlocal MAINTENANCE_GROUP = \"Maintenance - LWA - \" .. suffix\nlocal RESOURCES_GROUP = \"Resources - LWA - \" .. suffix\nlocal CAST_BAR = \"Cast Bar - LWA - \" .. suffix\n\nlocal NB_CORE = 8\nlocal CORE_WIDTH = 405\nlocal CORE_HEIGHT = 48\nlocal RESOURCES_HEIGHT = 0\n\nLWA = LWA or {}\nLWA[CLASS] = LWA[CLASS] or {}\n\nlocal LWA = LWA[CLASS]\n\nlocal config = nil\nLWA.configs = LWA.configs or {}\nLWA.configs[\"general\"] = this.config\n\nthis.resources = nil\nthis.parentFrame = nil\n\n\nlocal WeakAuras, C_Timer, time, min, max, floor, ceil, fmod, Round, pairs, ipairs, type, unpack, tinsert, FormatLargeNumber, DECIMAL_SEPARATOR = WeakAuras, C_Timer, time, min, max, floor, ceil, math.fmod, Round, pairs, ipairs, type, unpack, tinsert, FormatLargeNumber, DECIMAL_SEPARATOR\nlocal SharedMedia = LibStub(\"LibSharedMedia-3.0\")\n\n\nif WeakAuras.IsImporting() then\n    local function CheckImport()\n        if WeakAuras.IsImporting() or not this.isImporting then return end\n        \n        this.isImporting:Cancel()\n        this.isImporting = false\n        \n        C_Timer.After(1, function()\n                WeakAuras.ScanEvents(\"LWA_INIT\", true)\n        end)\n    end\n    \n    this.isImporting = C_Timer.NewTicker(0.5, CheckImport)\nelse\n    this.isImporting = false\nend\n\nlocal function tclone(t1)\n    local t = {}\n    \n    if t1 then\n        for k, v in pairs(t1) do\n            if \"table\" == type(v) then\n                v = tclone(v)\n            end\n            \n            if \"string\" == type(k) then\n                t[k] = v\n            else\n                tinsert(t, v)\n            end\n        end\n    end\n    \n    return t\nend\n\nlocal function tmerge(...)\n    local ts = {...}\n    local t = tclone(ts[1])\n    local t2\n    \n    for i = 2, #ts do\n        t2 = ts[i] or {}\n        \n        for k, v in pairs(t2) do\n            if \"table\" == type(v) then\n                v = tclone(v)\n                \n                if t[k] and #t[k] == 0 then\n                    t[k] = tmerge(t[k], v)\n                else\n                    t[k] = v\n                end\n            else\n                t[k] = v\n            end\n        end\n    end\n    \n    return t\nend\n\nlocal function SetRegionSize(r, w, h)\n    r:SetRegionWidth(w)\n    r:SetRegionHeight(h)\nend\n\nlocal function CalcSpacing(spacing)\n    local s, bs, bo, s2 = spacing, config.style.border_size, config.style.border_offset\n    \n    if bs > 0 then\n        s2 = bo\n    else\n        s2 = 0\n    end\n    \n    if s > 0 then\n        s = s + (s2 * 2)\n    else\n        s = s2\n    end\n    \n    return s\nend\n\nlocal function UpdateAnchorFrame(skipCore)\n    if this.isImporting then return end\n    \n    local config = LWA.GetConfig()\n    local h1 = config.core.height\n    local s1 = CalcSpacing(config.core.spacing)\n    local m1 = config.core.margin\n    local h, y = max(1, CORE_HEIGHT + RESOURCES_HEIGHT + s1 + m1), 0\n    \n    if 1 == h % 2 then\n        h = h + 1\n    end\n    \n    SetRegionSize(this.region, CORE_WIDTH, h)\n    \n    if config.core.resources_position == 1 then -- Above\n        y = y + RESOURCES_HEIGHT + s1 + m1\n    end\n    \n    if config.core.overflow_position == 1 then -- Above\n        y = y + max(CORE_HEIGHT, h1) - h1\n    end\n    \n    this.region:SetOffset(0, y)\n    \n    local function RepositionGroups()\n        local configs = { config.core, config.utility, config.maintenance }\n        \n        for i, g in ipairs({ CORE_GROUP, UTILITIES_GROUP, MAINTENANCE_GROUP }) do\n            if not (skipCore and CORE_GROUP == g) then\n                g = WeakAuras.GetRegion(g)\n                \n                if g then\n                    g:PositionChildren()\n                    \n                    if 0 == #g.sortedChildren then\n                        g:SetHeight(configs[i].height)\n                        g.currentHeight = configs[i].height\n                    end\n                end\n            end\n        end\n    end\n    \n    if skipCore then\n        C_Timer.After(0.05, RepositionGroups)\n    else\n        RepositionGroups()\n    end\nend\n\nfunction LWA.GetConfig(grp, force)\n    local default = {\n        style = {\n            border_offset = 1,\n            border_size = 1,\n            border_icons = true,\n            border_resources = true,\n            border_color = { [1] = 0, [2] = 0, [3] = 0, [4] = 1 },\n            zoom = 30,\n            resource_texture = \"Solid\",\n        },\n        core = {\n            font = \"\",\n            font_size = 18,\n            nb_min = 8,\n            nb_max = 8,\n            width = 48,\n            height = 48,\n            spacing = 3,\n            width2 = 48,\n            height2 = 48,\n            spacing2 = 3,\n            margin = 0,\n            overflow_position = 2, -- Below\n            resources_position = 2, -- Below\n        },\n        core2 = { -- Fake group\n            width = 48,\n            height = 48,\n            spacing = 3,\n        },\n        utility = {\n            font = \"\",\n            font_size = 16,\n            width = 38,\n            height = 38,\n            spacing = 3,\n            margin = 10,\n            nb_max = 10,\n            limit_icons = false,\n            behavior = 2, -- Always Show\n        },\n        top = {\n            font = \"\",\n            font_size = 16,\n            width = 38,\n            height = 38,\n            spacing = 3,\n            margin = 10,\n        },\n        side = {\n            font = \"\",\n            font_size = 16,\n            width = 38,\n            height = 38,\n            spacing = 3,\n            margin = 3,\n            grow_direction = 1,\n            nb = 60,\n        },\n        maintenance = {\n            font = \"\",\n            font_size = 16,\n            width = 36,\n            height = 36,\n            spacing = 0,\n            margin = 10,\n            nb_max = 10,\n            limit_icons = false,\n        },\n        alpha = {\n            global = 100,\n            ooc = 100,\n            mounted = 0,\n            skyriding_only = false,\n            ignore_enemy = true,\n            ignore_friendly = true,\n        },\n        resources = {\n            health_bar = {\n                format = 1\n            },\n            mana_bar = {\n                format = 1\n            }\n        },\n    }\n    \n    if force or not config or WeakAuras.IsOptionsOpen() then\n        config = tmerge(\n            default,\n            LWA.configs[\"general\"],\n            LWA.configs[\"class\"] or {}\n        )\n        \n        -- Special case for Core's Overflow\n        config.core2 = {\n            width = config.core.width2,\n            height = config.core.height2,\n            spacing = config.core.spacing2,\n            font = config.core.font,\n            font_size = config.core.font_size,\n        }\n    end\n    \n    if grp then\n        return config[grp] or {}\n    end\n    \n    return config\nend\n\nlocal function UpdateSubRegions(region, subCfg, applyBorders)\n    if region and #region.subRegions > 0 then\n        local config = LWA.GetConfig()\n        local bSize, bOffset, r, g, b, a = 0, 0 -- Border\n        local cfgFont, cfgSize, currentFont, currentSize, flags\n        \n        if applyBorders then\n            bSize = config.style.border_size\n            bOffset = config.style.border_offset\n            r, g, b, a = unpack(config.style.border_color)\n        end\n        \n        if subCfg then\n            cfgFont = subCfg.font\n            cfgSize = subCfg.font_size or 14\n            \n            if cfgFont then\n                cfgFont = SharedMedia:Fetch(\"font\", cfgFont)\n            end\n        end\n        \n        for _, subRegion in ipairs(region.subRegions) do\n            if \"subborder\" == subRegion.type then\n                subRegion:SetVisible(bSize > 0)\n                \n                if bSize > 0 then\n                    region:AnchorSubRegion(subRegion, \"area\", region.regionType == \"aurabar\" and \"bar\", nil, bOffset, bOffset)\n                    \n                    local bd = subRegion:GetBackdrop()\n                    bd.edgeSize = bSize\n                    subRegion:SetBackdrop(bd)\n                    subRegion:SetBorderColor(r, g, b, a)\n                end\n            elseif \"subtext\" == subRegion.type and cfgFont then\n                currentFont, currentSize, flags = subRegion.text:GetFont()\n                \n                if currentFont ~= cfgFont or currentSize ~= cfgSize then\n                    subRegion.text:SetFont(cfgFont, cfgSize, flags)\n                end\n            end\n        end\n    end\nend\n\nlocal function UpdateIcon(region, key, selfPoint)\n    if not region then return end\n    \n    local config = LWA.GetConfig()\n    local zoom = config.style.zoom / 100\n    local subCfg = config[key]\n    \n    region:SetAnchor(selfPoint, region.relativeTo, region.relativePoint)\n    \n    if region.SetZoom then\n        region:SetZoom(min(1, zoom + (region.extraZoom or 0)))\n    end\n    \n    SetRegionSize(region, subCfg.width, subCfg.height)\n    \n    UpdateSubRegions(region, subCfg, config.style.border_icons)\nend\n\nlocal function UpdateResource(region, index, nb, inCombat)\n    if not region then return end\n    \n    index = max(1, index or 1)\n    nb = max(1, nb or 1)\n    \n    if not inCombat then\n        local config, subCfg = LWA.GetConfig(), {}\n        \n        local w, h = CORE_WIDTH, 20\n        \n        if nb > 1 then\n            local s = CalcSpacing(config.core.spacing)\n            \n            w = (w + s) / nb - s\n        end\n        \n        local cg = region.configGroup\n        \n        if cg and config.resources[cg] then\n            subCfg = config.resources[cg]\n            h = subCfg.height or 20\n        end\n        \n        local lastW, lastH = region.width, region.height\n        \n        SetRegionSize(region, w, h)\n        \n        UpdateSubRegions(region, subCfg, config.style.border_resources)\n        \n        if config.style.resource_texture then\n            region.textureSource = \"LSM\"\n            region:SetStatusBarTextureLSM(config.style.resource_texture)\n            \n            if region.overlaysTexture then\n                for i, _ in ipairs(region.overlaysTexture) do\n                    region.overlaysTexture[i] = config.style.resource_texture\n                end\n            end\n        end\n        \n        if lastW ~= w or lastH ~= h then\n            region.bar:Update()\n        end\n        \n        if region.bar.spark then\n            region.bar.spark:SetHeight(max(15, Round(h * 2)))\n        end\n    end\n    \n    this.UpdateBar({ region = region }, index, nb)\nend\n\nlocal throttledInitHandler, throttledInitLastRun = nil, 0\n\nfunction this.ThrottledInit()\n    if throttledInitHandler or this.isImporting then return end\n    \n    local currentTime, delay = time(), 0.25\n    \n    if throttledInitLastRun > currentTime - 0.5 then\n        delay = max(0.25, currentTime - throttledInitLastRun)\n    end\n    \n    throttledInitHandler = C_Timer.NewTimer(delay, function()\n            WeakAuras.ScanEvents(\"LWA_INIT\")\n    end)\nend\n\nfunction this.Init()\n    if this.isImporting then return end\n    \n    throttledInitLastRun = time()\n    \n    local config = LWA.GetConfig(nil, true)\n    local isOptionsOpen = WeakAuras.IsOptionsOpen()\n    local zoom = config.style.zoom / 100\n    \n    if throttledInitHandler then\n        throttledInitHandler:Cancel()\n        throttledInitHandler = nil\n    end\n    \n    if not this.parentFrame then\n        this.parentFrame = WeakAuras.GetRegion(CLASS_GROUP)\n    end\n    \n    if this.parentFrame and not this.parentFrame.SetRealScale then\n        this.parentFrame.SetRealScale = this.parentFrame.SetScale\n        \n        this.parentFrame.SetScale = function(self, scale)\n            this.parentFrame:SetRealScale(scale)\n            local castBar = WeakAuras.GetRegion(CAST_BAR)\n            \n            if castBar then\n                castBar:SetScale(scale)\n            end\n        end\n    end\n    \n    if isOptionsOpen then\n        NB_CORE = config.core.nb_max\n    else\n        NB_CORE = max(4, config.core.nb_min, min(NB_CORE, config.core.nb_max))\n        \n        local castBar = WeakAuras.GetRegion(CAST_BAR)\n        \n        if castBar then\n            castBar:SetParent(UIParent)\n            \n            if this.parentFrame then\n                castBar:SetScale(this.parentFrame:GetScale())\n            end\n        end\n    end\n    \n    local spacing = CalcSpacing(config.core.spacing)\n    \n    CORE_WIDTH = NB_CORE * (config.core.width + spacing) - spacing\n    \n    local grpRegion = WeakAuras.GetRegion(CORE_GROUP)\n    \n    if grpRegion then\n        grpRegion:PositionChildren()\n        \n        if not isOptionsOpen then\n            NB_CORE = max(4, config.core.nb_min, min(#grpRegion.sortedChildren, config.core.nb_max))\n            \n            CORE_WIDTH = NB_CORE * (config.core.width + spacing) - spacing\n        end\n        \n        this.region:SetRegionWidth(CORE_WIDTH)\n    end\n    \n    this.UpdateResources()\n    \n    for _, g in ipairs({ DYNAMIC_EFFECTS_GROUP, LEFT_SIDE_GROUP, RIGHT_SIDE_GROUP }) do\n        g = WeakAuras.GetRegion(g)\n        \n        if g then\n            g:PositionChildren()\n        end\n    end\nend\n\nhooksecurefunc(\"SetUIVisibility\", function(isVisible)\n        if isVisible and this and this.ThrottledInit then\n            this.ThrottledInit()\n        end\nend)\n\nfunction this.UpdateResources()\n    if this.isImporting then return end\n    \n    local grpRegion = WeakAuras.GetRegion(RESOURCES_GROUP)\n    \n    if not this.resources then\n        local grpData = WeakAuras.GetData(RESOURCES_GROUP)\n        \n        this.resources = grpData and grpData.controlledChildren\n    end\n    \n    if grpRegion and this.resources and #this.resources > 0 then\n        local config = LWA.GetConfig()\n        \n        local totalHeight, nb = 0, 0\n        local h1 = config.core.height\n        local s1 = CalcSpacing(config.core.spacing)\n        local m1 = config.core.margin\n        local y = 0\n        \n        if config.core.resources_position == 2 then -- Below\n            y = max(CORE_HEIGHT, h1) + s1 + m1\n        end\n        \n        grpRegion:SetOffset(0, -y)\n        \n        local isOptionsOpen = WeakAuras.IsOptionsOpen()\n        local resRegion, isVisible, regionType\n        local w, h, cg = 0, 0\n        \n        y = 0\n        \n        for _, resId in ipairs(this.resources) do\n            resRegion = WeakAuras.GetRegion(resId)\n            \n            if resRegion then\n                isVisible = isOptionsOpen\n                regionType = resRegion.regionType\n                h = 0\n                \n                if \"aurabar\" == regionType then\n                    isVisible = isVisible or resRegion:IsVisible()\n                    UpdateResource(resRegion)\n                    \n                    h = resRegion.height\n                    \n                elseif \"dynamicgroup\" == regionType then\n                    local nbChild = 0\n                    local childRegions = {}\n                    \n                    for _, region in pairs(resRegion.controlledChildren) do\n                        if region and region[\"\"] then\n                            nbChild = nbChild + 1\n                            \n                            childRegions[region[\"\"].regionData.dataIndex] = region[\"\"].regionData.region\n                            \n                            isVisible = isVisible or region[\"\"].regionData.region:IsVisible()\n                        end\n                    end\n                    \n                    resRegion.childYOffset = -y\n                    h = 0\n                    \n                    for i, region in ipairs(childRegions) do\n                        UpdateResource(region, i, nbChild)\n                        \n                        h = max(h, region.height)\n                        \n                        region:SetYOffset(-y)\n                    end\n                    \n                    if h <= 0 then\n                        h = 20\n                    end\n                end\n                \n                if isVisible then\n                    nb = nb + 1\n                    \n                    if \"dynamicgroup\" == regionType then\n                        resRegion:PositionChildren()\n                    else\n                        resRegion:SetOffset(0, -y)\n                    end\n                    \n                    totalHeight = totalHeight + h\n                    y = y + h + s1\n                end\n            end\n        end\n        \n        RESOURCES_HEIGHT = totalHeight + max(nb - 1, 0) * CalcSpacing(config.core.spacing)\n    end\n    \n    UpdateAnchorFrame()\nend\n\nfunction this.UpdateBar(aura, i, nb)\n    local config = LWA.GetConfig(\"resources\")\n    local e = aura or aura_env\n    local region = e and e.region\n    local cg = region and region.configGroup\n    \n    if not (region and region:IsVisible() and cg and config[cg]) then return end\n    \n    local cs = region.colorState or \"\"\n    \n    if cs ~= \"\" then\n        cs = cs .. \"_\"\n    end\n    \n    cg = config[cg]\n    \n    local c1, c2 = cg[cs .. \"color1\"], cg[cs .. \"color2\"]\n    \n    if c1 and c2 then\n        nb = max(1, min(region.indexMax or 99, nb or 1))\n        i = min(nb, max(1, region.index or i or 1)) - (region.indexOffset or 0)\n        \n        local bar = region.bar\n        \n        if cg[cs .. \"gradient\"] and cg[cs .. \"gradient\"] < 3 then\n            if nb > 1 and 1 == cg[cs .. \"gradient\"] then\n                local function MixRGB(c1, c2, pos)\n                    pos = 1 - (pos or 0.5)\n                    \n                    return {\n                        (c1[1] * pos) + (c2[1] * (1 - pos)),\n                        (c1[2] * pos) + (c2[2] * (1 - pos)),\n                        (c1[3] * pos) + (c2[3] * (1 - pos)),\n                        (c1[4] * pos) + (c2[4] * (1 - pos))\n                    }\n                end\n                \n                local cc1, cc2 = c1, c2\n                \n                if i > 1 then\n                    c1 = MixRGB(cc1, cc2, (i - 1) / nb)\n                end\n                \n                c2 = MixRGB(cc1, cc2, i / nb)\n            end\n            \n            local orientation = \"HORIZONTAL\"\n            \n            if 2 == cg[cs .. \"gradient\"] then\n                orientation = \"VERTICAL\"\n                \n                local tmp = c1\n                c1 = c2\n                c2 = tmp\n            end\n            \n            region.enableGradient = true\n            region.gradientOrientation = orientation\n            region.barColor2 = c2\n            region:Color(unpack(c1))\n        else\n            region.enableGradient = false\n            region:Color(unpack(c1))\n        end\n        \n        if region.ot then\n            region.ot:SetColorTexture(unpack(c2))\n        end\n    end\nend\n\nfunction LWA.GrowCore(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w1 = config.core.width\n    local h1 = config.core.height\n    local s1 = CalcSpacing(config.core.spacing)\n    local w2 = config.core.width2\n    local h2 = config.core.height2\n    local s2 = CalcSpacing(config.core.spacing2)\n    local m1 = config.core.margin\n    \n    local maxCore = min(nb, config.core.nb_max)\n    local maxOverflow = nb - maxCore\n    local x, y\n    local xOffset = ((maxCore - 1) * (w1 + s1) / 2)\n    local yOffset = h1\n    local nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    local coreHeight = h1 + (ceil(maxOverflow / nbPerRow) * (h2 + s2))\n    local oldWidth, oldHeight = CORE_WIDTH, CORE_HEIGHT\n    \n    if maxOverflow > 0 then\n        coreHeight = coreHeight + max(s1, s2) - s2\n    end\n    \n    CORE_HEIGHT = coreHeight\n    \n    if not WeakAuras.IsOptionsOpen() then\n        NB_CORE = max(4, config.core.nb_min, maxCore)\n        \n        CORE_WIDTH = NB_CORE * (w1 + s1) - s1\n    end\n    \n    UpdateAnchorFrame(true)\n    \n    if oldWidth ~= CORE_WIDTH or oldHeight ~= CORE_HEIGHT then\n        this.UpdateResources()\n    end\n    \n    if config.core.resources_position == 1 then  -- Above\n        yOffset = h1 + RESOURCES_HEIGHT + s1 + m1\n    end\n    \n    if config.core.overflow_position == 1 then  -- Above\n        yOffset = yOffset + coreHeight - h1\n    end\n    \n    for i, regionData in ipairs(activeRegions) do\n        x = (i - 1) * (w1 + s1) - xOffset\n        y = -yOffset\n        \n        UpdateIcon(regionData.region, \"core\", \"BOTTOM\")\n        \n        newPositions[i] = { x, y }\n        \n        if i == maxCore then break end\n    end\n    \n    if maxOverflow > 0 then\n        local i2, m, anchor, yMult\n        \n        xOffset = ((maxCore - 1) * (w2 + s2) / 2)\n        yOffset = h1\n        \n        if config.core.overflow_position == 1 then -- Above\n            yOffset = yOffset - h2 + max(s1, s2) - s2 - coreHeight\n            yMult = 1\n            anchor = \"BOTTOM\"\n            \n            if config.core.resources_position == 1 then  -- Above\n                yOffset = yOffset - RESOURCES_HEIGHT - s1 - m1\n            end\n        else\n            if config.core.resources_position == 1 then  -- Above\n                yOffset = yOffset + RESOURCES_HEIGHT + s1 + m1\n            end\n            \n            yOffset = yOffset - h2\n            yMult = -1\n            anchor = \"TOP\"\n        end\n        \n        for i, regionData in ipairs(activeRegions) do\n            if i > maxCore then\n                i2 = i - maxCore\n                m = (i2 % nbPerRow)\n                \n                if m == 1 then\n                    xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n                    yOffset = yOffset + h2 + s2\n                end\n                \n                if m == 0 then\n                    m = nbPerRow\n                end\n                \n                x = (m - 1) * (w2 + s2) - xOffset\n                y = yOffset * yMult\n                \n                UpdateIcon(regionData.region, \"core2\", anchor)\n                \n                newPositions[i] = { x, y }\n            end\n        end\n    end\nend\n\nfunction LWA.GrowDynamicEffects(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local maxCore = min(nb, NB_CORE)\n    \n    local w1 = config.core.width\n    local s1 = CalcSpacing(config.core.spacing)\n    \n    local w2 = config.top.width\n    local h2 = config.top.height\n    local s2 = CalcSpacing(config.top.spacing)\n    \n    local xOffset = (maxCore - 1) * (w1 + s1) / 2\n    local yOffset = config.top.margin + max(s1, s2) - s2 - h2\n    local x, y, m\n    \n    local nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    \n    for i, regionData in ipairs(activeRegions) do\n        m = (i % nbPerRow)\n        \n        if m == 1 then\n            xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n            yOffset = yOffset + h2 + s2\n        end\n        \n        if m == 0 then\n            m = nbPerRow\n        end\n        \n        x = (m - 1) * (w2 + s2) - xOffset\n        y = yOffset\n        \n        UpdateIcon(regionData.region, \"top\", \"BOTTOM\")\n        \n        newPositions[i] = { x, y }\n    end\nend\n\nfunction LWA.GrowSide(newPositions, activeRegions, xMult)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w = config.side.width\n    local h = config.side.height\n    local s2 = CalcSpacing(config.side.spacing)\n    local s1 = CalcSpacing(config.core.spacing)\n    local h1 = config.core.height\n    local m1 = config.core.margin\n    \n    local baseX, baseY = config.side.margin + max(s1, s2), 0\n    local xOffset, yOffset, yMult = 0, 0, 1\n    local nbPerRC, m = min(config.side.nb, nb)\n    local grow = config.side.grow_direction\n    local anchor\n    \n    if config.core.resources_position == 2 and config.core.overflow_position == 2 then -- Below\n        if grow == 2 or grow == 4 then -- Upward\n            baseY = baseY - config.top.margin\n        end\n    else\n        if config.core.resources_position == 1 then -- Above\n            baseY = baseY + RESOURCES_HEIGHT + s1 + m1\n        end\n        \n        if config.core.overflow_position == 1 then -- Above\n            baseY = baseY + max(CORE_HEIGHT, h1) - h1\n        end\n    end\n    \n    xMult = xMult or 1\n    \n    if xMult < 0 then\n        anchor = \"TOPRIGHT\"\n    else\n        anchor = \"TOPLEFT\"\n    end\n    \n    if grow == 3 or grow == 4 then -- Horizontal\n        if grow == 4 then -- Upward\n            yOffset = -baseY\n            yMult = -1\n        else\n            yOffset = baseY - h - s2\n        end\n        \n        for i, regionData in ipairs(activeRegions) do\n            m = (i % nbPerRC)\n            \n            if m == 1 or (nbPerRC == 1 and i == 1) then\n                xOffset = baseX\n                yOffset = yOffset + h + s2\n            end\n            \n            UpdateIcon(regionData.region, \"side\", anchor)\n            \n            newPositions[i] = { xOffset * xMult, -yOffset * yMult }\n            \n            xOffset = xOffset + w + s2\n        end\n    else\n        xOffset = baseX - w - s2\n        \n        if grow == 2 then -- Upward\n            baseY = -baseY + h + s2\n            yOffset = baseY\n            yMult = -1\n        else\n            yOffset = -h - s2\n        end\n        \n        for i, regionData in ipairs(activeRegions) do\n            m = (i % nbPerRC)\n            \n            if m == 1 or (nbPerRC == 1 and i == 1) then\n                xOffset = xOffset + w + s2\n                yOffset = baseY\n            end\n            \n            UpdateIcon(regionData.region, \"side\", anchor)\n            \n            newPositions[i] = { xOffset * xMult, -yOffset * yMult }\n            \n            yOffset = yOffset + h + s2\n        end\n    end\nend\n\nfunction LWA.GrowUtilities(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w1 = config.core.width\n    local s1 = CalcSpacing(config.core.spacing)\n    \n    local w2 = config.utility.width\n    local h2 = config.utility.height\n    local s2 = CalcSpacing(config.utility.spacing)\n    \n    local maxCore, nbPerRow\n    \n    if config.utility.limit_icons then\n        nbPerRow = config.utility.nb_max\n        maxCore = min(nb, nbPerRow)\n    else\n        maxCore = min(nb, NB_CORE)\n        nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    end\n    \n    local xOffset = (maxCore - 1) * (w2 + s2) / 2\n    local yOffset = config.utility.margin + max(s1, s2) - s2 - h2\n    local x, y, m\n    \n    for i, regionData in ipairs(activeRegions) do\n        m = (i % nbPerRow)\n        \n        if m == 1 then\n            xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n            yOffset = yOffset + h2 + s2\n        end\n        \n        if m == 0 then\n            m = nbPerRow\n        end\n        \n        x = (m - 1) * (w2 + s2) - xOffset\n        y = -yOffset\n        \n        UpdateIcon(regionData.region, \"utility\", \"TOP\")\n        \n        newPositions[i] = { x, y }\n    end\nend\n\nfunction LWA.GrowMaintenance(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w1 = config.core.width\n    local s1 = CalcSpacing(config.core.spacing)\n    \n    local w2 = config.maintenance.width\n    local h2 = config.maintenance.height\n    local s2 = CalcSpacing(config.maintenance.spacing)\n    \n    local maxCore, nbPerRow\n    \n    if config.maintenance.limit_icons then\n        nbPerRow = config.maintenance.nb_max\n        maxCore = min(nb, nbPerRow)\n    else\n        maxCore = min(nb, NB_CORE)\n        nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    end\n    \n    local xOffset = (maxCore - 1) * (w2 + s2) / 2\n    local yOffset = config.maintenance.margin + config.utility.margin + max(CalcSpacing(config.utility.spacing), s2) - s2 - h2\n    local x, y, m\n    \n    for i, regionData in ipairs(activeRegions) do\n        m = (i % nbPerRow)\n        \n        if m == 1 then\n            xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n            yOffset = yOffset + h2 + s2\n        end\n        \n        if m == 0 then\n            m = nbPerRow\n        end\n        \n        x = (m - 1) * (w2 + s2) - xOffset\n        y = -yOffset\n        \n        UpdateIcon(regionData.region, \"maintenance\", \"TOP\")\n        \n        newPositions[i] = { x, y }\n    end\nend\n\nfunction LWA.GrowDynamicResource(newPositions, activeRegions, inCombat)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local s = CalcSpacing(config.core.spacing)\n    local w = (CORE_WIDTH + s) / nb\n    local xOffset, x = (CORE_WIDTH - w + s) / 2\n    local childYOffset = aura_env.region.childYOffset or 0\n    \n    for i, regionData in ipairs(activeRegions) do\n        x = (i - 1) * w - xOffset\n        \n        if not this.isImporting then\n            UpdateResource(regionData.region, i, nb, inCombat)\n            regionData.region:SetYOffset(childYOffset)\n        end\n        \n        newPositions[i] = { x, 0 }\n    end\nend\n\nlocal function round(num, decimals)\n    local mult = 10^(decimals or 0)\n    \n    return Round((num or 0) * mult) / mult\nend\n\nlocal barFormats = {\n    \"value\",\n    \"kvalue\",\n    \"value (percent)\",\n    \"kvalue (percent)\",\n    \"percent\",\n}\n\nfunction LWA.UpdateBarText(value, percent, format)\n    local text = barFormats[format] or \"value\"\n    value = value or 0\n    percent = percent or 0\n    \n    text = text:gsub(\"percent\", round(percent, 0))\n    \n    if 2 == format or 4 == format then\n        local rem = fmod(value, 1000) or 0\n        \n        if rem >= 950 or value >= 1000000 then\n            rem = 0\n        end\n        \n        text = text:gsub(\"kvalue\", FormatLargeNumber(Round((value - rem) / 1000)) .. \".\" .. Round(rem / 100) .. \" K\"):gsub(\"%.0 K\", \" K\"):gsub(\"%.\", DECIMAL_SEPERATOR)\n    else\n        text = text:gsub(\"value\", value)\n    end\n    \n    return text\nend",
-["do_custom"] = true,
-},
-},
-["desc"] = "Made by Luxthos - twitch.tv/luxthos",
-["zoom"] = 0,
-["cooldownTextDisabled"] = false,
-["semver"] = "11.2.1",
-["tocversion"] = 110000,
-["id"] = "General Options - LWA - Death Knight",
-["preferToUpdate"] = true,
-["useCooldownModRate"] = true,
-["width"] = 405,
-["frameStrata"] = 1,
-["config"] = {
-["top"] = {
-["font_size"] = 16,
-["font"] = "Friz Quadrata TT",
-["spacing"] = 0,
-["height"] = 32,
-["margin"] = 10,
-["width"] = 38,
-},
-["maintenance"] = {
-["font_size"] = 16,
-["font"] = "Friz Quadrata TT",
-["margin"] = 10,
-["spacing"] = 0,
-["height"] = 32,
-["limit_icons"] = false,
-["nb_max"] = 10,
-["width"] = 38,
-},
-["style"] = {
-["zoom"] = 30,
-["border_offset"] = 1,
-["border_icons"] = true,
-["border_color"] = {
-0,
-0,
-0,
-1,
-},
-["resource_texture"] = "Solid",
-["border_size"] = 1,
-["border_resources"] = true,
-},
-["core"] = {
-["spacing2"] = 0,
-["nb_max"] = 8,
-["resources_position"] = 2,
-["width"] = 48,
-["nb_min"] = 5,
-["font_size"] = 18,
-["font"] = "Friz Quadrata TT",
-["height"] = 40,
-["spacing"] = 0,
-["width2"] = 44,
-["overflow_position"] = 1,
-["margin"] = 0,
-["height2"] = 36,
-},
-["side"] = {
-["font_size"] = 16,
-["font"] = "Friz Quadrata TT",
-["grow_direction"] = 1,
-["spacing"] = 0,
-["height"] = 32,
-["margin"] = 3,
-["nb"] = 3,
-["width"] = 38,
-},
-["resources"] = {
-["cast_bar"] = {
-["emp_gradient"] = 1,
-["emp_color1"] = {
-1,
-1,
-1,
-0.90000000596046,
-},
-["emp_color2"] = {
-1,
-1,
-1,
-1,
-},
-["unint_color1"] = {
-0.52549019607843,
-0.52549019607843,
-0.52549019607843,
-0.90000000596046,
-},
-["color1"] = {
-0.52941176470588,
-0.090196078431373,
-0.090196078431373,
-1,
-},
-["color2"] = {
-0.77647058823529,
-0.1843137254902,
-0.1843137254902,
-1,
-},
-["unint_gradient"] = 1,
-["font_size"] = 14,
-["height"] = 20,
-["gradient"] = 1,
-["font"] = "Friz Quadrata TT",
-["unint_color2"] = {
-0.70980392156863,
-0.70980392156863,
-0.70980392156863,
-1,
-},
-},
-["health_bar"] = {
-["color2"] = {
-0.58431375026703,
-0.85098046064377,
-0.30588236451149,
-1,
-},
-["font"] = "Friz Quadrata TT",
-["font_size"] = 14,
-["height"] = 20,
-["format"] = 5,
-["gradient"] = 1,
-["color1"] = {
-0.24313727021217,
-0.58431375026703,
-0.10980392992496,
-1,
-},
-},
-},
-["alpha"] = {
-["skyriding_only"] = false,
-["ignore_enemy"] = false,
-["global"] = 100,
-["ooc"] = 100,
-["mounted"] = 100,
-["ignore_friendly"] = false,
-},
-["utility"] = {
-["font_size"] = 16,
-["font"] = "Friz Quadrata TT",
-["margin"] = 10,
-["spacing"] = 0,
-["height"] = 32,
-["limit_icons"] = false,
-["nb_max"] = 10,
-["width"] = 38,
-},
-},
-["inverse"] = false,
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["displayIcon"] = 134520,
-["cooldown"] = false,
 ["authorOptions"] = {
 {
 ["useName"] = true,
@@ -41290,6 +41102,205 @@ true,
 ["width"] = 2,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["conditions"] = {
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["parent"] = "Luxthos - Death Knight",
+["xOffset"] = 0,
+["uid"] = "G0KPiJiU88A",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+["custom"] = "local this = aura_env\nlocal suffix = this.id:gsub(\"General Options %- LWA %- \", \"\")\nlocal CLASS = suffix:gsub(\"[%s%d]+$\", \"\")\nthis.CLASS = CLASS\n\nlocal CLASS_GROUP = WeakAuras.GetData(this.id).parent\nlocal DYNAMIC_EFFECTS_GROUP = \"Dynamic Effects - LWA - \" .. suffix\nlocal CORE_GROUP = \"Core - LWA - \" .. suffix\nlocal LEFT_SIDE_GROUP = \"Left Side - LWA - \" .. suffix\nlocal RIGHT_SIDE_GROUP = \"Right Side - LWA - \" .. suffix\nlocal UTILITIES_GROUP = \"Utilities - LWA - \" .. suffix\nlocal MAINTENANCE_GROUP = \"Maintenance - LWA - \" .. suffix\nlocal RESOURCES_GROUP = \"Resources - LWA - \" .. suffix\nlocal CAST_BAR = \"Cast Bar - LWA - \" .. suffix\n\nlocal NB_CORE = 8\nlocal CORE_WIDTH = 405\nlocal CORE_HEIGHT = 48\nlocal RESOURCES_HEIGHT = 0\n\nLWA = LWA or {}\nLWA[CLASS] = LWA[CLASS] or {}\n\nlocal LWA = LWA[CLASS]\n\nlocal config = nil\nLWA.configs = LWA.configs or {}\nLWA.configs[\"general\"] = this.config\n\nthis.resources = nil\nthis.parentFrame = nil\n\n\nlocal WeakAuras, C_Timer, time, min, max, floor, ceil, fmod, Round, pairs, ipairs, type, unpack, tinsert, FormatLargeNumber, DECIMAL_SEPARATOR = WeakAuras, C_Timer, time, min, max, floor, ceil, math.fmod, Round, pairs, ipairs, type, unpack, tinsert, FormatLargeNumber, DECIMAL_SEPARATOR\nlocal SharedMedia = LibStub(\"LibSharedMedia-3.0\")\n\n\nif WeakAuras.IsImporting() then\n    local function CheckImport()\n        if WeakAuras.IsImporting() or not this.isImporting then return end\n        \n        this.isImporting:Cancel()\n        this.isImporting = false\n        \n        C_Timer.After(1, function()\n                WeakAuras.ScanEvents(\"LWA_INIT\", true)\n        end)\n    end\n    \n    this.isImporting = C_Timer.NewTicker(0.5, CheckImport)\nelse\n    this.isImporting = false\nend\n\nlocal function tclone(t1)\n    local t = {}\n    \n    if t1 then\n        for k, v in pairs(t1) do\n            if \"table\" == type(v) then\n                v = tclone(v)\n            end\n            \n            if \"string\" == type(k) then\n                t[k] = v\n            else\n                tinsert(t, v)\n            end\n        end\n    end\n    \n    return t\nend\n\nlocal function tmerge(...)\n    local ts = {...}\n    local t = tclone(ts[1])\n    local t2\n    \n    for i = 2, #ts do\n        t2 = ts[i] or {}\n        \n        for k, v in pairs(t2) do\n            if \"table\" == type(v) then\n                v = tclone(v)\n                \n                if t[k] and #t[k] == 0 then\n                    t[k] = tmerge(t[k], v)\n                else\n                    t[k] = v\n                end\n            else\n                t[k] = v\n            end\n        end\n    end\n    \n    return t\nend\n\nlocal function SetRegionSize(r, w, h)\n    r:SetRegionWidth(w)\n    r:SetRegionHeight(h)\nend\n\nlocal function CalcSpacing(spacing)\n    local s, bs, bo, s2 = spacing, config.style.border_size, config.style.border_offset\n    \n    if bs > 0 then\n        s2 = bo\n    else\n        s2 = 0\n    end\n    \n    if s > 0 then\n        s = s + (s2 * 2)\n    else\n        s = s2\n    end\n    \n    return s\nend\n\nlocal function UpdateAnchorFrame(skipCore)\n    if this.isImporting then return end\n    \n    local config = LWA.GetConfig()\n    local h1 = config.core.height\n    local s1 = CalcSpacing(config.core.spacing)\n    local m1 = config.core.margin\n    local h, y = max(1, CORE_HEIGHT + RESOURCES_HEIGHT + s1 + m1), 0\n    \n    if 1 == h % 2 then\n        h = h + 1\n    end\n    \n    SetRegionSize(this.region, CORE_WIDTH, h)\n    \n    if config.core.resources_position == 1 then -- Above\n        y = y + RESOURCES_HEIGHT + s1 + m1\n    end\n    \n    if config.core.overflow_position == 1 then -- Above\n        y = y + max(CORE_HEIGHT, h1) - h1\n    end\n    \n    this.region:SetOffset(0, y)\n    \n    local function RepositionGroups()\n        local configs = { config.core, config.utility, config.maintenance }\n        \n        for i, g in ipairs({ CORE_GROUP, UTILITIES_GROUP, MAINTENANCE_GROUP }) do\n            if not (skipCore and CORE_GROUP == g) then\n                g = WeakAuras.GetRegion(g)\n                \n                if g then\n                    g:PositionChildren()\n                    \n                    if 0 == #g.sortedChildren then\n                        g:SetHeight(configs[i].height)\n                        g.currentHeight = configs[i].height\n                    end\n                end\n            end\n        end\n    end\n    \n    if skipCore then\n        C_Timer.After(0.05, RepositionGroups)\n    else\n        RepositionGroups()\n    end\nend\n\nfunction LWA.GetConfig(grp, force)\n    local default = {\n        style = {\n            border_offset = 1,\n            border_size = 1,\n            border_icons = true,\n            border_resources = true,\n            border_color = { [1] = 0, [2] = 0, [3] = 0, [4] = 1 },\n            zoom = 30,\n            resource_texture = \"Solid\",\n        },\n        core = {\n            font = \"\",\n            font_size = 18,\n            nb_min = 8,\n            nb_max = 8,\n            width = 48,\n            height = 48,\n            spacing = 3,\n            width2 = 48,\n            height2 = 48,\n            spacing2 = 3,\n            margin = 0,\n            overflow_position = 2, -- Below\n            resources_position = 2, -- Below\n        },\n        core2 = { -- Fake group\n            width = 48,\n            height = 48,\n            spacing = 3,\n        },\n        utility = {\n            font = \"\",\n            font_size = 16,\n            width = 38,\n            height = 38,\n            spacing = 3,\n            margin = 10,\n            nb_max = 10,\n            limit_icons = false,\n            behavior = 2, -- Always Show\n        },\n        top = {\n            font = \"\",\n            font_size = 16,\n            width = 38,\n            height = 38,\n            spacing = 3,\n            margin = 10,\n        },\n        side = {\n            font = \"\",\n            font_size = 16,\n            width = 38,\n            height = 38,\n            spacing = 3,\n            margin = 3,\n            grow_direction = 1,\n            nb = 60,\n        },\n        maintenance = {\n            font = \"\",\n            font_size = 16,\n            width = 36,\n            height = 36,\n            spacing = 0,\n            margin = 10,\n            nb_max = 10,\n            limit_icons = false,\n        },\n        alpha = {\n            global = 100,\n            ooc = 100,\n            mounted = 0,\n            skyriding_only = false,\n            ignore_enemy = true,\n            ignore_friendly = true,\n        },\n        resources = {\n            health_bar = {\n                format = 1\n            },\n            mana_bar = {\n                format = 1\n            }\n        },\n    }\n    \n    if force or not config or WeakAuras.IsOptionsOpen() then\n        config = tmerge(\n            default,\n            LWA.configs[\"general\"],\n            LWA.configs[\"class\"] or {}\n        )\n        \n        -- Special case for Core's Overflow\n        config.core2 = {\n            width = config.core.width2,\n            height = config.core.height2,\n            spacing = config.core.spacing2,\n            font = config.core.font,\n            font_size = config.core.font_size,\n        }\n    end\n    \n    if grp then\n        return config[grp] or {}\n    end\n    \n    return config\nend\n\nlocal function UpdateSubRegions(region, subCfg, applyBorders)\n    if region and #region.subRegions > 0 then\n        local config = LWA.GetConfig()\n        local bSize, bOffset, r, g, b, a = 0, 0 -- Border\n        local cfgFont, cfgSize, currentFont, currentSize, flags\n        \n        if applyBorders then\n            bSize = config.style.border_size\n            bOffset = config.style.border_offset\n            r, g, b, a = unpack(config.style.border_color)\n        end\n        \n        if subCfg then\n            cfgFont = subCfg.font\n            cfgSize = subCfg.font_size or 14\n            \n            if cfgFont then\n                cfgFont = SharedMedia:Fetch(\"font\", cfgFont)\n            end\n        end\n        \n        for _, subRegion in ipairs(region.subRegions) do\n            if \"subborder\" == subRegion.type then\n                subRegion:SetVisible(bSize > 0)\n                \n                if bSize > 0 then\n                    region:AnchorSubRegion(subRegion, \"area\", region.regionType == \"aurabar\" and \"bar\", nil, bOffset, bOffset)\n                    \n                    local bd = subRegion:GetBackdrop()\n                    bd.edgeSize = bSize\n                    subRegion:SetBackdrop(bd)\n                    subRegion:SetBorderColor(r, g, b, a)\n                end\n            elseif \"subtext\" == subRegion.type and cfgFont then\n                currentFont, currentSize, flags = subRegion.text:GetFont()\n                \n                if currentFont ~= cfgFont or currentSize ~= cfgSize then\n                    subRegion.text:SetFont(cfgFont, cfgSize, flags)\n                end\n            end\n        end\n    end\nend\n\nlocal function UpdateIcon(region, key, selfPoint)\n    if not region then return end\n    \n    local config = LWA.GetConfig()\n    local zoom = config.style.zoom / 100\n    local subCfg = config[key]\n    \n    region:SetAnchor(selfPoint, region.relativeTo, region.relativePoint)\n    \n    if region.SetZoom then\n        region:SetZoom(min(1, zoom + (region.extraZoom or 0)))\n    end\n    \n    SetRegionSize(region, subCfg.width, subCfg.height)\n    \n    UpdateSubRegions(region, subCfg, config.style.border_icons)\nend\n\nlocal function UpdateResource(region, index, nb, inCombat)\n    if not region then return end\n    \n    index = max(1, index or 1)\n    nb = max(1, nb or 1)\n    \n    if not inCombat then\n        local config, subCfg = LWA.GetConfig(), {}\n        \n        local w, h = CORE_WIDTH, 20\n        \n        if nb > 1 then\n            local s = CalcSpacing(config.core.spacing)\n            \n            w = (w + s) / nb - s\n        end\n        \n        local cg = region.configGroup\n        \n        if cg and config.resources[cg] then\n            subCfg = config.resources[cg]\n            h = subCfg.height or 20\n        end\n        \n        local lastW, lastH = region.width, region.height\n        \n        SetRegionSize(region, w, h)\n        \n        UpdateSubRegions(region, subCfg, config.style.border_resources)\n        \n        if config.style.resource_texture then\n            region.textureSource = \"LSM\"\n            region:SetStatusBarTextureLSM(config.style.resource_texture)\n            \n            if region.overlaysTexture then\n                for i, _ in ipairs(region.overlaysTexture) do\n                    region.overlaysTexture[i] = config.style.resource_texture\n                end\n            end\n        end\n        \n        if lastW ~= w or lastH ~= h then\n            region.bar:Update()\n        end\n        \n        if region.bar.spark then\n            region.bar.spark:SetHeight(max(15, Round(h * 2)))\n        end\n    end\n    \n    this.UpdateBar({ region = region }, index, nb)\nend\n\nlocal throttledInitHandler, throttledInitLastRun = nil, 0\n\nfunction this.ThrottledInit()\n    if throttledInitHandler or this.isImporting then return end\n    \n    local currentTime, delay = time(), 0.25\n    \n    if throttledInitLastRun > currentTime - 0.5 then\n        delay = max(0.25, currentTime - throttledInitLastRun)\n    end\n    \n    throttledInitHandler = C_Timer.NewTimer(delay, function()\n            WeakAuras.ScanEvents(\"LWA_INIT\")\n    end)\nend\n\nfunction this.Init()\n    if this.isImporting then return end\n    \n    throttledInitLastRun = time()\n    \n    local config = LWA.GetConfig(nil, true)\n    local isOptionsOpen = WeakAuras.IsOptionsOpen()\n    local zoom = config.style.zoom / 100\n    \n    if throttledInitHandler then\n        throttledInitHandler:Cancel()\n        throttledInitHandler = nil\n    end\n    \n    if not this.parentFrame then\n        this.parentFrame = WeakAuras.GetRegion(CLASS_GROUP)\n    end\n    \n    if this.parentFrame and not this.parentFrame.SetRealScale then\n        this.parentFrame.SetRealScale = this.parentFrame.SetScale\n        \n        this.parentFrame.SetScale = function(self, scale)\n            this.parentFrame:SetRealScale(scale)\n            local castBar = WeakAuras.GetRegion(CAST_BAR)\n            \n            if castBar then\n                castBar:SetScale(scale)\n            end\n        end\n    end\n    \n    if isOptionsOpen then\n        NB_CORE = config.core.nb_max\n    else\n        NB_CORE = max(4, config.core.nb_min, min(NB_CORE, config.core.nb_max))\n        \n        local castBar = WeakAuras.GetRegion(CAST_BAR)\n        \n        if castBar then\n            castBar:SetParent(UIParent)\n            \n            if this.parentFrame then\n                castBar:SetScale(this.parentFrame:GetScale())\n            end\n        end\n    end\n    \n    local spacing = CalcSpacing(config.core.spacing)\n    \n    CORE_WIDTH = NB_CORE * (config.core.width + spacing) - spacing\n    \n    local grpRegion = WeakAuras.GetRegion(CORE_GROUP)\n    \n    if grpRegion then\n        grpRegion:PositionChildren()\n        \n        if not isOptionsOpen then\n            NB_CORE = max(4, config.core.nb_min, min(#grpRegion.sortedChildren, config.core.nb_max))\n            \n            CORE_WIDTH = NB_CORE * (config.core.width + spacing) - spacing\n        end\n        \n        this.region:SetRegionWidth(CORE_WIDTH)\n    end\n    \n    this.UpdateResources()\n    \n    for _, g in ipairs({ DYNAMIC_EFFECTS_GROUP, LEFT_SIDE_GROUP, RIGHT_SIDE_GROUP }) do\n        g = WeakAuras.GetRegion(g)\n        \n        if g then\n            g:PositionChildren()\n        end\n    end\nend\n\nhooksecurefunc(\"SetUIVisibility\", function(isVisible)\n        if isVisible and this and this.ThrottledInit then\n            this.ThrottledInit()\n        end\nend)\n\nfunction this.UpdateResources()\n    if this.isImporting then return end\n    \n    local grpRegion = WeakAuras.GetRegion(RESOURCES_GROUP)\n    \n    if not this.resources then\n        local grpData = WeakAuras.GetData(RESOURCES_GROUP)\n        \n        this.resources = grpData and grpData.controlledChildren\n    end\n    \n    if grpRegion and this.resources and #this.resources > 0 then\n        local config = LWA.GetConfig()\n        \n        local totalHeight, nb = 0, 0\n        local h1 = config.core.height\n        local s1 = CalcSpacing(config.core.spacing)\n        local m1 = config.core.margin\n        local y = 0\n        \n        if config.core.resources_position == 2 then -- Below\n            y = max(CORE_HEIGHT, h1) + s1 + m1\n        end\n        \n        grpRegion:SetOffset(0, -y)\n        \n        local isOptionsOpen = WeakAuras.IsOptionsOpen()\n        local resRegion, isVisible, regionType\n        local w, h, cg = 0, 0\n        \n        y = 0\n        \n        for _, resId in ipairs(this.resources) do\n            resRegion = WeakAuras.GetRegion(resId)\n            \n            if resRegion then\n                isVisible = isOptionsOpen\n                regionType = resRegion.regionType\n                h = 0\n                \n                if \"aurabar\" == regionType then\n                    isVisible = isVisible or resRegion:IsVisible()\n                    UpdateResource(resRegion)\n                    \n                    h = resRegion.height\n                    \n                elseif \"dynamicgroup\" == regionType then\n                    local nbChild = 0\n                    local childRegions = {}\n                    \n                    for _, region in pairs(resRegion.controlledChildren) do\n                        if region and region[\"\"] then\n                            nbChild = nbChild + 1\n                            \n                            childRegions[region[\"\"].regionData.dataIndex] = region[\"\"].regionData.region\n                            \n                            isVisible = isVisible or region[\"\"].regionData.region:IsVisible()\n                        end\n                    end\n                    \n                    resRegion.childYOffset = -y\n                    h = 0\n                    \n                    for i, region in ipairs(childRegions) do\n                        UpdateResource(region, i, nbChild)\n                        \n                        h = max(h, region.height)\n                        \n                        region:SetYOffset(-y)\n                    end\n                    \n                    if h <= 0 then\n                        h = 20\n                    end\n                end\n                \n                if isVisible then\n                    nb = nb + 1\n                    \n                    if \"dynamicgroup\" == regionType then\n                        resRegion:PositionChildren()\n                    else\n                        resRegion:SetOffset(0, -y)\n                    end\n                    \n                    totalHeight = totalHeight + h\n                    y = y + h + s1\n                end\n            end\n        end\n        \n        RESOURCES_HEIGHT = totalHeight + max(nb - 1, 0) * CalcSpacing(config.core.spacing)\n    end\n    \n    UpdateAnchorFrame()\nend\n\nfunction this.UpdateBar(aura, i, nb)\n    local config = LWA.GetConfig(\"resources\")\n    local e = aura or aura_env\n    local region = e and e.region\n    local cg = region and region.configGroup\n    \n    if not (region and region:IsVisible() and cg and config[cg]) then return end\n    \n    local cs = region.colorState or \"\"\n    \n    if cs ~= \"\" then\n        cs = cs .. \"_\"\n    end\n    \n    cg = config[cg]\n    \n    local c1, c2 = cg[cs .. \"color1\"], cg[cs .. \"color2\"]\n    \n    if c1 and c2 then\n        nb = max(1, min(region.indexMax or 99, nb or 1))\n        i = min(nb, max(1, region.index or i or 1)) - (region.indexOffset or 0)\n        \n        local bar = region.bar\n        \n        if cg[cs .. \"gradient\"] and cg[cs .. \"gradient\"] < 3 then\n            if nb > 1 and 1 == cg[cs .. \"gradient\"] then\n                local function MixRGB(c1, c2, pos)\n                    pos = 1 - (pos or 0.5)\n                    \n                    return {\n                        (c1[1] * pos) + (c2[1] * (1 - pos)),\n                        (c1[2] * pos) + (c2[2] * (1 - pos)),\n                        (c1[3] * pos) + (c2[3] * (1 - pos)),\n                        (c1[4] * pos) + (c2[4] * (1 - pos))\n                    }\n                end\n                \n                local cc1, cc2 = c1, c2\n                \n                if i > 1 then\n                    c1 = MixRGB(cc1, cc2, (i - 1) / nb)\n                end\n                \n                c2 = MixRGB(cc1, cc2, i / nb)\n            end\n            \n            local orientation = \"HORIZONTAL\"\n            \n            if 2 == cg[cs .. \"gradient\"] then\n                orientation = \"VERTICAL\"\n                \n                local tmp = c1\n                c1 = c2\n                c2 = tmp\n            end\n            \n            region.enableGradient = true\n            region.gradientOrientation = orientation\n            region.barColor2 = c2\n            region:Color(unpack(c1))\n        else\n            region.enableGradient = false\n            region:Color(unpack(c1))\n        end\n        \n        if region.ot then\n            region.ot:SetColorTexture(unpack(c2))\n        end\n    end\nend\n\nfunction LWA.GrowCore(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w1 = config.core.width\n    local h1 = config.core.height\n    local s1 = CalcSpacing(config.core.spacing)\n    local w2 = config.core.width2\n    local h2 = config.core.height2\n    local s2 = CalcSpacing(config.core.spacing2)\n    local m1 = config.core.margin\n    \n    local maxCore = min(nb, config.core.nb_max)\n    local maxOverflow = nb - maxCore\n    local x, y\n    local xOffset = ((maxCore - 1) * (w1 + s1) / 2)\n    local yOffset = h1\n    local nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    local coreHeight = h1 + (ceil(maxOverflow / nbPerRow) * (h2 + s2))\n    local oldWidth, oldHeight = CORE_WIDTH, CORE_HEIGHT\n    \n    if maxOverflow > 0 then\n        coreHeight = coreHeight + max(s1, s2) - s2\n    end\n    \n    CORE_HEIGHT = coreHeight\n    \n    if not WeakAuras.IsOptionsOpen() then\n        NB_CORE = max(4, config.core.nb_min, maxCore)\n        \n        CORE_WIDTH = NB_CORE * (w1 + s1) - s1\n    end\n    \n    UpdateAnchorFrame(true)\n    \n    if oldWidth ~= CORE_WIDTH or oldHeight ~= CORE_HEIGHT then\n        this.UpdateResources()\n    end\n    \n    if config.core.resources_position == 1 then  -- Above\n        yOffset = h1 + RESOURCES_HEIGHT + s1 + m1\n    end\n    \n    if config.core.overflow_position == 1 then  -- Above\n        yOffset = yOffset + coreHeight - h1\n    end\n    \n    for i, regionData in ipairs(activeRegions) do\n        x = (i - 1) * (w1 + s1) - xOffset\n        y = -yOffset\n        \n        UpdateIcon(regionData.region, \"core\", \"BOTTOM\")\n        \n        newPositions[i] = { x, y }\n        \n        if i == maxCore then break end\n    end\n    \n    if maxOverflow > 0 then\n        local i2, m, anchor, yMult\n        \n        xOffset = ((maxCore - 1) * (w2 + s2) / 2)\n        yOffset = h1\n        \n        if config.core.overflow_position == 1 then -- Above\n            yOffset = yOffset - h2 + max(s1, s2) - s2 - coreHeight\n            yMult = 1\n            anchor = \"BOTTOM\"\n            \n            if config.core.resources_position == 1 then  -- Above\n                yOffset = yOffset - RESOURCES_HEIGHT - s1 - m1\n            end\n        else\n            if config.core.resources_position == 1 then  -- Above\n                yOffset = yOffset + RESOURCES_HEIGHT + s1 + m1\n            end\n            \n            yOffset = yOffset - h2\n            yMult = -1\n            anchor = \"TOP\"\n        end\n        \n        for i, regionData in ipairs(activeRegions) do\n            if i > maxCore then\n                i2 = i - maxCore\n                m = (i2 % nbPerRow)\n                \n                if m == 1 then\n                    xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n                    yOffset = yOffset + h2 + s2\n                end\n                \n                if m == 0 then\n                    m = nbPerRow\n                end\n                \n                x = (m - 1) * (w2 + s2) - xOffset\n                y = yOffset * yMult\n                \n                UpdateIcon(regionData.region, \"core2\", anchor)\n                \n                newPositions[i] = { x, y }\n            end\n        end\n    end\nend\n\nfunction LWA.GrowDynamicEffects(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local maxCore = min(nb, NB_CORE)\n    \n    local w1 = config.core.width\n    local s1 = CalcSpacing(config.core.spacing)\n    \n    local w2 = config.top.width\n    local h2 = config.top.height\n    local s2 = CalcSpacing(config.top.spacing)\n    \n    local xOffset = (maxCore - 1) * (w1 + s1) / 2\n    local yOffset = config.top.margin + max(s1, s2) - s2 - h2\n    local x, y, m\n    \n    local nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    \n    for i, regionData in ipairs(activeRegions) do\n        m = (i % nbPerRow)\n        \n        if m == 1 then\n            xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n            yOffset = yOffset + h2 + s2\n        end\n        \n        if m == 0 then\n            m = nbPerRow\n        end\n        \n        x = (m - 1) * (w2 + s2) - xOffset\n        y = yOffset\n        \n        UpdateIcon(regionData.region, \"top\", \"BOTTOM\")\n        \n        newPositions[i] = { x, y }\n    end\nend\n\nfunction LWA.GrowSide(newPositions, activeRegions, xMult)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w = config.side.width\n    local h = config.side.height\n    local s2 = CalcSpacing(config.side.spacing)\n    local s1 = CalcSpacing(config.core.spacing)\n    local h1 = config.core.height\n    local m1 = config.core.margin\n    \n    local baseX, baseY = config.side.margin + max(s1, s2), 0\n    local xOffset, yOffset, yMult = 0, 0, 1\n    local nbPerRC, m = min(config.side.nb, nb)\n    local grow = config.side.grow_direction\n    local anchor\n    \n    if config.core.resources_position == 2 and config.core.overflow_position == 2 then -- Below\n        if grow == 2 or grow == 4 then -- Upward\n            baseY = baseY - config.top.margin\n        end\n    else\n        if config.core.resources_position == 1 then -- Above\n            baseY = baseY + RESOURCES_HEIGHT + s1 + m1\n        end\n        \n        if config.core.overflow_position == 1 then -- Above\n            baseY = baseY + max(CORE_HEIGHT, h1) - h1\n        end\n    end\n    \n    xMult = xMult or 1\n    \n    if xMult < 0 then\n        anchor = \"TOPRIGHT\"\n    else\n        anchor = \"TOPLEFT\"\n    end\n    \n    if grow == 3 or grow == 4 then -- Horizontal\n        if grow == 4 then -- Upward\n            yOffset = -baseY\n            yMult = -1\n        else\n            yOffset = baseY - h - s2\n        end\n        \n        for i, regionData in ipairs(activeRegions) do\n            m = (i % nbPerRC)\n            \n            if m == 1 or (nbPerRC == 1 and i == 1) then\n                xOffset = baseX\n                yOffset = yOffset + h + s2\n            end\n            \n            UpdateIcon(regionData.region, \"side\", anchor)\n            \n            newPositions[i] = { xOffset * xMult, -yOffset * yMult }\n            \n            xOffset = xOffset + w + s2\n        end\n    else\n        xOffset = baseX - w - s2\n        \n        if grow == 2 then -- Upward\n            baseY = -baseY + h + s2\n            yOffset = baseY\n            yMult = -1\n        else\n            yOffset = -h - s2\n        end\n        \n        for i, regionData in ipairs(activeRegions) do\n            m = (i % nbPerRC)\n            \n            if m == 1 or (nbPerRC == 1 and i == 1) then\n                xOffset = xOffset + w + s2\n                yOffset = baseY\n            end\n            \n            UpdateIcon(regionData.region, \"side\", anchor)\n            \n            newPositions[i] = { xOffset * xMult, -yOffset * yMult }\n            \n            yOffset = yOffset + h + s2\n        end\n    end\nend\n\nfunction LWA.GrowUtilities(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w1 = config.core.width\n    local s1 = CalcSpacing(config.core.spacing)\n    \n    local w2 = config.utility.width\n    local h2 = config.utility.height\n    local s2 = CalcSpacing(config.utility.spacing)\n    \n    local maxCore, nbPerRow\n    \n    if config.utility.limit_icons then\n        nbPerRow = config.utility.nb_max\n        maxCore = min(nb, nbPerRow)\n    else\n        maxCore = min(nb, NB_CORE)\n        nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    end\n    \n    local xOffset = (maxCore - 1) * (w2 + s2) / 2\n    local yOffset = config.utility.margin + max(s1, s2) - s2 - h2\n    local x, y, m\n    \n    for i, regionData in ipairs(activeRegions) do\n        m = (i % nbPerRow)\n        \n        if m == 1 then\n            xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n            yOffset = yOffset + h2 + s2\n        end\n        \n        if m == 0 then\n            m = nbPerRow\n        end\n        \n        x = (m - 1) * (w2 + s2) - xOffset\n        y = -yOffset\n        \n        UpdateIcon(regionData.region, \"utility\", \"TOP\")\n        \n        newPositions[i] = { x, y }\n    end\nend\n\nfunction LWA.GrowMaintenance(newPositions, activeRegions)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local w1 = config.core.width\n    local s1 = CalcSpacing(config.core.spacing)\n    \n    local w2 = config.maintenance.width\n    local h2 = config.maintenance.height\n    local s2 = CalcSpacing(config.maintenance.spacing)\n    \n    local maxCore, nbPerRow\n    \n    if config.maintenance.limit_icons then\n        nbPerRow = config.maintenance.nb_max\n        maxCore = min(nb, nbPerRow)\n    else\n        maxCore = min(nb, NB_CORE)\n        nbPerRow = floor((CORE_WIDTH + s2) / (w2 + s2)) or 1\n    end\n    \n    local xOffset = (maxCore - 1) * (w2 + s2) / 2\n    local yOffset = config.maintenance.margin + config.utility.margin + max(CalcSpacing(config.utility.spacing), s2) - s2 - h2\n    local x, y, m\n    \n    for i, regionData in ipairs(activeRegions) do\n        m = (i % nbPerRow)\n        \n        if m == 1 then\n            xOffset = (min(nb - i, nbPerRow - 1)) * (w2 + s2) / 2\n            yOffset = yOffset + h2 + s2\n        end\n        \n        if m == 0 then\n            m = nbPerRow\n        end\n        \n        x = (m - 1) * (w2 + s2) - xOffset\n        y = -yOffset\n        \n        UpdateIcon(regionData.region, \"maintenance\", \"TOP\")\n        \n        newPositions[i] = { x, y }\n    end\nend\n\nfunction LWA.GrowDynamicResource(newPositions, activeRegions, inCombat)\n    local nb = #activeRegions\n    \n    if nb <= 0 then return end\n    \n    local config = LWA.GetConfig()\n    \n    local s = CalcSpacing(config.core.spacing)\n    local w = (CORE_WIDTH + s) / nb\n    local xOffset, x = (CORE_WIDTH - w + s) / 2\n    local childYOffset = aura_env.region.childYOffset or 0\n    \n    for i, regionData in ipairs(activeRegions) do\n        x = (i - 1) * w - xOffset\n        \n        if not this.isImporting then\n            UpdateResource(regionData.region, i, nb, inCombat)\n            regionData.region:SetYOffset(childYOffset)\n        end\n        \n        newPositions[i] = { x, 0 }\n    end\nend\n\nlocal function round(num, decimals)\n    local mult = 10^(decimals or 0)\n    \n    return Round((num or 0) * mult) / mult\nend\n\nlocal barFormats = {\n    \"value\",\n    \"kvalue\",\n    \"value (percent)\",\n    \"kvalue (percent)\",\n    \"percent\",\n}\n\nfunction LWA.UpdateBarText(value, percent, format)\n    local text = barFormats[format] or \"value\"\n    value = value or 0\n    percent = percent or 0\n    \n    text = text:gsub(\"percent\", round(percent, 0))\n    \n    if 2 == format or 4 == format then\n        local rem = fmod(value, 1000) or 0\n        \n        if rem >= 950 or value >= 1000000 then\n            rem = 0\n        end\n        \n        text = text:gsub(\"kvalue\", FormatLargeNumber(Round((value - rem) / 1000)) .. \".\" .. Round(rem / 100) .. \" K\"):gsub(\"%.0 K\", \" K\"):gsub(\"%.\", DECIMAL_SEPERATOR)\n    else\n        text = text:gsub(\"value\", value)\n    end\n    \n    return text\nend",
+["do_custom"] = true,
+},
+},
+["desc"] = "Made by Luxthos - twitch.tv/luxthos",
+["zoom"] = 0,
+["cooldownTextDisabled"] = false,
+["semver"] = "11.2.1",
+["tocversion"] = 110000,
+["id"] = "General Options - LWA - Death Knight",
+["preferToUpdate"] = true,
+["useCooldownModRate"] = true,
+["width"] = 405,
+["frameStrata"] = 1,
+["config"] = {
+["top"] = {
+["font_size"] = 16,
+["font"] = "Friz Quadrata TT",
+["spacing"] = 0,
+["height"] = 32,
+["margin"] = 10,
+["width"] = 38,
+},
+["maintenance"] = {
+["font_size"] = 16,
+["font"] = "Friz Quadrata TT",
+["margin"] = 10,
+["spacing"] = 0,
+["height"] = 32,
+["limit_icons"] = false,
+["nb_max"] = 10,
+["width"] = 38,
+},
+["style"] = {
+["zoom"] = 30,
+["border_offset"] = 1,
+["border_icons"] = true,
+["border_color"] = {
+0,
+0,
+0,
+1,
+},
+["resource_texture"] = "Solid",
+["border_size"] = 1,
+["border_resources"] = true,
+},
+["core"] = {
+["width"] = 48,
+["nb_max"] = 8,
+["resources_position"] = 2,
+["nb_min"] = 5,
+["spacing2"] = 0,
+["font_size"] = 18,
+["font"] = "Friz Quadrata TT",
+["height"] = 40,
+["spacing"] = 0,
+["width2"] = 44,
+["overflow_position"] = 1,
+["margin"] = 0,
+["height2"] = 36,
+},
+["side"] = {
+["font_size"] = 16,
+["font"] = "Friz Quadrata TT",
+["grow_direction"] = 1,
+["spacing"] = 0,
+["height"] = 32,
+["margin"] = 3,
+["nb"] = 3,
+["width"] = 38,
+},
+["resources"] = {
+["cast_bar"] = {
+["emp_gradient"] = 1,
+["emp_color1"] = {
+1,
+1,
+1,
+0.90000000596046,
+},
+["emp_color2"] = {
+1,
+1,
+1,
+1,
+},
+["unint_color1"] = {
+0.52549019607843,
+0.52549019607843,
+0.52549019607843,
+0.90000000596046,
+},
+["color1"] = {
+0.52941176470588,
+0.090196078431373,
+0.090196078431373,
+1,
+},
+["color2"] = {
+0.77647058823529,
+0.1843137254902,
+0.1843137254902,
+1,
+},
+["unint_gradient"] = 1,
+["font_size"] = 14,
+["height"] = 20,
+["gradient"] = 1,
+["font"] = "Friz Quadrata TT",
+["unint_color2"] = {
+0.70980392156863,
+0.70980392156863,
+0.70980392156863,
+1,
+},
+},
+["health_bar"] = {
+["color2"] = {
+0.58431375026703,
+0.85098046064377,
+0.30588236451149,
+1,
+},
+["font"] = "Friz Quadrata TT",
+["font_size"] = 14,
+["height"] = 20,
+["format"] = 5,
+["gradient"] = 1,
+["color1"] = {
+0.24313727021217,
+0.58431375026703,
+0.10980392992496,
+1,
+},
+},
+},
+["alpha"] = {
+["skyriding_only"] = false,
+["ignore_enemy"] = false,
+["global"] = 100,
+["ooc"] = 100,
+["mounted"] = 100,
+["ignore_friendly"] = false,
+},
+["utility"] = {
+["font_size"] = 16,
+["font"] = "Friz Quadrata TT",
+["margin"] = 10,
+["spacing"] = 0,
+["height"] = 32,
+["limit_icons"] = false,
+["nb_max"] = 10,
+["width"] = 38,
+},
+},
+["inverse"] = false,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
+["displayIcon"] = 134520,
+["cooldown"] = false,
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Class Options - LWA - Death Knight"] = {
 ["iconSource"] = 0,
@@ -41310,14 +41321,14 @@ true,
 ["event"] = "GTFO",
 ["unit"] = "player",
 ["debuffType"] = "HELPFUL",
+["custom"] = "function ()\n    WeakAuras.ScanEvents(\"LWA_OPTIONS\")\nend",
 ["events"] = "OPTIONS",
-["spellIds"] = {
-},
 ["custom_type"] = "event",
 ["names"] = {
 },
 ["subeventPrefix"] = "SPELL",
-["custom"] = "function ()\n    WeakAuras.ScanEvents(\"LWA_OPTIONS\")\nend",
+["spellIds"] = {
+},
 ["custom_hide"] = "custom",
 },
 ["untrigger"] = {
@@ -41380,11 +41391,13 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["progressSource"] = {
--1,
-"",
-},
 ["cooldownEdge"] = false,
+["color"] = {
+0,
+0,
+0,
+0,
+},
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -42298,20 +42311,20 @@ true,
 },
 ["runic_power_bar"] = {
 ["full_gradient"] = 1,
+["ir_gradient"] = 1,
 ["color2"] = {
 0.4078431372549,
 0.7843137254902,
 0.87843137254902,
 1,
 },
-["font_size"] = 14,
 ["color1"] = {
 0.035294117647059,
 0.55294117647059,
 0.67843137254902,
 1,
 },
-["ir_gradient"] = 1,
+["font_size"] = 14,
 ["font"] = "Friz Quadrata TT",
 ["gradient"] = 1,
 ["full_color2"] = {
@@ -42365,11 +42378,9 @@ true,
 },
 ["displayIcon"] = 134520,
 ["cooldown"] = false,
-["color"] = {
-0,
-0,
-0,
-0,
+["progressSource"] = {
+-1,
+"",
 },
 },
 ["Blackout Kick infight "] = {
@@ -42572,6 +42583,7 @@ true,
 },
 },
 ["zoneIds"] = "",
+["use_vehicleUi"] = false,
 ["pvptalent"] = {
 ["multi"] = {
 },
@@ -42580,7 +42592,6 @@ true,
 ["multi"] = {
 },
 },
-["use_vehicleUi"] = false,
 ["use_combat"] = true,
 ["use_class_and_spec"] = true,
 ["race"] = {
@@ -42840,15 +42851,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -43028,8 +43039,7 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["config"] = {
-},
+["borderInset"] = 1,
 ["borderOffset"] = 4,
 ["semver"] = "2.0.12",
 ["tocversion"] = 110002,
@@ -43038,8 +43048,9 @@ true,
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = 0,
+["config"] = {
+},
 ["uid"] = "TCeaHEg6hSK",
-["borderInset"] = 1,
 ["frameStrata"] = 1,
 ["conditions"] = {
 },
@@ -43138,13 +43149,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "2",
 ["use_health"] = true,
@@ -43156,7 +43167,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -43406,7 +43417,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -43415,11 +43426,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -43679,15 +43690,6 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -43740,6 +43742,8 @@ true,
 ["size"] = 10,
 },
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -43898,7 +43902,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Soul Reaper (Frost)"] = {
 ["iconSource"] = -1,
@@ -44102,40 +44113,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -44344,11 +44341,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Dynamic Effects - LWA - Death Knight"] = {
@@ -44532,7 +44543,29 @@ true,
 ["borderEdge"] = "Square Full White",
 ["borderSize"] = 2,
 ["sort"] = "none",
+["uid"] = "jl5tEYHkYfu",
+["config"] = {
+},
+["gridType"] = "RD",
+["anchorFrameParent"] = false,
 ["authorOptions"] = {
+},
+["limit"] = 5,
+["hybridPosition"] = "hybridFirst",
+["semver"] = "11.2.1",
+["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
+["id"] = "Dynamic Effects - LWA - Death Knight",
+["frameStrata"] = 1,
+["gridWidth"] = 5,
+["anchorFrameType"] = "SELECTFRAME",
+["rotation"] = 0,
+["radius"] = 200,
+["rowSpace"] = 1,
+["stepAngle"] = 15,
+["conditions"] = {
+},
+["information"] = {
+["forceEvents"] = true,
 },
 ["animation"] = {
 ["start"] = {
@@ -44554,28 +44587,6 @@ true,
 ["easeType"] = "none",
 },
 },
-["config"] = {
-},
-["anchorFrameParent"] = false,
-["gridType"] = "RD",
-["limit"] = 5,
-["hybridPosition"] = "hybridFirst",
-["semver"] = "11.2.1",
-["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
-["id"] = "Dynamic Effects - LWA - Death Knight",
-["frameStrata"] = 1,
-["gridWidth"] = 5,
-["anchorFrameType"] = "SELECTFRAME",
-["rotation"] = 0,
-["radius"] = 200,
-["rowSpace"] = 1,
-["stepAngle"] = 15,
-["conditions"] = {
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["uid"] = "jl5tEYHkYfu",
 },
 ["Icy Talons (Unholy)"] = {
 ["iconSource"] = -1,
@@ -44771,17 +44782,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -44812,7 +44816,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Frostreaper"] = {
 ["iconSource"] = -1,
@@ -44943,21 +44954,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -45027,7 +45031,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Hemostasis (Optional)"] = {
 ["iconSource"] = -1,
@@ -45223,17 +45234,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -45264,7 +45268,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Marrowrend"] = {
 ["iconSource"] = -1,
@@ -45506,17 +45517,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -45715,7 +45719,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Roll Charge 17 3"] = {
 ["sparkWidth"] = 10,
@@ -45789,13 +45800,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "2",
 ["use_health"] = true,
@@ -45807,7 +45818,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -46056,7 +46067,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -46065,11 +46076,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -46545,13 +46556,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -46563,7 +46574,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -46812,7 +46823,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -46821,11 +46832,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -46947,7 +46958,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -46956,11 +46967,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -46993,15 +47004,14 @@ true,
 ["triggers"] = {
 {
 ["trigger"] = {
-["unit"] = "player",
+["use_unit"] = true,
 ["duration"] = "1",
-["names"] = {
-},
-["debuffType"] = "HELPFUL",
+["subeventPrefix"] = "SPELL",
+["spellName"] = 109132,
 ["use_charges"] = true,
 ["genericShowOn"] = "showOnCooldown",
-["use_unit"] = true,
-["charges"] = "2",
+["unit"] = "player",
+["use_remaining"] = false,
 ["powertype"] = 0,
 ["spellIds"] = {
 },
@@ -47009,9 +47019,9 @@ true,
 ["use_showOn"] = true,
 ["use_ignoreoverride"] = true,
 ["use_powertype"] = true,
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["charges_operator"] = "==",
-["type"] = "spell",
+["charges"] = "2",
 ["use_health"] = true,
 ["unevent"] = "auto",
 ["use_spellCount"] = false,
@@ -47021,9 +47031,10 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["use_remaining"] = false,
-["spellName"] = 109132,
-["subeventPrefix"] = "SPELL",
+["type"] = "spell",
+["custom_hide"] = "timed",
+["names"] = {
+},
 ["use_track"] = true,
 ["use_genericShowOn"] = true,
 },
@@ -47446,40 +47457,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -47696,11 +47693,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Empower Rune Weapon"] = {
@@ -47895,17 +47906,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -48072,7 +48076,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Left Side - LWA - Death Knight"] = {
 ["arcLength"] = 360,
@@ -48193,11 +48204,12 @@ true,
 ["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
 ["borderSize"] = 2,
 ["limit"] = 5,
-["uid"] = "fMnZzTlhRa8",
+["useLimit"] = false,
 ["authorOptions"] = {
 },
 ["anchorFrameParent"] = false,
-["useLimit"] = false,
+["config"] = {
+},
 ["anchorPoint"] = "TOPLEFT",
 ["space"] = 2,
 ["semver"] = "11.2.1",
@@ -48215,8 +48227,7 @@ true,
 ["information"] = {
 ["forceEvents"] = true,
 },
-["config"] = {
-},
+["uid"] = "fMnZzTlhRa8",
 },
 ["Umbilicus Eternus"] = {
 ["iconSource"] = -1,
@@ -48374,17 +48385,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -48431,7 +48435,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["符文剑"] = {
 ["iconSource"] = -1,
@@ -48634,12 +48645,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["zoom"] = 0,
 ["uid"] = "LhNskL((qUy",
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["id"] = "符文剑",
 ["width"] = 32,
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["anchorFrameType"] = "SCREEN",
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["config"] = {
 },
 ["inverse"] = false,
@@ -48803,15 +48814,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -49027,11 +49038,11 @@ true,
 ["borderBackdrop"] = "Blizzard Tooltip",
 ["parent"] = "Suidilias Brewmaster Monk ",
 ["adjustedMin"] = "",
+["text1Font"] = "Friz Quadrata TT",
+["crop_x"] = 0.41,
+["desaturateBackground"] = false,
 ["backgroundOffset"] = 0,
 ["fontSize"] = 12,
-["desaturateBackground"] = false,
-["textSize"] = 12,
-["foregroundTexture"] = "Interface\\AddOns\\WeakAuras\\Media\\Textures\\Circle_White_Border",
 ["customTextUpdate"] = "update",
 ["stacksFont"] = "Friz Quadrata TT",
 ["desaturateForeground"] = false,
@@ -49179,9 +49190,9 @@ true,
 ["stacksFlags"] = "None",
 ["inverse"] = false,
 ["sparkDesature"] = false,
-["crop_x"] = 0.41,
-["text1Font"] = "Friz Quadrata TT",
 ["icon"] = false,
+["foregroundTexture"] = "Interface\\AddOns\\WeakAuras\\Media\\Textures\\Circle_White_Border",
+["textSize"] = 12,
 },
 ["A Feast of Souls (Optional - Frost)"] = {
 ["iconSource"] = -1,
@@ -49312,12 +49323,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -49332,11 +49347,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -49344,17 +49355,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -49402,7 +49406,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Blood Tap"] = {
 ["iconSource"] = -1,
@@ -49598,17 +49609,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -49711,7 +49715,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Breath of Fire "] = {
 ["iconSource"] = -1,
@@ -49874,15 +49885,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -50052,27 +50063,36 @@ true,
 ["useAdjustededMax"] = false,
 ["width"] = 24,
 ["source"] = "import",
-["parent"] = "M+ AUTOMARK",
+["url"] = "https://wago.io/1ctv3b91K/49",
 ["xOffset"] = 0,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["preferToUpdate"] = true,
 ["information"] = {
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["conditions"] = {
 },
-["progressSource"] = {
--1,
-"",
+["parent"] = "M+ AUTOMARK",
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
 },
-["preferToUpdate"] = true,
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
 ["uid"] = "oiXVZEYL7g5",
 ["frameStrata"] = 1,
 ["useCooldownModRate"] = true,
@@ -50083,6 +50103,31 @@ true,
 ["cooldownTextDisabled"] = false,
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
+["config"] = {
+["Settings"] = {
+["Damager"] = {
+["Enable"] = true,
+},
+["Tank"] = {
+["Enable"] = true,
+},
+["Leader"] = {
+["Enable"] = true,
+},
+["Healer"] = {
+["Enable"] = true,
+},
+},
+},
+["inverse"] = false,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -50283,45 +50328,11 @@ true,
 ["size"] = 10,
 },
 },
-["config"] = {
-["Settings"] = {
-["Damager"] = {
-["Enable"] = true,
-},
-["Tank"] = {
-["Enable"] = true,
-},
-["Leader"] = {
-["Enable"] = true,
-},
-["Healer"] = {
-["Enable"] = true,
-},
-},
-},
-["inverse"] = false,
-["url"] = "https://wago.io/1ctv3b91K/49",
 ["displayIcon"] = "618979",
 ["cooldown"] = false,
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["progressSource"] = {
+-1,
+"",
 },
 },
 ["Dark Succor"] = {
@@ -50478,17 +50489,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -50535,7 +50539,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Invoke Niuzao, the Black Ox "] = {
 ["iconSource"] = -1,
@@ -50718,7 +50729,7 @@ true,
 ["multi"] = {
 },
 },
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -50727,11 +50738,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -50986,12 +50997,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -51006,11 +51021,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -51018,17 +51029,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -51076,7 +51080,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Icebound Fortitude (Frost & Unholy)"] = {
 ["iconSource"] = -1,
@@ -51262,38 +51273,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -51346,6 +51330,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -51483,11 +51480,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Rushing jade Wind Timer"] = {
@@ -51844,17 +51855,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -51885,7 +51889,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Rune Mastery (Optional - Unholy)"] = {
 ["iconSource"] = -1,
@@ -52044,17 +52055,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -52101,7 +52105,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Roll CD 17 3"] = {
 ["sparkWidth"] = 10,
@@ -52187,7 +52198,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -52196,11 +52207,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -52241,13 +52252,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -52259,7 +52270,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -52635,15 +52646,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -52854,11 +52865,12 @@ true,
 ["anchorFrameFrame"] = "WeakAuras:Utilities - LWA - Death Knight",
 ["borderSize"] = 2,
 ["limit"] = 5,
-["uid"] = "mC5qIXv2MXg",
+["useLimit"] = false,
 ["authorOptions"] = {
 },
 ["anchorFrameParent"] = false,
-["useLimit"] = false,
+["config"] = {
+},
 ["anchorPoint"] = "BOTTOM",
 ["space"] = 2,
 ["semver"] = "11.2.1",
@@ -52876,8 +52888,7 @@ true,
 ["information"] = {
 ["forceEvents"] = true,
 },
-["config"] = {
-},
+["uid"] = "mC5qIXv2MXg",
 },
 ["饮血"] = {
 ["iconSource"] = -1,
@@ -53064,12 +53075,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["zoom"] = 0,
 ["uid"] = "BtXGEhtPjDy",
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["id"] = "饮血",
 ["width"] = 32,
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["anchorFrameType"] = "SCREEN",
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["config"] = {
 },
 ["inverse"] = false,
@@ -53329,38 +53340,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -53413,6 +53397,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -53550,11 +53547,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Incite Terror (Optional)"] = {
@@ -53682,12 +53693,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -53702,11 +53717,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -53714,17 +53725,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -53754,7 +53758,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Blinding Sleet"] = {
 ["iconSource"] = -1,
@@ -53941,38 +53952,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -54025,6 +54009,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -54162,11 +54159,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Right Side - LWA - Death Knight"] = {
@@ -54288,11 +54299,12 @@ true,
 ["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
 ["borderSize"] = 2,
 ["limit"] = 5,
-["uid"] = "qyGaG0XONLC",
+["useLimit"] = false,
 ["authorOptions"] = {
 },
 ["anchorFrameParent"] = false,
-["useLimit"] = false,
+["config"] = {
+},
 ["anchorPoint"] = "TOPRIGHT",
 ["space"] = 2,
 ["semver"] = "11.2.1",
@@ -54310,8 +54322,7 @@ true,
 ["information"] = {
 ["forceEvents"] = true,
 },
-["config"] = {
-},
+["uid"] = "qyGaG0XONLC",
 },
 ["Keg Smash "] = {
 ["iconSource"] = 1,
@@ -54530,13 +54541,8 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["color"] = {
-1,
-1,
-1,
-1,
-},
 ["icon"] = true,
+["cooldownEdge"] = false,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -54592,7 +54598,12 @@ true,
 ["adjustedMax"] = "",
 ["displayIcon"] = "1360980",
 ["cooldown"] = true,
-["cooldownEdge"] = false,
+["color"] = {
+1,
+1,
+1,
+1,
+},
 },
 ["Suidilias Brewmaster Monk "] = {
 ["controlledChildren"] = {
@@ -54791,14 +54802,13 @@ true,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
 ["id"] = "Suidilias Brewmaster Monk ",
-["selfPoint"] = "BOTTOMLEFT",
-["frameStrata"] = 1,
-["anchorFrameType"] = "SCREEN",
-["authorOptions"] = {
-},
 ["config"] = {
 },
+["frameStrata"] = 1,
+["anchorFrameType"] = "SCREEN",
+["selfPoint"] = "BOTTOMLEFT",
 ["borderInset"] = 11,
+["alpha"] = 1,
 ["uid"] = "EUz6LIyCghV",
 ["conditions"] = {
 },
@@ -54807,7 +54817,8 @@ true,
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
 },
-["alpha"] = 1,
+["authorOptions"] = {
+},
 },
 ["Automark Settings"] = {
 ["iconSource"] = -1,
@@ -54891,27 +54902,36 @@ true,
 ["useAdjustededMax"] = false,
 ["width"] = 24,
 ["source"] = "import",
-["parent"] = "M+ AUTOMARK",
+["url"] = "https://wago.io/1ctv3b91K/49",
 ["xOffset"] = 0,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["preferToUpdate"] = true,
 ["information"] = {
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["conditions"] = {
 },
-["progressSource"] = {
--1,
-"",
+["parent"] = "M+ AUTOMARK",
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
 },
-["preferToUpdate"] = true,
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
 ["uid"] = "TSJyCaiLYzm",
 ["frameStrata"] = 1,
 ["useCooldownModRate"] = false,
@@ -54922,6 +54942,37 @@ true,
 ["cooldownTextDisabled"] = false,
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
+["config"] = {
+["Settings"] = {
+["Modifier"] = {
+["Enable"] = false,
+["Option"] = 1,
+},
+["Automark"] = {
+["Option"] = 1,
+},
+["MakeAvailableAfter"] = {
+["Option"] = 120,
+},
+["Announce"] = {
+["Enable"] = true,
+["Option"] = 1,
+},
+["RangeLimiter"] = {
+["Enable"] = false,
+["Option"] = 1,
+},
+},
+},
+["inverse"] = false,
 ["authorOptions"] = {
 {
 ["useName"] = false,
@@ -55265,51 +55316,11 @@ true,
 ["size"] = 10,
 },
 },
-["config"] = {
-["Settings"] = {
-["Modifier"] = {
-["Enable"] = false,
-["Option"] = 1,
-},
-["Automark"] = {
-["Option"] = 1,
-},
-["MakeAvailableAfter"] = {
-["Option"] = 120,
-},
-["Announce"] = {
-["Enable"] = true,
-["Option"] = 1,
-},
-["RangeLimiter"] = {
-["Enable"] = false,
-["Option"] = 1,
-},
-},
-},
-["inverse"] = false,
-["url"] = "https://wago.io/1ctv3b91K/49",
 ["displayIcon"] = "618979",
 ["cooldown"] = false,
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["progressSource"] = {
+-1,
+"",
 },
 },
 ["7号"] = {
@@ -55475,12 +55486,12 @@ true,
 ["zoom"] = 0,
 ["cooldownTextDisabled"] = false,
 ["uid"] = "ABlnwHmj2tl",
-["useCooldownModRate"] = true,
+["frameStrata"] = 1,
 ["id"] = "7号",
 ["anchorFrameType"] = "SCREEN",
-["alpha"] = 1,
+["useCooldownModRate"] = true,
 ["width"] = 64,
-["frameStrata"] = 1,
+["alpha"] = 1,
 ["config"] = {
 },
 ["inverse"] = false,
@@ -55654,38 +55665,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -55738,6 +55722,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -55856,11 +55853,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Raise Abomination"] = {
@@ -56045,10 +56056,17 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["progressSource"] = {
 -1,
 "",
+},
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
 },
 ["information"] = {
 ["forceEvents"] = true,
@@ -56193,14 +56211,7 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 },
 ["Infliction of Sorrow (Unholy)"] = {
 ["iconSource"] = 0,
@@ -56369,12 +56380,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -56389,11 +56404,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = false,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -56401,17 +56412,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -56459,7 +56463,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 237530,
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Mark of Blood"] = {
 ["iconSource"] = -1,
@@ -56638,17 +56649,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -56773,7 +56777,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Anti-Magic Shell (Frost & Unholy)"] = {
 ["iconSource"] = -1,
@@ -56961,38 +56972,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -57045,6 +57029,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -57182,11 +57179,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Death Strike"] = {
@@ -57689,7 +57700,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -57698,11 +57709,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -57743,13 +57754,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "3",
 ["use_health"] = true,
@@ -57761,7 +57772,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -58055,13 +58066,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -58073,7 +58084,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -58322,7 +58333,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -58331,11 +58342,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -58528,15 +58539,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -58707,7 +58718,8 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["borderInset"] = 1,
+["config"] = {
+},
 ["borderOffset"] = 4,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -58735,9 +58747,8 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = 0,
+["borderInset"] = 1,
 ["uid"] = "FkX9jF4NQH)",
-["config"] = {
-},
 ["authorOptions"] = {
 },
 ["conditions"] = {
@@ -58778,7 +58789,7 @@ true,
 ["use_unit"] = true,
 ["type"] = "aura2",
 ["use_genericShowOn"] = true,
-["subeventSuffix"] = "_CAST_START",
+["unevent"] = "auto",
 ["use_showOn"] = true,
 ["useExactSpellId"] = true,
 ["event"] = "Action Usable",
@@ -58788,10 +58799,10 @@ true,
 ["spellIds"] = {
 22812,
 },
-["unevent"] = "auto",
 ["auraspellids"] = {
 "394112",
 },
+["subeventSuffix"] = "_CAST_START",
 ["ownOnly"] = true,
 ["use_track"] = true,
 ["use_absorbMode"] = true,
@@ -58932,15 +58943,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -59429,7 +59440,8 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["borderInset"] = 1,
+["config"] = {
+},
 ["borderOffset"] = 4,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -59457,9 +59469,8 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = 0,
+["borderInset"] = 1,
 ["uid"] = "30Rfj4xp(K8",
-["config"] = {
-},
 ["authorOptions"] = {
 },
 ["conditions"] = {
@@ -59986,9 +59997,9 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["preferToUpdate"] = true,
-["source"] = "import",
 ["icon"] = true,
+["source"] = "import",
+["xOffset"] = 0,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -60062,7 +60073,7 @@ true,
 },
 ["displayIcon"] = 2032221,
 ["cooldown"] = true,
-["xOffset"] = 0,
+["preferToUpdate"] = true,
 },
 ["Purified Chi "] = {
 ["iconSource"] = 1,
@@ -60098,7 +60109,9 @@ true,
 ["duration"] = "1",
 ["type"] = "aura2",
 ["subeventSuffix"] = "_CAST_START",
-["useExactSpellId"] = true,
+["auraspellids"] = {
+"325092",
+},
 ["use_showOn"] = true,
 ["useName"] = false,
 ["event"] = "Cooldown Progress (Spell)",
@@ -60108,10 +60121,8 @@ true,
 ["spellIds"] = {
 22812,
 },
-["auraspellids"] = {
-"325092",
-},
 ["unevent"] = "auto",
+["useExactSpellId"] = true,
 ["subeventPrefix"] = "SPELL",
 ["use_track"] = true,
 ["names"] = {
@@ -60252,15 +60263,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -60434,7 +60445,8 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["borderInset"] = 1,
+["config"] = {
+},
 ["borderOffset"] = 4,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -60462,9 +60474,8 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = -248,
+["borderInset"] = 1,
 ["uid"] = "ln)lERIZOx3",
-["config"] = {
-},
 ["authorOptions"] = {
 },
 ["conditions"] = {
@@ -60628,17 +60639,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -60686,7 +60690,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Luxthos - Death Knight"] = {
 ["controlledChildren"] = {
@@ -60802,11 +60813,11 @@ true,
 ["tocversion"] = 110000,
 ["id"] = "Luxthos - Death Knight",
 ["xOffset"] = 0,
-["alpha"] = 1,
-["anchorFrameType"] = "SCREEN",
 ["frameStrata"] = 2,
+["anchorFrameType"] = "SCREEN",
+["alpha"] = 1,
 ["uid"] = "yaUsoA26iZp",
-["selfPoint"] = "CENTER",
+["yOffset"] = -370,
 ["config"] = {
 },
 ["conditions"] = {
@@ -60814,7 +60825,7 @@ true,
 ["information"] = {
 ["forceEvents"] = true,
 },
-["yOffset"] = -370,
+["selfPoint"] = "CENTER",
 },
 ["Fortifying Brew "] = {
 ["iconSource"] = -1,
@@ -60976,15 +60987,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -61226,17 +61237,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -61283,7 +61287,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Tiger's Lust Buff "] = {
 ["iconSource"] = -1,
@@ -61541,9 +61552,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -61564,9 +61577,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -61685,7 +61696,7 @@ true,
 },
 ["displayIcon"] = 237586,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -61722,25 +61733,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Spirit Link Totem",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "oAePB1BPhNN",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "oAePB1BPhNN",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Tazavesh: Streets of Wonder - Tealc"] = {
 ["iconSource"] = 0,
@@ -62057,13 +62068,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -62101,7 +62112,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["use_zoneIds"] = true,
@@ -62138,25 +62154,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = "4062727",
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Zo'phex",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175616",
 ["Priority"] = {
@@ -62167,12 +62178,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Zo'phex",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Venza Goldfuse",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176705",
 ["Priority"] = {
@@ -62183,12 +62194,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Venza Goldfuse",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Achillite",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176555",
 ["Priority"] = {
@@ -62199,12 +62210,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Achillite",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Alcruux",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176556",
 ["Priority"] = {
@@ -62215,12 +62226,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Alcruux",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] P.O.S.T. Master",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175646",
 ["Priority"] = {
@@ -62231,12 +62242,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] P.O.S.T. Master",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Zo'gron",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176563",
 ["Priority"] = {
@@ -62247,12 +62258,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Zo'gron",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] So'azmi",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175806",
 ["Priority"] = {
@@ -62263,12 +62274,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] So'azmi",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Ancient Core Hound",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "180091",
 ["Priority"] = {
@@ -62279,12 +62290,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Ancient Core Hound",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Armored Overseer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177808",
 ["Priority"] = {
@@ -62295,12 +62306,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Armored Overseer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Bazaar Overseer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "246285",
 ["Priority"] = {
@@ -62311,12 +62322,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bazaar Overseer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Bazaar Strongarm",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178388",
 ["Priority"] = {
@@ -62327,12 +62338,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Bazaar Strongarm",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Beam Splicer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179954",
 ["Priority"] = {
@@ -62343,12 +62354,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Beam Splicer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Brawling Patron",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180159",
 ["Priority"] = {
@@ -62359,12 +62370,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Brawling Patron",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Brawling Patron",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176562",
 ["Priority"] = {
@@ -62375,12 +62386,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Brawling Patron",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Cartel Lackey",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "178394",
 ["Priority"] = {
@@ -62391,12 +62402,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Cartel Lackey",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Cartel Muscle",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180348",
 ["Priority"] = {
@@ -62407,12 +62418,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Cartel Muscle",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Cartel Skulker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179893",
 ["Priority"] = {
@@ -62423,12 +62434,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Cartel Skulker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Cartel Smuggler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180335",
 ["Priority"] = {
@@ -62439,12 +62450,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Cartel Smuggler",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Cartel Wiseguy",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "180336",
 ["Priority"] = {
@@ -62455,12 +62466,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Cartel Wiseguy",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Chains of Damnation",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177237",
 ["Priority"] = {
@@ -62471,12 +62482,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Chains of Damnation",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Commander Zo'far",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179821",
 ["Priority"] = {
@@ -62487,12 +62498,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Commander Zo'far",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Commerce Enforcer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179842",
 ["Priority"] = {
@@ -62503,12 +62514,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Commerce Enforcer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Customs Security",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177807",
 ["Priority"] = {
@@ -62519,12 +62530,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Customs Security",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Damp Skrat",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179366",
 ["Priority"] = {
@@ -62535,12 +62546,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Damp Skrat",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Defective Sorter",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176396",
 ["Priority"] = {
@@ -62551,12 +62562,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Defective Sorter",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Disruptive Patron",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "176565",
 ["Priority"] = {
@@ -62567,12 +62578,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Disruptive Patron",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Enraged Direhorn",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180495",
 ["Priority"] = {
@@ -62583,12 +62594,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Enraged Direhorn",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Frenzied Nightclaw",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180567",
 ["Priority"] = {
@@ -62599,12 +62610,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Frenzied Nightclaw",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Gatewarden Zo'mazz",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "178392",
 ["Priority"] = {
@@ -62615,12 +62626,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Gatewarden Zo'mazz",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Interrogation Specialist",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "177816",
 ["Priority"] = {
@@ -62631,12 +62642,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Interrogation Specialist",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Leader Xy'viler",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "180286",
 ["Priority"] = {
@@ -62647,12 +62658,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Leader Xy'viler",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Mailroom Portal",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "175796",
 ["Priority"] = {
@@ -62663,12 +62674,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Mailroom Portal",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Market Peacekeeper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179840",
 ["Priority"] = {
@@ -62679,12 +62690,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Market Peacekeeper",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Oasis Security",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "179269",
 ["Priority"] = {
@@ -62695,12 +62706,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Oasis Security",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Overloaded Mailemental",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "176395",
 ["Priority"] = {
@@ -62711,12 +62722,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Overloaded Mailemental",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Portalmancer Zo'honn",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "179334",
 ["Priority"] = {
@@ -62727,12 +62738,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Portalmancer Zo'honn",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "P.O.S.T. Worker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176394",
 ["Priority"] = {
@@ -62743,12 +62754,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "P.O.S.T. Worker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "Smuggled Creature",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "175677",
 ["Priority"] = {
@@ -62759,12 +62770,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Smuggled Creature",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Support Officer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "177817",
 ["Priority"] = {
@@ -62775,12 +62786,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Support Officer",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Tracker Zo'korss",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "179837",
 ["Priority"] = {
@@ -62791,12 +62802,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Tracker Zo'korss",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Unruly Patron",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "176561;180158",
 ["Priority"] = {
@@ -62807,12 +62818,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Unruly Patron",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Veteran Sparkcaster",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "179841",
 ["Priority"] = {
@@ -62823,24 +62834,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Veteran Sparkcaster",
+["WhenNotAvailable"] = 1,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Tazavesh: Streets of Wonder - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "ZPphz9xXC7C",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -62849,10 +62846,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Tazavesh: Streets of Wonder - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "ZPphz9xXC7C",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Leg Sweep  "] = {
 ["iconSource"] = -1,
@@ -63012,15 +63023,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -63254,6 +63265,7 @@ true,
 [117659] = true,
 },
 },
+["use_class_and_spec"] = true,
 ["spec"] = {
 ["multi"] = {
 },
@@ -63262,7 +63274,6 @@ true,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -63290,12 +63301,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["config"] = {
 },
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["id"] = "死神印记",
 ["anchorFrameType"] = "SCREEN",
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["width"] = 32,
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["uid"] = "lXbCwew2nIB",
 ["inverse"] = false,
 ["color"] = {
@@ -63407,15 +63418,15 @@ true,
 ["use_unit"] = true,
 ["unit"] = "player",
 ["spellName"] = 124081,
-["useExactSpellId"] = true,
+["subeventSuffix"] = "_CAST_START",
 ["use_remaining"] = false,
 ["debuffType"] = "HELPFUL",
+["unevent"] = "auto",
+["type"] = "aura2",
+["use_itemSlot"] = true,
 ["auraspellids"] = {
 "1219661",
 },
-["type"] = "aura2",
-["use_itemSlot"] = true,
-["unevent"] = "auto",
 ["use_showOn"] = true,
 ["event"] = "Cooldown Progress (Equipment Slot)",
 ["use_itemName"] = true,
@@ -63425,7 +63436,7 @@ true,
 ["spellIds"] = {
 },
 ["use_testForCooldown"] = true,
-["subeventSuffix"] = "_CAST_START",
+["useExactSpellId"] = true,
 ["use_genericShowOn"] = true,
 ["use_track"] = true,
 ["duration"] = "1",
@@ -63560,15 +63571,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["class"] = {
 ["single"] = "DRUID",
 ["multi"] = {
@@ -63715,12 +63726,11 @@ true,
 ["selfPoint"] = "CENTER",
 ["align"] = "CENTER",
 ["stagger"] = 0,
-["sort"] = "none",
+["useLimit"] = false,
 ["subRegions"] = {
 },
 ["uid"] = "RP32YWM7dTb",
-["config"] = {
-},
+["internalVersion"] = 85,
 ["load"] = {
 ["talent"] = {
 ["multi"] = {
@@ -63739,13 +63749,37 @@ true,
 },
 },
 },
-["internalVersion"] = 85,
+["authorOptions"] = {
+},
 ["backdropColor"] = {
 1,
 1,
 1,
 0.5,
 },
+["parent"] = "DK",
+["animate"] = false,
+["rotation"] = 0,
+["scale"] = 1,
+["centerType"] = "LR",
+["border"] = false,
+["borderEdge"] = "Square Full White",
+["regionType"] = "dynamicgroup",
+["borderSize"] = 2,
+["sort"] = "none",
+["arcLength"] = 360,
+["limit"] = 5,
+["constantFactor"] = "RADIUS",
+["stepAngle"] = 15,
+["borderOffset"] = 4,
+["frameStrata"] = 1,
+["gridWidth"] = 5,
+["id"] = "血DK",
+["rowSpace"] = 1,
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["fullCircle"] = true,
+["borderInset"] = 1,
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -63766,36 +63800,13 @@ true,
 ["easeType"] = "none",
 },
 },
-["animate"] = false,
-["parent"] = "DK",
-["scale"] = 1,
-["centerType"] = "LR",
-["border"] = false,
-["borderEdge"] = "Square Full White",
-["regionType"] = "dynamicgroup",
-["borderSize"] = 2,
-["limit"] = 5,
-["useLimit"] = false,
-["authorOptions"] = {
+["config"] = {
 },
-["constantFactor"] = "RADIUS",
-["stepAngle"] = 15,
-["borderOffset"] = 4,
-["frameStrata"] = 1,
-["gridWidth"] = 5,
-["id"] = "血DK",
-["rowSpace"] = 1,
-["alpha"] = 1,
-["anchorFrameType"] = "SCREEN",
-["rotation"] = 0,
-["borderInset"] = 1,
-["gridType"] = "RD",
-["fullCircle"] = true,
 ["conditions"] = {
 },
 ["information"] = {
 },
-["arcLength"] = 360,
+["gridType"] = "RD",
 },
 ["Infliction of Sorrow (Blood)"] = {
 ["iconSource"] = 0,
@@ -63964,12 +63975,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -63984,11 +63999,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = false,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -63996,17 +64007,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -64054,7 +64058,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 135675,
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Balanced Stratagem "] = {
 ["iconSource"] = -1,
@@ -64088,16 +64099,16 @@ true,
 ["stacks"] = "1",
 ["subeventPrefix"] = "SPELL",
 ["ownOnly"] = true,
+["useExactSpellId"] = true,
+["useName"] = false,
+["debuffType"] = "HELPFUL",
+["unevent"] = "auto",
+["type"] = "aura2",
+["stacksOperator"] = ">",
 ["auraspellids"] = {
 "451514",
 "451508",
 },
-["useName"] = false,
-["debuffType"] = "HELPFUL",
-["subeventSuffix"] = "_CAST_START",
-["type"] = "aura2",
-["stacksOperator"] = ">",
-["useExactSpellId"] = true,
 ["use_showOn"] = true,
 ["spellName"] = 124974,
 ["event"] = "Cooldown Progress (Spell)",
@@ -64107,7 +64118,7 @@ true,
 ["spellIds"] = {
 22812,
 },
-["unevent"] = "auto",
+["subeventSuffix"] = "_CAST_START",
 ["duration"] = "1",
 ["use_unit"] = true,
 ["use_track"] = true,
@@ -64263,7 +64274,7 @@ true,
 ["multi"] = {
 },
 },
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -64272,11 +64283,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -64496,12 +64507,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 3,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -64516,11 +64531,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -64528,17 +64539,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -64586,7 +64590,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Halls of Atonement - Tealc"] = {
 ["iconSource"] = 0,
@@ -64903,13 +64914,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -64947,7 +64958,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["use_zoneIds"] = true,
@@ -64984,25 +65000,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = "3601526",
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Halkias",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "165408",
 ["Priority"] = {
@@ -65013,12 +65024,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Halkias",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Echelon",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "164185",
 ["Priority"] = {
@@ -65029,12 +65040,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Echelon",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "  [BOSS ADD] Undying Stonefiend",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "164363",
 ["Priority"] = {
@@ -65045,12 +65056,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Undying Stonefiend",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] High Adjudicator Aleez",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "165410",
 ["Priority"] = {
@@ -65061,12 +65072,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] High Adjudicator Aleez",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Ghastly Parishioner",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "165913",
 ["Priority"] = {
@@ -65077,12 +65088,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Ghastly Parishioner",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [ENV] Anima Fountain",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "166497",
 ["Priority"] = {
@@ -65093,12 +65104,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Anima Fountain",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [ENV] Empty Anima Vessel",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "166034",
 ["Priority"] = {
@@ -65109,12 +65120,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Empty Anima Vessel",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Lord Chamberlain",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "164218",
 ["Priority"] = {
@@ -65125,12 +65136,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Lord Chamberlain",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Sinstone Statue",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "165737",
 ["Priority"] = {
@@ -65141,12 +65152,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Sinstone Statue",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Depraved Collector",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "165529",
 ["Priority"] = {
@@ -65157,12 +65168,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Depraved Collector",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Depraved Darkblade",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167615;165515",
 ["Priority"] = {
@@ -65173,12 +65184,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Depraved Darkblade",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Depraved Houndmaster",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "164562",
 ["Priority"] = {
@@ -65189,12 +65200,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Depraved Houndmaster",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Depraved Obliberator",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "165414",
 ["Priority"] = {
@@ -65205,12 +65216,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Depraved Obliberator",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Inquisitor Sigar",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "167876",
 ["Priority"] = {
@@ -65221,12 +65232,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Inquisitor Sigar",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Loyal Stoneborn",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "174175",
 ["Priority"] = {
@@ -65237,12 +65248,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Loyal Stoneborn",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Manifestation of Envy",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167898",
 ["Priority"] = {
@@ -65253,12 +65264,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Manifestation of Envy",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Shard of Halkias",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "164557",
 ["Priority"] = {
@@ -65269,12 +65280,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Shard of Halkias",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Stoneborn Eviscerator",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167611",
 ["Priority"] = {
@@ -65285,12 +65296,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Stoneborn Eviscerator",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Stoneborn Reaver",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167612",
 ["Priority"] = {
@@ -65301,12 +65312,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Stoneborn Reaver",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Stoneborn Slasher",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167607",
 ["Priority"] = {
@@ -65317,12 +65328,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Stoneborn Slasher",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Stonefiend Anklebiter",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167610",
 ["Priority"] = {
@@ -65333,12 +65344,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Stonefiend Anklebiter",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Toiling Groundskeeper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "165415",
 ["Priority"] = {
@@ -65349,12 +65360,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Toiling Groundskeeper",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Tormented Soul",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "167892",
 ["Priority"] = {
@@ -65365,12 +65376,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Tormented Soul",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Vicious Gargon",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "164563",
 ["Priority"] = {
@@ -65381,24 +65392,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Vicious Gargon",
+["WhenNotAvailable"] = 1,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Halls of Atonement - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "BJZAGzLlSJy",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -65407,10 +65404,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Halls of Atonement - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "BJZAGzLlSJy",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Blooddrinker"] = {
 ["iconSource"] = -1,
@@ -65576,40 +65587,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -65755,11 +65752,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Black Ox Brew "] = {
@@ -65960,13 +65971,8 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["color"] = {
-1,
-1,
-1,
-1,
-},
 ["icon"] = true,
+["cooldownEdge"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -66008,7 +66014,12 @@ true,
 ["adjustedMax"] = "",
 ["displayIcon"] = "1360980",
 ["cooldown"] = true,
-["cooldownEdge"] = true,
+["color"] = {
+1,
+1,
+1,
+1,
+},
 },
 ["Transcendance "] = {
 ["iconSource"] = -1,
@@ -66171,15 +66182,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -66494,17 +66505,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -66707,7 +66711,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 136144,
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Perdition"] = {
 ["iconSource"] = -1,
@@ -66837,40 +66848,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -66920,11 +66917,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Diffuse Magic Buff "] = {
@@ -67111,15 +67122,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -67380,21 +67391,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -67447,7 +67451,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Winning Streak! (Death Knight - S2 - 2-Pieces)"] = {
 ["iconSource"] = -1,
@@ -67625,9 +67636,9 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["preferToUpdate"] = true,
-["source"] = "import",
 ["icon"] = true,
+["source"] = "import",
+["xOffset"] = 0,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -67684,7 +67695,7 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["xOffset"] = 0,
+["preferToUpdate"] = true,
 },
 ["Health Bar (Optional) - LWA - Death Knight"] = {
 ["sparkWidth"] = 10,
@@ -67697,9 +67708,9 @@ true,
 ["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["actions"] = {
 ["start"] = {
+["custom"] = "",
 ["do_message"] = false,
 ["do_custom"] = false,
-["custom"] = "",
 },
 ["finish"] = {
 },
@@ -68141,15 +68152,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -68267,41 +68278,41 @@ true,
 ["triggers"] = {
 {
 ["trigger"] = {
-["use_absorbMode"] = true,
+["ownOnly"] = true,
 ["use_track"] = true,
 ["spellId"] = "49206",
 ["auranames"] = {
 },
-["use_unit"] = true,
-["use_genericShowOn"] = true,
+["unit"] = "player",
+["use_absorbMode"] = true,
 ["genericShowOn"] = "showOnCooldown",
-["names"] = {
-},
+["use_unit"] = true,
 ["use_totemName"] = true,
-["custom"] = "function(event, arg1)\n    if event == \"PLAYER_TOTEM_UPDATE\" and arg1 then\n        local haveTotem, name, startTime, duration, icon = GetTotemInfo(arg1)\n        if haveTotem and icon == aura_env.texture then\n            aura_env.haveTotem, aura_env.name, aura_env.startTime, aura_env.duration, aura_env.icon = haveTotem, name, startTime, duration, icon\n            aura_env.index = arg1\n            return true\n        elseif aura_env.index == arg1 then\n            aura_env.index = 0\n            aura_env.startTime, aura_env.duration = nil, nil\n        end\n    end\nend",
 ["spellIds"] = {
 },
+["events"] = "PLAYER_TOTEM_UPDATE",
 ["use_spellId"] = true,
 ["customDuration"] = "function()\n    if aura_env.startTime then\n        return aura_env.duration, aura_env.startTime + aura_env.duration\n    end\nend",
 ["subeventPrefix"] = "SPELL",
 ["duration"] = "35",
 ["spellName"] = 0,
-["subeventSuffix"] = "_CAST_SUCCESS",
-["type"] = "custom",
-["unevent"] = "auto",
 ["custom_type"] = "status",
+["type"] = "custom",
+["subeventSuffix"] = "_CAST_SUCCESS",
+["unevent"] = "auto",
 ["debuffType"] = "HELPFUL",
 ["useName"] = true,
 ["event"] = "Cooldown Progress (Spell)",
 ["totemName"] = "27829",
 ["realSpellName"] = 0,
 ["use_spellName"] = true,
-["events"] = "PLAYER_TOTEM_UPDATE",
+["custom"] = "function(event, arg1)\n    if event == \"PLAYER_TOTEM_UPDATE\" and arg1 then\n        local haveTotem, name, startTime, duration, icon = GetTotemInfo(arg1)\n        if haveTotem and icon == aura_env.texture then\n            aura_env.haveTotem, aura_env.name, aura_env.startTime, aura_env.duration, aura_env.icon = haveTotem, name, startTime, duration, icon\n            aura_env.index = arg1\n            return true\n        elseif aura_env.index == arg1 then\n            aura_env.index = 0\n            aura_env.startTime, aura_env.duration = nil, nil\n        end\n    end\nend",
 ["use_sourceUnit"] = true,
 ["check"] = "event",
-["unit"] = "player",
+["names"] = {
+},
 ["sourceUnit"] = "player",
-["ownOnly"] = true,
+["use_genericShowOn"] = true,
 },
 ["untrigger"] = {
 ["custom"] = "function()\n    return aura_env.index == 0\nend",
@@ -68461,10 +68472,6 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["progressSource"] = {
--1,
-"",
-},
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -68485,6 +68492,7 @@ true,
 ["easeType"] = "none",
 },
 },
+["icon"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -68682,7 +68690,10 @@ true,
 ["cooldownEdge"] = false,
 ["displayIcon"] = 1100170,
 ["cooldown"] = true,
-["icon"] = true,
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Death's Caress"] = {
 ["iconSource"] = -1,
@@ -68851,38 +68862,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -68935,6 +68919,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -69053,11 +69050,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Roll Backdrop 9 3"] = {
@@ -69132,13 +69143,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "<=",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -69150,7 +69161,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -69399,7 +69410,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -69408,11 +69419,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -69771,17 +69782,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -69812,7 +69816,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["巴掌"] = {
 ["iconSource"] = -1,
@@ -69995,12 +70006,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["config"] = {
 },
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["id"] = "巴掌",
 ["anchorFrameType"] = "SCREEN",
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["width"] = 32,
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["uid"] = "OJ1UbpoD)Hb",
 ["inverse"] = false,
 ["color"] = {
@@ -70238,17 +70249,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 },
@@ -70295,7 +70299,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Press the Advantage "] = {
 ["iconSource"] = -1,
@@ -70485,15 +70496,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -70783,15 +70794,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -70945,7 +70956,8 @@ true,
 ["borderEdge"] = "Square Full White",
 ["regionType"] = "group",
 ["borderSize"] = 2,
-["borderInset"] = 1,
+["config"] = {
+},
 ["borderOffset"] = 4,
 ["semver"] = "1.0.9",
 ["tocversion"] = 110107,
@@ -70973,9 +70985,8 @@ true,
 ["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["xOffset"] = 0,
+["borderInset"] = 1,
 ["uid"] = "EQioDFrREhe",
-["config"] = {
-},
 ["authorOptions"] = {
 },
 ["conditions"] = {
@@ -71206,15 +71217,6 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -71267,6 +71269,8 @@ true,
 ["size"] = 10,
 },
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -71447,7 +71451,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Festering Scythe"] = {
 ["iconSource"] = -1,
@@ -71643,17 +71654,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -71702,7 +71706,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Chi Torpedo  Charge 7 3"] = {
 ["sparkWidth"] = 10,
@@ -71776,13 +71787,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -71794,7 +71805,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -72043,7 +72054,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -72052,11 +72063,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -72264,40 +72275,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -72403,11 +72400,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Festermight"] = {
@@ -72600,17 +72611,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -72641,7 +72645,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Core - LWA - Death Knight"] = {
 ["arcLength"] = 360,
@@ -72765,10 +72776,10 @@ true,
 ["Consumption"] = false,
 ["Soul Reaper (Frost)"] = false,
 ["Pillar of Frost"] = false,
-["Soul Reaper (Unholy)"] = false,
-["Marrowrend"] = false,
 ["Reaper's Mark (Blood)"] = false,
+["Marrowrend"] = false,
 ["Legion of Souls"] = false,
+["Soul Reaper (Unholy)"] = false,
 ["Vampiric Blood"] = false,
 ["Summon Gargoyle"] = false,
 ["Bonestorm"] = false,
@@ -72850,11 +72861,12 @@ true,
 ["anchorFrameFrame"] = "WeakAuras:General Options - LWA - Death Knight",
 ["borderSize"] = 2,
 ["limit"] = 5,
-["uid"] = "660h5eCZ3W4",
+["useLimit"] = false,
 ["authorOptions"] = {
 },
 ["anchorFrameParent"] = false,
-["useLimit"] = false,
+["config"] = {
+},
 ["anchorPoint"] = "TOP",
 ["space"] = 2,
 ["semver"] = "11.2.1",
@@ -72872,8 +72884,7 @@ true,
 ["information"] = {
 ["forceEvents"] = true,
 },
-["config"] = {
-},
+["uid"] = "660h5eCZ3W4",
 },
 ["骨盾"] = {
 ["iconSource"] = -1,
@@ -73028,12 +73039,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["zoom"] = 0,
 ["uid"] = "d)kglgsIp3w",
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["id"] = "骨盾",
 ["width"] = 32,
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["config"] = {
 },
 ["inverse"] = false,
@@ -73189,17 +73200,10 @@ true,
 },
 ["columnSpace"] = 1,
 ["internalVersion"] = 85,
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["selfPoint"] = "LEFT",
 ["align"] = "CENTER",
-["regionType"] = "dynamicgroup",
-["space"] = 2,
-["anchorPoint"] = "CENTER",
-["stagger"] = 0,
-["useLimit"] = false,
-["version"] = 81,
-["subRegions"] = {
-},
+["source"] = "import",
 ["animation"] = {
 ["start"] = {
 ["type"] = "none",
@@ -73220,60 +73224,8 @@ true,
 ["easeType"] = "none",
 },
 },
-["radius"] = 200,
-["load"] = {
-["talent"] = {
-["multi"] = {
-},
-},
-["spec"] = {
-["multi"] = {
-},
-},
-["class"] = {
-["multi"] = {
-},
-},
-["size"] = {
-["multi"] = {
-},
-},
-},
-["gridType"] = "RD",
-["backdropColor"] = {
-1,
-1,
-1,
-0.5,
-},
-["config"] = {
-["reverse"] = false,
-["travelDist"] = 200,
-["NameOption"] = 1,
-["UseBossModsColor"] = true,
-["IconSpacing"] = 0,
-["textMaxLength"] = 20,
-["textPausedOptions"] = 1,
-["spellOptions"] = {
-},
-},
-["animate"] = false,
-["uid"] = "PpkAm2EPwEW",
-["scale"] = 1,
-["centerType"] = "LR",
-["border"] = false,
-["borderEdge"] = "Square Full White",
-["stepAngle"] = 15,
-["borderSize"] = 2,
-["sort"] = "none",
-["limit"] = 5,
-["frameStrata"] = 1,
-["constantFactor"] = "RADIUS",
-["rotation"] = 0,
-["borderOffset"] = 4,
-["semver"] = "1.0.80",
-["tocversion"] = 110002,
-["id"] = "Bigicon",
+["anchorPoint"] = "CENTER",
+["stagger"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -73543,12 +73495,71 @@ true,
 ["width"] = 1,
 },
 },
+["version"] = 81,
+["subRegions"] = {
+},
+["space"] = 2,
+["radius"] = 200,
+["load"] = {
+["talent"] = {
+["multi"] = {
+},
+},
+["spec"] = {
+["multi"] = {
+},
+},
+["class"] = {
+["multi"] = {
+},
+},
+["size"] = {
+["multi"] = {
+},
+},
+},
+["gridType"] = "RD",
+["backdropColor"] = {
+1,
+1,
+1,
+0.5,
+},
+["config"] = {
+["spellOptions"] = {
+},
+["travelDist"] = 200,
+["NameOption"] = 1,
+["reverse"] = false,
+["IconSpacing"] = 0,
+["textMaxLength"] = 20,
+["textPausedOptions"] = 1,
+["UseBossModsColor"] = true,
+},
+["animate"] = false,
+["uid"] = "PpkAm2EPwEW",
+["scale"] = 1,
+["centerType"] = "LR",
+["border"] = false,
+["borderEdge"] = "Square Full White",
+["stepAngle"] = 15,
+["borderSize"] = 2,
+["limit"] = 5,
+["regionType"] = "dynamicgroup",
 ["gridWidth"] = 5,
+["constantFactor"] = "RADIUS",
+["rotation"] = 0,
+["borderOffset"] = 4,
+["semver"] = "1.0.80",
+["tocversion"] = 110002,
+["id"] = "Bigicon",
+["sort"] = "none",
+["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["source"] = "import",
-["borderInset"] = 1,
 ["arcLength"] = 360,
+["borderInset"] = 1,
 ["parent"] = "Raid Ability Timeline",
+["useLimit"] = false,
 ["conditions"] = {
 },
 ["information"] = {
@@ -73667,14 +73678,11 @@ true,
 ["useAdjustededMax"] = false,
 ["backgroundTexture"] = "Textures\\SpellActivationOverlays\\Eclipse_Sun",
 ["source"] = "import",
-["config"] = {
-},
+["tocversion"] = 110107,
 ["useAdjustedMax"] = false,
 ["mirror"] = false,
-["startAngle"] = 270,
-["tocversion"] = 110107,
-["crop_x"] = 0.41,
-["uid"] = "jdvIYULOBey",
+["authorOptions"] = {
+},
 ["load"] = {
 ["ingroup"] = {
 ["multi"] = {
@@ -73722,15 +73730,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -73741,6 +73749,10 @@ true,
 ["use_petbattle"] = false,
 ["use_dragonriding"] = false,
 },
+["crop_x"] = 0.41,
+["config"] = {
+},
+["startAngle"] = 270,
 ["parent"] = "Suidilias Brewmaster Monk ",
 ["adjustedMax"] = "",
 ["anchorFrameType"] = "SCREEN",
@@ -73760,8 +73772,7 @@ true,
 },
 ["useAdjustedMin"] = false,
 ["inverse"] = false,
-["authorOptions"] = {
-},
+["crop"] = 0.41,
 ["orientation"] = "ANTICLOCKWISE",
 ["conditions"] = {
 },
@@ -73769,7 +73780,7 @@ true,
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
 },
-["crop"] = 0.41,
+["uid"] = "jdvIYULOBey",
 },
 ["Gorefriend's Grasp"] = {
 ["iconSource"] = -1,
@@ -73938,38 +73949,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -74022,6 +74006,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -74140,11 +74137,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Affixes and Misc - Automark"] = {
@@ -74166,10 +74177,10 @@ true,
 ["debuffType"] = "HELPFUL",
 ["event"] = "Health",
 ["unit"] = "player",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
-["events"] = "AutomarkGetMobsRequest",
 ["spellIds"] = {
 },
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
+["events"] = "AutomarkGetMobsRequest",
 ["names"] = {
 },
 ["check"] = "event",
@@ -74233,26 +74244,6 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
 ["actions"] = {
 ["start"] = {
 },
@@ -74261,6 +74252,7 @@ true,
 ["init"] = {
 },
 },
+["cooldownEdge"] = false,
 ["cooldown"] = false,
 ["conditions"] = {
 },
@@ -74580,9 +74572,9 @@ true,
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 5,
+["Name"] = "Void Emissary (Xal'atath's Bargain: Voidbound)",
 ["Id"] = "229537",
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 4,
 ["RangeLimiter"] = 10,
 ["Priority"] = {
@@ -74593,7 +74585,7 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Void Emissary (Xal'atath's Bargain: Voidbound)",
+["WhenNotAvailable"] = 1,
 },
 },
 },
@@ -74607,7 +74599,26 @@ true,
 ["displayIcon"] = "1381294",
 ["information"] = {
 },
-["cooldownEdge"] = false,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+},
 },
 ["Priory of the Sacred Flame - Tealc"] = {
 ["iconSource"] = 0,
@@ -74924,13 +74935,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -74968,7 +74979,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["use_zoneIds"] = true,
@@ -75005,25 +75021,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = "5899331",
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 4,
+["Name"] = "[BOSS] Captain Dailcry",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "207946",
 ["Priority"] = {
@@ -75034,12 +75045,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Captain Dailcry",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Elaena Emberlanz",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "211290",
 ["Priority"] = {
@@ -75050,12 +75061,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Elaena Emberlanz",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Sergeant Shaynemail",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "211291",
 ["Priority"] = {
@@ -75066,12 +75077,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Sergeant Shaynemail",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "  [BOSS ADD] Taener Duelmal",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "211289",
 ["Priority"] = {
@@ -75082,12 +75093,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Taener Duelmal",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Baron Braunpyke",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "207939",
 ["Priority"] = {
@@ -75098,12 +75109,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Baron Braunpyke",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Prioress Murrpray",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "207940",
 ["Priority"] = {
@@ -75114,12 +75125,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Prioress Murrpray",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Guard Captain Suleyman",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "212826",
 ["Priority"] = {
@@ -75130,12 +75141,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Guard Captain Suleyman",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [GUARD] Sergeant Shaynemail",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "239836",
 ["Priority"] = {
@@ -75146,12 +75157,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [GUARD] Sergeant Shaynemail",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Forge Master Damian",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "212831",
 ["Priority"] = {
@@ -75162,12 +75173,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Forge Master Damian",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [GUARD] Elaena Emberlanz",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "239833",
 ["Priority"] = {
@@ -75178,12 +75189,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [GUARD] Elaena Emberlanz",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] High Priest Aemya",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "212827",
 ["Priority"] = {
@@ -75194,12 +75205,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] High Priest Aemya",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [GUARD] Taener Duelmal",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "239834",
 ["Priority"] = {
@@ -75210,12 +75221,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [GUARD] Taener Duelmal",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Arathi Footman",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "206705",
 ["Priority"] = {
@@ -75226,12 +75237,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Arathi Footman",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Arathi Knight",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "206696",
 ["Priority"] = {
@@ -75242,12 +75253,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Arathi Knight",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Arathi Neophyte (Captain Dailcry)",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "207943",
 ["Priority"] = {
@@ -75258,12 +75269,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Arathi Neophyte (Captain Dailcry)",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Arathi Neophyte (Baron Braunpyke)",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "212838",
 ["Priority"] = {
@@ -75274,12 +75285,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Arathi Neophyte (Baron Braunpyke)",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Arathi Neophyte (Prioress Murrpray)",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "211140",
 ["Priority"] = {
@@ -75290,12 +75301,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Arathi Neophyte (Prioress Murrpray)",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Arathi Neophyte",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "209747",
 ["Priority"] = {
@@ -75306,12 +75317,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Arathi Neophyte",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Ardent Paladin",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "206704",
 ["Priority"] = {
@@ -75322,12 +75333,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Ardent Paladin",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Devout Priest",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "206697",
 ["Priority"] = {
@@ -75338,12 +75349,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Devout Priest",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Fanatical Conjuror",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "206698",
 ["Priority"] = {
@@ -75354,12 +75365,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Fanatical Conjuror",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Fervent Sharpshooter",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "206694",
 ["Priority"] = {
@@ -75370,12 +75381,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Fervent Sharpshooter",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Lightspawn",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "206710",
 ["Priority"] = {
@@ -75386,12 +75397,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Lightspawn",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Priory of the Sacred Flame",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "555555",
 ["Priority"] = {
@@ -75402,12 +75413,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Priory of the Sacred Flame",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Risen Footman",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "212835",
 ["Priority"] = {
@@ -75418,12 +75429,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Risen Footman",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Risen Mage",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "221760",
 ["Priority"] = {
@@ -75434,12 +75445,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Risen Mage",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Sir Braunpyke",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "217658",
 ["Priority"] = {
@@ -75450,12 +75461,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Sir Braunpyke",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "War Lynx",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "206699",
 ["Priority"] = {
@@ -75466,12 +75477,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "War Lynx",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Zealous Templar",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "207949",
 ["Priority"] = {
@@ -75482,24 +75493,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Zealous Templar",
+["WhenNotAvailable"] = 1,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Priory of the Sacred Flame - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "wgw(FoU93gw",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -75508,10 +75505,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Priory of the Sacred Flame - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "wgw(FoU93gw",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Frostwyrm's Fury"] = {
 ["iconSource"] = -1,
@@ -75646,40 +75657,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -75741,11 +75738,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Roll CD 15 3"] = {
@@ -75833,7 +75844,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -75842,11 +75853,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -75887,13 +75898,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -75905,7 +75916,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -76312,17 +76323,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -76353,7 +76357,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Consumption"] = {
 ["iconSource"] = -1,
@@ -76488,40 +76499,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -76583,11 +76580,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Bonegrinder"] = {
@@ -76808,17 +76819,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -76866,7 +76870,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Blood Shield Bar - LWA - Death Knight"] = {
 ["sparkWidth"] = 10,
@@ -76959,8 +76970,8 @@ true,
 "77535",
 },
 ["useExactSpellId"] = true,
+["ownOnly"] = true,
 ["fetchTooltip"] = true,
-["matchesShowOn"] = "showOnActive",
 ["event"] = "Health",
 ["unit"] = "player",
 ["subeventSuffix"] = "_CAST_START",
@@ -76972,7 +76983,7 @@ true,
 ["auranames"] = {
 },
 ["useName"] = false,
-["ownOnly"] = true,
+["matchesShowOn"] = "showOnActive",
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -77442,15 +77453,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -77682,15 +77693,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -77952,21 +77963,14 @@ true,
 },
 ["alpha"] = 1,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["source"] = "import",
+["preferToUpdate"] = true,
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -78019,7 +78023,14 @@ true,
 },
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["preferToUpdate"] = true,
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Tombstone"] = {
 ["iconSource"] = -1,
@@ -78190,40 +78201,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -78347,11 +78344,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Chi Torpedo Charge 3 3"] = {
@@ -78426,13 +78437,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = ">=",
 ["charges"] = "2",
 ["use_health"] = true,
@@ -78444,7 +78455,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -78693,7 +78704,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -78702,11 +78713,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -78831,12 +78842,7 @@ true,
 ["regionType"] = "group",
 ["borderSize"] = 2,
 ["anchorFrameParent"] = false,
-["parent"] = "Luxthos - Death Knight",
 ["borderEdge"] = "Square Full White",
-["borderOffset"] = 4,
-["semver"] = "11.2.1",
-["tocversion"] = 110000,
-["id"] = "Resources - LWA - Death Knight",
 ["animation"] = {
 ["start"] = {
 ["easeStrength"] = 3,
@@ -78857,6 +78863,11 @@ true,
 ["easeType"] = "none",
 },
 },
+["borderOffset"] = 4,
+["semver"] = "11.2.1",
+["tocversion"] = 110000,
+["id"] = "Resources - LWA - Death Knight",
+["parent"] = "Luxthos - Death Knight",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SELECTFRAME",
 ["frameStrata"] = 1,
@@ -78902,14 +78913,14 @@ true,
 },
 ["use_genericShowOn"] = true,
 ["charges"] = "1",
-["auraspellids"] = {
-"132578",
-},
+["subeventSuffix"] = "_CAST_START",
 ["spellName"] = 132578,
 ["charges_operator"] = ">=",
 ["type"] = "aura2",
-["subeventSuffix"] = "_CAST_START",
 ["useExactSpellId"] = true,
+["auraspellids"] = {
+"132578",
+},
 ["use_showOn"] = true,
 ["unevent"] = "auto",
 ["event"] = "Cooldown Progress (Spell)",
@@ -79055,7 +79066,7 @@ true,
 ["multi"] = {
 },
 },
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -79064,11 +79075,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -79294,22 +79305,38 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["preferToUpdate"] = true,
-["selfPoint"] = "CENTER",
-["url"] = "https://wago.io/dq8zvSt2N/10",
+["authorOptions"] = {
+},
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+["message_format_2.s_format"] = "none",
+["message"] = "",
+["do_message"] = false,
+["message_type"] = "SAY",
+},
+["finish"] = {
+["message"] = "",
+["message_format_1.s_format"] = "none",
+["message_type"] = "SAY",
+["do_message"] = false,
+["message_format_2.s_format"] = "none",
+},
+["init"] = {
+},
+},
 ["xOffset"] = -65,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["uid"] = "oYQieP)oX9c",
 ["alpha"] = 1,
 ["auto"] = true,
@@ -79358,23 +79385,7 @@ true,
 },
 },
 ["cooldown"] = true,
-["actions"] = {
-["start"] = {
-["message_format_2.s_format"] = "none",
-["message"] = "",
-["do_message"] = false,
-["message_type"] = "SAY",
-},
-["finish"] = {
-["message"] = "",
-["message_format_1.s_format"] = "none",
-["message_type"] = "SAY",
-["do_message"] = false,
-["message_format_2.s_format"] = "none",
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/dq8zvSt2N/10",
 },
 ["Vampiric Strike (Optional - Blood)"] = {
 ["iconSource"] = -1,
@@ -79552,12 +79563,16 @@ true,
 ["multi"] = {
 },
 },
+["class"] = {
+["single"] = "DEATHKNIGHT",
+["multi"] = {
+},
+},
 ["spec"] = {
 ["single"] = 2,
 ["multi"] = {
 },
 },
-["use_class_and_spec"] = true,
 ["ingroup"] = {
 },
 ["use_spellknown"] = false,
@@ -79572,11 +79587,7 @@ true,
 },
 ["use_class"] = true,
 ["use_never"] = true,
-["class"] = {
-["single"] = "DEATHKNIGHT",
-["multi"] = {
-},
-},
+["use_class_and_spec"] = true,
 ["size"] = {
 ["multi"] = {
 },
@@ -79584,17 +79595,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -79642,7 +79646,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Reaper's Mark (Frost)"] = {
 ["iconSource"] = -1,
@@ -79878,17 +79889,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -80074,7 +80078,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Touch of Death Buff"] = {
 ["iconSource"] = -1,
@@ -80258,15 +80269,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -80731,13 +80742,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -80789,8 +80800,8 @@ true,
 ["useAdjustededMax"] = false,
 ["width"] = 24,
 ["source"] = "import",
-["url"] = "https://wago.io/1ctv3b91K/49",
 ["desc"] = "Updates by Tealç-Frostmourne",
+["xOffset"] = 0,
 ["information"] = {
 },
 ["displayIcon"] = 5899330,
@@ -80813,9 +80824,9 @@ true,
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Speaker Shadowcrown",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "211087",
 ["Priority"] = {
@@ -80826,12 +80837,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Speaker Shadowcrown",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 2,
+["Name"] = "  [ENV] Arathi Bomb",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 2,
 ["MakeAvailableOn"] = 4,
 ["Id"] = "224325",
 ["Priority"] = {
@@ -80842,12 +80853,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Arathi Bomb",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Anub'ikkaj",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "211089",
 ["Priority"] = {
@@ -80858,12 +80869,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Anub'ikkaj",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Animated Shadow",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "224616",
 ["Priority"] = {
@@ -80874,12 +80885,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Animated Shadow",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Rasha'nan",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213937",
 ["Priority"] = {
@@ -80890,12 +80901,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Rasha'nan",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 2,
+["Name"] = "  [ENV] Arathi Bomb",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 2,
 ["MakeAvailableOn"] = 4,
 ["Id"] = "217124",
 ["Priority"] = {
@@ -80906,12 +80917,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [ENV] Arathi Bomb",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Ascendant Vis'coxria",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "211261",
 ["Priority"] = {
@@ -80922,12 +80933,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Ascendant Vis'coxria",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Deathscreamer Iken'tak",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "211263",
 ["Priority"] = {
@@ -80938,12 +80949,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Deathscreamer Iken'tak",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "[MINI BOSS] Ixkreten the Unbreakable",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "211262",
 ["Priority"] = {
@@ -80954,12 +80965,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[MINI BOSS] Ixkreten the Unbreakable",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Manifested Shadow",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "211341",
 ["Priority"] = {
@@ -80970,12 +80981,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Manifested Shadow",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Mereldar Citizen",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "225601",
 ["Priority"] = {
@@ -80986,12 +80997,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Mereldar Citizen",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Commander",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "214762",
 ["Priority"] = {
@@ -81002,12 +81013,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Commander",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Curseblade",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213894",
 ["Priority"] = {
@@ -81018,12 +81029,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Curseblade",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "(?) Nightfall Curseblade",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "228538",
 ["Priority"] = {
@@ -81034,12 +81045,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "(?) Nightfall Curseblade",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Nightfall Darkcaster",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "213893",
 ["Priority"] = {
@@ -81050,12 +81061,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Darkcaster",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Nightfall Darkcaster",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "228539",
 ["Priority"] = {
@@ -81066,12 +81077,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Darkcaster",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Nightfall Darkcaster",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "225605",
 ["Priority"] = {
@@ -81082,12 +81093,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Darkcaster",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Dark Architect",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213885",
 ["Priority"] = {
@@ -81098,12 +81109,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Dark Architect",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Ritualist",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "214761",
 ["Priority"] = {
@@ -81114,12 +81125,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Ritualist",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Shadowalker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "228537",
 ["Priority"] = {
@@ -81130,12 +81141,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Shadowalker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Shadowalker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213895",
 ["Priority"] = {
@@ -81146,12 +81157,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Shadowalker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "(?) Nightfall Shadowmage",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "228540",
 ["Priority"] = {
@@ -81162,12 +81173,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "(?) Nightfall Shadowmage",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Nightfall Shadowmage",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "213892",
 ["Priority"] = {
@@ -81178,12 +81189,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Shadowmage",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Nightfall Tactician",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213934",
 ["Priority"] = {
@@ -81194,12 +81205,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Nightfall Tactician",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Sureki Militant",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "213932",
 ["Priority"] = {
@@ -81210,12 +81221,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Sureki Militant",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Sureki Webmage",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "210966",
 ["Priority"] = {
@@ -81226,12 +81237,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Sureki Webmage",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Unstable Darkness",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "213905",
 ["Priority"] = {
@@ -81242,7 +81253,7 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Unstable Darkness",
+["WhenNotAvailable"] = 1,
 },
 },
 },
@@ -81578,7 +81589,7 @@ true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["xOffset"] = 0,
+["url"] = "https://wago.io/1ctv3b91K/49",
 },
 ["Tiger's Lust "] = {
 ["iconSource"] = -1,
@@ -81738,15 +81749,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -81918,7 +81929,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -81927,11 +81938,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -81972,13 +81983,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "1",
 ["use_health"] = true,
@@ -81990,7 +82001,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -82404,17 +82415,10 @@ true,
 },
 ["useCooldownModRate"] = true,
 ["useAdjustededMax"] = false,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
-["source"] = "import",
 ["authorOptions"] = {
 },
+["source"] = "import",
+["selfPoint"] = "CENTER",
 ["information"] = {
 ["forceEvents"] = true,
 ["ignoreOptionsEventErrors"] = true,
@@ -82462,7 +82466,14 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = "",
 ["cooldown"] = true,
-["selfPoint"] = "CENTER",
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
+},
 },
 ["Blackout Kick  "] = {
 ["iconSource"] = -1,
@@ -82621,15 +82632,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -82859,8 +82870,7 @@ true,
 ["borderEdge"] = "None",
 ["regionType"] = "group",
 ["borderSize"] = 16,
-["config"] = {
-},
+["uid"] = "rsF)xvpdH)S",
 ["borderOffset"] = 5,
 ["semver"] = "1.0.80",
 ["tocversion"] = 110002,
@@ -82870,8 +82880,9 @@ true,
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
 ["frameStrata"] = 1,
+["config"] = {
+},
 ["borderInset"] = 11,
-["uid"] = "rsF)xvpdH)S",
 ["groupIcon"] = 134376,
 ["conditions"] = {
 },
@@ -82967,7 +82978,7 @@ true,
 },
 },
 ["use_class_and_spec"] = true,
-["pvptalent"] = {
+["faction"] = {
 ["multi"] = {
 },
 },
@@ -82976,11 +82987,11 @@ true,
 },
 },
 ["use_spellknown"] = false,
-["use_vehicleUi"] = false,
-["faction"] = {
+["pvptalent"] = {
 ["multi"] = {
 },
 },
+["use_vehicleUi"] = false,
 ["zoneIds"] = "",
 ["race"] = {
 ["multi"] = {
@@ -83021,13 +83032,13 @@ true,
 },
 ["use_unit"] = true,
 ["powertype"] = 0,
-["spellName"] = 109132,
+["custom_hide"] = "timed",
 ["type"] = "spell",
 ["spellIds"] = {
 },
 ["subeventSuffix"] = "_CAST_START",
 ["use_powertype"] = true,
-["debuffType"] = "HELPFUL",
+["spellName"] = 109132,
 ["charges_operator"] = "==",
 ["charges"] = "0",
 ["use_health"] = true,
@@ -83039,7 +83050,7 @@ true,
 ["realSpellName"] = 109132,
 ["use_spellName"] = true,
 ["health"] = "0",
-["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["health_operator"] = ">=",
 ["use_charges"] = true,
 ["use_track"] = true,
@@ -83571,13 +83582,13 @@ true,
 ["unit"] = "player",
 ["custom_type"] = "status",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["names"] = {
 },
 ["check"] = "event",
-["custom"] = "function(event)\n    local VERSION = 1;\n    local mobs = aura_env.config.mobs;\n    local next, tonumber = next, tonumber;\n    \n    if next(mobs) == nil then return end\n    \n    for _,mob in pairs(mobs) do\n        local isEnabled = mob.AutomarkOption > 1;        \n        if isEnabled then \n            mob.Id = mob.Id:gsub(\"%s+\", \"\") -- Remove spaces from the string\n            local priorityMarks = {}\n            \n            for i = 1, 5 do\n                priorityMarks[i] = mob.Priority[tostring(i)]\n            end\n            \n            local ids = { strsplit(\",\", mob.Id) }\n            \n            for _, id in pairs(ids) do\n                if not (id == \"\") then\n                    WeakAuras.ScanEvents(\n                        \"AutomarkGetMobsResponse\", \n                        VERSION,\n                        tonumber(id),\n                        mob.AutomarkOption,\n                        priorityMarks,\n                        mob.RangeLimiter, \n                        mob.WhenNotAvailable,\n                        mob.WhenUnitDie, \n                        mob.MakeAvailableOn\n                    )\n                end\n            end\n        end\n    end\nend",
 ["events"] = "AutomarkGetMobsRequest",
+["spellIds"] = {
+},
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -83615,7 +83626,12 @@ true,
 },
 },
 ["height"] = 24,
-["parent"] = "M+ AUTOMARK",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["load"] = {
 ["use_size"] = true,
 ["use_zoneIds"] = true,
@@ -83652,25 +83668,20 @@ true,
 "",
 },
 ["source"] = "import",
-["cooldownEdge"] = false,
+["adjustedMin"] = "",
 ["information"] = {
 },
 ["displayIcon"] = "6921877",
-["adjustedMax"] = "",
+["parent"] = "M+ AUTOMARK",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
-["color"] = {
-1,
-1,
-1,
-1,
-},
+["selfPoint"] = "CENTER",
 ["config"] = {
 ["mobs"] = {
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Azhiccar",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234893",
 ["Priority"] = {
@@ -83681,12 +83692,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Azhiccar",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "  [BOSS ADD] Frenzied Mite",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "236190",
 ["Priority"] = {
@@ -83697,12 +83708,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "  [BOSS ADD] Frenzied Mite",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] A'wazj",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "237514",
 ["Priority"] = {
@@ -83713,12 +83724,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] A'wazj",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Taah'bat",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234933",
 ["Priority"] = {
@@ -83729,12 +83740,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Taah'bat",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "  [ENV] Binding Javelin",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "244302",
 ["Priority"] = {
@@ -83745,12 +83756,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "  [ENV] Binding Javelin",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "[BOSS] Soul-Scribe",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234935",
 ["Priority"] = {
@@ -83761,12 +83772,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "[BOSS] Soul-Scribe",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Burrowing Creeper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "245092",
 ["Priority"] = {
@@ -83777,12 +83788,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Burrowing Creeper",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 3,
+["Name"] = "Evoked Spirt",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 3,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "240952",
 ["Priority"] = {
@@ -83793,12 +83804,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Evoked Spirt",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Invading Mite",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234870",
 ["Priority"] = {
@@ -83809,12 +83820,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Invading Mite",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "K'aresh Elemental",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "235151",
 ["Priority"] = {
@@ -83825,12 +83836,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "K'aresh Elemental",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Overcharged Sentinel",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "242631",
 ["Priority"] = {
@@ -83841,12 +83852,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Overcharged Sentinel",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Overgorged Mite",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "242209",
 ["Priority"] = {
@@ -83857,12 +83868,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Overgorged Mite",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Ravaging Scavenger",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234912",
 ["Priority"] = {
@@ -83873,12 +83884,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Ravaging Scavenger",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 4,
+["Name"] = "Ravenous Destroyer",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 2,
+["AutomarkOption"] = 4,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "236995",
 ["Priority"] = {
@@ -83889,12 +83900,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 2,
-["Name"] = "Ravenous Destroyer",
+["WhenNotAvailable"] = 2,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Tamed Ruinstalker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234960",
 ["Priority"] = {
@@ -83905,12 +83916,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Tamed Ruinstalker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Voracious Gorger",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234883",
 ["Priority"] = {
@@ -83921,12 +83932,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Voracious Gorger",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Wastelander Farstalker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "234962",
 ["Priority"] = {
@@ -83937,12 +83948,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Wastelander Farstalker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Wastelander Pactspeaker",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "234955",
 ["Priority"] = {
@@ -83953,12 +83964,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Wastelander Pactspeaker",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Wastelander Phaseblade",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234872",
 ["Priority"] = {
@@ -83969,12 +83980,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Wastelander Phaseblade",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 5,
+["Name"] = "Wastelander Ritualist",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 5,
 ["MakeAvailableOn"] = 3,
 ["Id"] = "234957",
 ["Priority"] = {
@@ -83985,12 +83996,12 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Wastelander Ritualist",
+["WhenNotAvailable"] = 1,
 },
 {
-["AutomarkOption"] = 1,
+["Name"] = "Wastes Creeper",
 ["RangeLimiter"] = 10,
-["WhenNotAvailable"] = 1,
+["AutomarkOption"] = 1,
 ["MakeAvailableOn"] = 1,
 ["Id"] = "234918",
 ["Priority"] = {
@@ -84001,24 +84012,10 @@ true,
 ["4"] = 1,
 },
 ["WhenUnitDie"] = 1,
-["Name"] = "Wastes Creeper",
+["WhenNotAvailable"] = 1,
 },
 },
 },
-["adjustedMin"] = "",
-["width"] = 24,
-["desaturate"] = false,
-["cooldownTextDisabled"] = false,
-["zoom"] = 0,
-["semver"] = "2.0.12",
-["tocversion"] = 110200,
-["id"] = "Eco-Dome Al'dani - Tealc",
-["alpha"] = 1,
-["useCooldownModRate"] = true,
-["anchorFrameType"] = "SCREEN",
-["xOffset"] = 0,
-["uid"] = "jlSJd7tGg4M",
-["inverse"] = false,
 ["actions"] = {
 ["start"] = {
 },
@@ -84027,10 +84024,24 @@ true,
 ["finish"] = {
 },
 },
+["width"] = 24,
+["desaturate"] = false,
+["cooldownTextDisabled"] = false,
+["zoom"] = 0,
+["semver"] = "2.0.12",
+["tocversion"] = 110200,
+["id"] = "Eco-Dome Al'dani - Tealc",
+["adjustedMax"] = "",
+["alpha"] = 1,
+["anchorFrameType"] = "SCREEN",
+["cooldownEdge"] = false,
+["uid"] = "jlSJd7tGg4M",
+["inverse"] = false,
+["useCooldownModRate"] = true,
 ["conditions"] = {
 },
 ["cooldown"] = false,
-["selfPoint"] = "CENTER",
+["xOffset"] = 0,
 },
 ["Rune 2"] = {
 ["sparkWidth"] = 10,
@@ -84578,15 +84589,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["class"] = {
 ["single"] = "DRUID",
 ["multi"] = {
@@ -84835,40 +84846,26 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
+["progressSource"] = {
+-1,
+"",
+},
 ["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
+["authorOptions"] = {
 },
 ["information"] = {
 ["forceEvents"] = true,
 },
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
 ["icon"] = true,
-["progressSource"] = {
--1,
-"",
-},
-["authorOptions"] = {
-},
 ["config"] = {
 },
 ["anchorFrameParent"] = false,
@@ -84982,11 +84979,25 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
 },
 },
 ["Leap"] = {
@@ -85174,10 +85185,17 @@ true,
 ["useAdjustededMax"] = false,
 ["anchorFrameType"] = "SCREEN",
 ["source"] = "import",
-["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 ["progressSource"] = {
 -1,
 "",
+},
+["actions"] = {
+["start"] = {
+},
+["finish"] = {
+},
+["init"] = {
+},
 },
 ["information"] = {
 ["forceEvents"] = true,
@@ -85357,14 +85375,7 @@ true,
 ["xOffset"] = 0,
 ["displayIcon"] = 237569,
 ["cooldown"] = true,
-["actions"] = {
-["start"] = {
-},
-["finish"] = {
-},
-["init"] = {
-},
-},
+["url"] = "https://wago.io/LuxthosDeathKnightWarWithin/95",
 },
 ["吸血鬼"] = {
 ["iconSource"] = -1,
@@ -85562,12 +85573,12 @@ true,
 ["cooldownTextDisabled"] = false,
 ["config"] = {
 },
-["frameStrata"] = 1,
+["useCooldownModRate"] = true,
 ["id"] = "吸血鬼",
 ["anchorFrameType"] = "SCREEN",
-["alpha"] = 1,
+["frameStrata"] = 1,
 ["width"] = 32,
-["useCooldownModRate"] = true,
+["alpha"] = 1,
 ["uid"] = "OATkP7gCgl9",
 ["inverse"] = false,
 ["color"] = {
@@ -85819,15 +85830,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["use_petbattle"] = false,
 ["race"] = {
@@ -85948,8 +85959,10 @@ true,
 ["debuffType"] = "HELPFUL",
 ["use_genericShowOn"] = true,
 ["type"] = "aura2",
+["auraspellids"] = {
+"122278",
+},
 ["subeventSuffix"] = "_CAST_START",
-["unevent"] = "auto",
 ["use_showOn"] = true,
 ["useExactSpellId"] = true,
 ["event"] = "Cooldown Progress (Spell)",
@@ -85958,9 +85971,7 @@ true,
 ["use_spellName"] = true,
 ["spellIds"] = {
 },
-["auraspellids"] = {
-"122278",
-},
+["unevent"] = "auto",
 ["ownOnly"] = true,
 ["unit"] = "player",
 ["use_track"] = true,
@@ -86098,15 +86109,15 @@ true,
 ["multi"] = {
 },
 },
+["faction"] = {
+["multi"] = {
+},
+},
 ["pvptalent"] = {
 ["multi"] = {
 },
 },
 ["use_vehicleUi"] = false,
-["faction"] = {
-["multi"] = {
-},
-},
 ["zoneIds"] = "",
 ["class"] = {
 ["single"] = "DRUID",
@@ -86233,11 +86244,11 @@ true,
 ["type"] = "custom",
 ["subeventSuffix"] = "_CAST_START",
 ["custom_type"] = "event",
-["names"] = {
-},
+["unit"] = "player",
 ["duration"] = "10",
 ["event"] = "Health",
-["subeventPrefix"] = "SPELL",
+["names"] = {
+},
 ["customDuration"] = "",
 ["events"] = "UPDATE_MOUSEOVER_UNIT, MODIFIER_STATE_CHANGED",
 ["custom"] = "function(event, unitId)\n    -- Check if the player is a marker or if the event should be handled\n    local playerName = aura_env.GetPlayerName();\n    if aura_env.CurrentMarker.Name ~= playerName then return end\n    \n    local modifier = aura_env.CheckModifierState();\n    if not modifier then return end\n    \n    local unit = \"mouseover\"\n    \n    if event == \"MODIFIER_STATE_CHANGED\" and not UnitExists(unit) then return end\n    \n    -- Extract the necessary data\n    local guid = UnitGUID(unit)\n    if aura_env.IsMobAlreadyMarked(guid) then return end\n    \n    local NpcId = aura_env.GetNpcIdFromGUID(guid)\n    \n    local mob = aura_env.Mobs[NpcId]\n    if not mob then return end\n    \n    local shouldAutoMark = not UnitIsDead(unit) and not UnitIsPlayer(unit) and not GetRaidTargetIndex(unit) and mob.AutomarkOption == 1\n    \n    if not shouldAutoMark or \n    not aura_env.CheckMarkDistance(NpcId, unit, guid) then\n        return\n    end\n    \n    -- Initialize mark\n    local mark, priority;\n    local markOrder = 10;\n    \n    for i = 1, 5 do\n        priority = mob.Prio[i]\n        \n        if priority == markOrder then\n            -- Mark Order\n            mark = aura_env.GetAvailableMarkFromMarkOrder(NpcId)\n            break\n        elseif priority > 1 then\n            -- Normal Mark (Skull, Cross, Star, etc)\n            local markToCheck = 10 - priority\n            if aura_env.CheckIfMarkIsAvailable(markToCheck, NpcId) then\n                mark = markToCheck\n                break\n            end\n        end\n    end\n    \n    if not mark and mob.NotAvailable then\n        -- Add the mob to the general Queue\n        aura_env.AddNpcToQueue(guid, NpcId)\n    end\n    \n    -- Apply mark and announce if applicable\n    if mark then \n        if mob.MakeAvailable == 4 then\n            SetRaidTarget(unit, mark)\n        else\n            aura_env.MarkUnit(unit, guid, mark)\n            \n            local announce = aura_env.Settings.Automark.Announce\n            \n            if announce.Enable then\n                if announce.Option == 2 and priority == markOrder then return end\n                \n                aura_env.AnnounceMark(unit, guid, mark)\n            end\n        end\n    end\nend\n\n-- UPDATE_MOUSEOVER_UNIT, NAME_PLATE_UNIT_ADDED, UNIT_THREAT_LIST_UPDATE, MODIFIER_STATE_CHANGED",
@@ -86245,7 +86256,7 @@ true,
 ["check"] = "event",
 ["spellIds"] = {
 },
-["unit"] = "player",
+["subeventPrefix"] = "SPELL",
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -86258,11 +86269,11 @@ true,
 ["type"] = "custom",
 ["subeventSuffix"] = "_CAST_START",
 ["custom_type"] = "event",
-["names"] = {
-},
+["unit"] = "player",
 ["duration"] = "10",
 ["event"] = "Health",
-["subeventPrefix"] = "SPELL",
+["names"] = {
+},
 ["customDuration"] = "",
 ["events"] = "NAME_PLATE_UNIT_ADDED, UNIT_THREAT_LIST_UPDATE",
 ["custom"] = "function(event, unit)\n    -- Check if the player is a marker or if the event should be handled\n    local playerName = aura_env.GetPlayerName();\n    if aura_env.CurrentMarker.Name ~= playerName then return end\n    \n    local doesUnitExist = UnitExists(unit)\n    if not doesUnitExist then return end\n    \n    local hasRaidTargetIndex = not GetRaidTargetIndex(unit) == nil\n    if hasRaidTargetIndex then return end\n    \n    -- Extract the necessary data\n    local guid = UnitGUID(unit)\n    if aura_env.IsMobAlreadyMarked(guid) then return end\n    \n    local NpcId = aura_env.GetNpcIdFromGUID(guid)\n    \n    local mob = aura_env.Mobs[NpcId]\n    if not mob then return end\n    \n    -- Get Automark option from mob or Global setting. \n    local automark = mob.AutomarkOption\n    \n    local automarkNonCombat, automarkCombat = 2, 3;\n    \n    local isAutomarkNonCombat = (automark == automarkNonCombat)\n    local isAutomarkCombat = (automark == automarkCombat)\n    \n    if not isAutomarkNonCombat and not isAutomarkCombat then return end\n    \n    if isAutomarkCombat and not UnitThreatSituation(\"player\", unit) then \n        return \n    end\n    \n    -- Initialize mark\n    local mark, priority;\n    local markOrder = 10;\n    \n    for i = 1, 5 do\n        priority = mob.Prio[i]\n        \n        if priority == markOrder then\n            -- Mark Order\n            mark = aura_env.GetAvailableMarkFromMarkOrder(NpcId)\n            break\n        elseif priority > 1 then\n            -- Normal Mark (Skull, Cross, Star, etc)\n            local markToCheck = 10 - priority\n            if aura_env.CheckIfMarkIsAvailable(markToCheck, NpcId) then\n                mark = markToCheck\n                break\n            end\n        end\n    end\n    \n    if not mark and mob.NotAvailable then\n        -- Add the mob to the general Queue\n        aura_env.AddNpcToQueue(guid, NpcId)\n    end\n    \n    -- Apply mark and announce if applicable\n    if mark then \n        if mob.MakeAvailable == 4 then -- Do not save mark\n            SetRaidTarget(unit, mark)\n        else\n            aura_env.MarkUnit(unit, guid, mark)\n            \n            local announce = aura_env.Settings.Automark.Announce\n            \n            if announce.Enable then\n                if announce.Option == 2 and priority == markOrder then return end\n                \n                aura_env.AnnounceMark(unit, guid, mark)\n            end\n        end\n    end\nend\n\n-- NAME_PLATE_UNIT_ADDED, UNIT_THREAT_LIST_UPDATE, MODIFIER_STATE_CHANGED",
@@ -86270,7 +86281,7 @@ true,
 ["check"] = "event",
 ["spellIds"] = {
 },
-["unit"] = "player",
+["subeventPrefix"] = "SPELL",
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -86308,12 +86319,12 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["customDuration"] = "",
 ["unit"] = "player",
-["custom"] = "function(event, prefix, text, channel, sender)\n    if event == \"CHAT_MSG_ADDON\" and prefix == \"MYTHICAUTOMARK\" then \n        local subEvent, msg = strsplit(\"^\", text)\n        if subEvent == \"UPDATE_PLAYER\" then \n            aura_env.SendPlayerInfo(event)\n        elseif subEvent == \"DECIDE_MARKER\" then \n            local senderRole, senderIsLeader, senderSeasonScore = aura_env.ConvertAddonMsg(msg)\n            \n            local currentMarker = aura_env.CurrentMarker;\n            \n            -- Player data\n            local role = UnitGroupRolesAssigned(\"player\") == \"NONE\" and select(5, GetSpecializationInfo(GetSpecialization())) or UnitGroupRolesAssigned(\"player\")\n            local isLeader = UnitIsGroupLeader(\"player\")\n            local seasonScore = C_PlayerInfo.GetPlayerMythicPlusRatingSummary(\"player\").currentSeasonScore\n            local partyScore = aura_env.GetPriorityScore(role, isLeader, seasonScore)\n            local playerName = aura_env.GetPlayerName()\n            local senderScore = aura_env.GetPriorityScore(senderRole, senderIsLeader, senderSeasonScore);\n            \n            if currentMarker.Name == playerName then \n                -- Current marker is the player\n                aura_env.UpdateCurrentMarker(partyScore, role, isLeader, seasonScore, playerName)\n            end\n            \n            if not currentMarker.Name then \n                -- No current marker\n                aura_env.UpdateCurrentMarker(senderScore, senderRole, senderIsLeader, senderSeasonScore, sender)\n                return true;\n            end\n            \n            if currentMarker.Name == sender then \n                -- Current marker is the sender\n                aura_env.UpdateCurrentMarker(senderScore, senderRole, senderIsLeader, senderSeasonScore, sender)\n            end\n            \n            if senderScore > currentMarker.PartyScore then \n                -- Sender has higher score than current marker\n                aura_env.UpdateCurrentMarker(senderScore, senderRole, senderIsLeader, senderSeasonScore, sender)\n                return true;\n            end\n        end\n    end\nend\n\n-- CHAT_MSG_ADDON",
-["custom_type"] = "event",
-["check"] = "event",
 ["spellIds"] = {
 },
+["custom_type"] = "event",
+["check"] = "event",
 ["events"] = "CHAT_MSG_ADDON",
+["custom"] = "function(event, prefix, text, channel, sender)\n    if event == \"CHAT_MSG_ADDON\" and prefix == \"MYTHICAUTOMARK\" then \n        local subEvent, msg = strsplit(\"^\", text)\n        if subEvent == \"UPDATE_PLAYER\" then \n            aura_env.SendPlayerInfo(event)\n        elseif subEvent == \"DECIDE_MARKER\" then \n            local senderRole, senderIsLeader, senderSeasonScore = aura_env.ConvertAddonMsg(msg)\n            \n            local currentMarker = aura_env.CurrentMarker;\n            \n            -- Player data\n            local role = UnitGroupRolesAssigned(\"player\") == \"NONE\" and select(5, GetSpecializationInfo(GetSpecialization())) or UnitGroupRolesAssigned(\"player\")\n            local isLeader = UnitIsGroupLeader(\"player\")\n            local seasonScore = C_PlayerInfo.GetPlayerMythicPlusRatingSummary(\"player\").currentSeasonScore\n            local partyScore = aura_env.GetPriorityScore(role, isLeader, seasonScore)\n            local playerName = aura_env.GetPlayerName()\n            local senderScore = aura_env.GetPriorityScore(senderRole, senderIsLeader, senderSeasonScore);\n            \n            if currentMarker.Name == playerName then \n                -- Current marker is the player\n                aura_env.UpdateCurrentMarker(partyScore, role, isLeader, seasonScore, playerName)\n            end\n            \n            if not currentMarker.Name then \n                -- No current marker\n                aura_env.UpdateCurrentMarker(senderScore, senderRole, senderIsLeader, senderSeasonScore, sender)\n                return true;\n            end\n            \n            if currentMarker.Name == sender then \n                -- Current marker is the sender\n                aura_env.UpdateCurrentMarker(senderScore, senderRole, senderIsLeader, senderSeasonScore, sender)\n            end\n            \n            if senderScore > currentMarker.PartyScore then \n                -- Sender has higher score than current marker\n                aura_env.UpdateCurrentMarker(senderScore, senderRole, senderIsLeader, senderSeasonScore, sender)\n                return true;\n            end\n        end\n    end\nend\n\n-- CHAT_MSG_ADDON",
 ["dynamicDuration"] = false,
 },
 ["untrigger"] = {
@@ -86356,13 +86367,13 @@ true,
 ["unit"] = "player",
 ["names"] = {
 },
+["spellIds"] = {
+},
 ["custom"] = "function()\n    -- Get Player Info\n    aura_env.ResetMarks()\n    -- Reset Mobs\n    aura_env.Mobs = {}\n    -- Reset Queue\n    aura_env.Queue = {}\n    -- Get Settings\n    WeakAuras.ScanEvents(\"AutomarkSettingsRequest\")\n    -- Update current marker\n    aura_env.UpdatePlayerInfo()\n    -- Get other players info\n    aura_env.SendRoleCall()\n    -- Get all mobs\n    WeakAuras.ScanEvents(\"AutomarkGetMobsRequest\")\nend\n\n\n",
-["events"] = "InitializeTheWeakAura",
 ["custom_type"] = "status",
 ["check"] = "event",
 ["subeventPrefix"] = "SPELL",
-["spellIds"] = {
-},
+["events"] = "InitializeTheWeakAura",
 ["debuffType"] = "HELPFUL",
 },
 ["untrigger"] = {
@@ -86754,9 +86765,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -86777,9 +86790,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -86898,7 +86909,7 @@ true,
 },
 ["displayIcon"] = 572025,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -86935,25 +86946,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Ironbark",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "SXJ1KpxM7qO",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "SXJ1KpxM7qO",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Power Word: Barrier"] = {
 ["iconSource"] = -1,
@@ -86988,9 +86999,11 @@ true,
 ["use_unit"] = true,
 ["use_tooltip"] = false,
 ["unit"] = "player",
-["buffShowOn"] = "showOnActive",
-["debuffType"] = "HELPFUL",
+["spellName"] = {
+"Raise Dead",
+},
 ["custom_hide"] = "timed",
+["debuffType"] = "HELPFUL",
 ["subeventSuffix"] = "_AURA_APPLIED",
 ["type"] = "aura2",
 ["use_debuffClass"] = false,
@@ -87011,9 +87024,7 @@ true,
 ["subeventPrefix"] = "SPELL",
 ["combineMatches"] = "showLowest",
 ["sourceUnit"] = "player",
-["spellName"] = {
-"Raise Dead",
-},
+["buffShowOn"] = "showOnActive",
 },
 ["untrigger"] = {
 ["unit"] = "pet",
@@ -87133,7 +87144,7 @@ true,
 },
 ["displayIcon"] = 253400,
 ["xOffset"] = 0,
-["parent"] = "Tank External Group",
+["adjustedMax"] = "",
 ["useAdjustededMin"] = false,
 ["regionType"] = "icon",
 ["config"] = {
@@ -87170,25 +87181,25 @@ true,
 ["auto"] = true,
 ["tocversion"] = 110200,
 ["id"] = "Power Word: Barrier",
-["cooldownEdge"] = false,
+["parent"] = "Tank External Group",
 ["alpha"] = 1,
 ["anchorFrameType"] = "SCREEN",
-["progressSource"] = {
--1,
-"",
-},
-["uid"] = "7Fy72zOwdoG",
-["inverse"] = false,
 ["color"] = {
 1,
 1,
 1,
 1,
 },
+["uid"] = "7Fy72zOwdoG",
+["inverse"] = false,
+["cooldownEdge"] = false,
 ["conditions"] = {
 },
 ["cooldown"] = true,
-["adjustedMax"] = "",
+["progressSource"] = {
+-1,
+"",
+},
 },
 ["Dark Command"] = {
 ["iconSource"] = -1,
@@ -87355,38 +87366,11 @@ true,
 },
 ["useAdjustededMax"] = false,
 ["source"] = "import",
-["xOffset"] = 0,
-["adjustedMax"] = "",
-["animation"] = {
-["start"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["main"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-["finish"] = {
-["easeStrength"] = 3,
-["type"] = "none",
-["duration_type"] = "seconds",
-["easeType"] = "none",
-},
-},
-["information"] = {
-["forceEvents"] = true,
-},
-["useAdjustededMin"] = false,
-["regionType"] = "icon",
-["icon"] = true,
 ["progressSource"] = {
 -1,
 "",
 },
+["xOffset"] = 0,
 ["authorOptions"] = {
 {
 ["subOptions"] = {
@@ -87439,6 +87423,19 @@ true,
 ["size"] = 10,
 },
 },
+["information"] = {
+["forceEvents"] = true,
+},
+["useAdjustededMin"] = false,
+["regionType"] = "icon",
+["adjustedMax"] = "",
+["color"] = {
+1,
+1,
+1,
+1,
+},
+["icon"] = true,
 ["config"] = {
 ["utility"] = {
 ["behavior"] = 2,
@@ -87557,27 +87554,30 @@ true,
 },
 },
 ["cooldown"] = true,
-["color"] = {
-1,
-1,
-1,
-1,
+["animation"] = {
+["start"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["main"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
+},
+["finish"] = {
+["easeStrength"] = 3,
+["type"] = "none",
+["duration_type"] = "seconds",
+["easeType"] = "none",
 },
 },
 },
-["lastArchiveClear"] = 1756120822,
-["minimap"] = {
-["minimapPos"] = 43.86872998930126,
-["hide"] = true,
 },
 ["lastUpgrade"] = 1750834487,
-["dbVersion"] = 85,
-["migrationCutoff"] = 730,
 ["registered"] = {
-},
-["login_squelch_time"] = 10,
-["historyCutoff"] = 730,
-["features"] = {
 },
 ["editor_theme"] = "Monokai",
 }

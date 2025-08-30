@@ -3,8 +3,8 @@ WQTrackerDB = {
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "Default",
 ["我们完蛋啦 - 伊森利恩"] = "Default",
+["某饺子 - 伊森利恩"] = "Default",
 ["某餃子 - 伊森利恩"] = "Default",
-["凤凰基友之二 - 凤凰之神"] = "Default",
 ["凤凰基友之四 - 凤凰之神"] = "Default",
 ["凤凰基友之三 - 凤凰之神"] = "Default",
 ["三减竖式 - 伊森利恩"] = "Default",
@@ -12,7 +12,7 @@ WQTrackerDB = {
 ["三减宁静 - 伊森利恩"] = "Default",
 ["Fasas - Aegwynn"] = "Default",
 ["开门的搞 - 伊森利恩"] = "Default",
-["某饺子 - 伊森利恩"] = "Default",
+["凤凰基友之二 - 凤凰之神"] = "Default",
 ["牛牛萨之父 - 霜之哀伤"] = "Default",
 },
 ["profiles"] = {
@@ -694,6 +694,11 @@ WQTrackerDB = {
 ["rewardAmount"] = "",
 ["rewardTexture"] = 1519429,
 },
+[82292] = {
+["expireAt"] = 1756551638,
+["rewardAmount"] = "14",
+["rewardTexture"] = 2004597,
+},
 [88774] = {
 ["expireAt"] = 1756638055,
 ["rewardAmount"] = "25",
@@ -704,13 +709,13 @@ WQTrackerDB = {
 ["rewardAmount"] = "645",
 ["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
 },
+[86707] = {
+["expireAt"] = 1756638087,
+["rewardAmount"] = "25",
+["rewardTexture"] = 133016,
+},
 [85927] = {
 ["expireAt"] = 1756638066,
-["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
-},
-[81802] = {
-["expireAt"] = 1756638053,
 ["rewardAmount"] = "",
 ["rewardTexture"] = 1519429,
 },
@@ -724,20 +729,15 @@ WQTrackerDB = {
 ["rewardAmount"] = "",
 ["rewardTexture"] = 1519429,
 },
-[82585] = {
-["expireAt"] = 1756508452,
-["rewardAmount"] = "|cff2292FF649",
-["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
-},
 [86696] = {
 ["expireAt"] = 1756638055,
 ["rewardAmount"] = "|cff2292FF655",
 ["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
 },
-[86707] = {
-["expireAt"] = 1756638087,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
+[81802] = {
+["expireAt"] = 1756638038,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
 },
 },
 ["Player-940-057FAD37"] = {
@@ -745,6 +745,81 @@ WQTrackerDB = {
 ["Player-940-05166F8B"] = {
 },
 ["Player-940-057FDA40"] = {
+[82293] = {
+["expireAt"] = 1756573262,
+["rewardAmount"] = "20",
+["rewardTexture"] = 2004597,
+},
+[86696] = {
+["expireAt"] = 1756638062,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
+},
+[81810] = {
+["expireAt"] = 1756638002,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[81802] = {
+["expireAt"] = 1756638006,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[82292] = {
+["expireAt"] = 1756551666,
+["rewardAmount"] = "14",
+["rewardTexture"] = 2004597,
+},
+[84948] = {
+["expireAt"] = 1756522802,
+["rewardAmount"] = "",
+["rewardTexture"] = 4549147,
+},
+[88774] = {
+["expireAt"] = 1756638062,
+["rewardAmount"] = "25",
+["rewardTexture"] = 133016,
+},
+[83930] = {
+["expireAt"] = 1756594862,
+["rewardAmount"] = "645",
+["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
+},
+[85088] = {
+["expireAt"] = 1756522462,
+["rewardAmount"] = "25",
+["rewardTexture"] = 133016,
+},
+[85927] = {
+["expireAt"] = 1756638062,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[82298] = {
+["expireAt"] = 1756594862,
+["rewardAmount"] = "20",
+["rewardTexture"] = 133675,
+},
+[81819] = {
+["expireAt"] = 1756638002,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[82300] = {
+["expireAt"] = 1756530062,
+["rewardAmount"] = "15",
+["rewardTexture"] = 2004597,
+},
+[76586] = {
+["expireAt"] = 1756940462,
+["rewardAmount"] = "",
+["rewardTexture"] = 1708494,
+},
+[83048] = {
+["expireAt"] = 1756767662,
+["rewardAmount"] = "642",
+["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Talisman_07",
+},
 },
 ["Player-940-051674C6"] = {
 [59234] = {

@@ -3,8 +3,8 @@ HandyNotes_MapNotesRetailDB = {
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "迪凯策划没马 - 伊森利恩",
 ["牛牛萨之父 - 霜之哀伤"] = "牛牛萨之父 - 霜之哀伤",
+["凤凰基友之二 - 凤凰之神"] = "凤凰基友之二 - 凤凰之神",
 ["某饺子 - 伊森利恩"] = "某饺子 - 伊森利恩",
-["某餃子 - 伊森利恩"] = "某餃子 - 伊森利恩",
 ["凤凰基友之四 - 凤凰之神"] = "凤凰基友之四 - 凤凰之神",
 ["凤凰基友之三 - 凤凰之神"] = "凤凰基友之三 - 凤凰之神",
 ["三减宁静 - 伊森利恩"] = "三减宁静 - 伊森利恩",
@@ -12,7 +12,7 @@ HandyNotes_MapNotesRetailDB = {
 ["三减竖式 - 伊森利恩"] = "三减竖式 - 伊森利恩",
 ["Fasas - Aegwynn"] = "Fasas - Aegwynn",
 ["开门的搞 - 伊森利恩"] = "开门的搞 - 伊森利恩",
-["凤凰基友之二 - 凤凰之神"] = "凤凰基友之二 - 凤凰之神",
+["某餃子 - 伊森利恩"] = "某餃子 - 伊森利恩",
 ["我们完蛋啦 - 伊森利恩"] = "我们完蛋啦 - 伊森利恩",
 },
 ["profiles"] = {
@@ -28,30 +28,16 @@ HandyNotes_MapNotesRetailDB = {
 ["MiniMapScaleMapNotesIcons"] = 1.5,
 ["MiniMapAlphaMapNotesIcons"] = 1,
 },
+["凤凰基友之二 - 凤凰之神"] = {
+},
 ["某饺子 - 伊森利恩"] = {
-["MiniMapScaleMapNotesIcons"] = 1.5,
 ["activate"] = {
 ["HideMMB"] = true,
 },
-["MiniMapScalePetBattleDungeon"] = 2,
-["showZoneFirstAid"] = true,
-["MiniMapAlphaMapNotesIcons"] = 1,
-["MiniMapAlphaPetBattleDungeon"] = 1,
-},
-["某餃子 - 伊森利恩"] = {
-["activate"] = {
-["EnemyFaction"] = false,
-["HideMMB"] = true,
-["ClassicBank"] = false,
-["HideWMB"] = false,
-},
-["ExtraTooltip"] = true,
 ["MiniMapAlphaMapNotesIcons"] = 1,
 ["MiniMapScaleMapNotesIcons"] = 1.5,
 ["MiniMapAlphaPetBattleDungeon"] = 1,
 ["showZoneFirstAid"] = true,
-["ChatMassage"] = true,
-["RestoreCapitalsDeletedIcons"] = "LeftButton",
 ["MiniMapScalePetBattleDungeon"] = 2,
 },
 ["凤凰基友之四 - 凤凰之神"] = {
@@ -80,7 +66,21 @@ HandyNotes_MapNotesRetailDB = {
 ["showZoneFirstAid"] = true,
 ["ExtraTooltip"] = true,
 },
-["凤凰基友之二 - 凤凰之神"] = {
+["某餃子 - 伊森利恩"] = {
+["MiniMapAlphaPetBattleDungeon"] = 1,
+["activate"] = {
+["HideMMB"] = true,
+["EnemyFaction"] = false,
+["ClassicBank"] = false,
+["HideWMB"] = false,
+},
+["MiniMapAlphaMapNotesIcons"] = 1,
+["ChatMassage"] = true,
+["MiniMapScaleMapNotesIcons"] = 1.5,
+["RestoreCapitalsDeletedIcons"] = "LeftButton",
+["ExtraTooltip"] = true,
+["showZoneFirstAid"] = true,
+["MiniMapScalePetBattleDungeon"] = 2,
 },
 ["我们完蛋啦 - 伊森利恩"] = {
 ["MiniMapScaleMapNotesIcons"] = 1.5,
@@ -95,8 +95,8 @@ MNMiniMapButtonRetailDB = {
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "迪凯策划没马 - 伊森利恩",
 ["牛牛萨之父 - 霜之哀伤"] = "牛牛萨之父 - 霜之哀伤",
+["凤凰基友之二 - 凤凰之神"] = "凤凰基友之二 - 凤凰之神",
 ["某饺子 - 伊森利恩"] = "某饺子 - 伊森利恩",
-["某餃子 - 伊森利恩"] = "某餃子 - 伊森利恩",
 ["凤凰基友之四 - 凤凰之神"] = "凤凰基友之四 - 凤凰之神",
 ["凤凰基友之三 - 凤凰之神"] = "凤凰基友之三 - 凤凰之神",
 ["三减宁静 - 伊森利恩"] = "三减宁静 - 伊森利恩",
@@ -104,7 +104,7 @@ MNMiniMapButtonRetailDB = {
 ["三减竖式 - 伊森利恩"] = "三减竖式 - 伊森利恩",
 ["Fasas - Aegwynn"] = "Fasas - Aegwynn",
 ["开门的搞 - 伊森利恩"] = "开门的搞 - 伊森利恩",
-["凤凰基友之二 - 凤凰之神"] = "凤凰基友之二 - 凤凰之神",
+["某餃子 - 伊森利恩"] = "某餃子 - 伊森利恩",
 ["我们完蛋啦 - 伊森利恩"] = "我们完蛋啦 - 伊森利恩",
 },
 ["profiles"] = {
@@ -112,14 +112,11 @@ MNMiniMapButtonRetailDB = {
 },
 ["牛牛萨之父 - 霜之哀伤"] = {
 },
+["凤凰基友之二 - 凤凰之神"] = {
+},
 ["某饺子 - 伊森利恩"] = {
 ["minimap"] = {
 ["minimapPos"] = 329.5739232719022,
-},
-},
-["某餃子 - 伊森利恩"] = {
-["minimap"] = {
-["minimapPos"] = 61.70112291595845,
 },
 },
 ["凤凰基友之四 - 凤凰之神"] = {
@@ -136,7 +133,10 @@ MNMiniMapButtonRetailDB = {
 },
 ["开门的搞 - 伊森利恩"] = {
 },
-["凤凰基友之二 - 凤凰之神"] = {
+["某餃子 - 伊森利恩"] = {
+["minimap"] = {
+["minimapPos"] = 61.70112291595845,
+},
 },
 ["我们完蛋啦 - 伊森利恩"] = {
 },

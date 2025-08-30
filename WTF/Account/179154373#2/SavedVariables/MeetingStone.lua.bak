@@ -251,7 +251,7 @@ MEETINGSTONE_UI_DB = {
 ["HonorLevel"] = 0,
 },
 ["圣焰隐修院（史诗钥石）"] = {
-["ItemLevel"] = 690,
+["ItemLevel"] = 700,
 ["HonorLevel"] = 0,
 },
 ["自定义PvE"] = {
@@ -357,8 +357,8 @@ MEETINGSTONE_UI_DB = {
 ["FILTER_DAMAGE"] = false,
 }
 MEETINGSTONE_UI_E_POINTS = {
-["y"] = -1.007510542869568,
-["x"] = 215.5707244873047,
+["y"] = -13.7057523727417,
+["x"] = 43.88835144042969,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["QuickJoin"] = true,
