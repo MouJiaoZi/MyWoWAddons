@@ -15,15 +15,6 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["目标血量低于多少时开始对比"] = "目标血量低于多少时开始对比（百分比）"
 	L["血量领先"] = "血量领先 %d%%"
 elseif G.Client == "ruRU" then
-	L["标注能量最高的目标"] = "Highest energy collector nameplate mark"
-	L["收集装置"] = "collector"
-	L["血量及击杀倒计时"] = "%s's hp bar and time limit indicator"
-	L["目标血量低于多少时开始对比"] = "Compare when target health is below (percentage)"
-	L["血量领先"] = "Gap: %d%%"
-	L["单躲球"] = "Single dodges"
-	L["双躲球"] = "Double dodges"
-	L["三躲球"] = "Triple dodges"
-else
 	--L["标注能量最高的目标"] = "Highest energy collector nameplate mark"
 	--L["收集装置"] = "collector"
 	--L["血量及击杀倒计时"] = "%s's hp bar and time limit indicator"
@@ -32,6 +23,15 @@ else
 	--L["单躲球"] = "Single dodges"
 	--L["双躲球"] = "Double dodges"
 	--L["三躲球"] = "Triple dodges"
+else
+	L["标注能量最高的目标"] = "Highest energy collector nameplate mark"
+	L["收集装置"] = "collector"
+	L["血量及击杀倒计时"] = "%s's hp bar and time limit indicator"
+	L["目标血量低于多少时开始对比"] = "Compare when target health is below (percentage)"
+	L["血量领先"] = "Gap: %d%%"
+	L["单躲球"] = "Single dodges"
+	L["双躲球"] = "Double dodges"
+	L["三躲球"] = "Triple dodges"
 end
 ---------------------------------Notes--------------------------------
 
@@ -354,7 +354,7 @@ G.Encounters[2687] = {
 					tags = {3},
 					sound = soundfile("1228213cast"),
 				},
-				{ -- 首领模块 星界收割 计时圆圈 （待测试）
+				{ -- 首领模块 星界收割 计时圆圈 （✓）
 					category = "BossMod",
 					spellID = 1228214,
 					enable_tag = "none",
@@ -420,7 +420,7 @@ G.Encounters[2687] = {
 								frame.last_cast = currentTime
 								
 								if destGUID == G.PlayerGUID then
-									if frame.count == 9 then
+									if frame.count == 5 or frame.count == 9 then
 										frame:StartCD(3)
 									else
 										local auraInfo = C_UnitAuras.GetPlayerAuraBySpellID(1228188) or C_UnitAuras.GetPlayerAuraBySpellID(1238874)
@@ -540,8 +540,8 @@ G.Encounters[2687] = {
 				{33122, "12"},--【奥术具象】
 			},
 			spells = {
-				{1242952},--【黑暗恩赐】
-				{1236207},--【星界涌动】
+				--{1242952},--【黑暗恩赐】
+				--{1236207},--【星界涌动】
 			},
 			options = {	
 				{ -- 姓名板光环 黑暗恩赐（✓）
@@ -585,7 +585,64 @@ G.Encounters[2687] = {
 						end
 					end,
 				},
-				
+				{ -- 首领模块 奥术具象 控制链 （待测试）
+					category = "BossMod",
+					spellID = 1236207,
+					enable_tag = "none",
+					name = T.GetFomattedNameFromNpcID("242586")..L["控制链"],
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					custom = {
+						{
+							key = "mrt_custom_btn",
+						},
+						{
+							key = "mrt_analysis_btn",
+						},
+					},
+					init = function(frame)
+					
+						function frame:copy_mrt()
+							local str = T.GenerateGroupCCNote(self.config_id, self.config_name, 4)
+							return str
+						end
+						
+						function frame:ReadNote(display)
+							T.ReadGroupCCNote(self.config_id, display, self.config_name)
+							T.GroupSpellForceUpdate()
+						end
+						
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_AURA_APPLIED" and (spellID == 1233979 or spellID == 1243873) then -- 星界收割/虚空收割
+								local currentTime = GetTime()
+								
+								if currentTime - frame.last_cast > 3 then
+									frame.count = frame.count + 1
+									T.DisplayGroupCCFrame(frame.count)
+								end
+								
+								frame.last_cast = currentTime
+								
+								C_Timer.After(18, function()
+									T.HideGroupCCFrame()
+								end)
+							end
+						elseif event == "ENCOUNTER_START" then
+							frame.count = 0
+							frame.last_cast = 0
+							
+							frame:ReadNote()							
+						end
+					end,
+					reset = function(frame, event)
+						T.HideGroupCCFrame()
+					end,
+				},
 			},
 		},		
 		{ -- 首要序列
@@ -774,9 +831,9 @@ G.Encounters[2687] = {
 				{32392},--【奥能回响】
 			},
 			spells = {
-				{1228454, "4"},--【能量印记】
-				{1238867},--【回音祈咒】
-				{1238874, "7"},--【回音风暴】
+				--{1228454, "4"},--【能量印记】
+				--{1238867},--【回音祈咒】
+				--{1238874, "7"},--【回音风暴】
 			},
 			options = {
 				{ -- 姓名板光环 能量印记（✓）
@@ -784,65 +841,6 @@ G.Encounters[2687] = {
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
 					spellID = 1228454,
-				},
-				{ -- 首领模块 能量印记 移动BOSS（✓）
-					category = "BossMod",
-					spellID = 1228454,
-					ficon = "0",
-					enable_tag = "role",
-					name = L["移动BOSS"]..T.GetIconLink(1228454),
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_THREAT_SITUATION_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
-						frame.text_frame.text:SetText(string.format("|cffff0000%s|r", L["移动BOSS"]))
-						
-						function frame:IsTanking()
-							local isTanking = UnitDetailedThreatSituation("player", "boss1")
-							return isTanking
-						end
-						
-						function frame:check_boss()	
-							for unit in T.IterateBoss() do
-								if AuraUtil.FindAuraBySpellID(1228454, unit, "HELPFUL") then -- 能量印记
-									return true
-								end
-							end
-						end
-						
-						function frame:check()
-							if self:IsTanking() and self:check_boss() then
-								if not self.text_frame:IsShown() then								
-									self.text_frame:Show()
-									T.PlaySound("moveboss")
-								end
-							else
-								self.text_frame:Hide()
-							end
-						end
-					end,
-					update = function(frame, event, ...)
-						if event == "UNIT_AURA_ADD" or event == "UNIT_AURA_REMOVED" then
-							local unit, spellID = ...
-							if spellID == 1228454 then
-								frame:check()
-							end
-						elseif event == "UNIT_THREAT_SITUATION_UPDATE" then
-							local unit = ...
-							if unit == "player" then
-								frame:check()
-							end
-						elseif event == "ENCOUNTER_START" then
-							T.RegisterWatchAuraSpellID(1228454)
-						end
-					end,
-					reset = function(frame, event)
-						T.UnregisterWatchAuraSpellID(1228454)
-					end,
 				},
 				{ -- 奥能回响 血量及击杀倒计时 （✓）
 					category = "BossMod",
@@ -1061,15 +1059,6 @@ G.Encounters[2687] = {
 					spellID = 1228161,
 					text = L["跑圈"],
 				},
-				{ -- 图标 沉默风暴（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1228188,
-					spellIDs = {1238874},
-					hl = "org",
-				},
 				{ -- 文字 沉默风暴（✓）
 					category = "TextAlert",
 					type = "spell",
@@ -1100,45 +1089,31 @@ G.Encounters[2687] = {
 						end
 					end,
 				},
-				{ -- 团队框架高亮 沉默风暴（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1228188,
-					spellIDs = {1238874},
-				},				
-				{ -- 首领模块 沉默风暴 多人光环（✓）
-					category = "BossMod",
-					spellID = 1228161,
-					enable_tag = "rl",
-					name = string.format(L["NAME多人光环提示"], T.GetIconLink(1228188)),	
-					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 250},
-					events = {
-						["UNIT_AURA"] = true,	
-					},
-					init = function(frame)
-						frame.role = true
-						
-						frame.spellIDs = {
-							[1228188] = {},-- 沉默风暴
-							[1238874] = {},-- 回音风暴
-						}
-						T.InitUnitAuraBars(frame)			
-					end,
-					update = function(frame, event, ...)
-						T.UpdateUnitAuraBars(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetUnitAuraBars(frame)
-					end,
-				},
-				{ -- 图标 沉默风暴（✓）
+				{ -- 图标 沉默风暴/回音风暴（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 1228168,
 					spellIDs = {1238878},
+					ficon = "7",
 					text = L["平静"],
+					hl = "blu",
+				},
+				{ -- 团队框架高亮 沉默风暴/回音风暴（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 1228168,
+					spellIDs = {1238878},
+					color = "blu",
+				},
+				{ -- 驱散提示音 沉默风暴/回音风暴（✓）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 1228168,
+					spellIDs = {1238878},
+					file = "[dispel]",
+					ficon = "7",
 				},
 			},
 		},
@@ -1348,8 +1323,8 @@ G.Encounters[2687] = {
 			},
 			spells = {
 				{1234328},--【光子轰击】
-				{1226260},--【奥术汇流】
-				{1243272},--【抑制裂口】
+				--{1226260},--【奥术汇流】
+				--{1243272},--【抑制裂口】
 			},
 			options = {
 				{ -- 首领模块 光子轰击 倒计时 （✓）
@@ -1477,8 +1452,8 @@ G.Encounters[2687] = {
 				{32596, "0"},--【庇护的侍从】
 			},
 			spells = {
-				{1232738, "1"},--【硬化之壳】
-				{1238266},--【能量渐增】
+				--{1232738, "1"},--【硬化之壳】
+				--{1238266},--【能量渐增】
 			},
 			options = {
 				{ -- 姓名板光环 硬化之壳（✓）

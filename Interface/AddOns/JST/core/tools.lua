@@ -50,17 +50,12 @@ local function MyItemCheck(itemID)
 	end
 end
 
-local function CreateSpellLineFrame(name, text, size, dir, anchor, x, y)
+local function CreateSpellLineFrame(name, text, size, anchor, x, y)
 	local frame = CreateFrame("Frame", addon_name..name, FrameHolder)
+	frame:Hide()
 	
-	local width, height
-	if dir == "vertical" then
-		width = size
-		height = size*5 + 5*4
-	else
-		width = size*5 + 5*4
-		height = size
-	end
+	local width = size*5 + 5*4
+	local height = size
 	frame:SetSize(width, height)
 	
 	frame.movingname = text
@@ -83,10 +78,21 @@ local function CreateSpellIconBase(parent, tag)
 	icon.texture:SetTexCoord( .1, .9, .1, .9)
 	icon.texture:SetAllPoints()
 	
+	icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
+	icon.cooldown:SetAllPoints()
+	icon.cooldown:SetDrawEdge(false)
+	icon.cooldown:SetFrameLevel(icon:GetFrameLevel())
+	icon.cooldown:SetReverse(true)
+	
 	icon.charge_text = T.createtext(icon, "OVERLAY", 20, "OUTLINE", "RIGHT") -- 层数
 	icon.charge_text:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 0, 2)
 	icon.charge_text:SetHeight(12)
 	icon.charge_text:SetTextColor(0, 1, 1)
+
+	icon.source_text = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "CENTER") -- 玩家名字
+	icon.source_text:SetPoint("TOPLEFT", icon, "TOPLEFT", -2, -2)
+	icon.source_text:SetPoint("TOPRIGHT", icon, "TOPRIGHT", 2, -2)
+	icon.source_text:SetHeight(12)
 	
 	icon:HookScript("OnShow", function(self)
 		parent:lineup()
@@ -542,7 +548,7 @@ local function SortBySpellPrority(t)
 	end)
 end
 
-local GroupSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["团队单体减伤技能监控和分配"], 40, "horizontal", "TOPLEFT", 450, 0)
+local GroupSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["团队单体减伤技能监控和分配"], 40, "TOPLEFT", 450, 0)
 
 function GroupSpellFrame:lineup()
 	SortBySpellPrority(self.active_byindex)
@@ -563,11 +569,6 @@ end
 
 local function CreateGroupSpellIcon(updater, group, tag)
 	local icon = CreateSpellIconBase(GroupSpellFrame, tag)
-	
-	icon.source_text = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "CENTER") -- 玩家名字
-	icon.source_text:SetPoint("TOPLEFT", icon, "TOPLEFT", -2, -2)
-	icon.source_text:SetPoint("TOPRIGHT", icon, "TOPRIGHT", 2, -2)
-	icon.source_text:SetHeight(12)
 	
 	icon.target_text = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "CENTER") -- 玩家名字
 	icon.target_text:SetPoint("BOTTOMLEFT", icon, "TOPLEFT", -2, -2)
@@ -893,13 +894,508 @@ T.EditGroupSpellFrame = function(option)
 end
 
 ----------------------------------------------------------
-------------------[[    个人减伤提示    ]]------------------
+-------------------[[    控制链    ]]---------------------
+----------------------------------------------------------
+local group_spell_tag = "JSTSpells"
+
+local ControlSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["队伍控制链监控"], 40, "CENTER", 0, 360)
+
+function ControlSpellFrame:lineup()
+	local lastframe		
+	for index, icon in pairs(self.active_byindex) do
+		if icon:IsShown() then
+			icon:ClearAllPoints()
+			if not lastframe then
+				icon:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+			else
+				icon:SetPoint("TOPLEFT", lastframe, "TOPRIGHT", 5, 0)	
+			end
+			lastframe = icon
+		end
+	end
+end
+
+local function CreateControlSpellIcon(updater, group, tag)	
+	local icon = CreateSpellIconBase(ControlSpellFrame, tag)
+	
+	T.SetHighLightBorderColor(icon, icon, {0, 1, 0}, 3)
+	
+	function icon:update_onedit(option)
+		if option == "all" or option == "icon_size" then
+			self:SetSize(C.DB["GeneralOption"]["control_spell_size"], C.DB["GeneralOption"]["control_spell_size"])
+		end
+	end
+	
+	function icon:display_charge(charge)
+		if charge and charge > 1 then
+			self.charge_text:SetText(charge)
+		else
+			self.charge_text:SetText("")
+		end
+	end
+	
+	function icon:display_cd(expirationTime, dur)
+		if expirationTime - GetTime() > 0 then
+			local start = expirationTime - dur
+			self.cooldown:SetCooldown(start, dur)
+			self.texture:SetDesaturated(true)
+		else
+			self.cooldown:SetCooldown(0, 0)
+			self.texture:SetDesaturated(false)
+		end
+	end
+	
+	function icon:init_display(GUID, spellID)
+		self.GUID = GUID
+		self.spellID = spellID
+		
+		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
+		self.source_text:SetText(T.ColorNickNameByGUID(GUID))
+		
+		if self.GUID == G.PlayerGUID then
+			self.glow:Show()
+		else
+			self.glow:Hide()
+		end
+		
+		self:update_onedit("all")		
+		self:Show()
+	end
+	
+	function icon:cancel()
+		self:Hide()
+	end
+	
+	updater.actives_bytag[tag] = icon
+	
+	return icon
+end
+
+local ControlSpell_Updater = T.CreateUpdater(CreateControlSpellIcon, ControlSpellFrame)
+
+ControlSpell_Updater.active_byGUID = {}
+ControlSpell_Updater.order = {}
+ControlSpell_Updater.cooldownInfo = {} -- [GUID][spellID] = {expirationTime = <number>, duration = <number>, charges = <number>}
+ControlSpell_Updater.finishedCasts = {}
+ControlSpell_Updater.ttsPlayed = {}
+ControlSpell_Updater.set = 0
+
+function ControlSpell_Updater:GetLineInfo(setNumber, line)
+	local GUIDs = T.LineToGUIDArray(line)
+    local GUID = GUIDs[1]
+	
+	local matched_spellID
+	for word in line:gmatch("%S+") do
+		if tonumber(word) then
+			local spellID = tonumber(word)
+			if C_Spell.GetSpellName(spellID) then
+				matched_spellID = spellID
+				break
+			end
+		elseif G.GroupTrackedSpellsbyName[word] then
+			local spellID = G.GroupTrackedSpellsbyName[word]
+			matched_spellID = spellID
+			break
+		end
+	end
+	
+	if not GUID and not string.find(line, L["可以继续写"]) then
+        T.msg(string.format("%s [%d] %s", L["名字错误"], setNumber, line))
+    end
+	
+    if not matched_spellID and not string.find(line, L["可以继续写"]) then
+		T.msg(string.format("%s [%d] %s", L["法术错误"], setNumber, line))
+    end
+	
+	if GUID and matched_spellID then
+		return GUID, matched_spellID
+	end
+end
+
+function ControlSpell_Updater:ReadNote(tag, analyze, title)
+	self.cooldownInfo = table.wipe(self.cooldownInfo)
+	self.finishedCasts = table.wipe(self.finishedCasts)
+	self.ttsPlayed = table.wipe(self.ttsPlayed)
+    self.order = table.wipe(self.order)
+	self.set = 0
+	
+    local setNumber = 1
+	local indexNumber = 0
+	local divide_set
+	local title_displayed
+	local spellCount = #G.GroupTrackedSpellsbyIndex
+	
+	local ccTag = "CC"..(tag or "")
+    for _, line in T.IterateNoteAssignment(ccTag) do
+	
+		if analyze and not title_displayed then
+			T.msg(string.format(L["开始读取%s控制链信息"], title))
+			title_displayed = true
+		end
+		
+        line = line:gsub("||c%x%x%x%x%x%x%x%x", "")
+        line = line:gsub("||r", "")
+        
+        local set = line:lower():match("^set(%d+)")
+        
+        set = tonumber(set)
+        
+        if set then
+            setNumber = set
+			indexNumber = 0
+			divide_set = true
+			
+            if analyze then
+                T.msg(string.format("-----------%d-------------", set))
+            end
+        else
+			line = gsub(line, "{spell:(%d+)}", " %1 ")
+			
+            local GUID, spellID = self:GetLineInfo(setNumber, line)
+            
+            if GUID and spellID then
+                if not self.order[setNumber] then
+					self.order[setNumber] = {}
+				end
+				
+				if not self.finishedCasts[setNumber] then
+					self.finishedCasts[setNumber] = {}
+				end
+				
+				if not self.ttsPlayed[setNumber] then
+					self.ttsPlayed[setNumber] = {}
+				end
+				
+                indexNumber = indexNumber + 1
+               
+                if analyze then
+					if divide_set then
+						T.msg(string.format("[%d-%d] %s %s", setNumber, indexNumber, T.ColorNickNameByGUID(GUID), T.GetIconLink(spellID)))
+					else
+						T.msg(string.format("[%d] %s %s", indexNumber, T.ColorNickNameByGUID(GUID), T.GetIconLink(spellID)))
+					end
+                end
+                
+                if not self.cooldownInfo[GUID] then
+					self.cooldownInfo[GUID] = {}
+				end
+				
+                if not self.cooldownInfo[GUID][spellID] then
+					self.cooldownInfo[GUID][spellID] = {}
+				end
+                
+                table.insert(self.order[setNumber],
+                    {
+                        GUID = GUID,
+                        spellID = spellID,
+                        icon = C_Spell.GetSpellTexture(spellID),
+                    }
+                )
+				
+				if not G.GroupTrackedSpellsbySpellID[spellID] then
+					spellCount = spellCount + 1
+					G.GroupTrackedSpellsbySpellID[spellID] = spellCount
+				end
+            end
+        end
+    end
+end
+
+function ControlSpell_Updater:UpdateExpirationTimes(receivedInfo)
+    for _, entry in ipairs(receivedInfo) do
+        local GUID = entry.GUID
+        local spellID = entry.spellID
+        local cooldownInfo = self.cooldownInfo[GUID] and self.cooldownInfo[GUID][spellID]
+		
+        if cooldownInfo then
+            cooldownInfo.duration = entry.duration or 0
+            cooldownInfo.expirationTime = entry.expirationTime or 0
+			cooldownInfo.charges = entry.charges or 0
+        end
+    end
+end
+
+function ControlSpell_Updater:NotifyNext()
+    local currentTime = GetTime()
+    local order = self.order[self.set]
+    
+    if not order then return end
+    
+    for _, entry in ipairs(order) do
+        local GUID = entry.GUID
+        local spellID = entry.spellID
+        local expirationTime = self.cooldownInfo[GUID][spellID].expirationTime
+        local isReady = expirationTime and expirationTime < currentTime
+        
+        if isReady then
+			T.FireEvent("JST_GROUP_CC_NEXT", GUID, spellID, self.set)
+            return
+        end
+    end
+end
+
+function ControlSpell_Updater:BuildStates()
+	local alwaysShow = C.DB["GeneralOption"]["control_always_show"]
+    local order = self.order[self.set]
+    
+    for _, icon in pairs(self.actives_bytag) do
+		if icon.cancel then
+			icon:cancel()
+		end
+    end
+    
+    if not order then return end
+	
+    -- Check if we are included in the order
+    if not alwaysShow then
+        local included = false
+        
+        for _, entry in ipairs(order) do
+            if entry.GUID == G.PlayerGUID then
+                included = true
+            end
+        end
+        
+        if not included then return end
+    end
+    
+    local currentTime = GetTime()
+	
+    for index, entry in ipairs(order) do
+        local GUID = entry.GUID
+        local spellID = entry.spellID
+        local cooldownInfo = self.cooldownInfo[GUID] and self.cooldownInfo[GUID][spellID]
+        local duration = cooldownInfo and cooldownInfo.duration
+        local expirationTime = cooldownInfo and cooldownInfo.expirationTime
+		local charges = cooldownInfo and cooldownInfo.charges
+        local isReady = expirationTime and expirationTime < currentTime + 15
+        
+        if isReady then
+           local tag = GUID.."-"..spellID
+		   
+		   if not self.actives_bytag[tag] then
+				local icon = self:GetAlert(1, tag)
+				icon:init_display(GUID, spellID)
+				
+				if not self.active_byGUID[GUID] then
+					self.active_byGUID[GUID] = {}
+				end
+				
+				self.active_byGUID[GUID][spellID] = icon
+			end
+			
+			local icon = self.actives_bytag[tag]
+			
+			icon:display_charge(charge)
+			icon:display_cd(expirationTime, duration)
+			icon:Show()
+        end
+    end
+	
+end
+
+ControlSpell_Updater:SetScript("OnEvent", function(self, event, ...)
+	if event == "JST_GROUP_CD_UPDATE" then
+		local receivedInfo = ...
+        if not receivedInfo then return end
+		
+		self:UpdateExpirationTimes(receivedInfo)
+		
+		if ControlSpellFrame:IsShown() and not T.IsInPreview() then
+			self:BuildStates()
+			self:NotifyNext()
+		end
+	 elseif event == "JST_GROUP_CC_NEXT" then
+		local GUID, spellID, set = ...
+		
+		if GUID == G.PlayerGUID then
+			if not self.finishedCasts[set][spellID] then
+				self.cur_spellID = spellID
+				self.text_frame.text:SetText(T.GetSpellIcon(spellID)..L["准备"])
+				self.text_frame:Show()
+			end
+			
+			if not self.ttsPlayed[self.set][spellID] then
+				self.ttsPlayed[self.set][spellID] = true
+				
+				if C.DB["GeneralOption"]["control_tts"] then
+					T.PlaySound("prepare")
+					C_Timer.After(.5, function()
+						T.SpeakText(C_Spell.GetSpellName(spellID))
+					end)
+				end
+			end
+		else
+			self.text_frame:Hide()
+		end
+		
+	 elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+        local unit, castGUID, spellID = ...
+        
+        if unit ~= "player" or not castGUID then return end
+		
+        if self.set > 0 and self.cur_spellID == spellID and not self.finishedCasts[self.set][spellID] then
+			self.finishedCasts[self.set][spellID] = true
+			self.text_frame:Hide()
+		end
+
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		local difficultyID = select(3, GetInstanceInfo())
+		if difficultyID == 8 then
+			self:ReadNote("MYTHICPLUS")
+		end
+	end
+end)
+
+function ControlSpellFrame:CreatePreviewCCIcon(tag, i)
+	local icon = CreateSpellIconBase(ControlSpellFrame, tag)
+	T.SetHighLightBorderColor(icon, icon, {0, 1, 0}, 3)
+	
+	local spellID = G.GroupTrackedSpellsbyIndex[i]
+	icon.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
+	icon.source_text:SetText(T.ColorNickNameByGUID(G.PlayerGUID))
+	
+	function icon:update_onedit(option)
+		if option == "all" or option == "icon_size" then
+			self:SetSize(C.DB["GeneralOption"]["control_spell_size"], C.DB["GeneralOption"]["control_spell_size"])
+		end
+	end
+	
+	ControlSpell_Updater.actives_bytag[tag] = icon
+	
+	return icon
+end
+
+function ControlSpellFrame:PreviewShow()
+	local my_index = math.random(6)
+	for i = 1, 6 do
+		local tag = "preview"..i
+		local icon = ControlSpell_Updater.actives_bytag[tag] or self:CreatePreviewCCIcon(tag, i)
+		
+		icon:update_onedit("all")
+		
+		if i == my_index then
+			icon.glow:Show()
+		else
+			icon.glow:Hide()
+		end
+		
+		icon:Show()
+	end	
+	self:Show()
+end
+
+function ControlSpellFrame:PreviewHide()
+	for i = 1, 6 do
+		local tag = "preview"..i
+		local icon = ControlSpell_Updater.actives_bytag[tag]
+		
+		if icon then
+			icon:Hide()
+		end
+	end	
+	self:Hide()
+end
+
+T.EditGroupCCFrame = function(option)
+	local cc_cd_events = {	
+		["JST_GROUP_CD_UPDATE"] = true,
+		["JST_GROUP_CC_NEXT"] = true,
+		["UNIT_SPELLCAST_SUCCEEDED"] = true,
+		["PLAYER_ENTERING_WORLD"] = true,
+	}
+	
+	if option == "all" or option == "enable" then
+		if C.DB["GeneralOption"]["control_spell_enable"] then
+			T.RestoreDragFrame(ControlSpellFrame)
+			T.RegisterEventAndCallbacks(ControlSpell_Updater, cc_cd_events)
+		else
+			T.ReleaseDragFrame(ControlSpellFrame)
+			T.UnregisterEventAndCallbacks(ControlSpell_Updater, cc_cd_events)
+			ControlSpellFrame:Hide()
+		end
+	end
+	if option == "all" or option == "icon_size" then
+		ControlSpellFrame:SetSize(C.DB["GeneralOption"]["control_spell_size"]*6+25, C.DB["GeneralOption"]["control_spell_size"])
+	end		
+	for _, icon in pairs(ControlSpellFrame.active_byindex) do
+		icon:update_onedit(option)
+	end
+	
+	if not ControlSpell_Updater.text_frame then
+		ControlSpell_Updater.text_frame = T.CreateAlertTextShared("ControlSpell_Updater", 2)
+		ControlSpell_Updater.text_frame.text:SetTextColor(0, 1, 0)
+	end
+end
+
+T.GenerateGroupCCNote = function(tag, title, set)	
+	local str, full_set_str, short_set_str = "", "", ""
+	for index, spellID in pairs(G.GroupTrackedSpellsbyIndex) do
+		local spellName = C_Spell.GetSpellName(spellID)
+		local spell = string.format("%s {spell:%d}%s", G.PlayerName, spellID, spellName)
+		
+		full_set_str = full_set_str..spell.."\n"
+		if index <= 3 then
+			short_set_str = short_set_str..spell.."\n"
+		end
+	end
+	
+	if set then
+		for i = 1, set do
+			if i == 1 then
+				str = str.."set"..i.."\n"..full_set_str.."\n"
+			else
+				str = str.."set"..i.."\n"..short_set_str.."\n"
+			end
+		end
+		
+		str = str..L["可以继续写"]
+	else
+		str = full_set_str
+	end
+	
+	str = string.format("#CC%sstart%s\n%s\nend", tag, title, str)
+	return str
+end
+
+T.CopyGroupCCNote = function()	
+	local button = JSTtoolsScrollAnchor.CCnote_copy
+	local title = string.format(L["粘贴%sMRT模板"], L["大秘境"]..L["控制链"])
+	local str = T.GenerateGroupCCNote("MYTHICPLUS", L["大秘境"]..L["控制链"])
+	T.DisplayCopyString(button, str, title)
+end
+
+T.ReadGroupCCNote = function(tag, analyze, title)
+	ControlSpell_Updater:ReadNote(tag, analyze, title)
+end
+
+T.DisplayGroupCCFrame = function(set)
+	if not C.DB["GeneralOption"]["control_spell_enable"] then return end
+	if ControlSpell_Updater.order[set] then
+		ControlSpell_Updater.set = set
+		ControlSpell_Updater.finishedCasts[set] = table.wipe(ControlSpell_Updater.finishedCasts[set])
+		ControlSpell_Updater.ttsPlayed[set] = table.wipe(ControlSpell_Updater.ttsPlayed[set])
+		
+        ControlSpell_Updater:BuildStates()
+        ControlSpell_Updater:NotifyNext()
+		ControlSpellFrame:Show()
+    end
+end
+
+T.HideGroupCCFrame = function(set)
+	ControlSpellFrame:Hide()
+	if ControlSpell_Updater.text_frame then
+		ControlSpell_Updater.text_frame:Hide()
+	end
+end
+
+----------------------------------------------------------
+-----------------[[    个人减伤提示    ]]-----------------
 ----------------------------------------------------------
 local almost_ready_dur = 3
 local checking_hp_tags = {}
 
-local PersonalSpellFrame = CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"],  40, "horizontal", "CENTER", 0, 100)
-PersonalSpellFrame:Hide()
+local PersonalSpellFrame = CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"],  40, "CENTER", 0, 100)
 
 PersonalSpellFrame.text = T.createtext(PersonalSpellFrame, "OVERLAY", 30, "OUTLINE", "LEFT")
 PersonalSpellFrame.text:SetPoint("LEFT", PersonalSpellFrame, "LEFT", 0, 0)
@@ -955,16 +1451,14 @@ function PersonalSpellFrame:ShowCheck(perc)
 end
 
 function PersonalSpellFrame:HideCheck(perc)
-	local passed
+	local should_show
 	for tag, threshold in pairs(checking_hp_tags) do
 		if perc < threshold + 10 then
-			 passed = true
-			 return
+			 should_show = true
+			 break
 		end
 	end
-	if not passed then
-		return true
-	end
+	return not should_show
 end
 
 T.Play_personlspell_sound = function()
@@ -974,10 +1468,8 @@ T.Play_personlspell_sound = function()
 end
 
 function PersonalSpellFrame:Update()
-	if UnitIsDead("player") then
-		if self:IsShown() then
-			self:Hide()
-		end
+	if UnitIsDeadOrGhost("player") then
+		self:Hide()
 	else
 		local hp = UnitHealth("player")
 		local max_hp = UnitHealthMax("player")
@@ -1011,6 +1503,15 @@ PersonalSpellFrame:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
+PersonalSpellFrame.t = 0
+PersonalSpellFrame:SetScript("OnUpdate", function(self, e)
+	self.t = self.t + e
+	if self.t > .5 then
+		self:Update()
+		self.t = 0
+	end
+end)
+
 T.AddPersonalSpellCheckTag = function(tag, perc, ignore_roles)
 	if ignore_roles and type(ignore_roles) == "table" then 
 		local my_role = T.GetMyRole()
@@ -1040,17 +1541,11 @@ end
 
 local function CreatePersonalSpellIcon(updater, group, tag)
 	local icon = CreateSpellIconBase(PersonalSpellFrame, tag)
-	
-	icon.dur_text = T.createtext(icon, "OVERLAY", 14, "OUTLINE", "CENTER")
+
+	icon.dur_text = T.createtext(icon, "OVERLAY", 14, "OUTLINE", "CENTER") -- 持续时间
 	icon.dur_text:SetPoint("TOP", icon, "BOTTOM", 0, -2)
 	icon.dur_text:SetTextColor(1, 1, 0)
 	icon.dur_text:SetHeight(12)
-	
-	icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
-	icon.cooldown:SetAllPoints()
-	icon.cooldown:SetDrawEdge(false)
-	icon.cooldown:SetFrameLevel(icon:GetFrameLevel())
-	icon.cooldown:SetReverse(true)
 	
 	function icon:update_onedit(option)
 		if option == "all" or option == "icon_size" then
@@ -1113,6 +1608,7 @@ local function CreatePersonalSpellIcon(updater, group, tag)
 		self.spellID = spellID
 		
 		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
+		
 		self:display_charge(charge)
 		self:display_cd(start, dur)
 		
@@ -1433,10 +1929,8 @@ local function AddCurrentData(tag, ...)
 								G.Current_Data[category][alert_type][key] = args
 								G.Current_Data[category][alert_type][key].IsEncounterData = true
 							end
-							--print("ecnounter add", tag, category, alert_type, key, "ignore dif")
 						else -- 杂兵
 							G.Current_Data[category][alert_type][key] = args
-							--print("instance add", tag, category, alert_type, key)
 						end
 					end
 				end
@@ -1453,11 +1947,9 @@ local function WipeCurrentData(event)
 				if event == "ENCOUNTER_END" then
 					if args.IsEncounterData then
 						G.Current_Data[category][alert_type][key] = nil
-						--print("ecnounter remove", category, alert_type, key)
 					end
 				else
 					G.Current_Data[category][alert_type][key] = nil
-					--print("all remove", category, alert_type, key)
 				end
 			end
 		end
@@ -2394,9 +2886,12 @@ local mrt_eg = [[%1$s
 %5$s]]
 
 T.CopyTimeline = function()
-	local name = T.GetNameByGUID(G.PlayerGUID)
 	local button = JSTtimelineScrollAnchor.tl_copy
-	T.DisplayCopyString(button, string.format(mrt_eg, L["时间轴"], name, L["注意自保"], L["注意治疗"], L["战斗结束"]), L["MRT时间轴模板"].." "..L["复制粘贴"])
+	local title = string.format(L["粘贴%sMRT模板"], L["时间轴"])
+	local str = string.format(mrt_eg, L["时间轴"], G.PlayerName, L["注意自保"], L["注意治疗"], L["战斗结束"])
+	str = L["时间轴标题注意"].."\n\n"..str
+	
+	T.DisplayCopyString(button, str, title)
 end
 ----------------------------------------------------------
 -----------------[[    团队私人光环    ]]-------------------
@@ -2628,84 +3123,4 @@ RaidPAFrame:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "ENCOUNTER_END" then
 		self.release_all()
 	end
-end)
-
-----------------------------------------------------------
--------------------[[    控制链    ]]---------------------
-----------------------------------------------------------
-local group_spell_tag = "JSTSpells"
-
-local ControlSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["团队技能监控"], 40, "vertical", "TOPLEFT", -300, 200)
-ControlSpellFrame:Hide()
-
-ControlSpellFrame.data = {}
-
-function ControlSpellFrame:PreviewShow()
-	self:generate_all()
-end
-
-function ControlSpellFrame:lineup()
-	local lastframe		
-	for index, icon in pairs(self.active_byindex) do
-		if icon:IsShown() then
-			icon:ClearAllPoints()
-			if not lastframe then
-				icon:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
-			else
-				icon:SetPoint("TOPLEFT", lastframe, "BOTTOMLEFT", 0, -5)	
-			end
-			lastframe = icon
-		end
-	end
-end
-
-local function CreateControlSpellIcon(updater, group, tag)	
-	local icon = CreateSpellIconBase(ControlSpellFrame, tag)
-	
-	icon.source_text = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "CENTER") -- 玩家名字
-	icon.source_text:SetPoint("LEFT", icon, "RIGHT", 2, 0)
-	
-	function icon:update_onedit(option)
-		if option == "all" or option == "icon_size" then
-			self:SetSize(C.DB["GeneralOption"]["control_spell_size"], C.DB["GeneralOption"]["control_spell_size"])
-		end
-	end
-	
-	function icon:init_display(GUID, spellID, charge)
-		self.GUID = GUID
-		self.spellID = spellID
-		self.charge = charge
-		
-		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
-		self.source_text:SetText(T.ColorNickNameByGUID(GUID))
-		self:update_charge()
-		
-		self:update_onedit("all")
-		self:Show()
-	end
-	
-	function icon:cancel()
-		self:Hide()
-		self.texture:SetDesaturated(false)
-	end
-	
-	updater.actives_bytag[tag] = icon
-	
-	return icon
-end
-
-local ControlSpell_Updater = T.CreateUpdater(CreateControlSpellIcon, ControlSpellFrame)
-
-ControlSpell_Updater.active_byGUID = {}
-
-function ControlSpellFrame:get_assignment()
-	
-end
-
-function ControlSpellFrame:generate_all()
-	
-end
-
-ControlSpell_Updater:SetScript("OnEvent", function(self, event, ...)	
-	
 end)

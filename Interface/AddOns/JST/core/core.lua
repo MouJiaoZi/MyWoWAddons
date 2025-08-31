@@ -34,6 +34,7 @@ T.UpdateAll = function()
 	T.EditASFrame("all")
 	T.EditRaidPAFrame("all")
 	T.UpdateAutoMarkState()
+	T.EditGroupCCFrame("all")
 	T.EditGroupSpellFrame("all")
 	T.EditPersonalSpellFrame("all")
 end
@@ -1670,21 +1671,28 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
+
+	elseif event == "DATA_REMOVED" then
+		for _, bar in pairs(self.actives_bytag) do
+			self:RemoveAlert(bar.tag)
+		end
 		
 	elseif event == "ENCOUNTER_START" or event == "ENCOUNTER_PHASE" then -- 战斗开始重置计数
 		self.count_data = table.wipe(self.count_data)
+			
 	end
 end)
 
 T.RegisterEventAndCallbacks(AlertBar_Cast_Updater, {
+	["ENCOUNTER_PHASE"] = true,
+	["ENCOUNTER_START"] = true,
 	["UNIT_SPELLCAST_START"] = true,
 	["UNIT_SPELLCAST_STOP"] = true,
 	["UNIT_SPELLCAST_CHANNEL_START"] = true,
 	["UNIT_SPELLCAST_CHANNEL_STOP"] = true,
 	["UNIT_SPELLCAST_SUCCEEDED"] = true,	
 	["UNIT_TARGET"] = true,
-	["ENCOUNTER_PHASE"] = true,
-	["ENCOUNTER_START"] = true,
+	["DATA_REMOVED"] = true,
 })
 
 -- 计时条：CLEU
@@ -1872,15 +1880,23 @@ AlertBar_CLEU_Updater:SetScript("OnEvent", function(self, event, ...)
 				self:update(cleuTag, bar, args, log_spellID, sourceGUID, destGUID)
 			end
 		end
+		
+	elseif event == "DATA_REMOVED" then
+		for _, bar in pairs(self.actives_bytag) do
+			self:RemoveAlert(bar.tag)
+		end
+		
 	elseif event == "ENCOUNTER_START" or event == "ENCOUNTER_PHASE" then -- 战斗开始重置计数
 		self.count_data = table.wipe(self.count_data)
+		
 	end
 end)
 
-T.RegisterEventAndCallbacks(AlertBar_CLEU_Updater, {
-	["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+T.RegisterEventAndCallbacks(AlertBar_CLEU_Updater, {	
 	["ENCOUNTER_PHASE"] = true,
 	["ENCOUNTER_START"] = true,
+	["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+	["DATA_REMOVED"] = true,
 })
 
 -- 计时条：光环
@@ -2169,6 +2185,13 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
+		
+	elseif event == "ENCOUNTER_ENGAGE_UNIT" then
+		local unit, GUID = ...
+		if T.FilterAuraUnit(unit) then
+			self:AuraFullCheck(unit, GUID)
+		end
+		
 	elseif event == "DATA_ADDED" then
 		for _, unit in pairs(aura_check_units) do			
 			if UnitExists(unit) then
@@ -2177,17 +2200,15 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 				self:AuraFullCheck(unit, GUID)
 			end
 		end
+		
 	elseif event == "DATA_REMOVED" then
 		for _, bar in pairs(self.actives_bytag) do
 			self:RemoveAlert(bar.tag)
 		end
-	elseif event == "ENCOUNTER_ENGAGE_UNIT" then
-		local unit, GUID = ...
-		if T.FilterAuraUnit(unit) then
-			self:AuraFullCheck(unit, GUID)
-		end
+		
 	elseif event == "ENCOUNTER_START" or event == "ENCOUNTER_PHASE" then -- 战斗开始重置计数
 		self.count_data = table.wipe(self.count_data)
+		
 	end
 end)
 
@@ -2195,9 +2216,9 @@ T.RegisterEventAndCallbacks(AlertBar_Aura_Updater, {
 	["ENCOUNTER_PHASE"] = true,
 	["ENCOUNTER_START"] = true,
 	["UNIT_AURA"] = true,
-	["DATA_ADDED"] = true,
+	["ENCOUNTER_ENGAGE_UNIT"] = true,	
+	["DATA_ADDED"] = true,	
 	["DATA_REMOVED"] = true,
-	["ENCOUNTER_ENGAGE_UNIT"] = true,
 })
 
 -- 计时条：测试
@@ -3000,7 +3021,7 @@ local function UpdateInterruptText(unitFrame)
 								end
 							end
 						end
-						if #t == 0 and InterruptMrtData[npcID][mark]["backups"] then -- 使用替补
+						if not next(t) and InterruptMrtData[npcID][mark]["backups"] then -- 使用替补
 							for i, player_GUID in pairs(InterruptMrtData[npcID][mark]["backups"]) do
 								local info = T.GetGroupInfobyGUID(player_GUID)
 								if info then
@@ -3044,7 +3065,7 @@ local function UpdateInterruptText(unitFrame)
 								end
 							end
 						end
-						if #t == 0 and InterruptMrtData[npcID][9]["backups"] then -- 使用替补
+						if not next(t) and InterruptMrtData[npcID][9]["backups"] then -- 使用替补
 							for i, GUID in pairs(InterruptMrtData[npcID][9]["backups"]) do
 								local info = T.GetGroupInfobyGUID(GUID)
 								if info then
@@ -4447,7 +4468,7 @@ local function NamePlates_OnEvent(self, event, ...)
 							if not InterruptMrtData[npcID][mark]["backups"] then
 								InterruptMrtData[npcID][mark]["backups"] = {}
 							end
-							local containsMe = T.FillArrayByGUID(players, InterruptMrtData[npcID][mark]["backups"])
+							local containsMe = T.InsertGUIDtoArray(players, InterruptMrtData[npcID][mark]["backups"])
 							if containsMe then
 								if not Foucus_RaidTarget[npcID] then
 									Foucus_RaidTarget[npcID] = {}
@@ -4459,7 +4480,7 @@ local function NamePlates_OnEvent(self, event, ...)
 							if not InterruptMrtData[npcID][mark][count] then
 								InterruptMrtData[npcID][mark][count] = {}
 							end
-							local containsMe = T.FillArrayByGUID(players, InterruptMrtData[npcID][mark][count])
+							local containsMe = T.InsertGUIDtoArray(players, InterruptMrtData[npcID][mark][count])
 							if containsMe then
 								if not Foucus_RaidTarget[npcID] then
 									Foucus_RaidTarget[npcID] = {}
@@ -5722,29 +5743,23 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 				end, true)
 			end
 		end
-	elseif event == "ADDON_MSG" then
-		local channel, sender, GUID, message = ...
-		if message == "boss_whisper" then
-			local msg = select(5, ...)
-			for spellID, info in pairs(RFIconFrames["Msg"]) do
-				if string.find(msg, info.msg) then
-					local enable = T.ValueFromDB({"RFIcon", "Msg", spellID, "enable"})
-					if enable then
-						local info = T.GetGroupInfobyGUID(GUID)
-						if info and info.unit then
-							local frame = T.GetUnitFrame(info.unit)
-							if frame then
-								local iconholder = frame.iconholder or CreateRFIconHolders(frame)
-								local tag = info.msg.."-"..GUID
-								local spell_icon = C_Spell.GetSpellIcon(spellID)
-								local startTimeMS = GetTime()*1000
-								local endTimeMS = startTimeMS + RFIconFrames["Msg"][spellID]["dur"]*1000
-								UpdateRFIcon(tag, iconholder, spell_icon, startTimeMS, endTimeMS)
-							end
-						end
+	elseif event == "UNIT_RAID_BOSS_WHISPER" then
+		local unit, GUID, msg = ...
+		for spellID, info in pairs(RFIconFrames["Msg"]) do
+			if string.find(msg, info.msg) then
+				local enable = T.ValueFromDB({"RFIcon", "Msg", spellID, "enable"})
+				if enable then
+					local unit_frame = T.GetUnitFrame(unit)
+					if unit_frame then
+						local iconholder = unit_frame.iconholder or CreateRFIconHolders(unit_frame)
+						local tag = info.msg.."-"..GUID
+						local spell_icon = C_Spell.GetSpellIcon(spellID)
+						local startTimeMS = GetTime()*1000
+						local endTimeMS = startTimeMS + RFIconFrames["Msg"][spellID]["dur"]*1000
+						UpdateRFIcon(tag, iconholder, spell_icon, startTimeMS, endTimeMS)
 					end
-					break
 				end
+				break
 			end
 		end
 	end
@@ -5786,14 +5801,19 @@ T.CreateRFIconAlert = function(option_page, category, args)
 	end
 end
 
+RFTrigger.events = {
+	["UNIT_SPELLCAST_START"] = true,
+	["UNIT_SPELLCAST_STOP"] = true,
+	["UNIT_TARGET"] = true,
+	["UNIT_AURA"] = true,
+	["ENCOUNTER_END"] = true,
+	["UNIT_RAID_BOSS_WHISPER"] = true,
+}
+
 T.EditRFIconAlert = function(option)
 	if option == "enable" or option == "all" then	
 		if C.DB["GeneralOption"]["disable_all"] or C.DB["GeneralOption"]["disable_rf"] then
-			RFTrigger:UnregisterEvent("UNIT_SPELLCAST_START")
-			RFTrigger:UnregisterEvent("UNIT_SPELLCAST_STOP")
-			RFTrigger:UnregisterEvent("UNIT_TARGET")
-			RFTrigger:UnregisterEvent("UNIT_AURA")
-			RFTrigger:UnregisterEvent("ENCOUNTER_END")
+			T.UnregisterEventAndCallbacks(RFTrigger, RFTrigger.events)
 			
 			for tag, icon in pairs(RFIcons) do
 				CancelRFIcon(tag)
@@ -5802,11 +5822,7 @@ T.EditRFIconAlert = function(option)
 			HideAllRFAuraGlow()
 			HideAllRFIndex()
 		else
-			RFTrigger:RegisterEvent("UNIT_SPELLCAST_START")
-			RFTrigger:RegisterEvent("UNIT_SPELLCAST_STOP")
-			RFTrigger:RegisterEvent("UNIT_TARGET")
-			RFTrigger:RegisterEvent("UNIT_AURA")
-			RFTrigger:RegisterEvent("ENCOUNTER_END")
+			T.RegisterEventAndCallbacks(RFTrigger, RFTrigger.events)
 		end
 	end
 	
@@ -5953,8 +5969,14 @@ T.CreateBossMod = function(option_page, category, args)
 
 	for i, info in pairs(detail_options) do
 		if info.key == "mrt_custom_btn" then
+			info.text = L["粘贴MRT模板"]
 			info.onclick = function(alert, button, self)
 				T.DisplayCopyString(self, alert:copy_mrt(), L["复制粘贴"])
+			end
+		elseif info.key == "mrt_analysis_btn" then
+			info.text = L["MRT战术板解析"]
+			info.onclick = function(alert)
+				alert:ReadNote(true)
 			end
 		elseif info.key == "option_list_btn" then
 			info.onclick = function(alert, button, self)

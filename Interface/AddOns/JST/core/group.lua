@@ -232,6 +232,7 @@ T.GetNameByGUID = GetNameByGUID
 	buff
 ]]
 
+-- 获取队友信息
 local GetGroupInfobyGUID = function(GUID)
 	local info = GUID and GroupInfo[GUID]
 	if info then
@@ -239,6 +240,12 @@ local GetGroupInfobyGUID = function(GUID)
 	end
 end
 T.GetGroupInfobyGUID = GetGroupInfobyGUID
+
+-- 获取队友单位
+local GUIDToUnit = function(GUID)
+	return GUID and GroupInfo[GUID] and GroupInfo[GUID].unit
+end
+T.GUIDToUnit = GUIDToUnit
 
 -- 生成染色的队友昵称
 local ColorNickNameByGUID = function(GUID)
@@ -377,6 +384,7 @@ local classMobility = {
     MONK = 12,
     MAGE = 13
 }
+G.classMobility = classMobility
 
 T.SortTableMobility = function(t, reverse)
     table.sort(

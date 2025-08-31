@@ -3,6 +3,46 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.65
+Fractillus Null Consumption prompt self-protection when 2+ stacks.
+Fractillus Null Consumption raid frames glow when 2+ stacks.
+The Soul Hunters Frailty spirit soak prompt.
+The Soul Hunters Frailty(DOT) prompt self-protection when 2+ stacks.
+The Soul Hunters Frailty(DOT) raid frames glow when 2+ stacks.
+The Soul Hunters Fel Devastation bait front text timer.
+Update Araz/Fractillus mythic timeline mrt note.
+Fix raid frames glow bug.
+
+5.64
+Attempt to fix the bug where self-protection spells frame do not disappear.
+The Soul Hunters error correction of Devourer's Ire dispel assignment.
+The Soul Hunters Charge timer bar with sound effects and team framework serial number switch.
+Salhadaar add mythic difficulty spell countdown text and timeline mrt note.
+Salhadaar prompt defensive spells for Invoke the Oath/Banishment/Reap/Twilight Scar.
+Salhadaar Invoke the Oath/Vengeful Oath timing bar.
+Salhadaar Galactic Smash assignment map.
+Salhadaar Twilight Spikes timing bar.
+Salhadaar Starkiller Swing baiting assignment.
+Salhadaar Starkiller Swing left/right assignment.
+Other error corrections.
+
+5.62
+New tool: Group CC Monitoring, currently used in some boss battles, will be applied to the Mythic+ in the future.
+Loom'ithar deleted Infusion Tether sorting.
+Forgeweaver Araz add CC Monitoring for Arcane Manifestation.
+The Soul Hunters Redo Devourer's Ire dispel assignment.
+The Soul Hunters prompt defensive spells for Encroaching Oblivion/Dark Residue/Soulcrush.
+The Soul Hunters Dark Residue soak assignment.
+The Soul Hunters The Hunt timing bar and Immune spells check.
+The Soul Hunters add mythic difficulty spell countdown text and timeline mrt note.
+Fractillus prompt defensive spells for Null Consumption/Shattershell.
+Fractillus spawn/break wall assignment can provide advance notice of the tank's placement of the wall. (Default off, click on the small gear to open detailed settings and manually enable)
+Fractillus spawn/break wall assignment add the default MRT note for normal/mythic difficulties.These will be load without writing custom MRT note.
+Fractillus spawn/break wall assignment adding custom priority note functionality. it requires copying mythic difficulty MRT note templates.
+Fractillus add mythic difficulty spell countdown text and timeline mrt note.
+Dimensius add raid timing bar for Reverse Gravity.
+Remove useless functions and correct other errors.
+
 5.49
 Plexus Sentinel mythic timeline data.
 Soulbinder Naazindhri mythic timeline data.

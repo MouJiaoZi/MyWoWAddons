@@ -1,4 +1,4 @@
-## Interface: 110107
+## Interface: 110205, 110200
 ## Title: Wago App Companion
 ## Group: WagoAppCompanion
 ## Author: The Wago team

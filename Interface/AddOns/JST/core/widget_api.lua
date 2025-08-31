@@ -154,6 +154,41 @@ T.IterateBoss = function()
   end
 end
 
+T.GetBossUnit = function(target_npcID)
+	local matched = {}
+	if target_npcID then
+		for unit in T.IterateBoss() do
+			local GUID = UnitGUID(unit)
+			local npcID = select(6, strsplit("-", GUID))
+			if npcID == target_npcID then
+				table.insert(matched, unit)
+			end
+		end
+	end
+	
+	if next(matched) then
+		return matched[1], matched
+	end
+end
+
+T.GetCurrentTank = function(npcID)
+	local boss_unit
+	if npcID then
+		boss_unit = T.GetBossUnit(npcID)
+	else
+		boss_unit = "boss1"
+	end
+	
+	if boss_unit then
+		for unit in Lib:IterateGroupMembers() do
+			local isTanking = UnitDetailedThreatSituation(unit, boss_unit)
+            if isTanking then                  
+                return unit
+            end
+		end
+	end
+end
+
 T.CheckEncounter = function(npcIDs, ficon)
 	local difficultyID = select(3, GetInstanceInfo())
 	if CheckDifficulty(ficon, difficultyID) then -- 难度符合
@@ -512,9 +547,47 @@ T.SendChatMsg = function(msg, rp, channel)
 				SendChatMessage(msg_rp.."..", channel or "SAY")
 			end, rp)
 			ticker.start = GetTime()
+			
+			return ticker
 		else
 			SendChatMessage(msg.."..", channel or "SAY")
 		end
+	end
+end
+
+-- 循环消息
+T.StartMsgTicker = function(parent, msg, rp, channel)
+	if rp then
+		if not parent.msg_ticker then
+			parent.msg_ticker = C_Timer.NewTicker(1, function(self)
+				local remain = rp - floor(GetTime() - self.start) + 1
+				local msg_rp = gsub(msg, "%%dur", remain)
+				SendChatMessage(msg_rp.."..", channel or "SAY")
+			end, rp)
+			parent.msg_ticker.start = GetTime()
+			
+		elseif parent.msg_ticker:IsCancelled() then
+			parent.msg_ticker:Invoke()
+			parent.msg_ticker.start = GetTime()
+			
+		end
+	else
+		if not parent.msg_ticker then
+			parent.msg_ticker = C_Timer.NewTicker(1, function(self)	
+				SendChatMessage(msg.."..", channel or "SAY")
+			end)
+			
+		elseif parent.msg_ticker:IsCancelled() then
+			parent.msg_ticker:Invoke()
+			
+		end
+	end
+end
+
+-- 停止循环消息
+T.StopMsgTicker = function(parent)
+	if parent.msg_ticker then
+		parent.msg_ticker:Cancel()
 	end
 end
 
@@ -536,6 +609,7 @@ T.SendAuraMsg = function(str, channel, spell, stack, dur, tag)
 	end
 	T.SendChatMsg(msg, nil, channel or "SAY")
 end
+
 
 --====================================================--
 --[[                 -- 颜色处理 --                 ]]--
@@ -1078,15 +1152,17 @@ T.createGUIbd = function(f, a)
 end
 
 -- 图标粗边框
-T.SetHighLightBorderColor = function(frame, anchor, color)	
+T.SetHighLightBorderColor = function(frame, anchor, color, edgeSize)
+	local size = edgeSize or 5
+	
 	frame.glow = CreateFrame("Frame", nil, frame, "BackdropTemplate")
 	frame.glow:SetFrameLevel(frame:GetFrameLevel()+1)
 	frame.glow:SetAllPoints(anchor)
 	frame.glow:SetBackdrop({
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		edgeFile = "Interface\\Buttons\\WHITE8x8",
-		edgeSize = 5,
-		insets = { left = 5, right = 5, top = 5, bottom = 5}
+		edgeSize = size,
+		insets = { left = size, right = size, top = size, bottom = size}
 	})
 	frame.glow:SetBackdropColor(0, 0, 0, 0)
 	

@@ -6,11 +6,11 @@ end
 
 --------------------------------Locals--------------------------------
 if G.Client == "zhCN" or G.Client == "zhTW" then
-
+	L["捡球"] = "捡球"
 elseif G.Client == "ruRU" then
-
+	--L["捡球"] = "Pickup"
 else
-
+	L["捡球"] = "Pickup"
 end
 ---------------------------------Notes--------------------------------
 
@@ -420,13 +420,14 @@ G.Encounters[2691] = {
 					category = "BossMod",
 					spellID = 1243609,
 					enable_tag = "rl",
-					name = string.format(L["NAME多人光环提示"], T.GetIconLink(1243609)),	
+					name = string.format(L["NAME多人光环提示"], T.GetIconLink(1243577)..T.GetIconLink(1243609)),	
 					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -400},
 					events = {
 						["UNIT_AURA"] = true,	
 					},
 					init = function(frame)						
 						frame.spellIDs = {
+							[1243577] = {},-- 引力倒逆
 							[1243609] = {},-- 浮空
 						}
 						

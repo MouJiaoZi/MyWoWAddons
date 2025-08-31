@@ -11,18 +11,21 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["坦克出墙"] = "坦克出墙"
 	L["出墙消墙位置分配"] = "出墙、消墙位置分配"
 	L["安全区文字持续时间"] = "安全区文字持续时间"
+	L["提前5秒提示坦克墙位置"] = "提前5秒提示坦克墙位置"
 elseif G.Client == "ruRU" then
-	--L["出墙"] = "Spwan wall"
+	--L["出墙"] = "Spawn wall"
 	--L["消墙"] = "Break wall"
-	--L["坦克出墙"] = "Tank spwan wall"
-	--L["出墙消墙位置分配"] = "Spwan/break wall assignment"
+	--L["坦克出墙"] = "Tank Spawn wall"
+	--L["出墙消墙位置分配"] = "Spawn/break wall assignment"
 	--L["安全区文字持续时间"] = "Safe spot display duration"
+	--L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"	
 else
-	L["出墙"] = "Spwan wall"
+	L["出墙"] = "Spawn wall"
 	L["消墙"] = "Break wall"
-	L["坦克出墙"] = "Tank spwan wall"
-	L["出墙消墙位置分配"] = "Spwan/break wall assignment"
+	L["坦克出墙"] = "Tank Spawn wall"
+	L["出墙消墙位置分配"] = "Spawn/break wall assignment"
 	L["安全区文字持续时间"] = "Safe spot display duration"
+	L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"
 end
 ---------------------------------Notes--------------------------------
 
@@ -63,10 +66,10 @@ G.Encounters[2747] = {
 			spells = {
 				{1236784, "12"},--【破碎节点】
 				{1232760, "12"},--【水晶裂伤】
-				{1232130},--【节点破片】
+				--{1232130},--【节点破片】
 			},
 			options = {
-				{ -- 图标 水晶裂伤（史诗待测试）
+				{ -- 图标 水晶裂伤（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -79,17 +82,17 @@ G.Encounters[2747] = {
 		{ -- 虚空注能节点
 			spells = {
 				{1236785},--【虚空注能节点】
-				{1232130},--【节点破片】
+				--{1232130},--【节点破片】
 				{1247424},--【虚无吞噬】
-				{1247495},--【虚无爆炸】
+				--{1247495},--【虚无爆炸】
 			},
 			options = {
-				{ -- 文字 虚无吞噬 倒计时（史诗待测试）
+				{ -- 文字 虚无吞噬 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["大圈"]..L["倒计时"],
 					data = {
-						spellID = 1247424,
+						spellID = 1236785,
 						events =  {
 							["UNIT_AURA_ADD"] = true,
 						},	
@@ -98,12 +101,55 @@ G.Encounters[2747] = {
 						if event == "ENCOUNTER_START" then
 							self.round = true							
 							self.last_cast = 0
-							T.Start_Text_DelayTimer(self, 51, L["大圈"], true)
+							self.difficultyID = select(3, ...)
+							
+							if self.difficultyID == 16 then
+								T.Start_Text_DelayTimer(self, 42, L["大圈"], true)
+							else
+								T.Start_Text_DelayTimer(self, 51, L["大圈"], true)
+							end
 						elseif event == "UNIT_AURA_ADD" then
 							local unit, spellID = ...
 							if spellID == 1247424 and GetTime() - self.last_cast > 1 then
 								self.last_cast = GetTime()
-								T.Start_Text_DelayTimer(self, 51, L["大圈"], true)
+								if self.difficultyID == 16 then
+									T.Start_Text_DelayTimer(self, 40, L["大圈"], true)
+								else
+									T.Start_Text_DelayTimer(self, 51, L["大圈"], true)
+								end	
+							end
+						end
+					end,
+				},
+				{ -- 文字 虚无吞噬2层（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = T.GetIconLink(1247424)..string.format(L["层数大于"], 1),
+					data = {
+						spellID = 1247424,
+						events =  {
+							["UNIT_AURA_ADD"] = true,
+							["UNIT_AURA_UPDATE"] = true,
+							["UNIT_AURA_REMOVED"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "UNIT_AURA_ADD" or event == "UNIT_AURA_UPDATE" then
+							local unit, spellID, auraID = ...
+							if unit == "player" and spellID == self.data.spellID then
+								local aura_data = C_UnitAuras.GetAuraDataByAuraInstanceID("player", auraID)
+								if aura_data and aura_data.applications > 1 then
+									self.text:SetText(string.format("%s%d %s", T.GetSpellIcon(1247424), aura_data.applications, L["注意自保"]))
+									self:Show()
+									T.PlaySound("defense")
+								else
+									self:Hide()
+								end
+							end
+						elseif event == "UNIT_AURA_REMOVED" then
+							local unit, spellID = ...
+							if unit == "player" and spellID == self.data.spellID then
+								self:Hide()
 							end
 						end
 					end,
@@ -133,11 +179,40 @@ G.Encounters[2747] = {
 					reset = function(frame, event)
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
+				},				
+
+				{ -- 首领模块 虚无吞噬 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 1247495,
+					enable_tag = "none",
+					name = T.GetIconLink(1247424)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
+						["UNIT_AURA_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.aura_spellIDs = {
+							[1247424] = 0,
+						}
+						frame.ignore_roles = {"TANK"}
+						frame.threshold = 65
+						
+						T.InitPersonalSpellAlertbyAura(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetPersonalSpellAlertbyAura(frame)
+					end,
 				},
 				{ -- 团队框架高亮 虚无吞噬（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 1247424,
+					amount = 2,
 				},
 			},
 		},
@@ -146,7 +221,7 @@ G.Encounters[2747] = {
 				{1233917},--【结晶过载】
 			},
 			options = {
-				{ -- 计时条 结晶过载（待测试）
+				{ -- 计时条 狂怒粉碎（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1225673,
@@ -159,7 +234,7 @@ G.Encounters[2747] = {
 				{1224414},--【结晶震荡波】
 			},
 			options = {
-				{ -- 文字 结晶震荡波 倒计时（史诗待测试）
+				{ -- 文字 结晶震荡波 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["出墙"]..L["倒计时"],
@@ -170,8 +245,11 @@ G.Encounters[2747] = {
 							["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						},
 						info = {
-							["all"] = {
+							[15] = {
 								[1] = {7, 20.7, 30.3, 20.7, 30.3, 20.7, 30.3, 20.7, 30.3, 20.7, 30.3, 20.7, 30.3, 20.7, 30.3, 20.7, 30.3, 20.7},
+							},
+							[16] = {
+								[1] = {7.5, 14.5, 25.5, 14.5, 25.5, 14.5, 25.5, 14.5, 25.5, 14.5, 25.5, 14.5, 25.5, 14.5, 25.5},
 							},
 						},
 						cd_args = {
@@ -218,18 +296,27 @@ G.Encounters[2747] = {
 						["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						["UNIT_SPELLCAST_START"] = true,
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						["JST_CUSTOM"] = true,
 					},
 					custom = {
 						{
+							key = "difficulty_index_dd",
+							text = L["MRT模板难度"],
+							default = 15,
+							key_table = {
+								{14, PLAYER_DIFFICULTY1},
+								{15, PLAYER_DIFFICULTY2},
+								{16, PLAYER_DIFFICULTY6},
+							},
+						},
+						{
+							key = "1_blank",
+						},
+						{
 							key = "mrt_custom_btn",
-							text = L["粘贴MRT模板"],
 						},
 						{
 							key = "mrt_analysis_btn",
-							text = L["MRT战术板解析"],
-							onclick = function(alert)
-								alert:ReadNoteAssignments(true)
-							end
 						},
 						{
 							key = "safe_dur_sl",
@@ -237,6 +324,11 @@ G.Encounters[2747] = {
 							default = 30,
 							min = 5,
 							max = 50,
+						},
+						{
+							key = "tank_advance_bool",
+							text = L["提前5秒提示坦克墙位置"],
+							default = false,
 						},
 						{
 							key = "rl_bool",
@@ -451,6 +543,27 @@ G.Encounters[2747] = {
 							end
 						end
 						
+						function frame:DisplayTankSpwan(affected_dur)
+							for unit in T.IterateGroupMembers() do
+								local isTanking = UnitDetailedThreatSituation(unit, "boss1")
+								
+								if isTanking then
+									local GUID = UnitGUID(unit)
+									local position = table.remove(frame.tankSpawns, 1)
+									
+									if position then
+										frame:DisplayAssignment("SPAWN", GUID, position, true)
+										
+										C_Timer.After(affected_dur, function()
+											frame:BarApplyChanges(position)
+										end)
+									end
+									
+									return
+								end
+							end
+						end
+						
 						frame.spawnGUIDs = {}
 						frame.breakGUIDs = {}
 						frame.spawns = {}
@@ -459,6 +572,57 @@ G.Encounters[2747] = {
 						frame.safespots = {}
 						frame.spwans_count = 0
 						frame.rotation_count = 0
+						frame.breakOrder = {}
+						
+						local normalDefault = [[
+							+ 1 1 0 1 0 0 (3)
+							T 6 (3)
+							+ 0 1 0 1 1 0 (3)
+							- 0 2 0 2 0 0
+							
+							+ 1 1 0 1 0 0 (3)
+							T 6 (3)
+							+ 0 1 0 1 1 0 (3)
+							- 1 1 0 1 1 0
+							
+							+ 1 1 0 1 0 0 (3)
+							T 6 (3)
+							+ 0 1 0 1 1 0 (3)
+							- 0 2 0 2 0 0
+							
+							+ 1 1 0 1 0 0 (3)
+							T 6 (3)
+							+ 0 1 0 1 1 0 (3)
+							- 0 1 0 1 0 2
+							
+							+ 1 1 0 1 0 0 (3)
+							T 6 (3)
+							+ 0 1 0 1 1 0 (3)
+							- 1 1 0 1 1 0
+							
+							+ 1 1 0 1 0 0 (3)
+							T 6 (3)
+							+ 0 1 0 1 1 0 (3)
+							- 1 2 0 0 0 1
+							
+							+ 1 1 1 0 0 0 (4)
+							T 6 (4)
+							+ 1 1 1 0 0 0 (4)
+							- 2 2 0 0 0 0
+							
+							+ 1 1 1 0 0 0 (4)
+							T 6 (4)
+							+ 1 1 1 0 0 0 (4)
+							- 1 1 1 0 0 1
+							
+							+ 1 1 1 0 0 0 (4)
+							T 6 (4)
+							+ 0 1 1 0 1 0 (4)
+							- 0 0 0 0 0 0
+						]]
+						
+						normalDefault = gsub(normalDefault, "\t", "")
+						normalDefault = string.format("#%dstart%s[%s]\n%send", frame.config_id, L["出墙消墙位置分配"], PLAYER_DIFFICULTY1, normalDefault)
 						
 						local heroicDefault = [[
 							+ 1 1 0 1 1 0 (3)
@@ -506,28 +670,98 @@ G.Encounters[2747] = {
 							+ 1 1 1 0 1 0 (4)
 							- 0 0 0 0 0 0
 						]]
-												
+						
 						heroicDefault = gsub(heroicDefault, "\t", "")
-						heroicDefault = string.format("#%dstart%s\n%send", frame.config_id, L["出墙消墙位置分配"], heroicDefault)
+						heroicDefault = string.format("#%dstart%s[%s]\n%send", frame.config_id, L["出墙消墙位置分配"], PLAYER_DIFFICULTY2, heroicDefault)
+						
+						local mythicDefault = [[
+							+ 1 1 0 1 1 0 (3)
+							T 6 (3)
+							+ 1 1 0 1 1 0 (3)
+							- 2 2 0 2 2 0
+							
+							+ 1 1 0 1 1 0 (3)
+							T 4 (3)
+							+ 1 1 0 1 1 0 (3)
+							- 0 2 0 1 2 3
+							
+							+ 0 1 1 0 1 1 (4)
+							T 1 (4)
+							+ 0 1 1 0 1 1 (4)
+							- 0 2 2 0 2 2
+							
+							+ 0 1 1 0 1 1 (4)
+							T 6 (4)
+							+ 0 1 1 0 1 1 (4)
+							- 1 2 2 0 2 1
+							
+							+ 0 1 1 0 1 1 (4)
+							T 5 (4)
+							+ 1 1 1 0 1 0 (4)
+							- 1 2 2 0 2 1
+							
+							+ 1 1 1 0 1 0 (4)
+							T 3 (4)
+							+ 0 1 1 0 1 1 (4)
+							- 1 3 1 0 2 1
+							
+							+ 1 1 1 0 1 0 (4)
+							T 2 (3)
+							+ 0 1 0 1 1 1 (3)
+							- 0 6 0 0 1 1
+							
+							+ 0 2 0 0 1 1 (3)
+							T 2 (3)
+							+ 1 1 0 0 1 1 (3)
+							- 0 0 0 0 0 0
+						]]
+						
+						mythicDefault = gsub(mythicDefault, "\t", "")
+						mythicDefault = string.format("#%dstart%s[%s]\n%send", frame.config_id, L["出墙消墙位置分配"], PLAYER_DIFFICULTY6, mythicDefault)
 						
 						function frame:copy_mrt()
-							return heroicDefault
+							local difficultyID = C.DB["BossMod"][self.config_id]["difficulty_index_dd"]
+							if difficultyID == 14 then
+								return normalDefault
+							elseif difficultyID == 15 then
+								return heroicDefault
+							else
+								local raidlist = ""
+								for unit in T.IterateGroupMembers() do
+									local name = UnitName(unit)
+									raidlist = raidlist.." "..name
+								end
+								
+								raidlist = string.format("#%dprioritystart\n%s\nend", self.config_id, raidlist)
+								
+								return mythicDefault.."\n\n"..raidlist.."\n"
+							end
 						end
 						
-						function frame:ReadNoteAssignments(display)
+						function frame:ReadNote(display)
 							self.spawns = table.wipe(self.spawns)
 							self.tankSpawns = table.wipe(self.tankSpawns)
 							self.breaks = table.wipe(self.breaks)
 							self.safespots = table.wipe(self.safespots)
-						
+							self.breakOrder = table.wipe(self.breakOrder)
+							
 							local tag = string.format("#%sstart", self.config_id)
 							local note = VMRT and VMRT.Note and VMRT.Note.Text1
 							local useDefaultAssignments = not (note and note:match(tag))
 							local defaultAssignment
 							
 							if useDefaultAssignments then
-								if frame.difficultyID == 15 or display then -- Heroic
+								local difficultyID = select(3, GetInstanceInfo())
+								if difficultyID ~= 14 and difficultyID ~= 15 and difficultyID ~= 16 then
+									difficultyID = C.DB["BossMod"][self.config_id]["difficulty_index_dd"]
+								end
+								
+								if difficultyID == 14 then
+									defaultAssignment = normalDefault
+								elseif difficultyID == 15 then
 									defaultAssignment = heroicDefault
+								elseif difficultyID == 16 then
+									defaultAssignment = mythicDefault
 								end
 							end
 	
@@ -602,6 +836,21 @@ G.Encounters[2747] = {
 									end
 								end
 							end
+							
+							for _, line in T.IterateNoteAssignment(self.config_id.."priority") do
+								local GUIDs = T.LineToGUIDArray(line)
+								local str = ""
+								
+								for index, GUID in ipairs(GUIDs) do
+									self.breakOrder[GUID] = index
+									local name = T.ColorNickNameByGUID(GUID)
+									str = str .. " "..name
+								end
+								
+								if display then
+									T.msg(string.format("%s→%s", L["左"], L["右"]), str)
+								end
+							end
 						end
 						
 						function frame:Assign(assignmentType)
@@ -617,7 +866,20 @@ G.Encounters[2747] = {
 							
 							if not positions then return end
 							
-							T.SortTable(affected, true)
+							if next(self.breakOrder) then
+								table.sort(affected, function(guidA, guidB)
+									local orderA = self.breakOrder[guidA] or 0
+									local orderB = self.breakOrder[guidB] or 0
+									
+									if orderA ~= orderB then
+										return orderA < orderB
+									else
+										return guidA < guidB
+									end
+								end)
+							else
+								T.SortTable(affected, true)
+							end
 							
 							for i, GUID in ipairs(affected) do
 								local position = positions[i]
@@ -701,50 +963,53 @@ G.Encounters[2747] = {
 								frame:BarDisplay(i)
 							end
 							
-							frame:ReadNoteAssignments()
+							frame:ReadNote()
 							
 							-- Broadcast the initial safespot
-							local safespot = table.remove(frame.safespots, 1)
-							frame:DisplaySafe(safespot)
+							frame.safespot = table.remove(frame.safespots, 1)
+							frame:DisplaySafe(frame.safespot)
 							
 							if C.DB["BossMod"][frame.config_id]["rl_bool"] then
 								frame.rl_frame:Show()
+							end
+							
+							if C.DB["BossMod"][frame.config_id]["tank_advance_bool"] then
+								C_Timer.After(11, function()
+									T.FireEvent("JST_CUSTOM", frame.config_id)
+								end)
 							end
 						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
 							local unit, castGUID, spellID = ...
 							
 							if unit == "boss1" then
 								if spellID == 1233416 or spellID == 1231871 then -- 结晶震荡波/震波猛击
-									local safespot = table.remove(frame.safespots, 1)
-									frame:DisplaySafe(safespot)
+									frame.safespot = table.remove(frame.safespots, 1)
+									frame:DisplaySafe(frame.safespot)
 								elseif spellID == 1220394 then -- 粉碎抽打
-									local safespot = frame.safespots[1]
-									frame:DisplaySafe(safespot)
+									frame.safespot = frame.safespots[1]
+									frame:DisplaySafe(frame.safespot)
 								end
 							end
+
 						elseif event == "UNIT_SPELLCAST_START" then
 							local unit, castGUID, spellID = ...
 							
 							if unit == "boss1" and spellID == 1231871 then -- 震波猛击
-								for unit in T.IterateGroupMembers() do
-									local isTanking = UnitDetailedThreatSituation(unit, "boss1")
-									
-									if isTanking then
-										local GUID = UnitGUID(unit)
-										local position = table.remove(frame.tankSpawns, 1)
-										
-										if position then
-											frame:DisplayAssignment("SPAWN", GUID, position, true)
-											
-											C_Timer.After(4, function()
-												frame:BarApplyChanges(position)
-											end)
-										end
-										
-										return
-									end
-								end
+								if C.DB["BossMod"][frame.config_id]["tank_advance_bool"] then
+									C_Timer.After(35, function()
+										T.FireEvent("JST_CUSTOM", frame.config_id)
+									end)
+								else
+									frame:DisplayTankSpwan(4)
+								end							
 							end
+							
+						elseif event == "JST_CUSTOM" then
+							local id, set = ...
+							if id == frame.config_id then
+								frame:DisplayTankSpwan(9)
+							end		
+							
 						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, sourceGUID, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 							
@@ -853,7 +1118,7 @@ G.Encounters[2747] = {
 				{1227378, "5"},--【水晶覆体】
 			},
 			options = {
-				{ -- 文字 碎壳 倒计时（史诗待测试）
+				{ -- 文字 碎壳 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["消墙"]..L["倒计时"],
@@ -864,8 +1129,11 @@ G.Encounters[2747] = {
 							["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						},
 						info = {
-							["all"] = {
+							[15] = {
 								[1] = {40.5, 51, 51, 51, 51, 51, 51, 51, 51},
+							},
+							[16] = {
+								[1] = {32.5, 40, 40, 40, 40, 40, 40, 40, 40},
 							},
 						},
 						cd_args = {
@@ -902,6 +1170,33 @@ G.Encounters[2747] = {
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},
+				{ -- 首领模块 碎壳 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 1227367,
+					enable_tag = "none",
+					name = T.GetIconLink(1227373)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
+						["UNIT_AURA_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.aura_spellIDs = {
+							[1227373] = 0,
+						}
+						frame.ignore_roles = {"TANK"}
+						frame.threshold = 65
+						
+						T.InitPersonalSpellAlertbyAura(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetPersonalSpellAlertbyAura(frame)
+					end,
+				},
 				{ -- 图标 水晶覆体（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -909,7 +1204,7 @@ G.Encounters[2747] = {
 					unit = "player",
 					spellID = 1227378,
 					tip = L["定身"],
-				},			
+				},
 			},
 		},
 		{ -- 猛波震击
@@ -917,7 +1212,7 @@ G.Encounters[2747] = {
 				{1231871, "0,12"},--【猛波震击】			
 			},
 			options = {
-				{ -- 文字 猛波震击 倒计时（史诗待测试）
+				{ -- 文字 猛波震击 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -929,8 +1224,11 @@ G.Encounters[2747] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},
 						info = {
-							["all"] = {
+							[15] = {
 								[1] = {18, 51, 51, 51, 51, 51, 51, 51, 51},
+							},
+							[16] = {
+								[1] = {16, 40, 40, 40, 40, 40, 40, 40, 40},
 							},
 						},
 						cd_args = {

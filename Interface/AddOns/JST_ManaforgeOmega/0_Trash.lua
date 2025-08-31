@@ -36,36 +36,41 @@ G.Encounters["r2810"] = { -- Test
 			},
 			options = {
 				{ -- 首领模块 提示稳定飞行模式
-					category = "TextAlert", 
-					type = "spell",
-					color = {1, 1, 1},
-					preview = string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)),
-					data = {
-						spellID = 404468,
-						events = {
-							["UNIT_AURA_ADD"] = true,
-							["UNIT_AURA_REMOVED"] = true,
-						},
+					category = "BossMod",
+					spellID = 404468,
+					enable_tag = "none",
+					name = string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)),
+					points = {hide = true},
+					events = {
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
 					},
-					update = function(self, event, ...)
+					init = function(frame)
+						if not frame.text_frame then
+							frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
+							frame.text_frame.text:SetText(string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)))
+						end
+						
+						function frame:check()
+							if AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
+								self.text_frame:Show()
+							else
+								self.text_frame:Hide()
+							end
+						end						
+					end,
+					update = function(frame, event, ...)
 						if event == "UNIT_AURA_ADD" or event == "UNIT_AURA_REMOVED" then
 							local unit, spellID = ...
 							if unit == "player" and spellID == 404468 then
-								if AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
-									self.text:SetText(string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)))
-									self:Show()
-								else
-									self:Hide()
-								end
+								frame:check()
 							end
 						else
-							if AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
-								self.text:SetText(string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)))
-								self:Show()
-							else
-								self:Hide()
-							end
+							frame:check()
 						end
+					end,
+					reset = function(frame, event)
+						frame.text_frame:Hide()
 					end,
 				},
 			},

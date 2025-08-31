@@ -1,4 +1,4 @@
-local T, C, L, G = unpack(select(2, ...))
+﻿local T, C, L, G = unpack(select(2, ...))
 
 ----------------------------------------------------------
 ---------------[[        Callbacks        ]]--------------
@@ -81,7 +81,19 @@ local CallbackEvents = {
 	["UNIT_AURA_REMOVED"] = true,
 	["ENCOUNTER_ENGAGE_UNIT"] = true,
 	["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
-	["ENCOUNTER_HIDE_BOSS_UNIT"] = true,	
+	["ENCOUNTER_HIDE_BOSS_UNIT"] = true,
+	["UNIT_RAID_BOSS_WHISPER"] = true,
+	["JST_UNIT_ALIVE"] = true,
+	["JST_MACRO_PRESSED"] = true,
+	["JST_PRIVATE_AURA_EVENT"] = true,
+	["JST_PRIVATE_AURA_CANCEL_EVENT"] = true,
+	["JST_DISPEL_EVENT"] = true,
+	["JST_CooldownListUpdate"] = true,
+	["JST_CooldownListWipe"] = true,
+	["JST_CooldownUpdate"] = true,
+	["JST_CooldownAdded"] = true,
+	["JST_GROUP_CD_UPDATE"] = true,
+	["JST_GROUP_CC_NEXT"] = true,
 }
 
 T.RegisterEventAndCallbacks = function(frame, events, update)
@@ -136,14 +148,55 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 	if event == "CHAT_MSG_ADDON" then
 		local prefix, message, channel, sender = ...
 		if prefix == "jstpaopao" then
-			T.FireEvent("ADDON_MSG", channel, sender, string.split(",", message))
+			local GUID, MSG_TYPE, msg = string.split(",", message)
+			
+			if MSG_TYPE == "boss_whisper" then
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("UNIT_RAID_BOSS_WHISPER", unit, GUID, msg)
+				
+			elseif MSG_TYPE == "unit_alive" then
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("JST_UNIT_ALIVE", unit, GUID)
+				
+			elseif MSG_TYPE == "target_me" then
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("JST_PRIVATE_AURA_EVENT", unit, GUID)
+				
+			elseif string.match(MSG_TYPE, "target_me(%d+)") then
+				local index = string.match(MSG_TYPE, "target_me(%d+)")
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("JST_PRIVATE_AURA_EVENT", unit, GUID, tonumber(index))
+				
+			elseif MSG_TYPE == "remove_me" then
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("JST_PRIVATE_AURA_CANCEL_EVENT", unit, GUID)
+				
+			elseif string.match(MSG_TYPE, "remove_me(%d+)") then
+				local index = string.match(MSG_TYPE, "remove_me(%d+)")
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("JST_PRIVATE_AURA_CANCEL_EVENT", unit, GUID, tonumber(index))
+				
+			elseif MSG_TYPE == "dispel_event" then
+				local spellID = tonumber(msg)
+				local unit = T.GUIDToUnit(GUID)
+				T.FireEvent("JST_DISPEL_EVENT", unit, GUID, spellID)
+				
+			else
+				T.FireEvent("ADDON_MSG", channel, sender, string.split(",", message))
+			end
+			
 		end
 	elseif event == "CHAT_MSG_RAID_BOSS_WHISPER" then
 		local msg = ...
 		T.addon_msg("boss_whisper,"..msg, "GROUP")
+		
+	elseif event == "PLAYER_ALIVE" then
+		T.addon_msg("unit_alive", "GROUP")
+		
 	elseif event == "ENCOUNTER_START" then
 		self.engaged = table.wipe(self.engaged)
 		self.active = table.wipe(self.active)
+		
 	elseif event == "INSTANCE_ENCOUNTER_ENGAGE_UNIT" then
 		C_Timer.After(.5, function()
 			for GUID in pairs(self.active) do
@@ -151,8 +204,6 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				if not unit then
 					self.active[GUID] = nil
 					T.FireEvent("ENCOUNTER_HIDE_BOSS_UNIT", GUID)
-					--local npcID = select(6, strsplit("-", GUID))
-					--print("ENCOUNTER_HIDE_BOSS_UNIT", GUID, T.GetFomattedNameFromNpcID(npcID))
 				end
 			end
 			for unit in T.IterateBoss() do
@@ -160,12 +211,10 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				if not self.engaged[GUID] then
 					self.engaged[GUID] = true
 					T.FireEvent("ENCOUNTER_ENGAGE_UNIT", unit, GUID)
-					--print("ENCOUNTER_ENGAGE_UNIT", unit, GUID, UnitName(unit))
 				end
 				if not self.active[GUID] then
 					self.active[GUID] = true
 					T.FireEvent("ENCOUNTER_SHOW_BOSS_UNIT", unit, GUID)
-					--print("ENCOUNTER_SHOW_BOSS_UNIT", unit, GUID, UnitName(unit))
 				end
 			end
 		end)
@@ -174,8 +223,246 @@ end)
 
 eventframe:RegisterEvent("CHAT_MSG_ADDON")
 eventframe:RegisterEvent("CHAT_MSG_RAID_BOSS_WHISPER")
+eventframe:RegisterEvent("PLAYER_ALIVE")
 eventframe:RegisterEvent("ENCOUNTER_START")
 eventframe:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
+
+----------------------------------------------------------
+-----------------[[    队伍技能事件    ]]-----------------
+----------------------------------------------------------
+local LibOpenRaid = LibStub:GetLibrary("LibOpenRaid-1.0", true)
+
+local callbacks = {
+    CooldownListUpdate = function(...)
+		T.FireEvent("JST_CooldownListUpdate", ...) 
+	end,
+    CooldownListWipe = function(...) 
+		T.FireEvent("JST_CooldownListWipe", ...)
+	end,
+    CooldownUpdate = function(...)
+		T.FireEvent("JST_CooldownUpdate", ...)
+	end,
+    CooldownAdded = function(...)
+		T.FireEvent("JST_CooldownAdded", ...)
+	end
+}
+
+LibOpenRaid.RegisterCallback(callbacks, "CooldownListUpdate", "CooldownListUpdate")
+LibOpenRaid.RegisterCallback(callbacks, "CooldownListWipe", "CooldownListWipe")
+LibOpenRaid.RegisterCallback(callbacks, "CooldownUpdate", "CooldownUpdate")
+LibOpenRaid.RegisterCallback(callbacks, "CooldownAdded", "CooldownAdded")
+
+G.GroupTrackedSpellsbySpellID = {}
+G.GroupTrackedSpellsbyName = {}
+G.GroupTrackedSpellsbyIndex = {
+	-- 控制
+	372048, -- Oppressing Roar
+    368970, -- Tail Swipe
+    358385, -- Landslide
+    108199, -- Gorefiend's Grasp
+    179057, -- Chaos Nova
+    202138, -- Sigil of Chains
+    207684, -- Sigil of Misery
+    119381, -- Leg Sweep
+    116844, -- Ring of Peace
+    102793, -- Ursol's Vortex
+    102359, -- Mass Entanglement
+    192058, -- Capacitor Totem
+    30283, -- Shadowfury
+    109248, -- Binding Shot
+    46968, -- Shockwave
+	-- 免疫
+	45438, -- Ice Block
+    196555, -- Netherwalk
+    186265, -- Turtle
+    642, -- Divine Shield
+    31224, -- Cloak of Shadows
+	-- 减伤
+	47585, -- Dispersion
+	22812, -- 树皮术
+}
+
+for index, spellID in pairs(G.GroupTrackedSpellsbyIndex) do
+	G.GroupTrackedSpellsbySpellID[spellID] = index
+	
+	local spell = C_Spell.GetSpellName(spellID)
+	G.GroupTrackedSpellsbyName[spell] = spellID
+end
+
+local GSFrame = CreateFrame("Frame", nil, UIParent)
+
+GSFrame.entries = {}
+
+function GSFrame:GetEntry(GUID, spellID)
+	for _, entry in ipairs(self.entries) do
+        if entry.GUID == GUID and entry.spellID == spellID then
+            return entry
+        end
+    end
+end
+
+function GSFrame:UpdateEntry(GUID, spellID, cooldownInfo)
+    if not GUID or not cooldownInfo or not spellID or not G.GroupTrackedSpellsbySpellID[spellID] then return false end
+    
+    local entry = self:GetEntry(GUID, spellID)
+    
+    -- If no entry for this GUID/spellID combination exists, create it
+    if not entry then
+        local spellInfo = C_Spell.GetSpellInfo(spellID)
+        
+        table.insert(self.entries,
+            {
+                GUID = GUID,
+                spellID = spellID,
+                spellName = spellInfo.name,
+                spellIcon = spellInfo.iconID,
+            }
+        )
+        
+        entry = self.entries[#self.entries]
+    end
+    
+    -- Update expirationTime/duration for the entry
+    local _, _, timeLeft, charges, _, _, _, duration = LibOpenRaid.GetCooldownStatusFromCooldownInfo(cooldownInfo)
+    local expirationTime = charges >= 1 and 0 or GetTime() + timeLeft
+	
+    entry.charges = charges
+    entry.duration = duration
+    entry.expirationTime = expirationTime
+end
+
+function GSFrame:UpdateAllEntries()
+    -- Wipe all info
+    self.entries = table.wipe(self.entries)
+    
+    -- Update entries
+    local allUnitsCooldown = LibOpenRaid.GetAllUnitsCooldown()
+    
+    if allUnitsCooldown then
+        for unit, unitCooldowns in pairs(allUnitsCooldown) do
+            local GUID = UnitGUID(unit)
+
+			for spellID, cooldownInfo in pairs(unitCooldowns) do
+				self:UpdateEntry(GUID, spellID, cooldownInfo)
+			end
+        end
+    end
+    
+    -- Sort entries
+    table.sort(self.entries,
+        function(entryA, entryB)
+            local spellA = entryA.spellID
+            local spellB = entryB.spellID
+            
+            local indexA = G.GroupTrackedSpellsbySpellID[spellA]
+            local indexB = G.GroupTrackedSpellsbySpellID[spellB]
+            
+            if indexA ~= indexB then
+                return indexA < indexB
+            end
+            
+			if entryA.GUID and entryB.GUID then
+				return entryA.GUID < entryB.GUID
+			end
+        end
+    )
+    
+    LibOpenRaid.RequestAllData()
+end
+
+function GSFrame:Notify()
+    T.FireEvent("JST_GROUP_CD_UPDATE", self.entries)
+end
+
+GSFrame:SetScript("OnEvent", function(self, event, ...)
+	if event == "JST_CooldownListUpdate" then
+        local unit, unitCooldowns = ...  
+        local GUID = UnitGUID(unit)
+        
+        if unitCooldowns then
+            for spellID, cooldownInfo in pairs(unitCooldowns) do
+                self:UpdateEntry(GUID, spellID, cooldownInfo)
+            end
+        end 
+        self:Notify()
+		
+    elseif event == "JST_CooldownListWipe" then
+	
+        self:UpdateAllEntries()
+        self:Notify()
+		
+    elseif event == "JST_CooldownUpdate" or event == "JST_CooldownAdded" then
+        local unit, spellID, cooldownInfo = ...
+        local GUID = UnitGUID(unit)
+        
+        self:UpdateEntry(GUID, spellID, cooldownInfo)
+        self:Notify()
+		
+    elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+        local _, subEvent, _, _, _, _, _, destGUID = ...
+        
+        if subEvent == "UNIT_DIED" and T.GUIDToUnit(destGUID) then
+            self:UpdateAllEntries()
+            self:Notify()
+        end
+		
+    elseif event == "JST_UNIT_ALIVE" then
+        self:UpdateAllEntries()
+        self:Notify()
+		
+    elseif event == "ENCOUNTER_START" then
+        self:UpdateAllEntries()
+        self:Notify()
+		
+	elseif event == "PLAYER_ENTERING_WORLD" then
+        self:UpdateAllEntries()
+        self:Notify()
+		
+    end
+end)
+
+T.RegisterEventAndCallbacks(GSFrame, {
+	["JST_CooldownListUpdate"] = true,
+	["JST_CooldownListWipe"] = true,
+	["JST_CooldownUpdate"] = true,
+	["JST_CooldownAdded"] = true,
+	["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
+	["JST_UNIT_ALIVE"] = true,
+	["ENCOUNTER_START"] = true,
+	["PLAYER_ENTERING_WORLD"] = true,
+})
+
+T.GroupSpellForceUpdate = function()
+	GSFrame:UpdateAllEntries()
+	GSFrame:Notify()
+end
+
+T.GetGroupCooldown = function(GUID, spellID)
+	local entry = GSFrame:GetEntry(GUID, spellID)
+
+	if entry then
+		local exp_time = entry.expirationTime
+		local duration = entry.duration
+		local start = exp_time - duration
+		local remain = exp_time - GetTime()
+		local charges = entry.charges
+		local ready = remain <= 0 and true or false
+		
+		return ready, exp_time, duration, remain, start, charges
+	end
+end
+
+--引力失效
+LIB_OPEN_RAID_COOLDOWNS_INFO[449700] = {
+    cooldown = 40,
+    duration = 3,
+    specs = {62, 63, 64},
+    talent = false,
+    charges = 1,
+    class = "MAGE",
+    type = 8
+}
+
 ----------------------------------------------------------
 ----------------[[    怪物进战斗事件    ]]----------------
 ----------------------------------------------------------
@@ -310,7 +597,9 @@ local auraUtilityFrame = CreateFrame("Frame")
 auraUtilityFrame:RegisterEvent("UNIT_AURA")
 
 local aura_cache = {}
-local aura_event_spellIDs = {}
+local aura_event_spellIDs = {
+	[404468] = true,
+}
 
 T.RegisterWatchAuraSpellID = function(spellID)
 	aura_event_spellIDs[spellID] = true
@@ -378,3 +667,4 @@ auraUtilityFrame:SetScript("OnEvent", function(self, event, ...)
 		end
 	end
 end)
+

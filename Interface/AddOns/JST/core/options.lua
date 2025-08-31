@@ -267,7 +267,7 @@ G.Options = {
 				T.CopyTimeline()
 			end,
 			rely = "tl",
-		},		
+		},
 		{ -- 动态战术板测试
 			key = "tl_test",
 			option_type = "button",
@@ -494,6 +494,69 @@ G.Options = {
 			width = 3,
 			text = L["请求技能提示"].."\n\n"..L["需要队友安装JST"],
 		},
+		{ -- 标题:队伍控制链监控
+			option_type = "title",
+			text = L["队伍控制链监控"],
+		},
+		{ -- 启用
+			key = "control_spell_enable",
+			option_type = "check",
+			width = 1,
+			text = L["启用"],
+			apply = function()
+				T.EditGroupCCFrame("enable")
+			end,
+		},
+		{ -- 控制战术板模板
+			key = "CCnote_copy",
+			option_type = "button",
+			width = .5,
+			text = L["MRT时间轴模板"],
+			apply = function()
+				T.CopyGroupCCNote()
+			end,
+			rely = "control_spell_enable",
+		},
+		{ -- 控制战术板解析
+			key = "control_mrt_read",
+			option_type = "button",
+			width = .5,
+			text = L["MRT战术板解析"],
+			apply = function()
+				T.ReadGroupCCNote()
+			end,
+			rely = "control_spell_enable",
+		},
+		{ -- 图标尺寸
+			key = "control_spell_size",
+			option_type = "slider",
+			width = 1,
+			text = L["图标大小"],
+			min = 25,
+			max = 80,
+			step = 1,
+			apply = function()
+				T.EditGroupCCFrame("icon_size")
+			end,
+			rely = "control_spell_enable",
+		},
+		{ -- 总是显示全部控制技能
+			key = "control_always_show",
+			option_type = "check",
+			width = .5,
+			text = L["总是显示全部控制技能"],
+			apply = function()
+				T.EditGroupCCFrame("enable")
+			end,
+			rely = "control_spell_enable",
+		},
+		{ -- 音效
+			key = "control_tts",
+			option_type = "check",
+			width = .5,
+			text = L["音效"],
+			rely = "control_spell_enable",
+		},
 		{ -- 标题:团队单体减伤技能监控和分配
 			option_type = "title",
 			text = L["团队单体减伤技能监控和分配"],
@@ -526,7 +589,7 @@ G.Options = {
 				T.EditGroupSpellFrame("icon_size")
 			end,
 			rely = "group_spell_enable",
-		},		
+		},
 		{ -- 队伍单体减伤技能提示
 			key = "person_spell_discription",
 			option_type = "string",

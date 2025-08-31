@@ -1421,6 +1421,81 @@ end
 T.StopTimerBar = StopTimerBar
 
 ---------------------------------------------
+---------------  图标模板  ----------------
+---------------------------------------------
+
+local CreateIcon = function(parent, icon, size)
+	local icon = CreateFrame("Frame", nil, parent)
+	icon:SetSize(size, size)
+	
+	T.createborder(icon)
+	
+	icon.tex = icon:CreateTexture(nil, "ARTWORK")
+	icon.tex:SetAllPoints()
+	icon.tex:SetTexCoord( .1, .9, .1, .9)
+	
+	local fontsize = floor(size*.5)
+	
+	icon.trtext = T.createtext(icon, "OVERLAY", fontsize, "OUTLINE", "RIGHT")
+	icon.trtext:SetPoint("TOPRIGHT", icon, "TOPRIGHT")
+	
+	icon.brtext = T.createtext(icon, "OVERLAY", fontsize, "OUTLINE", "RIGHT")
+	icon.brtext:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT")
+	
+	icon:HookScript("OnSizeChanged", function(self, width, size)
+		self.trtext:SetFont(G.Font, floor(size*.5), "OUTLINE")
+		self.trtext:SetFont(G.Font, floor(size*.5), "OUTLINE")
+	end)
+	
+	icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
+	icon.cooldown:SetAllPoints()
+	icon.cooldown:SetDrawEdge(false)
+	icon.cooldown:SetHideCountdownNumbers(true)
+	icon.cooldown:SetReverse(true)
+	
+	function icon:update_texture(texture)
+		self.tex:SetTexture(texture)
+	end
+	
+	function icon:update_stack(count)
+		self.trtext:SetText(count > 0 and count or "")
+	end
+	
+	function icon:start_cooldown(dur, exp_time)
+		self.cooldown:SetCooldown(exp_time - dur, dur)
+	end
+	
+	function icon:stop(glow)
+		self:SetScript("OnUpdate", nil)
+		self.brtext:SetText("")
+		if glow then
+			T.PixelGlow_Stop(self, "active_buff")
+		end
+	end
+	
+	function icon:start(exp_time, glow)		
+		self:SetScript("OnUpdate", function(s, e)
+			s.t = s.t + e
+			if s.t > .05 then	
+				local remain = exp_time - GetTime()
+				if remain > 0 then
+					s.brtext:SetText(T.FormatTime(remain))
+				else
+					s:stop()
+				end
+				s.t = 0
+			end
+		end)
+		if glow then
+			T.PixelGlow_Start(self, {1, 1, 0}, 12, .25, nil, 3, 0, 0, true, "active_buff")
+		end
+	end
+	
+	return icon
+end
+T.CreateIcon = CreateIcon
+
+---------------------------------------------
 ----------------  小圆圈模板  ---------------
 ---------------------------------------------
 local CreateCircle = function(frame, rm, hide)
@@ -1707,7 +1782,7 @@ T.GetElementsCustomData = function(frame)
 		table.insert(data.custom, {key = "option_list_btn", text = L["支援技能设置"], default = {}})
 	end	
 	if frame.copy_mrt then
-		table.insert(data.custom, {key = "mrt_custom_btn", text = L["粘贴MRT模板"]})
+		table.insert(data.custom, {key = "mrt_custom_btn"})
 	end
 end
 
@@ -1793,7 +1868,7 @@ T.GetScaleCustomData = function(frame)
 	end})
 
 	if frame.copy_mrt then
-		table.insert(data.custom, {key = "mrt_custom_btn", text = L["粘贴MRT模板"]})
+		table.insert(data.custom, {key = "mrt_custom_btn"})
 	end
 end
 
@@ -1811,7 +1886,7 @@ T.GetFontSizeCustomData = function(frame)
 	end})
 	
 	if frame.copy_mrt then
-		table.insert(data.custom, {key = "mrt_custom_btn", text = L["粘贴MRT模板"]})
+		table.insert(data.custom, {key = "mrt_custom_btn"})
 	end
 end
 
@@ -1838,25 +1913,15 @@ T.GetSpellAssignCustomData = function(frame)
 	end
 	
 	if frame.copy_mrt then
-		table.insert(data.custom, {key = "mrt_custom_btn", text = L["粘贴MRT模板"]})
+		table.insert(data.custom, {key = "mrt_custom_btn"})
 	end
 end
 
 --------------------------------------------------------
---------------  [首领模块]自保技能提示 AURA ------------
+--------------  [首领模块]自保技能提示 API -------------
 --------------------------------------------------------
--- event: UNIT_AURA_ADD
--- event: UNIT_AURA_REMOVED
--- event: UNIT_AURA_UPDATE
 
---		frame.aura_spellIDs = {
---			[8936] = 0, -- 忽略层数
---			[774] = 2,
---		}
---		frame.ignore_roles = {"TANK"} -- 忽略的职业
---		frame.threshold = 65
-
-T.InitPersonalSpellAlertbyAura = function(frame)	
+local function CreatePersonalSpellAlertBase(frame)
 	local path = T.GetBossModData(frame)
 	local data = T.ValueFromPath(G.Encounters, path)
 	if not data.custom then
@@ -1886,6 +1951,29 @@ T.InitPersonalSpellAlertbyAura = function(frame)
 			T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
 		end
 	end
+end
+T.CreatePersonalSpellAlertBase = CreatePersonalSpellAlertBase
+
+local function ResetPersonalSpellAlertBase(frame)
+	frame:RemoveCheck()
+end
+T.ResetPersonalSpellAlertBase = ResetPersonalSpellAlertBase
+--------------------------------------------------------
+--------------  [首领模块]自保技能提示 AURA ------------
+--------------------------------------------------------
+-- event: UNIT_AURA_ADD
+-- event: UNIT_AURA_REMOVED
+-- event: UNIT_AURA_UPDATE
+
+--		frame.aura_spellIDs = {
+--			[8936] = 0, -- 忽略层数
+--			[774] = 2,
+--		}
+--		frame.ignore_roles = {"TANK"} -- 忽略的职业
+--		frame.threshold = 65
+
+T.InitPersonalSpellAlertbyAura = function(frame)	
+	CreatePersonalSpellAlertBase(frame)
 end
 
 T.UpdatePersonalSpellAlertbyAura = function(frame, event, ...)
@@ -1932,7 +2020,7 @@ T.ResetPersonalSpellAlertbyAura = function(frame)
 	for spellID in pairs(frame.aura_spellIDs) do
 		T.UnregisterWatchAuraSpellID(spellID)
 	end
-	frame:RemoveCheck()
+	ResetPersonalSpellAlertBase(frame)
 end
 --------------------------------------------------------
 --------------  [首领模块]自保技能提示 CLEU ------------
@@ -1949,36 +2037,10 @@ end
 --		frame.ignore_roles = {"TANK"} -- 忽略的职业
 --		frame.threshold = 65
 
-T.InitPersonalSpellAlertbyCLEU = function(frame)	
-	local path = T.GetBossModData(frame)
-	local data = T.ValueFromPath(G.Encounters, path)
-	if not data.custom then
-		data.custom = {}
-	end
 
-	table.insert(data.custom, {
-		key = "hp_perc_sl",
-		text = L["血量阈值百分比"],
-		default = frame.threshold or 65,
-		min = 20,
-		max = 100,
-	})
-	
-	frame.check = false
-	
-	function frame:ActiveCheck()
-		if not frame.check then
-			frame.check = true
-			T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, C.DB["BossMod"][frame.config_id]["hp_perc_sl"], frame.ignore_roles)
-		end
-	end
-	
-	function frame:RemoveCheck()
-		if frame.check then
-			frame.check = false
-			T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
-		end
-	end
+
+T.InitPersonalSpellAlertbyCLEU = function(frame)	
+	CreatePersonalSpellAlertBase(frame)
 end
 
 T.UpdatePersonalSpellAlertbyCLEU = function(frame, event, ...)
@@ -2000,7 +2062,7 @@ T.UpdatePersonalSpellAlertbyCLEU = function(frame, event, ...)
 end
 
 T.ResetPersonalSpellAlertbyCLEU = function(frame)
-	frame:RemoveCheck()
+	ResetPersonalSpellAlertBase(frame)
 end
 --------------------------------------------------------
 ---------  [首领模块]法术圆圈计时器模板 CLEU -----------
@@ -2581,8 +2643,7 @@ local CreateAuraIcon = function(frame, bar, auraID)
 	icon.tex = icon:CreateTexture(nil, "ARTWORK")
 	icon.tex:SetAllPoints()
 	icon.tex:SetTexCoord( .1, .9, .1, .9)
-	
-	
+		
 	icon.count = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "RIGHT")
 	icon.count:SetPoint("TOPRIGHT", icon, "TOPRIGHT")
 	
@@ -2611,7 +2672,7 @@ local CreateAuraIcon = function(frame, bar, auraID)
 	
 	function icon:start(dur, exp_time)
 		if dur and exp_time and dur > 0 and exp_time - GetTime() > 0 then
-			self.cooldown:SetCooldown(exp_time - dur, dur)							
+			self.cooldown:SetCooldown(exp_time - dur, dur)
 			self:SetScript("OnUpdate", function(s, e)
 				s.t = s.t + e
 				if s.t > .05 then	
@@ -5202,93 +5263,6 @@ end
 --------------------------------------------------------
 ---------------  [首领模块]交互统计 API  ---------------
 --------------------------------------------------------
--- 交互计时条
-local CreateMacroBar = function(frame, i)	
-	local bar = CreateElementBar(frame, i)
-	
-	function bar:update()	
-		self:SetMinMaxValues(0, frame.dur)
-		self:SetScript("OnUpdate", function(s, e)
-			s.t = s.t + e
-			if s.t > s.update_rate then
-				local remain = frame.last_exp - GetTime()
-				if remain > 0 then
-					s.right:SetText(T.FormatTime(remain))
-					s:SetValue(frame.dur - remain)						
-				else
-					s:remove()
-				end
-				s.t = 0
-			end
-		end)
-	end
-end
-
--- 交互圆圈
-local CreateMacroCircle = function(frame, i)
-	local circle = CreateElementCircle(frame, i)
-	
-	function circle:update()
-		self:SetScript("OnUpdate", function(s, e)
-			s.t = s.t + e
-			if s.t > s.update_rate then
-				local remain = frame.last_exp - GetTime()
-				if remain <= 0 then
-					s:remove()
-				end
-				s.t = 0
-			end
-		end)
-	end
-end
-
--- Private Aura 图标
-local CreatePaIcon = function(frame)
-	if frame.pa_icon then	
-		T.CreateMovableFrame(frame, "paicon", 150, 150, {a1 = "CENTER", a2 = "CENTER", x = 0, y = 100}, "_PrivateIcon", L["PA图标提示"]) -- 有选项
-		frame.paicon:SetAlpha(.3)
-		frame.paicon:Hide()
-	end
-	
-	function frame:ShowPrivateAuraIcon()
-		if frame.paicon and C.DB["BossMod"][frame.config_id]["pa_icon_bool"] and not frame.auraAnchorID then
-			frame.auraAnchorID = C_UnitAuras.AddPrivateAuraAnchor({
-				unitToken = "player",
-				auraIndex = 1,
-				parent = frame.paicon,
-				showCountdownFrame = true,
-				showCountdownNumbers = true,
-				iconInfo = {
-					iconWidth = 150,
-					iconHeight = 150,
-					iconAnchor = {
-						point = "CENTER",
-						relativeTo = frame.paicon,
-						relativePoint = "CENTER",
-						offsetX = 0,
-						offsetY = 0,
-					},
-				},
-				durationAnchor = {
-					point = "TOP",
-					relativeTo = frame.paicon,
-					relativePoint = "BOTTOM",
-					offsetX = 0,
-					offsetY = -1,
-				},
-			})
-			frame.paicon:Show()			
-		end
-	end
-	
-	function frame:HidePrivateAuraIcon()
-		if frame.paicon and frame.auraAnchorID then
-			C_UnitAuras.RemovePrivateAuraAnchor(frame.auraAnchorID)
-			frame.auraAnchorID = nil
-			frame.paicon:Hide()			
-		end
-	end
-end
 
 -- 交互宏按钮
 local CreateMacroButton = function(frame)
@@ -5317,10 +5291,12 @@ local CreateMacroButton = function(frame)
 			button:RegisterForClicks("LeftButtonDown", "RightButtonDown", "LeftButtonUp", "RightButtonUp")
 			button:SetScript("OnMouseDown", function(self, button)
 				if button == "LeftButton" then
-					T.addon_msg("TargetMe"..data.msg, "GROUP")
+					T.FireEvent("JST_MACRO_PRESSED", "TargetMe", data.msg)
+					T.msg(L["已按宏"]..data.msg)
 					self.sd:SetBackdropBorderColor(0, 1, 0)
 				else
-					T.addon_msg("RemoveMe"..data.msg, "GROUP")
+					T.FireEvent("JST_MACRO_PRESSED", "RemoveMe", data.msg)
+					T.msg(L["已按取消宏"]..data.msg)
 					self.sd:SetBackdropBorderColor(1, 0, 0)
 				end
 			end)
@@ -5345,323 +5321,6 @@ local CreateMacroButton = function(frame)
 	end
 end
 T.CreateMacroButton = CreateMacroButton
-
---------------------------------------------------------
-------------  [首领模块]交互统计 整体排序  -------------
---------------------------------------------------------
-
-T.InitMacroMods_ByMRT = function(frame)
-	InitModsByMrt(frame)
-	
-	frame.last_exp = 0
-	
-	frame.msg_info = {
-		{spellID = frame.config_id, msg = ""},
-	}
-	
-	CreateMacroButton(frame)
-	CreatePaIcon(frame)
-	
-	for i in pairs(frame.info) do
-		if frame.element_type == "circle" then
-			CreateMacroCircle(frame, i)
-		else
-			CreateMacroBar(frame, i)
-		end
-	end
-	
-	function frame:Prepare()
-		self.count = self.count + 1
-		
-		if self.pre_update_auras then
-			self:pre_update_auras()
-		end
-		
-		-- 跳过这一轮
-		if self.skip then return end
-		
-		self.last_exp = GetTime() + self.dur
-		
-		self.aura_num = 0
-		self.graph_bg:Show()
-		self:ShowPrivateAuraIcon()
-		self:ShowMacroButton()
-		
-		if G.TestMod then
-			C_Timer.After(.5, function()
-				T.addon_msg("TargetMe", "GROUP")
-			end)
-		end
-		
-		C_Timer.After(self.dur, function()
-			self:RemoveAll()
-		end)
-	end
-	
-	function frame:Display()
-		-- 第一轮排序：指定位置
-		local custom_count_key
-		if self.custom_assignment[self.count] then
-			custom_count_key = self.count
-		elseif self.custom_assignment["all"] then
-			custom_count_key = "all"
-		end
-		if custom_count_key then
-			for index, players in pairs(self.custom_assignment[custom_count_key]) do
-				for _, GUID in pairs(players) do
-					if self.backups[GUID] then
-						local element = self.elements[index]
-						if element.available then
-							element:display(GUID, true)
-							element:update()
-							self:RemoveBackup(GUID)
-							break
-						end
-					end
-				end
-			end
-		end
-		
-		-- 第二轮排序：常规排序
-		for _, GUID in pairs(self.assignment) do
-			if self.backups[GUID] then
-				local element = GetNextElementAvailable(self)
-				if element then
-					element:display(GUID)
-					element:update()
-					self:RemoveBackup(GUID)
-				end
-			end
-		end
-	end
-	
-	function frame:Remove(GUID)
-		local element = self.actives[GUID]
-		if element then
-			element:remove()
-			self:Display()
-			self:UpdateBackupInfo()
-		end
-		self:RemoveBackup(GUID)
-	end
-	
-	function frame:RemoveAll()
-		self.graph_bg:Hide()
-		for i, element in pairs(self.elements) do
-			element:remove()
-		end
-		self:RemoveAllBackups()
-		self:HidePrivateAuraIcon()
-		self:HideMacroButton()
-	end
-	
-	function frame:PreviewShow()
-		self.graph_bg:Show()
-		self:ShowMacroButton()
-	end
-	
-	function frame:PreviewHide()
-		self.graph_bg:Hide()
-		self:HideMacroButton()
-	end
-end
-
-T.UpdateMacroMods_ByMRT = function(frame, event, ...)
-	if frame.cast_info[event] then
-		local unit, _, spellID = ...
-		if (G.TestMod and unit == "raid1" or string.find(unit, "boss")) and frame.cast_info[event][spellID] then
-			frame:Prepare()
-		end
-	elseif event == "ADDON_MSG" then
-		local channel, sender, GUID, message = ...
-		if message == "TargetMe"..frame.msg_info[1].msg then				
-			local info = T.GetGroupInfobyGUID(GUID)
-			if info and tContains(frame.assignment, GUID) and frame.last_exp - GetTime() <= frame.dur and frame.last_exp - GetTime() > 0 and (not frame.filter or frame:filter(GUID)) then
-				if not (frame.actives[GUID] or frame.backups[GUID]) then
-					T.msg(string.format(L["收到点名讯息"], info.format_name, T.GetIconLink(frame.config_id)))
-					frame:AddBackup(GUID)
-					frame.aura_num = frame.aura_num + 1
-					if frame.aura_num == GetTotalAuraNumber(frame) then
-						frame:Display()
-						if frame.post_update_auras then
-							frame:post_update_auras(frame.aura_num)
-						end
-					end
-					if G.PlayerGUID == GUID then
-						frame:HidePrivateAuraIcon()
-					end
-				end
-			end
-		elseif message == "RemoveMe"..frame.msg_info[1].msg then
-			local info = T.GetGroupInfobyGUID(GUID)
-			if info then
-				T.msg(string.format(L["收到移除讯息"], info.format_name, T.GetIconLink(frame.config_id)))			
-				frame:Remove(GUID)
-			end
-		end
-	elseif event == "ENCOUNTER_START" then
-		frame.aura_num = 0
-		frame.count = 0
-		frame.last_exp = 0
-		frame.difficultyID = select(3, ...)
-
-		-- 获取分组数据	
-		GetAssignmentByIndex(frame)
-	end
-end
-
-T.ResetMacroMods_ByMRT = function(frame)
-	if frame.raid_index then
-		T.HideAllRFIndex()
-	end
-	frame:RemoveAll()
-	frame:Hide()
-end
-
---------------------------------------------------------
--------------  [首领模块]交互统计 逐个填坑  ------------
---------------------------------------------------------
-T.InitMacroMods_ByTime = function(frame)
-	InitModByTime(frame)
-	
-	frame.last_exp = 0
-
-	frame.msg_info = {
-		{spellID = frame.config_id, msg = ""},
-	}
-	
-	CreateMacroButton(frame)
-	CreatePaIcon(frame)
-
-	for i in pairs(frame.info) do
-		if frame.element_type == "circle" then
-			CreateMacroCircle(frame, i)
-		else
-			CreateMacroBar(frame, i)
-		end
-	end
-	
-	function frame:Prepare()
-		self.count = self.count + 1
-		
-		if self.pre_update_auras then
-			self:pre_update_auras()
-		end
-		
-		-- 跳过这一轮
-		if self.skip then return end
-		
-		self.last_exp = GetTime() + self.dur
-		
-		self.graph_bg:Show()
-		self:ShowPrivateAuraIcon()
-		self:ShowMacroButton()
-		
-		if G.TestMod then
-			C_Timer.After(.5, function()
-				T.addon_msg("TargetMe", "GROUP")
-			end)
-		end
-		
-		C_Timer.After(self.dur, function()
-			self:RemoveAll()
-		end)
-	end
-	
-	function frame:Display(GUID)		
-		if self.positive_assignment[GUID] then
-			local element = GetNextElementAvailable(self)
-			if element then
-				element:display(GUID)
-				element:update()
-				self:RemoveBackup(GUID)
-			end
-		elseif self.reverse_assignment[GUID] then
-			local element = GetNextElementAvailable(self, true)
-			if element then
-				element:display(GUID)
-				element:update()
-				self:RemoveBackup(GUID)
-			end	
-		end
-	end
-	
-	function frame:Remove(GUID)
-		local element = self.actives[GUID]
-		if element then
-			element:remove()
-			for GUID in pairs(self.backups) do -- 从候补中补充
-				self:Display(GUID)
-			end
-			self:UpdateBackupInfo()
-		end
-		self:RemoveBackup(GUID)
-	end
-	
-	function frame:RemoveAll()
-		self.graph_bg:Hide()
-		for i, element in pairs(self.elements) do
-			element:remove()
-		end
-		self:RemoveAllBackups()
-		self:HidePrivateAuraIcon()
-		self:HideMacroButton()
-	end
-	
-	function frame:PreviewShow()
-		self.graph_bg:Show()
-		self:ShowMacroButton()
-	end
-	
-	function frame:PreviewHide()
-		self.graph_bg:Hide()
-		self:HideMacroButton()
-	end
-end
-
-T.UpdateMacroMods_ByTime = function(frame, event, ...)
-	if frame.cast_info[event] then
-		local unit, _, spellID = ...
-		if (G.TestMod and unit == "raid1" or string.find(unit, "boss")) and frame.cast_info[event][spellID] then
-			frame:Prepare()
-		end
-	elseif event == "ADDON_MSG" then
-		local channel, sender, GUID, message = ...
-		if message == "TargetMe"..frame.msg_info[1].msg then
-			local info = T.GetGroupInfobyGUID(GUID)
-			if info and (frame.positive_assignment[GUID] or frame.reverse_assignment[GUID]) and frame.last_exp - GetTime() <= frame.dur and frame.last_exp - GetTime() > 0 and (not frame.filter or frame:filter(GUID)) then
-				if not (frame.actives[GUID] or frame.backups[GUID]) then
-					T.msg(string.format(L["收到点名讯息"], info.format_name, T.GetIconLink(frame.config_id)))
-					frame:AddBackup(GUID)
-					frame:Display(GUID)
-					if G.PlayerGUID == GUID then
-						frame:HidePrivateAuraIcon()
-					end
-				end
-			end
-		elseif message == "RemoveMe"..frame.msg_info[1].msg then
-			local info = T.GetGroupInfobyGUID(GUID)
-			if info then
-				T.msg(string.format(L["收到移除讯息"], info.format_name, T.GetIconLink(frame.config_id)))
-				frame:Remove(GUID)
-			end
-		end
-	elseif event == "ENCOUNTER_START" then
-		frame.count = 0
-		frame.last_exp = 0
-		
-		-- 获取分组数据
-		GetAssignmentByName(frame)
-	end
-end
-
-T.ResetMacroMods_ByTime = function(frame)
-	if frame.raid_index then
-		T.HideAllRFIndex()
-	end
-	frame:RemoveAll()
-	frame:Hide()
-end
 
 --------------------------------------------------------
 ----------  [首领模块]技能轮次安排模板  ----------------

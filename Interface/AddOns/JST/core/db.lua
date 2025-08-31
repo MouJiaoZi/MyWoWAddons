@@ -66,7 +66,10 @@ local Character_default_Settings = {
 		raid_pa_height = 20,
 		raid_pa_fsize = 14,
 		raid_pa_icon_num = 2,
-		control_spell_size = 25,
+		control_spell_enable = true,
+		control_always_show = false,
+		control_spell_size = 55,
+		control_tts = true,
 	},
 	IconAlertOption = {		
 		test = false,

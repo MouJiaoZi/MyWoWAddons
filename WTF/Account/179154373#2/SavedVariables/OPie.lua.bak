@@ -71,8 +71,8 @@ OPie_SavedData = {
 ["sliceToken"] = "ABueQntX/Iw",
 },
 {
-["sliceToken"] = "ABueQcKpFbw",
 ["id"] = 50977,
+["sliceToken"] = "ABueQcKpFbw",
 },
 {
 "item",
@@ -105,10 +105,10 @@ OPie_SavedData = {
 ["OPieDeletedRings"] = {
 ["RaidSymbols"] = true,
 ["SpecMenu"] = true,
-["WorldMarkers"] = true,
-["CommonTrades"] = true,
 ["OPieAutoQuest"] = true,
+["CommonTrades"] = true,
 ["DKCombat"] = true,
+["WorldMarkers"] = true,
 ["CommonHearth"] = true,
 },
 ["OPieFlagStore"] = {

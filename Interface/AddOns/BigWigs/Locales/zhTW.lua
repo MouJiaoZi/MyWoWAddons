@@ -308,10 +308,9 @@ L.keystoneTeleportInCombat = "戰鬥中無法傳送。"
 L.keystoneTabHistory = "歷史"
 L.keystoneHeaderThisWeek = "本周"
 L.keystoneHeaderOlder = "先前"
-L.keystoneScoreTooltip = "地城分數：|cFFFFFFFF%d|r"
-L.keystoneScoreGainedTooltip = "獲得分數：|cFFFFFFFF+%d|r"
-L.keystoneCompletedTooltip = "時限內完成"
-L.keystoneFailedTooltip = "超時"
+L.keystoneScoreGainedTooltip = "獲得分數：|cFFFFFFFF+%d|r\n地城分數：|cFFFFFFFF%d|r"
+--L.keystoneCompletedTooltip = "時限內完成：|cFFFFFFFF%d min %d sec|r\nTime Limit：|cFFFFFFFF%d min %d sec|r"
+--L.keystoneFailedTooltip = "超時：|cFFFFFFFF%d min %d sec|r\nTime Limit：|cFFFFFFFF%d min %d sec|r"
 L.keystoneExplainer = "傳奇+工具合集，提升你進行傳奇+副本時的遊戲體驗。"
 L.keystoneAutoSlot = "自動插鑰石"
 L.keystoneAutoSlotDesc = "打開能量之泉時，自動插入鑰石。"
@@ -343,6 +342,9 @@ L.keystoneHistoryRunsOlderTooltip = "以前地城：|cFFFFFFFF%d|r"
 L.keystoneHistoryScore = "分數 +%d"
 L.keystoneHistoryScoreThisWeekTooltip = "本周獲得分數：cFFFFFFFF+%d|r"
 L.keystoneHistoryScoreOlderTooltip = "上周分數：|cFFFFFFFF+%d|r"
+L.keystoneTimeUnder = "|cFF33FF99-%02d:%02d|r"
+L.keystoneTimeOver = "|cFFFF4411+%02d:%02d|r"
+--L.keystoneTeleportTip = "TIP: Click the dungeon name below to teleport directly to the dungeon entrance."
 
 -- It doesn't really matter what you call it as long as it's recognizable and limited to ~6 characters
 L.keystoneShortName_TheRookery = "培育所" --培育
@@ -439,9 +441,9 @@ L.CENTER = "中"
 L.customAnchorPoint = "進階：自定錨點"
 L.sourcePoint = "基準錨點"  -- 中文似乎沒有point和relativePoint的正式譯名?
 L.destinationPoint = "相對錨點"
---L.drawStrata = "Draw Strata"
---L.medium = "MEDIUM"
---L.low = "LOW"
+--L.drawStrata = "Strata"
+--L.medium = "Medium"
+--L.low = "Low"
 
 -----------------------------------------------------------------------
 -- AltPower.lua

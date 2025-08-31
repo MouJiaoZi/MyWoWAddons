@@ -2459,55 +2459,58 @@ T.CreateEncounterOptions = function(instance_type, option_page, ENCID, InstanceI
 	end)
 	
 	for section_index, section_data in pairs(data.alerts) do
-		CreateEncounterSectionTitle(option_page, section_data)
-		for index, args in pairs(section_data.options) do
-			local category = args.category
-			local alert_type = args.type
+		if next(section_data.options) then		
+			CreateEncounterSectionTitle(option_page, section_data)
 			
-			if not category then
-				T.msg(string.format("encounter %s section %d option %d, category missing", ENCID, section_index, index))
-			end
-			
-			if category and alert_type then
-				AddDataTable(engageTag, category, alert_type)
-				AddDataTable(mapTag, category, alert_type)
-				AddCurrentDataTable(category, alert_type)
-			end
-			
-			if category == "AlertIcon" then
-				if alert_type == "aura" then
-					T.CreateAura(option_page, category, args)
-				elseif alert_type == "com" then
-					T.CreateCom(option_page, category, args)
-				elseif alert_type == "bmsg" then
-					T.CreateBossMsg(option_page, category, args)
+			for index, args in pairs(section_data.options) do
+				local category = args.category
+				local alert_type = args.type
+				
+				if not category then
+					T.msg(string.format("encounter %s section %d option %d, category missing", ENCID, section_index, index))
 				end
-			elseif category == "AlertTimerbar" then
-				if alert_type == "cast" then
-					T.CreateCast(option_page, category, args)
-				elseif alert_type == "cleu" then
-					T.CreateCLEU(option_page, category, args)
-				elseif alert_type == "aura" then
-					T.CreateAuraBar(option_page, category, args)
+				
+				if category and alert_type then
+					AddDataTable(engageTag, category, alert_type)
+					AddDataTable(mapTag, category, alert_type)
+					AddCurrentDataTable(category, alert_type)
 				end
-			elseif category == "TextAlert" then
-				if alert_type == "hp" then
-					T.CreateAlertTextHealth(option_page, category, args)
-				elseif alert_type == "pp" then
-					T.CreateAlertTextPower(option_page, category, args)
-				elseif alert_type == "spell" then
-					T.CreateAlertTextSpell(option_page, category, args)
+				
+				if category == "AlertIcon" then
+					if alert_type == "aura" then
+						T.CreateAura(option_page, category, args)
+					elseif alert_type == "com" then
+						T.CreateCom(option_page, category, args)
+					elseif alert_type == "bmsg" then
+						T.CreateBossMsg(option_page, category, args)
+					end
+				elseif category == "AlertTimerbar" then
+					if alert_type == "cast" then
+						T.CreateCast(option_page, category, args)
+					elseif alert_type == "cleu" then
+						T.CreateCLEU(option_page, category, args)
+					elseif alert_type == "aura" then
+						T.CreateAuraBar(option_page, category, args)
+					end
+				elseif category == "TextAlert" then
+					if alert_type == "hp" then
+						T.CreateAlertTextHealth(option_page, category, args)
+					elseif alert_type == "pp" then
+						T.CreateAlertTextPower(option_page, category, args)
+					elseif alert_type == "spell" then
+						T.CreateAlertTextSpell(option_page, category, args)
+					end
+				elseif category == "PlateAlert" then
+					T.CreatePlateAlert(option_page, category, args)
+				elseif category == "Sound" then	
+					T.CreateSoundAlert(option_page, category, args)
+				elseif category == "RFIcon" then	
+					T.CreateRFIconAlert(option_page, category, args)
+				elseif category == "PhaseChangeData" then
+					T.Create_Phase_Options(option_page, category, args)
+				elseif category == "BossMod" then
+					T.CreateBossMod(option_page, category, args)
 				end
-			elseif category == "PlateAlert" then
-				T.CreatePlateAlert(option_page, category, args)
-			elseif category == "Sound" then	
-				T.CreateSoundAlert(option_page, category, args)
-			elseif category == "RFIcon" then	
-				T.CreateRFIconAlert(option_page, category, args)
-			elseif category == "PhaseChangeData" then
-				T.Create_Phase_Options(option_page, category, args)
-			elseif category == "BossMod" then
-				T.CreateBossMod(option_page, category, args)
 			end
 		end
 	end

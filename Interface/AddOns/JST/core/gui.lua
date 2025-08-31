@@ -770,33 +770,45 @@ SlashCmdList["JST"] = function(ARG)
 	local arg = string.lower(ARG)
 	if arg == "range" then -- 距离测量
 		T.msg(UnitName("target"), T.GetRange("target"))
+		
 	elseif arg == "rm" then -- 重置标记
 		T.ResetMarks()
+		
 	elseif string.find(arg, "test") then -- 测试
 		local args = gsub(ARG, "test ", "")
 		T.FireEvent("JST_CUSTOM", string.split(",", args))
 		T.msg("JST_CUSTOM", string.split(",", args))
+		
 	elseif arg == "dispel" then -- 驱散我
-		T.addon_msg("DispelMe", "GROUP")
+		T.FireEvent("JST_MACRO_PRESSED", "DispelMe")
+		T.msg(L["已按驱散宏"])
+		
 	elseif string.find(arg, "add") then -- 增加我
 		if arg == "add" then
-			T.addon_msg("TargetMe", "GROUP")
+			T.FireEvent("JST_MACRO_PRESSED", "TargetMe")
+			T.msg(L["已按宏"])
 		else
 			local index = string.match(arg, "add(%d+)")
-			T.addon_msg("TargetMe"..index, "GROUP")
+			T.FireEvent("JST_MACRO_PRESSED", "TargetMe", tonumber(index))
+			T.msg(L["已按宏"]..index)
 		end
+		
 	elseif string.find(arg, "remove") then -- 移除我
 		if arg == "remove" then
-			T.addon_msg("RemoveMe", "GROUP")
+			T.FireEvent("JST_MACRO_PRESSED", "RemoveMe")
+			T.msg(L["已按取消宏"])
 		else
 			local index = string.match(arg, "remove(%d+)")
-			T.addon_msg("RemoveMe"..index, "GROUP")
+			T.FireEvent("JST_MACRO_PRESSED", "RemoveMe", tonumber(index))
+			T.msg(L["已按取消宏"]..index)
 		end
+		
 	elseif arg == "ds" or string.match(arg, "ds (.+)") then -- 请求减伤技能
 		local spellStr = string.match(arg, "ds (.+)")
 		T.RequestGroupDefenseSpell(true, spellStr)
+		
 	elseif string.match(arg, "(.+) spell(%d+)") then -- 法术请求
-		local arg1, arg2 = string.match(arg, "(.+) spell(%d+)")
+		local arg1, arg2 = string.match(ARG, "(.+) spell(%d+)")
 		
 		local target, format_name
 		if arg1 == "%t" then

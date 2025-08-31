@@ -41,7 +41,7 @@ G.Encounters[2685] = {
 				{32044},--【影卫刺客】
 			},
 			spells = {
-				{1227048},--【虚空剑士奇袭】
+				--{1227048},--【虚空剑士奇袭】
 			},
 			options = {
 				{ -- 图标 虚空剑士奇袭（✓）
@@ -94,7 +94,7 @@ G.Encounters[2685] = {
 				{32710},--【影卫法师】
 			},
 			spells = {
-				{1227052},--【虚空爆炸】
+				--{1227052},--【虚空爆炸】
 			},
 			options = {
 				{ -- 图标 虚空爆炸（✓）
@@ -156,8 +156,8 @@ G.Encounters[2685] = {
 				{32045},--【影卫相位剑士】
 			},
 			spells = {
-				{1242018, "12"},--【虚空共鸣】
-				{1235576, "1"},--【相位之刃】
+				--{1242018, "12"},--【虚空共鸣】
+				--{1235576, "1"},--【相位之刃】
 			},
 			options = {
 				{ -- 姓名板光环 虚空共鸣（✓）
@@ -173,7 +173,7 @@ G.Encounters[2685] = {
 				{1227848, "2"},--【精华内爆】
 			},
 			options = {
-				{ -- 文字 精华内爆 倒计时（待测试）
+				{ -- 文字 精华内爆 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1227848)..L["倒计时"],
@@ -265,6 +265,7 @@ G.Encounters[2685] = {
 						frame.element_type = "bar"
 						frame.color = {.9, .31, 1}
 						frame.raid_glow = "pixel"
+						frame.disable_copy_mrt = true
 						
 						frame.info = {
 							{text = L["左"], msg_applied = L["左"].."%name", msg = L["左"]},
@@ -293,7 +294,7 @@ G.Encounters[2685] = {
 		{ -- 奥术符印
 			spells = {
 				{1246530, "12"},--【奥术符印】
-				{1246775},--【碎裂脉冲】
+				--{1246775},--【碎裂脉冲】
 			},
 			options = {
 				{ -- 图标 碎裂脉冲（✓）
@@ -331,7 +332,7 @@ G.Encounters[2685] = {
 		{ -- 奥术驱除
 			spells = {
 				{1242088},--【奥术驱除】
-				{1242086},--【奥术能量】
+				--{1242086},--【奥术能量】
 			},
 			options = {
 				{ -- 文字 奥术驱除 倒计时（史诗待测试）
@@ -465,7 +466,6 @@ G.Encounters[2685] = {
 						frame.role = true
 						frame.raid_index = true
 						frame.disable_copy_mrt = true							
-						frame.bar_num = 4
 						
 						frame.info = {
 							{text = L["左"], msg_applied = L["左"].."%name", msg = L["左"]},

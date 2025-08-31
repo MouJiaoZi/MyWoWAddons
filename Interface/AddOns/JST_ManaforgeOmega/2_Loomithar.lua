@@ -7,15 +7,12 @@ end
 --------------------------------Locals--------------------------------
 if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["围墙"] = "围墙"
-	L["小组状态监控"] = "小组状态监控"
 	L["开始挡线"] = "开始挡线"
 elseif G.Client == "ruRU" then
 	--L["围墙"] = "Wall"
-	--L["小组状态监控"] = "Group status monitoring"
 	--L["开始挡线"] = "start soaking"
 else
 	L["围墙"] = "Wall"
-	L["小组状态监控"] = "Group status monitoring"
 	L["开始挡线"] = "start soaking"
 end
 ---------------------------------Notes--------------------------------
@@ -31,7 +28,7 @@ G.Encounters[2686] = {
 		{ -- 巢穴编织
 			spells = {
 				{1237272, "1,5"},--【巢穴编织】
-				{1238502, "0"},--【织造结界】
+				--{1238502, "0"},--【织造结界】
 			},
 			options = {
 				{ -- 文字 巢穴编织 倒计时（✓）
@@ -161,8 +158,8 @@ G.Encounters[2686] = {
 		{ -- 注能晶塔
 			spells = {
 				{1247672, "12"},--【注能晶塔】
-				{1247029, "12"},--【超能新星】
-				{1247045, "12"},--【超能灌注】
+				--{1247029, "12"},--【超能新星】
+				--{1247045, "12"},--【超能灌注】
 			},
 			options = {
 				{ -- 图标 超能灌注（✓）
@@ -178,7 +175,7 @@ G.Encounters[2686] = {
 					ficon = "12",
 					spellID = 1247672,
 					enable_tag = "everyone",
-					name = T.GetIconLink(1247672)..L["小组状态监控"],
+					name = T.GetIconLink(1247672)..L["分配"]..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,3,4")),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = 210, y = -40},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
@@ -215,7 +212,6 @@ G.Encounters[2686] = {
 						},
 						{
 							key = "mrt_custom_btn", 
-							text = L["粘贴MRT模板"],
 						},
 					},
 					init = function(frame)
@@ -391,8 +387,8 @@ G.Encounters[2686] = {
 						end
 						
 						function frame:copy_mrt()
-							local str = ""
-							local raidlist = [[
+							local str = [[
+								#%dstart%s
 								{rt1} player player
 								{rt2} player player
 								{rt3} player player
@@ -403,15 +399,12 @@ G.Encounters[2686] = {
 								{rt3} player player
 								{rt4} player player
 								
-								player player player
+								player player
+								end
 							]]
 							
-							raidlist = gsub(raidlist, "	", "")
-							
-							local spell = C_Spell.GetSpellName(self.config_id)
-							str = string.format("#%sstart%s\n%send\n", self.config_id, spell, raidlist)
-							
-							return str
+							str = gsub(str, "	", "")
+							return string.format(str, self.config_id, C_Spell.GetSpellName(self.config_id))
 						end
 						
 						function frame:PreviewShow()
@@ -425,9 +418,9 @@ G.Encounters[2686] = {
 						end
 						
 						function frame:PreviewHide()
-							for i = 1, 2 do
-								self.bars[i]:Hide()
-								self.bars[i] = nil
+							for tag, bar in pairs(self.bars) do
+								bar:Hide()
+								self.bars[tag] = nil
 							end
 						end
 					end,
@@ -473,6 +466,7 @@ G.Encounters[2686] = {
 											local unit = info.unit
 											if not UnitIsDeadOrGhost(unit) then
 												table.insert(GUIDs, backupGUID)
+												table.remove(backups, index)
 												str = str.." "..info.format_name
 												deadCount = deadCount - 1
 											end										
@@ -601,8 +595,8 @@ G.Encounters[2686] = {
 		{ -- 注能束缚
 			spells = {
 				{1226315, "5"},--【注能束缚】
-				{1226366, "5"},--【活体流丝】
-				{1226721},--【缠丝陷阱】
+				--{1226366, "5"},--【活体流丝】
+				--{1226721},--【缠丝陷阱】
 			},
 			options = {
 				{ -- 文字 注能束缚 倒计时（✓）
@@ -732,60 +726,12 @@ G.Encounters[2686] = {
 							{text = "[4]", msg_applied = "4 %name", msg = "444", sound = "[1302\\pull4]"},
 						}
 						
-						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
-						
-						frame.debuff_list = {}
-						
-						function frame:custom_sort(t)
-							T.SortTableMobility(t, true)
-						end
-						
-						function frame:UpdateText(my_index)						
-							if my_index == 1 then
-								self.text_frame.text:SetText(string.format("|cff00ff00%s|r", L["拉断连线"]))
-								T.PlaySound("break")
-							elseif my_index == 2 then
-								self.text_frame.text:SetText(string.format("|cffffff00%s|r", L["准备"]))
-							else
-								self.text_frame.text:SetText(string.format("|cffff0000%s%d|r", my_index, L["等待"], my_index - 1))
-							end
-							self.text_frame:Show()
-						end
-						
-						function frame:pre_update_auras()
-							self.debuff_list = table.wipe(self.debuff_list)
-						end
-						
-						function frame:post_display(element, index, unit, GUID)
-							table.insert(self.debuff_list, GUID)
-						end
-						
-						function frame:post_update_auras()
-							local my_index = tIndexOf(self.debuff_list, G.PlayerGUID)
-							if my_index and my_index > 0 then
-								self:UpdateText(my_index)
-							end
-						end
-						
-						function frame:post_remove(element, index, unit, GUID)
-							if GUID == G.PlayerGUID then
-								self.text_frame:Hide()
-							else
-								tDeleteItem(self.debuff_list, GUID)
-								local my_index = tIndexOf(self.debuff_list, G.PlayerGUID)
-								if my_index and my_index > 0 then
-									self:UpdateText(my_index)
-								end
-							end
-						end
-						
 						T.InitAuraMods_ByMrt(frame)
 					end,
 					update = function(frame, event, ...)
 						T.UpdateAuraMods_ByMrt(frame, event, ...)
 					end,
 					reset = function(frame, event)
-						frame.text_frame:Hide()
 						T.ResetAuraMods_ByMrt(frame)
 					end,
 				},
@@ -1038,7 +984,7 @@ G.Encounters[2686] = {
 		{ -- 无缚狂怒
 			spells = {
 				{1228059, "1"},--【无缚狂怒】
-				{1243771, "1"},--【奥能黏液】
+				--{1243771, "1"},--【奥能黏液】
 			},
 			options = {
 				{ -- 图标 奥能黏液（✓）
@@ -1124,7 +1070,7 @@ G.Encounters[2686] = {
 		{ -- 蠕行波
 			spells = {
 				{1227226, "0"},--【蠕行波】
-				{1242303, "12"},--【蠕行缠裹】
+				--{1242303, "12"},--【蠕行缠裹】
 			},
 			options = {
 				{ -- 文字 蠕行波 倒计时（✓）

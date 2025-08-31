@@ -3,8 +3,8 @@ Details_StreamerDB = {
 ["characters"] = {
 ["迪凯策划没马 - 伊森利恩"] = "Fasas - Aegwynn",
 ["牛牛萨之父 - 霜之哀伤"] = "Fasas - Aegwynn",
-["凤凰基友之二 - 凤凰之神"] = "Fasas - Aegwynn",
 ["某饺子 - 伊森利恩"] = "Fasas - Aegwynn",
+["某餃子 - 伊森利恩"] = "Fasas - Aegwynn",
 ["凤凰基友之四 - 凤凰之神"] = "Fasas - Aegwynn",
 ["凤凰基友之三 - 凤凰之神"] = "Fasas - Aegwynn",
 ["三减宁静 - 伊森利恩"] = "Fasas - Aegwynn",
@@ -12,7 +12,7 @@ Details_StreamerDB = {
 ["三减竖式 - 伊森利恩"] = "Fasas - Aegwynn",
 ["Fasas - Aegwynn"] = "Fasas - Aegwynn",
 ["开门的搞 - 伊森利恩"] = "Fasas - Aegwynn",
-["某餃子 - 伊森利恩"] = "Fasas - Aegwynn",
+["凤凰基友之二 - 凤凰之神"] = "Fasas - Aegwynn",
 ["我们完蛋啦 - 伊森利恩"] = "Fasas - Aegwynn",
 },
 ["profiles"] = {
@@ -47,7 +47,7 @@ Details_StreamerDB = {
 ["square_amount"] = 5,
 ["enabled"] = false,
 ["arrow_size"] = 10,
-["y"] = 0,
+["font_size"] = 10,
 ["row_spacement"] = 21,
 ["main_frame_color"] = {
 0,
@@ -62,7 +62,6 @@ Details_StreamerDB = {
 0.4,
 },
 ["arrow_texture"] = "Interface\\CHATFRAME\\ChatFrameExpandArrow",
-["use_spark"] = true,
 ["per_second"] = {
 ["enabled"] = false,
 ["point"] = "CENTER",
@@ -74,10 +73,11 @@ Details_StreamerDB = {
 ["update_speed"] = 0.05,
 ["attribute_type"] = 1,
 },
+["use_spark"] = true,
 ["x"] = -3.0517578125e-05,
 ["font_face"] = "Friz Quadrata TT",
 ["square_size"] = 32,
-["font_size"] = 10,
+["y"] = 0,
 ["author"] = "Terciob",
 ["main_frame_locked"] = false,
 ["main_frame_size"] = {
