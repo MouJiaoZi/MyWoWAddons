@@ -3,6 +3,27 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.71
+fix raid frames glow bug.
+
+5.70
+Loom'ithar Add MRT note analysis function for the assignment of Infusion Pylons soak.
+Forgeweaver Araz Fixed some control chain display bugs in certain rounds
+The Soul Hunters Add Devourer's Ire handover prompt (it is recommended to add a handover mark to MRT note)
+The Soul Hunters monitoring raid Unending Hunger stacks with Devourer's Ire.
+The Soul Hunters fix bug of Frailty stacks prompt (tank spirit soak)
+Fractillus spawn/break wall assignment and error notification
+Update the value of new raid buff inf team information
+Other error corrections.
+
+5.66
+When the custom voice pack entry is missing, try using the entry from the default voice pack.
+Supplement the default list of CC, prompt to use spell ID when unable to read spell name.
+The Soul Hunters Collapsing Star show remaining quantity.
+The Soul Hunters Dark Residue show timing text.
+The Soul Hunters The Hunt timing bar show immune spell icons.
+Other error corrections.
+
 5.65
 Fractillus Null Consumption prompt self-protection when 2+ stacks.
 Fractillus Null Consumption raid frames glow when 2+ stacks.
@@ -33,7 +54,7 @@ Forgeweaver Araz add CC Monitoring for Arcane Manifestation.
 The Soul Hunters Redo Devourer's Ire dispel assignment.
 The Soul Hunters prompt defensive spells for Encroaching Oblivion/Dark Residue/Soulcrush.
 The Soul Hunters Dark Residue soak assignment.
-The Soul Hunters The Hunt timing bar and Immune spells check.
+The Soul Hunters The Hunt timing bar and immune spells check.
 The Soul Hunters add mythic difficulty spell countdown text and timeline mrt note.
 Fractillus prompt defensive spells for Null Consumption/Shattershell.
 Fractillus spawn/break wall assignment can provide advance notice of the tank's placement of the wall. (Default off, click on the small gear to open detailed settings and manually enable)
@@ -90,38 +111,4 @@ Dimensius Shadowquake adds a timing circles.
 Dimensius modifies the Shattered Space sound effect and adds a countdown.
 Personal Defensive spell prompt add sound.
 Other error corrections.
-
-4.93
-The Soul Hunters adds BOSS nameplate markings.
-Add stable flight monitoring within Manaforge Omega.
-Supplement and revise timeline information.
-Other error corrections.
-
-4.91
-Add missing spell colors.
-Fix a bug of timeline.
-
-4.90
-Add content of the Manaforge Omega.
-
-4.80
-Improve prompts for The Dawnbreaker.
-
-4.79
-Improve prompts for Priory of the Sacred Flame.
-Improve prompts for Halls of Atonement.
-
-4.78
-Improve prompts for Ara-Kara, City of Echoes.
-Improve prompts for Operation: Floodgate.
-
-4.76
-Add content of the S3 Mythic+ data.
-New feature: Use macros to request for individual damage reduction skills (such as Pain Suppression) and corresponding automatic allocation of individual damage reduction spells of team members, please refer to the tool settings for details.
-Added low health and self-protection spells prompt function (only displayed under specific conditions).
-New commonly used frames: tank spells timing bar.
-Add numerical monitoring on the raid frames (such as heal absorption shield values).
-Add more setting options for raid frames index numbers.
-Add more setting options for raid frames glow.
-Add MRT note detection in group information.
 ]]

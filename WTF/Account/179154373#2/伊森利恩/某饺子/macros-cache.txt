@@ -11,8 +11,9 @@ VER 3 01000000000000AC "1" "INV_Misc_QuestionMark"
 #showtooltip
 /cast [@cursor] 召唤玄牛雕像
 /target 玄牛雕像
-/cast [exists, help] 嚎镇八方
-/click TotemFrameTotem1 RightButton
+/cast [exists, help, nodead] 嚎镇八方
+/click MouTotemCheck
+/click MouTotemFrameTotem RightButton
 /targetlasttarget
 END
 VER 3 01000000000000AD "1" "INV_Misc_QuestionMark"

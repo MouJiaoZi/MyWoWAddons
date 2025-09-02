@@ -1,7 +1,7 @@
 ﻿## Interface: 110200
 ## Title: |cffff0000Jingsi|r Tools
 ## Title-zhCN: |cffff0000静思|r 副本助手
-## Version: 5.65
+## Version: 5.71
 ## Author: Paopao001
 ## OptionalDeps: !ClassColors, BigWigs, DBM-Core, MRT
 ## SavedVariables: JST_DB

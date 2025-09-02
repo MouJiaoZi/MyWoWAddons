@@ -254,32 +254,40 @@ LibOpenRaid.RegisterCallback(callbacks, "CooldownAdded", "CooldownAdded")
 
 G.GroupTrackedSpellsbySpellID = {}
 G.GroupTrackedSpellsbyName = {}
+
 G.GroupTrackedSpellsbyIndex = {
 	-- 控制
-	372048, -- Oppressing Roar
-    368970, -- Tail Swipe
-    358385, -- Landslide
-    108199, -- Gorefiend's Grasp
-    179057, -- Chaos Nova
-    202138, -- Sigil of Chains
-    207684, -- Sigil of Misery
-    119381, -- Leg Sweep
-    116844, -- Ring of Peace
-    102793, -- Ursol's Vortex
-    102359, -- Mass Entanglement
-    192058, -- Capacitor Totem
-    30283, -- Shadowfury
-    109248, -- Binding Shot
-    46968, -- Shockwave
+	372048, -- 压迫怒吼
+	368970, -- 扫尾
+	358385, -- 山崩
+	108199, -- 血魔之握
+	179057, -- 混乱新星
+	202138, -- 锁链咒符
+	207684, -- 悲苦咒符
+	119381, -- 扫堂腿
+	116844, -- 平心之环
+	102793, -- 乌索尔旋风
+	102359, -- 群体缠绕
+	192058, -- 电能图腾
+	30283, -- 暗影之怒
+	109248, -- 束缚射击
+	46968, -- 震荡波
+	357214, -- 飞翼打击
+	132469, -- 台风
+	376079, -- 勇士之矛
+	458513, -- 引力失效
+	
 	-- 免疫
-	45438, -- Ice Block
-    196555, -- Netherwalk
-    186265, -- Turtle
-    642, -- Divine Shield
-    31224, -- Cloak of Shadows
+	45438, -- 寒冰屏障
+	196555, -- 虚空行走
+	186265, -- 灵龟守护
+	642, -- 圣盾术
+	31224, -- 暗影斗篷
+	
 	-- 减伤
-	47585, -- Dispersion
+	47585, -- 消散
 	22812, -- 树皮术
+	108271, -- 星界转移
 }
 
 for index, spellID in pairs(G.GroupTrackedSpellsbyIndex) do

@@ -41,6 +41,9 @@ G.media = {
 	circle = "Interface\\AddOns\\JST\\media\\circle",
 	red_arrow = "Interface\\AddOns\\JST\\media\\arrow",
 	triangle = "Interface\\AddOns\\JST\\media\\triangle",
+	overlay1 = "Interface\\AddOns\\JST\\media\\overlay_indicator_1",
+	overlay2 = "Interface\\AddOns\\JST\\media\\overlay_indicator_2",
+	overlay3 = "Interface\\AddOns\\JST\\media\\overlay_indicator_3",
 }
 
 --====================================================--

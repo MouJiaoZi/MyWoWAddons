@@ -438,23 +438,20 @@ end
 
 -- 播放音效
 T.PlaySound = function(sound, sound2)
-	if not sound then return end
-	if C.DB["GeneralOption"]["disable_sound"] then return end
-	if C.DB["GeneralOption"]["sound_channel"] == "Master" then
-		PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound..".ogg", "Master")
-	elseif C.DB["GeneralOption"]["sound_channel"] == "Dialog" then
-		PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound..".ogg", "Dialog")
-	else -- SFX
-		PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound..".ogg")
+	if C.DB["GeneralOption"]["disable_sound"] or not sound then return end
+	
+	local soundChannel = C.DB["GeneralOption"]["sound_channel"]
+	
+	local soundPlayed = PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound..".ogg", soundChannel)
+	if not soundPlayed then
+		PlaySoundFile([[Interface\AddOns\JST_SoundPackCN\sounds\]]..sound..".ogg", soundChannel)
 	end
+	
 	if sound2 then
 		C_Timer.After(.8, function()
-			if C.DB["GeneralOption"]["sound_channel"] == "Master" then
-				PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound2..".ogg", "Master")
-			elseif C.DB["GeneralOption"]["sound_channel"] == "Dialog" then
-				PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound2..".ogg", "Dialog")
-			else -- SFX
-				PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound2..".ogg")
+			local soundPlayed = PlaySoundFile(C.DB["GeneralOption"]["sound_file"]..sound2..".ogg", soundChannel)
+			if not soundPlayed then
+				PlaySoundFile([[Interface\AddOns\JST_SoundPackCN\sounds\]]..sound2..".ogg", soundChannel)
 			end
 		end)
 	end
@@ -710,6 +707,20 @@ end
 -- 聊天框提示（一般讯息）
 T.msg = function(...)
 	local msg = strjoin(" ", ...)
+	print(G.addon_colorStr.."JST|r> "..msg)
+end
+
+-- 分割线
+T.divideline = function(str)
+	local msg
+	if str then
+		local lenth = string.len(str)
+		local num = max(5, 30-floor(lenth/10))
+		local side = string.rep("-", num)
+		msg = string.format("%s%s%s", side, str, side)
+	else
+		msg = "--------------------------------"
+	end
 	print(G.addon_colorStr.."JST|r> "..msg)
 end
 

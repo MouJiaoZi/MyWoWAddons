@@ -275,7 +275,7 @@ L.H25 = "25人英雄"
 -----------------------------------------------------------------------
 
 L.tools = "工具"
-L.toolsDesc = "BigWigs 提供多种工具和\"便利功能\"，让你可以轻松的简化首领战斗流程。点击 |cFF33FF99+|r 图标展开菜单可查看所有功能。"
+L.toolsDesc = "BigWigs 提供多种工具和\"便利功能\"，让你可以轻松的简化首领战斗流程。"
 
 -----------------------------------------------------------------------
 -- AutoRole.lua
@@ -309,8 +309,8 @@ L.keystoneTabHistory = "历史记录"
 L.keystoneHeaderThisWeek = "本周"
 L.keystoneHeaderOlder = "更早"
 L.keystoneScoreGainedTooltip = "获得评分：|cFFFFFFFF+%d|r\n史诗钥石评分：|cFFFFFFFF%d|r"
---L.keystoneCompletedTooltip = "限时完成: |cFFFFFFFF%d min %d sec|r\nTime Limit: |cFFFFFFFF%d min %d sec|r"
---L.keystoneFailedTooltip = "超时: |cFFFFFFFF%d min %d sec|r\nTime Limit: |cFFFFFFFF%d min %d sec|r"
+L.keystoneCompletedTooltip = "限时完成: |cFFFFFFFF%d分%d秒|r\n时限：|cFFFFFFFF%d分%d秒|r"
+L.keystoneFailedTooltip = "超时: |cFFFFFFFF%d分%d秒|r\n时限：|cFFFFFFFF%d分%d秒|r"
 L.keystoneExplainer = "一个包含多种工具的集合，旨在提升史诗钥石地下城的游戏体验。"
 L.keystoneAutoSlot = "自动插入史诗钥石"
 L.keystoneAutoSlotDesc = "打开能量之泉时，自动将你的史诗钥石插入。"
@@ -344,7 +344,7 @@ L.keystoneHistoryScoreThisWeekTooltip = "本周获得的分数：|cFFFFFFFF+%d|r
 L.keystoneHistoryScoreOlderTooltip = "本周之前获得的总分数：|cFFFFFFFF+%d|r"
 L.keystoneTimeUnder = "|cFF33FF99-%02d:%02d|r"
 L.keystoneTimeOver = "|cFFFF4411+%02d:%02d|r"
---L.keystoneTeleportTip = "TIP: Click the dungeon name below to teleport directly to the dungeon entrance."
+L.keystoneTeleportTip = "点击下方地下城名称可直接|cFF33FF99传送|r至地下城入口。"
 
 -- It doesn't really matter what you call it as long as it's recognizable and limited to ~6 characters
 L.keystoneShortName_TheRookery = "驭雷栖巢"
@@ -842,6 +842,7 @@ L.combatLogDesc = "当开怪倒数计时器开始到战斗结束时自动开始�
 L.pull = "开怪"
 L.engageSoundTitle = "当首领战斗开始时播放音效"
 L.pullStartedSoundTitle = "当开怪倒数计时器开始时播放音效"
+L.pullStartedMessageTitle = "当开怪倒数计时器开始时显示消息"
 L.pullFinishedSoundTitle = "当开怪倒数计时器结束时播放音效"
 L.pullStartedBy = "%s 发起开怪倒数计时。"
 L.pullStopped = "%s 取消了开怪倒数计时。"

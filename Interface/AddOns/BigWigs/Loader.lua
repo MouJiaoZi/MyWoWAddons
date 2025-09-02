@@ -56,7 +56,7 @@ do
 	local ALPHA = "ALPHA"
 
 	local releaseType
-	local myGitHash = "f7f4676" -- The ZIP packager will replace this with the Git hash.
+	local myGitHash = "86b2ba3" -- The ZIP packager will replace this with the Git hash.
 	local releaseString
 	--[=[@alpha@
 	-- The following code will only be present in alpha ZIPs.
@@ -1490,7 +1490,7 @@ do
 		--[1384] = locales.esES, [1385] = locales.esES, [1386] = locales.esES, [1387] = locales.esES, [1395] = locales.esES, -- esES
 	}
 	local criticalList = {
-		--[locales.esMX] = true,
+		[locales.itIT] = true,
 	}
 
 	local language = locales[myLocale]
@@ -1502,7 +1502,7 @@ do
 		delayedMessages[#delayedMessages+1] = msg1
 		delayedMessages[#delayedMessages+1] = msg2
 		delayedMessages[#delayedMessages+1] = msg3
-		if criticalList[language or realmLanguage] then
+		if myLocale == "enUS" and criticalList[realmLanguage] then
 			Popup(msg1.. "\n" ..msg2.. "\n" ..msg3, true)
 		end
 	end

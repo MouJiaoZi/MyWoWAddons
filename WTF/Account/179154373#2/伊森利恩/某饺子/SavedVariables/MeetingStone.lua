@@ -682,6 +682,31 @@ MEETINGSTONE_CHARACTER_DB = {
 ["time"] = 1756647646,
 ["class"] = 13,
 },
+{
+["role"] = "HEALER",
+["name"] = "Yqxqs-白银之手",
+["time"] = 1756731336,
+["class"] = 2,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "妞晚上等我-燃烧之刃",
+["time"] = 1756731336,
+["class"] = 2,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "黄泉升窍-无尽之海",
+["time"] = 1756731336,
+["class"] = 3,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "今晚不当人-燃烧之刃",
+["time"] = 1756731336,
+["class"] = 6,
+},
 },
 ["3-378-1617-0"] = {
 {

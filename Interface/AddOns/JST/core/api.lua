@@ -1424,34 +1424,43 @@ T.StopTimerBar = StopTimerBar
 ---------------  图标模板  ----------------
 ---------------------------------------------
 
-local CreateIcon = function(parent, icon, size)
+local CreateIcon = function(parent, icon_tex, size)
 	local icon = CreateFrame("Frame", nil, parent)
 	icon:SetSize(size, size)
+	icon.t = 0
 	
 	T.createborder(icon)
 	
 	icon.tex = icon:CreateTexture(nil, "ARTWORK")
 	icon.tex:SetAllPoints()
 	icon.tex:SetTexCoord( .1, .9, .1, .9)
-	
-	local fontsize = floor(size*.5)
-	
-	icon.trtext = T.createtext(icon, "OVERLAY", fontsize, "OUTLINE", "RIGHT")
-	icon.trtext:SetPoint("TOPRIGHT", icon, "TOPRIGHT")
-	
-	icon.brtext = T.createtext(icon, "OVERLAY", fontsize, "OUTLINE", "RIGHT")
-	icon.brtext:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT")
-	
-	icon:HookScript("OnSizeChanged", function(self, width, size)
-		self.trtext:SetFont(G.Font, floor(size*.5), "OUTLINE")
-		self.trtext:SetFont(G.Font, floor(size*.5), "OUTLINE")
-	end)
+	icon.tex:SetTexture(icon_tex)
 	
 	icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
 	icon.cooldown:SetAllPoints()
 	icon.cooldown:SetDrawEdge(false)
 	icon.cooldown:SetHideCountdownNumbers(true)
 	icon.cooldown:SetReverse(true)
+	
+	icon.cover = CreateFrame("Frame", nil, icon)
+	icon.cover:SetAllPoints()
+	
+	icon.trtext = T.createtext(icon.cover, "OVERLAY", floor(size*.5), "OUTLINE", "RIGHT") -- 层数
+	icon.trtext:SetPoint("TOPRIGHT", icon.cover, "TOPRIGHT")
+	icon.trtext:SetTextColor(0, 1, 1)
+	
+	icon.rtext = T.createtext(icon.cover, "OVERLAY", floor(size*.5), "OUTLINE", "RIGHT") -- 持续时间
+	icon.rtext:SetPoint("LEFT", icon.cover, "RIGHT", 2, 0)
+	icon.rtext:SetTextColor(1, 1, 0)
+	
+	icon.ctext = T.createtext(icon.cover, "OVERLAY", floor(size*.5), "OUTLINE", "RIGHT") -- 冷却时间
+	icon.ctext:SetPoint("CENTER", icon.cover, "CENTER")
+	
+	icon:HookScript("OnSizeChanged", function(self, width, size)
+		self.trtext:SetFont(G.Font, floor(size*.3), "OUTLINE")
+		self.rtext:SetFont(G.Font, floor(size*.5), "OUTLINE")
+		self.ctext:SetFont(G.Font, floor(size*.5), "OUTLINE")
+	end)
 	
 	function icon:update_texture(texture)
 		self.tex:SetTexture(texture)
@@ -1461,13 +1470,43 @@ local CreateIcon = function(parent, icon, size)
 		self.trtext:SetText(count > 0 and count or "")
 	end
 	
-	function icon:start_cooldown(dur, exp_time)
-		self.cooldown:SetCooldown(exp_time - dur, dur)
+	function icon:stop_cooldown(desaturated)
+		self:SetScript("OnUpdate", nil)
+		self.ctext:SetText("")
+		
+		self.cooldown:SetCooldown(0, 0)
+		
+		if desaturated then
+			self.tex:SetDesaturated(false)
+		end
 	end
 	
+	function icon:start_cooldown(dur, exp_time, desaturated)
+		self:SetScript("OnUpdate", function(s, e)
+			s.t = s.t + e
+			if s.t > .05 then	
+				local remain = exp_time - GetTime()
+				if remain > 0 then
+					s.ctext:SetText(T.FormatTime(remain))
+				else
+					s:stop_cooldown(desaturated)
+				end
+				s.t = 0
+			end
+		end)
+		
+		local start = exp_time - dur
+		self.cooldown:SetCooldown(start, dur)
+		
+		if desaturated then
+			self.tex:SetDesaturated(true)
+		end
+	end
+
 	function icon:stop(glow)
 		self:SetScript("OnUpdate", nil)
-		self.brtext:SetText("")
+		self.rtext:SetText("")
+		
 		if glow then
 			T.PixelGlow_Stop(self, "active_buff")
 		end
@@ -1479,17 +1518,19 @@ local CreateIcon = function(parent, icon, size)
 			if s.t > .05 then	
 				local remain = exp_time - GetTime()
 				if remain > 0 then
-					s.brtext:SetText(T.FormatTime(remain))
+					s.rtext:SetText(T.FormatTime(remain))
 				else
-					s:stop()
+					s:stop(glow)
 				end
 				s.t = 0
 			end
 		end)
+		
 		if glow then
-			T.PixelGlow_Start(self, {1, 1, 0}, 12, .25, nil, 3, 0, 0, true, "active_buff")
+			T.PixelGlow_Start(self, {1, 1, 0}, 6, .25, nil, 2, 0, 0, true, "active_buff")
 		end
 	end
+	
 	
 	return icon
 end
@@ -3647,6 +3688,7 @@ end
 
 --		frame.spellIDs = {
 --			[774] = {
+--				icon = 3163628, -- 自定义图标
 --				aura_type = "HARMFUL", -- 光环类型 默认 "HARMFUL"
 --				color = {0.95, .5, 0}, -- 颜色 或法术颜色
 --				limit = 5, -- 限制显示数量
@@ -3661,6 +3703,7 @@ end
 --		frame.role = true -- 显示被点名人的职责
 --		frame:filter(auraID, spellID, GUID) -- 过滤
 --		frame:post_create_bar(bar, auraID, spellID, GUID) -- 附加修改
+--		frame:custom_update(bar, spellID, count, dur, exp_time, effect_value) -- 自定义刷新
 
 T.InitUnitAuraBars = function(frame)
 	frame.bars = {}
@@ -3670,7 +3713,7 @@ T.InitUnitAuraBars = function(frame)
 	T.GetBarsCustomData(frame)
 	
 	for spellID, info in pairs(frame.spellIDs) do
-		info.icon = C_Spell.GetSpellTexture(spellID)
+		info.icon = info.icon or C_Spell.GetSpellTexture(spellID)
 		info.aura_type = info.aura_type or "HARMFUL"
 		
 		if not info.color then
@@ -3682,8 +3725,8 @@ T.InitUnitAuraBars = function(frame)
 		end
 	end
 	
-	function frame:create_bar(auraID, spellID, name, GUID)
-		if not frame.filter or frame:filter(auraID, spellID, GUID) then		
+	function frame:create_bar(auraID, spellID, GUID)
+		if not frame.filter or frame:filter(auraID, spellID, GUID) then
 			local info = T.GetGroupInfobyGUID(GUID)
 			if info then
 				local icon = self.spellIDs[spellID].icon
@@ -3719,7 +3762,9 @@ T.InitUnitAuraBars = function(frame)
 		local bar = self.bars[auraID]
 		
 		if bar then
-			if self.spellIDs[spellID]["progress_value"] then
+			if self.custom_update then
+				self:custom_update(bar, spellID, count, dur, exp_time, effect_value)
+			elseif self.spellIDs[spellID]["progress_value"] then
 				local total = self.spellIDs[spellID]["progress_value"]
 				bar:SetMinMaxValues(0 , total)
 				bar:SetValue(min(total, effect_value))
@@ -3876,11 +3921,10 @@ T.UpdateUnitAuraBars = function(frame, event, ...)
 						if info and frame:role_check(unit, info.role) then
 							local effect_ind = info.effect
 							local auraID = AuraData.auraInstanceID
-							local name = UnitName(unit)
 							local GUID = UnitGUID(unit)
 							local spellID = AuraData.spellId
 							local effect_value = AuraData.points and effect_ind and AuraData.points[effect_ind] or 0
-							frame:create_bar(auraID, spellID, name, GUID)
+							frame:create_bar(auraID, spellID, GUID)
 							frame:update_bar(auraID, spellID, AuraData.applications, AuraData.duration, AuraData.expirationTime, effect_value)						
 						end
 					end, true)
@@ -3894,9 +3938,8 @@ T.UpdateUnitAuraBars = function(frame, event, ...)
 					if info and frame:role_check(unit, info.role) then
 						local auraID = AuraData.auraInstanceID
 						if not frame.bars[auraID] then
-							local name = UnitName(unit)
 							local GUID = UnitGUID(unit)
-							frame:create_bar(auraID, spellID, name, GUID)
+							frame:create_bar(auraID, spellID, GUID)
 							local effect_ind = info.effect
 							local effect_value = 0
 							if effect_ind and AuraData.points and AuraData.points[effect_ind] then
@@ -6465,4 +6508,18 @@ T.FillArrayByGUID = function(line, GUIDs)
     end
     
     return containsPlayerGUID
+end
+
+T.GetColoredNameListByArray = function(GUIDs, start_str, mark)
+	local str = ""
+	if start_str then
+		str = str .. start_str
+	end
+	if mark then
+		str = str .. T.FormatRaidMark(mark)
+	end
+	for _, GUID in pairs(GUIDs) do
+		str = str .." ".. T.ColorNickNameByGUID(GUID)
+	end
+	return str 
 end

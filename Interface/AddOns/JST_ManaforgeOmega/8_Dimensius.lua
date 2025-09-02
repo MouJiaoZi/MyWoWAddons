@@ -155,6 +155,342 @@ G.Encounters[2691] = {
 						T.ResetUnitAuraBars(frame)
 					end,
 				},
+				{ -- 首领模块 过量物质分配（待测试）
+					category = "BossMod",
+					spellID = 1227866,
+					enable_tag = "everyone",
+					name = string.format(T.GetIconLink(1228206)..L["分配"]),	
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					custom = {
+						{
+							key = "mrt_custom_btn",
+						},
+						{
+							key = "mrt_analysis_btn",
+						},
+					},
+					init = function(frame)
+						frame.backup_assignments = {}
+						frame.assignments = {}
+						frame.pre_assigned = {}
+						frame.count = 0
+						frame.last_cast = 0
+						frame.my_set = 0
+						
+						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
+						
+						function frame:copy_mrt()
+							local str = [[
+								#%1$dBackupstart%2$s
+								L player player player player player player player player player
+								R player player player player player player player player player
+								end
+								
+								#%1$dstart%2$s
+								L player player
+								R player player
+								
+								L player player
+								R player player
+								
+								L player player
+								R player player
+								
+								L player player
+								R player player
+								end
+							]]
+							
+							str = gsub(str, "	", "")
+							return string.format(str, self.config_id, C_Spell.GetSpellName(self.config_id))
+						end
+						
+						function frame:GetBackupArray(tag, line, set)
+							local GUIDs, containsPlayerGUID = T.LineToGUIDArray(line)
+							
+							if next(GUIDs) then
+								local str = string.format("%s %s ", L["替补"], tag)
+								
+								for _, GUID in pairs(GUIDs) do
+									table.insert(self.backup_assignments[set], GUID)
+									local name = T.ColorNickNameByGUID(GUID)
+									str = str..name
+								end
+								
+								if display then
+									T.msg(str)
+								end
+								
+								if containsPlayerGUID then
+									self.my_set = set
+								end
+							end
+						end
+						
+						function frame:GetPriorityArray(tag, line, set)
+							local GUIDs = T.LineToGUIDArray(line)
+									
+							if next(GUIDs) then
+								self.count_left = self.count_left + 1 
+								self.assignments[set][self.count_left] = {}
+								
+								local str = string.format("[%d] %s ", self.count_left, tag)
+								
+								for index, GUID in pairs(GUIDs) do
+									if index <= 2 then
+										self.assignments[set][self.count_left][index] = GUID
+										local name = T.ColorNickNameByGUID(GUID)
+										str = str..name
+									end
+								end
+								
+								if display then
+									T.msg(str)
+								end
+							end
+						end
+						
+						function frame:ReadNote(display)
+							self.backup_assignments = table.wipe(self.backup_assignments)
+							self.backup_assignments[1] = {}
+							self.backup_assignments[2] = {}
+							
+							self.assignments = table.wipe(self.assignments)
+							self.assignments[1] = {}
+							self.assignments[2] = {}
+							
+							self.my_set = 0
+							
+							if display then
+								T.msg("--------------")
+							end
+							
+							for _, line in T.IterateNoteAssignment(self.config_id.."Backup") do
+								local assignmentType = line:match("^[L%R%-]")
+								if assignmentType == "L" then
+									self:GetBackupArray(L["左"], line, 1)
+								elseif assignmentType == "R" then
+									self:GetBackupArray(L["右"], line, 2)
+								end
+							end
+							
+							self.count_left, self.count_right = 0, 0
+							
+							for _, line in T.IterateNoteAssignment(self.config_id) do
+								local assignmentType = line:match("^[L%R%-]")
+								if assignmentType == "L" then
+									self:GetPriorityArray(L["左"], line, 1)
+								elseif assignmentType == "R" then
+									self:GetPriorityArray(L["右"], line, 2)
+								end
+							end
+						end
+						
+						function frame:GetActiveNum(set)
+							local num = 0
+							
+							local GUIDs = self.backup_assignments[set]
+							if not GUIDs then return end
+							
+							for _, GUID in pairs(GUIDs) do    
+								local unit = T.GUIDToUnit(GUID)
+								if unit and AuraUtil.FindAuraBySpellID(1228206, unit, "HARMFUL") then -- 过量物质
+									num = num + 1
+								end
+							end
+							
+							return num
+						end
+						
+						function frame:PlayerCheck(GUID)
+							local unit = T.GUIDToUnit(GUID)
+							if unit then
+								local alive = not UnitIsDeadOrGhost(unit)
+								local debuffed1 = AuraUtil.FindAuraBySpellID(unit, 1243577, "HARMFUL") -- 引力倒逆
+								local debuffed2 = AuraUtil.FindAuraBySpellID(unit, 1243609, "HARMFUL") -- 浮空
+								local debuffed3 = AuraUtil.FindAuraBySpellID(unit, 1228206, "HARMFUL") -- 过量物质 
+								if alive and not debuffed1 and not debuffed2 and not debuffed3 then        
+									return true
+								end
+							end
+						end
+												
+						function frame:GetBackup(set, rev)
+							local GUIDs = self.backup_assignments[set]
+							if not GUIDs then return end
+							
+							if rev then
+								for i = #GUIDs, 1, -1 do
+									local GUID = GUIDs[i]
+									if self:PlayerCheck(GUID) and not tContains(self.pre_assigned[set], GUID) then
+										return GUID
+									end
+								end
+							else
+								for i = 1, #GUIDs, 1 do
+									local GUID = GUIDs[i]
+									if self:PlayerCheck(GUID) and not tContains(self.pre_assigned[set], GUID) then
+										return GUID
+									end
+								end
+							end
+						end
+						
+						function frame:GetAvailable(set)
+							local melee_result, ranged_result
+							
+							local count = self.count
+							local GUIDs = self.assignments[set][count]
+							
+							local melee_GUID = GUIDs and GUIDs[1]
+							
+							if melee_GUID and self:PlayerCheck(melee_GUID) then
+								melee_result = melee_GUID
+							else
+								melee_result = self:GetBackup(set)
+							end
+							
+							local ranged_GUID = GUIDs and GUIDs[2]
+							
+							if ranged_GUID and self:PlayerCheck(ranged_GUID) then
+								ranged_result = ranged_GUID
+							else
+								ranged_result = self:GetBackup(set, true)
+							end
+							
+							return melee_result, ranged_result
+						end
+						
+						function frame:Display(set, GUID, text, sound, backup)
+							if GUID == G.PlayerGUID then
+								if backup then
+									self.text_frame.text:SetTextColor(1, .3, 0)
+								else
+									self.text_frame.text:SetTextColor(1, 1, 1)
+								end
+								
+								self.text_frame.text:SetText(L["捡球"].." "..text)
+								self.text_frame:Show()
+								
+								T.PlaySound(sound)
+								T.StartMsgTicker(self, text)
+							end
+						end
+						
+						function frame:Remove()
+							self.text_frame:Hide()
+							T.StopMsgTicker(self)
+						end
+												
+						function frame:PreAssign()
+							self.pre_assigned = table.wipe(self.pre_assigned)
+        
+							for set = 1, 2 do
+								self.pre_assigned[set] = {}
+								
+								local set_name = set == 1 and L["左"] or L["右"]
+								local melee_result, ranged_result = self:GetAvailable(set)
+								
+								if melee_result then
+									self.pre_assigned[set][1] = melee_result
+									self:Display(set, melee_result, L["近战"], "meleegroup")
+									local name = T.ColorNickNameByGUID(melee_result)
+									T.msg(string.format("%s %s %s", set_name, L["近战"], name))
+								end
+								
+								if ranged_result then
+									self.pre_assigned[set][2] = ranged_result
+									self:Display(set, ranged_result, L["远程"], "rangegroup")
+									local name = T.ColorNickNameByGUID(ranged_result)
+									T.msg(string.format("%s %s %s", set_name, L["远程"], name))
+								end
+							end
+						end
+						
+						function frame:CheckforBackUp(set, GUID, text, sound)
+							local name = T.ColorNickNameByGUID(GUID)
+							local unit = T.GUIDToUnit(GUID)
+							local set_name = set == 1 and L["左"] or L["右"]
+							if unit and not AuraUtil.FindAuraBySpellID(1228206, unit, "HARMFUL") and not self:PlayerCheck(GUID) then -- 需要替补 
+								local backup_GUID = self:GetBackup(set)
+								if backup_GUID then
+									local backup_name = T.ColorNickNameByGUID(backup_GUID)
+									T.msg(string.format("%s %s(%s) %s", set_name, text, L["替补"], backup_name))
+									self:Display(set, backup_GUID, text, sound, true)
+								end
+							end
+						end
+						
+						function frame:BackupAssign()
+							for set = 1, 2 do
+								local need = self.count%2 == 1 and 2 or 4
+								local current = self:GetActiveNum(set)
+								local lack = need - current
+								local PreAssigned = self.pre_assigned[set]
+								if lack > 0 and PreAssigned and next(PreAssigned) then    
+									local melee_GUID = PreAssigned[1]
+									if melee_GUID then
+										self:CheckforBackUp(1, melee_GUID, L["近战"], "meleegroup")
+									end
+									
+									local ranged_GUID = PreAssigned[2]
+									if ranged_GUID then
+										self:CheckforBackUp(2, ranged_GUID, L["远程"], "rangegroup")
+									end									
+								end
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()							
+							if sub_event == "SPELL_CAST_START" and spellID == 1230087 then -- 千钧猛击
+								frame.count = frame.count + 1
+								frame:Remove()
+								
+								C_Timer.After(12, function()
+									frame:PreAssign() -- 第一次分配
+								end)
+								
+							elseif sub_event == "SPELL_CAST_SUCCESS" and spellID == 1236617 then -- P2
+								frame:Remove()
+								
+							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 1243577 then -- 引力倒逆 补分配
+								if GetTime() - frame.last_cast > 3 then
+									frame.last_cast = GetTime()
+									
+									C_Timer.After(.2, function()
+										frame:BackupAssign()
+									end)
+								end
+								
+							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 1228206 then -- 过量物质
+								if frame.my_set > 0 and tContains(frame.backup_assignments[frame.my_set], destGUID) then
+									local need = frame.count%2 == 1 and 2 or 4
+									local current = frame:GetActiveNum(frame.my_set)
+									local lack = need - current
+									if lack == 0 then
+										frame:Remove()
+									end
+								end 
+							end
+							
+						elseif event == "ENCOUNTER_START" then
+							frame.count = 0
+							frame.last_cast = 0
+							frame.my_set = 0
+
+							frame:ReadNote()
+						end
+					end,
+					reset = function(frame, event)
+						frame:Remove()
+						frame:Hide()
+					end,
+				},
 			},
 		},
 		{ -- 凡躯的脆弱

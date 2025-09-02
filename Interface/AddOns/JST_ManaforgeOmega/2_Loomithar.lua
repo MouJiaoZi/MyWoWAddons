@@ -213,6 +213,9 @@ G.Encounters[2686] = {
 						{
 							key = "mrt_custom_btn", 
 						},
+						{
+							key = "mrt_analysis_btn",
+						},
 					},
 					init = function(frame)
 						frame.bars = {}
@@ -363,7 +366,7 @@ G.Encounters[2686] = {
 							end
 						end
 						
-						function frame:GetMrtAssignment()
+						function frame:ReadNote(analyse)
 							-- [1] = Players soaking the first set of pylons each phase
 							-- [2] = Players soaking the second set of pylons each phase
 							self.assignments = table.wipe(self.assignments)
@@ -371,16 +374,30 @@ G.Encounters[2686] = {
 							self.assignments[2] = {}
 							self.backups = table.wipe(self.backups)
 							
+							T.divideline(self.config_name)
+							
 							for lineCount, line in T.IterateNoteAssignment(self.config_id) do
 								local GUIDs, _, mark = T.LineToGUIDArray(line)
 								
 								if next(GUIDs) then
+									
 									if lineCount <= 8 and mark then
 										local setNumber = lineCount <= 4 and 1 or 2
 										
 										self.assignments[setNumber][mark] = GUIDs
+										
+										if analyse then
+											local start_str = setNumber == 1 and L["奇数"] or L["偶数"]
+											local str = T.GetColoredNameListByArray(GUIDs, start_str, mark)
+											T.msg(str)
+										end
 									elseif lineCount == 9 then
 										self.backups = GUIDs
+										
+										if analyse then
+											local str = T.GetColoredNameListByArray(GUIDs, L["替补"])
+											T.msg(str)
+										end
 									end
 								end
 							end
@@ -508,7 +525,7 @@ G.Encounters[2686] = {
 							end
 						elseif event == "ENCOUNTER_START" then
 							frame.set = 0
-							frame:GetMrtAssignment()
+							frame:ReadNote()
 						end
 					end,
 					reset = function(frame, event)

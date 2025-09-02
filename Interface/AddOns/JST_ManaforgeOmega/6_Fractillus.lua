@@ -12,13 +12,17 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["出墙消墙位置分配"] = "出墙、消墙位置分配"
 	L["安全区文字持续时间"] = "安全区文字持续时间"
 	L["提前5秒提示坦克墙位置"] = "提前5秒提示坦克墙位置"
+	L["放墙错误"] = "%s 放墙位置出错(%s)，实际放在了%s。"
+	L["消墙错误"] = "%s 消墙位置出错(%s)，实际消了%s。"
 elseif G.Client == "ruRU" then
 	--L["出墙"] = "Spawn wall"
 	--L["消墙"] = "Break wall"
 	--L["坦克出墙"] = "Tank Spawn wall"
 	--L["出墙消墙位置分配"] = "Spawn/break wall assignment"
 	--L["安全区文字持续时间"] = "Safe spot display duration"
-	--L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"	
+	--L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"
+	--L["放墙错误"] = "%s wall placement error (%s), actually placed in %s."
+	--L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
 else
 	L["出墙"] = "Spawn wall"
 	L["消墙"] = "Break wall"
@@ -26,10 +30,63 @@ else
 	L["出墙消墙位置分配"] = "Spawn/break wall assignment"
 	L["安全区文字持续时间"] = "Safe spot display duration"
 	L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"
+	L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
 end
 ---------------------------------Notes--------------------------------
 
 ---------------------------------Data--------------------------------
+
+local event_frame = CreateFrame("Frame")
+event_frame:RegisterEvent("ZONE_CHANGED")
+event_frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+
+event_frame.player_pos = {}
+event_frame.spellIDToColumn = {
+	[1223493] = 1, -- Column F Aura
+	[1223489] = 2, -- Column E Aura
+	[1223486] = 3, -- Column D Aura
+	[1223485] = 4, -- Column C Aura
+	[1223484] = 5, -- Column B Aura
+	[1223483] = 6, -- Column A Aura
+}
+
+event_frame:SetScript("OnEvent", function(self, event, ...)
+	if event == "UNIT_SPELLCAST_SUCCEEDED" then
+		local unit, castGUID, spellID = ...
+		
+		if not string.find(unit, "raid") or not castGUID then return end
+		
+		local column = self.spellIDToColumn[spellID]
+		if column then
+			local GUID = UnitGUID(unit)
+			self.player_pos[GUID] = column
+			
+			local frame = G.BossModFrames[1233416]
+			
+			if frame.spawnGUIDs[GUID] or frame.breakGUIDs[GUID] then
+				frame:BarDisplayAll()
+			end
+		end
+	else
+		local subZone = GetSubZoneText()
+		if subZone == C_Map.GetAreaInfo(16572) or subZone == C_Map.GetAreaInfo(16571) then
+			self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+		else
+			self:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+		end
+	end
+end)
+
+local function GUIDToColumn(GUID)
+	return event_frame.player_pos[GUID]
+end
+
+local function SetDefaultColumn(GUID, pos)
+	if not event_frame.player_pos[GUID] then
+		event_frame.player_pos[GUID] = pos
+	end
+end
+
 -- engage_id = 1810, -- 测试用
 -- npc_id = {"91784"}, -- 测试用
 
@@ -349,8 +406,25 @@ G.Encounters[2747] = {
 							end,
 						},
 					},
-					init = function(frame)						
+					init = function(frame)
 						T.GetScaleCustomData(frame)
+						
+						frame.tankSpawnCount = 1
+												
+						frame.spawns = {}
+						frame.tankSpawns = {}
+						frame.breaks = {}
+						frame.safespots = {}
+						frame.breakOrder = {}
+						
+						frame.spawnGUIDs = {}
+						frame.breakGUIDs = {}
+						frame.spwans_count = 0
+						frame.rotation_count = 0
+						frame.last_cast = 0						
+						
+						frame.wallCounts = {}
+						frame.wallAssigned = {}
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
@@ -372,10 +446,9 @@ G.Encounters[2747] = {
 							str = {layer = "ARTWORK", text = "-", fs = 25, color = {1, 1, 1}, points = {"TOP", 0, -20}},
 						}
 						
-						for i = 1, 6 do
-							local rotation = (i - 0.5 - (slices / 2)) * (2 * math.pi * ((degrees / 360) / slices))
-							
-							frame.graph_tex_info["slice"..i] = {
+						for column = 1, 6 do
+							local rotation = (column - 0.5 - (slices / 2)) * (2 * math.pi * ((degrees / 360) / slices))
+							frame.graph_tex_info["slice"..column] = {
 								layer = "BACKGROUND",
 								sub_layer = 1,
 								tex = G.media.triangle,
@@ -393,14 +466,14 @@ G.Encounters[2747] = {
 						frame.graph_bg:Hide()
 						
 						local bar_width = 60
-						local bar_height = 100
+						local bar_height = 90
 						T.CreateMovableFrame(frame, "rl_frame", bar_width*6+25, bar_height+15, {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 225, y = -150}, "_rl_frame", L["团队分配"])
 						frame.rl_frame.bars = {}
 						
-						for i = 1, 6 do
+						for column = 1, 6 do
 							local bar = CreateFrame("StatusBar", nil, frame.rl_frame)
 							bar:SetSize(bar_width, bar_height)
-							bar:SetPoint("BOTTOMLEFT", frame.rl_frame, "BOTTOMLEFT", (bar_width+5)*(i-1), 0)
+							bar:SetPoint("BOTTOMLEFT", frame.rl_frame, "BOTTOMLEFT", (bar_width+5)*(column-1), 0)
 							
 							bar:SetOrientation("VERTICAL")
 							bar:SetStatusBarTexture(G.media.blank)
@@ -408,26 +481,42 @@ G.Encounters[2747] = {
 							T.createborder(bar, .25, .25, .25, 1)
 														
 							bar:SetMinMaxValues(0, 6)
-												
+							
 							bar.name = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "CENTER")
 							bar.name:SetPoint("BOTTOM", bar, "BOTTOM", 0, 0)
 							
-							bar.text = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "CENTER")
-							bar.text:SetPoint("BOTTOM", bar.name, "TOP", 0, 0)
-							
 							bar.rt = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "CENTER")
 							bar.rt:SetPoint("BOTTOM", bar, "TOP", 0, 0)
-							bar.rt:SetText(T.FormatRaidMark(i))
+							bar.rt:SetText(T.FormatRaidMark(column))
+							
+							bar.extraTex = bar:CreateTexture(nil, "OVERLAY")
+							bar.extraTex:SetPoint("RIGHT", bar:GetStatusBarTexture(), "RIGHT")
+							bar.extraTex:SetPoint("LEFT", bar:GetStatusBarTexture(), "LEFT")
+							bar.extraTex:SetPoint("BOTTOM", bar:GetStatusBarTexture(), "TOP", 0, 0)
+							bar.extraTex:SetTexture(G.media.overlay1)
 							
 							bar.players = {}
-							bar.value = 0
-							bar.change = 0
 							
 							table.insert(frame.rl_frame.bars, bar)
 						end
 						
-						function frame:BarDisplay(index)
-							local bar = frame.rl_frame.bars[index]
+						function frame:BarDisplay(column)
+							local bar = frame.rl_frame.bars[column]
+								
+							bar.players = table.wipe(bar.players)
+							
+							for GUID in pairs(frame.spawnGUIDs) do
+								if GUIDToColumn(GUID) == column then
+									table.insert(bar.players, GUID)
+								end
+							end
+							
+							for GUID in pairs(frame.breakGUIDs) do
+								if GUIDToColumn(GUID) == column then
+									table.insert(bar.players, GUID)
+								end
+							end							
+							
 							local str = ""
 							for i, GUID in pairs(bar.players) do
 								local format_name = T.GetGroupInfobyGUID(GUID)["format_name"]
@@ -439,39 +528,46 @@ G.Encounters[2747] = {
 							end
 							
 							bar.name:SetText(str)
-							bar:SetValue(bar.value)
 							
-							if bar.change == 0 then
-								bar.text:SetText(string.format("%d", bar.value))
-							elseif bar.change > 0 then
-								bar.text:SetText(string.format("%d|cffff0000+%d|r", bar.value, bar.change))
-							else
-								bar.text:SetText(string.format("%d|cff00ff00%d|r", bar.value, bar.change))
-							end							
+							local value = self.wallCounts[column]
+							
+							if value then
+								bar:SetValue(value)
+							end
+							
+							local change = self.wallAssigned[column]
+							
+							if change then
+							
+								if change == 0 then
+									bar.extraTex:Hide()	
+								elseif change > 0 then
+									bar.extraTex:Show()
+									bar.extraTex:SetVertexColor(0, 1, 1)
+									bar.extraTex:SetPoint("TOP", bar:GetStatusBarTexture(), "TOP", 0, 15*change)
+								else
+									bar.extraTex:Show()
+									bar.extraTex:SetVertexColor(.25, .25, .25)
+									bar.extraTex:SetPoint("TOP", bar:GetStatusBarTexture(), "TOP", 0, 15*change)
+								end
+							end
 						end
 						
-						function frame:BarUpdate(index, GUID, change)
-							table.insert(frame.rl_frame.bars[index]["players"], GUID)
-							frame.rl_frame.bars[index]["change"] = frame.rl_frame.bars[index]["change"] + change
-							frame:BarDisplay(index)
+						function frame:BarDisplayAll()
+							for column = 1, 6 do
+								self:BarDisplay(column)
+							end
 						end
 						
-						function frame:BarApplyChanges(index)
-							frame.rl_frame.bars[index]["players"] = table.wipe(frame.rl_frame.bars[index]["players"])
-							frame.rl_frame.bars[index]["value"] = frame.rl_frame.bars[index]["value"]+frame.rl_frame.bars[index]["change"]
-							frame.rl_frame.bars[index]["change"] = 0
-							frame:BarDisplay(index)
-						end
-						
-						function frame:Display(i, text)
+						function frame:Display(target_column, text)
 							self.graph_bg:Show()
 							
-							self.graphs.str.text:SetText(T.FormatRaidMark(i)..text)
+							self.graphs.str.text:SetText(T.FormatRaidMark(target_column)..text)
 							
-							for index = 1, 6 do
-								local slice = self.graphs["slice"..index]
-								if index == i then
-									local r, g, b = T.GetRaidMarkColor(index)
+							for column = 1, 6 do
+								local slice = self.graphs["slice"..column]
+								if column == target_column then
+									local r, g, b = T.GetRaidMarkColor(column)
 									slice.tex:SetVertexColor(r, g, b)
 								else
 									slice.tex:SetVertexColor(.3, .3, .3)
@@ -513,10 +609,14 @@ G.Encounters[2747] = {
 										if not tank then
 											local ind = mod(self.spwans_count, 2) == 1 and 1 or 3
 											T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, ind, info.format_name, L["出墙"], T.FormatRaidMark(position)))
-											self:BarUpdate(position, GUID, 1)
+											self.wallAssigned[position] = self.wallAssigned[position] + 1
+											self.spawnGUIDs[GUID] = position
+											T.FireEvent("JST_CUSTOM", frame.config_id)
 										else
 											T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 2, info.format_name, L["坦克"]..L["出墙"], T.FormatRaidMark(position)))
-											self:BarUpdate(position, GUID, self.difficultyID == 16 and 3 or 1)
+											self.wallAssigned[position] = self.wallAssigned[position] + self.tankSpawnCount
+											self.spawnGUIDs[GUID] = position
+											T.FireEvent("JST_CUSTOM", frame.config_id)
 										end
 									end
 								end
@@ -537,13 +637,15 @@ G.Encounters[2747] = {
 									local info = T.GetGroupInfobyGUID(GUID)
 									if info then
 										T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 4, info.format_name, L["消墙"], T.FormatRaidMark(position)))
-										self:BarUpdate(position, GUID, -1)
+										self.wallAssigned[position] = self.wallAssigned[position] - 1
+										self.breakGUIDs[GUID] = position
+										T.FireEvent("JST_CUSTOM", frame.config_id)
 									end
 								end
 							end
 						end
 						
-						function frame:DisplayTankSpwan(affected_dur)
+						function frame:DisplayTankSpwan()
 							for unit in T.IterateGroupMembers() do
 								local isTanking = UnitDetailedThreatSituation(unit, "boss1")
 								
@@ -553,26 +655,12 @@ G.Encounters[2747] = {
 									
 									if position then
 										frame:DisplayAssignment("SPAWN", GUID, position, true)
-										
-										C_Timer.After(affected_dur, function()
-											frame:BarApplyChanges(position)
-										end)
 									end
 									
 									return
 								end
 							end
 						end
-						
-						frame.spawnGUIDs = {}
-						frame.breakGUIDs = {}
-						frame.spawns = {}
-						frame.tankSpawns = {}
-						frame.breaks = {}
-						frame.safespots = {}
-						frame.spwans_count = 0
-						frame.rotation_count = 0
-						frame.breakOrder = {}
 						
 						local normalDefault = [[
 							+ 1 1 0 1 0 0 (3)
@@ -756,12 +844,12 @@ G.Encounters[2747] = {
 									difficultyID = C.DB["BossMod"][self.config_id]["difficulty_index_dd"]
 								end
 								
-								if difficultyID == 14 then
-									defaultAssignment = normalDefault
-								elseif difficultyID == 15 then
+								if difficultyID == 15 then
 									defaultAssignment = heroicDefault
 								elseif difficultyID == 16 then
 									defaultAssignment = mythicDefault
+								elseif difficultyID == 14 then
+									defaultAssignment = normalDefault
 								end
 							end
 	
@@ -841,8 +929,8 @@ G.Encounters[2747] = {
 								local GUIDs = T.LineToGUIDArray(line)
 								local str = ""
 								
-								for index, GUID in ipairs(GUIDs) do
-									self.breakOrder[GUID] = index
+								for i, GUID in ipairs(GUIDs) do
+									self.breakOrder[GUID] = i
 									local name = T.ColorNickNameByGUID(GUID)
 									str = str .. " "..name
 								end
@@ -854,13 +942,17 @@ G.Encounters[2747] = {
 						end
 						
 						function frame:Assign(assignmentType)
-							local affected, positions
+							local affected, positions = {}, {}
 							
 							if assignmentType == "SPAWN" then
-								affected = self.spawnGUIDs
+								for GUID in pairs(self.spawnGUIDs) do
+									table.insert(affected, GUID)
+								end
 								positions = table.remove(self.spawns, 1)
 							else
-								affected = self.breakGUIDs
+								for GUID in pairs(self.breakGUIDs) do
+									table.insert(affected, GUID)
+								end
 								positions = table.remove(self.breaks, 1)
 							end
 							
@@ -883,40 +975,37 @@ G.Encounters[2747] = {
 							
 							for i, GUID in ipairs(affected) do
 								local position = positions[i]
-								
+
 								if position then
 									self:DisplayAssignment(assignmentType, GUID, position)
 								end
-							end
-							
-							if assignmentType == "SPAWN" then
-								self.spawnGUIDs = table.wipe(self.spawnGUIDs)
-							else
-								self.breakGUIDs = table.wipe(self.breakGUIDs)
 							end
 							
 							T.msg("--------------")
 						end
 						
 						function frame:PreviewRLFrame()
+							self.spawnGUIDs = table.wipe(self.spawnGUIDs)
+							self.breakGUIDs = table.wipe(self.breakGUIDs)
+							self.wallCounts = table.wipe(self.wallCounts)
+							
 							if C.DB["BossMod"][self.config_id]["rl_bool"] then
-								local change_type = math.random(2) == 1 and "add" or "remove"
-								for i = 1, 6 do
-									local bar = self.rl_frame.bars[i]
-									bar.value = math.random(4)
-									bar.change = 0
-									bar.players = table.wipe(bar.players)
-									local change = math.random(2) == 1
-									if change then
-										if change_type == "add" then
-											self:BarUpdate(i, G.PlayerGUID, 1)
-										elseif change_type == "remove" then
-											self:BarUpdate(i, G.PlayerGUID, -1)
-										end
-									else
-										self:BarDisplay(i)
-									end
+								local change
+								
+								if self.rad_type == 2 then
+									self.spawnGUIDs[G.PlayerGUID] = self.rad_spot
+									change = 1
+								elseif self.rad_type == 3 then
+									self.breakGUIDs[G.PlayerGUID] = self.rad_spot
+									change = -1
 								end
+								
+								for column = 1, 6 do
+									self.wallCounts[column] = math.random(5)
+									self.wallAssigned[column] = self.rad_spot == column and change or 0
+								end
+								
+								self:BarDisplayAll()
 								self.rl_frame:Show()
 							end
 						end
@@ -924,15 +1013,15 @@ G.Encounters[2747] = {
 						function frame:PreviewShow()
 							self.graph_bg:Show()
 							
-							local rad_type = math.random(3)
-							local rad_spot = math.random(6)
+							self.rad_type = math.random(3)
+							self.rad_spot = math.random(6)
 							
-							if rad_type == 1 then
-								self:DisplaySafe(rad_spot, true)
-							elseif rad_type == 2 then
-								self:DisplayAssignment("SPAWN", G.PlayerGUID, rad_spot, false, true)
+							if self.rad_type == 1 then
+								self:DisplaySafe(self.rad_spot, true)
+							elseif self.rad_type == 2 then
+								self:DisplayAssignment("SPAWN", G.PlayerGUID, self.rad_spot, false, true)
 							else
-								self:DisplayAssignment("BREAK", G.PlayerGUID, rad_spot, false, true)
+								self:DisplayAssignment("BREAK", G.PlayerGUID, self.rad_spot, false, true)
 							end
 							
 							self:PreviewRLFrame()
@@ -949,18 +1038,27 @@ G.Encounters[2747] = {
 						if event == "ENCOUNTER_START" then
 							frame.difficultyID = select(3, ...)
 							
+							if frame.difficultyID == 16 then
+								frame.tankSpawnCount = 3
+							else
+								frame.tankSpawnCount = 1
+							end
+
 							frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
 							frame.breakGUIDs = table.wipe(frame.breakGUIDs)
-							
 							frame.spwans_count = 0
-							frame.rotation_count = 0
+							frame.rotation_count = 0							
+							frame.last_cast = 0
 							
-							for i = 1, 6 do
-								local bar = frame.rl_frame.bars[i]
-								bar.value = 0
-								bar.change = 0
+							frame.wallAssigned = table.wipe(frame.wallAssigned)
+							frame.wallCounts = table.wipe(frame.wallCounts)
+							
+							for column = 1, 6 do
+								local bar = frame.rl_frame.bars[column]
 								bar.players = table.wipe(bar.players)
-								frame:BarDisplay(i)
+								
+								frame.wallAssigned[column] = 0
+								frame.wallCounts[column] = 0
 							end
 							
 							frame:ReadNote()
@@ -969,17 +1067,30 @@ G.Encounters[2747] = {
 							frame.safespot = table.remove(frame.safespots, 1)
 							frame:DisplaySafe(frame.safespot)
 							
+							for unit in T.IterateGroupMembers() do
+								local GUID = UnitGUID(unit)
+								SetDefaultColumn(GUID, frame.safespot)
+							end
+							
 							if C.DB["BossMod"][frame.config_id]["rl_bool"] then
 								frame.rl_frame:Show()
 							end
 							
 							if C.DB["BossMod"][frame.config_id]["tank_advance_bool"] then
-								C_Timer.After(11, function()
-									T.FireEvent("JST_CUSTOM", frame.config_id)
+								local first_dur = frame.difficultyID == 16 and 16 or 18
+								local wait = first_dur - 5
+								frame.timer = C_Timer.NewTimer(wait, function()
+									frame:DisplayTankSpwan()
+									frame:UpdateMonitor()
 								end)
 							end
+							
+							T.FireEvent("JST_CUSTOM", frame.config_id)
+							
 						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
 							local unit, castGUID, spellID = ...
+							
+							if not castGUID then return end
 							
 							if unit == "boss1" then
 								if spellID == 1233416 or spellID == 1231871 then -- 结晶震荡波/震波猛击
@@ -996,58 +1107,133 @@ G.Encounters[2747] = {
 							
 							if unit == "boss1" and spellID == 1231871 then -- 震波猛击
 								if C.DB["BossMod"][frame.config_id]["tank_advance_bool"] then
-									C_Timer.After(35, function()
-										T.FireEvent("JST_CUSTOM", frame.config_id)
+									local tank_dur = frame.difficultyID == 16 and 40 or 51
+									local wait = tank_dur - 5
+									frame.timer = C_Timer.NewTimer(wait, function()
+										frame:DisplayTankSpwan()
 									end)
 								else
-									frame:DisplayTankSpwan(4)
-								end							
+									frame:DisplayTankSpwan()
+								end
+								
+								for unit in T.IterateGroupMembers() do
+									local isTanking = UnitDetailedThreatSituation(unit, "boss1")
+									
+									if isTanking then
+										local GUID = UnitGUID(unit)
+										frame.spawnGUIDs[GUID] = 0
+										T.FireEvent("JST_CUSTOM", frame.config_id)
+										return
+									end
+								end
 							end
 							
 						elseif event == "JST_CUSTOM" then
 							local id, set = ...
 							if id == frame.config_id then
-								frame:DisplayTankSpwan(9)
-							end		
+								frame:BarDisplayAll()
+							end
 							
 						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, sourceGUID, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 							
 							if sub_event == "SPELL_AURA_APPLIED" then
 								if spellID == 1233411 then -- 结晶震荡波
-									table.insert(frame.spawnGUIDs, destGUID)
+									frame.spawnGUIDs[destGUID] = 0
 					
-									if #frame.spawnGUIDs == 1 then
+									if GetTime() - frame.last_cast > 3 then
+										frame.last_cast = GetTime()
 										frame.spwans_count = frame.spwans_count + 1
 										frame.rotation_count = ceil(frame.spwans_count/2)
 										
 										C_Timer.After(0.2, function() 
 											frame:Assign("SPAWN")
-										end)
-										C_Timer.After(10, function()
-											for position = 1, 6 do
-												frame:BarApplyChanges(position)
-											end
+											T.FireEvent("JST_CUSTOM", frame.config_id)
 										end)
 									end
-								elseif spellID == 1227373 then -- 碎壳
-									table.insert(frame.breakGUIDs, destGUID)
 									
-									if #frame.breakGUIDs == 1 then
+								elseif spellID == 1227373 then -- 碎壳
+									frame.breakGUIDs[destGUID] = 0
+									
+									if GetTime() - frame.last_cast > 3 then
+										frame.last_cast = GetTime()
 										C_Timer.After(0.2, function()
 											frame:Assign("BREAK")
-										end)
-										C_Timer.After(8, function()
-											for position = 1, 6 do
-												frame:BarApplyChanges(position)
-											end
+											T.FireEvent("JST_CUSTOM", frame.config_id)
 										end)
 									end
+									
+								end
+							 elseif sub_event == "SPELL_CAST_SUCCESS" then
+								
+								if spellID == 1233416 then -- 结晶震荡波 (spawn)
+									for GUID, assign in pairs(frame.spawnGUIDs) do
+										local column = GUIDToColumn(GUID)
+										if column then
+											frame.wallCounts[column] = frame.wallCounts[column] + 1
+											if assign > 0 and assign ~= column then
+												local name = T.ColorNickNameByGUID(GUID)
+												local rt1 = T.FormatRaidMark(assign)
+												local rt2 = T.FormatRaidMark(column)
+												T.msg(string.format(L["放墙错误"], name, rt1, rt2))
+											end
+										end
+									end
+									
+									frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
+									for column = 1, 6 do
+										frame.wallAssigned[column] = 0
+									end
+									T.FireEvent("JST_CUSTOM", frame.config_id)
+									
+								elseif spellID == 1231871 then -- 震波猛击 (tank spawn)
+									for GUID, assign in pairs(frame.spawnGUIDs) do
+										local column = GUIDToColumn(GUID)
+										if column then
+											frame.wallCounts[column] = frame.wallCounts[column] + frame.tankSpawnCount
+											if assign > 0 and assign ~= column then
+												local name = T.ColorNickNameByGUID(GUID)
+												local rt1 = T.FormatRaidMark(assign)
+												local rt2 = T.FormatRaidMark(column)
+												T.msg(string.format(L["放墙错误"], name, rt1, rt2))
+											end
+										end
+									end
+									
+									frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
+									for column = 1, 6 do
+										frame.wallAssigned[column] = 0
+									end
+									T.FireEvent("JST_CUSTOM", frame.config_id)			
+									
+								elseif spellID == 1220394 then -- 粉碎抽打 (breaks)
+									for GUID, assign in pairs(frame.breakGUIDs) do
+										local column = GUIDToColumn(GUID)
+										if column then
+											frame.wallCounts[column] = frame.wallCounts[column] - 1
+											frame.wallCounts[column] = max(frame.wallCounts[column], 0)
+											if assign > 0 and assign ~= column then
+												local name = T.ColorNickNameByGUID(GUID)
+												local rt1 = T.FormatRaidMark(assign)
+												local rt2 = T.FormatRaidMark(column)
+												T.msg(string.format(L["消墙错误"], name, rt1, rt2))
+											end
+										end
+									end
+									
+									frame.breakGUIDs = table.wipe(frame.breakGUIDs)
+									for column = 1, 6 do
+										frame.wallAssigned[column] = 0
+									end
+									T.FireEvent("JST_CUSTOM", frame.config_id)
 								end
 							end
 						end
 					end,
 					reset = function(frame, event)
+						if frame.timer then
+							frame.timer:Cancel()
+						end
 						T.Stop_Text_Timer(frame.text_frame)
 						frame.graph_bg:Hide()
 						if C.DB["BossMod"][frame.config_id]["rl_bool"] then
@@ -1207,12 +1393,12 @@ G.Encounters[2747] = {
 				},
 			},
 		},
-		{ -- 猛波震击
+		{ -- 震波猛击
 			spells = {
-				{1231871, "0,12"},--【猛波震击】			
+				{1231871, "0,12"},--【震波猛击】			
 			},
 			options = {
-				{ -- 文字 猛波震击 倒计时（✓）
+				{ -- 文字 震波猛击 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -1239,7 +1425,7 @@ G.Encounters[2747] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1231871, L["坦克出墙"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 猛波震击（✓）
+				{ -- 计时条 震波猛击（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1231871,
@@ -1247,7 +1433,7 @@ G.Encounters[2747] = {
 					show_tar = true,
 					sound = soundfile("1231871cast", "cast"),
 				},
-				{ -- 嘲讽提示 猛波震击（待测试）
+				{ -- 嘲讽提示 震波猛击（待测试）
 					category = "BossMod",
 					spellID = 1231871,
 					ficon = "0",
@@ -1263,10 +1449,10 @@ G.Encounters[2747] = {
 					},
 					init = function(frame)
 						frame.aura_spellIDs = {
-							[1231871] = 1, -- 猛波震击
+							[1231871] = 1, -- 震波猛击
 						}
 						frame.cast_spellIDs = {
-							[1231871] = true, -- 猛波震击
+							[1231871] = true, -- 震波猛击
 						}
 						
 						T.InitTauntAlert(frame)
@@ -1278,7 +1464,7 @@ G.Encounters[2747] = {
 						T.ResetTauntAlert(frame)
 					end,
 				},
-				{ -- 换坦计时条 猛波震击（✓）
+				{ -- 换坦计时条 震波猛击（✓）
 					category = "AlertTimerbar",
 					type = "aura",
 					aura_type = "HARMFUL",

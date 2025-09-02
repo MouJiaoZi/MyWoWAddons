@@ -275,7 +275,7 @@ L.H25 = "Героик 25"
 -----------------------------------------------------------------------
 
 L.tools = "Инструменты"
-L.toolsDesc = "BigWigs предоставляет различные инструменты или \"упрощающие жизнь\" функции для ускорения и упрощения процесса убийства боссов. Нажмите значок |cFF33FF99+|r для просмотра возможных инструментов."
+L.toolsDesc = "BigWigs предоставляет различные инструменты или \"упрощающие жизнь\" функции для ускорения и упрощения процесса убийства боссов."
 
 -----------------------------------------------------------------------
 -- AutoRole.lua
@@ -344,7 +344,7 @@ L.keystoneHistoryScoreThisWeekTooltip = "Общее количество рей�
 L.keystoneHistoryScoreOlderTooltip = "Общее количество рейтинга полученное до этой недели: |cFFFFFFFF+%d|r"
 L.keystoneTimeUnder = "|cFF33FF99-%02d:%02d|r"
 L.keystoneTimeOver = "|cFFFF4411+%02d:%02d|r"
---L.keystoneTeleportTip = "TIP: Click the dungeon name below to teleport directly to the dungeon entrance."
+--L.keystoneTeleportTip = "Click the dungeon name below to |cFF33FF99TELEPORT|r directly to the dungeon entrance."
 
 -- It doesn't really matter what you call it as long as it's recognizable and limited to ~6 characters
 L.keystoneShortName_TheRookery = "ROOK"
@@ -842,6 +842,7 @@ L.combatLogDesc = "Лог боя будет автоматически запу�
 L.pull = "Атака"
 L.engageSoundTitle = "Воспроизвести звук, когда начинается бой с боссом"
 L.pullStartedSoundTitle = "Воспроизвести звук, когда запускается таймер атаки"
+--L.pullStartedMessageTitle = "Show a message when the pull timer is started"
 L.pullFinishedSoundTitle = "Воспроизвести звук, когда завершается таймер атаки"
 L.pullStartedBy = "Пулл таймер начат: %s."
 L.pullStopped = "%s отменил таймер атаки."

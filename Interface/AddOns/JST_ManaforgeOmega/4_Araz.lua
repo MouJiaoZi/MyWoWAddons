@@ -64,8 +64,10 @@ G.Encounters[2687] = {
 							if unit == "boss1" then
 								if spellID == 1231720 then
 									self.count = self.count + 1
-									local str = self.count == 1 and L["单躲球"] or self.count == 2 and L["双躲球"] or L["三躲球"]
-									T.Start_Text_Timer(self, 5, str, true)
+									if self.count < 3 then
+										local str = self.count == 1 and L["单躲球"] or self.count == 2 and L["双躲球"] or L["三躲球"]
+										T.Start_Text_Timer(self, 5, str, true)
+									end
 								elseif spellID == 1254321 then
 									T.Start_Text_Timer(self, 4, L["三躲球"], true)
 								end
@@ -624,13 +626,13 @@ G.Encounters[2687] = {
 								if currentTime - frame.last_cast > 3 then
 									frame.count = frame.count + 1
 									T.DisplayGroupCCFrame(frame.count)
+									
+									frame.timer = C_Timer.NewTimer(12, function()
+										T.HideGroupCCFrame()
+									end)
 								end
 								
 								frame.last_cast = currentTime
-								
-								C_Timer.After(18, function()
-									T.HideGroupCCFrame()
-								end)
 							end
 						elseif event == "ENCOUNTER_START" then
 							frame.count = 0
@@ -1135,7 +1137,7 @@ G.Encounters[2687] = {
 						},
 						info = {
 							["all"] = {
-								[1] = {4.0, 22.0, 22.0, 22.0, 22.0, 22.0},
+								[1] = {4.0, 22.0, 22.0, 22.0, 22.0},
 								[1.1] = {19.2, 22.0, 22.0},
 								[1.2] = {},
 								[2] = {9.4, 22.0, 22.0, 22.0},
@@ -1747,7 +1749,7 @@ G.Encounters[2687] = {
 					type = "cast",
 					spellID = 1232221,
 					text = L["击退"],
-					sound = "[knockback]cast",
+					sound = "[knockoff]cast,cd3",
 				},
 			},
 		},

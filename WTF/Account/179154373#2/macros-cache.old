@@ -1,7 +1,7 @@
 VER 3 0000000000000142 " " "INV_MISC_QUESTIONMARK"
-#showtooltip item:245970
+#showtooltip item:54452
 #macro version 1
-/run if not InCombatLockdown() then RHT.b:SetAttribute("item","P.O.S.T.总管的特快炉石") end
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","虚灵之门") end
 /click RHTB LeftButton 1
 END
 VER 3 0000000000000143 "mount" "INV_Misc_QuestionMark"

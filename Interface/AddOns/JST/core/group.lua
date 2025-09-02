@@ -86,7 +86,7 @@ end
 
 local function UpdateRaidBuffValue()
 	local foundNew = false
-    local BuffPerc = select(16, AuraUtil.FindAuraBySpellID(1225298, "player", "HELPFUL")) or 0
+    local BuffPerc = select(16, AuraUtil.FindAuraBySpellID(1237913, "player", "HELPFUL")) or 0
 
     if My_raidBuff ~= BuffPerc then
         foundNew = true

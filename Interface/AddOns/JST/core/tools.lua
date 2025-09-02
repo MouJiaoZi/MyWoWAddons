@@ -984,7 +984,7 @@ function ControlSpell_Updater:GetLineInfo(setNumber, line)
 	local GUIDs = T.LineToGUIDArray(line)
     local GUID = GUIDs[1]
 	
-	local matched_spellID
+	local matched_spellID, use_spellID
 	for word in line:gmatch("%S+") do
 		if tonumber(word) then
 			local spellID = tonumber(word)
@@ -992,6 +992,7 @@ function ControlSpell_Updater:GetLineInfo(setNumber, line)
 				matched_spellID = spellID
 				break
 			end
+			use_spellID = true
 		elseif G.GroupTrackedSpellsbyName[word] then
 			local spellID = G.GroupTrackedSpellsbyName[word]
 			matched_spellID = spellID
@@ -1000,11 +1001,15 @@ function ControlSpell_Updater:GetLineInfo(setNumber, line)
 	end
 	
 	if not GUID and not string.find(line, L["可以继续写"]) then
-        T.msg(string.format("%s [%d] %s", L["名字错误"], setNumber, line))
+        T.msg(string.format("%s %s", L["名字错误"], line))
     end
 	
     if not matched_spellID and not string.find(line, L["可以继续写"]) then
-		T.msg(string.format("%s [%d] %s", L["法术错误"], setNumber, line))
+		if not use_spellID then
+			T.msg(string.format("%s %s", L["请使用法术ID"], line))
+		else
+			T.msg(string.format("%s %s", L["法术ID错误"], line))
+		end
     end
 	
 	if GUID and matched_spellID then

@@ -5781,13 +5781,17 @@ T.CreateRFIconAlert = function(option_page, category, args)
 	RFIconFrames[args.type][args.spellID] = {}
 	
 	if args.type == "Aura" then
-		if type(args.color) == "table" then
+		if not args.color then
+			RFIconFrames[args.type][args.spellID].color = T.GetSpellColor(args.spellID)
+		elseif args.color and type(args.color) == "table" then
 			RFIconFrames[args.type][args.spellID].color = args.color
-		elseif G.hl_colors[args.color] then
+		elseif args.color and G.hl_colors[args.color] then
 			RFIconFrames[args.type][args.spellID].color = G.hl_colors[args.color]
 		else
+			T.msg("RFIcon", args.type, args.spellID, "颜色错误")
 			RFIconFrames[args.type][args.spellID].color = T.GetSpellColor(args.spellID)
 		end
+		
 		RFIconFrames[args.type][args.spellID].amount = args.amount
 	elseif args.type == "Msg" then
 		RFIconFrames[args.type][args.spellID].msg = args.boss_msg

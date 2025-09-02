@@ -274,7 +274,7 @@ L.H25 = "Heroic 25"
 -----------------------------------------------------------------------
 
 L.tools = "Tools"
-L.toolsDesc = "BigWigs provides various tools or \"quality of life\" features to speed up and simplify the process of fighting bosses. Expand the menu by clicking the |cFF33FF99+|r icon to see them all."
+L.toolsDesc = "BigWigs provides various tools or \"quality of life\" features to speed up and simplify the process of fighting bosses."
 
 -----------------------------------------------------------------------
 -- AutoRole.lua
@@ -343,7 +343,7 @@ L.keystoneHistoryScoreThisWeekTooltip = "Total score gained this week: |cFFFFFFF
 L.keystoneHistoryScoreOlderTooltip = "Total score gained before this week: |cFFFFFFFF+%d|r"
 L.keystoneTimeUnder = "|cFF33FF99-%02d:%02d|r"
 L.keystoneTimeOver = "|cFFFF4411+%02d:%02d|r"
-L.keystoneTeleportTip = "TIP: Click the dungeon name below to teleport directly to the dungeon entrance."
+L.keystoneTeleportTip = "Click the dungeon name below to |cFF33FF99TELEPORT|r directly to the dungeon entrance."
 
 -- It doesn't really matter what you call it as long as it's recognizable and limited to ~6 characters
 L.keystoneShortName_TheRookery = "ROOK"
@@ -841,6 +841,7 @@ L.combatLogDesc = "Automatically start logging combat when a pull timer is start
 L.pull = "Pull"
 L.engageSoundTitle = "Play a sound when a boss encounter has started"
 L.pullStartedSoundTitle = "Play a sound when the pull timer is started"
+L.pullStartedMessageTitle = "Show a message when the pull timer is started"
 L.pullFinishedSoundTitle = "Play a sound when the pull timer is finished"
 L.pullStartedBy = "Pull timer started by %s."
 L.pullStopped = "Pull timer cancelled by %s."

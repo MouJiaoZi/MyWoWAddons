@@ -403,7 +403,7 @@ function LS:MySpecialization()
 		if type(spec) == "number" and spec > 0 then
 			local specId = GetSpecializationInfo(spec)
 
-			if specId then
+			if specId and specId > 0 then
 				local position = positionTable[specId]
 				local role = roleTable[specId]
 				if position and role then

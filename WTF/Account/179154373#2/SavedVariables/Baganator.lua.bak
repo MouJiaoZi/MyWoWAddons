@@ -259,9 +259,26 @@ BAGANATOR_CONFIG = {
 ["view_alpha"] = 1,
 ["disabled_skins"] = {
 },
-["setting_anchors"] = false,
+["sort_ignore_slots_count_2"] = {
+["某餃子-伊森利恩"] = 0,
+},
 ["upgrade_plugin"] = "none",
 ["guild_bank_sort_method"] = "unset",
+["recent_characters_main_view"] = {
+"某餃子-伊森利恩",
+"某饺子-伊森利恩",
+"迪凯策划没马-伊森利恩",
+"我们完蛋啦-伊森利恩",
+"凤凰基友之三-凤凰之神",
+"凤凰基友之四-凤凰之神",
+"开门的搞-伊森利恩",
+"三减竖式-伊森利恩",
+"三减宁静-伊森利恩",
+"牛牛萨之父-霜之哀伤",
+"凤凰基友之二-凤凰之神",
+"Afdfaf-苏拉玛",
+},
+["debug_keywords"] = false,
 ["skins"] = {
 ["elvui"] = {
 ["use_bag_font"] = false,
@@ -278,27 +295,10 @@ BAGANATOR_CONFIG = {
 ["empty_slot_background"] = false,
 },
 },
-["recent_characters_main_view"] = {
-"某饺子-伊森利恩",
-"某餃子-伊森利恩",
-"迪凯策划没马-伊森利恩",
-"我们完蛋啦-伊森利恩",
-"凤凰基友之三-凤凰之神",
-"凤凰基友之四-凤凰之神",
-"开门的搞-伊森利恩",
-"三减竖式-伊森利恩",
-"三减宁静-伊森利恩",
-"牛牛萨之父-霜之哀伤",
-"凤凰基友之二-凤凰之神",
-"Afdfaf-苏拉玛",
-},
-["debug_keywords"] = false,
 ["auto_sort_on_open"] = false,
 ["guild_current_tab"] = 0,
+["setting_anchors"] = false,
 ["bag_view_width"] = 12,
-["sort_ignore_slots_count_2"] = {
-["某餃子-伊森利恩"] = 0,
-},
 ["currencies_tracked"] = {
 ["三减竖式-伊森利恩"] = {
 },

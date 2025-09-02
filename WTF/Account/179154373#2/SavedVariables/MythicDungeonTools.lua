@@ -3,8 +3,8 @@ MythicDungeonToolsDB = {
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "迪凯策划没马 - 伊森利恩",
 ["牛牛萨之父 - 霜之哀伤"] = "牛牛萨之父 - 霜之哀伤",
-["某饺子 - 伊森利恩"] = "某饺子 - 伊森利恩",
 ["某餃子 - 伊森利恩"] = "某餃子 - 伊森利恩",
+["凤凰基友之二 - 凤凰之神"] = "凤凰基友之二 - 凤凰之神",
 ["凤凰基友之四 - 凤凰之神"] = "凤凰基友之四 - 凤凰之神",
 ["凤凰基友之三 - 凤凰之神"] = "凤凰基友之三 - 凤凰之神",
 ["三减宁静 - 伊森利恩"] = "三减宁静 - 伊森利恩",
@@ -12,7 +12,7 @@ MythicDungeonToolsDB = {
 ["三减竖式 - 伊森利恩"] = "三减竖式 - 伊森利恩",
 ["Fasas - Aegwynn"] = "Fasas - Aegwynn",
 ["开门的搞 - 伊森利恩"] = "开门的搞 - 伊森利恩",
-["凤凰基友之二 - 凤凰之神"] = "凤凰基友之二 - 凤凰之神",
+["某饺子 - 伊森利恩"] = "某饺子 - 伊森利恩",
 ["我们完蛋啦 - 伊森利恩"] = "我们完蛋啦 - 伊森利恩",
 },
 ["global"] = {
@@ -28,7 +28,7 @@ MythicDungeonToolsDB = {
 },
 ["selectedDungeonList"] = 3,
 ["maximized"] = false,
-["nonFullscreenScale"] = 0.900000879786036,
+["currentDifficulty"] = 12,
 ["presets"] = {
 [19] = {
 {
@@ -5675,17 +5675,17 @@ nil,
 27,
 },
 ["color"] = "3eff9e",
-[5] = {
-30,
-29,
-33,
-},
 [9] = {
 4,
 5,
 },
 [16] = {
 3,
+},
+[5] = {
+30,
+29,
+33,
 },
 },
 {
@@ -5914,11 +5914,6 @@ nil,
 27,
 },
 ["color"] = "ff3eff",
-[5] = {
-29,
-30,
-33,
-},
 [9] = {
 4,
 5,
@@ -5929,6 +5924,11 @@ nil,
 4,
 1,
 2,
+},
+[5] = {
+29,
+30,
+33,
 },
 },
 {
@@ -6372,14 +6372,15 @@ nil,
 },
 },
 ["toolbarExpanded"] = false,
+["latestSeenDungeonList"] = 9,
+["nonFullscreenScale"] = 0.900000879786036,
+["version"] = 550,
+["xoffset"] = -105.8723526000977,
 ["minimap"] = {
 ["minimapPos"] = 330.881463262169,
 ["showInCompartment"] = true,
 ["hide"] = true,
 },
-["latestSeenDungeonList"] = 9,
-["version"] = 550,
-["xoffset"] = -105.8723526000977,
 ["colorPaletteInfo"] = {
 ["customPaletteValues"] = {
 {
@@ -6444,7 +6445,6 @@ nil,
 },
 },
 },
-["currentDifficulty"] = 12,
 ["yoffset"] = -60.98761749267578,
 },
 }

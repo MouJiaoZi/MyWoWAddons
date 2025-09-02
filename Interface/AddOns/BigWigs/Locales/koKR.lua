@@ -275,7 +275,7 @@ L.H25 = "영웅 25"
 -----------------------------------------------------------------------
 
 L.tools = "도구"
-L.toolsDesc = "BigWigs은 보스와의 전투를 더욱 빠르고 간편하게 만들어 주는 다양한 도구 또는 \"편의 기능\"을 제공합니다. |cFF33FF99+|r 아이콘을 클릭하여 메뉴를 확장하면 모든 기능을 확인할 수 있습니다."
+L.toolsDesc = "BigWigs은 보스와의 전투를 더욱 빠르고 간편하게 만들어 주는 다양한 도구 또는 \"편의 기능\"을 제공합니다."
 
 -----------------------------------------------------------------------
 -- AutoRole.lua
@@ -309,8 +309,8 @@ L.keystoneTabHistory = "기록"
 L.keystoneHeaderThisWeek = "이번 주"
 L.keystoneHeaderOlder = "이전 기록"
 L.keystoneScoreGainedTooltip = "획득 점수: |cFFFFFFFF+%d|r\n던전 점수: |cFFFFFFFF%d|r"
---L.keystoneCompletedTooltip = "제한 시간 내에 완료: |cFFFFFFFF%d min %d sec|r\nTime Limit: |cFFFFFFFF%d min %d sec|r"
---L.keystoneFailedTooltip = "제한 시간 내에 완료하지 못함: |cFFFFFFFF%d min %d sec|r\nTime Limit: |cFFFFFFFF%d min %d sec|r"
+L.keystoneCompletedTooltip = "제한 시간 내에 완료: |cFFFFFFFF%d분 %d초|r\n제한 시간: |cFFFFFFFF%d분 %d초|r"
+L.keystoneFailedTooltip = "제한 시간 내에 완료하지 못함: |cFFFFFFFF%d분 %d초|r\n제한 시간: |cFFFFFFFF%d분 %d초|r"
 L.keystoneExplainer = "신화+ 경험을 향상시키는 다양한 도구 모음입니다."
 L.keystoneAutoSlot = "쐐기돌 자동 삽입"
 L.keystoneAutoSlotDesc = "마력의 샘을 열 때 자동으로 쐐기돌을 넣습니다."
@@ -344,7 +344,7 @@ L.keystoneHistoryScoreThisWeekTooltip = "이번 주 획득 총 점수: |cFFFFFFF
 L.keystoneHistoryScoreOlderTooltip = "이번 주 이전에 획득한 총 점수: |cFFFFFFFF+%d|r"
 L.keystoneTimeUnder = "|cFF33FF99-%02d:%02d|r"
 L.keystoneTimeOver = "|cFFFF4411+%02d:%02d|r"
---L.keystoneTeleportTip = "TIP: Click the dungeon name below to teleport directly to the dungeon entrance."
+L.keystoneTeleportTip = "아래 던전 이름을 클릭하면 |cFF33FF99순간이동|r 던전 입구로 바로 이동합니다."
 
 -- It doesn't really matter what you call it as long as it's recognizable and limited to ~6 characters
 L.keystoneShortName_TheRookery = "부화장"
@@ -842,6 +842,7 @@ L.combatLogDesc = "전투 예정 타이머 시작부터 보스 전투 종료로 
 L.pull = "전투 예정"
 L.engageSoundTitle = "보스 전투가 시작되면 사운드 재생"
 L.pullStartedSoundTitle = "전투 예정 타이머가 시작되었을때 소리 재생"
+L.pullStartedMessageTitle = "전투 예정 타이머가 시작될 때 메시지 표시"
 L.pullFinishedSoundTitle = "전투 예정 타이머가 끝났을때 소리 재생"
 L.pullStartedBy = "%s에 의해 풀 타이머가 시작되었습니다."
 L.pullStopped = "%s|1이;가; 전투 예정 타이머를 취소했습니다."
