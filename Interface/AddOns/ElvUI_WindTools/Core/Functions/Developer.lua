@@ -1,4 +1,7 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W ---@type WindTools
+local F ---@class Functions
+local E ---@type ElvUI
+W, F, E = unpack((select(2, ...)))
 
 local _G = _G
 local format = format
@@ -11,16 +14,20 @@ local strrep = strrep
 local tostring = tostring
 local type = type
 
+---@cast F Functions
+
 F.Developer = {}
 
---[[
-    Print pretty
-    -- modified from https://www.cnblogs.com/leezj/p/4230271.html
-    @param {Any} Any Object
-]]
+---Pretty print any object with table structure visualization
+---Modified from https://www.cnblogs.com/leezj/p/4230271.html
+---@param object any The object to print (table, string, number, etc.)
 function F.Developer.Print(object)
 	if type(object) == "table" then
+		---@type table<string, boolean> Cache to prevent infinite recursion
 		local cache = {}
+		---Print table structure recursively
+		---@param subject any The current object to print
+		---@param indent string Current indentation string
 		local function printLoop(subject, indent)
 			if cache[tostring(subject)] then
 				print(indent .. "*" .. tostring(subject))
@@ -58,21 +65,17 @@ function F.Developer.Print(object)
 	end
 end
 
---[[
-    Custom Error Handler
-    @param ...string Error Message
-]]
+---Custom error handler with WindTools branding
+---@param ... string Error message parts
 function F.Developer.ThrowError(...)
 	local message = strjoin(" ", ...)
 	_G.geterrorhandler()(format("%s |cffff3860[ERROR]|r\n%s", W.Title, message))
 end
 
---[[
-    Custom Logger [WARNING]
-    @param ...string Message
-]]
+---Custom logger for warning messages
+---@param ... string Message parts
 function F.Developer.LogWarning(...)
-	if E.global.WT.core.logLevel < 2 then
+	if E.global.WT.developer.logLevel < 2 then
 		return
 	end
 
@@ -80,12 +83,10 @@ function F.Developer.LogWarning(...)
 	print(format("%s |cffffdd57[WARNING]|r %s", W.Title, message))
 end
 
---[[
-    Custom Logger [INFO]
-    @param ...string Message
-]]
+---Custom logger for info messages
+---@param ... string Message parts
 function F.Developer.LogInfo(...)
-	if E.global.WT.core.logLevel < 3 then
+	if E.global.WT.developer.logLevel < 3 then
 		return
 	end
 
@@ -93,12 +94,10 @@ function F.Developer.LogInfo(...)
 	print(format("%s |cff209cee[INFO]|r %s", W.Title, message))
 end
 
---[[
-    Custom Logger [DEBUG]
-    @param ...string Message
-]]
+---Custom logger for debug messages
+---@param ... string Message parts
 function F.Developer.LogDebug(...)
-	if E.global.WT.core.logLevel < 4 then
+	if E.global.WT.developer.logLevel < 4 then
 		return
 	end
 
@@ -106,10 +105,8 @@ function F.Developer.LogDebug(...)
 	print(format("%s |cff00d1b2[DEBUG]|r %s", W.Title, message))
 end
 
---[[
-    Custom Logger Injection
-    @param table Module | string Module Name
-]]
+---Inject logger methods into a module
+---@param module table|string Module object or module name string
 function F.Developer.InjectLogger(module)
 	if type(module) == "string" then
 		module = W:GetModule(module)
@@ -148,27 +145,11 @@ function F.Developer.InjectLogger(module)
 	end
 end
 
---[[
-    Set delay for module initialization
-    @param table module
-    @param number delay
-]]
-function F.Developer.DelayInit(module, delay)
-	delay = delay or 2
-	if module.Initialize then
-		module.Initialize_ = module.Initialize
-		module.Initialize = function(self, ...)
-			E:Delay(delay, self.Initialize_, self, ...)
-		end
-	end
-end
-
---[[
-	Inspect object with https://github.com/brittyazel/DevTool
-	@param any obj
-	@param string name
-]]
-function F.Developer.DT(obj, name)
+---Inspect object with DevTool addon
+---https://github.com/brittyazel/DevTool
+---@param obj any Object to inspect
+---@param name string? Name for the object (optional)
+function F.Developer.DevTool(obj, name)
 	if _G.DevTool and _G.DevTool.AddData then
 		_G.DevTool:AddData(obj, name)
 	end

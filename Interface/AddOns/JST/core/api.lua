@@ -2117,6 +2117,7 @@ end
 --				dur = 4.5, -- 持续时间
 --				color = {0, 1, 0}, -- 颜色，默认白色
 --				reverse = true, -- [可选]逆时针
+--				sound = "dropnow", -- [可选]声音
 --			},
 --		}
 
@@ -2158,9 +2159,13 @@ T.UpdateCircleTimers = function(frame, event, ...)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 		local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 		if frame.spellIDs and frame.spellIDs[spellID] and sub_event == frame.spellIDs[spellID]["event"] then -- 开始
-			if not frame.spellIDs[spellID]["target_me"] or G.PlayerGUID == destGUID then
+			local info = frame.spellIDs[spellID]
+			if not info.target_me or G.PlayerGUID == destGUID then
 				local cd_tex = frame.figures[spellID]
-				cd_tex:begin(GetTime() + frame.spellIDs[spellID].dur, frame.spellIDs[spellID].dur)
+				cd_tex:begin(GetTime() + info.dur, info.dur)
+				if info.sound then
+					T.PlaySound(info.sound)
+				end
 			end
 		end	
 	end
@@ -2184,6 +2189,7 @@ end
 --				aura_type = "HARMFUL", -- 光环类型 默认 "HARMFUL"
 --				color = {0, 1, 0}, -- 颜色
 --				reverse = true, -- [可选]逆时针
+--				sound = "dropnow", -- [可选]声音
 --			},
 --		} 		
 
@@ -2248,6 +2254,11 @@ T.UpdateUnitAuraCircleTimers = function(frame, event, ...)
 							local auraID = AuraData.auraInstanceID
 							if not frame.figures[auraID] then
 								local cd_tex = CreateRingCD(frame, info.color, info.reverse)
+								
+								if info.sound then
+									T.PlaySound(info.sound)
+								end
+								
 								cd_tex:begin(AuraData.expirationTime, AuraData.duration)
 								frame.figures[auraID] = cd_tex
 							end
@@ -2260,11 +2271,15 @@ T.UpdateUnitAuraCircleTimers = function(frame, event, ...)
 				for _, AuraData in pairs(updateInfo.addedAuras) do
 					local auraID = AuraData.auraInstanceID
 					local spellID = AuraData.spellId
-					
-					if frame.spellIDs[spellID] and unit == frame.spellIDs[spellID].unit then					
+					local info = frame.spellIDs[spellID]
+					if info and unit == info.unit then					
 						if not frame.figures[auraID] then
-							local cd_tex = CreateRingCD(frame, frame.spellIDs[spellID].color, frame.spellIDs[spellID].reverse)
+							local cd_tex = CreateRingCD(frame, info.color, info.reverse)
 							cd_tex:begin(AuraData.expirationTime, AuraData.duration)
+							
+							if info.sound then
+								T.PlaySound(frame.spellIDs[spellID].sound)
+							end
 							
 							frame.figures[auraID] = cd_tex
 						end
@@ -2317,6 +2332,7 @@ end
 --			[8936] = {
 --				color = {0, 1, 0}, -- 颜色，默认白色
 --				reverse = true, -- [可选]逆时针
+--				sound = "dropnow", -- [可选]声音
 --			},
 --		}
 
@@ -2365,9 +2381,12 @@ T.UpdateCircleCastTimers = function(frame, event, ...)
 							
 							if not frame.figures[cast_GUID] then
 								frame.figures[cast_GUID] = CreateRingCD(frame, info.color, info.reverse)
+								frame.figures[cast_GUID]:begin(exp_time, dur)
+								
+								if info.sound then
+									T.PlaySound(info.sound)
+								end
 							end
-							
-							frame.figures[cast_GUID]:begin(exp_time, dur)
 						end
 					end
 				end)
@@ -2392,9 +2411,12 @@ T.UpdateCircleCastTimers = function(frame, event, ...)
 						
 						if not frame.figures[cast_GUID] then
 							frame.figures[cast_GUID] = CreateRingCD(frame, info.color, info.reverse)
+							frame.figures[cast_GUID]:begin(exp_time, dur)
+							
+							if info.sound then
+								T.PlaySound(info.sound)
+							end
 						end
-						
-						frame.figures[cast_GUID]:begin(exp_time, dur)
 					end
 				else
 					if frame.figures[cast_GUID] then
@@ -2425,6 +2447,7 @@ end
 --			["8936"] = {
 --				color = {0, 1, 0}, -- 颜色，默认白色
 --				reverse = true, -- [可选]逆时针
+--				sound = "dropnow", -- [可选]声音
 --			},
 --		}
 
@@ -2460,14 +2483,18 @@ end
 T.UpdateCircleMsgTimers = function(frame, event, ...)
 	if event == "CHAT_MSG_RAID_BOSS_WHISPER" then
 		local text = ...
-		for k, v in pairs(frame.keywords) do
+		for k, info in pairs(frame.keywords) do
 			if string.find(text, k)  then -- 开始
 				if not frame.figures[k] then
-					frame.figures[k] = CreateRingCD(frame, v.color, v.reverse)
+					frame.figures[k] = CreateRingCD(frame, info.color, info.reverse)
 				end
-				frame.figures[k]:begin(GetTime() + v.dur, v.dur)
+				frame.figures[k]:begin(GetTime() + info.dur, info.dur)
+				
+				if info.sound then
+					T.PlaySound(info.sound)
+				end
 			end	
-		end		
+		end
 	end
 end
 

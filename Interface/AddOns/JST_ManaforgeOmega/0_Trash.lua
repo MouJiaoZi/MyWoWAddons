@@ -44,15 +44,26 @@ G.Encounters["r2810"] = { -- Test
 					events = {
 						["UNIT_AURA_ADD"] = true,
 						["UNIT_AURA_REMOVED"] = true,
+						["ZONE_CHANGED"] = true,
 					},
 					init = function(frame)
+						local mapGroupID = C_Map.GetMapGroupID(2460)
+						local mapGroupMembersInfo = C_Map.GetMapGroupMembersInfo(mapGroupID)
+						
+						for index, mapGroupMemberInfo in ipairs(mapGroupMembersInfo) do
+							if mapGroupMemberInfo.mapID == 2467 then
+								frame.mapName = mapGroupMemberInfo.name
+							end
+						end
+						
 						if not frame.text_frame then
 							frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
 							frame.text_frame.text:SetText(string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)))
 						end
 						
 						function frame:check()
-							if AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
+							local subZone = GetSubZoneText()
+							if subZone == frame.mapName and AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
 								self.text_frame:Show()
 							else
 								self.text_frame:Hide()

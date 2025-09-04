@@ -5198,7 +5198,11 @@ end
 ----------------------------------------------------------
 -------------------[[    团队框架图标    ]]-----------------
 ----------------------------------------------------------
-local RFIconFrames = {}
+local RFIconFrames = {
+	Cast = {},
+	Aura = {},
+	Msg = {},
+}
 local RFIconMultiSpellIDs = {} -- 转换技能ID
 local RFIconHolders = {}
 local RFIcons = {}
@@ -5753,7 +5757,7 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 					if unit_frame then
 						local iconholder = unit_frame.iconholder or CreateRFIconHolders(unit_frame)
 						local tag = info.msg.."-"..GUID
-						local spell_icon = C_Spell.GetSpellIcon(spellID)
+						local spell_icon = C_Spell.GetSpellTexture(spellID)
 						local startTimeMS = GetTime()*1000
 						local endTimeMS = startTimeMS + RFIconFrames["Msg"][spellID]["dur"]*1000
 						UpdateRFIcon(tag, iconholder, spell_icon, startTimeMS, endTimeMS)

@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local TT = E:GetModule("Tooltip")
 local T = W.Modules.Tooltips
 
@@ -76,7 +76,7 @@ function S:RareScanner()
 
 	if scannerButton.LootBar then
 		if scannerButton.LootBar.LootBarToolTip then
-			hooksecurefunc(scannerButton.LootBar.LootBarToolTip, "Show", function(self)
+			hooksecurefunc(scannerButton.LootBar.LootBarToolTip, "Show", function(tooltip)
 				TT:SetStyle(_G.LootBarToolTip)
 
 				if scannerButton.LootBar.LootBarToolTipComp1 and scannerButton.LootBar.LootBarToolTipComp1.Show then

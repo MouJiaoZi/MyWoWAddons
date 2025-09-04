@@ -1,6 +1,6 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local CB = W:NewModule("ChatBar", "AceHook-3.0", "AceEvent-3.0")
-local S = W.Modules.Skins
+local S = W.Modules.Skins ---@type Skins
 local LSM = E.Libs.LSM
 
 local _G = _G
@@ -56,7 +56,7 @@ local checkFunctions = {
 	end,
 }
 
-local function GetCommuniryChannelByName(text)
+local function GetCommunityChannelByName(text)
 	local channelList = { GetChannelList() }
 	for k, v in pairs(channelList) do
 		local clubId = strmatch(tostring(v), "Community:(.-):")
@@ -365,7 +365,7 @@ function CB:UpdateBar()
 				if mouseButton ~= "LeftButton" then
 					return
 				end
-				local clubChannelId = GetCommuniryChannelByName(name)
+				local clubChannelId = GetCommunityChannelByName(name)
 				if not clubChannelId then
 					self:Log(
 						"warning",
@@ -539,8 +539,6 @@ function CB:PLAYER_REGEN_ENABLED()
 	self:UpdateBar()
 	self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 end
-
-CB.GROUP_ROSTER_UPDATE = F.DelvesEventFix(CB.UpdateBar)
 
 function CB:Initialize()
 	self.db = E.db.WT.social.chatBar

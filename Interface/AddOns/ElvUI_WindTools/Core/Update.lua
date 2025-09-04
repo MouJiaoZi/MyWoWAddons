@@ -1,4 +1,6 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W ---@class WindTools
+local F, E, L, V, P, G ---@type Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
+W, F, E, L, V, P, G = unpack((select(2, ...)))
 
 local format = format
 local pairs = pairs
@@ -299,6 +301,26 @@ function W:UpdateScripts()
 		end
 
 		UpdateMessage(L["Tooltips"] .. ": " .. L["Update Database"], privateVersion)
+	end
+
+	if privateVersion < 3.99 then
+		if E.private.WT and E.private.WT.skins and E.private.WT.skins.rollResult then
+			E.private.WT.skins.rollResult = nil
+			UpdateMessage(L["Skins"] .. ": " .. L["Database cleanup"], privateVersion)
+		end
+	end
+
+	if globalVersion < 3.99 then
+		if E.global.WT and E.global.WT.misc and E.global.WT.misc.gameBar and E.global.WT.misc.gameBar.covenantCache then
+			E.global.WT.misc.gameBar.covenantCache = nil
+			UpdateMessage(L["Game Bar"] .. ": " .. L["Database cleanup"], globalVersion)
+		end
+
+		if E.global.WT.core and E.global.WT.core.logLevel then
+			E.global.WT.developer.logLevel = E.global.WT.core.logLevel
+			E.global.WT.core.logLevel = nil
+			UpdateMessage(L["Advanced"] .. ": " .. L["Developer"], globalVersion)
+		end
 	end
 
 	if not isFirstLine then

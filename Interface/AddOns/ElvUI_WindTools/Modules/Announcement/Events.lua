@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local A = W:GetModule("Announcement")
 
 local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo
@@ -107,8 +107,6 @@ end
 function A:GROUP_ROSTER_UPDATE()
 	self:ResetAuthority()
 end
-
-A.GROUP_ROSTER_UPDATE = F.DelvesEventFix(A.GROUP_ROSTER_UPDATE)
 
 function A:UNIT_SPELLCAST_SUCCEEDED(event, unitTarget, castGUID, spellId)
 	self:Utility(event, UnitName(unitTarget), spellId)

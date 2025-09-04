@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local T = W.Modules.Tooltips
 
 local _G = _G
@@ -6,8 +6,10 @@ local hooksecurefunc = hooksecurefunc
 local pairs = pairs
 local select = select
 local strfind = strfind
-local tinsert = tinsert
+local tContains = tContains
+local tInsertUnique = tInsertUnique
 local tonumber = tonumber
+local tostring = tostring
 local unpack = unpack
 
 local GetAchievementInfo = GetAchievementInfo
@@ -48,28 +50,37 @@ local PET_TYPE_SUFFIX = PET_TYPE_SUFFIX
 _G.BONUS_OBJECTIVE_REWARD_WITH_COUNT_FORMAT = "|T%1$s:16:16:0:0:64:64:5:59:5:59|t |cffffffff%2$s|r %3$s"
 _G.BONUS_OBJECTIVE_REWARD_FORMAT = "|T%1$s:16:16:0:0:64:64:5:59:5:59|t %2$s"
 
+---@type table<Enum.TooltipDataType, fun(data: table): string?>
 local iconFunctions = {
 	[Enum_TooltipDataType_Achievement] = function(data)
-		return select(10, GetAchievementInfo(tonumber(data.id)))
+		local id = tonumber(data and data.id)
+		local icon = id and select(10, GetAchievementInfo(id))
+		return icon and tostring(icon)
 	end,
 	[Enum_TooltipDataType_Item] = function(data)
-		return C_Item_GetItemIconByID(data.id)
+		local icon = data and data.id and C_Item_GetItemIconByID(data.id)
+		return icon and tostring(icon)
 	end,
 	[Enum_TooltipDataType_Spell] = function(data)
-		return C_Spell_GetSpellTexture(data.id)
+		local icon = data and data.id and C_Spell_GetSpellTexture(data.id)
+		return icon and tostring(icon)
 	end,
 	[Enum_TooltipDataType_Toy] = function(data)
-		return C_Item_GetItemIconByID(data.id)
+		local icon = data and data.id and C_Item_GetItemIconByID(data.id)
+		return icon and tostring(icon)
 	end,
 	[Enum_TooltipDataType_Mount] = function(data)
-		return select(3, C_MountJournal_GetMountInfoByID(data.id))
+		local icon = data and data.id and select(3, C_MountJournal_GetMountInfoByID(data.id))
+		return icon and tostring(icon)
 	end,
 	[Enum_TooltipDataType_Currency] = function(data)
-		local info = C_CurrencyInfo_GetCurrencyInfo(data.id)
-		return info and info.iconFileID
+		local info = data and data.id and C_CurrencyInfo_GetCurrencyInfo(data.id)
+		local fileID = info and info.iconFileID
+		return fileID and tostring(fileID)
 	end,
 	[Enum_TooltipDataType_EquipmentSet] = function(data)
-		return select(2, C_EquipmentSet_GetEquipmentSetInfo(data.id))
+		local icon = data and data.id and select(2, C_EquipmentSet_GetEquipmentSetInfo(data.id))
+		return icon and tostring(icon)
 	end,
 	[Enum_TooltipDataType_Macro] = function(data)
 		_G.LastData = data
@@ -77,9 +88,11 @@ local iconFunctions = {
 		local tooltipType = lineData and lineData.tooltipType
 		if tooltipType then
 			if tooltipType == Enum_TooltipDataType_Item then
-				return C_Item_GetItemIconByID(lineData.tooltipID)
+				local icon = lineData and lineData.tooltipID and C_Item_GetItemIconByID(lineData.tooltipID)
+				return icon and tostring(icon)
 			elseif tooltipType == Enum_TooltipDataType_Spell then
-				return C_Spell_GetSpellTexture(lineData.tooltipID)
+				local icon = lineData and lineData.tooltipID and C_Spell_GetSpellTexture(lineData.tooltipID)
+				return icon and tostring(icon)
 			end
 		end
 	end,
@@ -88,8 +101,8 @@ local iconFunctions = {
 local function setTooltipIcon(tt, data, type)
 	local icon = iconFunctions[type] and iconFunctions[type](data)
 	local title = data.lines and data.lines[1] and data.lines[1].leftText
-	local iconString = icon
-		and F.GetIconString(icon, E.private.WT.tooltips.titleIcon.width, E.private.WT.tooltips.titleIcon.height, true)
+	local iconDB = E.private.WT.tooltips.titleIcon
+	local iconString = icon and F.GetIconString(icon, iconDB.height, iconDB.width, true)
 
 	if not title or not iconString then
 		return
@@ -108,7 +121,7 @@ local function setTooltipIcon(tt, data, type)
 end
 
 local function alignShoppingTooltip(tt)
-	if not tt or not tt.GetNumPoints or tt:GetNumPoints() < 2 or not tt.__SetPoint then
+	if not tt or not tt.GetNumPoints or tt:GetNumPoints() < 2 or not F.IsMethodInternalized(tt, "SetPoint") then
 		return
 	end
 
@@ -119,29 +132,29 @@ local function alignShoppingTooltip(tt)
 	if shoppingTooltip2:IsShown() then
 		if point == "TOP" then
 			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, 0)
 			shoppingTooltip2:ClearAllPoints()
-			shoppingTooltip2:SetPoint("TOPLEFT", shoppingTooltip1, "TOPRIGHT", 3, 0)
+			F.CallMethod(shoppingTooltip1, "SetPoint", "TOPLEFT", anchorFrame, "TOPRIGHT", 3, 0)
+			F.CallMethod(shoppingTooltip2, "SetPoint", "TOPLEFT", shoppingTooltip1, "TOPRIGHT", 3, 0)
 		elseif point == "RIGHT" then
 			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, 0)
 			shoppingTooltip2:ClearAllPoints()
-			shoppingTooltip2:SetPoint("TOPRIGHT", shoppingTooltip1, "TOPLEFT", -3, 0)
+			F.CallMethod(shoppingTooltip1, "SetPoint", "TOPRIGHT", anchorFrame, "TOPLEFT", -3, 0)
+			F.CallMethod(shoppingTooltip2, "SetPoint", "TOPRIGHT", shoppingTooltip1, "TOPLEFT", -3, 0)
 		end
 	else
 		if point == "LEFT" then
 			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPLEFT", anchorFrame, "TOPRIGHT", 3, 0)
+			F.CallMethod(shoppingTooltip1, "SetPoint", "TOPLEFT", anchorFrame, "TOPRIGHT", 3, 0)
 		elseif point == "RIGHT" then
 			shoppingTooltip1:ClearAllPoints()
-			shoppingTooltip1:SetPoint("TOPRIGHT", anchorFrame, "TOPLEFT", -3, 0)
+			F.CallMethod(shoppingTooltip1, "SetPoint", "TOPRIGHT", anchorFrame, "TOPLEFT", -3, 0)
 		end
 	end
 end
 
 local function handle(type)
 	TooltipDataProcessor_AddTooltipPostCall(type, function(tt, data)
-		if not data or not data.id or not data.lines or not tt.GetName or not F.In(tt:GetName(), tooltips) then
+		if not data or not data.id or not data.lines or not tt.GetName or not tContains(tooltips, tt:GetName()) then
 			return
 		end
 
@@ -201,10 +214,14 @@ function T:ClearPetIcon(tt)
 end
 
 function T:AddPetID(tt, unit, guid)
-	if UnitIsBattlePet(unit) then
-		local speciesID = UnitBattlePetSpeciesID(unit)
-		speciesID = speciesID and F.CreateColorString(speciesID, E.db.general.valuecolor)
-		tt:AddDoubleLine(L["Pet ID"] .. ":", speciesID or ("|cffeeeeee" .. L["Unknown"] .. "|r"))
+	if not UnitIsBattlePet(unit) then
+		return
+	end
+
+	local speciesID = UnitBattlePetSpeciesID(unit)
+	local speciesIDString = speciesID and F.CreateColorString(tostring(speciesID), E.db.general.valuecolor)
+	if speciesIDString then
+		tt:AddDoubleLine(L["Pet ID"] .. ": ", speciesIDString or ("|cffeeeeee" .. L["Unknown"] .. "|r"))
 	end
 end
 
@@ -214,7 +231,7 @@ function T:Icons()
 			handle(_type)
 		end
 
-		_G.ShoppingTooltip1.__SetPoint = _G.ShoppingTooltip1.SetPoint
+		F.InternalizeMethod(_G.ShoppingTooltip1, "SetPoint")
 		hooksecurefunc(_G.ShoppingTooltip1, "SetPoint", alignShoppingTooltip)
 
 		self:ReskinRewardIcon(_G.GameTooltip.ItemTooltip)
@@ -235,9 +252,7 @@ function T:Icons()
 end
 
 function T:AddIconTooltip(name)
-	if not F.In(name, tooltips) then
-		tinsert(tooltips, name)
-	end
+	tInsertUnique(tooltips, name)
 end
 
 T:AddCallback("Icons")

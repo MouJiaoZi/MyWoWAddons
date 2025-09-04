@@ -1,6 +1,6 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local LSM = E.Libs.LSM
-local S = W.Modules.Skins
+local S = W.Modules.Skins ---@type Skins
 local WS = S.Widgets
 local ES = E.Skins
 
@@ -27,7 +27,7 @@ function WS:HandleSliderFrame(_, slider)
 		slider.windWidgetSkinned = true
 	end
 
-	F.SetVertexColorWithDB(slider:GetThumbTexture(), db.classColor and W.ClassColor or db.color)
+	F.SetVertexColorWithDB(slider:GetThumbTexture(), db.classColor and E.myClassColor or db.color)
 end
 
 WS:SecureHook(ES, "HandleSliderFrame")

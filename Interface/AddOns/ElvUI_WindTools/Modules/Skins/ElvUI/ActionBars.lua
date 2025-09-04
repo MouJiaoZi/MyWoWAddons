@@ -1,10 +1,9 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local AB = E.ActionBars
 
 local _G = _G
-local pairs = pairs
-local NUM_STANCE_SLOTS = NUM_STANCE_SLOTS or 10
+local NUM_STANCE_SLOTS = 10
 local NUM_PET_ACTION_SLOTS = NUM_PET_ACTION_SLOTS or 10
 local NUM_ACTIONBAR_BUTTONS = NUM_ACTIONBAR_BUTTONS
 

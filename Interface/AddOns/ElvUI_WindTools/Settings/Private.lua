@@ -1,7 +1,8 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local V ---@class PrivateDB
+local W, F, E, L, P, G ---@type WindTools, Functions, ElvUI, table, ProfileDB, GlobalDB
+W, F, E, L, V, P, G = unpack((select(2, ...)))
 
 local pairs = pairs
-
 local GetLocale = GetLocale
 
 local norm = format("|cff1eff00%s|r", L["[ABBR] Normal"])
@@ -213,6 +214,9 @@ V.misc = {
 		rightPanel = {
 			enable = true,
 			autoRefresh = true,
+			autoJoin = false,
+			skipConfirmation = false,
+			adjustFontSize = W.ChineseLocale and 1 or 0,
 		},
 	},
 }
@@ -301,11 +305,6 @@ V.skins = {
 	shadow = true,
 	weakAurasShadow = true,
 	increasedSize = 0,
-	rollResult = {
-		name = F.GetCompatibleFont("Accidental Presidency"),
-		size = 13,
-		style = "OUTLINE",
-	},
 	bigWigsSkin = {
 		queueTimer = {
 			smooth = true,
@@ -487,27 +486,28 @@ V.skins = {
 		},
 	},
 	addons = {
-		ace3 = true,
-		ace3DropdownBackdrop = true,
 		angryKeystones = true,
 		auctionator = true,
 		bigWigs = true,
 		bigWigsQueueTimer = true,
+		btWQuests = true,
 		bugSack = true,
 		hekili = true,
 		immersion = true,
+		manuscriptsJournal = true,
 		mountRoutePlanner = true,
 		myslot = true,
 		mythicDungeonTools = true,
 		omniCD = true,
+		omniCDExtraBar = true,
 		omniCDIcon = true,
 		omniCDStatusBar = true,
-		omniCDExtraBar = true,
+		paragonReputation = true,
 		postal = true,
 		premadeGroupsFilter = true,
 		raiderIO = true,
 		rareScanner = true,
-		rematch = true,
+		rematch = false,
 		silverDragon = true,
 		simpleAddonManager = true,
 		simulationcraft = true,
@@ -517,8 +517,14 @@ V.skins = {
 		warpDeplete = true,
 		weakAuras = true,
 		weakAurasOptions = true,
+		whisperPop = true,
 		worldQuestTab = true,
-		btWQuests = true,
+	},
+	libraries = {
+		ace3 = true,
+		ace3Dropdown = true,
+		libQTip = true,
+		secureTabs = true,
 	},
 	blizzard = {
 		enable = true,
@@ -534,6 +540,7 @@ V.skins = {
 		azeriteRespec = true,
 		bags = true,
 		barberShop = true,
+		battlefieldMap = true,
 		binding = true,
 		blackMarket = true,
 		calendar = true,

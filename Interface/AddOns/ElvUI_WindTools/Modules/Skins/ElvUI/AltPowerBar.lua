@@ -1,6 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local A = E:GetModule("Auras")
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 
@@ -10,7 +9,6 @@ function S:ElvUI_AltPowerBar()
 	end
 
 	local bar = _G.ElvUI_AltPowerBar
-
 	if not bar then
 		return
 	end

@@ -1,4 +1,6 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local G ---@class GlobalDB
+local W, F, E, L, V, P ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB
+W, F, E, L, V, P, G = unpack((select(2, ...)))
 
 G.core = {
 	compatibilityCheck = true,
@@ -8,6 +10,15 @@ G.core = {
 	advancedCLEUEventTrace = false,
 	logLevel = 2,
 	loginMessage = true,
+}
+
+G.developer = {
+	logLevel = 2,
+	tableAttributeDisplay = {
+		enable = false,
+		width = 1000,
+		height = 600,
+	},
 }
 
 G.item = {

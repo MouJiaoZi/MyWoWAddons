@@ -1,9 +1,8 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local ES = E.Skins
 
 local _G = _G
-local hooksecurefunc = hooksecurefunc
 local pairs = pairs
 
 local CreateFrame = CreateFrame
@@ -104,6 +103,9 @@ function S:BlizzardMiscFrames()
 	if MessageDialog then
 		self:CreateShadow(MessageDialog)
 	end
+
+	-- Opacity Frame
+	self:CreateShadow(_G.OpacityFrame)
 end
 
 function S:SkinMenu(_, manager, _, menuDescription)

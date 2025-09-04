@@ -1,8 +1,6 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local A = E:GetModule("Auras")
-local S = W.Modules.Skins
-
-local _G = _G
+local S = W.Modules.Skins ---@type Skins
 
 function S:ElvUI_Auras_SkinIcon(_, button)
 	if not button.__windSkin then

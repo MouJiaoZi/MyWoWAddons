@@ -1,9 +1,8 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local A = W:NewModule("Absorb", "AceHook-3.0", "AceEvent-3.0")
 local LSM = E.Libs.LSM
 local UF = E.UnitFrames
 
-local _G = _G
 local pairs = pairs
 local rad = rad
 
@@ -29,7 +28,7 @@ function A:ConstructTextures(frame)
 
 	if not absorb.overlay then
 		local overlay = absorb:CreateTexture(nil, "OVERLAY", nil, 6)
-		overlay:SetTexture("Interface/RaidFrame/Shield-Overlay", true, true)
+		overlay:SetTexture("Interface/RaidFrame/Shield-Overlay", "REPEAT", "REPEAT")
 		absorb.overlay = overlay
 	end
 
@@ -42,7 +41,7 @@ function A:ConstructTextures(frame)
 	end
 end
 
-function A:ConfigureTextures(_, frame)
+function A:ConfigureTextures(unitFramesModule, frame)
 	if not (frame and frame.db and frame.db.healPrediction and frame.db.healPrediction.enable and frame.windAbsorb) then
 		return
 	end
@@ -62,18 +61,18 @@ function A:ConfigureTextures(_, frame)
 			overlay:ClearAllPoints()
 			if isHorizontal then
 				local anchor = isReverse and "RIGHT" or "LEFT"
-				overlay.SetOverlaySize = function(self, percent)
-					self:SetWidth(frame.Health:GetWidth() * percent)
-					self:SetTexCoord(0, overlay:GetWidth() / 32, 0, overlay:GetHeight() / 32)
+				overlay.SetOverlaySize = function(overlayObj, percent)
+					overlayObj:SetWidth(frame.Health:GetWidth() * percent)
+					overlayObj:SetTexCoord(0, overlay:GetWidth() / 32, 0, overlay:GetHeight() / 32)
 				end
 				overlay:SetPoint("TOP" .. anchor, pred.absorbBar, "TOP" .. anchor)
 				overlay:SetPoint("BOTTOM" .. anchor, pred.absorbBar, "BOTTOM" .. anchor)
 			else
 				local anchor = isReverse and "TOP" or "BOTTOM"
 
-				overlay.SetOverlaySize = function(self, percent)
-					self:SetHeight(frame.Health:GetHeight() * percent)
-					self:SetTexCoord(0, overlay:GetWidth() / 32, 0, overlay:GetHeight() / 32)
+				overlay.SetOverlaySize = function(overlayObj, percent)
+					overlayObj:SetHeight(frame.Health:GetHeight() * percent)
+					overlayObj:SetTexCoord(0, overlay:GetWidth() / 32, 0, overlay:GetHeight() / 32)
 				end
 
 				overlay:SetPoint(anchor .. "LEFT", pred.absorbBar, anchor .. "LEFT")
@@ -109,12 +108,23 @@ function A:ConfigureTextures(_, frame)
 	end
 end
 
-function A:HealthPrediction_OnUpdate(object, unit, _, _, absorb, _, hasOverAbsorb, _, health, maxHealth)
+function A:HealthPrediction_OnUpdate(
+	healthPredElement,
+	unit,
+	myIncomingHeal,
+	otherIncomingHeal,
+	absorb,
+	healAbsorb,
+	hasOverAbsorb,
+	hasOverHealAbsorb,
+	health,
+	maxHealth
+)
 	if not self.db or not self.db.enable then
 		return
 	end
 
-	local frame = object.frame
+	local frame = healthPredElement.frame
 	local pred = frame.HealthPrediction
 	local overlay = frame.windAbsorb.overlay
 	local glow = frame.windAbsorb.glow
@@ -224,18 +234,18 @@ function A:SmoothTweak(frame)
 	frame.windSmooth = CreateFrame("statusbar", nil, E.UIParent)
 
 	-- If triggered by ElvUI smooth, do the job
-	frame.windSmooth.SetValue = function(self)
-		if self.job then
-			self.job()
-			self.job = nil
+	frame.windSmooth.SetValue = function(smoothBar)
+		if smoothBar.job then
+			smoothBar.job()
+			smoothBar.job = nil
 		end
 	end
 
 	-- Add the job to the smooth queue
-	frame.windSmooth.DoJob = function(self, job)
+	frame.windSmooth.DoJob = function(smoothBar, job)
 		if UF and UF.db and UF.db.smoothbars then
-			self.job = job
-			self:SetValue(0)
+			smoothBar.job = job
+			smoothBar:SetValue(0)
 		else
 			job()
 		end
@@ -277,7 +287,7 @@ function A:ProfileUpdate()
 
 	if not self.db or not self.db.enable then
 		for frame in pairs(framePool) do
-			self:ConfigureTextures(frame)
+			self:ConfigureTextures(UF, frame)
 		end
 	end
 

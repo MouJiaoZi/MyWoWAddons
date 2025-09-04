@@ -1,15 +1,17 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
 local C = W.Utilities.Color
 local async = W.Utilities.Async
 local options = W.options.misc.args
 local LSM = E.Libs.LSM
-local M = W.Modules.Misc
-local MF = W.Modules.MoveFrames
+local M = W.Modules.Misc ---@class Misc
+local MF = W.Modules.MoveFrames ---@type MoveFrames
 local CT = W:GetModule("ChatText")
 local GB = W:GetModule("GameBar")
 local AM = W:GetModule("Automation")
 local SA = W:GetModule("SpellActivationAlert")
 local LL = W:GetModule("LFGList")
+
+---@cast SA SpellActivationAlert
 
 local format = format
 local pairs = pairs
@@ -677,13 +679,13 @@ do
 	for name, data in pairs(itemList) do
 		async.WithItemID(data.id, function(item)
 			local icon = item:GetItemIcon()
-			local name = item:GetItemName()
+			local itemName = item:GetItemName()
 			local color = item:GetItemQualityColor()
 
 			local iconString = F.GetIconString(icon)
-			local nameString = F.CreateColorString(name, color)
+			local nameString = F.CreateColorString(itemName, color)
 
-			options.mute.args.other.args[name] = {
+			options.mute.args.other.args[itemName] = {
 				order = data.id,
 				type = "toggle",
 				name = iconString .. " " .. nameString,
@@ -956,7 +958,7 @@ do
 
 		local subIndex = 1
 		for key, data in pairs(catTable) do
-			if not F.In(key, { "name", "order" }) then
+			if key ~= "name" and key ~= "order" then
 				options.tags.args[cat].args[key] = {
 					order = data.order or subIndex,
 					type = data.type or "input",
@@ -1406,6 +1408,12 @@ options.gameBar = {
 					order = 4,
 					type = "toggle",
 					name = L["Flash"],
+				},
+				avoidReloadInCombat = {
+					order = 4,
+					type = "toggle",
+					name = L["Avoid Reload in Combat"],
+					desc = L["Disable the middle click UI reloading in combat."],
 				},
 				alwaysSystemInfo = {
 					order = 5,
@@ -2013,8 +2021,21 @@ options.lfgList = {
 						},
 					},
 				},
-				filtersBehaviour = {
+				adjustFontSize = {
 					order = 4,
+					type = "range",
+					name = L["Font Size Adjustment"],
+					desc = L["Adjust the font size of the right panel."],
+					min = -10,
+					max = 20,
+					step = 1,
+					set = function(info, value)
+						E.private.WT.misc.lfgList.rightPanel[info[#info]] = value
+						E:StaticPopup_Show("PRIVATE_RL")
+					end,
+				},
+				filtersBehaviour = {
+					order = 5,
 					type = "group",
 					inline = true,
 					name = L["Filters"],

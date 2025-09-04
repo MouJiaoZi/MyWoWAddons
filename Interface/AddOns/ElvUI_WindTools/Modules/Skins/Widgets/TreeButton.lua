@@ -1,8 +1,7 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local LSM = E.Libs.LSM
-local S = W.Modules.Skins
+local S = W.Modules.Skins ---@type Skins
 local WS = S.Widgets
-local ES = E.Skins
 
 local _G = _G
 local abs = abs
@@ -70,7 +69,7 @@ function WS:HandleTreeGroup(widget)
 					bg:SetDrawLayer(layer, subLayer)
 				end
 
-				F.SetVertexColorWithDB(bg, db.backdrop.classColor and W.ClassColor or db.backdrop.color)
+				F.SetVertexColorWithDB(bg, db.backdrop.classColor and E.myClassColor or db.backdrop.color)
 
 				button.windAnimation = self.Animation(bg, db.backdrop.animation)
 				self.SetAnimationMetadata(button, button.windAnimation)
@@ -92,11 +91,20 @@ function WS:HandleTreeGroup(widget)
 			end
 
 			if db.selected.enable then
-				button:CreateBackdrop()
+				button:CreateBackdrop(
+					nil,
+					LSM:Fetch("statusbar", db.selected.texture) or E.media.glossTex,
+					nil,
+					nil,
+					nil,
+					nil,
+					nil,
+					nil,
+					true
+				)
 				button.backdrop:SetInside(button, 2, 0)
-				local borderColor = db.selected.borderClassColor and W.ClassColor or db.selected.borderColor
-				local backdropColor = db.selected.backdropClassColor and W.ClassColor or db.selected.backdropColor
-				button.backdrop.Center:SetTexture(LSM:Fetch("statusbar", db.selected.texture) or E.media.glossTex)
+				local borderColor = db.selected.borderClassColor and E.myClassColor or db.selected.borderColor
+				local backdropColor = db.selected.backdropClassColor and E.myClassColor or db.selected.backdropColor
 				button.backdrop:SetBackdropBorderColor(
 					borderColor.r,
 					borderColor.g,
@@ -120,7 +128,7 @@ function WS:HandleTreeGroup(widget)
 					end
 
 					if frame.windWidgetText then
-						local color = db.text.selectedClassColor and W.ClassColor or db.text.selectedColor
+						local color = db.text.selectedClassColor and E.myClassColor or db.text.selectedColor
 						frame.windWidgetText:SetTextColor(color.r, color.g, color.b)
 					end
 				end
@@ -131,7 +139,7 @@ function WS:HandleTreeGroup(widget)
 					end
 
 					if frame.windWidgetText then
-						local color = db.text.normalClassColor and W.ClassColor or db.text.normalColor
+						local color = db.text.normalClassColor and E.myClassColor or db.text.normalColor
 						frame.windWidgetText:SetTextColor(color.r, color.g, color.b)
 					end
 				end

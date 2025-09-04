@@ -1,23 +1,30 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W ---@class WindTools
+local F, E, L ---@type Functions, ElvUI, table
+W, F, E, L = unpack((select(2, ...)))
 
 local _G = _G
 local format = format
+local gmatch = gmatch
 local pairs = pairs
 local pcall = pcall
 local strmatch = strmatch
 local strsub = strsub
 local tinsert = tinsert
 local tonumber = tonumber
+local unpack = unpack
+local xpcall = xpcall
 
 local CombatLogGetCurrentEventInfo = CombatLogGetCurrentEventInfo
-local CreateFrame = CreateFrame
 local GetCurrentCombatTextEventInfo = GetCurrentCombatTextEventInfo
 local InCombatLockdown = InCombatLockdown
 
+local C_PartyInfo_InviteUnit = C_PartyInfo.InviteUnit
 local C_UI_Reload = C_UI.Reload
 
-local ACCEPT = _G.ACCEPT
-local CANCEL = _G.CANCEL
+---@diagnostic disable-next-line: undefined-field
+local ACCEPT, CANCEL = _G.ACCEPT, _G.CANCEL
+
+---@cast F Functions
 
 W.RegisteredModules = {}
 W.Changelog = {}
@@ -73,28 +80,70 @@ _G["BINDING_NAME_CLICK WTExtraBindingButtonLogout:LeftButton"] = L["Logout"]
 _G["BINDING_NAME_CLICK WTExtraBindingButtonLeaveGroup:LeftButton"] = L["Leave Party"]
 _G["BINDING_NAME_CLICK WTExtraBindingButtonLeaveDelve:LeftButton"] = L["Leave Delve"]
 
+-- WindTools Link Operations
+-- 1. Print "|Hwtlink:feature:arg1:arg2:arg3:..." in the chat
+-- 2. Click the link, it will trigger the corresponding function with the provided arguments
+-- => W.LinkOperations[feature](arg1, arg2, arg3, ...)
 W.LinkOperations = {
 	["changelog"] = E.PopupDialogs.WINDTOOLS_OPEN_CHANGELOG.OnAccept,
+	["invite"] = function(name)
+		if name then
+			C_PartyInfo_InviteUnit(name)
+		end
+	end,
 }
 
-function W:AddCustomLinkSupport()
-	local ItemRefTooltip_SetHyperlink = _G.ItemRefTooltip.SetHyperlink
-	function _G.ItemRefTooltip.SetHyperlink(tt, data, ...)
-		if strsub(data, 1, 6) == "wtlink" then
-			local pattern = "wtlink:([%w,;%.]+):([%w,;%.]*):"
-			local feature_name, context_string = strmatch(data, pattern)
-			if feature_name and W.LinkOperations[feature_name] then
-				W.LinkOperations[feature_name](context_string)
-			end
+---Registers a link operation function for a specific feature.
+---
+---**WindTools Link Operations**
+---1. Print `|Hwtlink:feature:arg1:arg2:arg3:...` in the chat
+---2. Click the link, it will trigger the corresponding function with the provided arguments
+---```
+---local func = W.LinkOperations[feature]
+---func(arg1, arg2, arg3, ...)
+---```
+---
+---@param feature string|nil The name/identifier of the feature registering the operation
+---@param func function|nil The function to be called when the link operation is triggered
+function W:RegisterLinkOperation(feature, func)
+	if not feature or not func then
+		return
+	end
+
+	W.LinkOperations[feature] = func
+end
+
+function W:ItemRefTooltip_SetHyperlink(_, data)
+	if strsub(data, 1, 6) ~= "wtlink" then
+		return
+	end
+
+	local feature, argsString = strmatch(data, "^wtlink:([^:]+)(.*)$")
+	if not feature then
+		return
+	end
+
+	local args = {}
+	if argsString and argsString ~= "" then
+		argsString = strsub(argsString, 2)
+		for arg in gmatch(argsString, "[^:]+") do
+			tinsert(args, arg)
 		end
-		ItemRefTooltip_SetHyperlink(tt, data, ...)
+	end
+
+	if feature and W.LinkOperations[feature] then
+		W.LinkOperations[feature](unpack(args))
 	end
 end
 
---[[
-    WindTools module registration
-    @param {string} name The name of module
-]]
+function W:AddCustomLinkSupport()
+	if not W:IsHooked(_G.ItemRefTooltip, "SetHyperlink") then
+		W:Hook(_G.ItemRefTooltip, "SetHyperlink", "ItemRefTooltip_SetHyperlink", true)
+	end
+end
+
+---Register a new module
+---@param name string The name of the module
 function W:RegisterModule(name)
 	if not name then
 		F.Developer.ThrowError("The name of module is required!")
@@ -112,7 +161,7 @@ function W:InitializeModules()
 	for _, moduleName in pairs(W.RegisteredModules) do
 		local module = self:GetModule(moduleName)
 		if module.Initialize then
-			pcall(module.Initialize, module)
+			xpcall(module.Initialize, F.Developer.LogDebug, module)
 		end
 	end
 end
@@ -160,6 +209,22 @@ function W:ChangelogReadAlert()
 	end
 end
 
+function W:EventTraceLogEvent(trace, event, ...)
+	if event == "COMBAT_LOG_EVENT_UNFILTERED" or event == "COMBAT_LOG_EVENT" then
+		self.hooks[_G.EventTrace].LogEvent(trace, event, CombatLogGetCurrentEventInfo())
+	elseif event == "COMBAT_TEXT_UPDATE" then
+		self.hooks[_G.EventTrace].LogEvent(trace, event, (...), GetCurrentCombatTextEventInfo())
+	else
+		self.hooks[_G.EventTrace].LogEvent(trace, event, ...)
+	end
+end
+
+function W:TryReplaceEventTraceLogEvent()
+	if _G.EventTrace and _G.EventTrace.LogEvent and not self:IsHooked(_G.EventTrace, "LogEvent") then
+		W:RawHook(_G.EventTrace, "LogEvent", "EventTraceLogEvent", true)
+	end
+end
+
 function W:GameFixing()
 	if E.global.WT.core.cvarAlert then
 		self:RegisterEvent("CVAR_UPDATE", function(_, cvar, value)
@@ -170,32 +235,22 @@ function W:GameFixing()
 	end
 
 	if E.global.WT.core.advancedCLEUEventTrace then
-		local function LogEvent(trace, event, ...)
-			if event == "COMBAT_LOG_EVENT_UNFILTERED" or event == "COMBAT_LOG_EVENT" then
-				trace:LogEvent_Original(event, CombatLogGetCurrentEventInfo())
-			elseif event == "COMBAT_TEXT_UPDATE" then
-				trace:LogEvent_Original(event, (...), GetCurrentCombatTextEventInfo())
-			else
-				trace:LogEvent_Original(event, ...)
-			end
-		end
-
-		local function OnEventTraceLoaded()
-			_G.EventTrace.LogEvent_Original = _G.EventTrace.LogEvent
-			_G.EventTrace.LogEvent = LogEvent
-		end
-
 		if _G.EventTrace then
-			OnEventTraceLoaded()
+			self:TryReplaceEventTraceLogEvent()
 		else
-			local frame = CreateFrame("Frame")
-			frame:RegisterEvent("ADDON_LOADED")
-			frame:SetScript("OnEvent", function(f, event, ...)
-				if event == "ADDON_LOADED" and (...) == "Blizzard_EventTrace" then
-					OnEventTraceLoaded()
-					f:UnregisterAllEvents()
-				end
-			end)
+			self:RegisterEvent("ADDON_LOADED")
 		end
+	end
+end
+
+function W:ADDON_LOADED(event, addOnName)
+	if addOnName ~= "Blizzard_EventTrace" then
+		return
+	end
+
+	self:UnregisterEvent("ADDON_LOADED")
+
+	if E.global.WT.core.advancedCLEUEventTrace then
+		self:TryReplaceEventTraceLogEvent()
 	end
 end

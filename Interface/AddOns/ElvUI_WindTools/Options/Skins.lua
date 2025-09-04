@@ -1,7 +1,7 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
 local options = W.options.skins.args
 local LSM = E.Libs.LSM
-local S = W.Modules.Skins
+local S = W.Modules.Skins ---@type Skins
 local C = W.Utilities.Color
 
 local _G = _G
@@ -9,7 +9,7 @@ local format = format
 local pairs = pairs
 local type = type
 
-local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
+local C_AddOns_DoesAddOnExist = C_AddOns.DoesAddOnExist
 
 local RED_FONT_COLOR = RED_FONT_COLOR
 local YELLOW_FONT_COLOR = YELLOW_FONT_COLOR
@@ -94,7 +94,7 @@ options.general = {
 				format(L["It doesn't mean that the %s Skins will not be applied."], W.Title)
 			),
 			hidden = function()
-				return not C_AddOns_IsAddOnLoaded("ElvUI_MerathilisUI")
+				return not C_AddOns_DoesAddOnExist("ElvUI_MerathilisUI")
 			end,
 		},
 		general = {
@@ -467,60 +467,6 @@ options.font = {
 				},
 			},
 		},
-		rollResult = {
-			order = 4,
-			type = "group",
-			inline = true,
-			name = L["Roll Result"],
-			get = function(info)
-				return E.private.WT.skins.rollResult[info[#info]]
-			end,
-			set = function(info, value)
-				E.private.WT.skins.rollResult[info[#info]] = value
-				E:StaticPopup_Show("PRIVATE_RL")
-			end,
-			args = {
-				tip = {
-					order = 1,
-					type = "description",
-					name = format(
-						L["It only works when you enable the skin (%s)."],
-						format("%s - %s", L["Blizzard"], L["Loot"])
-					),
-				},
-				name = {
-					order = 2,
-					type = "select",
-					dialogControl = "LSM30_Font",
-					name = L["Font"],
-					values = LSM:HashTable("font"),
-				},
-				style = {
-					order = 3,
-					type = "select",
-					name = L["Outline"],
-					values = {
-						NONE = L["None"],
-						OUTLINE = L["Outline"],
-						THICKOUTLINE = L["Thick"],
-						SHADOW = L["|cff888888Shadow|r"],
-						SHADOWOUTLINE = L["|cff888888Shadow|r Outline"],
-						SHADOWTHICKOUTLINE = L["|cff888888Shadow|r Thick"],
-						MONOCHROME = L["|cFFAAAAAAMono|r"],
-						MONOCHROMEOUTLINE = L["|cFFAAAAAAMono|r Outline"],
-						MONOCHROMETHICKOUTLINE = L["|cFFAAAAAAMono|r Thick"],
-					},
-				},
-				size = {
-					order = 4,
-					name = L["Size"],
-					type = "range",
-					min = 5,
-					max = 60,
-					step = 1,
-				},
-			},
-		},
 	},
 }
 
@@ -633,6 +579,11 @@ options.blizzard = {
 			order = 10,
 			type = "toggle",
 			name = L["Barber Shop"],
+		},
+		battlefieldMap = {
+			order = 10,
+			type = "toggle",
+			name = L["Battlefield Map"],
 		},
 		binding = {
 			order = 10,
@@ -1250,18 +1201,6 @@ options.addons = {
 			name = " ",
 			width = "full",
 		},
-		ace3 = {
-			order = 10,
-			type = "toggle",
-			name = L["Ace3"],
-			width = 1.5,
-		},
-		ace3DropdownBackdrop = {
-			order = 10,
-			type = "toggle",
-			name = L["Ace3 Dropdown Backdrop"],
-			width = 1.5,
-		},
 		angryKeystones = {
 			order = 10,
 			type = "toggle",
@@ -1287,6 +1226,12 @@ options.addons = {
 			name = L["BigWigs Queue Timer"],
 			addonName = "BigWigs",
 		},
+		btWQuests = {
+			order = 10,
+			type = "toggle",
+			name = L["BtWQuests"],
+			addonName = "BtWQuests",
+		},
 		bugSack = {
 			order = 10,
 			type = "toggle",
@@ -1307,6 +1252,12 @@ options.addons = {
 			name = L["Immersion"],
 			addonName = "Immersion",
 			addonskinsKey = "Immersion",
+		},
+		manuscriptsJournal = {
+			order = 10,
+			type = "toggle",
+			name = L["Manuscripts Journal"],
+			addonName = "ManuscriptsJournal",
 		},
 		mountRoutePlanner = {
 			order = 10,
@@ -1332,6 +1283,16 @@ options.addons = {
 			name = L["OmniCD"],
 			addonName = "OmniCD",
 		},
+		omniCDExtraBar = {
+			order = 10,
+			type = "toggle",
+			name = L["OmniCD Extra Bar"],
+			desc = L["Add a shadowed background to the group title and adjust its position slightly upward."],
+			hidden = function()
+				return not E.private.WT.skins.addons.omniCD
+			end,
+			addonName = "OmniCD",
+		},
 		omniCDIcon = {
 			order = 10,
 			type = "toggle",
@@ -1350,15 +1311,11 @@ options.addons = {
 			end,
 			addonName = "OmniCD",
 		},
-		omniCDExtraBar = {
+		paragonReputation = {
 			order = 10,
 			type = "toggle",
-			name = L["OmniCD Extra Bar"],
-			desc = L["Add a shadowed background to the group title and adjust its position slightly upward."],
-			hidden = function()
-				return not E.private.WT.skins.addons.omniCD
-			end,
-			addonName = "OmniCD",
+			name = L["Paragon Reputation"],
+			addonName = "ParagonReputation",
 		},
 		postal = {
 			order = 10,
@@ -1386,6 +1343,13 @@ options.addons = {
 			type = "toggle",
 			name = L["RareScanner"],
 			addonName = "RareScanner",
+		},
+		rematch = {
+			order = 10,
+			type = "toggle",
+			name = L["Rematch"] .. " |cffff3860(" .. L["WIP"] .. ")|r",
+			addonName = "Rematch",
+			addonskinsKey = "Rematch",
 		},
 		silverDragon = {
 			order = 10,
@@ -1443,17 +1407,18 @@ options.addons = {
 			name = L["WeakAuras Options"],
 			addonName = "WeakAuras",
 		},
+		whisperPop = {
+			order = 10,
+			type = "toggle",
+			name = L["WhisperPop"],
+			addonName = "WhisperPop",
+			addonskinsKey = "WhisperPop",
+		},
 		worldQuestTab = {
 			order = 10,
 			type = "toggle",
 			name = L["World Quest Tab"],
 			addonName = "WorldQuestTab",
-		},
-		btWQuests = {
-			order = 10,
-			type = "toggle",
-			name = L["BtWQuests"],
-			addonName = "BtWQuests",
 		},
 	},
 }
@@ -1461,13 +1426,13 @@ options.addons = {
 local function GenerateAddOnSkinsGetFunction(name)
 	if type(name) == "string" then
 		return function(info)
-			return C_AddOns_IsAddOnLoaded(name) and E.private.WT.skins.addons[info[#info]]
+			return C_AddOns_DoesAddOnExist(name) and E.private.WT.skins.addons[info[#info]]
 		end
 	elseif type(name) == "table" then
 		return function(info)
 			local isValid = false
 			for _, addon in pairs(name) do
-				isValid = isValid or C_AddOns_IsAddOnLoaded(addon)
+				isValid = isValid or C_AddOns_DoesAddOnExist(addon)
 			end
 			return isValid and E.private.WT.skins.addons[info[#info]]
 		end
@@ -1494,13 +1459,13 @@ end
 local function GenerateAddOnSkinsDisabledFunction(name)
 	if type(name) == "string" then
 		return function(info)
-			return not C_AddOns_IsAddOnLoaded(name) or not E.private.WT.skins.enable
+			return not C_AddOns_DoesAddOnExist(name) or not E.private.WT.skins.enable
 		end
 	elseif type(name) == "table" then
 		return function(info)
 			local isValid = false
 			for _, addon in pairs(name) do
-				isValid = isValid or C_AddOns_IsAddOnLoaded(addon)
+				isValid = isValid or C_AddOns_DoesAddOnExist(addon)
 			end
 			return not isValid or not E.private.WT.skins.enable
 		end
@@ -1520,8 +1485,77 @@ for _, option in pairs(options.addons.args) do
 	end
 end
 
-options.widgets = {
+options.libraries = {
 	order = 7,
+	type = "group",
+	name = L["Libraries"],
+	get = function(info)
+		return E.private.WT.skins.libraries[info[#info]]
+	end,
+	set = function(info, value)
+		E.private.WT.skins.libraries[info[#info]] = value
+		E:StaticPopup_Show("PRIVATE_RL")
+	end,
+	disabled = function()
+		return not E.private.WT.skins.enable
+	end,
+	args = {
+		enableAll = {
+			order = 1,
+			type = "execute",
+			name = L["Enable All"],
+			func = function()
+				for key in pairs(V.skins.libraries) do
+					E.private.WT.skins.libraries[key] = true
+				end
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+		},
+		disableAll = {
+			order = 2,
+			type = "execute",
+			name = L["Disable All"],
+			func = function()
+				for key in pairs(V.skins.libraries) do
+					E.private.WT.skins.libraries[key] = false
+				end
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+		},
+		betterOption = {
+			order = 9,
+			type = "description",
+			name = " ",
+			width = "full",
+		},
+		ace3 = {
+			order = 10,
+			type = "toggle",
+			name = L["Ace3"],
+		},
+		ace3Dropdown = {
+			order = 10,
+			type = "toggle",
+			name = L["Ace3 Dropdown"],
+			disabled = function()
+				return not E.private.WT.skins.libraries.ace3
+			end,
+		},
+		libQTip = {
+			order = 10,
+			type = "toggle",
+			name = L["LibQTip"],
+		},
+		secureTabs = {
+			order = 10,
+			type = "toggle",
+			name = L["SecureTabs"],
+		},
+	},
+}
+
+options.widgets = {
+	order = 8,
 	type = "group",
 	name = L["Widgets"],
 	disabled = function()
@@ -2671,18 +2705,18 @@ for _, widget in pairs({ "button", "treeGroupButton", "tab" }) do
 end
 
 options.bigWigsSkin = {
-	order = 8,
+	order = 9,
 	type = "group",
 	name = L["BigWigs Skin"],
 	disabled = function()
-		return not E.private.WT.skins.enable or not C_AddOns_IsAddOnLoaded("BigWigs")
+		return not E.private.WT.skins.enable or not C_AddOns_DoesAddOnExist("BigWigs")
 	end,
 	args = {
 		alert = {
 			order = 1,
 			type = "description",
 			name = function()
-				if not C_AddOns_IsAddOnLoaded("BigWigs") then
+				if not C_AddOns_DoesAddOnExist("BigWigs") then
 					return C.StringByTemplate(format(L["%s is not loaded."], L["BigWigs"]), "danger")
 				end
 

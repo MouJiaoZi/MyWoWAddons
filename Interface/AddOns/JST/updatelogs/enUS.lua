@@ -3,6 +3,19 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.74
+Delete the test module that was mistakenly added. If the update does not delete the relevant files, please delete JST_Test from the plugin folder.I'm very sorry.
+|cffff0000World of Warcraft\_retail_\Interface\AddOns\JST_Test DELETE THIS!!!|r
+
+5.73
+Plexus Sentinel add a sound prompt to Manifest Matrices timing circle.
+The Soul Hunters Devourer's Ire handover timimg correction.
+The Soul Hunters Collapsing Star soak assignment marks replace skull to cross.
+Fractillus Correct the error in determining the placement of tanks on walls.
+Fractillus Null Consumption change the color of the timing circle to light blue,
+Trash Only detect the Dragon ride in Seat of the Devourer.
+Other error corrections.
+
 5.71
 fix raid frames glow bug.
 

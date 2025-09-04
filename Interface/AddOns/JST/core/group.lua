@@ -702,10 +702,12 @@ local function UpdateMyInfo()
 	UpdateNickNameByPlayerGUID(G.PlayerGUID, C.DB["GeneralOption"]["mynickname"])
 	
 	local specId, role, position = LS:MySpecialization()
-	GroupInfo[G.PlayerGUID].role = role
-	GroupInfo[G.PlayerGUID].spec_id = specId
-	GroupInfo[G.PlayerGUID].spec_icon = select(4, GetSpecializationInfoByID(specId))
-	GroupInfo[G.PlayerGUID].pos = position
+	if specId and role and position then
+		GroupInfo[G.PlayerGUID].role = role
+		GroupInfo[G.PlayerGUID].spec_id = specId
+		GroupInfo[G.PlayerGUID].spec_icon = select(4, GetSpecializationInfoByID(specId))
+		GroupInfo[G.PlayerGUID].pos = position
+	end
 end
 
 local function UpdateMrtNoteForAll()

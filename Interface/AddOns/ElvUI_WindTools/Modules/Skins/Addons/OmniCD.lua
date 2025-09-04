@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
@@ -95,9 +95,9 @@ function S:OmniCD_Party_ExtraBar()
 					bar.anchor:SetTemplate("Transparent")
 					self:CreateShadow(bar.anchor)
 					bar.anchor:SetHeight(bar.anchor:GetHeight() + 8)
-					bar.anchor.__SetPoint = bar.anchor.SetPoint
+					F.InternalizeMethod(bar.anchor, "SetPoint")
 					hooksecurefunc(bar.anchor, "SetPoint", function()
-						F.MoveFrameWithOffset(bar.anchor, 0, bar.db and bar.db.growUpward and -11 or 3)
+						F.Move(bar.anchor, 0, bar.db and bar.db.growUpward and -11 or 3)
 					end)
 
 					bar.__wind = true

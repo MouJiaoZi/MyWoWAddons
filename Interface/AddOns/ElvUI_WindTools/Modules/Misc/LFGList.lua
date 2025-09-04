@@ -1,8 +1,8 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local KI = W:GetModule("KeystoneInfo")
-local S = W.Modules.Skins
-local MF = W.Modules.MoveFrames
-local LL = W:NewModule("LFGList", "AceHook-3.0", "AceEvent-3.0")
+local S = W.Modules.Skins ---@type Skins
+local MF = W.Modules.MoveFrames ---@type MoveFrames
+local LL = W:NewModule("LFGList", "AceHook-3.0", "AceEvent-3.0") ---@class LFGList : AceModule, AceHook-3.0, AceEvent-3.0
 local LFGPI = W.Utilities.LFGPlayerInfo
 local C = W.Utilities.Color
 local LSM = E.Libs.LSM
@@ -42,6 +42,7 @@ local UnitGroupRolesAssigned = UnitGroupRolesAssigned
 local UnitName = UnitName
 local WeeklyRewards_ShowUI = WeeklyRewards_ShowUI
 
+local C_Timer_After = C_Timer.After
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 local C_AddOns_LoadAddOn = C_AddOns.LoadAddOn
 local C_ChallengeMode_GetAffixInfo = C_ChallengeMode.GetAffixInfo
@@ -154,7 +155,7 @@ function LL:GetPlayerDB(key)
 	local globalDB = E.global.WT.misc.lfgList
 
 	if not globalDB then
-		return
+		return {}
 	end
 
 	if not globalDB[E.myrealm] then
@@ -169,7 +170,7 @@ function LL:GetPlayerDB(key)
 		globalDB[E.myrealm][E.myname][key] = {}
 	end
 
-	return globalDB[E.myrealm][E.myname][key]
+	return globalDB[E.myrealm][E.myname][key] --[[@as table]]
 end
 
 function LL:UpdateAdditionalText(button, score, best)
@@ -302,9 +303,9 @@ function LL:UpdateEnumerate(Enumerate)
 	}
 
 	for i = 1, result.numMembers do
-		local info = C_LFGList_GetSearchResultPlayerInfo(button.resultID, i)
-		if info then
-			local role, class, spec = info.assignedRole, info.classFilename, info.specName
+		local playerInfo = C_LFGList_GetSearchResultPlayerInfo(button.resultID, i)
+		if playerInfo then
+			local role, class, spec = playerInfo.assignedRole, playerInfo.classFilename, playerInfo.specName
 			tinsert(cache[role], { class, spec, i == 1 })
 		end
 	end
@@ -514,6 +515,28 @@ function LL:RefreshSearch()
 	_G.LFGListSearchPanel_DoSearch(_G.LFGListFrame.SearchPanel)
 end
 
+function LL:RepositionRaiderIOProfileTooltip(frame)
+	local anchor = _G.RaiderIO_ProfileTooltipAnchor
+	if not anchor then
+		return
+	end
+
+	if not self:IsHooked(anchor, "SetPoint") then
+		self:RawHook(anchor, "SetPoint", function(_, arg1, arg2, arg3, arg4, arg5)
+			if arg2 and (arg2 == _G.PVEFrame or arg2 == frame) then
+				arg2 = frame:IsShown() and frame or _G.PVEFrame
+			end
+			self.hooks[anchor]["SetPoint"](anchor, arg1, arg2, arg3, arg4, arg5)
+		end, true)
+	end
+
+	local point = { anchor:GetPoint(1) }
+	if #point > 0 then
+		anchor:ClearAllPoints()
+		anchor:Point(unpack(point))
+	end
+end
+
 function LL:InitializeRightPanel()
 	if self.rightPanel then
 		return
@@ -527,64 +550,41 @@ function LL:InitializeRightPanel()
 	S:CreateShadowModule(frame)
 	MF:InternalHandle(frame, "PVEFrame")
 
-	hooksecurefunc(frame, "Show", function(f)
-		if _G.RaiderIO_ProfileTooltipAnchor then
-			local point = { _G.RaiderIO_ProfileTooltipAnchor:GetPoint(1) }
+	self:SecureHook(frame, "Show", "RepositionRaiderIOProfileTooltip")
+	self:SecureHook(frame, "Hide", "RepositionRaiderIOProfileTooltip")
 
-			if not _G.RaiderIO_ProfileTooltipAnchor.__SetPoint then
-				_G.RaiderIO_ProfileTooltipAnchor.__SetPoint = _G.RaiderIO_ProfileTooltipAnchor.SetPoint
-				_G.RaiderIO_ProfileTooltipAnchor.SetPoint = function(_, arg1, arg2, arg3, arg4, arg5)
-					if arg2 and (arg2 == _G.PVEFrame or arg2 == f) then
-						arg2 = f:IsShown() and f or _G.PVEFrame
-					end
-					_G.RaiderIO_ProfileTooltipAnchor:__SetPoint(arg1, arg2, arg3, arg4, arg5)
-				end
-			end
-
-			if #point > 0 then
-				_G.RaiderIO_ProfileTooltipAnchor:ClearAllPoints()
-				_G.RaiderIO_ProfileTooltipAnchor:SetPoint(unpack(point))
-			end
+	local function HandleAutoJoin(module, resultID, button)
+		if not module.db.rightPanel.autoJoin then
+			return
 		end
-	end)
 
-	hooksecurefunc(frame, "Hide", function(f)
-		if _G.RaiderIO_ProfileTooltipAnchor then
-			local point = { _G.RaiderIO_ProfileTooltipAnchor:GetPoint(1) }
-
-			if not _G.RaiderIO_ProfileTooltipAnchor.__SetPoint then
-				_G.RaiderIO_ProfileTooltipAnchor.__SetPoint = _G.RaiderIO_ProfileTooltipAnchor.SetPoint
-				_G.RaiderIO_ProfileTooltipAnchor.SetPoint = function(_, arg1, arg2, arg3, arg4, arg5)
-					if arg2 and (arg2 == _G.PVEFrame or arg2 == f) then
-						arg2 = f:IsShown() and f or _G.PVEFrame
-					end
-					_G.RaiderIO_ProfileTooltipAnchor:__SetPoint(arg1, arg2, arg3, arg4, arg5)
-				end
-			end
-
-			if #point > 0 then
-				_G.RaiderIO_ProfileTooltipAnchor:ClearAllPoints()
-				_G.RaiderIO_ProfileTooltipAnchor:SetPoint(unpack(point))
-			end
-		end
-	end)
-
-	hooksecurefunc("LFGListSearchEntry_OnClick", function(s, button)
-		if not self.db.rightPanel.autoJoin then
+		if button == "RightButton" then
 			return
 		end
 
 		local panel = _G.LFGListFrame.SearchPanel
-		if
-			button ~= "RightButton"
-			and _G.LFGListSearchPanelUtil_CanSelectResult(s.resultID)
-			and panel.SignUpButton:IsEnabled()
-		then
-			if panel.selectedResult ~= s.resultID then
-				_G.LFGListSearchPanel_SelectResult(panel, s.resultID)
+		if _G.LFGListSearchPanelUtil_CanSelectResult(resultID) and panel.SignUpButton:IsEnabled() then
+			if panel.selectedResult ~= resultID then
+				_G.LFGListSearchPanel_SelectResult(panel, resultID)
 			end
 			_G.LFGListSearchPanel_SignUp(panel)
 		end
+	end
+
+	hooksecurefunc("LFGListSearchEntry_Update", function(entry)
+		if entry.autoJoinHandled then
+			return
+		end
+
+		entry:HookScript("OnClick", function(f, button)
+			if button == "LeftButton" then
+				C_Timer_After(0.01, function()
+					HandleAutoJoin(LL, f.resultID, button)
+				end)
+			end
+		end)
+
+		entry.autoJoinHandled = true
 	end)
 
 	_G.LFGListApplicationDialog:HookScript("OnShow", function(s)
@@ -687,7 +687,7 @@ function LL:InitializeRightPanel()
 		filterButton.tex:SetTexture(W.MythicPlusMapData[mapID].tex)
 
 		filterButton.name = filterButton:CreateFontString(nil, "OVERLAY")
-		filterButton.name:SetFont(E.media.normFont, 12, "OUTLINE")
+		filterButton.name:SetFont(E.media.normFont, 12 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 		filterButton.name:SetPoint("LEFT", filterButton.tex, "RIGHT", 8, 0)
 		filterButton.name:SetText(W.MythicPlusMapData[mapID].abbr)
 
@@ -713,12 +713,12 @@ function LL:InitializeRightPanel()
 	leaderScore:SetTemplate()
 
 	leaderScore.text = leaderScore:CreateFontString(nil, "OVERLAY")
-	leaderScore.text:SetFont(E.media.normFont, 11, "OUTLINE")
+	leaderScore.text:SetFont(E.media.normFont, 11 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	leaderScore.text:SetPoint("LEFT", leaderScore, "LEFT", 8, 0)
 	leaderScore.text:SetText(L["Leader Score Over"])
 
 	leaderScore.editBox = CreateFrame("EditBox", nil, leaderScore)
-	leaderScore.editBox:SetFont(E.media.normFont, 12, "OUTLINE")
+	leaderScore.editBox:SetFont(E.media.normFont, 12 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	leaderScore.editBox:SetSize(40, 20)
 	leaderScore.editBox:SetJustifyH("CENTER")
 	leaderScore.editBox:SetPoint("RIGHT", -10, 0)
@@ -776,12 +776,12 @@ function LL:InitializeRightPanel()
 	leaderDungeonScore:SetTemplate()
 
 	leaderDungeonScore.text = leaderDungeonScore:CreateFontString(nil, "OVERLAY")
-	leaderDungeonScore.text:SetFont(E.media.normFont, 11, "OUTLINE")
+	leaderDungeonScore.text:SetFont(E.media.normFont, 11 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	leaderDungeonScore.text:SetPoint("LEFT", leaderDungeonScore, "LEFT", 8, 0)
 	leaderDungeonScore.text:SetText(L["Dungeon Score Over"])
 
 	leaderDungeonScore.editBox = CreateFrame("EditBox", nil, leaderDungeonScore)
-	leaderDungeonScore.editBox:SetFont(E.media.normFont, 12, "OUTLINE")
+	leaderDungeonScore.editBox:SetFont(E.media.normFont, 12 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	leaderDungeonScore.editBox:SetSize(40, 20)
 	leaderDungeonScore.editBox:SetJustifyH("CENTER")
 	leaderDungeonScore.editBox:SetPoint("RIGHT", -10, 0)
@@ -838,7 +838,7 @@ function LL:InitializeRightPanel()
 	roleAvailable:SetTemplate()
 
 	roleAvailable.text = roleAvailable:CreateFontString(nil, "OVERLAY")
-	roleAvailable.text:SetFont(E.media.normFont, 11, "OUTLINE")
+	roleAvailable.text:SetFont(E.media.normFont, 11 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	roleAvailable.text:SetPoint("CENTER", roleAvailable, "CENTER", 0, 0)
 	roleAvailable.text:SetText(L["Role Available"])
 	roleAvailable.text:SetJustifyH("CENTER")
@@ -850,7 +850,7 @@ function LL:InitializeRightPanel()
 	needTank:SetTemplate()
 
 	needTank.text = needTank:CreateFontString(nil, "OVERLAY")
-	needTank.text:SetFont(E.media.normFont, 11, "OUTLINE")
+	needTank.text:SetFont(E.media.normFont, 11 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	needTank.text:SetPoint("CENTER", needTank, "CENTER", 0, 0)
 	needTank.text:SetText(L["Has Tank"])
 	needTank.text:SetJustifyH("CENTER")
@@ -862,7 +862,7 @@ function LL:InitializeRightPanel()
 	needHealer:SetTemplate()
 
 	needHealer.text = needHealer:CreateFontString(nil, "OVERLAY")
-	needHealer.text:SetFont(E.media.normFont, 11, "OUTLINE")
+	needHealer.text:SetFont(E.media.normFont, 11 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	needHealer.text:SetPoint("CENTER", needHealer, "CENTER", 0, 0)
 	needHealer.text:SetText(L["Has Healer"])
 	needHealer.text:SetJustifyH("CENTER")
@@ -999,7 +999,7 @@ function LL:InitializeRightPanel()
 	addSetActive(vaultStatus)
 
 	vaultStatus.text = vaultStatus:CreateFontString(nil, "OVERLAY")
-	vaultStatus.text:SetFont(E.media.normFont, 13, "OUTLINE")
+	vaultStatus.text:SetFont(E.media.normFont, 13 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	vaultStatus.text:SetPoint("CENTER", vaultStatus, "CENTER", 0, 0)
 	vaultStatus.text:SetJustifyH("CENTER")
 
@@ -1162,11 +1162,11 @@ function LL:InitializeRightPanel()
 	addSetActive(sortByButton)
 
 	sortByButton.text = sortByButton:CreateFontString(nil, "OVERLAY")
-	sortByButton.text:SetFont(E.media.normFont, 12, "OUTLINE")
+	sortByButton.text:SetFont(E.media.normFont, 12 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	sortByButton.text:SetPoint("CENTER", sortByButton, "CENTER", 0, 0)
 
 	sortByButton.title = sortByButton:CreateFontString(nil, "OVERLAY")
-	sortByButton.title:SetFont(E.media.normFont, 12, "OUTLINE")
+	sortByButton.title:SetFont(E.media.normFont, 12 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 	sortByButton.title:SetPoint("CENTER", sortByButton, "TOP", 0, 0)
 	sortByButton.title:SetText(F.GetWindStyleText(L["Sort by"]))
 	sortByButton.title:Hide()
@@ -1247,7 +1247,7 @@ function LL:InitializeRightPanel()
 
 	-- Quick Access Title
 	local quickAccessTitle = quickAccessPanel:CreateFontString(nil, "OVERLAY")
-	F.SetFontOutline(quickAccessTitle, nil, 16)
+	F.SetFontOutline(quickAccessTitle, nil, 16 + self.db.rightPanel.adjustFontSize)
 	quickAccessTitle:SetPoint("TOP", quickAccessPanel, "TOP", 0, 0)
 	quickAccessTitle:SetText(F.GetWindStyleText(L["Quick Access"]))
 
@@ -1273,7 +1273,7 @@ function LL:InitializeRightPanel()
 		addSetActive(button)
 
 		button.text = button:CreateFontString(nil, "OVERLAY")
-		button.text:SetFont(E.media.normFont, 12, "OUTLINE")
+		button.text:SetFont(E.media.normFont, 12 + self.db.rightPanel.adjustFontSize, "OUTLINE")
 		button.text:SetPoint("CENTER", button, "CENTER", 0, 0)
 		button.text:SetText(data.text)
 
@@ -1306,9 +1306,9 @@ function LL:InitializeRightPanel()
 			if not selection then
 				return
 			end
-			for _, button in ipairs(selection.CategoryButtons) do
-				if button.categoryID == data.categoryID and button.filters == data.filters then
-					LFGListCategorySelectionButton_OnClick(button)
+			for _, categoryButton in ipairs(selection.CategoryButtons) do
+				if categoryButton.categoryID == data.categoryID and categoryButton.filters == data.filters then
+					LFGListCategorySelectionButton_OnClick(categoryButton)
 					LFGListCategorySelection_StartFindGroup(selection)
 					return
 				end
@@ -1360,9 +1360,9 @@ function LL:UpdateRightPanel()
 	end
 
 	self.rightPanel.filters.leaderScore:SetActive(dfDB.leaderScoreEnable)
-	self.rightPanel.filters.leaderScore.editBox:SetText(dfDB.leaderScore or 0)
+	self.rightPanel.filters.leaderScore.editBox:SetText(tostring(dfDB.leaderScore or 0))
 	self.rightPanel.filters.leaderDungeonScore:SetActive(dfDB.leaderDungeonScoreEnable)
-	self.rightPanel.filters.leaderDungeonScore.editBox:SetText(dfDB.leaderDungeonScore or 0)
+	self.rightPanel.filters.leaderDungeonScore.editBox:SetText(tostring(dfDB.leaderDungeonScore or 0))
 	self.rightPanel.filters.roleAvailable:SetActive(dfDB.roleAvailableEnable)
 	self.rightPanel.filters.needTank:SetActive(dfDB.needTankEnable)
 	self.rightPanel.filters.needHealer:SetActive(dfDB.needHealerEnable)
@@ -1572,8 +1572,6 @@ function LL:GROUP_ROSTER_UPDATE(...)
 	self:RequestKeystoneData()
 	self:LFGListEventHandler(...)
 end
-
-LL.GROUP_ROSTER_UPDATE = F.DelvesEventFix(LL.GROUP_ROSTER_UPDATE)
 
 function LL:Initialize()
 	if C_AddOns_IsAddOnLoaded("PremadeGroupsFilter") then

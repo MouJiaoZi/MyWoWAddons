@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local TT = E:GetModule("Tooltip")
 
 local _G = _G
@@ -163,10 +163,10 @@ function S:BtWQuests()
 		navBar.backdrop:Point("TOPLEFT", -2, 0)
 		navBar.backdrop:Point("BOTTOMRIGHT")
 		HandleNavButton(navBar.home, true)
-		navBar:HookScript("OnShow", function(self)
-			if not self.__windSkin then
-				HandledDropDown(self.dropDown)
-				self.__windSkin = true
+		navBar:HookScript("OnShow", function(nav)
+			if not nav.__windSkin then
+				HandledDropDown(nav.dropDown)
+				nav.__windSkin = true
 			end
 		end)
 	end

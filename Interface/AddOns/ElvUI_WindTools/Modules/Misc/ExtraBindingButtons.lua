@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local M = W.Modules.Misc
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local M = W.Modules.Misc ---@class Misc
 
 local CreateFrame = CreateFrame
 

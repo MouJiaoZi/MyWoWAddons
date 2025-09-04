@@ -1,13 +1,10 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 local next = next
 local pairs = pairs
-local select = select
-local tinsert = tinsert
-local unpack = unpack
 
 function S:Blizzard_EncounterJournal()
 	if not self:CheckDB("encounterjournal", "encounterJournal") then

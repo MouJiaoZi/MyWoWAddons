@@ -1,7 +1,7 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local IL = W:NewModule("Inspect", "AceEvent-3.0", "AceHook-3.0") -- Modified from TinyInspect
-local S = W.Modules.Skins
-local MF = W.Modules.MoveFrames
+local S = W.Modules.Skins ---@type Skins
+local MF = W.Modules.MoveFrames ---@type MoveFrames
 
 local LibEvent = LibStub:GetLibrary("LibEvent.7000")
 local LibItemEnchant = LibStub:GetLibrary("LibItemEnchant.7000")

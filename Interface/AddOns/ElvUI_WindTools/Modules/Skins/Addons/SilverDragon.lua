@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local TT = E:GetModule("Tooltip")
 
 local _G = _G
@@ -8,8 +8,6 @@ local pairs = pairs
 local select = select
 local type = type
 local unpack = unpack
-
-local RunNextFrame = RunNextFrame
 
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 
@@ -64,10 +62,10 @@ local function StyleSilverDragonLootWindow(frame)
 		frame.close:Point("TOPRIGHT", frame, "TOPRIGHT", -4, -4)
 	end
 
-	frame.__SetPoint = frame.SetPoint
-	F.MoveFrameWithOffset(frame, 0, -3)
+	F.InternalizeMethod(frame, "SetPoint")
+	F.Move(frame, 0, -3)
 	hooksecurefunc(frame, "SetPoint", function()
-		F.MoveFrameWithOffset(frame, 0, -3)
+		F.Move(frame, 0, -3)
 	end)
 
 	frame.__windSkin = true
@@ -99,10 +97,10 @@ local function StyleSilverDragonPopup(popup, module)
 		S:Proxy("HandleButton", popup.lootIcon)
 		popup.lootIcon.texture:SetAtlas("VignetteLoot")
 		popup.lootIcon:HookScript("OnClick", function()
-			RunNextFrame(function()
-				if popup.lootIcon.window then
-					StyleSilverDragonLootWindow(popup.lootIcon.window)
-				end
+			F.WaitFor(function()
+				return popup.lootIcon and popup.lootIcon.window and true or false
+			end, function()
+				StyleSilverDragonLootWindow(popup.lootIcon.window)
 			end)
 		end)
 	end
@@ -260,24 +258,6 @@ local function StyleSilverDragonHistoryWindow(frame, collapseButtonStatus)
 	end
 end
 
-local function LayoutSilverDragonCompact(popup)
-	popup:Size(240, 50)
-	popup.model:Hide()
-
-	popup.title:Point("TOPLEFT", popup, "TOPLEFT", 8, -8)
-	popup.title:Point("TOPRIGHT", popup, "TOPRIGHT", -25, -8)
-	popup.status:Point("BOTTOM", 0, 8)
-	popup.status:SetJustifyH("CENTER")
-	popup.source:Point("BOTTOMRIGHT", -8, 4)
-
-	popup.raidIcon:Point("BOTTOM", popup.title, "TOP", 0, 2)
-	popup.lootIcon:Point("BOTTOMLEFT", 4, 4)
-	popup.lootIcon:Size(20, 20)
-
-	popup.dead:SetAllPoints(popup)
-	popup.shine.animIn.translate:SetOffset(180, 0)
-end
-
 local function ConfigureSilverDragonPopup(popup, config, module)
 	-- Set background color
 	local r, g, b, a = unpack(config.background)
@@ -352,10 +332,12 @@ local function SetupSilverDragonOverlay(silverDragon)
 		return
 	end
 
-	hooksecurefunc(module, "ShowTooltip", function(module)
-		if module.lootwindow then
-			StyleSilverDragonLootWindow(module.lootwindow)
-		end
+	hooksecurefunc(module, "ShowTooltip", function(overlayModule)
+		F.WaitFor(function()
+			return overlayModule.lootwindow and true or false
+		end, function()
+			StyleSilverDragonLootWindow(overlayModule.lootwindow)
+		end)
 	end)
 
 	if module.tooltip then
@@ -411,9 +393,9 @@ local function SetupSilverDragonHistory(silverDragon)
 	end
 
 	if module.ShowWindow then
-		hooksecurefunc(module, "ShowWindow", function(module)
-			if module.window then
-				StyleSilverDragonHistoryWindow(module.window, module.db.collapsed)
+		hooksecurefunc(module, "ShowWindow", function(historyModule)
+			if historyModule.window then
+				StyleSilverDragonHistoryWindow(historyModule.window, historyModule.db.collapsed)
 			end
 		end)
 	end

@@ -1,14 +1,17 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W ---@type WindTools
+local F ---@class Functions
+local E ---@type ElvUI
+W, F, E = unpack((select(2, ...)))
 local LSM = E.Libs.LSM
 
 local _G = _G
 local abs = abs
+local coroutine = coroutine
 local format = format
 local min = min
 local pairs = pairs
 local pcall = pcall
 local print = print
-local select = select
 local strfind = strfind
 local strmatch = strmatch
 local tonumber = tonumber
@@ -17,16 +20,13 @@ local tremove = tremove
 local type = type
 local unpack = unpack
 
-local GenerateFlatClosure = GenerateFlatClosure
 local GetClassColor = GetClassColor
-local GetInstanceInfo = GetInstanceInfo
-local RunNextFrame = RunNextFrame
 
---[[
-    从数据库设定字体样式
-    @param {object} text FontString 型对象
-    @param {table} db 字体样式数据库
-]]
+---@cast F Functions
+
+---Set font style from database settings
+---@param text FontString The FontString object to modify
+---@param db table Font style database containing name, size, and style
 function F.SetFontWithDB(text, db)
 	if not text or not text.GetFont then
 		F.Developer.LogDebug("Functions.SetFontWithDB: text not found")
@@ -43,11 +43,9 @@ function F.SetFontWithDB(text, db)
 	text:FontTemplate(db.name and LSM:Fetch("font", db.name) or fontName, db.size or fontHeight, db.style or "NONE")
 end
 
---[[
-    从数据库设定字体颜色
-    @param {object} text FontString 型对象
-    @param {table} db 字体颜色数据库
-]]
+---Set font color from database settings
+---@param text FontString The FontString object to modify
+---@param db table Font color database containing r, g, b, a values
 function F.SetFontColorWithDB(text, db)
 	if not text or not text.GetFont then
 		F.Developer.LogDebug("Functions.SetFontColorWithDB: text not found")
@@ -61,12 +59,10 @@ function F.SetFontColorWithDB(text, db)
 	text:SetTextColor(db.r, db.g, db.b, db.a)
 end
 
---[[
-    更换字体描边为轮廓
-    @param {object} text FontString 型对象
-    @param {string} [font] 字型路径
-    @param {number|string} [size] 字体尺寸或是尺寸变化量字符串
-]]
+---Change font outline style to OUTLINE and remove shadow
+---@param text FontString The FontString object to modify
+---@param font string? Font path or name (optional)
+---@param size number|string? Font size or size change amount as string (optional)
 function F.SetFontOutline(text, font, size)
 	if not text or not text.GetFont then
 		F.Developer.LogDebug("Functions.SetFontOutline: text not found")
@@ -87,11 +83,10 @@ function F.SetFontOutline(text, font, size)
 	text.SetShadowColor = E.noop
 end
 
---[[
-    从数据库创建彩色字符串
-    @param {string} text 文字
-    @param {table} db 字体颜色数据库
-]]
+---Create colored string from database settings
+---@param text string The text to colorize
+---@param db table Color database containing r, g, b values
+---@return string? coloredText The colored string or nil if parameters are invalid
 function F.CreateColorString(text, db)
 	if not text or not type(text) == "string" then
 		F.Developer.LogDebug("Functions.CreateColorString: text not found")
@@ -108,11 +103,10 @@ function F.CreateColorString(text, db)
 	return hex .. text .. "|r"
 end
 
---[[
-    创建职业色字符串
-    @param {string} text 文字
-    @param {string} englishClass 职业名
-]]
+---Create class colored string
+---@param text string The text to colorize
+---@param englishClass string The English class name
+---@return string? coloredText The class colored string or nil if parameters are invalid
 function F.CreateClassColorString(text, englishClass)
 	if not text or not type(text) == "string" then
 		F.Developer.LogDebug("Functions.CreateClassColorString: text not found")
@@ -133,12 +127,10 @@ function F.CreateClassColorString(text, englishClass)
 	return hex .. text .. "|r"
 end
 
---[[
-    更换窗体内部字体描边为轮廓
-    @param {object} frame 窗体
-    @param {string} [font] 字型路径
-    @param {number|string} [size] 字体尺寸或是尺寸变化量字符串
-]]
+---Set font outline for all FontString regions in a frame
+---@param frame Frame The frame containing FontString regions
+---@param font string? Font path or name (optional)
+---@param size number|string? Font size or size change amount as string (optional)
 function F.SetFrameFontOutline(frame, font, size)
 	if not frame or not frame.GetRegions then
 		F.Developer.LogDebug("Functions.SetFrameFontOutline: frame not found")
@@ -146,11 +138,12 @@ function F.SetFrameFontOutline(frame, font, size)
 	end
 	for _, region in pairs({ frame:GetRegions() }) do
 		if region:IsObjectType("FontString") then
-			F.SetFontOutline(region, font, size)
+			F.SetFontOutline(region --[[@as FontString]], font, size)
 		end
 	end
 end
 
+---Print a gradient colored line separator
 function F.PrintGradientLine()
 	local HexToRGB = W.Utilities.Color.HexToRGB
 	local r1, g1, b1 = HexToRGB("f0772f")
@@ -163,10 +156,8 @@ function F.PrintGradientLine()
 	print(gradientLine)
 end
 
---[[
-    打印信息
-    @param {string} text 文本
-]]
+---Print message with WindTools title prefix
+---@param text string? The text to print
 function F.Print(text)
 	if not text then
 		return
@@ -176,10 +167,8 @@ function F.Print(text)
 	print(message)
 end
 
---[[
-    延迟去除全部模块函数钩子
-    @param {table/string} module Ace3 模块或自定义字符串
-]]
+---Delay unhook all hooks from a module
+---@param module table|string Ace3 module object or module name string
 function F.DelayUnhookAll(module)
 	if type(module) == "string" then
 		module = W:GetModule(module)
@@ -196,10 +185,19 @@ function F.DelayUnhookAll(module)
 	end
 end
 
+---Round a number to specified decimal places
+---@param number number The number to round
+---@param decimals number Number of decimal places
+---@return string roundedNumber The rounded number as string
 function F.Round(number, decimals)
 	return format(format("%%.%df", decimals), number)
 end
 
+---Set callback with retry mechanism
+---@param callback function The callback function to execute with results
+---@param target function The target function to call
+---@param times number? Current retry count (internal use)
+---@param ... any Arguments to pass to target function
 function F.SetCallback(callback, target, times, ...)
 	times = times or 0
 	if times >= 10 then
@@ -220,7 +218,11 @@ function F.SetCallback(callback, target, times, ...)
 end
 
 do
+	---@type string Pattern to extract item level from tooltip text
 	local pattern = gsub(ITEM_LEVEL, "%%d", "(%%d+)")
+	---Get real item level from item link by scanning tooltip
+	---@param link string The item link
+	---@return string? itemLevel The item level or nil if not found
 	function F.GetRealItemLevelByLink(link)
 		E.ScanTooltip:SetOwner(_G.UIParent, "ANCHOR_NONE")
 		E.ScanTooltip:ClearLines()
@@ -240,6 +242,8 @@ do
 end
 
 do
+	---Color configuration for progress bar
+	---@type table
 	local color = {
 		start = {
 			r = 1.000,
@@ -253,6 +257,9 @@ do
 		},
 	}
 
+	---Get color based on progress value (0.0 to 1.0)
+	---@param progress number Progress value between 0 and 1
+	---@return table color Color table with r, g, b values
 	function F.GetProgressColor(progress)
 		local r = (color.complete.r - color.start.r) * progress + color.start.r
 		local g = (color.complete.g - color.start.g) * progress + color.start.g
@@ -268,11 +275,15 @@ do
 	end
 end
 
+---Set vertex color for texture from database settings
+---@param tex Texture The texture object to modify
+---@param db table Color database containing r, g, b, a values
 function F.SetVertexColorWithDB(tex, db)
 	if not tex or not tex.GetVertexColor then
 		F.Developer.LogDebug("Functions.SetVertexColorWithDB: No texture to handling")
 		return
 	end
+
 	if not db or type(db) ~= "table" then
 		F.Developer.LogDebug("Functions.SetVertexColorWithDB: No texture color database")
 		return
@@ -281,28 +292,24 @@ function F.SetVertexColorWithDB(tex, db)
 	tex:SetVertexColor(db.r, db.g, db.b, db.a)
 end
 
+---Create WindTools styled gradient text
+---@param text string The text to apply gradient to
+---@return string gradientText The gradient styled text
 function F.GetWindStyleText(text)
 	return E:TextGradient(text, 0.32941, 0.52157, 0.93333, 0.29020, 0.70980, 0.89412, 0.25882, 0.84314, 0.86667)
 end
 
-function F.In(val, tbl)
-	if not val or not tbl or type(tbl) ~= "table" then
-		return false
-	end
-
-	for _, v in pairs(tbl) do
-		if v == val then
-			return true
-		end
-	end
-
-	return false
-end
-
+---Check if value is NaN (Not a Number)
+---@param val any The value to check
+---@return boolean isNaN True if value is NaN
 function F.IsNaN(val)
 	return tostring(val) == tostring(0 / 0)
 end
 
+---Return value or default if value is nil or NaN
+---@param val any The value to check
+---@param default any The default value to return if val is invalid
+---@return any result The original value or default
 function F.Or(val, default)
 	if not val or F.IsNaN(val) then
 		return default
@@ -310,56 +317,108 @@ function F.Or(val, default)
 	return val
 end
 
-function F.DelvesEventFix(original, func)
-	local isWaiting = false
+---@type table<any, table> Throttle states storage
+local throttleStates = {}
 
-	return function(...)
-		local difficulty = select(3, GetInstanceInfo())
-		if not difficulty or difficulty ~= 208 then
-			return original(...)
-		end
+---Throttle function execution to prevent excessive calls
+---@param duration number Duration in seconds to throttle
+---@param key any? Unique key for throttling (optional, defaults to function)
+---@param func function The function to throttle
+---@param ... any Arguments to pass to the function
+function F.Throttle(duration, key, func, ...)
+	if type(duration) ~= "number" or duration <= 0 then
+		F.Developer.ThrowError("Invalid duration for F.Throttle: must be a positive number")
+	end
 
-		if isWaiting then
+	if type(func) ~= "function" then
+		F.Developer.ThrowError("Invalid function for F.Throttle: third argument must be a function")
+	end
+
+	local finalKey = key ~= nil and key or func
+	local state = throttleStates[finalKey]
+
+	if not state then
+		state = {
+			isThrottling = false,
+			timer = nil,
+			lastArgs = { ... },
+		}
+		throttleStates[finalKey] = state
+	else
+		state.lastArgs = { ... }
+
+		if state.isThrottling then
 			return
 		end
-
-		local f = GenerateFlatClosure(original, ...)
-
-		RunNextFrame(function()
-			if not isWaiting then
-				isWaiting = true
-				E:Delay(3, function()
-					f()
-					isWaiting = false
-				end)
-			end
-		end)
 	end
+
+	state.isThrottling = true
+
+	if state.timer then
+		state.timer:Cancel()
+		state.timer = nil
+	end
+
+	state.timer = E:Delay(duration, function()
+		func(unpack(state.lastArgs))
+		state.isThrottling = false
+		state.timer = nil
+	end)
 end
 
-function F.WaitFor(condition, callback, interval, leftTimes)
-	leftTimes = (leftTimes or 10) - 1
+---Wait for condition to be true, then execute callback
+---@param condition function Function that returns boolean when condition is met
+---@param callback function Function to execute when condition is true
+---@param interval number? Check interval in seconds (default: 0.1)
+---@param maxTimes number? Maximum number of checks (default: 10)
+function F.WaitFor(condition, callback, interval, maxTimes)
 	interval = interval or 0.1
+	maxTimes = maxTimes or 10
 
-	if condition() then
-		callback()
-		return
+	local co = coroutine.create(function()
+		local leftTimes = maxTimes
+
+		while leftTimes > 0 do
+			if condition() then
+				callback()
+				return
+			end
+
+			leftTimes = leftTimes - 1
+			if leftTimes <= 0 then
+				break
+			end
+
+			coroutine.yield(interval)
+		end
+	end)
+
+	local function resumeCoroutine()
+		local success, delay = coroutine.resume(co)
+		if not success then
+			F.Developer.ThrowError("WaitFor coroutine error:", tostring(delay))
+			return
+		end
+		if coroutine.status(co) ~= "dead" then
+			E:Delay(delay, resumeCoroutine)
+		end
 	end
 
-	if leftTimes and leftTimes <= 0 then
-		return
-	end
-
-	E:Delay(interval, F.WaitFor, condition, callback, interval, leftTimes)
+	resumeCoroutine()
 end
 
-function F.MoveFrameWithOffset(frame, x, y)
+---Move frame by offset while preserving all anchor points
+---@param frame any The frame to move
+---@param x number X offset to apply
+---@param y number Y offset to apply
+function F.Move(frame, x, y)
 	if not frame or not frame.ClearAllPoints then
 		return
 	end
 
 	local setPoint = frame.__SetPoint or frame.SetPoint
 
+	---@type table[] Store all current anchor points
 	local pointsData = {}
 
 	for i = 1, frame:GetNumPoints() do
@@ -373,4 +432,65 @@ function F.MoveFrameWithOffset(frame, x, y)
 		local point, relativeTo, relativePoint, xOfs, yOfs = unpack(data)
 		setPoint(frame, point, relativeTo, relativePoint, xOfs + x, yOfs + y)
 	end
+end
+
+---Check if two numbers are approximately equal
+---@param a number? First number
+---@param b number? Second number
+---@param allowance number? Allowed difference (default: 0.025)
+---@return boolean equal True if numbers are approximately equal
+function F.IsAlmost(a, b, allowance)
+	allowance = allowance or 0.025
+	if a == nil and b ~= nil or a ~= nil and b == nil then
+		return false
+	end
+
+	if a == nil and b == nil then
+		return true
+	end
+
+	return abs(a - b) < 0.025
+end
+
+---Internalizes a method by creating a backup copy with a double underscore prefix.
+---This function is commonly used to preserve original method implementations before
+---overriding them with custom behavior. The original method is stored as "__methodName"
+---and can optionally be replaced with a no-operation function.
+---@param frame any The frame object that contains the method to be internalized
+---@param methodKey any The name of the method to create an internal backup for
+---@param override boolean? If true, replaces the original method with E.noop function
+function F.InternalizeMethod(frame, methodKey, override)
+	local internalMethodKey = "__" .. methodKey
+	if frame[internalMethodKey] or not frame[methodKey] then
+		return
+	end
+
+	frame[internalMethodKey] = frame[methodKey]
+	if override then
+		frame[methodKey] = E.noop
+	end
+end
+
+--- Checks if a method has been internalized on a frame object
+--- @param frame table|nil The frame object to check for the internalized method
+--- @param methodKey string The name of the method to check for internalization
+--- @return boolean True if the frame has an internalized version of the method, false otherwise
+function F.IsMethodInternalized(frame, methodKey)
+	local internalMethodKey = "__" .. methodKey
+	return frame and frame[internalMethodKey] ~= nil or false
+end
+
+---Safely calls a method on a frame object, with fallback support for internal method variants.
+---This function first attempts to call an internal version of the method (prefixed with "__"),
+---and if that doesn't exist, falls back to calling the standard method name.
+---@param frame any The frame object that contains the method to be called
+---@param methodKey string The name of the method to call (without any prefixes)
+---@param ... any Variable arguments that will be passed to the called method
+function F.CallMethod(frame, methodKey, ...)
+	local internalMethodKey = "__" .. methodKey
+	if frame[internalMethodKey] then
+		return frame[internalMethodKey](frame, ...)
+	end
+
+	return frame[methodKey](frame, ...)
 end

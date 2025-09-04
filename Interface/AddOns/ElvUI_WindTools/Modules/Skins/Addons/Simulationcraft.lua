@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 
@@ -14,10 +14,13 @@ function S:Simulationcraft_SkinMainFrame()
 	self:CreateShadow(_G.SimcFrame)
 
 	self:Proxy("HandleButton", _G.SimcFrameButton)
+	self:Proxy("HandleCheckBox", _G.SimcFrame.CheckButton)
 	self:Proxy("HandleScrollBar", _G.SimcScrollFrameScrollBar)
 
 	F.SetFontOutline(_G.SimcFrameButton:GetNormalFontObject())
 	F.SetFontOutline(_G.SimcEditBox)
+	F.SetFontOutline(_G.SimcFrame.CheckButton.Text)
+	F.Move(_G.SimcFrame.CheckButton.Text, 0, -3)
 end
 
 function S:Simulationcraft()

@@ -997,6 +997,31 @@ MEETINGSTONE_CHARACTER_DB = {
 ["time"] = 1756006286,
 ["class"] = 2,
 },
+{
+["role"] = "HEALER",
+["name"] = "Greedblue-布兰卡德",
+["time"] = 1756943282,
+["class"] = 7,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "秋狩月-厄祖玛特",
+["time"] = 1756943282,
+["class"] = 4,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "小奶地皮埃斯-冰风岗",
+["time"] = 1756943282,
+["class"] = 7,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "把酒忆浮年-伊森利恩",
+["time"] = 1756943282,
+["class"] = 8,
+},
 },
 ["3-378-1618-0"] = {
 {
@@ -2066,6 +2091,31 @@ MEETINGSTONE_CHARACTER_DB = {
 ["name"] = "悪無-伊森利恩",
 ["time"] = 1756815588,
 ["class"] = 12,
+},
+{
+["role"] = "HEALER",
+["name"] = "老衲昨晚睡觉-萨尔",
+["time"] = 1756945060,
+["class"] = 11,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "愤怒阿喀琉斯-迅捷微风",
+["time"] = 1756945060,
+["class"] = 6,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "Dawsonjj-死亡之翼",
+["time"] = 1756945060,
+["class"] = 12,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "Infron-巨龙之吼",
+["time"] = 1756945060,
+["class"] = 3,
 },
 },
 ["2-281-1017-0"] = {

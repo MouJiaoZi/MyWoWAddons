@@ -1,4 +1,6 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local P ---@class ProfileDB
+local W, F, E, L, V, G ---@type WindTools, Functions, ElvUI, table, PrivateDB, GlobalDB
+W, F, E, L, V, P, G = unpack((select(2, ...)))
 
 local tinsert = tinsert
 
@@ -1164,6 +1166,7 @@ P.tooltips = {
 		enable = true,
 		title = true,
 		excludeDungeon = true,
+		hideBlizzard = true,
 		mode = "NORMAL",
 		classIconStyle = "flat",
 		template = "{{classIcon:18}} {{specIcon:14,18}} {{classColorStart}}{{className}} ({{specName}}){{classColorEnd}}{{amountStart}} x {{amount}}{{amountEnd}}",
@@ -1223,6 +1226,7 @@ P.misc = {
 			flash = true,
 			interval = 10,
 			alwaysSystemInfo = false,
+			avoidReloadInCombat = true,
 			font = {
 				name = F.GetCompatibleFont("Montserrat"),
 				size = 25,

@@ -1,4 +1,4 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
 local MF = W.Modules.MoveFrames
 local S = W.Modules.Skins
 local ES = E.Skins
@@ -32,14 +32,13 @@ function W:ConstructCompatibilityFrame()
 
 	frame:SetFrameStrata("TOOLTIP")
 	frame:SetFrameLevel(9000)
-
-	if MF and MF.db and MF.db.enable then
-		MF:HandleFrame(frame)
-	end
+	MF:InternalHandle(frame)
 
 	local close = F.Widgets.New("CloseButton", frame)
-	close:SetPoint("TOPRIGHT", frame.backdrop, "TOPRIGHT")
-	close:SetFrameLevel(frame:GetFrameLevel() + 1)
+	if close then
+		close:SetPoint("TOPRIGHT", frame.backdrop, "TOPRIGHT")
+		close:SetFrameLevel(frame:GetFrameLevel() + 1)
+	end
 
 	local title = frame:CreateFontString(nil, "ARTWORK")
 	title:FontTemplate()
@@ -222,14 +221,14 @@ local function GetCheckCompatibilityFunction(targetAddonName, targetAddonLocales
 				module1 = myModuleName,
 				plugin1 = W.Title,
 				func1 = function()
-					myTable[myKey] = true
-					targetTable[targetKey] = false
+					---@diagnostic disable-next-line: need-check-nil
+					myTable[myKey], targetTable[targetKey] = true, false
 				end,
 				module2 = targetAddonModuleName,
 				plugin2 = targetAddonLocales,
 				func2 = function()
-					myTable[myKey] = false
-					targetTable[targetKey] = true
+					---@diagnostic disable-next-line: need-check-nil
+					myTable[myKey], targetTable[targetKey] = false, true
 				end,
 			})
 		end

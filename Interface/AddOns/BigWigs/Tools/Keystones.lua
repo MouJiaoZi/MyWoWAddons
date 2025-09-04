@@ -612,7 +612,7 @@ local function CreateCell()
 		cell:SetSize(20, 20)
 		cell:SetScript("OnEnter", OnEnterShowTooltip)
 		cell:SetScript("OnLeave", GameTooltip_Hide)
-		cell:RegisterForClicks("AnyDown")
+		cell:RegisterForClicks("AnyDown", "AnyUp")
 
 		cell.text = cell:CreateFontString(nil, nil, "GameFontNormal")
 		cell.text:SetAllPoints(cell)
@@ -691,7 +691,7 @@ do
 			button:SetSize(90, 48)
 			button:SetScript("OnEnter", OnEnter)
 			button:SetScript("OnLeave", GameTooltip_Hide)
-			button:RegisterForClicks("AnyDown")
+			button:RegisterForClicks("AnyDown", "AnyUp")
 			button:SetHitRectInsets(-52, 0, 0, 0) -- Allow clicking the icon to work
 
 			local text = button:CreateFontString(nil, nil, "GameFontNormal")
@@ -804,7 +804,15 @@ do
 		local HasSlottedKeystone, SlotKeystone = C_ChallengeMode.HasSlottedKeystone, C_ChallengeMode.SlotKeystone
 		local GetOwnedKeystoneMapID = C_MythicPlus.GetOwnedKeystoneMapID
 		local GetContainerNumSlots, GetContainerItemLink, PickupContainerItem = C_Container.GetContainerNumSlots, C_Container.GetContainerItemLink, C_Container.PickupContainerItem
+		local text
 		tab1:SetScript("OnEvent", function()
+			if not text then
+				text = ChallengesKeystoneFrame:CreateFontString(nil, nil, "Fancy14Font")
+				text:SetPoint("BOTTOM", ChallengesKeystoneFrame, "BOTTOM", 0, 180)
+				text:SetSize(300, 30)
+				text:SetJustifyH("CENTER")
+			end
+			text:SetText("")
 			if db.profile.autoSlotKeystone and not HasSlottedKeystone() then
 				local _, _, _, _, _, _, _, instanceID = BigWigsLoader.GetInstanceInfo()
 				if GetOwnedKeystoneMapID() == instanceID then
@@ -813,6 +821,7 @@ do
 						for currentSlot = 1, slots do
 							local itemLink = GetContainerItemLink(currentBag, currentSlot)
 							if itemLink and itemLink:find("Hkeystone", nil, true) then
+								text:SetText(L.keystoneAutoSlotFrame)
 								PickupContainerItem(currentBag, currentSlot)
 								SlotKeystone()
 								BigWigsLoader.Print(L.keystoneAutoSlotMessage:format(itemLink))
@@ -1875,7 +1884,7 @@ do
 		db.profile[key] = {r, g, b, a < 0.3 and 0.3 or a}
 		UpdateWidgets()
 	end
-	BigWigsAPI.SetToolOptionsTable("MythicPlus", {
+	BigWigsAPI.RegisterToolOptions("MythicPlus", {
 		type = "group",
 		childGroups = "tab",
 		name = L.keystoneModuleName,

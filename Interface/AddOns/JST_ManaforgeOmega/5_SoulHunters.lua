@@ -288,7 +288,7 @@ G.Encounters[2688] = {
 						frame.marks = {}
 						frame.count = 0
 						
-						frame.dispelTime = {58.0, 34.0, 58.0, 34.0, 39.0, 61.0, 26.0, 40.0, 55.0}
+						frame.dispelTime = {57.0, 35.0, 59.0, 39.0, 35.0, 57.0, 40.0, 34.0, 50.0}
 						
 						frame.text_frame_handover = T.CreateAlertTextShared("bossmod"..frame.config_id.."handover", 2)
 						frame.text_frame_dispeler = T.CreateAlertTextShared("bossmod"..frame.config_id.."dispeler", 1)
@@ -1045,7 +1045,7 @@ G.Encounters[2688] = {
 					category = "BossMod",
 					spellID = 1233093,
 					ficon = "12",
-					name = T.GetIconLink(1233093)..L["撞球位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,8,5,4,3,6")),
+					name = T.GetIconLink(1233093)..L["撞球位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,7,5,4,3,6")),
 					enable_tag = "everyone",
 					points = {hide = true},
 					events = {
@@ -1066,7 +1066,7 @@ G.Encounters[2688] = {
 						frame.affected = {}
 						frame.isWarlockOrShadowPriest = {}
 						frame.isHealer = {}
-						frame.indexToMark = {1, 2, 8, 5, 4, 3, 6}
+						frame.indexToMark = {1, 2, 7, 5, 4, 3, 6}
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						

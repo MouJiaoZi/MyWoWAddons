@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 local pairs = pairs
@@ -61,15 +61,15 @@ function S:WorldMapFrame()
 		end
 
 		if i > 1 then
-			F.MoveFrameWithOffset(tab, 0, -2)
+			F.Move(tab, 0, -2)
 		end
 	end
 
-	if QuestMapFrame.QuestsTab then
-		QuestMapFrame.QuestsTab:ClearAllPoints()
-		QuestMapFrame.QuestsTab.__SetPoint = QuestMapFrame.QuestsTab.SetPoint
-		QuestMapFrame.QuestsTab.SetPoint = E.noop
-		QuestMapFrame.QuestsTab:__SetPoint("TOPLEFT", QuestMapFrame, "TOPRIGHT", 13, -30)
+	local questsTab = QuestMapFrame.QuestsTab
+	if questsTab then
+		questsTab:ClearAllPoints()
+		F.InternalizeMethod(questsTab, "SetPoint", true)
+		F.CallMethod(questsTab, "SetPoint", "TOPLEFT", QuestMapFrame, "TOPRIGHT", 13, -30)
 	end
 end
 

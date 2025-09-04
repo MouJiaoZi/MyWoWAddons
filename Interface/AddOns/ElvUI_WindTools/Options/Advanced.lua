@@ -1,4 +1,4 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
 local options = W.options.advanced.args
 local C = W.Utilities.Color
 
@@ -70,27 +70,6 @@ options.core = {
 				E:StaticPopup_Show("PRIVATE_RL")
 			end,
 		},
-		logLevel = {
-			order = 5,
-			type = "select",
-			name = L["Log Level"],
-			desc = L["Only display log message that the level is higher than you choose."]
-				.. "\n|cffff3860"
-				.. L["Set to 2 if you do not understand the meaning of log level."]
-				.. "|r",
-			get = function(info)
-				return E.global.WT.core.logLevel
-			end,
-			set = function(info, value)
-				E.global.WT.core.logLevel = value
-			end,
-			values = {
-				[1] = "1 - |cffff3860[ERROR]|r",
-				[2] = "2 - |cffffdd57[WARNING]|r",
-				[3] = "3 - |cff209cee[INFO]|r",
-				[4] = "4 - |cff00d1b2[DEBUG]|r",
-			},
-		},
 	},
 }
 
@@ -129,6 +108,76 @@ options.gameFix = {
 				E:StaticPopup_Show("PRIVATE_RL")
 			end,
 			width = "full",
+		},
+	},
+}
+
+options.developer = {
+	order = 3,
+	type = "group",
+	name = L["Developer"],
+	args = {
+		logLevel = {
+			order = 1,
+			type = "select",
+			name = L["Log Level"],
+			desc = L["Only display log message that the level is higher than you choose."]
+				.. "\n|cffff3860"
+				.. L["Set to 2 if you do not understand the meaning of log level."]
+				.. "|r",
+			get = function(info)
+				return E.global.WT.developer.logLevel
+			end,
+			set = function(info, value)
+				E.global.WT.developer.logLevel = value
+			end,
+			values = {
+				[1] = "1 - |cffff3860[ERROR]|r",
+				[2] = "2 - |cffffdd57[WARNING]|r",
+				[3] = "3 - |cff209cee[INFO]|r",
+				[4] = "4 - |cff00d1b2[DEBUG]|r",
+			},
+		},
+		tableAttributeDisplay = {
+			order = 2,
+			type = "group",
+			name = L["Table Attribute Display"],
+			inline = true,
+			get = function(info)
+				return E.global.WT.developer.tableAttributeDisplay[info[#info]]
+			end,
+			set = function(info, value)
+				E.global.WT.developer.tableAttributeDisplay[info[#info]] = value
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+			args = {
+				desc = {
+					order = 1,
+					type = "description",
+					name = L["Modify the debug tool that displays table attributes."],
+				},
+				enable = {
+					order = 2,
+					type = "toggle",
+					name = L["Enable"],
+				},
+				width = {
+					order = 3,
+					type = "range",
+					name = L["Width"],
+					min = 0,
+					max = 2000,
+					step = 10,
+				},
+				height = {
+					order = 4,
+					type = "range",
+					name = L["Height"],
+					min = 0,
+					max = 2000,
+					step = 10,
+				},
+			},
 		},
 	},
 }
@@ -174,7 +223,7 @@ E.PopupDialogs.WINDTOOLS_IMPORT_SETTING = {
 }
 
 options.reset = {
-	order = 3,
+	order = 4,
 	type = "group",
 	name = L["Reset"],
 	args = {
@@ -758,7 +807,6 @@ options.reset = {
 						E:StaticPopup_Show("WINDTOOLS_RESET_MODULE", L["Font"], nil, function()
 							E.private.WT.skins.ime = V.skins.ime
 							E.private.WT.skins.errorMessage = V.skins.errorMessage
-							E.private.WT.skins.rollResult = V.skins.rollResult
 						end)
 					end,
 				},
@@ -968,7 +1016,7 @@ do
 	}
 
 	options.profiles = {
-		order = 4,
+		order = 5,
 		type = "group",
 		name = L["Profiles"],
 		args = {

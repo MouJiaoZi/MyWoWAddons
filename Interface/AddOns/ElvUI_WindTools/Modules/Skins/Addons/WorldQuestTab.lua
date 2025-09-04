@@ -1,7 +1,6 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
-local ES = E.Skins
-local MF = W.Modules.MoveFrames
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
+local MF = W.Modules.MoveFrames ---@type MoveFrames
 
 local _G = _G
 local next = next
@@ -17,22 +16,16 @@ local function isUnofficialVersion()
 	return C_AddOns_GetAddOnMetadata("WorldQuestTab", "IconAtlas") ~= "Worldquest-icon"
 end
 
-local function PositionTabIcons(icon, _, anchor)
-	if anchor then
-		icon:SetPoint("CENTER")
-	end
-end
-
--- Copy from ElvUI WorldMap skin
+-- Modified from ElvUI WorldMap skin
 local function reskinTab(tab)
 	tab:CreateBackdrop()
 	tab:Size(30, 40)
 
 	if tab.Icon then
-		tab.Icon:ClearAllPoints()
-		tab.Icon:SetPoint("CENTER")
-
-		hooksecurefunc(tab.Icon, "SetPoint", PositionTabIcons)
+		F.InternalizeMethod(tab.Icon, "SetPoint", true)
+		F.InternalizeMethod(tab.Icon, "ClearAllPoints", true)
+		F.CallMethod(tab.Icon, "ClearAllPoints")
+		F.CallMethod(tab.Icon, "SetPoint", "CENTER")
 	end
 
 	if tab.Background then
@@ -89,9 +82,9 @@ local function reskinFlightMapContainer(frame)
 	frame:SetTemplate("Transparent")
 	S:CreateShadow(frame)
 
-	frame.__SetPoint = frame.SetPoint
+	F.InternalizeMethod(frame, "SetPoint")
 	hooksecurefunc(frame, "SetPoint", function(self)
-		F.MoveFrameWithOffset(self, 15, 0)
+		F.Move(self, 15, 0)
 	end)
 
 	hooksecurefunc(frame, "SetParent", function(self, parent)
@@ -112,7 +105,7 @@ local function settingsCategory(frame)
 		frame.Highlight:SetAlpha(0)
 		frame.backdrop:SetInside(frame, 10, 5)
 
-		F.MoveFrameWithOffset(frame.Title, 0, -2)
+		F.Move(frame.Title, 0, -2)
 		return
 	end
 
@@ -132,8 +125,8 @@ local function settingsCategory(frame)
 		frame.windSelectedTexture:Hide()
 
 		frame.BGRight:Hide()
-		frame.backdrop:SetPoint("TOPLEFT", frame.BGLeft)
-		frame.backdrop:SetPoint("BOTTOMRIGHT", frame.BGRight)
+		frame.backdrop:Point("TOPLEFT", frame.BGLeft)
+		frame.backdrop:Point("BOTTOMRIGHT", frame.BGRight)
 		hooksecurefunc(frame, "SetExpanded", function(self, expanded)
 			self.windSelectedTexture:SetShown(expanded)
 		end)
@@ -187,11 +180,12 @@ function S:WorldQuestTab()
 
 	self:DisableAddOnSkin("WorldQuestTab")
 
-	if _G.WQT_QuestMapTab then
-		reskinTab(_G.WQT_QuestMapTab)
-		_G.WQT_QuestMapTab.__SetPoint = _G.WQT_QuestMapTab.SetPoint
-		hooksecurefunc(_G.WQT_QuestMapTab, "SetPoint", function()
-			F.MoveFrameWithOffset(_G.WQT_QuestMapTab, 0, -2)
+	local tab = _G.WQT_QuestMapTab
+	if tab then
+		reskinTab(tab)
+		F.InternalizeMethod(tab, "SetPoint")
+		hooksecurefunc(tab, "SetPoint", function()
+			F.Move(tab, 0, -2)
 		end)
 	end
 

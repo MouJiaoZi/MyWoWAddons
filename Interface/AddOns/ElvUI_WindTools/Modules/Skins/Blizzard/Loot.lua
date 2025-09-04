@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local ES = E.Skins
 
 local _G = _G
@@ -29,7 +29,7 @@ function S:LootFrame()
 	_G.GroupLootHistoryFrame.ScrollBox:SetPoint("TOPLEFT", _G.GroupLootHistoryFrame, "TOPLEFT", 6, -90)
 	_G.GroupLootHistoryFrame.ScrollBox:SetPoint("BOTTOMRIGHT", _G.GroupLootHistoryFrame, "BOTTOMRIGHT", -23, 5)
 
-	F.MoveFrameWithOffset(_G.GroupLootHistoryFrame.Timer, 0, -7)
+	F.Move(_G.GroupLootHistoryFrame.Timer, 0, -7)
 end
 
 S:AddCallback("LootFrame")

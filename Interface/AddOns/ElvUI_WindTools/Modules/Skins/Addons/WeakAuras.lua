@@ -1,166 +1,152 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
-local ES = E.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 local format = format
-local pairs = pairs
-local print = print
 local unpack = unpack
 
 local WeakAuras = _G.WeakAuras
 
-function S:WeakAuras_PrintProfile()
-	local frame = _G.WADebugEditBox.Background
-
-	if frame and not frame.__windSkin then
-		self:Proxy("HandleScrollBar", _G.WADebugEditBoxScrollFrameScrollBar)
-
-		frame:StripTextures()
-		frame:SetTemplate("Transparent")
-		self:CreateShadow(frame)
-
-		for _, child in pairs({ frame:GetChildren() }) do
-			if child:GetNumRegions() == 3 then
-				child:StripTextures()
-				local subChild = child:GetChildren()
-				subChild:ClearAllPoints()
-				subChild:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 3, 7)
-				self:Proxy("HandleCloseButton", subChild)
-			end
-		end
-
-		frame.__windSkin = true
+---Create backdrop and shadow for a frame with common settings
+---@param frame Frame The frame to apply backdrop and shadow to
+---@param useDefaultTemplate boolean? Whether to use default template
+local function CreateBackdropAndShadow(frame, useDefaultTemplate)
+	if not frame or frame.__windBackdrop then
+		return
 	end
+
+	frame:CreateBackdrop(not useDefaultTemplate and "Transparent")
+
+	if E.private.WT.skins.weakAurasShadow then
+		S:CreateBackdropShadow(frame, true)
+	end
+
+	frame.backdrop.Center:StripTextures()
+	frame.__windBackdrop = true
 end
 
-function S:ProfilingWindow_UpdateButtons(frame)
-	-- 下方 4 个按钮
-	for _, button in pairs({ frame.statsFrame:GetChildren() }) do
-		self:Proxy("HandleButton", button)
+---Apply ElvUI texture coordinates to an icon
+---@param icon Texture The icon texture to apply coordinates to
+local function ApplyElvUITexCoords(icon)
+	if not icon then
+		return
 	end
 
-	-- 顶部 2 个按钮
-	for _, button in pairs({ frame.titleFrame:GetChildren() }) do
-		if not button.__windSkin and button.GetNormalTexture then
-			local normalTextureID = button:GetNormalTexture():GetTexture()
-			if normalTextureID == 252125 then
-				button:StripTextures()
-				button.SetNormalTexture = E.noop
-				button.SetPushedTexture = E.noop
-				button.SetHighlightTexture = E.noop
+	F.InternalizeMethod(icon, "SetTexCoord")
+	F.CallMethod(icon, "SetTexCoord", unpack(E.TexCoords))
+end
 
-				button.Texture = button:CreateTexture(nil, "OVERLAY")
-				button.Texture:SetPoint("CENTER")
-				button.Texture:SetTexture(E.Media.Textures.ArrowUp)
-				button.Texture:SetSize(14, 14)
+---Handle complex texture coordinate calculations for icons
+---@param icon Texture The icon texture to handle
+local function HandleComplexTexCoords(icon)
+	if not icon then
+		return
+	end
 
-				button:HookScript("OnEnter", function(self)
-					if self.Texture then
-						self.Texture:SetVertexColor(unpack(E.media.rgbvaluecolor))
-					end
-				end)
+	F.InternalizeMethod(icon, "SetTexCoord")
+	icon.SetTexCoord = function(self, ULx, ULy, LLx, LLy, URx, URy, LRx, LRy)
+		local cLeft, cRight, cTop, cDown
+		if URx and URy and LRx and LRy then
+			cLeft, cRight, cTop, cDown = ULx, LRx, ULy, LRy
+		else
+			cLeft, cRight, cTop, cDown = ULx, ULy, LLx, LLy
+		end
 
-				button:HookScript("OnLeave", function(self)
-					if self.Texture then
-						self.Texture:SetVertexColor(1, 1, 1)
-					end
-				end)
-
-				button:HookScript("OnClick", function(self)
-					self.Texture:Show("")
-					if self:GetParent():GetParent().minimized then
-						button.Texture:SetRotation(ES.ArrowRotation["down"])
-					else
-						button.Texture:SetRotation(ES.ArrowRotation["up"])
-					end
-				end)
-
-				button:SetHitRectInsets(6, 6, 7, 7)
-				button:SetPoint("TOPRIGHT", frame.titleFrame, "TOPRIGHT", -19, 3)
+		if cLeft == 0 or cRight == 0 or cTop == 0 or cDown == 0 then
+			local width, height = cRight - cLeft, cDown - cTop
+			if width == height then
+				F.CallMethod(self, "SetTexCoord", unpack(E.TexCoords))
 			else
-				self:Proxy("HandleCloseButton", button)
-				button:ClearAllPoints()
-				button:SetPoint("TOPRIGHT", frame.titleFrame, "TOPRIGHT", 3, 1)
+				F.CallMethod(self, "SetTexCoord", E:CropRatio(width, height))
 			end
-
-			button.__windSkin = true
+		else
+			F.CallMethod(self, "SetTexCoord", cLeft, cRight, cTop, cDown)
 		end
 	end
+
+	icon:SetTexCoord(icon:GetTexCoord())
 end
 
-local function Skin_WeakAuras(f, fType)
-	if fType == "icon" then
-		if not f.__windSkin then
-			f.icon.SetTexCoordOld = f.icon.SetTexCoord
-			f.icon.SetTexCoord = function(self, ULx, ULy, LLx, LLy, URx, URy, LRx, LRy)
-				local cLeft, cRight, cTop, cDown
-				if URx and URy and LRx and LRy then
-					cLeft, cRight, cTop, cDown = ULx, LRx, ULy, LRy
-				else
-					cLeft, cRight, cTop, cDown = ULx, ULy, LLx, LLy
-				end
+---Sync backdrop alpha with icon alpha
+---@param frame Frame The frame containing the backdrop
+---@param icon Texture The icon to sync with
+local function SyncBackdropAlpha(frame, icon)
+	if not frame.backdrop or not icon then
+		return
+	end
 
-				local left, right, top, down = unpack(E.TexCoords)
-				if cLeft == 0 or cRight == 0 or cTop == 0 or cDown == 0 then
-					local width, height = cRight - cLeft, cDown - cTop
-					if width == height then
-						self:SetTexCoordOld(left, right, top, down)
-					elseif width > height then
-						self:SetTexCoordOld(left, right, top + cTop * (right - left), top + cDown * (right - left))
-					else
-						self:SetTexCoordOld(left + cLeft * (down - top), left + cRight * (down - top), top, down)
-					end
-				else
-					self:SetTexCoordOld(cLeft, cRight, cTop, cDown)
-				end
-			end
-			f.icon:SetTexCoord(f.icon:GetTexCoord())
-			f:CreateBackdrop()
-			if E.private.WT.skins.weakAurasShadow then
-				S:CreateBackdropShadow(f, true)
-			end
-			f.backdrop.Center:StripTextures()
-			f.backdrop:SetFrameLevel(0)
-			hooksecurefunc(f, "SetFrameStrata", function()
-				f.backdrop:SetFrameLevel(0)
-			end)
-			f.backdrop.icon = f.icon
-			f.backdrop:HookScript("OnUpdate", function(self)
-				self:SetAlpha(self.icon:GetAlpha())
-				if self.shadow then
-					self.shadow:SetAlpha(self.icon:GetAlpha())
-				end
-			end)
-
-			f.__windSkin = true
+	frame.backdrop.icon = icon
+	frame.backdrop:HookScript("OnUpdate", function(self)
+		self:SetAlpha(self.icon:GetAlpha())
+		if self.shadow then
+			self.shadow:SetAlpha(self.icon:GetAlpha())
 		end
-	elseif fType == "aurabar" then
-		if not f.__windSkin then
-			f:CreateBackdrop()
-			f.backdrop.Center:StripTextures()
-			f.backdrop:SetFrameLevel(0)
-			hooksecurefunc(f, "SetFrameStrata", function()
-				f.backdrop:SetFrameLevel(0)
-			end)
-			if E.private.WT.skins.weakAurasShadow then
-				S:CreateBackdropShadow(f, true)
-			end
-			f.icon:SetTexCoord(unpack(E.TexCoords))
-			f.icon.SetTexCoord = E.noop
-			f.iconFrame:SetAllPoints(f.icon)
-			f.iconFrame:CreateBackdrop()
-			hooksecurefunc(f.icon, "Hide", function()
-				f.iconFrame.backdrop:SetShown(false)
-			end)
+	end)
+end
 
-			hooksecurefunc(f.icon, "Show", function()
-				f.iconFrame.backdrop:SetShown(true)
-			end)
+---Skin an icon region
+---@param frame Frame The icon frame to skin
+local function SkinIconRegion(frame)
+	if not frame or frame.__windSkin then
+		return
+	end
 
-			f.__windSkin = true
-		end
+	if frame.icon then
+		HandleComplexTexCoords(frame.icon)
+	end
+
+	CreateBackdropAndShadow(frame)
+
+	if frame.icon then
+		SyncBackdropAlpha(frame, frame.icon)
+	end
+
+	frame.__windSkin = true
+end
+
+---Skin an aurabar region
+---@param frame Frame The aurabar frame to skin
+local function SkinAurabarRegion(frame)
+	if not frame or frame.__windSkin then
+		return
+	end
+
+	CreateBackdropAndShadow(frame)
+
+	if frame.icon then
+		ApplyElvUITexCoords(frame.icon)
+	end
+
+	if frame.iconFrame then
+		frame.iconFrame:SetAllPoints(frame.icon)
+		frame.iconFrame:CreateBackdrop()
+
+		-- Sync icon frame backdrop visibility with icon
+		hooksecurefunc(frame.icon, "Hide", function()
+			frame.iconFrame.backdrop:SetShown(false)
+		end)
+
+		hooksecurefunc(frame.icon, "Show", function()
+			frame.iconFrame.backdrop:SetShown(true)
+		end)
+	end
+
+	frame.__windSkin = true
+end
+
+---Main function to skin WeakAuras regions
+---@param frame Frame The frame to skin
+---@param regionType string The type of region ("icon", "aurabar", etc.)
+local function SkinWeakAuras(frame, regionType)
+	if not frame or frame.__windSkin then
+		return
+	end
+
+	if regionType == "icon" then
+		SkinIconRegion(frame)
+	elseif regionType == "aurabar" then
+		SkinAurabarRegion(frame)
 	end
 end
 
@@ -169,45 +155,25 @@ function S:WeakAuras()
 		return
 	end
 
-	-- Only works for WeakAurasPatched
 	if not WeakAuras or not WeakAuras.Private then
 		local alertMessage = format(
-			"%s: %s %s %s",
-			W.Title,
+			"%s %s %s",
 			L["You are using Official WeakAuras, the skin of WeakAuras will not be loaded due to the limitation."],
 			L["If you want to use WeakAuras skin, please install |cffff0000WeakAurasPatched|r (https://wow-ui.net/wap)."],
 			L["You can disable this alert via disabling WeakAuras Skin in Skins - Addons."]
 		)
-		E:Delay(10, print, alertMessage)
+		E:Delay(10, F.Print, alertMessage)
 		return
 	end
 
-	-- Handle the options region type registration
-	if WeakAuras.Private.RegisterRegionOptions then
-		self:RawHook(WeakAuras.Private, "RegisterRegionOptions", "WeakAuras_RegisterRegionOptions")
-	end
-
-	-- from 雨夜独行客@NGA
 	if WeakAuras.Private.SetTextureOrAtlas then
 		hooksecurefunc(WeakAuras.Private, "SetTextureOrAtlas", function(icon)
 			local parent = icon:GetParent()
 			local region = parent.regionType and parent or parent:GetParent()
 			if region and region.regionType then
-				Skin_WeakAuras(region, region.regionType)
+				SkinWeakAuras(region, region.regionType)
 			end
 		end)
-	end
-
-	-- Real Time Profiling Window
-	local profilingWindow = WeakAuras.RealTimeProfilingWindow
-	if profilingWindow then
-		self:CreateShadow(profilingWindow)
-		if profilingWindow.UpdateButtons then
-			self:SecureHook(profilingWindow, "UpdateButtons", "ProfilingWindow_UpdateButtons")
-		end
-		if WeakAuras.PrintProfile then
-			self:SecureHook(WeakAuras, "PrintProfile", "WeakAuras_PrintProfile")
-		end
 	end
 end
 

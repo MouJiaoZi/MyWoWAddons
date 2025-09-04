@@ -1,6 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local LSM = E.Libs.LSM
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local ES = E.Skins
 
 local WS = W:NewModule("WidgetSkins", "AceHook-3.0", "AceEvent-3.0")
@@ -9,7 +8,6 @@ S.Widgets = WS
 local abs = abs
 local pairs = pairs
 local pcall = pcall
-local strlower = strlower
 local type = type
 local wipe = wipe
 

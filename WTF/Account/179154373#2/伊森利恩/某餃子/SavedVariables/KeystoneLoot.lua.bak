@@ -3,8 +3,8 @@ KeystoneLootCharDB = {
 ["selectedRaidItemLevel"] = "myth-1",
 ["selectedSlotId"] = 13,
 ["statHighlightingHasteEnabled"] = false,
-["statHighlightingNoStatsEnabled"] = false,
-["statHighlightingVersatilityEnabled"] = true,
+["selectedDungeonItemLevel"] = "hero-5",
+["selectedClassId"] = 6,
 ["favoriteLoot"] = {
 [392] = {
 [252] = {
@@ -12,10 +12,10 @@ KeystoneLootCharDB = {
 },
 },
 ["dbVersion"] = 3,
-["selectedClassId"] = 6,
+["statHighlightingVersatilityEnabled"] = true,
 ["statHighlightingMasteryEnabled"] = true,
-["selectedSpecId"] = 252,
 ["currentSeason"] = 15,
-["selectedDungeonItemLevel"] = "hero-5",
+["selectedSpecId"] = 252,
+["statHighlightingNoStatsEnabled"] = false,
 ["statHighlightingCritEnabled"] = true,
 }

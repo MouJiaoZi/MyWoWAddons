@@ -1,8 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local FL = W:NewModule("FastLoot", "AceEvent-3.0")
-
-local _G = _G
-local tonumber = tonumber
 
 local GetNumLootItems = GetNumLootItems
 local GetTime = GetTime
@@ -18,7 +15,7 @@ local NUM_BAG_SLOTS = NUM_BAG_SLOTS
 function FL:GetFreeSlots()
 	local numFreeSlots = 0
 	for bag = 0, NUM_BAG_SLOTS do
-		numFreeSlots = numFreeSlots + tonumber((C_Container_GetContainerNumFreeSlots(bag))) or 0
+		numFreeSlots = numFreeSlots + (C_Container_GetContainerNumFreeSlots(bag) or 0)
 	end
 	return numFreeSlots
 end

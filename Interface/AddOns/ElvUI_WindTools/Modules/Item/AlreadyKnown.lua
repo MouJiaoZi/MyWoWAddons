@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local AK = W:NewModule("AlreadyKnown", "AceEvent-3.0", "AceHook-3.0")
 
 local _G = _G
@@ -33,8 +33,8 @@ local Enum_ItemClass_Battlepet = Enum.ItemClass.Battlepet
 local BUYBACK_ITEMS_PER_PAGE = BUYBACK_ITEMS_PER_PAGE
 local COLLECTED = COLLECTED
 local ITEM_SPELL_KNOWN = ITEM_SPELL_KNOWN
-local MAX_GUILDBANK_SLOTS_PER_TAB = MAX_GUILDBANK_SLOTS_PER_TAB or 98
-local NUM_SLOTS_PER_GUILDBANK_GROUP = NUM_SLOTS_PER_GUILDBANK_GROUP or 14
+local MAX_GUILDBANK_SLOTS_PER_TAB = 98
+local NUM_SLOTS_PER_GUILDBANK_GROUP = 14
 
 local knowables = {
 	[Enum.ItemClass.Consumable] = true,
@@ -65,13 +65,14 @@ local function IsAlreadyKnown(link, index)
 	if linkType == "battlepet" then
 		return isPetCollected(linkID)
 	elseif linkType == "item" then
-		local name, _, _, level, _, _, _, _, _, _, _, itemClassID = C_Item_GetItemInfo(link)
+		local name, _, _, _, _, _, _, _, _, _, _, itemClassID = C_Item_GetItemInfo(link)
 		if not name then
 			return
 		end
 
 		if itemClassID == Enum_ItemClass_Battlepet and index then
-			local data = C_TooltipInfo_GetGuildBankItem(GetCurrentGuildBankTab(), index)
+			local tab = GetCurrentGuildBankTab() --[[@as number]]
+			local data = C_TooltipInfo_GetGuildBankItem(tab, index)
 			if data then
 				return data.battlePetSpeciesID and isPetCollected(data.battlePetSpeciesID)
 			end
@@ -87,7 +88,6 @@ local function IsAlreadyKnown(link, index)
 			if data then
 				for i = 1, #data.lines do
 					local lineData = data.lines[i]
-					local argVal = lineData and lineData.args
 					local text = lineData and lineData.leftText
 					if text then
 						if strfind(text, COLLECTED) or text == ITEM_SPELL_KNOWN then
@@ -171,7 +171,7 @@ function AK:GuildBank(frame)
 		return
 	end
 
-	local tab = GetCurrentGuildBankTab()
+	local tab = GetCurrentGuildBankTab() --[[@as number]]
 	for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
 		local index = mod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)
 		if index == 0 then
@@ -259,7 +259,7 @@ end
 
 function AK:Initialize()
 	if C_AddOns_IsAddOnLoaded("AlreadyKnown") then
-		self.StopRunning = "AlreadyKnonwn"
+		self.StopRunning = "AlreadyKnown"
 		return
 	end
 
@@ -276,7 +276,7 @@ end
 
 function AK:ToggleSetting()
 	if C_AddOns_IsAddOnLoaded("AlreadyKnown") then
-		self.StopRunning = "AlreadyKnonwn"
+		self.StopRunning = "AlreadyKnown"
 		return
 	end
 

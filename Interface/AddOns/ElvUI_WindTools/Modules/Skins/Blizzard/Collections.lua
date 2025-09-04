@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 
@@ -13,7 +13,11 @@ function S:Blizzard_Collections()
 	self:CreateShadow(_G.WardrobeOutfitEditFrame)
 
 	for i = 1, 6 do
-		self:ReskinTab(_G["CollectionsJournalTab" .. i])
+		local tab = _G["CollectionsJournalTab" .. i]
+		if tab then
+			tab:SetPushedTextOffset(0, 0)
+			self:ReskinTab(tab)
+		end
 	end
 end
 

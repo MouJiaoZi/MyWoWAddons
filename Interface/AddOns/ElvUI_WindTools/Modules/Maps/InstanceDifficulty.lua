@@ -152,8 +152,6 @@ function ID:ADDON_LOADED(_, addon)
 	end
 end
 
-ID.GROUP_ROSTER_UPDATE = F.DelvesEventFix(ID.UpdateFrame)
-
 function ID:Initialize()
 	self.db = E.private.WT.maps.instanceDifficulty
 
@@ -169,10 +167,10 @@ function ID:Initialize()
 	self:RegisterEvent("PLAYER_DIFFICULTY_CHANGED", "UpdateFrame")
 	self:RegisterEvent("GUILD_PARTY_STATE_UPDATED", "UpdateFrame")
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA", "UpdateFrame")
-	self:RegisterEvent("GROUP_ROSTER_UPDATE")
+	self:RegisterEvent("GROUP_ROSTER_UPDATE", "UpdateFrame")
 
 	if C_AddOns_IsAddOnLoaded("Blizzard_Minimap") then
-		self:ADDON_LOADED("ADDON_LOADED", "Blizzard_Minimap")
+		self:ADDON_LOADED(nil, "Blizzard_Minimap")
 	else
 		self:RegisterEvent("ADDON_LOADED")
 	end

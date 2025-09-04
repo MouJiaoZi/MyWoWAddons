@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local TT = E:GetModule("Tooltip")
 
 local _G = _G
@@ -27,7 +27,7 @@ function S:TomCats_HandleTomCatsIcon(icon)
 
 	if not icon.__windSkin then
 		local maskNum = icon.Icon:GetNumMaskTextures()
-		for i = maskNum, 1 do
+		for i = 1, maskNum do
 			icon.Icon:RemoveMaskTexture(icon.Icon:GetMaskTexture(i))
 		end
 

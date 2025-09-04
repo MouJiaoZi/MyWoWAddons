@@ -1,4 +1,6 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...)))
+local F ---@class Functions
+local W, E, V, P ---@type WindTools, ElvUI, ProfileDB, PrivateDB
+W, F, E, V, P = unpack((select(2, ...)))
 local D = E:GetModule("Distributor")
 local LibDeflate = E.Libs.Deflate
 
@@ -6,8 +8,11 @@ local format = format
 local next = next
 local type = type
 
+---@cast F Functions
+
 F.Profiles = {}
 
+---@type table Generated keys configuration for profile data
 local generatedKeys = {
 	profile = {
 		item = {
@@ -20,6 +25,10 @@ local generatedKeys = {
 	private = {},
 }
 
+---@class Functions
+---Generate compressed and encoded string from data
+---@param data table The data to serialize and compress
+---@return string encodedString The compressed and encoded string
 function F.Profiles.GenerateString(data)
 	local exportString = D:Serialize(data)
 	local compressedData = LibDeflate:CompressDeflate(exportString, LibDeflate.compressLevel)
@@ -27,6 +36,10 @@ function F.Profiles.GenerateString(data)
 	return encodedData
 end
 
+---@class Functions
+---Extract and deserialize data from encoded string
+---@param dataString string The encoded data string
+---@return table? data The deserialized data or nil if failed
 function F.Profiles.ExactString(dataString)
 	local decodedData = LibDeflate:DecodeForPrint(dataString)
 	local decompressed = LibDeflate:DecompressDeflate(decodedData)
@@ -40,13 +53,18 @@ function F.Profiles.ExactString(dataString)
 	local success, data = D:Deserialize(decompressed)
 
 	if not success then
-		F.Print("Error deserializing:", data)
+		F.Print("Error deserializing: " .. data)
 		return
 	end
 
 	return data
 end
 
+---@class Functions
+---Get output string for profile and private data export
+---@param profile boolean Include profile data in export
+---@param private boolean Include private data in export
+---@return string outputString The combined export string
 function F.Profiles.GetOutputString(profile, private)
 	local profileData = {}
 	if profile then
@@ -63,6 +81,9 @@ function F.Profiles.GetOutputString(profile, private)
 	return F.Profiles.GenerateString(profileData) .. "{}" .. F.Profiles.GenerateString(privateData)
 end
 
+---@class Functions
+---Import profile and private data from string
+---@param importString string The import string containing profile and private data
 function F.Profiles.ImportByString(importString)
 	local profileString, privateString = E:SplitString(importString, "{}")
 	if not profileString or not privateString then

@@ -63,7 +63,7 @@ event_frame:SetScript("OnEvent", function(self, event, ...)
 			
 			local frame = G.BossModFrames[1233416]
 			
-			if frame.spawnGUIDs[GUID] or frame.breakGUIDs[GUID] then
+			if frame.spawnGUIDs[GUID] or frame.spawnTankGUIDs[GUID] or frame.breakGUIDs[GUID] then
 				frame:BarDisplayAll()
 			end
 		end
@@ -225,7 +225,8 @@ G.Encounters[2747] = {
 							[1247424] = { -- 虚无吞噬
 								unit = "player",
 								aura_type = "HARMFUL",
-								color = T.GetSpellColor(1247424),
+								color = {.47, .72, 1},
+								
 							},
 						}
 						T.InitUnitAuraCircleTimers(frame)
@@ -418,6 +419,7 @@ G.Encounters[2747] = {
 						frame.breakOrder = {}
 						
 						frame.spawnGUIDs = {}
+						frame.spawnTankGUIDs = {}
 						frame.breakGUIDs = {}
 						frame.spwans_count = 0
 						frame.rotation_count = 0
@@ -506,6 +508,12 @@ G.Encounters[2747] = {
 							bar.players = table.wipe(bar.players)
 							
 							for GUID in pairs(frame.spawnGUIDs) do
+								if GUIDToColumn(GUID) == column then
+									table.insert(bar.players, GUID)
+								end
+							end
+							
+							for GUID in pairs(frame.spawnTankGUIDs) do
 								if GUIDToColumn(GUID) == column then
 									table.insert(bar.players, GUID)
 								end
@@ -615,7 +623,7 @@ G.Encounters[2747] = {
 										else
 											T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 2, info.format_name, L["坦克"]..L["出墙"], T.FormatRaidMark(position)))
 											self.wallAssigned[position] = self.wallAssigned[position] + self.tankSpawnCount
-											self.spawnGUIDs[GUID] = position
+											self.spawnTankGUIDs[GUID] = position
 											T.FireEvent("JST_CUSTOM", frame.config_id)
 										end
 									end
@@ -1045,6 +1053,7 @@ G.Encounters[2747] = {
 							end
 
 							frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
+							frame.spawnTankGUIDs = table.wipe(frame.spawnTankGUIDs)
 							frame.breakGUIDs = table.wipe(frame.breakGUIDs)
 							frame.spwans_count = 0
 							frame.rotation_count = 0							
@@ -1121,7 +1130,7 @@ G.Encounters[2747] = {
 									
 									if isTanking then
 										local GUID = UnitGUID(unit)
-										frame.spawnGUIDs[GUID] = 0
+										frame.spawnTankGUIDs[GUID] = 0
 										T.FireEvent("JST_CUSTOM", frame.config_id)
 										return
 									end
@@ -1187,7 +1196,7 @@ G.Encounters[2747] = {
 									T.FireEvent("JST_CUSTOM", frame.config_id)
 									
 								elseif spellID == 1231871 then -- 震波猛击 (tank spawn)
-									for GUID, assign in pairs(frame.spawnGUIDs) do
+									for GUID, assign in pairs(frame.spawnTankGUIDs) do
 										local column = GUIDToColumn(GUID)
 										if column then
 											frame.wallCounts[column] = frame.wallCounts[column] + frame.tankSpawnCount
@@ -1200,7 +1209,7 @@ G.Encounters[2747] = {
 										end
 									end
 									
-									frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
+									frame.spawnTankGUIDs = table.wipe(frame.spawnTankGUIDs)
 									for column = 1, 6 do
 										frame.wallAssigned[column] = 0
 									end

@@ -1,5 +1,5 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 
@@ -139,12 +139,10 @@ local function UpdateBlock(block)
 
 			local timeBar = widgetFrame.TimerBar
 			if timeBar and not timeBar.__windSkin then
-				timeBar.__SetStatusBarTexture = timeBar.SetStatusBarTexture
+				F.InternalizeMethod(timeBar, "SetStatusBarTexture", true)
 				hooksecurefunc(timeBar, "SetStatusBarTexture", function(frame)
-					if frame.__SetStatusBarTexture then
-						frame:__SetStatusBarTexture(E.media.normTex)
-						frame:SetStatusBarColor(unpack(E.media.rgbvaluecolor))
-					end
+					F.CallMethod(frame, "SetStatusBarTexture", E.media.normTex)
+					frame:SetStatusBarColor(unpack(E.media.rgbvaluecolor))
 				end)
 				timeBar:CreateBackdrop("Transparent")
 				timeBar.__windSkin = true
@@ -164,9 +162,9 @@ local function UpdateBlock(block)
 			if mapID and mapID == 2710 and not widgetFrame.__windSkinMoved then
 				if widgetFrame.Bar and widgetFrame.Label then
 					widgetFrame.Label:Hide()
-					F.MoveFrameWithOffset(widgetFrame, 15, 0)
+					F.Move(widgetFrame, 15, 0)
 				else
-					F.MoveFrameWithOffset(widgetFrame, 10, 0)
+					F.Move(widgetFrame, 10, 0)
 				end
 
 				widgetFrame.__windSkinMoved = true

@@ -466,6 +466,7 @@ G.Encounters[2684] = {
 								unit = "player",
 								aura_type = "HARMFUL",
 								color = {0, 1, 1},
+								sound = "dropnow",
 							},
 						}
 						T.InitUnitAuraCircleTimers(frame)

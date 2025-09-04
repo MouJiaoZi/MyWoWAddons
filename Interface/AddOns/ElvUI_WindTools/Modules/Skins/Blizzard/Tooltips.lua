@@ -1,14 +1,10 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local TT = E:GetModule("Tooltip")
-local S = W.Modules.Skins
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
-local format = format
-local gsub = gsub
 local hooksecurefunc = hooksecurefunc
 local pairs = pairs
-local strfind = strfind
-local strsub = strsub
 
 local function styleIconsInLine(line, text)
 	if not line then
@@ -18,7 +14,7 @@ local function styleIconsInLine(line, text)
 	text = text or line:GetText()
 	local styledText = S:StyleTextureString(text)
 	if styledText and styledText ~= text then
-		(line.__SetText or line.SetText)(line, styledText)
+		F.CallMethod(line, "SetText", styledText)
 	end
 end
 
@@ -34,7 +30,7 @@ local function StyleTooltipWidgetContainer(tt)
 	for frame in tt.widgetContainer.widgetPools:EnumerateActive() do
 		if not frame.__windSkin then
 			if frame.Text then
-				frame.Text.__SetText = frame.Text.SetText
+				F.InternalizeMethod(frame.Text, "SetText")
 				hooksecurefunc(frame.Text, "SetText", styleIconsInLine)
 				F.SetFontOutline(frame.Text)
 				frame.Text:SetText(frame.Text:GetText())

@@ -1,9 +1,7 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
-local next = next
-local MAX_SKILLLINE_TABS = MAX_SKILLLINE_TABS
 
 function S:Blizzard_ProfessionsBook()
 	if not self:CheckDB("spellbook", "professionBook") then

@@ -1,7 +1,7 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 
-local MF = W.Modules.MoveFrames
+local MF = W.Modules.MoveFrames ---@type MoveFrames
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
@@ -9,7 +9,6 @@ local ipairs = ipairs
 local next = next
 local pairs = pairs
 local strfind = strfind
-local tostring = tostring
 local unpack = unpack
 
 -- Modified from ElvUI Auction House Skin
@@ -82,9 +81,8 @@ end
 local function HandleTab(tab)
 	S:Proxy("HandleTab", tab)
 	tab.Text:ClearAllPoints()
-	tab.Text:SetPoint("CENTER", tab, "CENTER", 0, 0)
-	tab.Text.__SetPoint = tab.Text.SetPoint
-	tab.Text.SetPoint = E.noop
+	F.InternalizeMethod(tab.Text, "SetPoint", true)
+	F.CallMethod(tab.Text, "SetPoint", "CENTER", tab, "CENTER", 0, 0)
 end
 
 local function buyIconName(frame)

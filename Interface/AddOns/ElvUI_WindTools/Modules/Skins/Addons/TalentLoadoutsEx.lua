@@ -1,6 +1,6 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
-local MF = W.Modules.MoveFrames
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
+local MF = W.Modules.MoveFrames ---@type MoveFrames
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
@@ -68,7 +68,7 @@ function S:TalentLoadoutsEx()
 	self:Proxy("HandleTrimScrollBar", frame.ScrollBar)
 	ReskinChildButton(frame)
 	self:CreateShadow(frame)
-	F.MoveFrameWithOffset(frame, 3, 0)
+	F.Move(frame, 3, 0)
 	MF:InternalHandle(frame, "PlayerSpellsFrame")
 
 	for _, button in frame.ScrollBox:EnumerateFrames() do

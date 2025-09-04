@@ -1,7 +1,8 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local GB = W:NewModule("GameBar", "AceEvent-3.0", "AceHook-3.0")
 local DT = E:GetModule("DataTexts")
+local async = W.Utilities.Async
 
 local _G = _G
 local collectgarbage = collectgarbage
@@ -14,22 +15,21 @@ local max = max
 local min = min
 local mod = mod
 local pairs = pairs
+local random = random
 local select = select
 local strfind = strfind
-local strjoin = strjoin
 local tContains = tContains
 local tinsert = tinsert
 local tonumber = tonumber
 local tostring = tostring
 local type = type
-local unpack = unpack
 
 local BNGetNumFriends = BNGetNumFriends
 local CloseAllWindows = CloseAllWindows
 local CloseMenus = CloseMenus
 local CreateFrame = CreateFrame
-local CreateFromMixins = CreateFromMixins
 local GenerateClosure = GenerateClosure
+local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo
 local GetGameTime = GetGameTime
 local GetNumGuildMembers = GetNumGuildMembers
 local GetTime = GetTime
@@ -39,7 +39,6 @@ local IsControlKeyDown = IsControlKeyDown
 local IsInGuild = IsInGuild
 local IsModifierKeyDown = IsModifierKeyDown
 local IsShiftKeyDown = IsShiftKeyDown
-local ItemMixin = ItemMixin
 local PlaySound = PlaySound
 local PlayerHasToy = PlayerHasToy
 local RegisterStateDriver = RegisterStateDriver
@@ -58,7 +57,6 @@ local C_BattleNet_GetFriendNumGameAccounts = C_BattleNet.GetFriendNumGameAccount
 local C_CVar_GetCVar = C_CVar.GetCVar
 local C_CVar_GetCVarBool = C_CVar.GetCVarBool
 local C_CVar_SetCVar = C_CVar.SetCVar
-local C_CovenantSanctumUI_GetRenownLevel = C_CovenantSanctumUI.GetRenownLevel
 local C_Covenants_GetActiveCovenantID = C_Covenants.GetActiveCovenantID
 local C_FriendList_GetNumFriends = C_FriendList.GetNumFriends
 local C_Garrison_GetCompleteMissions = C_Garrison.GetCompleteMissions
@@ -76,6 +74,8 @@ local IconString = "|T%s:16:18:0:0:64:64:4:60:7:57"
 local LeftButtonIcon = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:230:307|t"
 local RightButtonIcon = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:333:410|t"
 local ScrollButtonIcon = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:127:204|t"
+
+local RED_FONT_COLOR = RED_FONT_COLOR
 
 local friendOnline = gsub(_G.ERR_FRIEND_ONLINE_SS, "\124Hplayer:%%s\124h%[%%s%]\124h", "")
 local friendOffline = gsub(_G.ERR_FRIEND_OFFLINE_S, "%%s", "")
@@ -435,7 +435,7 @@ local ButtonTypes = {
 				if not InCombatLockdown() then
 					ToggleCharacter("PaperDollFrame")
 				else
-					_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+					_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 				end
 			end,
 		},
@@ -477,7 +477,7 @@ local ButtonTypes = {
 				if not InCombatLockdown() then
 					ToggleFriendsFrame(1)
 				else
-					_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+					_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 				end
 			end,
 		},
@@ -491,7 +491,7 @@ local ButtonTypes = {
 					numBNOnline = numBNOnline + 1
 					if numGameAccounts and numGameAccounts > 0 then
 						for j = 1, numGameAccounts do
-							local gameAccountInfo = C_BattleNet_GetFriendGameAccountInfo(i, j)
+							local gameAccountInfo = C_BattleNet_GetFriendGameAccountInfo(i, j) --[[@as BNetGameAccountInfo]]
 							if gameAccountInfo.clientProgram and gameAccountInfo.clientProgram == "WoW" then
 								numWoWOnline = numWoWOnline + 1
 							end
@@ -553,7 +553,7 @@ local ButtonTypes = {
 						HideUIPanel(_G.GameMenuFrame)
 					end
 				else
-					_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+					_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 				end
 			end,
 		},
@@ -629,10 +629,7 @@ local ButtonTypes = {
 		additionalText = function()
 			local numMissions = #C_Garrison_GetCompleteMissions(FollowerType_9_0)
 				+ #C_Garrison_GetCompleteMissions(FollowerType_8_0)
-			if numMissions == 0 then
-				numMissions = ""
-			end
-			return numMissions
+			return tostring(numMissions == 0 and "" or numMissions)
 		end,
 		tooltips = "Missions",
 	},
@@ -661,7 +658,7 @@ local ButtonTypes = {
 				if not InCombatLockdown() then
 					_G.ToggleProfessionsBook()
 				else
-					_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+					_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 				end
 			end,
 		},
@@ -698,7 +695,7 @@ local ButtonTypes = {
 				if not InCombatLockdown() then
 					_G.PlayerSpellsUtil.ToggleSpellBookFrame()
 				else
-					_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+					_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 				end
 			end,
 		},
@@ -714,7 +711,7 @@ local ButtonTypes = {
 				if not InCombatLockdown() then
 					_G.PlayerSpellsUtil.ToggleClassTalentFrame()
 				else
-					_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+					_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 				end
 			end,
 		},
@@ -738,8 +735,8 @@ local ButtonTypes = {
 		click = {
 			LeftButton = function()
 				local vol = C_CVar_GetCVar("Sound_MasterVolume")
-				vol = vol and tonumber(vol) or 0
-				C_CVar_SetCVar("Sound_MasterVolume", min(vol + 0.1, 1))
+				local volNum = vol and tonumber(vol) or 0
+				C_CVar_SetCVar("Sound_MasterVolume", min(volNum + 0.1, 1))
 			end,
 			MiddleButton = function()
 				local enabled = tonumber(C_CVar_GetCVar("Sound_EnableAllSound")) == 1
@@ -747,15 +744,15 @@ local ButtonTypes = {
 			end,
 			RightButton = function()
 				local vol = C_CVar_GetCVar("Sound_MasterVolume")
-				vol = vol and tonumber(vol) or 0
-				C_CVar_SetCVar("Sound_MasterVolume", max(vol - 0.1, 0))
+				local volNum = vol and tonumber(vol) or 0
+				C_CVar_SetCVar("Sound_MasterVolume", max(volNum - 0.1, 0))
 			end,
 		},
 		tooltips = function(button)
 			local vol = C_CVar_GetCVar("Sound_MasterVolume")
-			vol = vol and tonumber(vol) or 0
+			local volNum = vol and tonumber(vol) or 0
 			DT.tooltip:ClearLines()
-			DT.tooltip:SetText(L["Volume"] .. format(": %d%%", vol * 100))
+			DT.tooltip:SetText(L["Volume"] .. format(": %d%%", volNum * 100))
 			DT.tooltip:AddLine("\n")
 			DT.tooltip:AddLine(LeftButtonIcon .. " " .. L["Increase the volume"] .. " (+10%)", 1, 1, 1)
 			DT.tooltip:AddLine(RightButtonIcon .. " " .. L["Decrease the volume"] .. " (-10%)", 1, 1, 1)
@@ -764,9 +761,9 @@ local ButtonTypes = {
 
 			button.tooltipsUpdateTimer = C_Timer_NewTicker(0.3, function()
 				local _vol = C_CVar_GetCVar("Sound_MasterVolume")
-				_vol = _vol and tonumber(_vol) or 0
+				local _volNum = _vol and tonumber(_vol) or 0
 				DT.tooltip:ClearLines()
-				DT.tooltip:SetText(L["Volume"] .. format(": %d%%", _vol * 100))
+				DT.tooltip:SetText(L["Volume"] .. format(": %d%%", _volNum * 100))
 				DT.tooltip:AddLine("\n")
 				DT.tooltip:AddLine(LeftButtonIcon .. " " .. L["Increase the volume"] .. " (+10%)", 1, 1, 1)
 				DT.tooltip:AddLine(RightButtonIcon .. " " .. L["Decrease the volume"] .. " (-10%)", 1, 1, 1)
@@ -969,12 +966,14 @@ function GB:ConstructTimeArea()
 			if not InCombatLockdown() then
 				ToggleCalendar()
 			else
-				_G.UIErrorsFrame:AddMessage(E.InfoColor .. _G.ERR_NOT_IN_COMBAT)
+				_G.UIErrorsFrame:AddMessage(_G.ERR_NOT_IN_COMBAT, RED_FONT_COLOR:GetRGBA())
 			end
 		elseif mouseButton == "RightButton" then
 			ToggleTimeManager()
 		elseif mouseButton == "MiddleButton" then
-			C_UI_Reload()
+			if not InCombatLockdown() or not self.db.time.avoidReloadInCombat then
+				C_UI_Reload()
+			end
 		end
 	end)
 end
@@ -1148,6 +1147,17 @@ function GB:ConstructButton()
 	tinsert(self.buttons, button)
 end
 
+_G.WTGameBar_UpdateHomeButtons = function()
+	F.TaskManager:OutOfCombat(function()
+		for _, btn in pairs(GB.HomeButtons) do
+			if btn.type == "HOME" then
+				GB:UpdateHomeButtonMacro(btn, "left", ButtonTypes[btn.type].item.item1)
+				GB:UpdateHomeButtonMacro(btn, "right", ButtonTypes[btn.type].item.item2)
+			end
+		end
+	end)
+end
+
 function GB:UpdateButton(button, buttonType)
 	if InCombatLockdown() then
 		return
@@ -1166,8 +1176,9 @@ function GB:UpdateButton(button, buttonType)
 		and (config.item.item1 == L["Random Hearthstone"] or config.item.item2 == L["Random Hearthstone"])
 	then
 		button:SetAttribute("type*", "macro")
-		self:HandleRandomHomeButton(button, "left", config.item.item1)
-		self:HandleRandomHomeButton(button, "right", config.item.item2)
+		self:UpdateHomeButtonMacro(button, "left", config.item.item1)
+		self:UpdateHomeButtonMacro(button, "right", config.item.item2)
+		tinsert(self.HomeButtons, button)
 	elseif config.macro then
 		button:SetAttribute("type*", "macro")
 		button:SetAttribute("macrotext1", config.macro.LeftButton or "")
@@ -1264,6 +1275,8 @@ function GB:ConstructButtons()
 end
 
 function GB:UpdateButtons()
+	self.HomeButtons = {}
+
 	for i = 1, NUM_PANEL_BUTTONS do
 		self:UpdateButton(self.buttons[i], self.db.left[i])
 		self:UpdateButton(self.buttons[i + NUM_PANEL_BUTTONS], self.db.right[i])
@@ -1362,6 +1375,12 @@ function GB:UpdateLayout()
 	self.bar:SetSize(areaWidth, areaHeight)
 end
 
+function GB:NEW_TOY_ADDED(_, toyID)
+	if toyID and tContains(hearthstoneAndToyIDList, toyID) then
+		self:UpdateHearthStoneTable()
+	end
+end
+
 function GB:PLAYER_REGEN_ENABLED()
 	self:UnregisterEvent("PLAYER_REGEN_ENABLED")
 	self:ProfileUpdate()
@@ -1375,26 +1394,6 @@ function GB:PLAYER_ENTERING_WORLD()
 			self:ProfileUpdate()
 		end
 	end)
-end
-
-function GB:UpdateReknown()
-	local covenantID = C_Covenants_GetActiveCovenantID()
-	if not covenantID or covenantID == 0 then
-		return
-	end
-
-	if not self.covenantCache[E.myrealm] then
-		self.covenantCache[E.myrealm] = {}
-	end
-
-	if not self.covenantCache[E.myrealm][E.myname] then
-		self.covenantCache[E.myrealm][E.myname] = {}
-	end
-
-	local renownLevel = C_CovenantSanctumUI_GetRenownLevel()
-	if renownLevel then
-		self.covenantCache[E.myrealm][E.myname][tostring(covenantID)] = renownLevel
-	end
 end
 
 function GB:Initialize()
@@ -1417,7 +1416,6 @@ function GB:Initialize()
 	end
 
 	self:UpdateMetadata()
-	self:UpdateReknown()
 	self:UpdateHearthStoneTable()
 	self:ConstructBar()
 	self:ConstructTimeArea()
@@ -1426,15 +1424,9 @@ function GB:Initialize()
 	self:UpdateButtons()
 	self:UpdateLayout()
 	self:UpdateBar()
+	self:RegisterEvent("NEW_TOY_ADDED")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("COVENANT_CHOSEN", function()
-		E:Delay(3, function()
-			self:UpdateReknown()
-			self:UpdateHearthStoneTable()
-			self:UpdateBar()
-		end)
-	end)
-
+	self:RegisterEvent("COVENANT_CHOSEN", "UpdateHearthStoneTable")
 	self:SecureHook(_G.GuildMicroButton, "UpdateNotificationIcon", "UpdateGuildButton")
 	self.initialized = true
 end
@@ -1520,7 +1512,7 @@ function GB:UpdateGuildButton()
 	end
 end
 
-function GB:HandleRandomHomeButton(button, mouseButton, item)
+function GB:UpdateHomeButtonMacro(button, mouseButton, item)
 	if not button or not mouseButton or not item or not availableHearthstones then
 		return
 	end
@@ -1530,9 +1522,20 @@ function GB:HandleRandomHomeButton(button, mouseButton, item)
 
 	if item == L["Random Hearthstone"] then
 		if #availableHearthstones > 0 then
-			macro = "/castrandom " .. strjoin(",", unpack(availableHearthstones))
+			local randomIndex
+			if #availableHearthstones > 1 then
+				local currentIndex = button.randomHearthstoneIndex or 1
+				randomIndex = random(#availableHearthstones - 1)
+				if randomIndex >= currentIndex then
+					randomIndex = randomIndex + 1 -- Set to the different hearthstone from the current selection
+				end
+				button.randomHearthstoneIndex = randomIndex
+			else
+				randomIndex = 1
+			end
+			macro = format("/use item:%d\n/run _G.WTGameBar_UpdateHomeButtons()", availableHearthstones[randomIndex])
 		else
-			macro = '/run UIErrorsFrame:AddMessage("' .. L["No Hearthstone Found!"] .. '", 1, 0, 0)'
+			macro = format('/run UIErrorsFrame:AddMessage("%s", RED_FONT_COLOR:GetRGBA())', L["No Hearthstone Found!"])
 		end
 	end
 
@@ -1562,15 +1565,17 @@ function GB:UpdateHearthStoneTable()
 	end
 
 	local covenantHearthstones = {
-		[1] = 184353, -- 琪瑞安爐石
-		[2] = 183716, -- 汎希爾罪孽石
-		[3] = 180290, -- 暗夜妖精的爐石
-		[4] = 182773, -- 死靈領主爐石
+		[184353] = { covenantID = 1, achievementCriteriaNum = 1 }, -- 琪瑞安爐石
+		[183716] = { covenantID = 2, achievementCriteriaNum = 4 }, -- 汎希爾罪孽石
+		[180290] = { covenantID = 3, achievementCriteriaNum = 3 }, -- 暗夜妖精的爐石
+		[182773] = { covenantID = 4, achievementCriteriaNum = 2 }, -- 死靈領主爐石
 	}
 
-	for i = 1, 4 do
-		local toyID = covenantHearthstones[i]
-		hearthstonesTable[toyID] = false
+	local activeCovenantID = C_Covenants_GetActiveCovenantID()
+
+	for toyID, config in pairs(covenantHearthstones) do
+		local criteriaCompleted = select(3, GetAchievementCriteriaInfo(15646, config.achievementCriteriaNum))
+		hearthstonesTable[toyID] = criteriaCompleted or activeCovenantID == config.covenantID
 	end
 
 	local raceHeartstones = {
@@ -1587,36 +1592,21 @@ function GB:UpdateHearthStoneTable()
 
 	availableHearthstones = {}
 
-	local index = 0
-	local itemEngine = CreateFromMixins(ItemMixin)
-
-	local function GetNextHearthStoneInfo()
-		index = index + 1
-		if hearthstoneAndToyIDList[index] then
-			itemEngine:SetItemID(hearthstoneAndToyIDList[index])
-			itemEngine:ContinueOnItemLoad(function()
-				local id = itemEngine:GetItemID()
-				if hearthstonesTable[id] then
-					if C_Item_GetItemCount(id) >= 1 or PlayerHasToy(id) and C_ToyBox_IsToyUsable(id) then
-						tinsert(availableHearthstones, id)
-					end
-				end
-
-				hearthstonesAndToysData[tostring(hearthstoneAndToyIDList[index])] = {
-					name = itemEngine:GetItemName(),
-					icon = itemEngine:GetItemIcon(),
-				}
-				GetNextHearthStoneInfo()
-			end)
-		else
-			self:UpdateHomeButton()
-			if self.initialized then
-				self:UpdateButtons()
+	async.WithItemIDTable(hearthstoneAndToyIDList, "value", function(item)
+		local id = item:GetItemID()
+		if hearthstonesTable[id] then
+			if C_Item_GetItemCount(id) >= 1 or PlayerHasToy(id) and C_ToyBox_IsToyUsable(id) then
+				tinsert(availableHearthstones, id)
 			end
 		end
-	end
 
-	GetNextHearthStoneInfo()
+		hearthstonesAndToysData[tostring(id)] = { name = item:GetItemName(), icon = item:GetItemIcon() }
+	end, function()
+		self:UpdateHomeButton()
+		if self.initialized then
+			self:UpdateButtons()
+		end
+	end)
 end
 
 function GB:GetHearthStoneTable()

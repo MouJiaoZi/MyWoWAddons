@@ -1,12 +1,9 @@
-local W, F, E, L = unpack((select(2, ...)))
-local S = W.Modules.Skins
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local S = W.Modules.Skins ---@type Skins
 local C = W.Utilities.Color
 
 local _G = _G
 local pairs = pairs
-
-local UnitClass = UnitClass
-local GetClassColor = GetClassColor
 
 local RED_FONT_COLOR = RED_FONT_COLOR
 local YELLOW_FONT_COLOR = YELLOW_FONT_COLOR
@@ -31,7 +28,7 @@ function S:UIErrors()
 		if r == nil or g == nil or b == nil then
 			local db = E.private.WT.skins.uiErrors
 			if db.normalTextClassColor then
-				r, g, b = GetClassColor(E.myclass)
+				r, g, b = E.myClassColor:GetRGBA()
 				a = 1
 			else
 				r, g, b, a = db.normalTextColor.r, db.normalTextColor.g, db.normalTextColor.b, db.normalTextColor.a

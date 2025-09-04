@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...)))
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local TI = W:NewModule("TurnIn", "AceEvent-3.0")
 
 local _G = _G
@@ -318,11 +318,14 @@ function TI:QUEST_GREETING()
 		for index = 1, active do
 			local _, isComplete = GetActiveTitle(index)
 			local questID = GetActiveQuestID(index)
-			local isWorldQuest = C_QuestLog_IsWorldQuest(questID)
-			local skipRepeatable = self.db.onlyRepeatable and not IsQuestRepeatable(questID)
-			if isComplete and not isWorldQuest and not skipRepeatable then
-				if not self:IsPaused("COMPLETE") then
-					SelectActiveQuest(index)
+			if questID then
+				local isWorldQuest = C_QuestLog_IsWorldQuest(questID)
+				local skipRepeatable = self.db.onlyRepeatable and not IsQuestRepeatable(questID)
+				if isComplete and not isWorldQuest and not skipRepeatable then
+					if not self:IsPaused("COMPLETE") then
+						---@diagnostic disable-next-line: redundant-parameter -- The API doc is wrong
+						SelectActiveQuest(index)
+					end
 				end
 			end
 		end
@@ -339,6 +342,7 @@ function TI:QUEST_GREETING()
 				and not skipRepeatable
 				and not self:IsPaused("ACCEPT")
 			then
+				---@diagnostic disable-next-line: redundant-parameter -- The API doc is wrong
 				SelectAvailableQuest(index)
 			end
 		end
@@ -395,7 +399,7 @@ function TI:GOSSIP_SHOW()
 		return
 	end
 
-	local firstGossipOptionID = gossipOptions[1].gossipOptionID
+	local firstGossipOptionID = gossipOptions[1].gossipOptionID --[[@as number]]
 
 	if not (self.db and self.db.smartChat) then
 		return
@@ -576,7 +580,7 @@ function TI:QUEST_COMPLETE()
 	if choices <= 1 then
 		GetQuestReward(1)
 	elseif choices > 1 and self.db and self.db.selectReward then
-		local bestSellPrice, bestIndex = 0
+		local bestSellPrice, bestIndex = 0, nil
 
 		for index = 1, choices do
 			local link = GetQuestItemLink("choice", index)
