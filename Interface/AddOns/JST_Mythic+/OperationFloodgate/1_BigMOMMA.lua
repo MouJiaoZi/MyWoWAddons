@@ -29,6 +29,7 @@ G.Encounters[2648] = {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 超量电化（✓）
 					category = "AlertIcon",
@@ -285,6 +286,7 @@ G.Encounters[2648] = {
 					spellID = 469981,
 					sound = "[heal]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 夺命封锁屏障（✓）
 					category = "AlertIcon",

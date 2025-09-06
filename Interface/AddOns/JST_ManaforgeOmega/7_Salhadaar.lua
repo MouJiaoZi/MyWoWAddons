@@ -128,6 +128,7 @@ G.Encounters[2690] = {
 					spellID = 1224906,
 					text = L["全团AE"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 首领模块 唤动誓言 玩家自保技能提示（✓）
 					category = "BossMod",
@@ -344,7 +345,9 @@ G.Encounters[2690] = {
 					unit = "group",
 					spellID = 1224795,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 计时条 主宰（✓）
 					category = "AlertTimerbar",
@@ -361,7 +364,9 @@ G.Encounters[2690] = {
 					unit = "group",
 					spellID = 1224816,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 首领模块 分段计时条 镇压统治（✓）
 					category = "BossMod",
@@ -744,6 +749,7 @@ G.Encounters[2690] = {
 					spellID = 1225010,
 					text = L["准备"]..L["射线"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 计时条 处斩（✓）
 					category = "AlertTimerbar",
@@ -1057,7 +1063,9 @@ G.Encounters[2690] = {
 					unit = "group",
 					spellID = 1234529,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 			},
 		},
@@ -1128,7 +1136,7 @@ G.Encounters[2690] = {
 							local phase = ...
 							if phase == 2.1 then
 								if self.diffcultyID == 16 then
-									T.Start_Text_DelayTimer(self, 23.1, L["引圈"], true)
+									T.Start_Text_DelayTimer(self, 23.8, L["引圈"], true)
 								else
 									T.Start_Text_DelayTimer(self, 15.9, L["引圈"], true)
 								end
@@ -1352,6 +1360,7 @@ G.Encounters[2690] = {
 					color = {0, 1, 0},
 					text = L["易伤"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 血量（✓）
 					category = "TextAlert", 
@@ -2007,7 +2016,9 @@ G.Encounters[2690] = {
 					unit = "group",
 					spellID = 1226413,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 			},
 		},

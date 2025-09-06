@@ -2481,10 +2481,10 @@ T.InitCircleMsgTimers = function(frame)
 end
 
 T.UpdateCircleMsgTimers = function(frame, event, ...)
-	if event == "CHAT_MSG_RAID_BOSS_WHISPER" then
-		local text = ...
+	if frame.events[event] then
+		local msg = ...
 		for k, info in pairs(frame.keywords) do
-			if string.find(text, k)  then -- 开始
+			if string.find(msg, k)  then -- 开始
 				if not frame.figures[k] then
 					frame.figures[k] = CreateRingCD(frame, info.color, info.reverse)
 				end
@@ -2519,19 +2519,29 @@ end
 --		frame.end_mark = 8 -- 结束标记
 --		frame.mob_npcID = "181856" -- NpcID
 --		frame.ignore_combat = true -- (可选 忽略是否进战斗)
+--		frame.use_stored_mark = true -- (可选 同一个怪物使用相同的标记)
 
 T.InitRaidTarget = function(frame)
-	function frame:Get_counter()
-		if frame.counter < frame.end_mark then
-			frame.counter = frame.counter + 1
+	frame.marked = {}
+	frame.storedGUIDs = {}
+	frame.counter = frame.start_mark - 1
+	
+	function frame:Get_counter(GUID)
+		if self.use_stored_mark and self.storedGUIDs[GUID] then
+			return self.storedGUIDs[GUID]
 		else
-			frame.counter = frame.start_mark
+			if self.counter < self.end_mark then
+				self.counter = self.counter + 1
+			else
+				self.counter = self.start_mark
+			end
+			self.storedGUIDs[GUID] = self.counter
 		end
 	end
 	
 	function frame:Mark(unit, GUID)
-		if (not self.trigger or self:trigger(unit, GUID)) and (not IsEncounterInProgress() or frame.ignore_combat or UnitAffectingCombat(unit)) then
-			self:Get_counter()
+		if (not self.trigger or self:trigger(unit, GUID)) and (not IsEncounterInProgress() or self.ignore_combat or UnitAffectingCombat(unit)) then
+			self:Get_counter(GUID)
 			T.SetRaidTarget(unit, self.counter)
 			self.marked[GUID] = true
 			local npcID = select(6, strsplit("-", GUID))
@@ -2539,9 +2549,6 @@ T.InitRaidTarget = function(frame)
 			T.msg(string.format(L["已标记%s"], date("%H:%M:%S"), T.GetNameFromNpcID(npcID), mark))
 		end
 	end
-
-	frame.marked = {}
-	frame.counter = frame.start_mark - 1
 end
 
 T.UpdateRaidTarget = function(frame, event, ...)
@@ -2586,6 +2593,7 @@ end
 
 T.ResetRaidTarget = function(frame)
 	frame.marked = table.wipe(frame.marked)
+	frame.storedGUIDs = table.wipe(frame.storedGUIDs)
 	frame.counter = frame.start_mark - 1
 end
 
@@ -4607,8 +4615,8 @@ local AuraAction = function(frame, my_index)
 		else
 			count = select(3, AuraUtil.FindAuraBySpellID(frame.aura_id, "player", G.TestMod and "HELPFUL" or "HARMFUL"))
 			exp_time = select(6, AuraUtil.FindAuraBySpellID(frame.aura_id, "player", G.TestMod and "HELPFUL" or "HARMFUL"))
+			remain = exp_time - GetTime()
 		end
-		remain = exp_time - GetTime()
 		
 		if info.msg_applied then
 			T.SendAuraMsg(info.msg_applied, frame.send_msg_channel or "SAY", frame.aura_name, count, remain, tag)
@@ -5983,7 +5991,7 @@ T.GetCooldownData = GetCooldownData
 T.UpdateCooldownTimer = function(cast_event, cast_unit, cast_spellID, text, self, event, ...)
 	if event == cast_event then
 		local unit, cast_GUID, spellID = ...
-		if T.CheckUnit(cast_unit, unit) and cast_GUID and self.count then
+		if T.CheckUnit(unit, cast_unit) and cast_GUID and self.count then
 			if type(cast_spellID) == "table" then
 				for _, sub_spellID in pairs(cast_spellID) do
 					if spellID == sub_spellID then

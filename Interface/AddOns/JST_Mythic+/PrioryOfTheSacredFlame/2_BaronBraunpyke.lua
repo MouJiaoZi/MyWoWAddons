@@ -122,6 +122,7 @@ G.Encounters[2570] = {
 					spellID = 423062,
 					sound = "[run]cast",
 					glow = true,
+					group = 1,
 				},
 			},
 		},

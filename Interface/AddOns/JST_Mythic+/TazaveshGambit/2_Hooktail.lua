@@ -22,7 +22,7 @@ G.Encounters[2449] = {
 				{347149, "0"},
 			},
 			options = {
-				{ -- 文字 永恒吐息 倒计时
+				{ -- 文字 永恒吐息 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -44,7 +44,7 @@ G.Encounters[2449] = {
 						end
 					end,
 				},
-				{ -- 计时条 永恒吐息
+				{ -- 计时条 永恒吐息（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 347149,
@@ -72,7 +72,7 @@ G.Encounters[2449] = {
 				{1240097, "6"},
 			},
 			options = {
-				{ -- 文字 定时炸弹 倒计时
+				{ -- 文字 定时炸弹 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1240102)..L["倒计时"],
@@ -95,14 +95,14 @@ G.Encounters[2449] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1240102, T.GetIconLink(1240102), self, event, ...)
 					end,
 				},
-				{ -- 计时条 定时炸弹
+				{ -- 计时条 定时炸弹（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1240102,
 					sound = "[bomb]cast",
 					ficon = "6",
 				},
-				{ -- 图标 定时炸弹
+				{ -- 图标 定时炸弹（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -112,13 +112,40 @@ G.Encounters[2449] = {
 					hl = "blu",
 					sound = "[bombonyou]",
 				},
-				{ -- 团队框架高亮 定时炸弹
+				{ -- 首领模块 定时炸弹 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 1240097,
+					enable_tag = "none",
+					name = T.GetIconLink(1240097)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
+						["UNIT_AURA_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.aura_spellIDs = {
+							[1240097] = 0,
+						}
+						frame.ignore_roles = {"TANK"}
+						frame.threshold = 65
+						
+						T.InitPersonalSpellAlertbyAura(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetPersonalSpellAlertbyAura(frame)
+					end,
+				},
+				{ -- 团队框架高亮 定时炸弹（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 1240097,
 					color = "blu",
 				},
-				{ -- 文字 定时炸弹 驱散提示
+				{ -- 文字 定时炸弹 驱散提示（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["驱散"]..L["倒计时"],
@@ -167,7 +194,7 @@ G.Encounters[2449] = {
 				{1240214, "6"}, -- 双倍速
 			},
 			options = {
-				{ -- 姓名板光环 双倍速
+				{ -- 姓名板光环 双倍速（✓）
 					category = "PlateAlert",
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
@@ -183,7 +210,7 @@ G.Encounters[2449] = {
 				{347370}, -- 火炮弹幕
 			},
 			options = {
-				{ -- 图标 燃烧沥青
+				{ -- 图标 燃烧沥青（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -202,7 +229,7 @@ G.Encounters[2449] = {
 				{352345}, -- 船锚射击
 			},
 			options = {
-				{ -- 文字 船锚射击 倒计时
+				{ -- 文字 船锚射击 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(352345)..L["倒计时"],
@@ -214,7 +241,7 @@ G.Encounters[2449] = {
 					},
 					update = function(self, event, ...)
 						if event == "ENCOUNTER_START" then
-							T.Start_Text_DelayTimer(self, 15, T.GetIconLink(352345), true)
+							T.Start_Text_DelayTimer(self, 18, T.GetIconLink(352345), true)
 						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, sourceGUID, _, _, _, _, _, _, _, spellID, _, _, extraSpellId = CombatLogGetCurrentEventInfo()
 							if sub_event == "SPELL_CAST_SUCCESS" and extraSpellId == 352345 then
@@ -223,24 +250,42 @@ G.Encounters[2449] = {
 						end
 					end,
 				},
-				{ -- 计时条 船锚射击
-					category = "AlertTimerbar",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "group",
-					spellID = 352345,
-					show_tar = true,
-				},
-				{ -- 图标 船锚射击
+				{ -- 图标 船锚射击（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 352345,
-					tip = L["锁定"],
-					sound = "[defense]",
+					hl = "red",
 				},
-				{ -- 团队框架高亮 船锚射击
+				{ -- 首领模块 船锚射击 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 352345,
+					enable_tag = "none",
+					name = T.GetIconLink(352345)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["UNIT_AURA_ADD"] = true,
+						["UNIT_AURA_REMOVED"] = true,
+						["UNIT_AURA_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.aura_spellIDs = {
+							[352345] = 0,
+						}
+						frame.ignore_roles = {"TANK"}
+						frame.threshold = 65
+						
+						T.InitPersonalSpellAlertbyAura(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetPersonalSpellAlertbyAura(frame)
+					end,
+				},
+				{ -- 团队框架高亮 船锚射击（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 352345,
@@ -253,7 +298,7 @@ G.Encounters[2449] = {
 				{347422, "4"},
 			},
 			options = {
-				{ -- 图标 致命海洋
+				{ -- 图标 致命海洋（缺数据）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",

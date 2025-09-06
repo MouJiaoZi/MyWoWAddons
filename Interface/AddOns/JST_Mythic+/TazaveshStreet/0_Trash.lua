@@ -92,6 +92,7 @@ G.Encounters["c391"] = {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 辐射脉冲
 					category = "AlertIcon",
@@ -223,6 +224,7 @@ G.Encounters["c391"] = {
 					spellID = 355934,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 强光屏障
 					category = "PlateAlert",
@@ -507,6 +509,7 @@ G.Encounters["c391"] = {
 					type = "cast",
 					spellID = 347721,
 					glow = true,
+					group = 1,
 				},
 			},
 		},
@@ -521,6 +524,7 @@ G.Encounters["c391"] = {
 					spellID = 347775,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 垃圾信息过滤
 					category = "PlateAlert",
@@ -557,6 +561,7 @@ G.Encounters["c391"] = {
 					type = "cast",
 					spellID = 347903,
 					glow = true,
+					group = 1,
 				},
 				{ -- 对我施法图标 垃圾邮件
 					category = "AlertIcon",

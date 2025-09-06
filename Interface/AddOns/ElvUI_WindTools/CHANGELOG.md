@@ -1,16 +1,21 @@
 # Version: 3.99
-TBD Released
+2025/09/06 Released
 ## ❗ Important
 - Massive cleanup of deprecated code.
 - Optimize the performance of some internal functions.
 - Refactor the core logic for third-party library skinning.
 - Remove throttling for some Delves events since Blizzard has fixed the related bugs.
 - Optimize Korean translation text. Thanks Crazyyoungs.
+- Optimize color display in various places and unify the color templates used in the addon.
 ## ✳️ New
 - [Skins] Add Blizzard Battlefield Map skin.
 - [Skins] Add WhisperPop skin. Thanks DaguDuiyuan.
 - [Skins] Add Paragon Reputation skin.
 - [Skins] Add Manuscripts Journal skin.
+- [Skins] Add MultiLanguage skin.
+- [LFG List] Add a button in the group keystone interface (by default in the third tab at the bottom of the LFG List) that allows you to send the current group's keystone information to the party chat with one click.
+- [Tooltip] Add an option to automatically clean up Blizzard's default group info when using the Group Info feature in the toolbox, enabled by default.
+- [Event Tracker] Redesign and fix the weekly tracker, now able to track different types of weekly quests in TWW.
 ## 💪 Improvement
 - Optimize the handling logic for all chat links within the addon.
 - Fix errors that could occur when advanced combat event tracking was enabled.
@@ -19,6 +24,7 @@ TBD Released
 - [Skins] Optimize icon skinning in merchant frame.
 - [Skins] Optimize button skinning in covenant renown frame.
 - [Skins] Optimize player choice frame skin.
+- [Skins] Optimize the skin of tooltip components in the LibQTip library.
 - [Skins] Optimize WeakAuras Profiler skin.
 - [Skins] Optimize Simulationcraft skin.
 - [Skins] Optimize Mythic Dungeon Tools pull button skin.
@@ -33,6 +39,7 @@ TBD Released
 - [Game Bar] Refactor the random hearthstone feature, now supports covenant hearthstones and immediately switches to the next different hearthstone after clicking the button.
 - [LFG List] Add font size adjustment feature to the right panel.
 - [LFG List] Fix the taint that sometimes prevents reporting from working. Thanks Dack.
+- [LFG List] Fix the issue where the leader icon sometimes displays on the wrong member in dungeon group list.
 - [World Map] Fix the reveal feature for the battlefield map.
 - [Minimap Buttons] Enhance the automatic skinning for addons using LibDBIcon .
 - [Minimap Buttons] Refactor the handling logic for Expansion Landing Page button.
@@ -43,18 +50,23 @@ TBD Released
 
 ------
 # 版本: 3.99
-TBD 发布
+2025/09/06 发布
 ## ❗ 重要
 - 大量的过期代码整理.
 - 优化了一些内部函数的性能.
 - 重构了对第三方函数库美化的核心逻辑.
 - 由于暴雪已经修复相关 Bug, 移除对地下堡部分事件的节流处理.
 - 优化了韩语翻译文本. 感谢 Crazyyoungs
+- 优化各处的颜色显示, 统一插件内使用的颜色模板.
 ## ✳️ 新增
 - [美化皮肤] 新增了暴雪区域地图的美化外观.
 - [美化皮肤] 新增了 WhisperPop 美化外观. 感谢 DaguDuiyuan
 - [美化皮肤] 新增了 Paragon Reputation 美化外观.
 - [美化皮肤] 新增了 Manuscripts Journal 美化外观.
+- [美化皮肤] 新增了 MultiLanguage 美化外观.
+- [预组队列表] 在队伍钥匙界面 (默认在预组队界面的底部第三个标签页内) 新增了一个按钮, 可以一键将当前队伍的钥石信息发送到队伍频道.
+- [鼠标提示] 新增一个选项, 可以在使用工具箱内团队信息时自动清理暴雪默认的团队信息, 默认开启.
+- [事件追踪器] 对周常部分进行了重新修复和设计更新, 现在能够对地心之战不同种类的周常任务进行追踪了.
 ## 💪 改善
 - 优化了插件内全部聊天链接的处理逻辑.
 - 修复了启用高级战斗事件追踪时可能出现的错误.
@@ -63,6 +75,7 @@ TBD 发布
 - [美化皮肤] 优化商人界面中的图示美化.
 - [美化皮肤] 优化盟约名望界面中的按钮美化.
 - [美化皮肤] 优化任务线玩家选择界面外观.
+- [美化皮肤] 优化 LibQTip 库中的鼠标提示组件外观.
 - [美化皮肤] 优化 WeakAuras 性能分析界面外观.
 - [美化皮肤] 优化 Simulationcraft 外观.
 - [美化皮肤] 优化 Mythic Dungeon Tools 拉怪波次按钮外观.
@@ -77,6 +90,7 @@ TBD 发布
 - [游戏条] 重构了随机炉石功能，现在支持盟约炉石的使用, 同时点击按钮后立即更换下一个不同的炉石.
 - [预组队列表] 右侧面板新增了字体大小调整的功能.
 - [预组队列表] 修复举报有时候无法使用的污染. 感谢 Dack
+- [预组队列表] 修复地城队伍列表中, 队长图标有时候显示在错误的成员上的问题.
 - [世界地图] 修复了区域地图的去除迷雾功能.
 - [小地图按钮] 增强了对使用 LibDBIcon 插件的图标自动美化.
 - [小地图按钮] 重构了版本大厅按钮的处理逻辑.
@@ -87,18 +101,23 @@ TBD 发布
 
 ------
 # 版本: 3.99
-TBD 發布
+2025/09/06 發布
 ## ❗ 重要
 - 大量的過期代碼整理.
 - 優化了一些內部函式的性能.
 - 重構了對第三方函式庫美化的核心邏輯.
 - 由於暴雪已經修復相關 Bug, 移除對探究部分事件的節流處理.
 - 優化了韓文翻譯文本. 感謝 Crazyyoungs
+- 優化各處的顏色顯示, 統一插件內使用的顏色模板.
 ## ✳️ 新增
 - [美化皮膚] 新增了暴雪區域地圖的美化外觀.
 - [美化皮膚] 新增了 WhisperPop 美化外觀. 感謝 DaguDuiyuan
 - [美化皮膚] 新增了 Paragon Reputation 美化外觀.
 - [美化皮膚] 新增了 Manuscripts Journal 美化外觀.
+- [美化皮膚] 新增了 MultiLanguage 美化外觀.
+- [預組隊列表] 在隊伍鑰匙介面 (預設在預組介面的底部第三個標籤頁內) 新增了一個按鈕, 可以一鍵將當前隊伍的鑰石資訊發送到隊伍頻道.
+- [滑鼠提示] 新增一個選項, 可以在使用工具箱內團隊資訊時自動清理暴雪預設的團隊資訊, 預設開啟.
+- [事件追蹤器] 對週常部分進行了重新修復和設計更新, 現在能夠對地心之戰不同種類的週常任務進行追蹤了.
 ## 💪 改善
 - 優化了插件內全部聊天連結的處理邏輯.
 - 修復了啟用進階戰鬥事件追蹤時可能出現的錯誤.
@@ -107,6 +126,7 @@ TBD 發布
 - [美化外觀] 優化商人介面中的圖示美化.
 - [美化外觀] 優化誓盟名望介面中的按鈕美化.
 - [美化外觀] 優化任務線玩家選擇介面外觀.
+- [美化外觀] 優化 LibQTip 函式庫中的滑鼠提示組件外觀.
 - [美化外觀] 優化 WeakAuras 性能分析介面外觀.
 - [美化外觀] 優化 Simulationcraft 外觀.
 - [美化外觀] 優化 Mythic Dungeon Tools 拉怪波次按鍵外觀.
@@ -121,6 +141,7 @@ TBD 發布
 - [遊戲條] 重構了隨機爐石功能，現在支援誓盟爐石的使用, 同時點擊按鈕後立即更換下一個不同的爐石.
 - [預組隊列表] 右側面板新增了字型大小調整的功能.
 - [預組隊列表] 修復舉報有時候無法使用的污染. 感謝 Dack
+- [預組隊列表] 修復地城隊伍列表中, 隊長圖示有時候顯示在錯誤的成員上的問題.
 - [世界地圖] 修復了區域地圖的去除迷霧功能.
 - [小地圖按鍵] 增強了對使用 LibDBIcon 插件的圖示自動美化.
 - [小地圖按鍵] 重構了版本大廳按鈕的處理邏輯.
@@ -131,18 +152,23 @@ TBD 發布
 
 ------
 # 버전: 3.99
-TBD Released
+2025/09/06 Released
 ## ❗ 중요 사항
 - 대량의 사용되지 않는 코드를 정리했습니다.
 - 일부 내부 함수의 성능을 최적화했습니다.
 - 서드파티 라이브러리 외관의 핵심 로직을 리팩터링했습니다.
 - 블리자드에서 관련 버그를 수정했으므로 지하 던전 일부 이벤트의 제한 처리를 제거했습니다.
 - 한국어 번역 텍스트를 최적화했습니다. Crazyyoungs에게 감사드립니다.
+- 여러 위치의 색상 표시를 최적화하고 애드온에서 사용하는 색상 템플릿을 통합했습니다.
 ## ✳️ 신규 사항
 - [스킨] 블리자드 전장 지도 외관 추가.
 - [스킨] WhisperPop 외관 추가. DaguDuiyuan에게 감사드립니다.
 - [스킨] Paragon Reputation 외관 추가.
 - [스킨] Manuscripts Journal 외관 추가.
+- [스킨] MultiLanguage 외관 추가.
+- [LFG 목록] 그룹 열쇠 인터페이스(기본적으로 LFG 목록 하단의 세 번째 탭)에 버튼을 추가하여 현재 그룹의 열쇠 정보를 파티 채팅으로 한 번에 보낼 수 있습니다.
+- [툴팁] 도구 상자의 그룹 정보 기능을 사용할 때 블리자드의 기본 그룹 정보를 자동으로 정리하는 옵션을 추가했습니다. 기본적으로 활성화되어 있습니다.
+- [이벤트 추적기] 주간 추적기를 재설계하고 수정하여 이제 TWW의 다양한 유형의 주간 퀘스트를 추적할 수 있습니다.
 ## 💪 개선 사항
 - 애드온 내 모든 채팅 링크의 처리 로직을 최적화했습니다.
 - 고급 전투 이벤트 추적이 활성화되었을 때 발생할 수 있는 오류를 수정했습니다.
@@ -151,6 +177,7 @@ TBD Released
 - [스킨] 상인 인터페이스의 아이콘 스킨을 최적화했습니다.
 - [스킨] 성약 명성 인터페이스의 버튼 스킨을 최적화했습니다.
 - [스킨] 퀘스트 선택 인터페이스의 아이콘 스킨을 최적화했습니다.
+- [스킨] LibQTip 라이브러리의 툴팁 구성 요소 스킨을 최적화했습니다.
 - [스킨] WeakAuras 성능 분석 인터페이스 외관을 최적화했습니다.
 - [스킨] Simulationcraft 외관을 최적화했습니다.
 - [스킨] Mythic Dungeon Tools 라인업 버튼 외관을 최적화했습니다.
@@ -165,6 +192,7 @@ TBD Released
 - [게임 바] 랜덤 귀환석 기능을 재구성하여 이제 성약 귀환석을 지원하고 버튼을 클릭한 후 즉시 다음 다른 귀환석으로 전환됩니다.
 - [LFG 목록] 오른쪽 패널에 글꼴 크기 조정 기능을 추가했습니다.
 - [LFG 목록] 신고가 때때로 작동하지 않게 하는 오염 문제를 수정했습니다. Dack에게 감사드립니다.
+- [LFG 목록] 던전 그룹 목록에서 리더 아이콘이 때때로 잘못된 멤버에게 표시되는 문제를 수정했습니다.
 - [세계 지도] 전장 지도의 안개 제거 기능을 수정했습니다.
 - [미니맵 버튼] LibDBIcon을 사용하는 애드온의 자동 스킨 기능을 향상시켰습니다.
 - [미니맵 버튼] 확장팩 랜딩 페이지 버튼의 처리 로직을 재구성했습니다.
@@ -175,18 +203,23 @@ TBD Released
 
 ------
 # Версия: 3.99
-TBD Релиз
+2025/09/06 Релиз
 ## ❗ Важные
 - Массовая очистка устаревшего кода.
 - Оптимизирована производительность некоторых внутренних функций.
 - Рефакторинг основной логики для стилизации сторонних библиотек.
 - Удалено ограничение для некоторых событий подземелий, поскольку Blizzard исправила связанные ошибки.
 - Оптимизирован текст перевода на корейский. Спасибо Crazyyoungs.
+- Оптимизировано отображение цветов в различных местах и унифицированы шаблоны цветов, используемые в аддоне.
 ## ✳️ Новые
 - [Скины] Добавлен скин для карты поля боя Blizzard.
 - [Скины] Добавлен скин для WhisperPop. Спасибо DaguDuiyuan.
 - [Скины] Добавлен скин для Paragon Reputation.
 - [Скины] Добавлен скин для Manuscripts Journal.
+- [Скины] Добавлен скин для MultiLanguage.
+- [LFG список] Добавлена кнопка в интерфейс ключа группы (по умолчанию на третьей вкладке внизу списка LFG), которая позволяет отправить информацию о ключах текущей группы в групповой чат одним щелчком.
+- [Подсказка] Добавлена опция для автоматической очистки информации о группе Blizzard по умолчанию при использовании функции 'Информация о группе' на панели инструментов, Эта функция включена по умолчанию.
+- [Трекер событий] Переработан и исправлен еженедельный трекер, теперь можно отслеживать различные типы еженедельных заданий в TWW.
 ## 💪 Улучшения
 - Оптимизирована логика обработки всех ссылок чата в аддоне.
 - Исправлены ошибки, которые могли возникнуть при включенном расширенном отслеживании боевых событий.
@@ -195,6 +228,7 @@ TBD Релиз
 - [Скины] Оптимизирован скин иконок в интерфейсе торговца.
 - [Скины] Оптимизирован скин кнопок в интерфейсе репутации ковенантов.
 - [Скины] Оптимизирован скин иконок в интерфейсе выбора игрока.
+- [Скины] Оптимизирован скин компонентов подсказок в библиотеке LibQTip.
 - [Скины] Оптимизирован внешний вид анализатора производительности WeakAuras.
 - [Скины] Оптимизирован внешний вид Simulationcraft.
 - [Скины] Оптимизирован внешний вид Mythic Dungeon Tools.
@@ -209,6 +243,7 @@ TBD Релиз
 - [Игровая панель] Переработана функция случайного камня возвращения, теперь поддерживает камни ковенантов и сразу переключается на следующий камень после нажатия кнопки.
 - [LFG список] Добавлена функция изменения размера шрифта для правой панели.
 - [LFG список] Исправлено загрязнение, которое иногда препятствует работе отчетности. Спасибо Dack.
+- [LFG список] Исправлена проблема, когда иконка лидера иногда отображается у неправильного участника в списке группы подземелья.
 - [Мировая карта] Исправлена функция раскрытия для карты поля боя.
 - [Кнопки миникарты] Улучшена автоматическая стилизация для аддонов, использующих LibDBIcon.
 - [Кнопки миникарты] Переработана логика обработки кнопки Landing Page расширения.

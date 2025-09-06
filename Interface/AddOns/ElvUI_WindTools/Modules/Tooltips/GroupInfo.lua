@@ -3,8 +3,13 @@ local UF = E:GetModule("UnitFrames")
 local T = W.Modules.Tooltips
 local LFGPI = W.Utilities.LFGPlayerInfo
 
+local C = W.Utilities.Color
+
+local _G = _G
 local format = format
+local gsub = gsub
 local ipairs = ipairs
+local strfind = strfind
 
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 
@@ -109,10 +114,7 @@ function T:AddGroupInfo(tooltip, resultID)
 		tooltip:AddLine(W.Title .. " " .. L["Party Info"])
 	end
 
-	local data = LFGPI:GetPartyInfo(config.template)
-	if data then
-		addRoleInformation(tooltip, data, config)
-	end
+	addRoleInformation(tooltip, LFGPI:GetPartyInfo(config.template), config)
 
 	tooltip:Show()
 end
@@ -122,8 +124,8 @@ function T:GroupInfo()
 		F.Print(
 			format(
 				L["%s detected, %s will be disabled automatically."],
-				"|cffff3860" .. L["Premade Groups Filter"] .. "|r",
-				"|cff00a8ff" .. L["Tooltips"] .. " - " .. L["Group Info"] .. "|r"
+				C.StringByTemplate(L["Premade Groups Filter"], "yellow-400"),
+				C.StringByTemplate(L["Tooltips"] .. " - " .. L["Group Info"], "sky-400")
 			)
 		)
 		E.db.WT.tooltips.groupInfo.enable = false

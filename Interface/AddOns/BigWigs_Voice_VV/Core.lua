@@ -30,6 +30,7 @@ BigWigsAPI.RegisterVoicePack("VV")
 
 local VoiceID = "中文语音：VV(女)"
 
+--addonTbl.API:RegisterCountdown(VoiceID, {
 BigWigsAPI:RegisterCountdown(VoiceID, {
    "Interface\\AddOns\\BigWigs_Voice_VV\\Media\\Sounds\\1.ogg",
    "Interface\\AddOns\\BigWigs_Voice_VV\\Media\\Sounds\\2.ogg",

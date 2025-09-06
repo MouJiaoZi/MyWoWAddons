@@ -104,6 +104,7 @@ G.Encounters[2387] = {
 					type = "cast",
 					spellID = 328206,
 					glow = true,
+					group = 1,
 				},
 				{ -- 首领模块 石化血肉 对我施法计时圆圈（✓）
 					category = "BossMod",

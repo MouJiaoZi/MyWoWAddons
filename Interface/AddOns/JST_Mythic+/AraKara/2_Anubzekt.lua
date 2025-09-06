@@ -52,6 +52,7 @@ G.Encounters[2584] = {
 					spellID = 442210,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 流丝束缚（✓）
 					category = "PlateAlert",

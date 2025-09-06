@@ -53,6 +53,7 @@ G.Encounters[2406] = {
 					dur = 2,
 					text = L["射线"],
 					glow = true,
+					group = 1,
 					sound = "[ray]cast",
 				},
 				{ -- 首领模块 分段计时条 折射罪光（✓）

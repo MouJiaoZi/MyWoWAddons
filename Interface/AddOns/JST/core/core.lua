@@ -166,19 +166,31 @@ local function CheckAuraType(aura_type, aura_data)
 	end
 end
 
-T.CheckUnit = function(alert_unit, unit, tank)
+T.CheckUnit = function(unit, alert_unit, roles)
 	if alert_unit == "group" then
 		if IsInRaid() then
-			if tank then
-				return string.find(unit, "raid") and UnitGroupRolesAssigned(unit) == "TANK"
-			else
-				return string.find(unit, "raid")
+			if string.find(unit, "raid") then
+				if roles then
+					for _, role in pairs(roles) do
+						if UnitGroupRolesAssigned(unit) == role then
+							return true
+						end
+					end
+				else
+					return true
+				end
 			end
 		else
-			if tank then
-				return (unit == "player" or string.find(unit, "party")) and UnitGroupRolesAssigned(unit) == "TANK"
-			else
-				return unit == "player" or string.find(unit, "party")
+			if unit == "player" or string.find(unit, "party") then
+				if roles then
+					for _, role in pairs(roles) do
+						if UnitGroupRolesAssigned(unit) == role then
+							return true
+						end
+					end
+				else
+					return true
+				end
 			end
 		end
 	elseif alert_unit == "boss" then
@@ -329,27 +341,18 @@ local CreateAlertIcon = function(updater, group, tag)
 	icon.cooldown:SetReverse(true)
 	
 	-- 粗边框
-	icon.glow = CreateFrame("Frame", nil, icon, "BackdropTemplate")
-	icon.glow:SetFrameLevel(icon:GetFrameLevel()+1)
-	icon.glow:SetAllPoints(icon)
-	icon.glow:SetBackdrop({
-		bgFile = "Interface\\Buttons\\WHITE8x8",
-		edgeFile = "Interface\\Buttons\\WHITE8x8",
-		edgeSize = 5,
-		insets = { left = 5, right = 5, top = 5, bottom = 5}
-	})
-	icon.glow:SetBackdropColor(0, 0, 0, 0)	
+	T.SetHighLightBorderColor(icon, icon, {1, 1, 1}, 4)
 	
 	-- 粗边框闪烁动画
 	icon.anim = icon:CreateAnimationGroup()
 	icon.anim:SetLooping("BOUNCE")
 	
 	icon.anim:SetScript("OnStop", function()
-		icon.glow:SetAlpha(1)
+		icon.innerBD:SetAlpha(1)
 	end)
 	
 	icon.timer = icon.anim:CreateAnimation("Alpha")
-	icon.timer:SetChildKey("glow")
+	icon.timer:SetChildKey("innerBD")
 	icon.timer:SetDuration(.3)
 	icon.timer:SetFromAlpha(1)
 	icon.timer:SetToAlpha(.2)
@@ -439,10 +442,10 @@ local CreateAlertIcon = function(updater, group, tag)
 		self:update_onedit("all")
 		
 		if args.hl and args.hl ~= "" then
-			self.glow:SetBackdropBorderColor(unpack(G.hl_colors[gsub(args.hl, "_flash", "")]))
-			self.glow:Show()
+			self.innerBD:SetBackdropBorderColor(unpack(G.hl_colors[gsub(args.hl, "_flash", "")]))
+			self.innerBD:Show()
 		else
-			self.glow:Hide()
+			self.innerBD:Hide()
 		end
 		
 		local spellName = C_Spell.GetSpellName(args.spellID)
@@ -734,7 +737,7 @@ function AlertIcon_Aura_Updater:AuraFullCheck(unit, GUID)
 		AuraUtil.ForEachAura(unit, auraType, nil, function(aura_data)
 			local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 			local args = T.ValueFromPath(G.Current_Data, {"AlertIcon", "aura", spellID})
-			if args and T.CheckUnit(args.unit, unit) and CheckAuraType(args.aura_type, aura_data) then
+			if args and T.CheckUnit(unit, args.unit) and CheckAuraType(args.aura_type, aura_data) then
 				local enable = T.ValueFromDB({"AlertIcon", "aura", spellID, "enable"})
 				local aura_tag = GUID.."-"..aura_data.auraInstanceID
 				if enable and not self.actives_bytag[aura_tag] then					
@@ -766,7 +769,7 @@ AlertIcon_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 					for _, aura_data in pairs(updateInfo.addedAuras) do
 						local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 						local args = T.ValueFromPath(G.Current_Data, {"AlertIcon", "aura", spellID})
-						if args and T.CheckUnit(args.unit, unit) and CheckAuraType(args.aura_type, aura_data) then
+						if args and T.CheckUnit(unit, args.unit) and CheckAuraType(args.aura_type, aura_data) then
 							local enable = T.ValueFromDB({"AlertIcon", "aura", spellID, "enable"})
 							local GUID = UnitGUID(unit)
 							local aura_tag = GUID and GUID.."-"..aura_data.auraInstanceID
@@ -1401,6 +1404,7 @@ local CreateAlertBar = function(updater, group, tag)
 end
 
 -- 计时条：施法
+
 local AlertBar_Cast_Updater = CreateUpdater(CreateAlertBar, BarFrame, BarFrame2, BarFrame3)
 
 AlertBar_Cast_Updater.MultiSpellIDs = {}
@@ -1409,6 +1413,10 @@ AlertBar_Cast_Updater.count_data = {}
 T.CreateCast = function(option_page, category, args)
 	local details = {}
 	local detail_options = {}
+	
+	if not args.group then
+		args.group = 2
+	end
 	
 	if not args.color then
 		args.color = T.GetSpellColor(args.spellID)
@@ -1432,7 +1440,7 @@ T.CreateCast = function(option_page, category, args)
 	AddData(args, option_page.engageTag, option_page.mapTag, category, args.spellID)
 end
 
-function AlertBar_Cast_Updater:update_layout(event_type, tag, bar, args, cast_spellID, dur)
+function AlertBar_Cast_Updater:update_layout(event_type, tag, bar, args, cast_spellID, dur, exp_time)
 	bar:display(args)
 	
 	local flagicons = args.ficon and T.GetFlagIconStr(args.ficon) or ""
@@ -1454,7 +1462,7 @@ function AlertBar_Cast_Updater:update_layout(event_type, tag, bar, args, cast_sp
 	end
 	
 	bar.dur = dur
-	bar.exp_time = GetTime() + dur
+	bar.exp_time = exp_time or GetTime() + dur
 	
 	bar:SetScript("OnUpdate", function(s, e)
 		s.t = s.t + e
@@ -1522,7 +1530,7 @@ function AlertBar_Cast_Updater:update_range(bar, args, unit)
 end
 
 function AlertBar_Cast_Updater:update_target(bar, args, unit)
-	if args.show_tar or args.tank then
+	if args.show_tar then
 		local target_unit = T.GetTarget(unit)		
 		if target_unit then
 			local GUID = UnitGUID(target_unit)
@@ -1538,7 +1546,7 @@ function AlertBar_Cast_Updater:play_sound(event_type, bar, args, unit)
 	if args.sound and string.find(args.sound, event_type) and T.ValueFromDB(bar.path)["sound_bool"] and not bar.ofr and SoundStrFilter(args.sound) then
 		T.PlaySound(string.match(args.sound, "%[(.+)%]"..event_type))
 		
-		if args.show_tar or args.tank then -- 与朗读序号冲突
+		if args.show_tar then -- 与朗读序号冲突
 			C_Timer.After(1, function()
 				local str = bar.mid:GetText()
 				if str then
@@ -1567,9 +1575,9 @@ function AlertBar_Cast_Updater:play_sound(event_type, bar, args, unit)
 	end
 end
 
-function AlertBar_Cast_Updater:update(event_type, cast_Tag, bar, args, unit, cast_spellID, dur)
+function AlertBar_Cast_Updater:update(event_type, cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
 	-- 外观
-	self:update_layout(event_type, cast_Tag, bar, args, cast_spellID, dur)
+	self:update_layout(event_type, cast_Tag, bar, args, cast_spellID, dur, exp_time)
 
 	-- 序号
 	self:update_index(event_type, bar, args)
@@ -1596,9 +1604,10 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 					local startTimeMS, endTimeMS = select(4, UnitCastingInfo(unit))
 					local cast_Tag = cast_GUID
 					if startTimeMS and endTimeMS and not self.actives_bytag[cast_Tag] then
-						local bar = self:GetAlert((args.tank and 3) or (args.glow and 1) or 2, cast_Tag)
+						local bar = self:GetAlert(args.group, cast_Tag)
 						local dur = (endTimeMS - startTimeMS)/1000
-						self:update("cast", cast_Tag, bar, args, unit, cast_spellID, dur)
+						local exp_time = endTimeMS/1000
+						self:update("cast", cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
 					end
 				end
 			end
@@ -1623,9 +1632,10 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 					local cast_Tag = GUID and "Channel-"..GUID
 					local startTimeMS, endTimeMS = select(4, UnitChannelInfo(unit))
 					if startTimeMS and endTimeMS and cast_Tag and not self.actives_bytag[cast_Tag] then
-						local bar = self:GetAlert((args.tank and 3) or (args.glow and 1) or 2, cast_Tag)
+						local bar = self:GetAlert(args.group or 2, cast_Tag)
 						local dur = (endTimeMS - startTimeMS)/1000
-						self:update("channel", cast_Tag, bar, args, unit, cast_spellID, dur)
+						local exp_time = endTimeMS/1000
+						self:update("channel", cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
 					end
 				end
 			end
@@ -1650,7 +1660,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 				if enable then
 					local cast_Tag = "Succeeded-"..cast_GUID
 					if not self.actives_bytag[cast_Tag] then
-						local bar = self:GetAlert((args.tank and 3) or (args.glow and 1) or 2, cast_Tag)
+						local bar = self:GetAlert(args.group, cast_Tag)
 						self:update("cast", cast_Tag, bar, args, unit, cast_spellID, args.dur)
 					end
 				end
@@ -1705,6 +1715,10 @@ AlertBar_CLEU_Updater.count_data = {}
 T.CreateCLEU = function(option_page, category, args)
 	local details = {}
 	local detail_options = {}
+	
+	if not args.group then
+		args.group = 2
+	end
 	
 	if not args.color then
 		args.color = T.GetSpellColor(args.spellID)
@@ -1805,7 +1819,7 @@ function AlertBar_CLEU_Updater:update_range(bar, args, sourceGUID)
 end
 
 function AlertBar_CLEU_Updater:update_target(bar, args, destGUID)
-	if args.show_tar or args.tank then
+	if args.show_tar then
 		if destGUID then
 			bar.mid:SetText(T.ColorNickNameByGUID(destGUID))
 		else
@@ -1818,7 +1832,7 @@ function AlertBar_CLEU_Updater:play_sound(bar, args, destGUID)
 	if args.sound and T.ValueFromDB(bar.path)["sound_bool"] and not bar.ofr and SoundStrFilter(args.sound) then
 		T.PlaySound(string.match(args.sound, "%[(.+)%]"))
 		
-		if (args.show_tar or args.tank) and destGUID then -- 与朗读序号冲突
+		if args.show_tar and destGUID then -- 与朗读序号冲突
 			C_Timer.After(1, function()
 				local name = T.GetNameByGUID(destGUID)
 				if name then
@@ -1876,7 +1890,7 @@ AlertBar_CLEU_Updater:SetScript("OnEvent", function(self, event, ...)
 				local countTag = args.copy and ("-"..self.count_data[args.spellID]) or ""
 				local cleuTag = "CLEU-"..sub_event.."-"..log_spellID..countTag
 
-				local bar = self:GetAlert((args.tank and 3) or (args.glow and 1) or 2, cleuTag)
+				local bar = self:GetAlert(args.group, cleuTag)
 				self:update(cleuTag, bar, args, log_spellID, sourceGUID, destGUID)
 			end
 		end
@@ -1909,6 +1923,10 @@ AlertBar_Aura_Updater.count_data = {}
 T.CreateAuraBar = function(option_page, category, args)
 	local details = {}
 	local detail_options = {}
+	
+	if not args.group then
+		args.group = 2
+	end
 	
 	if not args.color then
 		args.color = T.GetSpellColor(args.spellID)
@@ -1961,7 +1979,7 @@ function AlertBar_Aura_Updater:update_range(bar, args, GUID)
 end
 
 function AlertBar_Aura_Updater:update_target(bar, args, GUID)
-	if args.show_tar or args.tank then
+	if args.show_tar then
 		if GUID then
 			bar.mid:SetText(T.ColorNickNameByGUID(GUID))
 		else
@@ -1974,7 +1992,7 @@ function AlertBar_Aura_Updater:play_sound(bar, args, GUID)
 	if args.sound and T.ValueFromDB(bar.path)["sound_bool"] and not bar.ofr and SoundStrFilter(args.sound) then
 		T.PlaySound(string.match(args.sound, "%[(.+)%]"))
 		
-		if (args.show_tar or args.tank) and GUID then -- 与朗读序号冲突
+		if args.show_tar and GUID then -- 与朗读序号冲突
 			C_Timer.After(1, function()
 				local name = T.GetNameByGUID(GUID)
 				if name then
@@ -2063,7 +2081,12 @@ function AlertBar_Aura_Updater:update(aura_tag, bar, args, GUID, aura_data, appl
 
 	-- 时间刷新
 	if bar.duration_old ~= duration or bar.exp_time_old ~= exp_time then
-		if duration > 0 and exp_time > 0 then
+		if args.force_full then
+			bar:SetMinMaxValues(0, 1)
+			bar:SetValue(1)
+			bar.right:SetText("")
+			bar:SetScript("OnUpdate", nil)
+		elseif duration > 0 and exp_time > 0 then
 			bar:SetMinMaxValues(0, duration)
 			bar:SetScript("OnUpdate", function(s, e)
 				s.t = s.t + e
@@ -2111,11 +2134,11 @@ function AlertBar_Aura_Updater:AuraFullCheck(unit, GUID)
 		AuraUtil.ForEachAura(unit, auraType, nil, function(aura_data)
 			local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 			local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "aura", spellID})
-			if args and T.CheckUnit(args.unit, unit, args.tank) and CheckAuraType(args.aura_type, aura_data) then
+			if args and T.CheckUnit(unit, args.unit, args.roles) and CheckAuraType(args.aura_type, aura_data) then
 				local enable = T.ValueFromDB({"AlertTimerbar", "aura", spellID, "enable"})
 				local aura_tag = GUID.."-"..aura_data.auraInstanceID
 				if enable and not self.actives_bytag[aura_tag] then
-					local bar = self:GetAlert((args.tank and 3) or (args.glow and 1) or 2, aura_tag)
+					local bar = self:GetAlert(args.group, aura_tag)
 					self:update(aura_tag, bar, args, GUID, aura_data, true)
 				end
 			end
@@ -2143,12 +2166,12 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 					for _, aura_data in pairs(updateInfo.addedAuras) do
 						local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 						local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "aura", spellID})
-						if args and T.CheckUnit(args.unit, unit, args.tank) and CheckAuraType(args.aura_type, aura_data) then
+						if args and T.CheckUnit(unit, args.unit, args.roles) and CheckAuraType(args.aura_type, aura_data) then
 							local enable = T.ValueFromDB({"AlertTimerbar", "aura", spellID, "enable"})
 							local GUID = UnitGUID(unit)
 							local aura_tag = GUID and GUID.."-"..aura_data.auraInstanceID
 							if enable and aura_tag and not self.actives_bytag[aura_tag] then
-								local bar = self:GetAlert((args.tank and 3) or (args.glow and 1) or 2, aura_tag)
+								local bar = self:GetAlert(args.group, aura_tag)
 								self:update(aura_tag, bar, args, GUID, aura_data, true)
 							end
 						end
@@ -2233,7 +2256,7 @@ function AlertBar_Test_Updater:update(key, bar, args)
 	bar.icon:SetTexture(C_Spell.GetSpellTexture(args.spellID))
 	bar.left:SetText(C_Spell.GetSpellName(args.spellID))
 	
-	if args.show_tar or args.tank then
+	if args.show_tar then
 		bar.mid:SetText(T.ColorNickNameByGUID(G.PlayerGUID))
 	else
 		bar.mid:SetText("")
@@ -2272,15 +2295,15 @@ function AlertBar_Test_Updater:update(key, bar, args)
 end
 
 local TestAlertBars = {
-	{type = "test", spellID = 139, color = {.9, .5, 0}, dur = 6, glow = true, tags = {2, 4}},
+	{type = "test", spellID = 139, color = {.9, .5, 0}, dur = 6, group = 1, glow = true, tags = {2, 4}},
 	{type = "test", spellID = 2908, color = {.2, .6, 1}, dur = 10},
-	{type = "test", spellID = 58461, color = {1, .6, .2}, dur = 15, tank = true},
-	{type = "test", spellID = 192517, color = {.02, .6, .83}, dur = 20, tank = true},
+	{type = "test", spellID = 58461, color = {1, .6, .2}, dur = 15, group = 3, show_tar = true, roles = {"TANK"}},
+	{type = "test", spellID = 192517, color = {.02, .6, .83}, dur = 20, group = 3, show_tar = true, roles = {"TANK"}},
 }
 
 function BarFrame:PreviewShow()
 	for i, args in pairs(TestAlertBars) do
-		local bar = AlertBar_Test_Updater:GetAlert((args.tank and 3) or (args.glow and 1) or 2, args.spellID)
+		local bar = AlertBar_Test_Updater:GetAlert(args.group, args.spellID)
 		AlertBar_Test_Updater:update(args.spellID, bar, args)
 	end
 end
@@ -2652,8 +2675,6 @@ T.RegisterEventAndCallbacks(AlertText_Power_Updater, {
 local AlertText_Spell_Updater = CreateUpdater(CreateAlertText, TextFrame, TextFrame2)
 
 T.CreateAlertTextSpell = function(option_page, category, args)
-	
-	
 	local details = {}
 	local detail_options = {}
 	
@@ -2674,9 +2695,7 @@ T.CreateAlertTextSpell = function(option_page, category, args)
 	local path = {category, args.type, args.data.spellID}
 	T.InitSettings(path, args.enable_tag, args.ficon, details)
 	T.Create_TextAlert_Options(option_page, category, path, args, detail_options)
-	
-	
-	
+		
 	AddData(args, option_page.engageTag, option_page.mapTag, category, args.data.spellID)
 end
 
@@ -4833,10 +4852,7 @@ local SoundFrames = {}
 local PASoundTiggerFrames = {}
 local SoundAlertMultiSpellData = {}
 
-local MyDispelState = {
-	HARMFUL = {},
-	HELPFUL = {},
-}
+local MyDispelState = {}
 
 -- 7 魔法 8 诅咒 9 中毒 10 诅咒 11 激怒 13 流血
 
@@ -4844,73 +4860,73 @@ local Dispel_Data = {
 	PRIEST = {
 		["HARMFUL"] = {
 			[7] = {
-				[527] = 1, -- 纯净术
-				[32375] = 1, -- 群体驱散
+				[527] = {spellID = 527}, -- 纯净术
+				[32375] = {spellID = 32375}, -- 群体驱散
 			},
 			[10] = {
-				[390632] = 1, -- 强化纯净术
-				[213634] = 1, -- 净化疾病
+				[390632] = {spellID = 527}, -- 强化纯净术
+				[213634] = {spellID = 213634}, -- 净化疾病
 			},
 		},
 		["HELPFUL"] = {
 			[7] = {
-				[528] = 1, -- 驱散魔法
-				[32375] = 1, -- 群体驱散
+				[528] = {spellID = 528}, -- 驱散魔法
+				[32375] = {spellID = 32375}, -- 群体驱散
 			},
 		},
 	},
 	DRUID = {
 		["HARMFUL"] = {
 			[7] = {
-				[88423] = 1, -- 自然之愈
+				[88423] = {spellID = 88423}, -- 自然之愈
 			},
 			[8] = {
-				[392378] = 1, -- 强化自然之愈
-				[2782] = 1, -- 清除腐蚀
+				[392378] = {spellID = 88423}, -- 强化自然之愈
+				[2782] = {spellID = 2782}, -- 清除腐蚀
 			},
 			[9] = {
-				[392378] = 1, -- 强化自然之愈
-				[2782] = 1, -- 清除腐蚀
+				[392378] = {spellID = 88423}, -- 强化自然之愈
+				[2782] = {spellID = 2782}, -- 清除腐蚀
 			},
 		},
 		["HELPFUL"] = {
 			[11] = {
-				[2908] = 1, -- 安抚
+				[2908] = {spellID = 2908}, -- 安抚
 			},
 		},
 	},
 	SHAMAN = { 
 		["HARMFUL"] = {
 			[7] = {
-				[77130] = 1, -- 净化灵魂
+				[77130] = {spellID = 77130}, -- 净化灵魂
 			},
 			[8] = {
-				[51886] = 1, -- 净化灵魂
-				[383016] = 1, -- 强化净化灵魂
+				[51886] = {spellID = 51886}, -- 净化灵魂
+				[383016] = {spellID = 77130}, -- 强化净化灵魂
 			},
 			--[9] = {
-			--	[383013] = 1, -- 清毒图腾
+			--	[383013] = {spellID = 383013}, -- 清毒图腾
 			--},
 		},
 		["HELPFUL"] = {
 			[7] = {
-				[370] = 1, -- 净化术
-				[378773] = 1, -- 强效净化术
+				[370] = {spellID = 370}, -- 净化术
+				[378773] = {spellID = 378773}, -- 强效净化术
 			},
 		},
 	},
 	PALADIN = {
 		["HARMFUL"] = {
 			[7] = {
-				[4987] = 1, -- 清洁术
+				[4987] = {spellID = 4987}, -- 清洁术
 			},
 			[9] = {
-				[213644] = 1, -- 清毒术
-				[393024] = 1, -- 强化清洁术
+				[213644] = {spellID = 213644}, -- 清毒术
+				[393024] = {spellID = 4987}, -- 强化清洁术
 			},
 			[10] = {
-				[213644] = 1, -- 清毒术
-				[393024] = 1, -- 强化清洁术
+				[213644] = {spellID = 213644}, -- 清毒术
+				[393024] = {spellID = 4987}, -- 强化清洁术
 			},
 		},
 	},
@@ -4920,32 +4936,32 @@ local Dispel_Data = {
 	MAGE = { 
 		["HARMFUL"] = {
 			[8] = {
-				[475] = 1, -- 解除诅咒
+				[475] = {spellID = 475}, -- 解除诅咒
 			},
 		},
 	},
 	WARLOCK = { 
 		["HARMFUL"] = {
 			[7] = {
-				[89808] = 2, -- 烧灼驱魔(宠物)
+				[89808] = {spellID = 89808, isPet = true}, -- 烧灼驱魔(宠物)
 			},
 		},
 	},
 	HUNTER = { 
 		["HELPFUL"] = {
 			[7] = {
-				[19801] = 1, -- 宁神射击
+				[19801] = {spellID = 19801}, -- 宁神射击
 			},
 			[11] = {
-				[19801] = 1, -- 宁神射击
+				[19801] = {spellID = 19801}, -- 宁神射击
 			},
 		},
 	},
 	ROGUE = { 
 		["HELPFUL"] = {
-			[11] = {
-				[5938] = 1, -- 毒刃
-			},
+			--[11] = {
+			--	[5938] = {spellID = 5938}, -- 毒刃
+			--},
 		},
 	},
 	DEATHKNIGHT = {
@@ -4954,75 +4970,76 @@ local Dispel_Data = {
 	MONK = {
 		["HARMFUL"] = {
 			[7] = {
-				[115450] = 1, -- 清创生血（治疗）
+				[115450] = {spellID = 115450}, -- 清创生血（治疗）
 			},
 			[9] = {
-				[218164] = 1, -- 清创生血
-				[388874] = 1, -- 强化清创生血
+				[218164] = {spellID = 218164}, -- 清创生血
+				[388874] = {spellID = 115450}, -- 强化清创生血
 			},
 			[10] = {
-				[218164] = 1, -- 清创生血
-				[388874] = 1, -- 强化清创生血
+				[218164] = {spellID = 218164}, -- 清创生血
+				[388874] = {spellID = 115450}, -- 强化清创生血
 			},
 		},
 	},
 	DEMONHUNTER = {
 		["HELPFUL"] = {
 			[7] = {
-				[278326] = 1, -- 吞噬魔法
+				[278326] = {spellID = 278326}, -- 吞噬魔法
 			},
 		},
 	},
 	EVOKER = {
 		["HARMFUL"] = {
 			[7] = {
-				[360823] = 1, -- 自然平衡
+				[360823] = {spellID = 360823}, -- 自然平衡
 			},
 			[8] = {
-				[374251] = 1, -- 灼烧之焰
+				[374251] = {spellID = 374251}, -- 灼烧之焰
 			},
 			[9] = {
-				[365585] = 1, -- 净除
-				[374251] = 1, -- 灼烧之焰
+				[365585] = {spellID = 365585}, -- 净除
+				[374251] = {spellID = 374251}, -- 灼烧之焰
 			},
 			[10] = {
-				[374251] = 1, -- 灼烧之焰
+				[374251] = {spellID = 374251}, -- 灼烧之焰
 			},
 			[13] = {
-				[374251] = 1, -- 灼烧之焰
+				[374251] = {spellID = 374251}, -- 灼烧之焰
 			},
 		},
 		["HELPFUL"] = {
 			[11] = {
-				[374346] = 1, -- 震魂摄魄
+				[374346] = {spellID = 406971}, -- 震魂摄魄
 			},
 		},
 	},
 }
 
-local function UpdateMyDispelState()
+local function UpdateMyDispelState()	
+	MyDispelState = table.wipe(MyDispelState)
+	
 	for aura_type, info in pairs(Dispel_Data[G.myClass]) do
+		if not MyDispelState[aura_type] then
+			MyDispelState[aura_type] = {}
+		end
+		
 		for tag, spellIDs in pairs(info) do
-			local can_dispel
-			
-			for spellID, spell_type in pairs(spellIDs) do
-				if not can_dispel then
-					if spell_type == 1 then
-						if IsPlayerSpell(spellID) then				
-							can_dispel = true
-						end
-					elseif spell_type == 2 then
-						if IsSpellKnown(spellID, true) then
-							can_dispel = true
-						end
-					end
-				end
+		
+			if not MyDispelState[aura_type][tag] then
+				MyDispelState[aura_type][tag] = {}
 			end
 			
-			if can_dispel then
-				MyDispelState[aura_type][tag] = true
-			else
-				MyDispelState[aura_type][tag] = nil
+			for spellID, info in pairs(spellIDs) do
+				if not info.isPet then
+					if IsPlayerSpell(spellID) then			
+						MyDispelState[aura_type][tag][spellID] = info
+					end
+				else
+					if C_SpellBook.IsSpellKnown(spellID, 1) then
+						MyDispelState[aura_type][tag][spellID] = info
+					end
+				end
 			end
 		end
 	end
@@ -5032,6 +5049,18 @@ G.PASoundTiggerFrames = PASoundTiggerFrames
 
 local SoundTrigger = CreateFrame("Frame", addon_name.."SoundTrigger", FrameHolder)
 SoundTrigger.last_dispel_played = 0
+
+local function IsDispelUsable(aura_type, dispel_type)
+	if GetTime() - SoundTrigger.last_dispel_played < 5 then return end	
+	local spells = MyDispelState[aura_type] and MyDispelState[aura_type][dispel_type]
+	if spells then
+		for spellID, info in pairs(spells) do
+			if T.MySpellCheck(info.spellID, info.isPet) then
+				return true
+			end
+		end
+	end
+end
 
 SoundTrigger:SetScript("OnEvent", function(self, event, ...)	
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
@@ -5048,7 +5077,7 @@ SoundTrigger:SetScript("OnEvent", function(self, event, ...)
 				local enable = T.ValueFromDB({"Sound", sound_type, config_spellID, "enable"})
 				if enable then
 					if info.dispel_type then
-						if MyDispelState[info.aura_type][info.dispel_type] and GetTime() - SoundTrigger.last_dispel_played >= 8 then -- 我可以驱散
+						if IsDispelUsable(info.aura_type, info.dispel_type) then -- 我可以驱散
 							if info.amount then
 								if amount and amount >= info.amount then
 									T.PlaySound(info.file)
@@ -5198,11 +5227,7 @@ end
 ----------------------------------------------------------
 -------------------[[    团队框架图标    ]]-----------------
 ----------------------------------------------------------
-local RFIconFrames = {
-	Cast = {},
-	Aura = {},
-	Msg = {},
-}
+local RFIconFrames = {}
 local RFIconMultiSpellIDs = {} -- 转换技能ID
 local RFIconHolders = {}
 local RFIcons = {}
@@ -5749,7 +5774,8 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 		end
 	elseif event == "UNIT_RAID_BOSS_WHISPER" then
 		local unit, GUID, msg = ...
-		for spellID, info in pairs(RFIconFrames["Msg"]) do
+		if not RFIconFrames.Msg then return end
+		for spellID, info in pairs(RFIconFrames.Msg) do
 			if string.find(msg, info.msg) then
 				local enable = T.ValueFromDB({"RFIcon", "Msg", spellID, "enable"})
 				if enable then

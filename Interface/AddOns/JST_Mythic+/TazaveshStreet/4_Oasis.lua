@@ -132,6 +132,8 @@ G.Encounters[2452] = {
 					type = "cast",
 					spellID = 353783,
 					glow = true,
+					group = 1,
+					ficon = "14",
 				},
 			},
 		},

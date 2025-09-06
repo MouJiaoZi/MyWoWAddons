@@ -11,7 +11,7 @@ KeystoneLootCharDB = {
 ["statHighlightingVersatilityEnabled"] = true,
 ["statHighlightingMasteryEnabled"] = true,
 ["currentSeason"] = 15,
-["selectedSpecId"] = 269,
+["selectedSpecId"] = 268,
 ["statHighlightingNoStatsEnabled"] = true,
 ["statHighlightingCritEnabled"] = true,
 }

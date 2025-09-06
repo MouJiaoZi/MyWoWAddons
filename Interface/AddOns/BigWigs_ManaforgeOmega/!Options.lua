@@ -148,7 +148,7 @@ BigWigs:AddColors("The Soul Hunters", {
 	[1227355] = "cyan",
 	[1227685] = "blue",
 	[1227809] = {"blue","orange"},
-	[1233105] = {"blue","yellow"},
+	[1233105] = {"blue","green"},
 	[1233381] = "blue",
 	[1233672] = "red",
 	[1233968] = "blue",

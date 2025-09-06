@@ -131,6 +131,8 @@ L["落地"]					= "Land"
 L["连招"]					= "Combo"
 L["影子"]					= "Shadow"
 L["大球"]					= "Big ball"
+L["打坦技能"]				= "Tank spell"
+L["符文"]					= "Rune"
 
 -- 法术相关：效果
 L["易伤"]					= "Vulnerable"

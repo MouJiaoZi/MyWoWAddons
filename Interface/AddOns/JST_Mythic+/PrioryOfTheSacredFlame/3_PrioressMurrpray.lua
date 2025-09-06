@@ -102,6 +102,7 @@ G.Encounters[2573] = {
 					text = L["背对BOSS"],
 					sound = "[backto]cast,cd3",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 盲目之光（✓）
 					category = "AlertIcon",

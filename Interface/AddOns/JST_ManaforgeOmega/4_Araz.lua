@@ -152,17 +152,23 @@ G.Encounters[2687] = {
 					points = {hide = true},
 					events = {
 						["ENCOUNTER_ENGAGE_UNIT"] = true,
+						["ENCOUNTER_PHASE"] = true,
 					},
 					init = function(frame)
 						frame.start_mark = 5
 						frame.end_mark = 7
 						frame.mob_npcID = "240905"
 						frame.ignore_combat = true
+						frame.use_stored_mark = true
 						
 						T.InitRaidTarget(frame)
 					end,
 					update = function(frame, event, ...)
 						T.UpdateRaidTarget(frame, event, ...)
+						
+						if event == "ENCOUNTER_PHASE" then							
+							frame.marked = table.wipe(frame.marked)
+						end
 					end,
 					reset = function(frame, event)
 						T.ResetRaidTarget(frame)
@@ -1012,7 +1018,9 @@ G.Encounters[2687] = {
 					unit = "group",
 					spellID = 1228219,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 图标 星界印记（✓）
 					category = "AlertIcon",
@@ -1203,7 +1211,9 @@ G.Encounters[2687] = {
 					unit = "group",
 					spellID = 1228506,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 			},
 		},

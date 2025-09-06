@@ -3,6 +3,20 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.82
+Tazavesh: So'leah's Gambit update.
+The dispelling prompt sound will now detect whether the dispelling spell is not in cooldown.
+
+5.80
+The Soul Hunters intermission position assignment bug fix.
+Other error corrections.
+
+5.78
+Forgeweaver Araz Arcane Collector mark error correction.
+The Soul Hunters Devourer's Ire handover timimg correction.
+The Soul Hunters Correction of intermission position assignment in special circumstances.
+Other error corrections.
+
 5.74
 Delete the test module that was mistakenly added. If the update does not delete the relevant files, please delete JST_Test from the plugin folder.I'm very sorry.
 |cffff0000World of Warcraft\_retail_\Interface\AddOns\JST_Test DELETE THIS!!!|r

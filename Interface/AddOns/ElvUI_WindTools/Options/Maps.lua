@@ -953,8 +953,8 @@ do
 					desc = format(
 						"%s\n%s\n%s\n\n%s\n%s",
 						L["Placeholders"] .. ":",
-						format("%s - %s", C.StringByTemplate("%mplus%", "info"), L["M+ Level"]),
-						format("%s - %s", C.StringByTemplate("%numPlayers%", "info"), L["Number of Players"]),
+						format("%s - %s", C.StringByTemplate("%mplus%", "blue-400"), L["M+ Level"]),
+						format("%s - %s", C.StringByTemplate("%numPlayers%", "blue-400"), L["Number of Players"]),
 						L["Custom color can be used by adding the following code"] .. ":",
 						format("\124\124cff|cffff0000rr|r|cff00ff00gg|r|cff0000ffbb|r%s\124\124r", L["Custom String"])
 					),
@@ -1136,11 +1136,11 @@ options.eventTracker = {
 				},
 			},
 		},
-		khazAlgarEmissary = {
+		weeklyTWW = {
 			order = 12,
 			type = "group",
 			inline = true,
-			name = L["Khaz Algar Emissary"],
+			name = format("%s (%s)", L["Weekly Quest"], L["[ABBR] The War Within"]),
 			get = function(info)
 				return E.db.WT.maps.eventTracker[info[#info - 1]][info[#info]]
 			end,

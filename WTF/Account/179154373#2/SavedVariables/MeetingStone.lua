@@ -8,6 +8,12 @@ MEETINGSTONE_UI_DB = {
 ["FILTER_MULTY"] = true,
 ["IGNORE_LIST"] = {
 {
+["time"] = "2025-09-04 21:47",
+["dep"] = "由指定队长名屏蔽",
+["t"] = 2,
+["leader"] = "惡魔猎手-阿纳克洛斯",
+},
+{
 ["time"] = "2025-08-25 22:00",
 ["dep"] = "由指定队长名屏蔽",
 ["t"] = 2,
@@ -348,7 +354,7 @@ MEETINGSTONE_UI_DB = {
 ["PALADIN"] = false,
 ["PRIEST"] = false,
 ["IGNORE_TIPS_LOG"] = true,
-["FILTER_TANK"] = true,
+["FILTER_TANK"] = false,
 ["WARLOCK"] = false,
 ["DEMONHUNTER"] = false,
 ["SHAMAN"] = false,
@@ -358,7 +364,7 @@ MEETINGSTONE_UI_DB = {
 }
 MEETINGSTONE_UI_E_POINTS = {
 ["y"] = -1.007377147674561,
-["x"] = 120.0788650512695,
+["x"] = 120.0788879394531,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["QuickJoin"] = true,

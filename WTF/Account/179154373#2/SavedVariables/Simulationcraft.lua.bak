@@ -6,6 +6,9 @@ SimulationCraftDB = {
 },
 ["profiles"] = {
 ["某餃子 - 伊森利恩"] = {
+["minimap"] = {
+["minimapPos"] = 338.7088648243049,
+},
 },
 ["某饺子 - 伊森利恩"] = {
 },

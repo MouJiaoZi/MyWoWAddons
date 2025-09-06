@@ -2,7 +2,7 @@
 KeystoneLootDB = {
 ["keystoneItemLevelEnabled"] = true,
 ["favoritesShowAllSpecs"] = false,
-["showNewText"] = true,
+["showNewText"] = false,
 ["dbVersion"] = 6,
 ["raidLootReminderEnabled"] = true,
 ["minimapButtonPosition"] = 179.3670606222852,

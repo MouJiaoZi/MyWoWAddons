@@ -482,7 +482,7 @@ G.Encounters[2688] = {
 								local wait = next_dur - ahead
 								self.timer = C_Timer.NewTimer(wait, function()
 									self:GetNextPlayer()
-									self.timer_progress = C_Timer.NewTimer(wait, function()
+									self.timer_progress = C_Timer.NewTimer(ahead, function()
 										self:StartTimer()
 									end)
 								end)
@@ -876,7 +876,7 @@ G.Encounters[2688] = {
 				{ -- 首领模块 坍缩之星 剩余数量（待测试）
 					category = "BossMod",
 					spellID = 1233968,
-					enable_tag = "none",
+					enable_tag = "rl",
 					name = string.format(L["坍缩之星剩余数量"], T.GetIconLink(1233093)),
 					points = {a1 = "CENTER", a2 = "TOP", x = 0, y = -50, width = 80, height = 40},
 					events = {
@@ -910,9 +910,9 @@ G.Encounters[2688] = {
 							return total
 						end
 						
-						function frame:UpdateText()
+						function frame:UpdateText(force_show)
 							self.text:SetText(string.format("%s %d/%d", T.GetSpellIcon(1233093), frame.count, frame.total_count))
-							if frame.count > 0 then
+							if frame.count > 0 or force_show then
 								self.text:Show()
 							else
 								self.text:Hide()
@@ -922,6 +922,7 @@ G.Encounters[2688] = {
 						function frame:PreviewShow()
 							local count = math.random(0, 40)
 							self.text:SetText(string.format("%s %d/%d", T.GetSpellIcon(1233093), count, 40))
+							self.text:Show()
 						end
 						
 						function frame:PreviewHide()
@@ -970,6 +971,7 @@ G.Encounters[2688] = {
 					end,
 					reset = function(frame, event)
 						frame.text:Hide()
+						frame:Hide()
 					end,
 				},
 				{ -- 图标 黑暗残渣（✓）
@@ -1041,7 +1043,7 @@ G.Encounters[2688] = {
 						T.ResetPersonalSpellAlertbyAura(frame)
 					end,
 				},
-				{ -- 首领模块 分配 黑暗残渣（✓）
+				{ -- 首领模块 转阶段位置分配（✓）
 					category = "BossMod",
 					spellID = 1233093,
 					ficon = "12",
@@ -1069,14 +1071,6 @@ G.Encounters[2688] = {
 						frame.indexToMark = {1, 2, 7, 5, 4, 3, 6}
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
-						
-						function frame:init_data()
-							self.affectedCount = 0
-							self.affected = table.wipe(self.affected)
-							for i = 1, 7 do
-								self.affected[i] = {}
-							end
-						end
 						
 						function frame:assign()
 							self.intermissionCount = self.intermissionCount + 1
@@ -1165,14 +1159,12 @@ G.Encounters[2688] = {
 									T.PlaySound("mark\\mark"..markIndex)
 								end
 							end
-							
-							self:init_data()
 						end
 					end,
 					update = function(frame, event, ...)
 						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-							local unit, cast_GUID, cast_spellID = ...
 							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							
 							if sub_event == "SPELL_AURA_APPLIED" and spellID == 1242883 then -- 灵魂束缚
 								if frame.intermissionCount >= 2 then return end
             
@@ -1180,19 +1172,29 @@ G.Encounters[2688] = {
 								
 								local groupIndex = math.floor((frame.affectedCount - 1) / 3) + 1
 								
+								if not frame.affected[groupIndex] then
+									frame.affected[groupIndex] = {}
+								end
+								
 								table.insert(frame.affected[groupIndex], destGUID)
 								
 								if frame.affectedCount == 1 then
-									C_Timer.After(0.5, function()
+									C_Timer.After(1, function()
 										frame:assign()
 									end)
 								end
+								
+							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == 1245978 then -- 灵魂束缚(BOSS) 转阶段之后才重置
+								frame.affected = table.wipe(frame.affected)
+								frame.affectedCount = 0
+								
 							end
 						elseif event == "ENCOUNTER_START" then
 							frame.intermissionCount = 0
 							frame.isWarlockOrShadowPriest = table.wipe(frame.isWarlockOrShadowPriest)
 							frame.isHealer = table.wipe(frame.isHealer)
-							frame:init_data()
+							frame.affected = table.wipe(frame.affected)
+							frame.affectedCount = 0
 							
 							 for unit in T.IterateGroupMembers() do
 								local GUID = UnitGUID(unit)
@@ -1575,7 +1577,9 @@ G.Encounters[2688] = {
 					unit = "group",
 					spellID = 1221490,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 图标 邪能之刃（✓）
 					category = "AlertIcon",
@@ -1728,7 +1732,9 @@ G.Encounters[2688] = {
 					unit = "group",
 					spellID = 1226493,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 换坦计时条 脆弱（✓）
 					category = "AlertTimerbar",
@@ -1737,7 +1743,9 @@ G.Encounters[2688] = {
 					unit = "group",
 					spellID = 1241917,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 嘲讽提示 脆弱吃魂剩余数量（✓）
 					category = "BossMod",
@@ -1878,6 +1886,7 @@ G.Encounters[2688] = {
 					type = "cast",
 					spellID = 1242259,
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 灵魂重碾（✓）
 					category = "AlertIcon",
@@ -2002,6 +2011,7 @@ G.Encounters[2688] = {
 					dur = 2.3,
 					sound = "[safe]cast",
 					glow = true,
+					group = 1,
 				},			
 			},
 		},
@@ -2063,6 +2073,7 @@ G.Encounters[2688] = {
 					spellID = 1227117,
 					text = L["冲击波"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 凋零烈焰（✓）
 					category = "AlertIcon",

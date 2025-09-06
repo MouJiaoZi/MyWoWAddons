@@ -1,5 +1,6 @@
 local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local TT = E:GetModule("Tooltip")
+local DT = E:GetModule("DataTexts")
 local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
@@ -49,6 +50,15 @@ function S:StyleIconsInTooltip(tt)
 		styleIconsInLine(_G[tt:GetName() .. "TextLeft" .. i])
 		styleIconsInLine(_G[tt:GetName() .. "TextRight" .. i])
 	end
+
+	for i = 1, 30 do
+		local texture = _G[tt:GetName() .. "Texture" .. i] ---@type Texture?
+		if texture and texture:IsShown() then
+			self:TryCropTexture(texture)
+		else
+			break
+		end
+	end
 end
 
 function S:ReskinTooltip(tt)
@@ -93,13 +103,14 @@ function S:TooltipFrames()
 		-- ours
 		E.ConfigTooltip,
 		E.SpellBookTooltip,
+		DT.tooltip,
 		-- libs
 		_G.LibDBIconTooltip,
 		_G.SettingsTooltip,
 	}
 
 	for _, tt in pairs(tooltips) do
-		if tt and tt ~= E.ScanTooltip and not tt.IsEmbedded and not tt:IsForbidden() then
+		if tt and not tt.IsEmbedded and not tt:IsForbidden() then
 			self:ReskinTooltip(tt)
 		end
 	end

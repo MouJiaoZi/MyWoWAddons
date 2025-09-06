@@ -127,6 +127,7 @@ G.Encounters["c525"] = {
 					spellID = 474337,
 					sound = "[change_pos]cast,cd2",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 碎切（✓）
 					category = "AlertIcon",
@@ -214,6 +215,7 @@ G.Encounters["c525"] = {
 					spellID = 462771,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 勘测光束（✓）
 					category = "PlateAlert",
@@ -298,6 +300,7 @@ G.Encounters["c525"] = {
 					type = "cast",
 					spellID = 468631,
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 鱼叉（✓）
 					category = "AlertIcon",
@@ -352,6 +355,7 @@ G.Encounters["c525"] = {
 					type = "cast",
 					spellID = 461796,
 					glow = true,
+					group = 1,
 				},
 			},
 		},
@@ -419,6 +423,7 @@ G.Encounters["c525"] = {
 					spellID = 465827,
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 扭曲精华（✓）
 					category = "AlertIcon",
@@ -488,6 +493,7 @@ G.Encounters["c525"] = {
 					type = "cast",
 					spellID = 471736,
 					glow = true,
+					group = 1,
 				},
 			},
 		},

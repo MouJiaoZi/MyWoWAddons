@@ -52,6 +52,7 @@ G.Encounters[2651] = {
 					text = L["全团AE"].."+"..L["射线"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 			},
 		},

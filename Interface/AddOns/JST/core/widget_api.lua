@@ -1037,6 +1037,10 @@ local filtermarks = {
 	[12] = true,
 }
 
+local custommarks = {
+	[14] = "|TInterface\\AddOns\\JST\\media\\interrupt_red.png:0:0:0:0:64:64:0:64:0:64|t"
+}
+
 -- 序号转字串
 --EncounterJournal_SetFlagIcon
 T.GetFlagIconStr = function(ficon, filter)
@@ -1046,16 +1050,21 @@ T.GetFlagIconStr = function(ficon, filter)
 		for i, mark in pairs(marks) do
 			local index = tonumber(mark)
 			if not filter or not filtermarks[index] then
-				local iconSize = 32
-				local columns = 256/iconSize -- 8
-				local rows = 64/iconSize -- 2
-				local l = mod(index, columns)*iconSize+8
-				local r = l+iconSize-14
-				local t = floor(index/columns)*iconSize+8
-				local b = t+iconSize-14
-				
-				local icon = string.format("|TInterface\\EncounterJournal\\UI-EJ-Icons:0:0:0:0:256:64:%d:%d:%d:%d|t", l, r, t, b)
-				str = str..icon
+				if custommarks[index] then
+					local icon = custommarks[index]
+					str = str..icon
+				else
+					local iconSize = 32
+					local columns = 256/iconSize -- 8
+					local rows = 64/iconSize -- 2
+					local l = mod(index, columns)*iconSize+8
+					local r = l+iconSize-14
+					local t = floor(index/columns)*iconSize+8
+					local b = t+iconSize-14
+					
+					local icon = string.format("|TInterface\\EncounterJournal\\UI-EJ-Icons:0:0:0:0:256:64:%d:%d:%d:%d|t", l, r, t, b)
+					str = str..icon
+				end
 			end
 		end
 	end
@@ -1166,22 +1175,22 @@ end
 T.SetHighLightBorderColor = function(frame, anchor, color, edgeSize)
 	local size = edgeSize or 5
 	
-	frame.glow = CreateFrame("Frame", nil, frame, "BackdropTemplate")
-	frame.glow:SetFrameLevel(frame:GetFrameLevel()+1)
-	frame.glow:SetAllPoints(anchor)
-	frame.glow:SetBackdrop({
+	frame.innerBD = CreateFrame("Frame", nil, frame, "BackdropTemplate")
+	frame.innerBD:SetFrameLevel(frame:GetFrameLevel()+1)
+	frame.innerBD:SetAllPoints(anchor)
+	frame.innerBD:SetBackdrop({
 		bgFile = "Interface\\Buttons\\WHITE8x8",
 		edgeFile = "Interface\\Buttons\\WHITE8x8",
 		edgeSize = size,
 		insets = { left = size, right = size, top = size, bottom = size}
 	})
-	frame.glow:SetBackdropColor(0, 0, 0, 0)
+	frame.innerBD:SetBackdropColor(0, 0, 0, 0)
 	
 	if type(color) == "table" then
-		frame.glow:SetBackdropBorderColor(unpack(color))
+		frame.innerBD:SetBackdropBorderColor(unpack(color))
 	else
 		local color_key = gsub(color, "_flash", "")
-		frame.glow:SetBackdropBorderColor(unpack(G.hl_colors[color_key]))
+		frame.innerBD:SetBackdropBorderColor(unpack(G.hl_colors[color_key]))
 	end
 end
 

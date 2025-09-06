@@ -162,7 +162,7 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				local unit = T.GUIDToUnit(GUID)
 				T.FireEvent("JST_PRIVATE_AURA_EVENT", unit, GUID)
 				
-			elseif string.match(MSG_TYPE, "target_me(%d+)") then
+			elseif MSG_TYPE and string.match(MSG_TYPE, "target_me(%d+)") then
 				local index = string.match(MSG_TYPE, "target_me(%d+)")
 				local unit = T.GUIDToUnit(GUID)
 				T.FireEvent("JST_PRIVATE_AURA_EVENT", unit, GUID, tonumber(index))
@@ -171,7 +171,7 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				local unit = T.GUIDToUnit(GUID)
 				T.FireEvent("JST_PRIVATE_AURA_CANCEL_EVENT", unit, GUID)
 				
-			elseif string.match(MSG_TYPE, "remove_me(%d+)") then
+			elseif MSG_TYPE and string.match(MSG_TYPE, "remove_me(%d+)") then
 				local index = string.match(MSG_TYPE, "remove_me(%d+)")
 				local unit = T.GUIDToUnit(GUID)
 				T.FireEvent("JST_PRIVATE_AURA_CANCEL_EVENT", unit, GUID, tonumber(index))
@@ -181,7 +181,7 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				local unit = T.GUIDToUnit(GUID)
 				T.FireEvent("JST_DISPEL_EVENT", unit, GUID, spellID)
 				
-			else
+			elseif message then
 				T.FireEvent("ADDON_MSG", channel, sender, string.split(",", message))
 			end
 			

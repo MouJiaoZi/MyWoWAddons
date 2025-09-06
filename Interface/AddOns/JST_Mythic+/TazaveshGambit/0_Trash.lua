@@ -20,41 +20,8 @@ G.Encounters["c392"] = {
 			spells = {
 				{355048},
 			},
-			options = {
-				{ -- 首领模块 小怪技能倒计时 破壳猛击
-					category = "BossMod",
-					spellID = 355048,
-					name = T.GetIconLink(355048)..L["倒计时"],
-					enable_tag = "none",
-					points = {hide = true},
-					events = {
-						["UNIT_ENTERING_COMBAT"] = true,
-						["GROUP_LEAVING_COMBAT"] = true,
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.cast_npcID = {
-							["178139"] = {
-								engage_cd = 7.6,
-								cast_cd = 15.8,
-								cast_gap = 5,
-							},
-						}
-						
-						frame.cast_spellID = 355048
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["击退"]
-						frame.text_color = T.GetSpellColor(frame.cast_spellID)
-						
-						T.InitMobCooldownText(frame)						
-					end,
-					update = function(frame, event, ...)
-						T.UpdateMobCooldownText(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetMobCooldownText(frame)
-					end,
-				},
-				{ -- 对我施法图标 破壳猛击
+			options = {				
+				{ -- 对我施法图标 破壳猛击（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 355048,
@@ -69,14 +36,15 @@ G.Encounters["c392"] = {
 				{355057},
 			},
 			options = {
-				{ -- 计时条 鱼人战吼
+				{ -- 计时条 鱼人战吼（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 355057,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
-				{ -- 姓名板打断图标 鱼人战吼
+				{ -- 姓名板打断图标 鱼人战吼（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 355057,
@@ -91,11 +59,11 @@ G.Encounters["c392"] = {
 				{355132},
 			},
 			options = {
-				{ -- 计时条 活力鱼串
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355132,
-					glow = true,
+				{ -- 姓名板NPC高亮 活力鱼串（✓）
+					category = "PlateAlert",
+					type = "PlateNpcID",
+					mobID = "179733",
+					hl_np = true,
 				},
 			},
 		},
@@ -104,12 +72,11 @@ G.Encounters["c392"] = {
 				{355234},
 			},
 			options = {
-				{ -- 计时条 不稳定的河豚
-					category = "AlertTimerbar",
-					type = "cast",
+				{ -- 声音 不稳定的河豚（✓）
+					category = "Sound",
+					sub_event = "SPELL_CAST_SUCCESS",
 					spellID = 355234,
-					text = L["炸弹"],
-					sound = "[bomb]cast",
+					file = "[outcircle]",
 				},
 			},
 		},
@@ -118,7 +85,7 @@ G.Encounters["c392"] = {
 				{355225},
 			},
 			options = {
-				{ -- 姓名板打断图标 水箭
+				{ -- 姓名板打断图标 水箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 355225,
@@ -126,13 +93,13 @@ G.Encounters["c392"] = {
 					interrupt = 2,
 					ficon = "6",
 				},
-				{ -- 对我施法图标 水箭
+				{ -- 对我施法图标 水箭（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 355225,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 水箭
+				{ -- 团队框架图标 水箭（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 355225,
@@ -144,7 +111,7 @@ G.Encounters["c392"] = {
 				{355464},
 			},
 			options = {
-				{ -- 计时条 投掷巨石
+				{ -- 计时条 投掷巨石（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 355464,
@@ -157,7 +124,7 @@ G.Encounters["c392"] = {
 				{355429},
 			},
 			options = {
-				{ -- 首领模块 小怪技能倒计时 海潮践踏
+				{ -- 首领模块 小怪技能倒计时 海潮践踏（✓）
 					category = "BossMod",
 					spellID = 355429,
 					name = T.GetIconLink(355429)..L["倒计时"],
@@ -190,13 +157,42 @@ G.Encounters["c392"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 海潮践踏
+				{ -- 计时条 海潮践踏（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 355429,
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
+				},
+				{ -- 首领模块 海潮践踏 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 355464,
+					enable_tag = "none",
+					name = T.GetIconLink(355429)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[355429] = {
+								event = "SPELL_CAST_START",
+								dur = 2,
+							},
+						}
+						frame.ignore_roles = {"TANK"}
+						frame.threshold = 80
+						
+						T.InitPersonalSpellAlertbyCLEU(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetPersonalSpellAlertbyCLEU(frame)
+					end,
 				},
 			},
 		},
@@ -205,7 +201,7 @@ G.Encounters["c392"] = {
 				{355584},
 			},
 			options = {
-				{ -- 计时条 充能脉冲
+				{ -- 计时条 充能脉冲（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 355584,
@@ -218,13 +214,13 @@ G.Encounters["c392"] = {
 				{355577},
 			},
 			options = {
-				{ -- 计时条 连环爆裂
+				{ -- 计时条 连环爆裂（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 355577,
 					sound = "[mindstep]cast",
 				},
-				{ -- 图标 连环爆裂
+				{ -- 图标 连环爆裂（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -240,7 +236,7 @@ G.Encounters["c392"] = {
 				{356843},
 			},
 			options = {
-				{ -- 姓名板打断图标 盐渍飞弹
+				{ -- 姓名板打断图标 盐渍飞弹（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 356843,
@@ -248,13 +244,13 @@ G.Encounters["c392"] = {
 					interrupt = 2,
 					ficon = "6",
 				},
-				{ -- 对我施法图标 盐渍飞弹
+				{ -- 对我施法图标 盐渍飞弹（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 356843,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 盐渍飞弹
+				{ -- 团队框架图标 盐渍飞弹（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 356843,
@@ -266,30 +262,19 @@ G.Encounters["c392"] = {
 				{356133},
 			},
 			options = {
-				{ -- 计时条 超级塞松啤酒
+				{ -- 计时条 超级塞松啤酒（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 356133,
+					ficon = "14",
 					glow = true,
+					group = 1,
 				},
-				{ -- 姓名板光环 超级塞松啤酒
+				{ -- 姓名板光环 超级塞松啤酒（✓）
 					category = "PlateAlert",
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
 					spellID = 356133,
-				},
-			},
-		},
-		{ -- 海盗船军官:利剑投掷
-			spells = {
-				{368661},
-			},
-			options = {
-				{ -- 计时条 利剑投掷
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 368661,
-					sound = "[outcircle]cast",
 				},
 			},
 		},
@@ -298,14 +283,15 @@ G.Encounters["c392"] = {
 				{357260},
 			},
 			options = {
-				{ -- 计时条 不稳定的裂隙
+				{ -- 计时条 不稳定的裂隙（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 357260,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
-				{ -- 姓名板打断图标 不稳定的裂隙
+				{ -- 姓名板打断图标 不稳定的裂隙（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 357260,
@@ -315,59 +301,16 @@ G.Encounters["c392"] = {
 				},
 			},
 		},
-		{ -- 热心的同谋:能量挥砍
-			spells = {
-				{357281},
-			},
-			options = {
-				{ -- 对我施法图标 能量挥砍
-					category = "AlertIcon",
-					type = "com",
-					spellID = 357281,
-					hl = "yel_flash",
-				},
-				{ -- 图标 能量挥砍
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 357281,
-					tip = L["易伤"].."%s10%",
-				},
-			},
-		},
-		{ -- 热心的同谋:重唤活力
-			spells = {
-				{357284},
-			},
-			options = {
-				{ -- 计时条 重唤活力
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 357284,
-					ficon = "6",
-					glow = true,
-				},
-				{ -- 姓名板打断图标 重唤活力
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 357284,
-					mobID = "180432",
-					interrupt = 2,
-					ficon = "6",
-				},
-			},
-		},
 		{ -- 盛装的星辰先知:游移之星
 			spells = {
 				{357226},
 			},
 			options = {
-				{ -- 计时条 游移之星
+				{ -- 计时条 游移之星（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 357226,
-					sound = "[dodge]cast",
+					sound = "[frontal]cast",
 				},
 			},
 		},
@@ -376,10 +319,10 @@ G.Encounters["c392"] = {
 				{357238},
 			},
 			options = {
-				{ -- 首领模块 小怪技能倒计时 流浪的脉冲星
+				{ -- 首领模块 小怪技能倒计时 流浪的脉冲星（✓）
 					category = "BossMod",
 					spellID = 357238,
-					name = T.GetIconLink(357238)..L["倒计时"],
+					name = T.GetIconLink(357238)..L["召唤小怪"]..L["倒计时"],
 					enable_tag = "none",
 					points = {hide = true},
 					events = {
@@ -397,8 +340,9 @@ G.Encounters["c392"] = {
 						}
 						
 						frame.cast_spellID = 357238
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["击退"]
+						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["召唤小怪"]
 						frame.text_color = T.GetSpellColor(frame.cast_spellID)
+						frame.sound_default = false
 						
 						T.InitMobCooldownText(frame)						
 					end,
@@ -409,17 +353,73 @@ G.Encounters["c392"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 流浪的脉冲星
+				{ -- 计时条 流浪的脉冲星（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 357238,
 					sound = "[add]cast",
 				},
-				{ -- 姓名板NPC高亮 流浪的脉冲星
+				{ -- 姓名板NPC高亮 流浪的脉冲星（✓）
 					category = "PlateAlert",
 					type = "PlateNpcID",
 					mobID = "180433",
 					hl_np = true,
+				},
+				{ -- 首领模块 流浪的脉冲星 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 357256,
+					enable_tag = "none",
+					name = T.GetIconLink(357238)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
+						["GROUP_LEAVING_COMBAT"] = true
+					},
+					custom = {
+						{
+							key = "hp_perc_sl",
+							text = L["血量阈值百分比"],
+							default = 50,
+							min = 10,
+							max = 90,
+						},
+					},
+					init = function(frame)
+						frame.mobs = {}
+						frame.mobsbyGUID = {}
+						frame.check = false
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_SUMMON" and spellID == 357238 then -- 流浪的脉冲星
+								table.insert(frame.mobs, destGUID)
+								frame.mobsbyGUID[destGUID] = true
+								if not frame.check then
+									frame.check = true
+									T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, C.DB["BossMod"][frame.config_id]["hp_perc_sl"], {"TANK"})
+								end
+							elseif sub_event == "UNIT_DIED" and frame.mobsbyGUID[destGUID] then -- 裂变
+								frame.mobsbyGUID[destGUID] = nil
+								tDeleteItem(frame.mobs, destGUID)
+								if #frame.mobs == 0 and frame.check then
+									frame.check = false
+									T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+								end
+							end
+						elseif event == "GROUP_LEAVING_COMBAT" then
+							frame.mobs = table.wipe(frame.mobs)
+							frame.mobsbyGUID = table.wipe(frame.mobsbyGUID)
+							frame.check = false
+							T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+						end
+					end,
+					reset = function(frame, event)
+						frame.mobs = table.wipe(frame.mobs)
+						frame.mobsbyGUID = table.wipe(frame.mobsbyGUID)
+						frame.check = false
+						T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+					end,
 				},
 			},
 		},

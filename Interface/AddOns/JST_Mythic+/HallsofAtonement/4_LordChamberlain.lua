@@ -139,6 +139,7 @@ G.Encounters[2413] = {
 					spellID = 328791,
 					sound = "[soak_line]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 哀伤仪式
 					category = "AlertIcon",
@@ -170,6 +171,7 @@ G.Encounters[2413] = {
 					dur = 3.5,
 					text = L["冲锋"],
 					glow = true,
+					group = 1,
 					sound = "[charge]cast",
 				},
 			},

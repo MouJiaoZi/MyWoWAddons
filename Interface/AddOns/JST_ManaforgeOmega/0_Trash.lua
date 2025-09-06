@@ -45,9 +45,12 @@ G.Encounters["r2810"] = { -- Test
 						["UNIT_AURA_ADD"] = true,
 						["UNIT_AURA_REMOVED"] = true,
 						["ZONE_CHANGED"] = true,
+						["ZONE_CHANGED_INDOORS"] = true,
 					},
 					init = function(frame)
-						local mapGroupID = C_Map.GetMapGroupID(2460)
+						T.RegisterWatchAuraSpellID(404468)
+						
+						local mapGroupID = C_Map.GetMapGroupID(2467)
 						local mapGroupMembersInfo = C_Map.GetMapGroupMembersInfo(mapGroupID)
 						
 						for index, mapGroupMemberInfo in ipairs(mapGroupMembersInfo) do
@@ -63,7 +66,7 @@ G.Encounters["r2810"] = { -- Test
 						
 						function frame:check()
 							local subZone = GetSubZoneText()
-							if subZone == frame.mapName and AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
+							if subZone == self.mapName and AuraUtil.FindAuraBySpellID(404468, "player", "HELPFUL") then
 								self.text_frame:Show()
 							else
 								self.text_frame:Hide()
@@ -76,6 +79,8 @@ G.Encounters["r2810"] = { -- Test
 							if unit == "player" and spellID == 404468 then
 								frame:check()
 							end
+						elseif event == "ZONE_CHANGED" or event == "ZONE_CHANGED_INDOORS" then
+							frame:check()
 						else
 							frame:check()
 						end

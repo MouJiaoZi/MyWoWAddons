@@ -76,6 +76,7 @@ G.Encounters["c378"] = {
 					spellID = 326450,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 忠心的野兽（✓）
 					category = "PlateAlert",
@@ -176,6 +177,7 @@ G.Encounters["c378"] = {
 					spellID = 326409,
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 			},
 		},

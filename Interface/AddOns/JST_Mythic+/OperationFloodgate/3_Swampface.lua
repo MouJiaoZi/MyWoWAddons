@@ -78,6 +78,7 @@ G.Encounters[2650] = {
 					text = L["全团AE"].."+"..L["躲波"],
 					sound = "[wave]cast,cd3",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 汹涌怒涛（✓）
 					category = "AlertIcon",
@@ -124,6 +125,7 @@ G.Encounters[2650] = {
 					spellID = 473114,
 					sound = "[dodge]cast",
 					glow = true,
+					group = 1,
 				},
 			},
 		},

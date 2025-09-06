@@ -689,30 +689,95 @@ WQTrackerDB = {
 },
 ["quests_all_characters"] = {
 ["Player-940-0516206F"] = {
-[82197] = {
-["expireAt"] = 1757026853,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
-[81620] = {
-["expireAt"] = 1757113253,
-["rewardAmount"] = "642",
+[86367] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
 ["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
 },
-[83028] = {
-["expireAt"] = 1757113253,
+[81630] = {
+["expireAt"] = 1757545303,
 ["rewardAmount"] = "25",
 ["rewardTexture"] = 133016,
 },
-[82552] = {
-["expireAt"] = 1757026853,
-["rewardAmount"] = "|cff2292FF649",
-["rewardTexture"] = "Interface\\ICONS\\INV_Misc_Cape_19",
+[81822] = {
+["expireAt"] = 1757242812,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
 },
-[51287] = {
-["expireAt"] = 1757113250,
+[76558] = {
+["expireAt"] = 1757545212,
+["rewardAmount"] = "1",
+["rewardTexture"] = 656679,
+},
+[86821] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
+},
+[82518] = {
+["expireAt"] = 1757286030,
+["rewardAmount"] = "25",
+["rewardTexture"] = 133016,
+},
+[81807] = {
+["expireAt"] = 1757242830,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[78434] = {
+["expireAt"] = 1757242812,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519427,
+},
+[51216] = {
+["expireAt"] = 1757286062,
 ["rewardAmount"] = 450,
 ["rewardTexture"] = "Interface\\AddOns\\WorldQuestTracker\\media\\icon_artifact_power",
+},
+[78438] = {
+["expireAt"] = 1757242812,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519427,
+},
+[76551] = {
+["expireAt"] = 1757199672,
+["rewardAmount"] = "1",
+["rewardTexture"] = 656679,
+},
+[85855] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
+},
+[82451] = {
+["expireAt"] = 1757286043,
+["rewardAmount"] = "25",
+["rewardTexture"] = 133016,
+},
+[76989] = {
+["expireAt"] = 1757372472,
+["rewardAmount"] = "1",
+["rewardTexture"] = 656679,
+},
+[81804] = {
+["expireAt"] = 1757242843,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[86372] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
+},
+[76586] = {
+["expireAt"] = 1757545272,
+["rewardAmount"] = "",
+["rewardTexture"] = 1708494,
+},
+[85927] = {
+["expireAt"] = 1757242912,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
 },
 },
 ["Player-940-057FAD37"] = {
@@ -720,6 +785,26 @@ WQTrackerDB = {
 ["Player-940-05166F8B"] = {
 },
 ["Player-940-057FDA40"] = {
+[86367] = {
+["expireAt"] = 1757242865,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
+},
+[86821] = {
+["expireAt"] = 1757242865,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
+},
+[86372] = {
+["expireAt"] = 1757242865,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
+},
+[85855] = {
+["expireAt"] = 1757242865,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
+},
 },
 ["Player-940-051674C6"] = {
 [59234] = {
@@ -811,12 +896,12 @@ WQTrackerDB = {
 [7823] = {
 ["poiID"] = 7823,
 ["mapID"] = 2248,
-["tooltipSetId"] = 1108,
+["zoneY"] = 0.3779747486114502,
 ["worldY"] = 0.1785767376422882,
 ["zoneX"] = 0.7312923669815063,
 ["continentID"] = 2274,
 ["worldX"] = 0.8276190161705017,
-["zoneY"] = 0.3779747486114502,
+["tooltipSetId"] = 1108,
 },
 [7826] = {
 ["poiID"] = 7826,
@@ -911,12 +996,12 @@ WQTrackerDB = {
 [8328] = {
 ["poiID"] = 8328,
 ["mapID"] = 2371,
-["zoneY"] = 0.4840457439422607,
+["tooltipSetId"] = 1670,
 ["worldY"] = 0,
 ["zoneX"] = 0.77094966173172,
 ["continentID"] = 2274,
 ["worldX"] = 0,
-["tooltipSetId"] = 1670,
+["zoneY"] = 0.4840457439422607,
 },
 },
 },

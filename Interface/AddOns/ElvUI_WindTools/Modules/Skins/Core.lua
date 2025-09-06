@@ -15,6 +15,7 @@ local tinsert = tinsert
 local tonumber = tonumber
 local tostring = tostring
 local type = type
+local unpack = unpack
 local xpcall = xpcall
 
 local CreateFrame = CreateFrame
@@ -602,12 +603,16 @@ end
 ---@param ... any Additional arguments to pass
 function S:Proxy(method, frame, ...)
 	if not frame then
-		F.Developer.ThrowError("Failed to proxy function: frame is nil, funcName:", method)
+		F.Developer.ThrowError("Failed to proxy function: frame is nil.", "\n funcName:", method)
 		return
 	end
 
 	if not ES[method] then
-		F.Developer.ThrowError(format("Proxy: %s is not exist in ElvUI Skins", method))
+		F.Developer.ThrowError(
+			format("Proxy: %s is not exist in ElvUI Skins", method),
+			"\n frame:",
+			frame.GetDebugName and frame:GetDebugName() or tostring(frame)
+		)
 		return
 	end
 
@@ -689,6 +694,30 @@ function S:ReskinIconButton(button, icon, size, rotate)
 		---Reset icon color on mouse leave
 		btn.Icon:SetVertexColor(1, 1, 1)
 	end)
+end
+
+--- Attempts to crop a texture by adjusting its texture coordinates if they are at default values.
+--- This function checks if the texture has a valid in-game texture ID and if its texture
+--- coordinates are set to the default values (0, 0, 1, 1). If both conditions are met,
+--- it applies ElvUI's standard texture coordinates to crop the texture.
+--- @param tex table The texture object to potentially crop
+--- @return nil This function does not return a value
+function S:TryCropTexture(tex)
+	if not tex or not tex.GetTexture or not tex.GetTexCoord or not tex.SetTexCoord then
+		return
+	end
+
+	local textureID = tex:GetTexture()
+
+	-- Skip the check if the texture is an atlas or a custom texture
+	if type(textureID) == "number" and textureID <= 0 then
+		return
+	end
+
+	local left, top, _, bottom, right = tex:GetTexCoord()
+	if F.IsAlmost(left, 0) and F.IsAlmost(top, 0) and F.IsAlmost(right, 1) and F.IsAlmost(bottom, 1) then
+		tex:SetTexCoord(unpack(E.TexCoords))
+	end
 end
 
 function S:Initialize()

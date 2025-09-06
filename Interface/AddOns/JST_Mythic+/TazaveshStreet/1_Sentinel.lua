@@ -57,8 +57,9 @@ G.Encounters[2437] = {
 					type = "cast",
 					spellID = 347949,
 					show_tar = true,
-					sound = "[rescue]channel",
 					glow = true,
+					group = 1,
+					sound = "[rescue]channel",
 				},
 				{ -- 图标 审讯
 					category = "AlertIcon",
@@ -93,7 +94,7 @@ G.Encounters[2437] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346204,
-					glow = "[dodge_circle]cast",
+					sound = "[dodge_circle]cast",
 				},
 				{ -- 图标 武装安保
 					category = "AlertIcon",
@@ -139,7 +140,7 @@ G.Encounters[2437] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 348128,
-					glow = "[buff_dmg]cast",
+					sound = "[buff_dmg]cast",
 					ficon = "0",
 				},
 				{ -- 图标 全副武装
@@ -187,8 +188,9 @@ G.Encounters[2437] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346006,
-					glow = "[disarm]cast",
 					glow = true,
+					group = 1,
+					sound = "[disarm]cast",
 				},
 				{ -- 图标 扣押违禁品
 					category = "AlertIcon",

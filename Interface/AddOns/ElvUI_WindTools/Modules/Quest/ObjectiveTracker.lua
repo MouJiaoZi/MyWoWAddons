@@ -34,14 +34,6 @@ local trackers = {
 local replaceRules = {}
 local numReplaceRules = #GetKeysArray(replaceRules)
 
----@class RGB
----@field r number
----@field g number
----@field b number
-
----@class RGBA : RGB
----@field a number
-
 ---Override the Blizzard text color used in objective tracker
 ---@param rgba RGBA The RGBA color table
 ---@param config {classColor: boolean, customColorNormal: RGB, customColorHighlight: RGB} The configuration table
@@ -318,6 +310,10 @@ function OT:HandleLine(line, _)
 			line.Dash:SetText(nil)
 		end
 
+		if line.Icon then
+			line.Icon:Hide()
+		end
+
 		local raw = line.Text:GetText()
 		if raw and raw ~= "" and strfind(raw, "^%- ") then
 			line.Text:SetText(gsub(raw, "^%- ", ""))
@@ -376,9 +372,9 @@ function OT:ObjectiveTrackerModule_Update(tracker)
 end
 
 ---Handles the addition of a new objective tracker block by setting up hooks and processing its elements
----@param _ ObjectiveTrackerModuleTemplate? The objective tracker module (unused)
+---@param tracker ObjectiveTrackerModuleTemplate? The objective tracker module (unused)
 ---@param block any The objective tracker block that was added
-function OT:ObjectiveTrackerModule_AddBlock(_, block)
+function OT:ObjectiveTrackerModule_AddBlock(tracker, block)
 	if not block or not block.AddObjective then
 		-- ScenarioObjectiveTrackerStageMixin has some custom behavior
 		return
@@ -386,6 +382,10 @@ function OT:ObjectiveTrackerModule_AddBlock(_, block)
 
 	if not self:IsHooked(block, "AddObjective") then
 		self:SecureHook(block, "AddObjective", "ObjectiveTrackerBlock_AddObjective")
+	end
+
+	if not (block.HeaderText or block.Text) then
+		F.Developer.LogDebug("Tracker block has no header or text:", tracker and tracker:GetDebugName())
 	end
 
 	self:HandleBlockHeader(block)

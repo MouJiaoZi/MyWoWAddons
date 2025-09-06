@@ -223,8 +223,8 @@ BAGANATOR_CONFIG = {
 ["category_modifications"] = {
 ["default_armor"] = {
 ["addedItems"] = {
-["i:219313"] = true,
 ["i:223006"] = true,
+["i:219313"] = true,
 },
 },
 ["default_gem"] = {
@@ -243,6 +243,7 @@ BAGANATOR_CONFIG = {
 ["default_potion"] = {
 ["addedItems"] = {
 ["i:224107"] = true,
+["i:219905"] = true,
 },
 },
 },

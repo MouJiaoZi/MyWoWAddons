@@ -14,8 +14,9 @@ local tl_update_rate = .5
 ----------------------[[    API    ]]---------------------
 ----------------------------------------------------------
 -- IsSpellKnownOrOverridesKnown
-local function MySpellCheck(spellID)
-	if not IsPlayerSpell(spellID) then
+local function MySpellCheck(spellID, isPet)
+	local spellBank = isPet and 1 or 0
+	if not C_SpellBook.IsSpellKnown(spellID, spellBank) then
 		return
 	end
 	
@@ -30,6 +31,7 @@ local function MySpellCheck(spellID)
 		end
 	end
 end
+T.MySpellCheck = MySpellCheck
 
 local function MyItemCheck(itemID)
 	local itemType = select(6, C_Item.GetItemInfoInstant(itemID))
@@ -917,7 +919,6 @@ end
 
 local function CreateControlSpellIcon(updater, group, tag)	
 	local icon = CreateSpellIconBase(ControlSpellFrame, tag)
-	
 	T.SetHighLightBorderColor(icon, icon, {0, 1, 0}, 3)
 	
 	function icon:update_onedit(option)
@@ -953,9 +954,9 @@ local function CreateControlSpellIcon(updater, group, tag)
 		self.source_text:SetText(T.ColorNickNameByGUID(GUID))
 		
 		if self.GUID == G.PlayerGUID then
-			self.glow:Show()
+			self.innerBD:Show()
 		else
-			self.glow:Hide()
+			self.innerBD:Hide()
 		end
 		
 		self:update_onedit("all")		
@@ -1280,9 +1281,9 @@ function ControlSpellFrame:PreviewShow()
 		icon:update_onedit("all")
 		
 		if i == my_index then
-			icon.glow:Show()
+			icon.innerBD:Show()
 		else
-			icon.glow:Hide()
+			icon.innerBD:Hide()
 		end
 		
 		icon:Show()

@@ -165,6 +165,7 @@ G.Encounters[2571] = {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 					instance_alert = true,
 				},
 				{ -- 计时条 神圣审判（✓）

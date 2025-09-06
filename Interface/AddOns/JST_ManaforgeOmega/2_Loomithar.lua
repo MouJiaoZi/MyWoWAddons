@@ -806,6 +806,7 @@ G.Encounters[2686] = {
 					sound = "[aoe]cast",
 					text = L["全团AE"].."+"..L["远离"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 过量输能爆发（✓）
 					category = "AlertIcon",
@@ -986,7 +987,9 @@ G.Encounters[2686] = {
 					unit = "group",
 					spellID = 1237212,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 			},
 		},
@@ -1053,6 +1056,7 @@ G.Encounters[2686] = {
 					sound = "[push]cast",
 					text = L["推人"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 首领模块 奥术暴怒 玩家自保技能提示（✓）
 					category = "BossMod",
@@ -1120,6 +1124,7 @@ G.Encounters[2686] = {
 					spellID = 1227226,
 					text = L["头前"],
 					glow = true,
+					group = 1,
 				},
 				{ -- 嘲讽提示 蠕行波（待测试）
 					category = "BossMod",
@@ -1159,7 +1164,9 @@ G.Encounters[2686] = {
 					unit = "group",
 					spellID = 1227163,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 				{ -- 图标 蠕行波（✓）
 					category = "AlertIcon",

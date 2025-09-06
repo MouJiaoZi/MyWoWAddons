@@ -53,6 +53,7 @@ G.Encounters[2675] = {
 					text = L["拉人"],
 					sound = "[pull]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 盛宴（✓）
 					category = "AlertIcon",

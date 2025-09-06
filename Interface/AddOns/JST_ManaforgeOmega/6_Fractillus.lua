@@ -1106,7 +1106,6 @@ G.Encounters[2747] = {
 									frame.safespot = table.remove(frame.safespots, 1)
 									frame:DisplaySafe(frame.safespot)
 								elseif spellID == 1220394 then -- 粉碎抽打
-									frame.safespot = frame.safespots[1]
 									frame:DisplaySafe(frame.safespot)
 								end
 							end
@@ -1254,7 +1253,6 @@ G.Encounters[2747] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1233416,
-					glow = true,
 				},
 				{ -- 图标 结晶震荡波（✓）
 					category = "AlertIcon",
@@ -1480,7 +1478,9 @@ G.Encounters[2747] = {
 					unit = "group",
 					spellID = 1231871,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 			},
 		},

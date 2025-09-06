@@ -1,6 +1,8 @@
 local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local T = W.Modules.Tooltips
 
+local C = W.Utilities.Color
+
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 local pairs = pairs
@@ -44,6 +46,7 @@ local tooltips = {
 	"ShoppingTooltip2",
 	"ItemRefShoppingTooltip1",
 	"ItemRefShoppingTooltip2",
+	"ElvUI_SpellBookTooltip",
 }
 
 local PET_TYPE_SUFFIX = PET_TYPE_SUFFIX
@@ -221,7 +224,7 @@ function T:AddPetID(tt, unit, guid)
 	local speciesID = UnitBattlePetSpeciesID(unit)
 	local speciesIDString = speciesID and F.CreateColorString(tostring(speciesID), E.db.general.valuecolor)
 	if speciesIDString then
-		tt:AddDoubleLine(L["Pet ID"] .. ": ", speciesIDString or ("|cffeeeeee" .. L["Unknown"] .. "|r"))
+		tt:AddDoubleLine(L["Pet ID"] .. ": ", speciesIDString or C.StringByTemplate(L["Unknown"], "gray-400"))
 	end
 end
 

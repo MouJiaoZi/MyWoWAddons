@@ -174,6 +174,7 @@ G.Encounters[2436] = {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 			},
 		},
@@ -214,6 +215,7 @@ G.Encounters[2436] = {
 					text = L["分担伤害"],
 					sound = "[sharedmg]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 现金汇款
 					category = "AlertIcon",

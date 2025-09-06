@@ -86,6 +86,7 @@ G.Encounters[2580] = {
 					text = L["射线"],
 					sound = "[ray]cast,cd3",
 					glow = true,
+					group = 1,
 				},
 			},
 		},
@@ -127,6 +128,7 @@ G.Encounters[2580] = {
 					spellID = 453140,
 					sound = "[mindstep]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 塌缩之夜（✓）
 					category = "AlertIcon",

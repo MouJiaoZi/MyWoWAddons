@@ -307,6 +307,7 @@ G.Encounters["c499"] = {
 					spellID = 427356,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 强效治疗术（✓）
 					category = "PlateAlert",
@@ -387,6 +388,7 @@ G.Encounters["c499"] = {
 					spellIDs = {428150},
 					sound = "[reflect_shield]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板光环 反射护盾（✓）
 					category = "PlateAlert",
@@ -535,6 +537,7 @@ G.Encounters["c499"] = {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 热浪（✓）
 					category = "AlertIcon",
@@ -739,6 +742,7 @@ G.Encounters["c499"] = {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
 					glow = true,
+					group = 1,
 				},
 			},
 		},
@@ -822,6 +826,7 @@ G.Encounters["c499"] = {
 					spellID = 444743,
 					ficon = "6",
 					glow = true,
+					group = 1,
 				},
 				{ -- 姓名板打断图标 连珠火球（✓）
 					category = "PlateAlert",

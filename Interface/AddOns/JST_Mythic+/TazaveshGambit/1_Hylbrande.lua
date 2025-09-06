@@ -22,11 +22,38 @@ G.Encounters[2448] = {
 				{353312},
 			},
 			options = {
-				{ -- 计时条 净化爆发
+				{ -- 计时条 净化爆发（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 353312,
-					sound = "[dodge_ball]cast",
+				},
+				{ -- 首领模块 净化爆发 玩家自保技能提示（✓）
+					category = "BossMod",
+					spellID = 353312,
+					enable_tag = "none",
+					name = T.GetIconLink(353312)..L["玩家自保技能提示"],	
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[353312] = {
+								event = "SPELL_CAST_START",
+								dur = 3,
+							},
+						}
+						frame.ignore_roles = {"TANK"}
+						frame.threshold = 65
+						
+						T.InitPersonalSpellAlertbyCLEU(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetPersonalSpellAlertbyCLEU(frame)
+					end,
 				},
 			},
 		},
@@ -35,7 +62,7 @@ G.Encounters[2448] = {
 				{346116, "0"},
 			},
 			options = {
-				{ -- 文字 剪切挥舞 倒计时
+				{ -- 文字 剪切挥舞 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -64,21 +91,13 @@ G.Encounters[2448] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_SUCCEEDED", "boss1", 346116, T.GetIconLink(346116), self, event, ...)
 					end,
 				},
-				{ -- 对我施法图标 剪切挥舞
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 剪切挥舞（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 346116,
-					hl = "yel_flash",
-					sound = "[defense]",
-					tip = L["自保"],
-				},
-				{ -- 图标 剪切挥舞
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 346116,
-					hl = "",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]channel",
 				},
 			},
 		},
@@ -87,7 +106,7 @@ G.Encounters[2448] = {
 				{347094},
 			},
 			options = {
-				{ -- 计时条 泰坦粉碎
+				{ -- 计时条 泰坦粉碎（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 347094,
@@ -105,20 +124,20 @@ G.Encounters[2448] = {
 					type = "Msg",
 					spellID = 346959,
 					boss_msg = "346959",
-					dur = 6,
+					dur = 9,
 				},
-				{ -- BOSS喊话 火焰净除
+				{ -- BOSS喊话 火焰净除（✓）
 					category = "AlertIcon",
 					type = "bmsg",
 					spellID = 346959,
 					event = "CHAT_MSG_RAID_BOSS_WHISPER",
 					boss_msg = "346959",
 					hl = "org",
-					dur = 6,
+					dur = 9,
 					sound = "[fixate]cd3",
 					msg = {str_applied = "%name %spell", str_rep = "{rt1}%dur"},
 				},
-				{ -- 首领模块 火焰净除 点名密语计时圆圈
+				{ -- 首领模块 火焰净除 点名密语计时圆圈（✓）
 					category = "BossMod",
 					spellID = 346959,
 					enable_tag = "none",
@@ -131,20 +150,20 @@ G.Encounters[2448] = {
 						frame.keywords = {
 							["346959"] = {
 								color = {1, 1, 0},
-								dur = 6,
+								dur = 9,
 							},
 						}
 						
 						T.InitCircleMsgTimers(frame)
 					end,
 					update = function(frame, event, ...)
-						T.UpdateCircleMsgTimers(frame)
+						T.UpdateCircleMsgTimers(frame, event, ...)
 					end,
 					reset = function(frame, event)
 						T.ResetCircleMsgTimers(frame)
 					end,
 				},
-				{ -- 图标 净化之地
+				{ -- 图标 净化之地（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -160,7 +179,7 @@ G.Encounters[2448] = {
 				{346766},
 			},
 			options = {
-				{ -- 文字 定期消毒 倒计时
+				{ -- 文字 定期消毒 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["阶段转换"]..L["倒计时"],
@@ -187,13 +206,15 @@ G.Encounters[2448] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 346766, L["阶段转换"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 定期消毒
+				{ -- 计时条 定期消毒（✓）
 					category = "AlertTimerbar",
-					type = "cast",
+					type = "cleu",
+					event = "SPELL_CAST_START",
 					spellID = 346766,
+					dur = 2,
 					sound = "[phase]cast",
 				},
-				{ -- 图标 消毒区域
+				{ -- 图标 消毒区域（缺数据）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -202,22 +223,32 @@ G.Encounters[2448] = {
 					tip = L["快走开"],
 					sound = "[sound_dd]",
 				},
-				{ -- 图标 泰坦洞察
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 346427,
+				{ -- 文字提示 泰坦洞察（✓）
+					category = "TextAlert", 
+					type = "spell",
+					preview = T.GetIconLink(346427),
+					data = {
+						spellID = 346427,
+						events = {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
+						},
+						sound = "transport",
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, sourceGUID, sourceName, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_AURA_APPLIED" and spellID == 346427 then
+								local name = T.ColorNickNameByGUID(sourceGUID) or sourceName
+								T.Start_Text_Timer(self, 3, name.." "..T.GetIconLink(346427))
+								
+								if C.DB["TextAlert"]["spell"][self.data.spellID]["sound_bool"] then
+									T.PlaySound("transport")
+								end
+							end
+						end
+					end,
 				},
-				{ -- 计时条 泰坦洞察
-					category = "AlertTimerbar",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "group",
-					spellID = 346427,				
-					show_tar = true,
-				},
-				{ -- 图标 旁路代码：摩尔科 福莱瑟 赫尔威提 里斯
+				{ -- 图标 旁路代码：摩尔科 福莱瑟 赫尔威提 里斯（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -226,16 +257,18 @@ G.Encounters[2448] = {
 					spellIDs = {348450, 348437, 348447},
 					options_spellIDs = {348451, 348450, 348437, 348447},
 				},
-				{ -- 计时条 旁路代码：摩尔科 福莱瑟 赫尔威提 里斯
+				{ -- 计时条 旁路代码：摩尔科 福莱瑟 赫尔威提 里斯（✓）
 					category = "AlertTimerbar",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "group",
 					spellID = 348451,
 					spellIDs = {348450, 348437, 348447},
-					options_spellIDs = {348451, 348450, 348437, 348447},
 					show_tar = true,
-					color = {1, .3, 0},
+					text = L["符文"],
+					force_full = true,
+					options_spellIDs = {348451, 348450, 348437, 348447},
+					color = {1, 1, 1},
 				},
 			},
 		},
@@ -247,12 +280,13 @@ G.Encounters[2448] = {
 				{347015},
 			},
 			options = {
-				{ -- 图标 强化防御
+				{ -- 图标 强化防御（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HELPFUL",
 					unit = "boss1",
 					spellID = 347015,
+					tip = L["BOSS减伤"].."%s25%"
 				},
 			},
 		},
@@ -275,7 +309,7 @@ G.Encounters[2448] = {
 				{352347},
 			},
 			options = {
-				{ -- 首领模块 标记 宝库净化者
+				{ -- 首领模块 标记 宝库净化者（✓）
 					category = "BossMod",
 					spellID = 352347,
 					enable_tag = "none",
@@ -311,7 +345,7 @@ G.Encounters[2448] = {
 						T.ResetRaidTarget(frame)
 					end,
 				},
-				{ -- 姓名板打断图标 英勇冲击
+				{ -- 姓名板打断图标 英勇冲击（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 352347,
@@ -319,13 +353,13 @@ G.Encounters[2448] = {
 					interrupt = 2,
 					ficon = "6",
 				},
-				{ -- 对我施法图标 英勇冲击
+				{ -- 对我施法图标 英勇冲击（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 352347,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 英勇冲击
+				{ -- 团队框架图标 英勇冲击（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 352347,

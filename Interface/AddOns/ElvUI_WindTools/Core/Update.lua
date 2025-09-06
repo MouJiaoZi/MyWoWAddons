@@ -1,6 +1,7 @@
 local W ---@class WindTools
 local F, E, L, V, P, G ---@type Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
 W, F, E, L, V, P, G = unpack((select(2, ...)))
+local C = W.Utilities.Color ---@type ColorUtility
 
 local format = format
 local pairs = pairs
@@ -8,10 +9,14 @@ local print = print
 local tonumber = tonumber
 local type = type
 
+---@cast E ElvUI
+
 local isFirstLine = true
 
 local DONE_ICON = format(" |T%s:0|t", W.Media.Icons.accept)
 
+---@param text string
+---@param from number
 local function UpdateMessage(text, from)
 	if isFirstLine then
 		isFirstLine = false
@@ -19,23 +24,27 @@ local function UpdateMessage(text, from)
 		F.Print(L["Update"])
 	end
 
-	E:Delay(1, function()
-		print(text .. format("(|cff00a8ff%.2f|r -> |cff00a8ff%s|r)...", from, W.Version) .. DONE_ICON)
-	end)
+	local versionText = format(
+		"(%s -> %s)...",
+		C.StringByTemplate(format("%.2f", from), "neutral-300"),
+		C.StringByTemplate(W.Version, "emerald-400")
+	)
+
+	E:Delay(1, print, text, versionText, DONE_ICON)
 end
 
 function W:UpdateScripts()
-	local currentVersion = tonumber(W.Version) -- installed WindTools Version
-	local globalVersion = tonumber(E.global.WT.version or "0") -- version in ElvUI Global
+	local currentVersion = tonumber(W.Version) or 0 -- installed WindTools Version
+	local globalVersion = tonumber(E.global.WT.version) or 0 -- version in ElvUI Global
 
 	-- from old updater
 	if globalVersion == 0 then
-		globalVersion = tonumber(E.global.WT.Version or "0")
+		globalVersion = tonumber(E.global.WT.Version) or 0
 		E.global.WT.Version = nil
 	end
 
-	local profileVersion = tonumber(E.db.WT.version or globalVersion) -- Version in ElvUI Profile
-	local privateVersion = tonumber(E.private.WT.version or globalVersion) -- Version in ElvUI Private
+	local profileVersion = tonumber(E.db.WT.version) or globalVersion -- Version in ElvUI Profile
+	local privateVersion = tonumber(E.private.WT.version) or globalVersion -- Version in ElvUI Private
 
 	if globalVersion == currentVersion and profileVersion == currentVersion and privateVersion == currentVersion then
 		return
@@ -301,6 +310,13 @@ function W:UpdateScripts()
 		end
 
 		UpdateMessage(L["Tooltips"] .. ": " .. L["Update Database"], privateVersion)
+	end
+
+	if profileVersion < 3.99 then
+		if E.db.WT and E.db.WT.maps and E.db.WT.maps.eventTracker and E.db.WT.maps.eventTracker.khazAlgarEmissary then
+			E.db.WT.maps.eventTracker.khazAlgarEmissary = nil
+			UpdateMessage(L["Event Tracker"] .. ": " .. L["Database cleanup"], profileVersion)
+		end
 	end
 
 	if privateVersion < 3.99 then

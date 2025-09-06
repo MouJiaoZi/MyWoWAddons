@@ -3,6 +3,20 @@
 if not (G.Client == "zhCN" or G.Client == "zhTW") then return end
 
 L["更新日志内容"]			= [[
+5.82
+宏图功能更新
+驱散提示音检测法术CD
+
+5.80
+狩魂猎手 转阶段位置分配错误修正
+其他错误修正。
+
+5.78
+熔炉编织者阿拉兹 奥术收集者标记错误修正
+狩魂猎手 吞噬者之怒交接时间修正
+狩魂猎手 特殊情况下转阶段位置分配错误修正
+其他错误修正。
+
 5.74
 删除误加入的测试模块，如果更新器没有删除相关文件，请删除插件文件夹中的JST_Test。非常抱歉。
 |cffff0000World of Warcraft\_retail_\Interface\AddOns\JST_Test 删除！！！|r

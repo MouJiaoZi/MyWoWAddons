@@ -114,7 +114,8 @@ G.Encounters[2649] = {
 					text = L["冲锋"],
 					show_tar = true,
 					sound = "[charge]cd3",
-					glow = true,	
+					glow = true,
+					group = 1,
 				},
 				{ -- 图标 滚桶冲锋（✓）
 					category = "AlertIcon",

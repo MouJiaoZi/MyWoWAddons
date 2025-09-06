@@ -2006,7 +2006,7 @@ local function GetBarSpellText(args)
 		extra_text = string.format(" [%s]", args.text)
 	end
 	
-	if args.tank then
+	if args.group == 3 then
 		return string.format(L["NAME换坦技能提示"], spell_text..extra_text)
 	else
 		return string.format(L["计时条%s"], spell_text..extra_text)

@@ -372,6 +372,7 @@ G.Encounters[2685] = {
 					spellID = 1242088,
 					text = L["击飞"],
 					glow = true,
+					group = 1,
 					sound = "[knockoff]cast",
 				},
 				{ -- 图标 奥术驱除（✓）
@@ -602,7 +603,9 @@ G.Encounters[2685] = {
 					unit = "group",
 					spellID = 1237607,
 					ficon = "0",
-					tank = true,
+					group = 3,
+					show_tar = true,
+					roles = {"TANK"},
 				},
 			},
 		},		

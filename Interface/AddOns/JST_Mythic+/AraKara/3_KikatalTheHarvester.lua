@@ -55,6 +55,7 @@ G.Encounters[2585] = {
 					text = L["拉人"],
 					sound = "[pull]cast,cd3",
 					glow = true,
+					group = 1,
 				},
 				{ -- 图标 消隐（✓）
 					category = "AlertIcon",

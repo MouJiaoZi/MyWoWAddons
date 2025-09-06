@@ -609,6 +609,11 @@ MasqueDB = {
 ["SkinID"] = "Zoomed",
 ["Inherit"] = false,
 },
+["WeakAuras_xzb2XhSKMVr"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
 ["WeakAuras_NOXI8(Mr3CH"] = {
 ["Upgraded"] = true,
 ["SkinID"] = "Zoomed",
@@ -655,6 +660,11 @@ MasqueDB = {
 ["Inherit"] = false,
 },
 ["WeakAuras_arHdDao295x"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["WeakAuras_h6jsgNClxau"] = {
 ["Upgraded"] = true,
 ["Inherit"] = false,
 ["SkinID"] = "Zoomed",
@@ -1657,6 +1667,11 @@ MasqueDB = {
 ["SkinID"] = "Zoomed",
 ["Inherit"] = false,
 },
+["WeakAuras_(H7Mu7NBh7X"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
 ["WeakAuras_WBrDL8LDA1U"] = {
 ["Upgraded"] = true,
 ["SkinID"] = "Zoomed",
@@ -1668,6 +1683,11 @@ MasqueDB = {
 ["Inherit"] = false,
 },
 ["WeakAuras_q4JPrDI(96I"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["WeakAuras_rYpLuYmPeQj"] = {
 ["Upgraded"] = true,
 ["Inherit"] = false,
 ["SkinID"] = "Zoomed",
@@ -1691,6 +1711,21 @@ MasqueDB = {
 ["SkinID"] = "Zoomed",
 ["Inherit"] = false,
 },
+["WeakAuras_)zosr05eJhu"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["WeakAuras_4ih1vEM7l)1"] = {
+["Upgraded"] = true,
+["SkinID"] = "Zoomed",
+["Inherit"] = false,
+},
+["WeakAuras_gitkg0(5LkZ"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
 ["WeakAuras_BtXGEhtPjDy"] = {
 ["Upgraded"] = true,
 ["SkinID"] = "Zoomed",
@@ -1700,6 +1735,16 @@ MasqueDB = {
 ["Upgraded"] = true,
 ["SkinID"] = "Zoomed",
 ["Inherit"] = false,
+},
+["WeakAuras_sCDhnm0GDgc"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
+},
+["WeakAuras_Ala9ql9AR1Z"] = {
+["Upgraded"] = true,
+["Inherit"] = false,
+["SkinID"] = "Zoomed",
 },
 ["WeakAuras_W1frddI1HpW"] = {
 ["Upgraded"] = true,
@@ -2828,7 +2873,7 @@ MasqueDB = {
 ["SkinID"] = "Zoomed",
 ["Inherit"] = false,
 },
-["WeakAuras_(H7Mu7NBh7X"] = {
+["WeakAuras_ZK4mQmioOM7"] = {
 ["Upgraded"] = true,
 ["Inherit"] = false,
 ["SkinID"] = "Zoomed",
@@ -3362,11 +3407,6 @@ MasqueDB = {
 ["Inherit"] = false,
 },
 ["WeakAuras_oiXVZEYL7g5"] = {
-["Upgraded"] = true,
-["SkinID"] = "Zoomed",
-["Inherit"] = false,
-},
-["WeakAuras_4ih1vEM7l)1"] = {
 ["Upgraded"] = true,
 ["SkinID"] = "Zoomed",
 ["Inherit"] = false,
