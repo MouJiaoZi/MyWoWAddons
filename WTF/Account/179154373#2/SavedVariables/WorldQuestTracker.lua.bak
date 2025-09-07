@@ -3,8 +3,8 @@ WQTrackerDB = {
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "Default",
 ["牛牛萨之父 - 霜之哀伤"] = "Default",
-["凤凰基友之二 - 凤凰之神"] = "Default",
 ["某饺子 - 伊森利恩"] = "Default",
+["某餃子 - 伊森利恩"] = "Default",
 ["凤凰基友之四 - 凤凰之神"] = "Default",
 ["凤凰基友之三 - 凤凰之神"] = "Default",
 ["三减宁静 - 伊森利恩"] = "Default",
@@ -12,7 +12,7 @@ WQTrackerDB = {
 ["三减竖式 - 伊森利恩"] = "Default",
 ["Fasas - Aegwynn"] = "Default",
 ["开门的搞 - 伊森利恩"] = "Default",
-["某餃子 - 伊森利恩"] = "Default",
+["凤凰基友之二 - 凤凰之神"] = "Default",
 ["我们完蛋啦 - 伊森利恩"] = "Default",
 },
 ["profiles"] = {
@@ -689,22 +689,27 @@ WQTrackerDB = {
 },
 ["quests_all_characters"] = {
 ["Player-940-0516206F"] = {
-[81822] = {
-["expireAt"] = 1757242812,
-["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
+[86367] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
 },
 [81630] = {
 ["expireAt"] = 1757545303,
 ["rewardAmount"] = "25",
 ["rewardTexture"] = 133016,
 },
-[86821] = {
-["expireAt"] = 1757242862,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
+[81822] = {
+["expireAt"] = 1757242812,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
 },
-[86372] = {
+[76558] = {
+["expireAt"] = 1757545212,
+["rewardAmount"] = "1",
+["rewardTexture"] = 656679,
+},
+[86821] = {
 ["expireAt"] = 1757242862,
 ["rewardAmount"] = "|cff2292FF655",
 ["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
@@ -714,20 +719,30 @@ WQTrackerDB = {
 ["rewardAmount"] = "25",
 ["rewardTexture"] = 133016,
 },
-[86367] = {
-["expireAt"] = 1757242862,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
+[81807] = {
+["expireAt"] = 1757242830,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
+},
+[78434] = {
+["expireAt"] = 1757242812,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519427,
 },
 [51216] = {
 ["expireAt"] = 1757286062,
 ["rewardAmount"] = 450,
 ["rewardTexture"] = "Interface\\AddOns\\WorldQuestTracker\\media\\icon_artifact_power",
 },
-[85927] = {
-["expireAt"] = 1757242912,
+[78438] = {
+["expireAt"] = 1757242812,
 ["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
+["rewardTexture"] = 1519427,
+},
+[85855] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
 },
 [82451] = {
 ["expireAt"] = 1757286043,
@@ -739,20 +754,25 @@ WQTrackerDB = {
 ["rewardAmount"] = "",
 ["rewardTexture"] = 1519429,
 },
-[85855] = {
-["expireAt"] = 1757242862,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
+[85927] = {
+["expireAt"] = 1757242912,
+["rewardAmount"] = "",
+["rewardTexture"] = 1519429,
 },
 [76586] = {
 ["expireAt"] = 1757545272,
 ["rewardAmount"] = "",
 ["rewardTexture"] = 1708494,
 },
-[81807] = {
-["expireAt"] = 1757242830,
-["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
+[86372] = {
+["expireAt"] = 1757242862,
+["rewardAmount"] = "|cff2292FF655",
+["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
+},
+[76989] = {
+["expireAt"] = 1757372472,
+["rewardAmount"] = "1",
+["rewardTexture"] = 656679,
 },
 },
 ["Player-940-057FAD37"] = {
@@ -760,26 +780,6 @@ WQTrackerDB = {
 ["Player-940-05166F8B"] = {
 },
 ["Player-940-057FDA40"] = {
-[86367] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
-},
-[86821] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
-},
-[86372] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
-},
-[85855] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
-},
 },
 ["Player-940-051674C6"] = {
 [59234] = {

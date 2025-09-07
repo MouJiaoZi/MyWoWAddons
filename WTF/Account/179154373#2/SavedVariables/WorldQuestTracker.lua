@@ -3,8 +3,8 @@ WQTrackerDB = {
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "Default",
 ["我们完蛋啦 - 伊森利恩"] = "Default",
-["某餃子 - 伊森利恩"] = "Default",
 ["凤凰基友之二 - 凤凰之神"] = "Default",
+["某饺子 - 伊森利恩"] = "Default",
 ["凤凰基友之四 - 凤凰之神"] = "Default",
 ["凤凰基友之三 - 凤凰之神"] = "Default",
 ["三减竖式 - 伊森利恩"] = "Default",
@@ -12,7 +12,7 @@ WQTrackerDB = {
 ["三减宁静 - 伊森利恩"] = "Default",
 ["Fasas - Aegwynn"] = "Default",
 ["开门的搞 - 伊森利恩"] = "Default",
-["某饺子 - 伊森利恩"] = "Default",
+["某餃子 - 伊森利恩"] = "Default",
 ["牛牛萨之父 - 霜之哀伤"] = "Default",
 },
 ["profiles"] = {
@@ -739,11 +739,6 @@ WQTrackerDB = {
 ["rewardAmount"] = "",
 ["rewardTexture"] = 1519427,
 },
-[76551] = {
-["expireAt"] = 1757199672,
-["rewardAmount"] = "1",
-["rewardTexture"] = 656679,
-},
 [85855] = {
 ["expireAt"] = 1757242862,
 ["rewardAmount"] = "|cff2292FF655",
@@ -785,26 +780,6 @@ WQTrackerDB = {
 ["Player-940-05166F8B"] = {
 },
 ["Player-940-057FDA40"] = {
-[86367] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
-},
-[86821] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
-},
-[86372] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Sword_39",
-},
-[85855] = {
-["expireAt"] = 1757242865,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
-},
 },
 ["Player-940-051674C6"] = {
 [59234] = {
