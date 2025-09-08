@@ -203,6 +203,10 @@ local function GetDatabaseRealValue(path)
 	return accessTable, accessKey, accessValue
 end
 
+--- Creates a compatibility check function for a specific target addon
+---@param targetAddonName string The name of the target addon to check compatibility with
+---@param targetAddonLocales string The localized name of the target addon
+---@return fun(myModuleName: string, targetAddonModuleName: string, myDB: string, targetAddonDB: string)
 local function GetCheckCompatibilityFunction(targetAddonName, targetAddonLocales)
 	if not C_AddOns_IsAddOnLoaded(targetAddonName) then
 		return E.noop
@@ -262,15 +266,8 @@ function W:CheckCompatibility()
 	CheckMerathilisUI(
 		format("%s-%s", L["Tooltip"], L["Add Icon"]),
 		format("%s-%s", L["Tooltip"], L["Tooltip Icons"]),
-		"private.WT.tooltips.icon",
-		"db.mui.tooltip.icon"
-	)
-
-	CheckMerathilisUI(
-		L["Group Info"],
-		L["LFG Info"],
-		"db.WT.tooltips.groupInfo.enable",
-		"db.mui.tooltip.groupInfo.enable"
+		"private.WT.tooltips.titleIcon.enable",
+		"db.mui.tooltip.titleIcon.enable"
 	)
 
 	CheckMerathilisUI(
@@ -393,14 +390,14 @@ function W:CheckCompatibility()
 		format("%s-%s-%s", L["Skins"], L["Addons"], L["WeakAuras"]),
 		L["WeakAuras"],
 		"private.WT.skins.addons.weakAuras",
-		"private.mui.skins.addonSkins.wa"
+		"private.mui.skins.addonSkins.weakAuras"
 	)
 
 	CheckMerathilisUI(
 		format("%s-%s-%s", L["Skins"], L["Addons"], L["WeakAuras Options"]),
 		L["WeakAuras Options"],
 		"private.WT.skins.addons.weakAurasOptions",
-		"private.mui.skins.addonSkins.waOptions"
+		"private.mui.skins.addonSkins.weakAurasOptions"
 	)
 
 	CheckMerathilisUI(L["Announcement"], L["Announcement"], "db.WT.announcement.enable", "db.mui.announcement.enable")

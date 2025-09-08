@@ -27,33 +27,13 @@ G.Encounters[2448] = {
 					type = "cast",
 					spellID = 353312,
 				},
-				{ -- 首领模块 净化爆发 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 净化爆发（✓）
+					category = "HPWatch",
+					type = "CLEU",
 					spellID = 353312,
-					enable_tag = "none",
-					name = T.GetIconLink(353312)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.spellIDs = {
-							[353312] = {
-								event = "SPELL_CAST_START",
-								dur = 3,
-							},
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyCLEU(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyCLEU(frame)
-					end,
+					event = "SPELL_CAST_START",
+					dur = 3,
+					threshold = 65,
 				},
 			},
 		},

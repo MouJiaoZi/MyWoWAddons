@@ -267,6 +267,10 @@ local Update_default_Settings = function()
 						Character_alert_Settings[category][alert_type][args.spellID] = {
 							enable = LoadNewSettings(args.enable_tag, args.ficon)
 						}
+					elseif category == "HPWatch" then
+						Character_alert_Settings[category][alert_type][args.spellID] = {
+							enable = LoadNewSettings(args.enable_tag, args.ficon)
+						}
 					end
 				end
 			end

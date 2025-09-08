@@ -1,13 +1,13 @@
 # LittleWigs
 
-## [v11.2.27](https://github.com/BigWigsMods/LittleWigs/tree/v11.2.27) (2025-09-01)
-[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.2.26...v11.2.27) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
+## [v11.2.28](https://github.com/BigWigsMods/LittleWigs/tree/v11.2.28) (2025-09-08)
+[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.2.27...v11.2.28) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
 
-- WarWithin/AraKara/Trash: Tweak option tab contents  
-- WarWithin/TheDawnbreaker/Trash: Organize options into tabs  
-- Shadowlands/Tazavesh/Trash: Organize options into tabs  
-- WarWithin/PrioryOfTheSacredFlame/Trash: Organize options into tabs  
-- WarWithin/OperationFloodgate/Trash: Organize options into tabs  
-- Shadowlands/HallsOfAtonement/Trash: Organize options into tabs  
-- WarWithin/EcoDomeAldani/Trash: Organize options into tabs  
-- WarWithin/AraKara/Trash: Organize options into tabs  
+- Bump toc  
+- Delves/TheDreadPit/UnderLordViktis: Support Ethereal Routing Station  
+- WarWithin/AraKara/Trash: Emphasize high stacks of Tainted Blood  
+- WarWithin/EcoDomeAldani/Azhiccar: Show a message when all Devour adds are killed  
+- WarWithin/OperationFloodgate/DemolitionDuo: Deflagration bar, alert when all bombs are destroyed  
+- WarWithin/OperationFloodgate/Trash: Fix clearing Venture Co. Architect nameplate on death  
+- Delves/ExcavationSite9/CraggleFritzbrains: Support Ethereal Routing Station  
+- Update esES (#1426)  

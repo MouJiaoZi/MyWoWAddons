@@ -2,6 +2,9 @@ local P ---@class ProfileDB
 local W, F, E, L, V, G ---@type WindTools, Functions, ElvUI, table, PrivateDB, GlobalDB
 W, F, E, L, V, P, G = unpack((select(2, ...)))
 
+---@cast W WindTools
+local C = W.Utilities.Color
+
 local tinsert = tinsert
 
 P.announcement = {
@@ -88,24 +91,24 @@ P.announcement = {
 		},
 		tag = {
 			enable = true,
-			color = { r = 0.992, g = 0.780, b = 0.000 },
+			color = C.GetRGBFromTemplate("yellow-300"),
 		},
 		suggestedGroup = {
 			enable = true,
-			color = { r = 1.000, g = 0.125, b = 0.337 },
+			color = C.GetRGBFromTemplate("rose-500"),
 		},
 		level = {
 			enable = true,
-			color = { r = 0.000, g = 0.831, b = 0.573 },
+			color = C.GetRGBFromTemplate("emerald-400"),
 			hideOnMax = true,
 		},
 		daily = {
 			enable = true,
-			color = { r = 0.557, g = 0.773, b = 1.000 },
+			color = C.GetRGBFromTemplate("cyan-500"),
 		},
 		weekly = {
 			enable = true,
-			color = { r = 0.000, g = 0.651, b = 0.957 },
+			color = C.GetRGBFromTemplate("blue-500"),
 		},
 	},
 	resetInstance = {
@@ -327,8 +330,8 @@ P.combat = {
 		text = true,
 		enterText = L["Enter Combat"],
 		leaveText = L["Leave Combat"],
-		enterColor = { r = 0.929, g = 0.11, b = 0.141, a = 1 },
-		leaveColor = { r = 0.227, g = 1, b = 0.6, a = 1 },
+		enterColor = C.GetRGBAFromTemplate("rose-500"),
+		leaveColor = C.GetRGBAFromTemplate("green-500"),
 		font = {
 			name = E.db.general.font,
 			size = 25,
@@ -373,11 +376,7 @@ P.item = {
 	alreadyKnown = {
 		enable = true,
 		mode = "COLOR",
-		color = {
-			r = 0,
-			g = 1,
-			b = 0,
-		},
+		color = { r = 0, g = 1, b = 0 },
 	},
 	fastLoot = {
 		enable = true,
@@ -650,24 +649,29 @@ P.item = {
 		inspect = true,
 		stats = true,
 		playerOnInspect = true,
+		icon = {
+			enable = true,
+			qualityBorder = false,
+			tierSetIndicator = true,
+		},
 		slotText = {
 			name = E.db.general.font,
-			size = W.CompatibleFont and 12 or 9,
+			size = W.CompatibleFont and 12 or 10,
 			style = "OUTLINE",
 		},
 		levelText = {
-			name = F.GetCompatibleFont("Montserrat"),
-			size = 13,
+			name = F.GetCompatibleFont("Chivo Mono"),
+			size = 14,
 			style = "OUTLINE",
 		},
 		equipText = {
 			name = E.db.general.font,
-			size = 13,
+			size = 14,
 			style = "OUTLINE",
 		},
 		statsText = {
 			name = E.db.general.font,
-			size = 13,
+			size = 14,
 			style = "OUTLINE",
 		},
 	},
@@ -683,11 +687,7 @@ P.item = {
 				style = "OUTLINE",
 				xOffset = 0,
 				yOffset = 0,
-				color = {
-					r = 1,
-					g = 1,
-					b = 1,
-				},
+				color = { r = 1, g = 1, b = 1 },
 			},
 		},
 		scrappingMachine = {
@@ -700,11 +700,7 @@ P.item = {
 				style = "OUTLINE",
 				xOffset = 0,
 				yOffset = 0,
-				color = {
-					r = 1,
-					g = 1,
-					b = 1,
-				},
+				color = { r = 1, g = 1, b = 1 },
 			},
 		},
 	},

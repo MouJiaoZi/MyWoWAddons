@@ -22,7 +22,7 @@ G.Encounters[2451] = {
 				{347481, "4"},
 			},
 			options = {
-				{ -- 文字 奥能手里波 倒计时
+				{ -- 文字 奥能手里波 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["圆环"]..L["倒计时"],
@@ -47,12 +47,33 @@ G.Encounters[2451] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1245579, L["圆环"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 奥能手里波
+				{ -- 计时条 奥能手里波（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1245579,	
 					text = L["圆环"],
 					sound = "[ring]cast",
+				},
+				{ -- 图标 奥能手里波（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 347481,
+					hl = "red",
+					tip = L["强力DOT"],
+				},
+				{ -- 团队框架高亮 奥能手里波（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 347481,
+					color = "red",
+				},
+				{ -- 自保技能提示 奥能手里波（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 347481,
+					threshold = 85,
 				},
 			},
 		},
@@ -69,7 +90,7 @@ G.Encounters[2451] = {
 				{1245634},
 			},
 			options = {
-				{ -- 血量
+				{ -- 血量（✓）
 					category = "TextAlert",
 					type = "hp",
 					data = {
@@ -80,7 +101,7 @@ G.Encounters[2451] = {
 						},
 					},	
 				},
-				{ -- 计时条 分隔术
+				{ -- 计时条 分隔术（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1245634,
@@ -92,21 +113,14 @@ G.Encounters[2451] = {
 				{357188, "4,6"},
 			},
 			options = {
-				{ -- 姓名板打断图标 双重秘术
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 357188,
-					mobID = "175806",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 计时条 双重秘术
+				{ -- 计时条 双重秘术（✓）
 					category = "AlertTimerbar",
 					type = "cast",
-					spellID = 357188,
+					spellID = 1245669,
+					group = 1,
 					ficon = "6",
 					glow = true,
-					group = 1,
+					sound = "[interrupt_cast]cast",
 				},
 			},
 		},
@@ -115,7 +129,7 @@ G.Encounters[2451] = {
 				{1248209, "13"},
 			},
 			options = {
-				{ -- 文字 相位斩 倒计时
+				{ -- 文字 相位斩 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["DOT"]..L["倒计时"],
@@ -140,21 +154,27 @@ G.Encounters[2451] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1248211, L["DOT"], self, event, ...)
 					end,
 				},
-				{ -- 图标 相位斩
+				{ -- 图标 相位斩（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 1248211,
-					hl = "red",
+					hl = "org",
 					tip = L["DOT"],
 					ficon = "13",
 				},
-				{ -- 团队框架高亮 相位斩
+				{ -- 团队框架高亮 相位斩（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 1248211,
-					color = "red",
+					color = "org",
+				},
+				{ -- 自保技能提示 相位斩（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1248211,
+					threshold = 65,
 				},
 			},
 		},

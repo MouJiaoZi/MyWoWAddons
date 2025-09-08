@@ -112,32 +112,11 @@ G.Encounters[2449] = {
 					hl = "blu",
 					sound = "[bombonyou]",
 				},
-				{ -- 首领模块 定时炸弹 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 定时炸弹（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1240097,
-					enable_tag = "none",
-					name = T.GetIconLink(1240097)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1240097] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 定时炸弹（✓）
 					category = "RFIcon",
@@ -258,32 +237,11 @@ G.Encounters[2449] = {
 					spellID = 352345,
 					hl = "red",
 				},
-				{ -- 首领模块 船锚射击 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 船锚射击（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 352345,
-					enable_tag = "none",
-					name = T.GetIconLink(352345)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[352345] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 船锚射击（✓）
 					category = "RFIcon",

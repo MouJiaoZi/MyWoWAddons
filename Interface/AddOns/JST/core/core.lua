@@ -609,12 +609,6 @@ function AlertIcon_Aura_Updater:update(aura_tag, icon, args, GUID, aura_data, ap
 			icon.anim:Play()
 		end
 		
-		-- 文字
-		if args.tip and string.match(args.tip, "%%s(%d+)") then -- 显示法术效果（如易伤20%，减速40%）
-			local value = tonumber(string.match(args.tip, "%%s(%d+)"))
-			icon.bottomtext:SetText(args.tip:gsub("(%d+)", ""):gsub("%%s", value*count))
-		end
-		
 		icon.GUID = GUID
 		icon.count_old = nil
 		icon.duration_old = nil
@@ -628,6 +622,12 @@ function AlertIcon_Aura_Updater:update(aura_tag, icon, args, GUID, aura_data, ap
 		icon.brtext:SetText(string.format("|cffFFFF00%s|r", count > 0 and count or ""))
 	end
 	
+	-- 层数变化的文字
+	if args.tip and string.match(args.tip, "%%s(%d+)") then -- 显示法术效果（如易伤20%，减速40%）
+		local value = tonumber(string.match(args.tip, "%%s(%d+)"))
+		icon.bottomtext:SetText(args.tip:gsub("(%d+)", ""):gsub("%%s", value*count))
+	end
+		
 	-- 层数刷新
 	if icon.count_old ~= count then
 		-- 层数变化的声音
@@ -666,11 +666,6 @@ function AlertIcon_Aura_Updater:update(aura_tag, icon, args, GUID, aura_data, ap
 			end
 		end
 		
-		-- 层数变化的文字
-		if args.tip and string.match(args.tip, "%%s(%d+)") then -- 显示法术效果（如易伤20%，减速40%）
-			local value = tonumber(string.match(args.tip, "%%s(%d+)"))
-			icon.bottomtext:SetText(args.tip:gsub("(%d+)", ""):gsub("%%s", value*count))
-		end
 	end
 	
 	-- 时间刷新	
@@ -1347,6 +1342,7 @@ local CreateAlertBar = function(updater, group, tag)
 		
 		-- Init
 		self.GUID = nil
+		self.target_fixed = nil
 		
 		self:SetStatusBarColor(unpack(args.color))
 		
@@ -1530,8 +1526,8 @@ function AlertBar_Cast_Updater:update_range(bar, args, unit)
 end
 
 function AlertBar_Cast_Updater:update_target(bar, args, unit)
-	if args.show_tar then
-		local target_unit = T.GetTarget(unit)		
+	if args.show_tar and not bar.target_fixed then
+		local target_unit = T.GetTarget(unit)
 		if target_unit then
 			local GUID = UnitGUID(target_unit)
 			local name = GUID and T.ColorNickNameByGUID(GUID)
@@ -1608,6 +1604,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 						local dur = (endTimeMS - startTimeMS)/1000
 						local exp_time = endTimeMS/1000
 						self:update("cast", cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
+						bar.target_fixed = false
 					end
 				end
 			end
@@ -1636,6 +1633,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 						local dur = (endTimeMS - startTimeMS)/1000
 						local exp_time = endTimeMS/1000
 						self:update("channel", cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
+						bar.target_fixed = false
 					end
 				end
 			end
@@ -1662,6 +1660,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 					if not self.actives_bytag[cast_Tag] then
 						local bar = self:GetAlert(args.group, cast_Tag)
 						self:update("cast", cast_Tag, bar, args, unit, cast_spellID, args.dur)
+						bar.target_fixed = false
 					end
 				end
 			end
@@ -1678,6 +1677,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 				local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "cast", spellID})
 				if args then
 					self:update_target(bar, args, unit)
+					bar.target_fixed = true
 				end
 			end
 		end
@@ -2245,6 +2245,7 @@ T.RegisterEventAndCallbacks(AlertBar_Aura_Updater, {
 })
 
 -- 计时条：测试
+
 local AlertBar_Test_Updater = CreateUpdater(CreateAlertBar, BarFrame, BarFrame2, BarFrame3)
 
 function AlertBar_Test_Updater:update(key, bar, args)

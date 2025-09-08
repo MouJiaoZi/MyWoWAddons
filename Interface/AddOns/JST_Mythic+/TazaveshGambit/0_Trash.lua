@@ -21,13 +21,14 @@ G.Encounters["c392"] = {
 				{355048},
 			},
 			options = {				
-				{ -- 对我施法图标 破壳猛击（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 破壳猛击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 355048,
-					hl = "yel_flash",
-					sound = "[knockback]",
-					tip = L["击退"],
+					group = 1,
+					ficon = "0",
+					text = L["击退"],
+					sound = "[knockback]cast",
 				},
 			},
 		},
@@ -166,33 +167,13 @@ G.Encounters["c392"] = {
 					glow = true,
 					group = 1,
 				},
-				{ -- 首领模块 海潮践踏 玩家自保技能提示（✓）
-					category = "BossMod",
-					spellID = 355464,
-					enable_tag = "none",
-					name = T.GetIconLink(355429)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.spellIDs = {
-							[355429] = {
-								event = "SPELL_CAST_START",
-								dur = 2,
-							},
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 80
-						
-						T.InitPersonalSpellAlertbyCLEU(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyCLEU(frame)
-					end,
+				{ -- 自保技能提示 海潮践踏（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 355429,
+					event = "SPELL_CAST_START",
+					dur = 2,
+					threshold = 80,
 				},
 			},
 		},

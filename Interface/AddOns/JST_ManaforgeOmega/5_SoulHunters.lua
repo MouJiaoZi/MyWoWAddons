@@ -911,8 +911,8 @@ G.Encounters[2688] = {
 						end
 						
 						function frame:UpdateText(force_show)
-							self.text:SetText(string.format("%s %d/%d", T.GetSpellIcon(1233093), frame.count, frame.total_count))
-							if frame.count > 0 or force_show then
+							self.text:SetText(string.format("%s %d/%d", T.GetSpellIcon(1233093), self.count, self.total_count))
+							if self.count > 0 or force_show then
 								self.text:Show()
 							else
 								self.text:Hide()

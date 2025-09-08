@@ -70,8 +70,8 @@ function F.SetFontOutline(text, font, size)
 	end
 	local fontName, fontHeight = text:GetFont()
 
-	if size and type(size) == "string" then
-		size = fontHeight + tonumber(size)
+	if type(size) == "string" then
+		size = fontHeight + (tonumber(size) or 0)
 	end
 
 	if font and not strfind(font, "%.ttf") and not strfind(font, "%.otf") then
@@ -180,14 +180,6 @@ function F.DelayUnhookAll(module)
 	else
 		F.Developer.LogDebug("Functions.DelayUnhookAll: Module not found!")
 	end
-end
-
----Round a number to specified decimal places
----@param number number The number to round
----@param decimals number Number of decimal places
----@return string roundedNumber The rounded number as string
-function F.Round(number, decimals)
-	return format(format("%%.%df", decimals), number)
 end
 
 ---Set callback with retry mechanism

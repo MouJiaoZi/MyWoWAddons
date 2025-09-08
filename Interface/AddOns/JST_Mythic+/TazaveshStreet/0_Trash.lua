@@ -21,7 +21,7 @@ G.Encounters["c391"] = {
 				{355900},
 			},
 			options = {
-				{ -- 声音 干扰手雷
+				{ -- 声音 干扰手雷（✓）
 					category = "Sound",
 					sub_event = "SPELL_CAST_SUCCESS",
 					spellID = 355900,
@@ -34,11 +34,13 @@ G.Encounters["c391"] = {
 				{351047},
 			},
 			options = {
-				{ -- 计时条 代理打击
+				{ -- 打坦计时条 代理打击（✓）
 					category = "AlertTimerbar",
 					type = "cast",
-					spellID = 351047,
-					sound = "[add]cast",
+					spellID = 352796,
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 			},
 		},
@@ -47,7 +49,7 @@ G.Encounters["c391"] = {
 				{438599},
 			},
 			options = {
-				{ -- 首领模块 小怪技能倒计时 辐射脉冲
+				{ -- 首领模块 小怪技能倒计时 辐射脉冲（✓）
 					category = "BossMod",
 					spellID = 356548,
 					name = T.GetIconLink(356548)..L["倒计时"],
@@ -66,7 +68,7 @@ G.Encounters["c391"] = {
 								cast_gap = 5,
 							},
 							["179334"] = {
-								engage_cd = 0.1,
+								engage_cd = 27.1,
 								cast_cd = 27.1,
 								cast_gap = 5,
 							},
@@ -85,7 +87,7 @@ G.Encounters["c391"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 辐射脉冲
+				{ -- 计时条 辐射脉冲（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 356548,
@@ -94,7 +96,7 @@ G.Encounters["c391"] = {
 					glow = true,
 					group = 1,
 				},
-				{ -- 图标 辐射脉冲
+				{ -- 图标 辐射脉冲（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -110,7 +112,7 @@ G.Encounters["c391"] = {
 				{352390},
 			},
 			options = {
-				{ -- 计时条 辐射脉冲
+				{ -- 计时条 辐射脉冲（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 352390,
@@ -124,7 +126,7 @@ G.Encounters["c391"] = {
 				{356537},
 			},
 			options = {
-				{ -- 姓名板打断图标 强化约束雕文
+				{ -- 姓名板打断图标 强化约束雕文（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 356537,
@@ -132,7 +134,7 @@ G.Encounters["c391"] = {
 					interrupt = 1,
 					ficon = "6",
 				},
-				{ -- 图标 强化约束雕文
+				{ -- 图标 强化约束雕文（缺数据）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -142,13 +144,13 @@ G.Encounters["c391"] = {
 					tip = L["减速"].."+"..L["强力DOT"],
 					ficon = "7",
 				},
-				{ -- 团队框架高亮 强化约束雕文
+				{ -- 团队框架高亮 强化约束雕文（缺数据）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 356324,
 					color = "blu",
 				},
-				{ -- 驱散提示音 强化约束雕文
+				{ -- 驱散提示音 强化约束雕文（缺数据）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 356324,
@@ -162,7 +164,7 @@ G.Encounters["c391"] = {
 				{355915},
 			},
 			options = {			
-				{ -- 图标 强化约束雕文
+				{ -- 图标 约束雕文（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -172,13 +174,13 @@ G.Encounters["c391"] = {
 					tip = L["减速"].."+"..L["强力DOT"],
 					ficon = "7",
 				},
-				{ -- 团队框架高亮 强化约束雕文
+				{ -- 团队框架高亮 约束雕文（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 355915,
 					color = "blu",
 				},
-				{ -- 驱散提示音 强化约束雕文
+				{ -- 驱散提示音 约束雕文（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 355915,
@@ -192,7 +194,7 @@ G.Encounters["c391"] = {
 				{354297},
 			},
 			options = {
-				{ -- 姓名板打断图标 凌光箭
+				{ -- 姓名板打断图标 凌光箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 354297,
@@ -200,13 +202,13 @@ G.Encounters["c391"] = {
 					interrupt = 2,
 					ficon = "6",
 				},
-				{ -- 对我施法图标 凌光箭
+				{ -- 对我施法图标 凌光箭（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 354297,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 凌光箭
+				{ -- 团队框架图标 凌光箭（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 354297,
@@ -218,7 +220,7 @@ G.Encounters["c391"] = {
 				{355934},
 			},
 			options = {		
-				{ -- 计时条 强光屏障
+				{ -- 计时条 强光屏障（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 355934,
@@ -226,7 +228,7 @@ G.Encounters["c391"] = {
 					glow = true,
 					group = 1,
 				},
-				{ -- 姓名板打断图标 强光屏障
+				{ -- 姓名板打断图标 强光屏障（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 355934,
@@ -234,14 +236,14 @@ G.Encounters["c391"] = {
 					interrupt = 1,
 					ficon = "6",
 				},	
-				{ -- 姓名板光环 折射护盾
+				{ -- 姓名板光环 折射护盾（✓）
 					category = "PlateAlert",
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
 					spellID = 355980,
 					ficon = "7",
 				},
-				{ -- 驱散提示音 折射护盾
+				{ -- 驱散提示音 折射护盾（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 355980,
@@ -251,19 +253,19 @@ G.Encounters["c391"] = {
 				},
 			},
 		},
-		{ -- 装甲监工:光线切分者
+		{ -- 装甲监工:光线切分者(追踪者佐·刻斯)
 			spells = {
 				{356001},
 			},
 			options = {
-				{ -- 计时条 光线切分者
+				{ -- 计时条 光线切分者（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 356001,
 					text = L["陷阱"],
 					sound = "[mindstep]cast",
 				},
-				{ -- 图标 光线切分者
+				{ -- 图标 光线切分者（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -272,18 +274,172 @@ G.Encounters["c391"] = {
 					tip = L["强力DOT"],
 					hl = "red",
 				},
+				{ -- 团队框架高亮 光线切分者（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 356011,
+					color = "red",
+				},
+				{ -- 自保技能提示 光线切分者（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 356011,
+					threshold = 75,
+				},
 			},
-		},
-		{ -- 财团打手:凌光反打
+		},		
+		{ -- 追踪者佐·刻斯:封锁
 			spells = {
-				{356967},
+				{356942},
 			},
 			options = {
-				{ -- 首领模块 小怪技能倒计时 凌光反打
+				{ -- 团队框架图标 封锁（✓）
+					category = "RFIcon",
+					type = "Cast",
+					spellID = 356942,
+				},
+				{ -- 驱散提示音 封锁（✓）
+					category = "Sound",
+					sub_event = "SPELL_CAST_START",
+					spellID = 356942,
+					file = "[prepare_dispel]",
+					ficon = "7",
+				},
+				{ -- 图标 封锁（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 356943,
+					hl = "blu",
+					tip = L["定身"].."+"..L["强力DOT"],
+					ficon = "7",
+				},
+				{ -- 团队框架高亮 封锁（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 356943,
+					color = "blu",
+				},				
+			},
+		},
+		{ -- 上古熔火恶犬:熔岩吐息
+			spells = {
+				{356404},
+			},
+			options = {
+				{ -- 计时条 熔岩吐息（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 356404,
+					sound = "[dodge]cast",
+				},
+			},
+		},
+		{ -- 上古熔火恶犬:上古恐慌
+			spells = {
+				{356407},
+			},
+			options = {
+				{ -- 姓名板打断图标 上古恐慌（✓）
+					category = "PlateAlert",
+					type = "PlateInterrupt",
+					spellID = 356407,
+					mobID = "180091",
+					interrupt = 1,
+					ficon = "6",
+				},
+			},
+		},
+		{ -- 狂乱的夜爪豹:狂乱割裂
+			spells = {
+				{357827},
+			},
+			options = {
+				{ -- 图标 狂乱割裂（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 357827,
+					hl = "red",
+					tip = L["强力DOT"],
+					ficon = "13",
+				},
+				{ -- 驱散提示音 狂乱割裂（✓）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 357827,
+					file = "[dispel]",
+					ficon = "13",
+				},
+				{ -- 团队框架高亮 狂乱割裂（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 357827,
+					color = "red",
+				},
+			},
+		},
+		{ -- 暴怒的恐角龙:狂暴冲锋
+			spells = {
+				{357512},
+			},
+			options = {	
+				{ -- 计时条 狂暴冲锋（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 357512,
+					group = 1,
+					show_tar = true,
+					sound = "[mindcharge]cast",
+					glow = true,
+				},
+				{ -- 对我施法图标 狂暴冲锋（✓）
+					category = "AlertIcon",
+					type = "com",
+					spellID = 357512,
+					hl = "yel_flash",
+					sound = "cd3",
+					msg = {str_applied = "%spell", str_rep = "%dur"},
+				},
+				{ -- 首领模块 狂暴冲锋 对我施法计时圆圈（✓）
 					category = "BossMod",
-					spellID = 356967,
-					ficon = "0",
-					name = T.GetIconLink(356967)..L["倒计时"],
+					spellID = 357512,
+					enable_tag = "none",
+					name = T.GetIconLink(357512)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {	
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_STOP"] = true,
+						["UNIT_TARGET"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[357512] = {		
+								color = {1, 1, 0},
+							},
+						}
+						T.InitCircleCastTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateCircleCastTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetCircleCastTimers(frame)
+					end,
+				},
+			},
+		},
+		{ -- 暴怒的恐角龙:狂野鞭笞 
+			spells = {
+				{357508},
+			},
+			options = {
+				{ -- 首领模块 小怪技能倒计时 狂野鞭笞（✓）
+					category = "BossMod",
+					spellID = 357508,
+					name = T.GetIconLink(357508)..L["倒计时"],
 					enable_tag = "none",
 					points = {hide = true},
 					events = {
@@ -293,15 +449,15 @@ G.Encounters["c391"] = {
 					},
 					init = function(frame)
 						frame.cast_npcID = {
-							["180348"] = {
-								engage_cd = 28.3,
-								cast_cd = 31.6,
+							["180495"] = {
+								engage_cd = 17,
+								cast_cd = 26.5,
 								cast_gap = 5,
 							},
 						}
 						
-						frame.cast_spellID = 356967
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["击退"]
+						frame.cast_spellID = 357508
+						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["近战AOE"]
 						frame.text_color = T.GetSpellColor(frame.cast_spellID)
 						
 						T.InitMobCooldownText(frame)						
@@ -313,12 +469,188 @@ G.Encounters["c391"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 对我施法图标 凌光反打
+				{ -- 计时条 狂野鞭笞（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 357508,
+					group = 1,
+					sound = "[meleeaoe]cast",
+					glow = true,
+				},
+			},
+		},
+		{ -- 集市维和者:重装方阵
+			spells = {
+				{355640},
+			},
+			options = {
+				{ -- 姓名板光环 重装方阵（✓）
+					category = "PlateAlert",
+					type = "PlateAuras",
+					aura_type = "HELPFUL",
+					spellID = 355640,
+				},
+			},
+		},
+		{ -- 贸易执行者:强力脚踢(指挥官佐·法)
+			spells = {
+				{355477},
+			},
+			options = {	
+				{ -- 打坦计时条 强力脚踢（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 355477,
+					group = 1,
+					ficon = "0",
+					sound = "[knockback]cast",
+				},
+			},
+		},
+		{ -- 贸易执行者:力量增幅器
+			spells = {
+				{1244443},
+			},
+			options = {	
+				{ -- 姓名板打断图标 力量增幅器（✓）
+					category = "PlateAlert",
+					type = "PlateInterrupt",
+					spellID = 1244443,
+					mobID = "179842",
+					interrupt = 1,
+					ficon = "6",
+				},
+			},
+		},
+		{ -- 老练的火花法师:凌光齐射
+			spells = {
+				{355642},
+			},
+			options = {	
+				{ -- 姓名板打断图标 凌光齐射（✓）
+					category = "PlateAlert",
+					type = "PlateInterrupt",
+					spellID = 355642,
+					mobID = "179841",
+					interrupt = 1,
+					ficon = "6",
+				},
+			},
+		},
+		{ -- 老练的火花法师:闪烁
+			spells = {
+				{355641},
+			},
+			options = {	
+				{ -- 图标 闪烁（✓）
 					category = "AlertIcon",
-					type = "com",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 355641,
+					hl = "blu",
+					tip = L["易伤"],
+					ficon = "7",
+				},
+				{ -- 团队框架高亮 闪烁（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 355641,
+					color = "blu",
+				},
+				{ -- 驱散提示音 闪烁（✓）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 355641,
+					file = "[dispel]",
+					ficon = "7",
+				},
+			},
+		},		
+		{ -- 指挥官佐·法:致命武力
+			spells = {
+				{355479},
+			},
+			options = {
+				{ -- 计时条 致命武力（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 355479,
+					group = 1,
+					text = L["连线"],
+					glow = true,
+					sound = "[chain]cast",
+				},
+				{ -- 首领模块 致命武力 计时圆圈（✓）
+					category = "BossMod",
+					spellID = 355480,
+					enable_tag = "none",
+					name = T.GetIconLink(355480)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {	
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[355480] = { -- 致命武力
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {1, 1, 0},
+								sound = "chainonyou",
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
+					end,
+				},
+				{ -- 图标 致命武力（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 355487,
+					tip = L["强力DOT"],
+					hl = "red",
+				},
+				{ -- 团队框架高亮 致命武力（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 355487,
+					color = "red",
+				},
+			},
+		},
+		{ -- 指挥官佐·法:震荡地雷
+			spells = {
+				{355473},
+			},
+			options = {
+				{ -- 计时条 震荡地雷（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 355473,
+					sound = "[mindstep]cast",
+				},
+				
+			},
+		},
+		{ -- 财团打手:凌光反打
+			spells = {
+				{356967},
+			},
+			options = {				
+				{ -- 打坦计时条 凌光反打（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 356967,
-					hl = "yel_flash",
-					sound = "[konckback]",
+					group = 1,
+					ficon = "0",
+					sound = "[knockback]cast",
 				},
 			},
 		},
@@ -327,26 +659,18 @@ G.Encounters["c391"] = {
 				{357229},
 			},
 			options = {
-				{ -- 计时条 时空光线强化器
+				{ -- 计时条 时空光线强化器（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 357229,
 					ficon = "7",
 					text = L["增加伤害"],
 				},
-				{ -- 姓名板光环 时空光线强化器
+				{ -- 姓名板光环 时空光线强化器（✓）
 					category = "PlateAlert",
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
 					spellID = 357229,
-					ficon = "7",
-				},
-				{ -- 驱散提示音 时空光线强化器
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 357229,
-					aura_type = "HELPFUL",
-					file = "[dispel]",
 					ficon = "7",
 				},
 			},
@@ -356,11 +680,11 @@ G.Encounters["c391"] = {
 				{357197},
 			},
 			options = {
-				{ -- 驱散提示音 光尘闪回
+				{ -- 驱散提示音 光尘闪回（✓）
 					category = "Sound",
 					sub_event = "SPELL_CAST_SUCCESS",
 					spellID = 357197,
-					file = "[change_pos]",
+					file = "[outcircle]",
 				},				
 			},
 		},
@@ -369,7 +693,7 @@ G.Encounters["c391"] = {
 				{357196},
 			},
 			options = {
-				{ -- 姓名板打断图标 凌光箭
+				{ -- 姓名板打断图标 凌光箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 357196,
@@ -377,13 +701,13 @@ G.Encounters["c391"] = {
 					interrupt = 2,
 					ficon = "6",
 				},
-				{ -- 对我施法图标 凌光箭
+				{ -- 对我施法图标 凌光箭（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 357196,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 凌光箭
+				{ -- 团队框架图标 凌光箭（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 357196,
@@ -395,18 +719,19 @@ G.Encounters["c391"] = {
 				{355830},
 			},
 			options = {
-				{ -- 对我施法图标 迅斩（待测试）
+				{ -- 对我施法图标 迅斩（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 355830,
 					hl = "yel_flash",
+					msg = {str_applied = "%name %spell"},
 				},
-				{ -- 团队框架图标 迅斩（待测试）
+				{ -- 团队框架图标 迅斩（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 355830,
 				},
-				{ -- 图标 迅斩
+				{ -- 图标 迅斩（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -416,18 +741,24 @@ G.Encounters["c391"] = {
 					tip = L["强力DOT"],
 					ficon = "13",
 				},
-				{ -- 驱散提示音 迅斩
+				{ -- 驱散提示音 迅斩（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 355832,
 					file = "[dispel]",
 					ficon = "13",
 				},
-				{ -- 团队框架高亮 迅斩
+				{ -- 团队框架高亮 迅斩（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 355832,
 					color = "red",
+				}, 
+				{ -- 自保技能提示 迅斩（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 355832,
+					threshold = 65,
 				},
 			},
 		},
@@ -436,7 +767,7 @@ G.Encounters["c391"] = {
 				{357029},
 			},
 			options = {
-				{ -- 图标 凌光炸弹
+				{ -- 图标 凌光炸弹（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -446,14 +777,14 @@ G.Encounters["c391"] = {
 					tip = L["炸弹"],
 					ficon = "7",
 				},
-				{ -- 驱散提示音 凌光炸弹
+				{ -- 驱散提示音 凌光炸弹（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 357029,
 					file = "[dispel]",
 					ficon = "7",
 				},
-				{ -- 团队框架高亮 凌光炸弹
+				{ -- 团队框架高亮 凌光炸弹（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 357029,
@@ -466,13 +797,17 @@ G.Encounters["c391"] = {
 				{347716},
 			},
 			options = {
-				{ -- 对我施法图标 开信刀
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 开信刀（✓）
+					category = "AlertTimerbar",
+					type = "cleu",
+					event = "SPELL_CAST_START",
 					spellID = 347716,
-					hl = "yel_flash",
+					dur = 1.5,
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
-				{ -- 图标 开信刀
+				{ -- 图标 开信刀（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -482,7 +817,7 @@ G.Encounters["c391"] = {
 					tip = L["DOT"],
 					ficon = "13",
 				},
-				{ -- 驱散提示音 开信刀
+				{ -- 驱散提示音 开信刀（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 347716,
@@ -490,7 +825,7 @@ G.Encounters["c391"] = {
 					ficon = "13",
 					amount = 2,
 				},
-				{ -- 团队框架高亮 开信刀
+				{ -- 团队框架高亮 开信刀（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 347716,
@@ -504,12 +839,10 @@ G.Encounters["c391"] = {
 				{347721},
 			},
 			options = {
-				{ -- 计时条 打开牢笼
+				{ -- 计时条 打开牢笼（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 347721,
-					glow = true,
-					group = 1,
 				},
 			},
 		},
@@ -518,7 +851,7 @@ G.Encounters["c391"] = {
 				{347775},
 			},
 			options = {				
-				{ -- 计时条 垃圾信息过滤
+				{ -- 计时条 垃圾信息过滤（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 347775,
@@ -526,22 +859,22 @@ G.Encounters["c391"] = {
 					glow = true,
 					group = 1,
 				},
-				{ -- 姓名板打断图标 垃圾信息过滤
+				{ -- 姓名板打断图标 垃圾信息过滤（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 347775,
 					mobID = "176395",
 					interrupt = 2,
 					ficon = "6",
-				},			
-				{ -- 姓名板光环 垃圾信息过滤
+				},
+				{ -- 姓名板光环 垃圾信息过滤（✓）
 					category = "PlateAlert",
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
 					spellID = 347775,
 					ficon = "7",
 				},
-				{ -- 驱散提示音 垃圾信息过滤
+				{ -- 驱散提示音 垃圾信息过滤（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 347775,
@@ -556,20 +889,13 @@ G.Encounters["c391"] = {
 				{347903},
 			},
 			options = {
-				{ -- 计时条 垃圾邮件
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 347903,
-					glow = true,
-					group = 1,
-				},
-				{ -- 对我施法图标 垃圾邮件
+				{ -- 对我施法图标 垃圾邮件（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 347903,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 垃圾邮件
+				{ -- 团队框架图标 垃圾邮件（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 347903,
@@ -581,7 +907,7 @@ G.Encounters["c391"] = {
 				{358919},
 			},
 			options = {
-				{ -- 图标 静电附着
+				{ -- 图标 静电附着（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -591,14 +917,14 @@ G.Encounters["c391"] = {
 					tip = L["减速"].."%s10%",
 					ficon = "7",
 				},
-				{ -- 团队框架高亮 静电附着
+				{ -- 团队框架高亮 静电附着（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 351960,
 					color = "blu",
 					amount = 3,
 				},
-				{ -- 驱散提示音 静电附着
+				{ -- 驱散提示音 静电附着（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 351960,
@@ -613,11 +939,37 @@ G.Encounters["c391"] = {
 				{1240821},
 			},
 			options = {
-				{ -- 计时条 充能猛击
+				{ -- 计时条 充能猛击（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1240821,
-					sound = "[outcircle]cast",
+					sound = "[spread]cast",
+				},
+				{ -- 首领模块 充能猛击 计时圆圈（✓）
+					category = "BossMod",
+					spellID = 1240820,
+					enable_tag = "none",
+					name = T.GetIconLink(1240820)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {	
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[1240820] = { -- 充能猛击
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {1, 1, 0},
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
+					end,
 				},
 			},
 		},
@@ -626,13 +978,15 @@ G.Encounters["c391"] = {
 				{1240912},
 			},
 			options = {
-				{ -- 对我施法图标 穿刺
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 穿刺（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 1240912,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
-				{ -- 图标 穿刺
+				{ -- 图标 穿刺（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -640,59 +994,6 @@ G.Encounters["c391"] = {
 					spellID = 1240912,
 					hl = "",
 					tip = L["易伤"].."20%",
-				},
-			},
-		},
-		{ -- 集市维和者:压制打击
-			spells = {
-				{355637},
-			},
-			options = {
-				{ -- 首领模块 小怪技能倒计时 压制打击
-					category = "BossMod",
-					spellID = 355637,
-					name = T.GetIconLink(355637)..L["倒计时"],
-					enable_tag = "none",
-					points = {hide = true},
-					events = {
-						["UNIT_ENTERING_COMBAT"] = true,
-						["GROUP_LEAVING_COMBAT"] = true,
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.cast_npcID = {
-							["179840"] = {
-								engage_cd = 1.5,
-								cast_cd = 15.3,
-								cast_gap = 3.2,
-							},
-						}
-						
-						frame.cast_spellID = 356548
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["全团AE"]
-						frame.text_color = T.GetSpellColor(frame.cast_spellID)
-						
-						T.InitMobCooldownText(frame)						
-					end,
-					update = function(frame, event, ...)
-						T.UpdateMobCooldownText(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetMobCooldownText(frame)
-					end,
-				},
-			},
-		},
-		{ -- 集市维和者:重装方阵
-			spells = {
-				{355640},
-			},
-			options = {
-				{ -- 姓名板光环 重装方阵
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 355640,
 				},
 			},
 		},

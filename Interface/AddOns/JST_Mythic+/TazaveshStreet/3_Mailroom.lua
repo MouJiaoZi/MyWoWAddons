@@ -22,7 +22,7 @@ G.Encounters[2436] = {
 				{346947, "5"},
 			},
 			options = {				
-				{ -- 文字 不稳定的货物 倒计时
+				{ -- 文字 不稳定的货物 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(346947)..L["倒计时"],
@@ -45,13 +45,13 @@ G.Encounters[2436] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 346947, T.GetIconLink(346947), self, event, ...)
 					end,
 				},
-				{ -- 计时条 不稳定的货物
+				{ -- 计时条 不稳定的货物（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346947,
 					sound = "[bomb]cast",
 				},
-				{ -- 图标 不稳定的货物
+				{ -- 图标 不稳定的货物（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -60,7 +60,51 @@ G.Encounters[2436] = {
 					hl = "yel",
 					tip = L["减速"].."20%",
 				},
-				{ -- 图标 动荡爆炸
+				{ -- 文字 不稳定的货物 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["炸弹"]..L["倒计时"],
+					data = {
+						spellID = 346296,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, sourceGUID, _, _, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_SUCCESS" and spellID == 346947 then
+								self.count = 5
+								self.exp_time = GetTime() + 30
+								
+								self:Show()
+								
+								self:SetScript("OnUpdate", function(s, e)
+									s.t = s.t + e
+									if s.t > 0.05 then
+										s.remain = s.exp_time - GetTime()
+										if s.remain > 0 then
+											s.text:SetText(string.format("%s%d/5 %.1f", L["炸弹"], s.count, s.remain))	
+										else
+											s:Hide()
+											s:SetScript("OnUpdate", nil)
+										end
+										s.t = 0
+									end
+								end)
+								
+							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == 346296 then
+								self.count = self.count - 1
+								if self.count == 0 then
+									self:Hide()
+									self:SetScript("OnUpdate", nil)
+									self.text:SetText("")
+								end
+							end
+						end
+					end,
+				},
+				{ -- 图标 动荡爆炸（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -76,7 +120,7 @@ G.Encounters[2436] = {
 				{438599},
 			},
 			options = {
-				{ -- 文字 有害液体 倒计时
+				{ -- 文字 有害液体 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(346286)..L["倒计时"],
@@ -99,13 +143,13 @@ G.Encounters[2436] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 346286, T.GetIconLink(346286), self, event, ...)
 					end,
 				},
-				{ -- 计时条 有害液体
+				{ -- 计时条 有害液体（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346286,
 					sound = "[mindstep]cast",
 				},
-				{ -- 图标 炼金残渣
+				{ -- 图标 炼金残渣（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -115,20 +159,29 @@ G.Encounters[2436] = {
 					tip = L["DOT"],
 					ficon = "7",
 				},
-				{ -- 团队框架高亮 炼金残渣
+				{ -- 团队框架高亮 炼金残渣（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 346844,
 					color = "blu",
+					amount = 2,
 				},
-				{ -- 驱散提示音 炼金残渣
+				{ -- 驱散提示音 炼金残渣（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
 					spellID = 346844,
 					file = "[dispel]",
 					ficon = "7",
+					amount = 2,
 				},
-				{ -- 图标 四溅液体
+				{ -- 自保技能提示 炼金残渣（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 346844,
+					threshold = 65,
+					amount = 2,
+				},
+				{ -- 图标 四溅液体（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -144,10 +197,10 @@ G.Encounters[2436] = {
 				{346742},
 			},
 			options = {
-				{ -- 文字 邮件旋风 倒计时
+				{ -- 文字 邮件旋风 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
-					preview = T.GetIconLink(346742)..L["倒计时"],
+					preview = T.GetIconLink(346742)..L["全团AE"]..L["倒计时"],
 					data = {
 						spellID = 346742,
 						events =  {
@@ -164,10 +217,10 @@ G.Encounters[2436] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 346742, T.GetIconLink(346742), self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 346742, L["全团AE"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 邮件旋风
+				{ -- 计时条 邮件旋风（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346742,
@@ -183,10 +236,10 @@ G.Encounters[2436] = {
 				{346962},
 			},
 			options = {
-				{ -- 文字 现金汇款 倒计时
+				{ -- 文字 现金汇款 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
-					preview = T.GetIconLink(346962)..L["倒计时"],
+					preview = T.GetIconLink(346962)..L["分担伤害"]..L["倒计时"],
 					data = {
 						spellID = 346962,
 						events =  {
@@ -203,28 +256,53 @@ G.Encounters[2436] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_SUCCEEDED", "boss1", 346962, T.GetIconLink(346962), self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_SUCCEEDED", "boss1", 346962, L["分担伤害"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 现金汇款
+				{ -- 计时条 现金汇款（✓）
 					category = "AlertTimerbar",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "group",
 					spellID = 346962,
+					group = 1,
 					text = L["分担伤害"],
 					sound = "[sharedmg]cast",
 					glow = true,
-					group = 1,
 				},
-				{ -- 图标 现金汇款
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
+				{ -- 首领模块 现金汇款 计时圆圈（✓）
+					category = "BossMod",
 					spellID = 346962,
-					tip = L["分担伤害"],
-					hl = "org",
+					enable_tag = "none",
+					name = T.GetIconLink(346962)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {	
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[346962] = { -- 现金汇款
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {1, .3, 0},
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
+					end,
+				},
+				{ -- 自保技能提示 现金汇款（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 346962,
+					event = "SPELL_CAST_SUCCESS",
+					dur = 7,
+					threshold = 80,
 				},
 			},
 		},

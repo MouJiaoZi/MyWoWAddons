@@ -24,7 +24,7 @@ G.Encounters[2437] = {
 				{353424, "2"},
 			},
 			options = {
-				{ -- 文字 审讯 倒计时
+				{ -- 文字 审讯 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(348350)..L["倒计时"],
@@ -47,21 +47,21 @@ G.Encounters[2437] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 348350, T.GetIconLink(348350), self, event, ...)
 					end,
 				},
-				{ -- 计时条 审讯
+				{ -- 计时条 审讯（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 348350,
 				},
-				{ -- 计时条 审讯
+				{ -- 计时条 审讯（✓）
 					category = "AlertTimerbar",
-					type = "cast",
+					type = "aura",
+					aura_type = "HARMFUL",
 					spellID = 347949,
+					unit = "group",
 					show_tar = true,
-					glow = true,
-					group = 1,
-					sound = "[rescue]channel",
+					sound = "[rescue]",
 				},
-				{ -- 图标 审讯
+				{ -- 图标 审讯（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -69,19 +69,26 @@ G.Encounters[2437] = {
 					spellID = 347949,
 					hl = "org",
 				},
-				{ -- 团队框架高亮 强化约束雕文
+				{ -- 团队框架高亮 审讯（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 347949,
 					color = "org",
 				},
-				{ -- 图标 监禁室
+				{ -- 图标 监禁室（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 345990,
+					tip = L["强力DOT"],
 					hl = "red",
+				},
+				{ -- 团队框架高亮 监禁室（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 345990,				
+					color = "red",
 				},
 			},
 		},
@@ -90,13 +97,13 @@ G.Encounters[2437] = {
 				{346204},
 			},
 			options = {
-				{ -- 计时条 武装安保
+				{ -- 计时条 武装安保（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346204,
 					sound = "[dodge_circle]cast",
 				},
-				{ -- 图标 武装安保
+				{ -- 图标 武装安保（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -112,7 +119,7 @@ G.Encounters[2437] = {
 				{348128},
 			},
 			options = {
-				{ -- 文字 全副武装 倒计时
+				{ -- 文字 全副武装 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -136,14 +143,14 @@ G.Encounters[2437] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 348128, L["增加伤害"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 全副武装
+				{ -- 计时条 全副武装（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 348128,
 					sound = "[buff_dmg]cast",
 					ficon = "0",
 				},
-				{ -- 图标 全副武装
+				{ -- 图标 全副武装（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HELPFUL",
@@ -161,7 +168,7 @@ G.Encounters[2437] = {
 				{353421},
 			},
 			options = {
-				{ -- 文字 扣押违禁品 倒计时
+				{ -- 文字 扣押违禁品 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["缴械"]..L["倒计时"],
@@ -184,24 +191,23 @@ G.Encounters[2437] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 346006, L["缴械"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 扣押违禁品
+				{ -- 计时条 扣押违禁品（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 346006,
-					glow = true,
-					group = 1,
-					sound = "[disarm]cast",
+					text = L["缴械"],
 				},
-				{ -- 图标 扣押违禁品
+				{ -- 图标 扣押违禁品（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 345770,
 					hl = "red",
-					tip = L["沉默"],
+					tip = L["缴械"],
+					sound = "[disarm]",
 				},
-				{ -- 图标 精力
+				{ -- 图标 精力（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -217,7 +223,7 @@ G.Encounters[2437] = {
 				{1236348},
 			},
 			options = {
-				{ -- 文字 充能劈斩 倒计时
+				{ -- 文字 充能劈斩 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["冲击波"]..L["倒计时"],
@@ -229,7 +235,7 @@ G.Encounters[2437] = {
 						},					
 						info = {							
 							["all"] = {
-								[1] = {12.8, 20.6, 19.4, 20.7, 19.4, 17.0, 17.0, 17.0, 20.6, 17.0},
+								[1] = {12.4, 20.6, 19.4, 20.7, 19.4, 17.0, 17.0, 17.0, 20.6, 17.0},
 							},
 						},
 						cd_args = {
@@ -240,7 +246,7 @@ G.Encounters[2437] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1236348, L["冲击波"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 充能劈斩
+				{ -- 计时条 充能劈斩（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1236348,

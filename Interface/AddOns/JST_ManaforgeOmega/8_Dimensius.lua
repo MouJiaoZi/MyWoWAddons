@@ -6,11 +6,23 @@ end
 
 --------------------------------Locals--------------------------------
 if G.Client == "zhCN" or G.Client == "zhTW" then
+	L["易伤前喊话"] = "必须出击，就是现在！"
 	L["捡球"] = "捡球"
+	L["大小圈"] = "大小圈"
+	L["超级新星生效计时条"] = "%s 生效计时条"
+	
 elseif G.Client == "ruRU" then
+	L["易伤前喊话"] = "Атакуем его! Сейчас!"
 	--L["捡球"] = "Pickup"
+	--L["大小圈"] = "Big/small circles"
+	--L["超级新星生效计时条"] = "%s take effect timing bar"
+	
 else
+	L["易伤前喊话"] = "We must strike--now!"
 	L["捡球"] = "Pickup"
+	L["大小圈"] = "Big/small circles"
+	L["超级新星生效计时条"] = "%s take effect timing bar"
+	
 end
 ---------------------------------Notes--------------------------------
 
@@ -35,7 +47,7 @@ G.Encounters[2691] = {
 				{1230087, "0"},--【千钧猛击】
 			},
 			options = {
-				{ -- 文字 千钧猛击 倒计时（✓）
+				{ -- 文字 千钧猛击 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1230087)..L["倒计时"],
@@ -46,8 +58,11 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
+							[15] = {
 								[1] = {23.5, 47.1, 47.1, 47.1},
+							},
+							[16] = {
+								[1] = {21, 42, 42, 42},
 							},
 						},
 						cd_args = {
@@ -63,7 +78,7 @@ G.Encounters[2691] = {
 					type = "cast",
 					spellID = 1230087,
 					sound = "[knockoff]cast,cd3",
-				},				
+				},
 			},
 		},
 		{ -- 活体物质
@@ -72,9 +87,9 @@ G.Encounters[2691] = {
 			},
 			spells = {
 				{1231005},--【裂变】
-				{1248240, "1,12"},--【无限可能】
+				--{1248240, "1,12"},--【无限可能】
 				{1228206},--【过量物质】
-				{1228207},--【集体引力】
+				--{1228207},--【集体引力】
 			},
 			options = {
 				{ -- 首领模块 裂变 玩家自保技能提示（✓）
@@ -514,10 +529,10 @@ G.Encounters[2691] = {
 		{ -- 吞噬
 			spells = {
 				{1229038, "4,5"},--【吞噬】
-				{1229674},--【吞食饥饿】
+				--{1229674},--【吞食饥饿】
 			},
 			options = {
-				{ -- 文字 吞噬 倒计时（✓）
+				{ -- 文字 吞噬 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1229038)..L["倒计时"],
@@ -528,8 +543,11 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
+							[15] = {
 								[1] = {11.8, 94.1},
+							},
+							[16] = {
+								[1] = {10.5, 84.2},
 							},
 						},
 						cd_args = {
@@ -551,10 +569,10 @@ G.Encounters[2691] = {
 		{ -- 暗物质
 			spells = {
 				{1230999, "2"},--【暗物质】
-				{1231002},--【黑暗能量】
+				--{1231002},--【黑暗能量】
 			},
 			options = {
-				{ -- 文字 暗物质 倒计时（✓）
+				{ -- 文字 暗物质 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["分散"]..L["倒计时"],
@@ -565,8 +583,11 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
+							[15] = {
 								[1] = {35.3, 43.6, 50.5},
+							},
+							[16] = {
+								[1] = {31.6, 38.9, 45.3, 38.9},
 							},
 						},
 						cd_args = {
@@ -624,11 +645,11 @@ G.Encounters[2691] = {
 		{ -- 破碎空间
 			spells = {
 				{1243690, "2"},--【破碎空间】
-				{1243704, "4,5"},--【反物质】
-				{1243699},--【空间碎片】
+				--{1243704, "4,5"},--【反物质】
+				--{1243699},--【空间碎片】
 			},
 			options = {
-				{ -- 文字 破碎空间 倒计时（✓）
+				{ -- 文字 破碎空间 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["大球"]..L["倒计时"],
@@ -639,8 +660,11 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[1] = {44, 47, 47},
+							[15] = {
+								[1] = {44.5, 47, 47, 47},
+							},
+							[16] = {
+								[1] = {39.9, 42.1, 42.1, 42.1},
 							},
 						},
 						cd_args = {
@@ -680,12 +704,12 @@ G.Encounters[2691] = {
 		},
 		{ -- 引力倒逆
 			spells = {
-				{1243577, "5,12"},--【引力倒逆】
+				{1243577, "5"},--【引力倒逆】
 				{1243609},--【浮空】
-				{1250614, "12"},--【畸变之力】
+				--{1250614, "12"},--【畸变之力】
 			},
 			options = {
-				{ -- 文字 引力倒逆 倒计时（✓）
+				{ -- 文字 引力倒逆 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1243577)..L["倒计时"],
@@ -693,29 +717,43 @@ G.Encounters[2691] = {
 						spellID = 1243577,
 						events =  {
 							["UNIT_AURA_ADD"] = true,
-						},	
-						info = {52, 42, 51},
+							["ENCOUNTER_PHASE"] = true,
+						},
 					},
 					update = function(self, event, ...)
 						if event == "ENCOUNTER_START" then
 							self.round = true							
 							self.last_cast = 0
 							self.next_count = 1
+							self.difficultyID = select(3, ...)
 							
-							local dur = self.data.info[self.next_count]
-							if dur then
-								T.Start_Text_DelayTimer(self, dur, T.GetIconLink(1243577), true)
+							if self.difficultyID == 15 then
+								T.Start_Text_DelayTimer(self, 52.9, T.GetIconLink(1243577), true)
+							elseif self.difficultyID == 16 then
+								T.Start_Text_DelayTimer(self, 43, T.GetIconLink(1243577), true)
 							end
+						
 						elseif event == "UNIT_AURA_ADD" then
 							local unit, spellID = ...
 							if spellID == 1243577 and GetTime() - self.last_cast > 1 then
 								self.last_cast = GetTime()
 								self.next_count = self.next_count + 1
 								
-								local dur = self.data.info[self.next_count]
-								if dur then
-									T.Start_Text_DelayTimer(self, dur, T.GetIconLink(1243577), true)
+								if self.next_count > 4 then return end
+								
+								if self.difficultyID == 15 then
+									local cd = gravityCount % 2 == 1 and 51.7 or 42.3
+									T.Start_Text_DelayTimer(self, cd, T.GetIconLink(1243577), true)
+								elseif self.difficultyID == 16 then
+									cd = 42.1
+									T.Start_Text_DelayTimer(self, 42.1, T.GetIconLink(1243577), true)
 								end
+							end
+							
+						elseif event == "ENCOUNTER_PHASE" then
+							local phase = ...
+							if phase == 1.5 then
+								T.Stop_Text_Timer(self)
 							end
 						end
 					end,
@@ -812,7 +850,7 @@ G.Encounters[2691] = {
 		{ -- 星辰之核
 			spells = {
 				{1246930},--【星辰之核】
-				{1246948},--【迸射流星】
+				--{1246948},--【迸射流星】
 			},
 			options = {
 				{ -- 图标 星辰之核（✓）
@@ -830,7 +868,7 @@ G.Encounters[2691] = {
 				{1238765, "4"},--【灭绝】
 			},
 			options = {
-				{ -- 文字 灭绝 倒计时（✓）
+				{ -- 文字 灭绝 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["躲地板"]..L["倒计时"],
@@ -841,9 +879,13 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[2] = {26, 35.2},
-								[3] = {32, 35.2},
+							[15] = {
+								[2] = {11.8, 35.3, 35.3},
+								[3] = {11.8, 35.3, 35.3},
+							},
+							[16] = {
+								[2] = {10.5, 31.6},
+								[3] = {10.5, 31.6},
 							},
 						},
 						cd_args = {
@@ -880,7 +922,7 @@ G.Encounters[2691] = {
 				{1237319, "2,5"},--【伽马爆发】
 			},
 			options = {
-				{ -- 文字 伽马爆发 倒计时（✓）
+				{ -- 文字 伽马爆发 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["推人"]..L["倒计时"],
@@ -891,9 +933,13 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						},					
 						info = {
-							["all"] = {
-								[2] = {40},
-								[3] = {45},
+							[15] = {
+								[2] = {25.9, 35.4},
+								[3] = {25.9, 35.4},
+							},
+							[16] = {
+								[2] = {21.1, 31.6},
+								[3] = {21.1, 31.6},
 							},
 						},
 						cd_args = {
@@ -915,29 +961,61 @@ G.Encounters[2691] = {
 				},
 			},
 		},
-		{ -- 引力扭曲
-			spells = {
-				{1234242, "12"},--【引力扭曲】
-			},
-			options = {
-				
-			},
-		},
-		{ -- 倾压引力
-			spells = {
-				{1234243},--【倾压引力】
-				{1234251},--【碾碎】
-			},
-			options = {
-				
-			},
-		},
-		{ -- 引力倒转
+		{ -- 倾压引力/引力倒转
 			spells = {				
-				{1234244},--【引力倒转】
+				{1234243},--【倾压引力】
+				{1234244},--【引力倒转】	
 			},
 			options = {
-				
+				{ -- 文字 引力倒转 倒计时（待测试）
+					category = "TextAlert",
+					ficon = "12",
+					type = "spell",
+					preview = T.GetIconLink(1234244)..L["大小圈"]..L["倒计时"],
+					data = {
+						spellID = 1234244,
+						events =  {
+							["UNIT_AURA_ADD"] = true,
+							["ENCOUNTER_PHASE"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+							self.count_down_start = 3
+							self.mute_count_down = true
+							self.prepare_sound = "1302\\preparecircles"
+							self.last_cast = 0
+
+						elseif event == "ENCOUNTER_PHASE" then
+							local phase = ...
+							if phase == 2 or phase == 3 then
+								self.next_count = 1
+								T.Start_Text_DelayTimer(self, 12.6, L["大小圈"], true)
+							elseif phase == 4 then
+								self.next_count = 1
+								T.Start_Text_DelayTimer(self, 59.4, L["大小圈"], true)
+							end
+							
+						elseif event == "UNIT_AURA_ADD" then
+							local unit, spellID = ...
+							if spellID == 1243577 and GetTime() - self.last_cast > 1 then
+								self.last_cast = GetTime()
+								self.next_count = self.next_count + 1
+								
+								local cd = 0
+								local phase = T.GetCurrentPhase()
+								if phase == 4 and self.next_count < 6 then
+									cd = self.next_count % 2 == 0 and 26.0 or 32.0 
+								elseif self.next_count < 3 then
+									cd = 31.5
+								end
+								
+								T.Start_Text_DelayTimer(self, cd, L["大小圈"], true)
+							end
+						end
+					end,
+				},
 			},
 		},
 		{ -- 蚀盛
@@ -952,17 +1030,18 @@ G.Encounters[2691] = {
 				},
 			},
 		},		
-		{ -- 阿托席恩:物质喷发
+		{ -- 阿托席恩:物质喷发/物质破坏
 			npcs = {
 				{32741},--【阿托席恩】 
 			},
 			spells = {
 				{1237694, "3"},--【物质喷发】
-				{1237696},--【碎片地带】
+				{1249423, "12"},--【物质破坏】
 			},
 			options = {
 				{ -- 文字 物质喷发 倒计时（✓）
 					category = "TextAlert",
+					ficon = "3",
 					type = "spell",
 					preview = L["头前"]..L["倒计时"],
 					data = {
@@ -972,8 +1051,8 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[2] = {20, 17.5, 17.7},
+							[15] = {
+								[2] = {7, 17.7, 17.7, 17.7},
 							},
 						},
 						cd_args = {
@@ -990,6 +1069,37 @@ G.Encounters[2691] = {
 					spellID = 1237694,
 					text = L["头前"],
 				},
+				{ -- 文字 物质破坏 倒计时（待测试）
+					category = "TextAlert",
+					ficon = "12",
+					type = "spell",
+					preview = L["射线"]..L["倒计时"],
+					data = {
+						spellID = 1249423,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_START"] = true,
+						},					
+						info = {
+							[16] = {
+								[2] = {3, 15.8, 15.8},
+							},
+						},
+						cd_args = {
+							round = true,
+						},
+					},
+					update = function(self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1249423, L["射线"], self, event, ...)
+					end,
+				},
+				{ -- 计时条 物质破坏（待测试）
+					category = "AlertTimerbar",
+					ficon = "12",
+					type = "cast",
+					spellID = 1249423,
+					text = L["射线"],
+				},
 				{ -- 图标 碎片地带（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -1000,30 +1110,18 @@ G.Encounters[2691] = {
 				},
 			},
 		},
-		{ -- 阿托席恩:物质破坏
-			npcs = {
-				{32741, "12"},--【阿托席恩】 
-			},
-			spells = {
-				{1249423},--【物质破坏】 
-				{1237696},--【碎片地带】
-			},
-			options = {
-			
-			},
-		},
-		{ -- 帕哥斯:星尘新星
+		{ -- 帕哥斯:星尘新星/星辰碎片冲击
 			npcs = {
 				{32745},--【帕哥斯】
 			},
 			spells = {
 				{1237695, "3"}, --【星尘新星】
-				{1237696}, --【碎片地带】
-				
+				{1249454, "12"},--【星辰碎片冲击】
 			},
 			options = {
 				{ -- 文字 星尘新星 倒计时（✓）
 					category = "TextAlert",
+					ficon = "3",
 					type = "spell",
 					preview = L["大圈"]..L["倒计时"],
 					data = {
@@ -1033,8 +1131,8 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[3] = {27.2, 35.3},
+							[15] = {
+								[3] = {7, 35.3},
 							},
 						},
 						cd_args = {
@@ -1050,22 +1148,38 @@ G.Encounters[2691] = {
 					type = "cast",
 					spellID = 1237695,
 				},
+				{ -- 文字 星辰碎片冲击 倒计时（待测试）
+					category = "TextAlert",
+					ficon = "12",
+					type = "spell",
+					preview = L["引头前"]..L["倒计时"],
+					data = {
+						spellID = 1251619,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_START"] = true,
+						},					
+						info = {
+							[16] = {
+								[3] = {3.2, 31.6},
+							},
+						},
+						cd_args = {
+							round = true,
+						},
+					},
+					update = function(self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1251619, L["引头前"], self, event, ...)
+					end,
+				},
+				{ -- 计时条 星辰碎片冲击（待测试）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1251619,
+					text = L["头前"],
+				},
 			},
 		},
-		{ -- 帕哥斯:星辰碎片冲击
-			npcs = {
-				{32745, "12"},--【帕哥斯】
-			},
-			spells = {
-				{1249454},--【星辰碎片冲击】
-				{1249456},--【星辰碎片】
-				{1254384},--【星辰迸发】
-				{1237696},--【碎片地带】
-			},
-			options = {
-				
-			},
-		},	
 		{ -- 阿托席恩 帕哥斯:征服者的十字
 			npcs = {
 				{32741},--【阿托席恩】
@@ -1075,28 +1189,54 @@ G.Encounters[2691] = {
 				{1239262, "1,12"},--【征服者的十字】虚空领主召唤虚空守卫方阵来争夺领地，并限制玩家移动。
 			},
 			options = {
-				{ -- 文字 征服者的十字 倒计时（✓）
+				{ -- 文字 征服者的十字 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["召唤小怪"]..L["倒计时"],
 					data = {
 						spellID = 1239262,
 						events =  {
-							["ENCOUNTER_PHASE"] = true,
-							["UNIT_SPELLCAST_START"] = true,
-						},					
-						info = {
-							["all"] = {
-								[2] = {13, 35.3},
-								[3] = {20, 35.3},
-							},
-						},
-						cd_args = {
-							round = true,
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1239262, L["召唤小怪"], self, event, ...)
+						if event == "ENCOUNTER_START" then
+							self.round = true
+							self.voidlordKilled = 0
+							self.difficultyID = select(3, ...)
+							
+						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "UNIT_DIED" then
+								local npcID = select(6, strsplit("-", destGUID))
+								if npcID == "245255" or npcID == "245222" then
+									T.Stop_Text_Timer(self)
+									self.voidlordKilled = self.voidlordKilled + 1
+								end
+								
+							elseif sub_event == "SPELL_CAST_SUCCESS" and spellID == 1237102 then -- 世界之魂吞噬
+								if self.voidlordKilled == 0 then
+									if self.difficultyID == 16 then
+										T.Start_Text_DelayTimer(self, 10.1, L["召唤小怪"], true)
+									else
+										T.Start_Text_DelayTimer(self, 15.2, L["召唤小怪"], true)
+									end
+								else
+									if self.difficultyID == 16 then
+										T.Start_Text_DelayTimer(self, 13.9, L["召唤小怪"], true)
+									else
+										T.Start_Text_DelayTimer(self, 18.8, L["召唤小怪"], true)
+									end
+								end
+								
+							elseif sub_event == "SPELL_CAST_START" and spellID == 1239262 then -- 征服者的十字
+								if self.difficultyID == 16 then
+									T.Start_Text_DelayTimer(self, 31.6, L["召唤小怪"], true)
+								else
+									T.Start_Text_DelayTimer(self, 35.3, L["召唤小怪"], true)
+								end
+							end
+						end
 					end,
 				},
 				{ -- 计时条 征服者的十字（✓）
@@ -1106,6 +1246,59 @@ G.Encounters[2691] = {
 					text = L["召唤小怪"],
 					sound = "[add]cast",
 				},
+				{ -- 首领模块 征服者的十字 控制链（待测试）
+					category = "BossMod",
+					spellID = 1239262,
+					enable_tag = "none",
+					name = T.GetFomattedNameFromNpcID("248589")..L["控制链"],
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					custom = {
+						{
+							key = "mrt_custom_btn",
+						},
+						{
+							key = "mrt_analysis_btn",
+						},
+					},
+					init = function(frame)
+					
+						function frame:copy_mrt()
+							local str = T.GenerateGroupCCNote(self.config_id, self.config_name, 4)
+							return str
+						end
+						
+						function frame:ReadNote(display)
+							T.ReadGroupCCNote(self.config_id, display, self.config_name)
+							T.GroupSpellForceUpdate()
+						end
+						
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_START" and spellID == 1239262 then -- 征服者的十字		
+								frame.count = frame.count + 1
+								T.DisplayGroupCCFrame(frame.count)
+								
+								frame.timer = C_Timer.NewTimer(20, function()
+									T.HideGroupCCFrame()
+								end)
+							end
+						elseif event == "ENCOUNTER_START" then
+							frame.count = 0
+							frame:ReadNote()							
+						end
+					end,
+					reset = function(frame, event)
+						if frame.timer then
+							frame.timer:Cancel()
+						end
+						T.HideGroupCCFrame()
+					end,
+				},
 			},
 		},
 		{ -- 虚空守卫
@@ -1113,8 +1306,8 @@ G.Encounters[2691] = {
 				{33583},--【虚空守卫】 
 			},
 			spells = {
-				{1239270},--【虚空守护】
-				{1246537},--【熵能统合】
+				--{1239270},--【虚空守护】
+				--{1246537},--【熵能统合】
 			},
 			options = {
 				{ -- 图标 虚空守护（✓）
@@ -1139,8 +1332,8 @@ G.Encounters[2691] = {
 				{33586},--【虚无束缚者】 
 			},
 			spells = {
-				{1246541},--【虚无缠缚】
-				{1249248, "12"},--【无边无界】
+				--{1246541},--【虚无缠缚】
+				--{1249248, "12"},--【无边无界】
 			},
 			options = {
 				{ -- 计时条 虚无缠缚（✓）
@@ -1214,6 +1407,25 @@ G.Encounters[2691] = {
 				{1245292, "1"},--【动荡能量】
 			},
 			options = {
+				{ -- 文字 动荡能量 倒计时（待测试）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["BOSS易伤"]..L["倒计时"],
+					data = {
+						spellID = 1245292,
+						events =  {
+							["CHAT_MSG_MONSTER_YELL"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "CHAT_MSG_MONSTER_YELL" then
+							local msg = ...
+							if msg == L["易伤前喊话"] then
+								T.Start_Text_Timer(self, 8.7, L["BOSS易伤"], true)
+							end
+						end
+					end,
+				},
 				{ -- 计时条 动荡能量（✓）
 					category = "AlertTimerbar",
 					type = "aura",
@@ -1235,10 +1447,34 @@ G.Encounters[2691] = {
 		{ -- 熄灭众星
 			spells = {
 				{1231716, "2"},--【熄灭众星】
-				{1232394},--【重力井】
-				{1248479, "4,12"},--【星辰过载】
+				--{1232394},--【重力井】
+				--{1248479, "4,12"},--【星辰过载】
 			},
 			options = {
+				{ -- 文字 熄灭众星 倒计时（待测试）
+					category = "TextAlert",
+					type = "spell",
+					preview = T.GetIconLink(1231716)..L["倒计时"],
+					data = {
+						spellID = 1231716,
+						events =  {
+							["ENCOUNTER_PHASE"] = true,
+							["UNIT_SPELLCAST_START"] = true,
+						},					
+						info = {
+							["all"] = {
+								[4] = {16.5},
+							},
+						},
+						cd_args = {
+							show_time = 3,
+							round = true,
+						},
+					},
+					update = function(self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1231716, T.GetIconLink(1231716), self, event, ...)
+					end,
+				},
 				{ -- 计时条 熄灭众星（✓）
 					category = "AlertTimerbar",
 					type = "cast",
@@ -1257,11 +1493,11 @@ G.Encounters[2691] = {
 		{ -- 吞噬
 			spells = {
 				{1233539, "4,5,12"},--【吞噬】
-				{1233557, "5"},--【密度】
+				--{1233557, "5"},--【密度】
 				{1232973},--【超级新星】
 			},
 			options = {				
-				{ -- 文字 吞噬 倒计时（✓）
+				{ -- 文字 吞噬 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1233539)..L["倒计时"],
@@ -1272,8 +1508,11 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[4] = {30.9, 100},
+							[15] = {
+								[4] = {47.5, 100},
+							},
+							[16] = {
+								[4] = {47.5, 80, 80},
 							},
 						},
 						cd_args = {
@@ -1292,6 +1531,7 @@ G.Encounters[2691] = {
 				},
 				{ -- 文字 超级新星 倒计时（✓）
 					category = "TextAlert",
+					ficon = "3",
 					type = "spell",
 					preview = T.GetIconLink(1232973)..L["倒计时"],
 					data = {
@@ -1301,8 +1541,8 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[4] = {39.8, 14.5, 33.3, 33.3, 18.9, 14.4},
+							[15] = {
+								[4] = {56.4, 14.5, 33.3, 33.3, 18.9, 14.4},
 							},
 						},
 						cd_args = {
@@ -1313,19 +1553,55 @@ G.Encounters[2691] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1232973, T.GetIconLink(1232973), self, event, ...)
 					end,
 				},
-				{ -- 计时条 超级新星（✓）
-					category = "AlertTimerbar",
-					type = "cast",
+				{ -- 首领模块 超级新星生效计时条 （✓）
+					category = "BossMod",
 					spellID = 1232973,
-					sound = soundfile("1232973cast", "cast"),
-				},
-				{ -- 计时条 超级新星（✓）
-					category = "AlertTimerbar",
-					type = "cleu",
-					event = "SPELL_CAST_SUCCESS",
-					spellID = 1232973,
-					dur = 5,
-					text = L["全团AE"],
+					enable_tag = "none",
+					name = string.format(L["超级新星生效计时条"], T.GetIconLink(1232973)),
+					points = {hide = true},
+					events = {
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+					},
+					init = function(frame)
+						frame.count = 0
+						
+						local icon = C_Spell.GetSpellTexture(1232973)
+						local color = T.GetSpellColor(1232973)
+						
+						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, icon, L["全团AE"], color)
+						frame.bar.glow:SetBackdropBorderColor(unpack(color))
+						frame.bar.glow:Show()
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_START" then
+							local unit, _, spellID = ...
+							
+							if frame.difficultyID ~= 16 and string.find(unit, "boss") and spellID == 1232973 then -- 超级新星
+								T.StartTimerBar(frame.bar, 6.5, true, true)
+								T.PlaySound("1232973cast")
+							end
+							
+						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, _, spellID = ...
+							
+							if frame.difficultyID == 16 and string.find(unit, "boss") and spellID == 1233539 then -- 吞噬 P3
+								frame.count = frame.count + 1
+								
+								if frame.count < 3 then
+									T.StartTimerBar(frame.bar, 7, true, true)
+									T.PlaySound("1232973cast")
+								end
+							end
+						
+						elseif event == "ENCOUNTER_START" then
+							frame.difficultyID = select(3, ...)
+							frame.count = 0 
+						end
+					end,
+					reset = function(frame, event)
+						T.StopTimerBar(frame.bar, true, true)
+					end,
 				},
 			},
 		},	
@@ -1335,7 +1611,7 @@ G.Encounters[2691] = {
 				{1234054},--【暗影震荡】
 			},
 			options = {
-				{ -- 文字 昏天暗地 倒计时（✓）
+				{ -- 文字 昏天暗地 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["圆环"]..L["倒计时"],
@@ -1344,10 +1620,13 @@ G.Encounters[2691] = {
 						events =  {
 							["ENCOUNTER_PHASE"] = true,
 							["UNIT_SPELLCAST_START"] = true,
-						},					
+						},
 						info = {
-							["all"] = {
-								[4] = {64.3, 33.3, 66.7},
+							[15] = {
+								[4] = {80.8, 33.3, 66.6},
+							},
+							[16] = {
+								[4] = {72.4, 30, 50, 30},
 							},
 						},
 						cd_args = {
@@ -1409,7 +1688,7 @@ G.Encounters[2691] = {
 				{1234266, "0"},--【寰宇脆弱】
 			},
 			options = {
-				{ -- 文字 寰宇崩塌 倒计时（✓）
+				{ -- 文字 寰宇崩塌 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["拉人"]..L["倒计时"],
@@ -1420,8 +1699,11 @@ G.Encounters[2691] = {
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {
-							["all"] = {
-								[4] = {48.7, 33.3, 33.3, 33.3, 33.3},
+							[15] = {
+								[4] = {65.3, 33.3, 33.3, 33.3},
+							},
+							[16] = {
+								[4] = {57.4, 30, 30, 30, 30},
 							},
 						},
 						cd_args = {
@@ -1481,7 +1763,7 @@ G.Encounters[2691] = {
 		},
 		{ -- 虚空之握
 			spells = {
-				{1250055, "2"},--【虚空之握】
+				{1250055, "3"},--【虚空之握】
 			},
 			options = {
 				{ -- 图标 虚空之握（✓）
@@ -1596,15 +1878,15 @@ G.Encounters[2691] = {
 					category = "PhaseChangeData",
 					phase = 1.5,
 					type = "CLEU",
-					sub_event = "SPELL_CAST_SUCCESS",
+					sub_event = "SPELL_CAST_START",
 					spellID = 1234898, -- 黑洞视界
 				},
 				{
 					category = "PhaseChangeData",
 					phase = 2,
 					type = "CLEU",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1246143, -- 湮灭之触
+					sub_event = "SPELL_CAST_START",
+					spellID = 1239262, -- 征服者的十字
 					count = 1,
 				},
 				{
@@ -1619,9 +1901,9 @@ G.Encounters[2691] = {
 					category = "PhaseChangeData",
 					phase = 3,
 					type = "CLEU",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1246143, -- 湮灭之触
-					count = 2,
+					sub_event = "SPELL_CAST_START",
+					spellID = 1239262, -- 征服者的十字
+					count = 3,
 				},
 				{
 					category = "PhaseChangeData",
@@ -1636,7 +1918,7 @@ G.Encounters[2691] = {
 					phase = 4,
 					type = "CLEU",
 					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1231716, -- 熄灭众星
+					spellID = 1245292, -- 动荡能量
 				},
 			},
 		},

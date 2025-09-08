@@ -2118,6 +2118,7 @@ end
 --				color = {0, 1, 0}, -- 颜色，默认白色
 --				reverse = true, -- [可选]逆时针
 --				sound = "dropnow", -- [可选]声音
+--				msg = "%spell", -- [可选]消息
 --			},
 --		}
 
@@ -2157,7 +2158,7 @@ end
 
 T.UpdateCircleTimers = function(frame, event, ...)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+		local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID, spellName = CombatLogGetCurrentEventInfo()
 		if frame.spellIDs and frame.spellIDs[spellID] and sub_event == frame.spellIDs[spellID]["event"] then -- 开始
 			local info = frame.spellIDs[spellID]
 			if not info.target_me or G.PlayerGUID == destGUID then
@@ -2165,6 +2166,9 @@ T.UpdateCircleTimers = function(frame, event, ...)
 				cd_tex:begin(GetTime() + info.dur, info.dur)
 				if info.sound then
 					T.PlaySound(info.sound)
+				end
+				if info.msg then
+					T.SendAuraMsg(info.msg, "SAY", spellName)
 				end
 			end
 		end	
@@ -2190,6 +2194,7 @@ end
 --				color = {0, 1, 0}, -- 颜色
 --				reverse = true, -- [可选]逆时针
 --				sound = "dropnow", -- [可选]声音
+--				msg = "%spell", -- [可选]消息
 --			},
 --		} 		
 
@@ -2258,6 +2263,9 @@ T.UpdateUnitAuraCircleTimers = function(frame, event, ...)
 								if info.sound then
 									T.PlaySound(info.sound)
 								end
+								if info.msg then
+									T.SendAuraMsg(info.msg, "SAY", AuraData.name)
+								end
 								
 								cd_tex:begin(AuraData.expirationTime, AuraData.duration)
 								frame.figures[auraID] = cd_tex
@@ -2280,7 +2288,10 @@ T.UpdateUnitAuraCircleTimers = function(frame, event, ...)
 							if info.sound then
 								T.PlaySound(frame.spellIDs[spellID].sound)
 							end
-							
+							if info.msg then
+								T.SendAuraMsg(info.msg, "SAY", AuraData.name)
+							end
+								
 							frame.figures[auraID] = cd_tex
 						end
 					end
@@ -2333,6 +2344,7 @@ end
 --				color = {0, 1, 0}, -- 颜色，默认白色
 --				reverse = true, -- [可选]逆时针
 --				sound = "dropnow", -- [可选]声音
+--				msg = "%spell", -- [可选]消息
 --			},
 --		}
 
@@ -2373,7 +2385,7 @@ T.UpdateCircleCastTimers = function(frame, event, ...)
 				C_Timer.After(frame.delay, function()
 					local target_unit = T.GetTarget(unit)
 					if target_unit and UnitIsUnit(target_unit, "player") then
-						local startTimeMS, endTimeMS = select(4, UnitCastingInfo(unit))
+						local name, _, _, startTimeMS, endTimeMS = UnitCastingInfo(unit)
 						if startTimeMS and endTimeMS then
 							local info = frame.spellIDs[cast_spellID]
 							local dur = (endTimeMS - startTimeMS)/1000
@@ -2385,6 +2397,9 @@ T.UpdateCircleCastTimers = function(frame, event, ...)
 								
 								if info.sound then
 									T.PlaySound(info.sound)
+								end
+								if info.msg then
+									T.SendAuraMsg(info.msg, "SAY", name)
 								end
 							end
 						end
@@ -2400,7 +2415,7 @@ T.UpdateCircleCastTimers = function(frame, event, ...)
 	elseif event == "UNIT_TARGET" then
 		local unit = ...
 		if unit and UnitCastingInfo(unit) then
-			local startTimeMS, endTimeMS, _, cast_GUID, _, cast_spellID = select(4, UnitCastingInfo(unit))
+			local name, _, _, startTimeMS, endTimeMS, _, cast_GUID, _, cast_spellID = UnitCastingInfo(unit)
 			if cast_GUID then
 				local target_unit = T.GetTarget(unit)
 				if target_unit and UnitIsUnit(target_unit, "player") then
@@ -2413,6 +2428,9 @@ T.UpdateCircleCastTimers = function(frame, event, ...)
 							frame.figures[cast_GUID] = CreateRingCD(frame, info.color, info.reverse)
 							frame.figures[cast_GUID]:begin(exp_time, dur)
 							
+							if info.msg then
+								T.SendAuraMsg(info.msg, "SAY", name)
+							end
 							if info.sound then
 								T.PlaySound(info.sound)
 							end
@@ -2448,6 +2466,7 @@ end
 --				color = {0, 1, 0}, -- 颜色，默认白色
 --				reverse = true, -- [可选]逆时针
 --				sound = "dropnow", -- [可选]声音
+--				msg = "%spell", -- [可选]消息			
 --			},
 --		}
 
@@ -2493,6 +2512,11 @@ T.UpdateCircleMsgTimers = function(frame, event, ...)
 				if info.sound then
 					T.PlaySound(info.sound)
 				end
+				if info.msg then
+					local spellID = tonumber(k)
+					local spellName = spellID and C_Spell.GetSpellName(spellID) or ""
+					T.SendAuraMsg(info.msg, "SAY", spellName)
+				end
 			end	
 		end
 	end
@@ -2511,7 +2535,7 @@ end
 --------------------------------------------------------
 ---------------  [首领模块]自动标记模板  ---------------
 --------------------------------------------------------
--- event: ENCOUNTER_ENGAGE_UNIT
+-- event: ENCOUNTER_ENGAGE_UNIT/ENCOUNTER_SHOW_BOSS_UNIT
 -- event: NAME_PLATE_UNIT_ADDED
 -- event: UNIT_TARGET
 
@@ -2552,7 +2576,7 @@ T.InitRaidTarget = function(frame)
 end
 
 T.UpdateRaidTarget = function(frame, event, ...)
-	if event == "ENCOUNTER_ENGAGE_UNIT" then
+	if event == "ENCOUNTER_ENGAGE_UNIT" or event == "ENCOUNTER_SHOW_BOSS_UNIT" then
 		local unit, GUID = ...
 		local npcID = select(6, strsplit("-", GUID))
 		if npcID and npcID == frame.mob_npcID and not frame.marked[GUID] then

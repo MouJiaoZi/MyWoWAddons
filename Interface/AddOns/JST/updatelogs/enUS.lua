@@ -3,6 +3,16 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.85
+Salhadaar add Shadowguard Reaper control chain.
+Dimensius Correct Mythic countdown data.
+Dimensius Modify the reference events for the phase transition and timeline data.
+Other error corrections.
+
+5.83
+Tazavesh: Streets of Wonder update.
+Other error corrections.
+
 5.82
 Tazavesh: So'leah's Gambit update.
 The dispelling prompt sound will now detect whether the dispelling spell is not in cooldown.

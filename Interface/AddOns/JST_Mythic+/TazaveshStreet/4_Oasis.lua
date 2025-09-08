@@ -22,7 +22,7 @@ G.Encounters[2452] = {
 				{348567, "5"},
 			},
 			options = {
-				{ -- 图标 爵士乐
+				{ -- 图标 爵士乐（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -31,7 +31,7 @@ G.Encounters[2452] = {
 					hl = "gre",
 					tip = L["加急速"].."%s1%",
 				},
-				{ -- 图标 快拍提速！
+				{ -- 图标 快拍提速！（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -41,31 +41,17 @@ G.Encounters[2452] = {
 					tip = L["加急速"].."25%",
 				},
 			},
-		},
-		{ -- 粗暴
-			spells = {
-				{353706},
-			},
-			options = {
-				{ -- 姓名板光环 粗暴
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 353706,
-					hl_np = true,
-				},
-			},
-		},
+		},		
 		{ -- 腐败的食品
 			spells = {
 				{359222},
 			},
 			options = {
-				{ -- 驱散提示音 腐败的食品
+				{ -- 驱散提示音 腐败的食品（✓）
 					category = "Sound",
-					sub_event = "SPELL_CAST_START",
+					sub_event = "SPELL_CAST_SUCCESS",
 					spellID = 359222,
-					file = "[mindstep]",
+					file = "[dodge_circle]",
 				},
 			},
 		},
@@ -77,13 +63,13 @@ G.Encounters[2452] = {
 				{348566},
 			},
 			options = {
-				{ -- 对我施法图标 投掷饮料
+				{ -- 对我施法图标 投掷饮料（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 348566,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 投掷饮料
+				{ -- 团队框架图标 投掷饮料（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 348566,
@@ -98,18 +84,18 @@ G.Encounters[2452] = {
 				{353836},
 			},
 			options = {
-				{ -- 对我施法图标 凌光箭
+				{ -- 对我施法图标 凌光箭（✓）
 					category = "AlertIcon",
 					type = "com",
 					spellID = 353836,
 					hl = "yel_flash",
 				},
-				{ -- 团队框架图标 凌光箭
+				{ -- 团队框架图标 凌光箭（✓）
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 353836,
 				},
-				{ -- 姓名板打断图标 凌光箭
+				{ -- 姓名板打断图标 凌光箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 353836,
@@ -127,13 +113,13 @@ G.Encounters[2452] = {
 				{438599},
 			},
 			options = {
-				{ -- 计时条 传送
+				{ -- 计时条 传送（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 353783,
-					glow = true,
 					group = 1,
 					ficon = "14",
+					glow = true,
 				},
 			},
 		},
@@ -145,20 +131,17 @@ G.Encounters[2452] = {
 				{350916, "0"},
 			},
 			options = {
-				{ -- 对我施法图标 安保猛击
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 安保猛击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 350916,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 安保猛击
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 350916,
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 			},
 		},
-		{ -- 绿洲保安:威吓怒吼
+		{ -- 绿洲保安:威吓怒吼(佐·格伦)
 			npcs = {
 				{23523},
 				{23098},
@@ -167,7 +150,7 @@ G.Encounters[2452] = {
 				{350922},
 			},
 			options = {
-				{ -- 姓名板打断图标 威吓怒吼
+				{ -- 姓名板打断图标 威吓怒吼（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
 					spellID = 350922,
@@ -185,7 +168,7 @@ G.Encounters[2452] = {
 				{1241032, "5"},
 			},
 			options = {
-				{ -- 吸收盾 最终警告
+				{ -- 吸收盾 最终警告（✓）
 					category = "BossMod",
 					spellID = 1241023,
 					enable_tag = "none",
@@ -220,19 +203,19 @@ G.Encounters[2452] = {
 				{355438},
 			},
 			options = {
-				{ -- 文字 压制冲击 倒计时
+				{ -- 文字 压制冲击 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
-					preview = L["分散"]..L["倒计时"],
+					preview = L["拉人"]..L["倒计时"],
 					data = {
-						spellID = 355439,
+						spellID = 355438,
 						events =  {
 							["ENCOUNTER_PHASE"] = true,
 							["UNIT_SPELLCAST_START"] = true,
 						},					
 						info = {							
 							["all"] = {
-								[2] = {19.8, 70.0},
+								[2] = {19.8, 56.5},
 							},
 						},
 						cd_args = {
@@ -240,17 +223,17 @@ G.Encounters[2452] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 355439, L["分散"], self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 355438, L["拉人"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 压制冲击
+				{ -- 计时条 压制冲击（✓）
 					category = "AlertTimerbar",
 					type = "cast",
-					spellID = 355439,
-					sound = "[spread]cast",
+					spellID = 355438,
+					sound = "[spread]cast,cd3",
 					text = L["分散"],
 				},
-				{ -- 首领模块 压制冲击 计时圆圈
+				{ -- 首领模块 压制冲击 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 355439,
 					enable_tag = "none",
@@ -286,7 +269,7 @@ G.Encounters[2452] = {
 				{350919},
 			},
 			options = {
-				{ -- 文字 群体控制 倒计时
+				{ -- 文字 群体控制 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["冲击波"]..L["倒计时"],
@@ -298,7 +281,7 @@ G.Encounters[2452] = {
 						},					
 						info = {							
 							["all"] = {
-								[2] = {47.7, 49.3},
+								[2] = {41, 42.5},
 							},
 						},
 						cd_args = {
@@ -309,19 +292,12 @@ G.Encounters[2452] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 350919, L["冲击波"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 群体控制
+				{ -- 计时条 群体控制（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 350919,
 					sound = "[dodge]cast",
 					text = L["冲击波"],
-				},
-				{ -- 对我施法图标 群体控制（待测试）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 350919,
-					hl = "yel_flash",
-					msg = {str_applied = "%name %spell"},
 				},
 			},
 		},
@@ -333,7 +309,7 @@ G.Encounters[2452] = {
 				{359028, "0"},
 			},
 			options = {
-				{ -- 文字 安保猛击 倒计时
+				{ -- 文字 安保猛击 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -346,7 +322,7 @@ G.Encounters[2452] = {
 						},					
 						info = {							
 							["all"] = {
-								[2] = {7.7, 52.9, 48.6},
+								[2] = {10.4, 44.5, 42.5},
 							},
 						},
 						cd_args = {
@@ -357,11 +333,13 @@ G.Encounters[2452] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 359028, T.GetIconLink(359028), self, event, ...)
 					end,
 				},
-				{ -- 对我施法图标 安保猛击
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 安保猛击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 359028,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 			},
 		},

@@ -2222,6 +2222,24 @@ T.Create_TextAlert_Options = function(option_page, category, path, args, detail_
 	end
 end
 
+-- 自保提示
+T.Create_HPWatch_Options = function(option_page, category, path, args, detail_options)
+	local enable_path = T.CopyTableInsertElement(path, "enable")
+	local str = T.GetIconLink(args.spellID)..L["玩家自保技能提示"]
+	
+	local bu = Checkbutton_Encounter_DB(option_page, enable_path, str, args.enable_tag, args.ficon)
+	
+	if args.type == "Aura" then
+		bu.apply = function()
+			G.HPWatchTrigger:GetScript("OnEvent")(G.HPWatchTrigger, "OPTION_EDIT")
+		end
+	end
+	
+	if detail_options and #detail_options > 0 then		
+		CreateDetailOptionButton(bu, path, str, detail_options)
+	end
+end
+
 -- 转阶段
 T.Create_Phase_Options = function(option_page, category, args)
 	local str
@@ -2506,6 +2524,8 @@ T.CreateEncounterOptions = function(instance_type, option_page, ENCID, InstanceI
 					T.CreateSoundAlert(option_page, category, args)
 				elseif category == "RFIcon" then	
 					T.CreateRFIconAlert(option_page, category, args)
+				elseif category == "HPWatch" then
+					T.CreateHPWatchAlert(option_page, category, args)
 				elseif category == "PhaseChangeData" then
 					T.Create_Phase_Options(option_page, category, args)
 				elseif category == "BossMod" then

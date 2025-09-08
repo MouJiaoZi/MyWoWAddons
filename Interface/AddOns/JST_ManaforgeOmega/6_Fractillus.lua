@@ -30,6 +30,7 @@ else
 	L["出墙消墙位置分配"] = "Spawn/break wall assignment"
 	L["安全区文字持续时间"] = "Safe spot display duration"
 	L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"
+	L["放墙错误"] = "%s wall spawn position error(%s), actually spawned %s."
 	L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
 end
 ---------------------------------Notes--------------------------------
@@ -411,7 +412,8 @@ G.Encounters[2747] = {
 						T.GetScaleCustomData(frame)
 						
 						frame.tankSpawnCount = 1
-												
+						frame.waitng_tankSpawn = false
+
 						frame.spawns = {}
 						frame.tankSpawns = {}
 						frame.breaks = {}
@@ -527,7 +529,7 @@ G.Encounters[2747] = {
 							
 							local str = ""
 							for i, GUID in pairs(bar.players) do
-								local format_name = T.GetGroupInfobyGUID(GUID)["format_name"]
+								local format_name = T.ColorNickNameByGUID(GUID) or ""
 								if i == 1 then
 									str = str..format_name
 								else
@@ -604,6 +606,7 @@ G.Encounters[2747] = {
 										if not tank then
 											T.SendChatMsg(L["出墙"]..string.format("{rt%d}", position), 5, "SAY")
 										else
+											self.waitng_tankSpawn = true
 											T.SendChatMsg(L["坦克"]..L["出墙"]..string.format("{rt%d}", position), 5, "SAY")
 										end
 									end
@@ -1051,7 +1054,8 @@ G.Encounters[2747] = {
 							else
 								frame.tankSpawnCount = 1
 							end
-
+							frame.waitng_tankSpawn = false
+							
 							frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
 							frame.spawnTankGUIDs = table.wipe(frame.spawnTankGUIDs)
 							frame.breakGUIDs = table.wipe(frame.breakGUIDs)
@@ -1090,7 +1094,6 @@ G.Encounters[2747] = {
 								local wait = first_dur - 5
 								frame.timer = C_Timer.NewTimer(wait, function()
 									frame:DisplayTankSpwan()
-									frame:UpdateMonitor()
 								end)
 							end
 							
@@ -1102,9 +1105,16 @@ G.Encounters[2747] = {
 							if not castGUID then return end
 							
 							if unit == "boss1" then
-								if spellID == 1233416 or spellID == 1231871 then -- 结晶震荡波/震波猛击
+								if spellID == 1233416 then -- 结晶震荡波
+									frame.safespot = table.remove(frame.safespots, 1)
+									
+									if not frame.waitng_tankSpawn then
+										frame:DisplaySafe(frame.safespot)
+									end
+								elseif spellID == 1231871 then -- 震波猛击
 									frame.safespot = table.remove(frame.safespots, 1)
 									frame:DisplaySafe(frame.safespot)
+									frame.waitng_tankSpawn = false
 								elseif spellID == 1220394 then -- 粉碎抽打
 									frame:DisplaySafe(frame.safespot)
 								end

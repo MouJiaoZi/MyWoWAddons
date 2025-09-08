@@ -151,7 +151,7 @@ G.Encounters[2687] = {
 					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("240905"), T.FormatRaidMark("5,6,7")),
 					points = {hide = true},
 					events = {
-						["ENCOUNTER_ENGAGE_UNIT"] = true,
+						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
 						["ENCOUNTER_PHASE"] = true,
 					},
 					init = function(frame)
@@ -166,7 +166,7 @@ G.Encounters[2687] = {
 					update = function(frame, event, ...)
 						T.UpdateRaidTarget(frame, event, ...)
 						
-						if event == "ENCOUNTER_PHASE" then							
+						if event == "ENCOUNTER_PHASE" then
 							frame.marked = table.wipe(frame.marked)
 						end
 					end,
@@ -593,7 +593,7 @@ G.Encounters[2687] = {
 						end
 					end,
 				},
-				{ -- 首领模块 奥术具象 控制链 （待测试）
+				{ -- 首领模块 奥术具象 控制链（✓）
 					category = "BossMod",
 					spellID = 1236207,
 					enable_tag = "none",
@@ -648,6 +648,9 @@ G.Encounters[2687] = {
 						end
 					end,
 					reset = function(frame, event)
+						if frame.timer then
+							frame.timer:Cancel()
+						end
 						T.HideGroupCCFrame()
 					end,
 				},
@@ -1357,8 +1360,9 @@ G.Encounters[2687] = {
 						frame.GUIDToCastCount = {}  -- 施法计数
 						frame.GUIDToNextCast = {} -- 下一次施法的时间点
 						
+						local icon = C_Spell.GetSpellTexture(1234328)
 						local color = T.GetSpellColor(1234328)						
-						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, C_Spell.GetSpellTexture(1234328), L["射线"], color)
+						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, icon, L["射线"], color)
 						frame.bar.glow:SetBackdropBorderColor(unpack(color))
 						frame.bar.glow:Show()
 						

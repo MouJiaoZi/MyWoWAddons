@@ -715,7 +715,7 @@ T.divideline = function(str)
 	local msg
 	if str then
 		local lenth = string.len(str)
-		local num = max(5, 30-floor(lenth/10))
+		local num = max(5, 20-floor(lenth/10))
 		local side = string.rep("-", num)
 		msg = string.format("%s%s%s", side, str, side)
 	else

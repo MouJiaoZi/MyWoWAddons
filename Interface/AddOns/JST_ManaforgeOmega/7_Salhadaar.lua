@@ -1282,6 +1282,86 @@ G.Encounters[2690] = {
 					type = "Aura",
 					spellID = 1228056,
 				},
+				{ -- 首领模块 集结影卫 控制链（待测试）
+					category = "BossMod",
+					spellID = 1228065,
+					enable_tag = "none",
+					name = T.GetFomattedNameFromNpcID("241801")..L["控制链"],
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					custom = {
+						{
+							key = "mrt_custom_btn",
+						},
+						{
+							key = "mrt_analysis_btn",
+						},
+					},
+					init = function(frame)
+						frame.sub_titles = {
+							T.GetFomattedNameFromNpcID("241803"),
+							T.GetFomattedNameFromNpcID("241798"),
+						}
+						
+						frame.mobIDs = {
+							["241803"] = 1,
+							["241798"] = 1,
+						}
+						
+						function frame:copy_mrt()
+							local str = T.GenerateGroupCCNote(self.config_id, self.config_name, 2)
+							return str
+						end
+						
+						function frame:ReadNote(display)
+							T.ReadGroupCCNote(self.config_id, display, self.config_name, self.sub_titles)
+							T.GroupSpellForceUpdate()
+						end
+						
+						function frame:GetSet()
+							for unit in T.IterateBoss() do
+								if not T.IsUnitOutOfRange(unit) then
+									local GUID = UnitGUID(unit)
+									local npcID = select(6, strsplit("-", GUID))
+									local set = self.mobIDs[npcID]
+									if set then
+										return set
+									end
+								end	
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "ENCOUNTER_PHASE" then
+							local phase = ...
+							if phase ~= 2.1 then return end
+							
+							frame.timer = C_Timer.After(7, function()
+								local set = frame:GetSet()
+								if set then
+									T.DisplayGroupCCFrame(set)
+									frame.progress_timer = C_Timer.NewTimer(20, function()
+										T.HideGroupCCFrame()
+									end)
+								end
+							end)
+							
+						elseif event == "ENCOUNTER_START" then
+							frame:ReadNote()							
+						end
+					end,
+					reset = function(frame, event)
+						if frame.timer then
+							frame.timer:Cancel()
+						end
+						if frame.progress_timer then
+							frame.progress_timer:Cancel()
+						end
+						T.HideGroupCCFrame()
+					end,
+				},
 			},
 		},
 		{ -- 封印熔炉
@@ -2280,8 +2360,6 @@ G.Encounters[2690] = {
 							
 							if info.text then
 								anchor.text:SetText(info.text)
-							else
-								anchor.timer = true
 							end
 							
 							anchor.anchorIDs = {}

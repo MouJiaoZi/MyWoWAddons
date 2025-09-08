@@ -40,11 +40,14 @@ local function addObjectiveProgress(tt, data)
 	local weightsTable = OP:GetNPCWeightByCurrentQuests(npcID)
 	if weightsTable then
 		for questID, npcWeight in next, weightsTable do
-			local info = C_QuestLog_GetInfo(C_QuestLog_GetLogIndexForQuestID(questID))
-			for i = 1, tt:NumLines() do
-				local text = _G["GameTooltipTextLeft" .. i]
-				if text and text:GetText() == info.title then
-					text:SetText(text:GetText() .. format(" + %s%%", F.Round(npcWeight, accuracy)))
+			local logIndex = questID and C_QuestLog_GetLogIndexForQuestID(questID)
+			local info = logIndex and C_QuestLog_GetInfo(logIndex)
+			if info and info.title then
+				for i = 1, tt:NumLines() do
+					local text = _G["GameTooltipTextLeft" .. i]
+					if text and text:GetText() == info.title then
+						text:SetText(text:GetText() .. format(" + %s%%", E:Round(npcWeight, accuracy)))
+					end
 				end
 			end
 		end

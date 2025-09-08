@@ -25,7 +25,7 @@ G.Encounters[2454] = {
 				{349627},
 			},
 			options = {
-				{ -- 计时条 暴食
+				{ -- 计时条 暴食（✓）
 					category = "AlertTimerbar",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -33,27 +33,15 @@ G.Encounters[2454] = {
 					spellID = 349627,
 					show_tar = true,
 				},
-				{ -- 图标 暴食
+				{ -- 图标 暴食（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 349627,
-					msg = {str_applied = "{rt1}%spell %name", str_rep = "{rt1}%dur"},
+					msg = {str_applied = "{rt1}%spell %name"},
 				},
-				{ -- 图标 暴食盛宴
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 350013,
-				},
-				{ -- 团队框架高亮 暴食
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 349627,
-				},
-				{ -- 首领模块 暴食 计时圆圈
+				{ -- 首领模块 暴食 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 349627,
 					enable_tag = "none",
@@ -78,7 +66,15 @@ G.Encounters[2454] = {
 					reset = function(frame, event)
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
-				},				
+				},
+				{ -- 图标 暴食盛宴（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 350013,
+					tip = L["DOT"],
+				},
 			},
 		},
 		{ -- 阿尔克鲁克斯:饥饿之握
@@ -89,7 +85,7 @@ G.Encounters[2454] = {
 				{349663},
 			},
 			options = {
-				{ -- 文字 饥饿之握 倒计时
+				{ -- 文字 饥饿之握 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["拉人"]..L["倒计时"],
@@ -109,15 +105,15 @@ G.Encounters[2454] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 349663, L["拉人"], self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 349663, L["拉人"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 饥饿之握
+				{ -- 计时条 饥饿之握（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 349663,
-					sound = "[pull]cast",
-					text = L["拉人"],
+					sound = "[outcircle]cast,cd3",
+					text = L["大圈"],
 				},
 			},
 		},
@@ -128,35 +124,22 @@ G.Encounters[2454] = {
 			spells = {
 				{349797},
 			},
-			options = {
-				{ -- 文字 饕餮吞噬 倒计时
-					category = "TextAlert",
-					type = "spell",
-					preview = L["躲圈"]..L["倒计时"],
-					data = {
-						spellID = 349797,
-						events = {
-							["ENCOUNTER_PHASE"] = true,
-							["UNIT_SPELLCAST_START"] = true,
-						},					
-						info = {							
-							["all"] = {
-								[1] = {24.2, 30.3},
-							},
-						},
-						cd_args = {
-							round = true,
-						},
-					},
-					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 349797, L["躲圈"], self, event, ...)
-					end,
-				},
-				{ -- 计时条 饕餮吞噬
+			options = {		
+				{ -- 计时条 饕餮吞噬（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 349797,
-					sound = "[outcircle]cast",
+					sound = "[dodge_circle]cast",
+				},
+				{ -- 计时条 饕餮吞噬（✓）
+					category = "AlertTimerbar",
+					type = "cleu",
+					event = "SPELL_CAST_SUCCESS",
+					spellID = 349797,
+					dur = 6,
+					group = 1,
+					tags = {4},
+					glow = true,
 				},
 			},
 		},
@@ -168,7 +151,7 @@ G.Encounters[2454] = {
 				{349987},
 			},
 			options = {
-				{ -- 文字 排风协议 倒计时
+				{ -- 文字 排风协议 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["宝珠"]..L["倒计时"],
@@ -186,7 +169,7 @@ G.Encounters[2454] = {
 							if cast_GUID and cast_spellID == 181089 then -- Encounter Event
 								local npcID = T.GetUnitNpcID(unit)
 								if npcID == "176555" then
-									T.Start_Text_DelayTimer(self, 20.7, L["宝珠"], true)
+									T.Start_Text_DelayTimer(self, 22, L["宝珠"], true)
 								end
 							end
 						elseif event == "UNIT_SPELLCAST_START" then
@@ -197,29 +180,29 @@ G.Encounters[2454] = {
 						end
 					end,
 				},
-				{ -- 计时条 排风协议
+				{ -- 计时条 排风协议（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 349987,
 					sound = "[orb]cast",
 				},
-				{ -- 图标 心能引爆
+				{ -- 图标 心能引爆（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 349999,
-					hl = "",
 					tip = L["降低伤害"].."%s5%",
 				},
-				{ -- 图标 被吞噬的心能
+				{ -- 图标 被吞噬的心能（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 350010,
+					tip = L["增加伤害"].."%s5%",
 				},
-				{ -- 图标 腐蚀心能
+				{ -- 图标 腐蚀心能（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -227,6 +210,12 @@ G.Encounters[2454] = {
 					spellID = 350045,
 					hl = "red",
 					tip = L["强力DOT"],
+				},
+				{ -- 团队框架高亮 腐蚀心能（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 350045,
+					color = "red",
 				},
 			},
 		},
@@ -238,7 +227,7 @@ G.Encounters[2454] = {
 				{349934},
 			},
 			options = {
-				{ -- 文字 狂热鞭笞协议 倒计时
+				{ -- 文字 狂热鞭笞协议 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					ficon = "0",
@@ -259,16 +248,18 @@ G.Encounters[2454] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 349934, T.GetIconLink(349934), self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 349934, T.GetIconLink(349934), self, event, ...)
 					end,
 				},
-				{ -- 对我施法图标 狂热鞭笞协议
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 狂热鞭笞协议（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 349934,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
-				{ -- 图标 狂热鞭笞协议
+				{ -- 图标 狂热鞭笞协议（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -276,7 +267,7 @@ G.Encounters[2454] = {
 					spellID = 349934,
 					hl = "red",
 					tip = L["强力DOT"],
-				},				
+				},
 			},
 		},
 		{ -- 阿喀琉忒:净化协议
@@ -287,7 +278,7 @@ G.Encounters[2454] = {
 				{349954},
 			},
 			options = {
-				{ -- 文字 净化协议 倒计时
+				{ -- 文字 净化协议 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["分散"]..L["倒计时"],
@@ -299,7 +290,7 @@ G.Encounters[2454] = {
 						},					
 						info = {							
 							["all"] = {
-								[2] = {3.7, 24.3, 26.7},
+								[2] = {4.7, 24.3, 26.7},
 							},
 						},
 						cd_args = {
@@ -307,17 +298,17 @@ G.Encounters[2454] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 349954, L["分散"], self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 349954, L["分散"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 净化协议
+				{ -- 计时条 净化协议（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 349954,
 					sound = "[spread]cast",
 					text = L["分散"],
 				},
-				{ -- 首领模块 净化协议 计时圆圈
+				{ -- 首领模块 净化协议 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 349954,
 					enable_tag = "none",
@@ -343,6 +334,25 @@ G.Encounters[2454] = {
 						T.ResetUnitAuraCircleTimers(frame)			
 					end,
 				},
+				{ -- 自保技能提示 净化协议（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 349954,
+					threshold = 65,
+				},
+				{ -- 团队框架高亮 净化协议（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 349954,
+					color = "blu",
+				},
+				{ -- 驱散提示音 净化协议（✓）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 349954,
+					file = "[dispel]",
+					ficon = "7",
+				},
 			},
 		},
 		{ -- 雯扎·金线:歼灭螺旋
@@ -353,7 +363,7 @@ G.Encounters[2454] = {
 				{350090, "4"},
 			},
 			options = {
-				{ -- 文字 歼灭螺旋 倒计时
+				{ -- 文字 歼灭螺旋 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["拉人"]..L["倒计时"],
@@ -365,7 +375,7 @@ G.Encounters[2454] = {
 						},					
 						info = {							
 							["all"] = {
-								[3] = {17.1, 30.3, 30.4},
+								[3] = {15.5, 30.3, 30.4},
 							},
 						},
 						cd_args = {
@@ -373,10 +383,10 @@ G.Encounters[2454] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 350086, L["拉人"], self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 350086, L["拉人"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 歼灭螺旋
+				{ -- 计时条 歼灭螺旋（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 350086,
@@ -393,7 +403,7 @@ G.Encounters[2454] = {
 				{350101},
 			},
 			options = {
-				{ -- 文字 诅咒锁链 倒计时
+				{ -- 文字 诅咒锁链 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = L["救人"]..L["倒计时"],
@@ -405,7 +415,7 @@ G.Encounters[2454] = {
 						},					
 						info = {							
 							["all"] = {
-								[3] = {6.1, 21.9, 29.1, 30.4},
+								[3] = {4.5, 21.9, 29.1, 30.4},
 							},
 						},
 						cd_args = {
@@ -413,10 +423,10 @@ G.Encounters[2454] = {
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 350101, L["救人"], self, event, ...)
+						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 350101, L["救人"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 诅咒锁链
+				{ -- 计时条 诅咒锁链（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 350101,	
@@ -424,7 +434,12 @@ G.Encounters[2454] = {
 					show_tar = true,
 					sound = "[rescue]cast",
 				},
-				{ -- 图标 诅咒锁链
+				{ -- 团队框架图标 诅咒锁链（✓）
+					category = "RFIcon",
+					type = "Cast",
+					spellID = 350101,
+				},
+				{ -- 图标 诅咒锁链（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -432,7 +447,12 @@ G.Encounters[2454] = {
 					spellID = 350101,
 					hl = "red",
 					tip = L["定身"],
-					ficon = "8",
+				},
+				{ -- 团队框架高亮 诅咒锁链（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 350101,
+					color = "red",
 				},
 			},
 		},

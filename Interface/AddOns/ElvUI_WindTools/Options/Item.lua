@@ -31,32 +31,10 @@ local function desc(code, helpText)
 	return C.StringByTemplate(code, "teal-400") .. " = " .. helpText
 end
 
-local slotNames = {
-	[1] = HEADSLOT,
-	[2] = NECKSLOT,
-	[3] = SHOULDERSLOT,
-	[4] = SHIRTSLOT,
-	[5] = CHESTSLOT,
-	[6] = WAISTSLOT,
-	[7] = LEGSSLOT,
-	[8] = FEETSLOT,
-	[9] = WRISTSLOT,
-	[10] = HANDSSLOT,
-	[11] = FINGER0SLOT_UNIQUE,
-	[12] = FINGER1SLOT_UNIQUE,
-	[13] = TRINKET0SLOT_UNIQUE,
-	[14] = TRINKET1SLOT_UNIQUE,
-	[15] = BACKSLOT,
-	[16] = MAINHANDSLOT,
-	[17] = SECONDARYHANDSLOT,
-	[18] = RANGEDSLOT,
-	[19] = TABARDSLOT,
-}
-
 -- Generate slot ID descriptions
 local function generateSlotDesc()
 	local slots = {}
-	for id, name in ipairs(slotNames) do
+	for id, name in ipairs(W.EquipmentSlots) do
 		tinsert(slots, format("|cff71d5ff%d|r=%s", id, name))
 	end
 
@@ -1202,8 +1180,45 @@ options.inspect = {
 				},
 			},
 		},
-		slotText = {
+		icon = {
 			order = 4,
+			type = "group",
+			inline = true,
+			name = L["Icon"],
+			get = function(info)
+				return E.db.WT.item.inspect.icon[info[#info]]
+			end,
+			set = function(info, value)
+				E.db.WT.item.inspect.icon[info[#info]] = value
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Show Icon"],
+				},
+				qualityBorder = {
+					order = 2,
+					type = "toggle",
+					name = L["Quality Border"],
+					desc = L["Show the quality border on the icon."],
+					hidden = function()
+						return not E.db.WT.item.inspect.icon
+					end,
+				},
+				tierSetIndicator = {
+					order = 3,
+					type = "toggle",
+					name = L["Tier Set Indicator"],
+					desc = L["Show the tier set indicator on the icon."],
+					hidden = function()
+						return not E.db.WT.item.inspect.icon
+					end,
+				},
+			},
+		},
+		slotText = {
+			order = 5,
 			type = "group",
 			inline = true,
 			name = L["Slot"],
@@ -1248,7 +1263,7 @@ options.inspect = {
 			},
 		},
 		levelText = {
-			order = 4,
+			order = 6,
 			type = "group",
 			inline = true,
 			name = L["Item Level"],
@@ -1293,7 +1308,7 @@ options.inspect = {
 			},
 		},
 		equipText = {
-			order = 5,
+			order = 7,
 			type = "group",
 			inline = true,
 			name = L["Item Name"],
@@ -1338,7 +1353,7 @@ options.inspect = {
 			},
 		},
 		statsText = {
-			order = 5,
+			order = 8,
 			type = "group",
 			inline = true,
 			name = L["Statistics"],
