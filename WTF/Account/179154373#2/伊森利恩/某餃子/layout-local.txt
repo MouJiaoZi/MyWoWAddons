@@ -50,9 +50,9 @@ W: 211
 H: 605
 Frame: JST_GUI
 FrameLevel: 2
-Anchor: CENTER
-X: 26
-Y: -56
+Anchor: RIGHT
+X: -261
+Y: -8
 W: 1150
 H: 730
 Frame: JSTTLFrame
@@ -104,3 +104,10 @@ X: 0
 Y: 63
 W: 970
 H: 832
+Frame: WeakAurasOptions
+FrameLevel: 1
+Anchor: RIGHT
+X: -137
+Y: -64
+W: 873
+H: 836

@@ -40,12 +40,24 @@ T.GetUnitFrame = function(unit)
 	return f
 end
 
+-- 刷新框架
+T.ScanForUnitFrames = function()
+	LGF:ScanForUnitFrames()
+end
+
 -- 获取距离
 T.GetRange = function(unit, checkVisible)
   return LRC:GetRange(unit, checkVisible)
 end
 
--- 是超出距离（50码）
+-- 在距离内（50码）
+T.IsUnitInRange = function(unit)	
+	if C_Item.IsItemInRange(116139, unit) then
+		return true
+	end
+end
+
+-- 超出距离（50码）
 T.IsUnitOutOfRange = function(unit)	
 	if not C_Item.IsItemInRange(116139, unit) then
 		return true

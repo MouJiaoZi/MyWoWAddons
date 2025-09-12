@@ -46,9 +46,9 @@ G.Encounters[2686] = {
 						if event == "ENCOUNTER_START" then
 							self.round = true
 							self.next_count = 1
-							self.diffcultyID = select(3, ...)
+							self.difficultyID = select(3, ...)
 							
-							if self.diffcultyID == 14 or self.diffcultyID == 17 then
+							if self.difficultyID == 14 or self.difficultyID == 17 then
 								T.Start_Text_DelayTimer(self, 44, L["围墙"], true)
 							else
 								T.Start_Text_DelayTimer(self, .5, L["围墙"], true)
@@ -61,9 +61,9 @@ G.Encounters[2686] = {
 								self.next_count = self.next_count + 1
 								
 								local dur
-								if self.diffcultyID == 15 then
+								if self.difficultyID == 15 then
 									dur = self.next_count % 2 == 1 and 41.5 or 43.5
-								elseif self.diffcultyID == 16 then
+								elseif self.difficultyID == 16 then
 									dur = self.next_count % 2 == 1 and (self.next_count % 4 == 3 and 36.5 or 34.5)
 								else
 									dur = 85
@@ -366,7 +366,7 @@ G.Encounters[2686] = {
 							end
 						end
 						
-						function frame:ReadNote(analyse)
+						function frame:ReadNote(display)
 							-- [1] = Players soaking the first set of pylons each phase
 							-- [2] = Players soaking the second set of pylons each phase
 							self.assignments = table.wipe(self.assignments)
@@ -374,7 +374,9 @@ G.Encounters[2686] = {
 							self.assignments[2] = {}
 							self.backups = table.wipe(self.backups)
 							
-							T.divideline(self.config_name)
+							if display then
+								T.divideline(self.config_name)
+							end
 							
 							for lineCount, line in T.IterateNoteAssignment(self.config_id) do
 								local GUIDs, _, mark = T.LineToGUIDArray(line)
@@ -386,7 +388,7 @@ G.Encounters[2686] = {
 										
 										self.assignments[setNumber][mark] = GUIDs
 										
-										if analyse then
+										if display then
 											local start_str = setNumber == 1 and L["奇数"] or L["偶数"]
 											local str = T.GetColoredNameListByArray(GUIDs, start_str, mark)
 											T.msg(str)
@@ -394,7 +396,7 @@ G.Encounters[2686] = {
 									elseif lineCount == 9 then
 										self.backups = GUIDs
 										
-										if analyse then
+										if display then
 											local str = T.GetColoredNameListByArray(GUIDs, L["替补"])
 											T.msg(str)
 										end
@@ -909,10 +911,10 @@ G.Encounters[2686] = {
 						if event == "ENCOUNTER_START" then	
 							self.round = true
 							self.next_count = 1
-							self.diffcultyID = select(3, ...)
+							self.difficultyID = select(3, ...)
 							
 							local count = mod(self.next_count, 2) == 1 and "(1)" or "(2)"
-							if self.diffcultyID == 16 then
+							if self.difficultyID == 16 then
 								T.Start_Text_DelayTimer(self, 12.7, L["射线"].." "..count, true)
 							else
 								T.Start_Text_DelayTimer(self, 9.5, L["射线"].." "..count, true)
@@ -929,11 +931,11 @@ G.Encounters[2686] = {
 								local count = mod(self.next_count, 2) == 1 and "(1)" or "(2)"
 								local dur
 								if self.next_count % 2 == 0 then
-									dur = self.diffcultyID == 16 and 4 or 7
+									dur = self.difficultyID == 16 and 4 or 7
 								elseif self.next_count % 4 == 3 then
 									dur = 39.5
 								else
-									dur = self.diffcultyID == 16 and 36.5 or 33.5
+									dur = self.difficultyID == 16 and 36.5 or 33.5
 								end
 								
 								T.Start_Text_DelayTimer(self, dur, L["射线"].." "..count, true)
@@ -1217,7 +1219,7 @@ G.Encounters[2686] = {
 						function frame:override_action_inactive(count, display_count)
 							if UnitGroupRolesAssigned(unit) ~= "TANK" then
 								T.PlaySound("dontsharedmg")
-								T.Start_Text_Timer(self.text_frame, 4, string.format("|cffff0000%s|r", L["不分担"]), true)
+								T.Start_Text_Timer(self.text_frame, self.alert_dur, string.format("|cffff0000%s|r", L["不分担"]), true)
 							end
 						end
 						

@@ -44,12 +44,38 @@ true,
 },
 },
 },
+["MythicPlus"] = {
+["profiles"] = {
+["Default"] = {
+["viewerPosition"] = {
+"TOPLEFT",
+"TOPLEFT",
+18,
+-180,
+},
+},
+},
+},
 ["BigWigs_Plugins_AutoReply"] = {
 ["profiles"] = {
 ["Default"] = {
-["disabled"] = false,
 ["exitCombat"] = 4,
 ["mode"] = 4,
+["disabled"] = false,
+},
+},
+},
+["BigWigs_Plugins_Proximity"] = {
+["profiles"] = {
+["Default"] = {
+["width"] = 139.9999847412109,
+},
+},
+},
+["BigWigs_Plugins_Pull"] = {
+["profiles"] = {
+["Default"] = {
+["voice"] = "中文语音：VV(女)",
 },
 },
 },
@@ -72,38 +98,12 @@ true,
 },
 },
 },
-["BigWigs_Plugins_Proximity"] = {
-["profiles"] = {
-["Default"] = {
-["width"] = 139.9999847412109,
-},
-},
-},
-["MythicPlus"] = {
-["profiles"] = {
-["Default"] = {
-["viewerPosition"] = {
-"TOPLEFT",
-"TOPLEFT",
-18,
--180,
-},
-},
-},
-},
-["BigWigs_Plugins_Pull"] = {
-["profiles"] = {
-["Default"] = {
-["voice"] = "中文语音：VV(女)",
-},
-},
-},
 },
 ["myKeystones"] = {
 ["Player-940-0516206F"] = {
-["playerRating"] = 2754,
+["playerRating"] = 2800,
 ["specId"] = 250,
-["keyMap"] = 542,
+["keyMap"] = 392,
 ["name"] = "某餃子",
 ["keyLevel"] = 12,
 ["realm"] = "伊森利恩",
@@ -111,13 +111,13 @@ true,
 ["Player-940-057FDA40"] = {
 ["playerRating"] = 2405,
 ["specId"] = 268,
-["keyMap"] = 499,
+["keyMap"] = 392,
 ["name"] = "某饺子",
 ["keyLevel"] = 11,
 ["realm"] = "伊森利恩",
 },
 },
-["prevWeeklyReset"] = 1756940400,
+["prevWeeklyReset"] = 1757545200,
 ["profiles"] = {
 ["Default"] = {
 },
@@ -930,7 +930,7 @@ BigWigsStatsDB = {
 },
 [2747] = {
 ["heroic"] = {
-["kills"] = 7,
+["kills"] = 8,
 ["fkDate"] = "2025/08/16",
 ["bestDate"] = "2025/08/29",
 ["fkWipes"] = 2,

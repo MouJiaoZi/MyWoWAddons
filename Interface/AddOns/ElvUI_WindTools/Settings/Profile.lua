@@ -649,10 +649,39 @@ P.item = {
 		inspect = true,
 		stats = true,
 		playerOnInspect = true,
-		icon = {
+		itemIcon = {
 			enable = true,
-			qualityBorder = false,
-			tierSetIndicator = true,
+			qualityBorder = true,
+			indicator = true,
+			width = 20,
+			height = 16,
+		},
+		gemIcon = {
+			enable = true,
+			size = 17,
+			showAddableSockets = true,
+			craftingTier = {
+				minTierToShow = 1,
+				maxTierToShow = 5,
+				name = F.GetCompatibleFont("Chivo Mono"),
+				size = 11,
+				style = "OUTLINE",
+				xOffset = 5,
+				yOffset = 1,
+			},
+		},
+		enchantIcon = {
+			enable = true,
+			size = 17,
+			craftingTier = {
+				minTierToShow = 1,
+				maxTierToShow = 5,
+				name = F.GetCompatibleFont("Chivo Mono"),
+				size = 11,
+				style = "OUTLINE",
+				xOffset = 5,
+				yOffset = 1,
+			},
 		},
 		slotText = {
 			name = E.db.general.font,
@@ -664,7 +693,7 @@ P.item = {
 			size = 14,
 			style = "OUTLINE",
 		},
-		equipText = {
+		itemNameText = {
 			name = E.db.general.font,
 			size = 14,
 			style = "OUTLINE",

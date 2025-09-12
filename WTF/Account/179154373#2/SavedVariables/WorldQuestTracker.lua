@@ -689,107 +689,12 @@ WQTrackerDB = {
 },
 ["quests_all_characters"] = {
 ["Player-940-0516206F"] = {
-[81630] = {
-["expireAt"] = 1757545303,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
-[76558] = {
-["expireAt"] = 1757545212,
-["rewardAmount"] = "1",
-["rewardTexture"] = 656679,
-},
-[76586] = {
-["expireAt"] = 1757545272,
-["rewardAmount"] = "",
-["rewardTexture"] = 1708494,
-},
-[76989] = {
-["expireAt"] = 1757372472,
-["rewardAmount"] = "1",
-["rewardTexture"] = 656679,
-},
 },
 ["Player-940-057FAD37"] = {
 },
 ["Player-940-05166F8B"] = {
 },
 ["Player-940-057FDA40"] = {
-[82292] = {
-["expireAt"] = 1757372435,
-["rewardAmount"] = "1",
-["rewardTexture"] = 667492,
-},
-[88904] = {
-["expireAt"] = 1757545295,
-["rewardAmount"] = "|cff2292FF662",
-["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
-},
-[81630] = {
-["expireAt"] = 1757545295,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
-[81799] = {
-["expireAt"] = 1757545235,
-["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
-},
-[81812] = {
-["expireAt"] = 1757545235,
-["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
-},
-[82293] = {
-["expireAt"] = 1757394035,
-["rewardAmount"] = "1",
-["rewardTexture"] = 667492,
-},
-[82294] = {
-["expireAt"] = 1757350835,
-["rewardAmount"] = "17",
-["rewardTexture"] = 2004597,
-},
-[84948] = {
-["expireAt"] = 1757337335,
-["rewardAmount"] = "",
-["rewardTexture"] = 4549147,
-},
-[81816] = {
-["expireAt"] = 1757545235,
-["rewardAmount"] = "",
-["rewardTexture"] = 1519429,
-},
-[87354] = {
-["expireAt"] = 1757337335,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
-[82300] = {
-["expireAt"] = 1757415635,
-["rewardAmount"] = "19",
-["rewardTexture"] = 2004597,
-},
-[86409] = {
-["expireAt"] = 1757545295,
-["rewardAmount"] = "|cff2292FF662",
-["rewardTexture"] = "Interface\\ICONS\\INV_Bracer_07",
-},
-[86305] = {
-["expireAt"] = 1757545295,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
-},
-[76586] = {
-["expireAt"] = 1757545295,
-["rewardAmount"] = "",
-["rewardTexture"] = 1708494,
-},
-[86696] = {
-["expireAt"] = 1757545295,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
 },
 ["Player-940-051674C6"] = {
 [59234] = {

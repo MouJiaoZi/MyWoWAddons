@@ -11,7 +11,6 @@ local newest = G.Version
 local last_scan = 0
 
 local LS = LibStub:GetLibrary("LibSpecializationEdit")
-local LGF = LibStub("LibGetFrame-1.0")
 local My_mrtNoteHash, My_ilvl, My_raidBuff = 0, 0, 0
 local mrtUpdateTimer, equipmentUpdateTimer, raidBuffUpdateTimer
 --====================================================--
@@ -636,6 +635,22 @@ refresh_btn:SetScript("OnClick", function()
 	end)
 end)
 
+local export_btn = T.ClickButton(OP.sfa, 80, {"TOPRIGHT", refresh_btn, "TOPLEFT", -5, -0}, L["导出团队信息"])
+
+export_btn:SetScript("OnClick", function(self)
+	local str = date("%m/%d %H:%M").."\n"
+	local index = 0
+	for unit in T.IterateGroupMembers() do
+		index = index + 1
+		local GUID = UnitGUID(unit)
+		local info = T.GetGroupInfobyGUID(GUID)
+		local full_name = info.full_name or "未知角色名"
+		local nick_name = info.nick_name or "未知昵称"
+		str = str..index.."	"..full_name.."	"..nick_name.."\n"
+	end
+	T.DisplayCopyString(self, str, "")
+end)
+
 -- 标题行
 local title = CreateRaidInfoLine(true)
 title:SetPoint("TOPLEFT", OP.sfa, "TOPLEFT", 20, -45)
@@ -775,7 +790,7 @@ local function ScanUnit(unit)
 	end
 	
 	if not UnitFrames[unit] then
-		LGF:ScanForUnitFrames()
+		T.ScanForUnitFrames()
 		UnitFrames[unit] = true
 	end
 	

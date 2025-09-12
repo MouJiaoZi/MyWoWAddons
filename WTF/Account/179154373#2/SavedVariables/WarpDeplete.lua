@@ -1081,20 +1081,25 @@ WarpDepleteDB = {
 },
 [12] = {
 ["current"] = {
-500,
-1260,
-1766,
-["forces"] = 1369,
-["challenge"] = 1765879,
+490,
+1197,
+1551,
+["forces"] = 1299,
+["challenge"] = 1550865,
 },
 ["best"] = {
-500,
-1260,
-1766,
-["forces"] = 1369,
-["challenge"] = 1765879,
+490,
+1197,
+1551,
+["forces"] = 1299,
+["challenge"] = 1550865,
 },
 ["currentDiff"] = {
+-10,
+-63,
+-215,
+["forces"] = -70,
+["challenge"] = -215014,
 },
 },
 [9] = {
@@ -1472,6 +1477,24 @@ WarpDepleteDB = {
 ["challenge"] = 75233,
 },
 },
+[12] = {
+["current"] = {
+584,
+938,
+1401,
+["forces"] = 1077,
+["challenge"] = 1402092,
+},
+["best"] = {
+584,
+938,
+1401,
+["forces"] = 1077,
+["challenge"] = 1402092,
+},
+["currentDiff"] = {
+},
+},
 [4] = {
 ["current"] = {
 392,
@@ -1747,11 +1770,11 @@ WarpDepleteDB = {
 },
 [10] = {
 ["current"] = {
-414,
-1328,
-2286,
-["forces"] = 2065,
-["challenge"] = 2286182,
+442,
+1083,
+1696,
+["forces"] = 1763,
+["challenge"] = 1762634,
 },
 ["best"] = {
 278,
@@ -1761,11 +1784,11 @@ WarpDepleteDB = {
 ["challenge"] = 1199002,
 },
 ["currentDiff"] = {
-136,
-610,
-1087,
-["forces"] = 1029,
-["challenge"] = 1087180,
+164,
+365,
+497,
+["forces"] = 727,
+["challenge"] = 563632,
 },
 },
 [12] = {
@@ -2021,11 +2044,11 @@ WarpDepleteDB = {
 },
 [12] = {
 ["current"] = {
-617,
-960,
-1419,
-["forces"] = 1233,
-["challenge"] = 1419635,
+647,
+982,
+1441,
+["forces"] = 1516,
+["challenge"] = 1516142,
 },
 ["best"] = {
 617,
@@ -2035,11 +2058,11 @@ WarpDepleteDB = {
 ["challenge"] = 1419635,
 },
 ["currentDiff"] = {
--90,
--160,
--275,
-["forces"] = -514,
-["challenge"] = -327670,
+30,
+22,
+22,
+["forces"] = 283,
+["challenge"] = 96507,
 },
 },
 [5] = {

@@ -1205,10 +1205,7 @@ G.Encounters[2653] = {
 										
 										self:SetSupportSpells(i, GUID, info)
 										
-										local unit_frame = T.GetUnitFrame(info.unit)
-										if unit_frame then
-											T.CreateRFIndex(unit_frame, i)
-										end
+										T.CreateRFIndex(GUID, i)
 									end
 									
 									if GUID == G.PlayerGUID then
@@ -1462,10 +1459,7 @@ G.Encounters[2653] = {
 									
 									self:SetSupportSpells(trigger_i, GUID, info)
 									
-									local unit_frame = T.GetUnitFrame(info.unit)
-									if unit_frame then
-										T.CreateRFIndex(unit_frame, trigger_i)
-									end
+									T.CreateRFIndex(GUID, trigger_i)
 								end
 								
 								if GUID == G.PlayerGUID then

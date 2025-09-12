@@ -28,70 +28,7 @@ MythicDungeonToolsDB = {
 },
 ["selectedDungeonList"] = 3,
 ["maximized"] = false,
-["colorPaletteInfo"] = {
-["customPaletteValues"] = {
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-{
-1,
-1,
-1,
-},
-},
-},
+["currentDungeonIdx"] = 111,
 ["presets"] = {
 [19] = {
 {
@@ -6437,10 +6374,72 @@ nil,
 ["toolbarExpanded"] = false,
 ["latestSeenDungeonList"] = 9,
 ["nonFullscreenScale"] = 0.900000879786036,
-["currentDungeonIdx"] = 119,
 ["version"] = 550,
 ["xoffset"] = -105.8723526000977,
-["currentDifficulty"] = 12,
+["colorPaletteInfo"] = {
+["customPaletteValues"] = {
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+{
+1,
+1,
+1,
+},
+},
+},
 ["minimap"] = {
 ["minimapPos"] = 330.881463262169,
 ["showInCompartment"] = true,

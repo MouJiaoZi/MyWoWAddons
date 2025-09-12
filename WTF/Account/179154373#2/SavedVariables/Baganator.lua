@@ -300,8 +300,8 @@ BAGANATOR_CONFIG = {
 ["guild_current_tab"] = 0,
 ["guild_bank_sort_method"] = "unset",
 ["recent_characters_main_view"] = {
-"某饺子-伊森利恩",
 "某餃子-伊森利恩",
+"某饺子-伊森利恩",
 "迪凯策划没马-伊森利恩",
 "我们完蛋啦-伊森利恩",
 "凤凰基友之三-凤凰之神",

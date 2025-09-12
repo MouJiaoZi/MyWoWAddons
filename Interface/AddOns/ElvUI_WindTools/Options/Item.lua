@@ -137,7 +137,7 @@ options.extraItemsBar = {
 					end,
 					set = function(_, value)
 						local itemID = tonumber(value)
-						if async.WithItemID(itemID) then
+						if itemID and async.WithItemID(itemID) then
 							tinsert(E.db.WT.item.extraItemsBar.customList, itemID)
 							EB:UpdateBars()
 						else
@@ -200,7 +200,7 @@ options.extraItemsBar = {
 					end,
 					set = function(_, value)
 						local itemID = tonumber(value)
-						if async.WithItemID(itemID) then
+						if itemID and async.WithItemID(itemID) then
 							E.db.WT.item.extraItemsBar.blackList[itemID] = true
 							EB:UpdateBars()
 						else
@@ -717,10 +717,8 @@ options.alreadyKnown = {
 					type = "description",
 					name = function()
 						if AK.StopRunning then
-							return format(
-								"|cffff3860" .. L["Because of %s, this module will not be loaded."] .. "|r",
-								AK.StopRunning
-							)
+							local errorMsg = format(L["Because of %s, this module will not be loaded."], AK.StopRunning)
+							return C.StringByTemplate(errorMsg, "rose-500")
 						else
 							return L["Puts a overlay on already known learnable items on vendors and AH."]
 						end
@@ -1100,10 +1098,8 @@ options.inspect = {
 					type = "description",
 					name = function()
 						if IS.StopRunning then
-							return format(
-								"|cffff3860" .. L["Because of %s, this module will not be loaded."] .. "|r",
-								IS.StopRunning
-							)
+							local errorMsg = format(L["Because of %s, this module will not be loaded."], IS.StopRunning)
+							return C.StringByTemplate(errorMsg, "rose-500")
 						else
 							return format(
 								"%s\n%s",
@@ -1180,45 +1176,8 @@ options.inspect = {
 				},
 			},
 		},
-		icon = {
-			order = 4,
-			type = "group",
-			inline = true,
-			name = L["Icon"],
-			get = function(info)
-				return E.db.WT.item.inspect.icon[info[#info]]
-			end,
-			set = function(info, value)
-				E.db.WT.item.inspect.icon[info[#info]] = value
-			end,
-			args = {
-				enable = {
-					order = 1,
-					type = "toggle",
-					name = L["Show Icon"],
-				},
-				qualityBorder = {
-					order = 2,
-					type = "toggle",
-					name = L["Quality Border"],
-					desc = L["Show the quality border on the icon."],
-					hidden = function()
-						return not E.db.WT.item.inspect.icon
-					end,
-				},
-				tierSetIndicator = {
-					order = 3,
-					type = "toggle",
-					name = L["Tier Set Indicator"],
-					desc = L["Show the tier set indicator on the icon."],
-					hidden = function()
-						return not E.db.WT.item.inspect.icon
-					end,
-				},
-			},
-		},
 		slotText = {
-			order = 5,
+			order = 4,
 			type = "group",
 			inline = true,
 			name = L["Slot"],
@@ -1263,7 +1222,7 @@ options.inspect = {
 			},
 		},
 		levelText = {
-			order = 6,
+			order = 5,
 			type = "group",
 			inline = true,
 			name = L["Item Level"],
@@ -1307,16 +1266,69 @@ options.inspect = {
 				},
 			},
 		},
-		equipText = {
+		itemIcon = {
+			order = 6,
+			type = "group",
+			inline = true,
+			name = L["Item Icon"],
+			get = function(info)
+				return E.db.WT.item.inspect.itemIcon[info[#info]]
+			end,
+			set = function(info, value)
+				E.db.WT.item.inspect.itemIcon[info[#info]] = value
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Show Icon"],
+				},
+				qualityBorder = {
+					order = 2,
+					type = "toggle",
+					name = L["Quality Border"],
+					desc = L["Show the quality border on the icon."],
+					hidden = function()
+						return not E.db.WT.item.inspect.itemIcon
+					end,
+				},
+				indicator = {
+					order = 3,
+					type = "toggle",
+					name = L["Indicator"],
+					desc = L["Show the special mark on the icon to indicate the crafting quality, tier set, etc."],
+					hidden = function()
+						return not E.db.WT.item.inspect.itemIcon
+					end,
+				},
+				width = {
+					order = 4,
+					name = L["Width"],
+					type = "range",
+					min = 5,
+					max = 40,
+					step = 1,
+				},
+				height = {
+					order = 5,
+					name = L["Height"],
+					type = "range",
+					min = 5,
+					max = 40,
+					step = 1,
+				},
+			},
+		},
+		itemNameText = {
 			order = 7,
 			type = "group",
 			inline = true,
 			name = L["Item Name"],
 			get = function(info)
-				return E.db.WT.item.inspect.equipText[info[#info]]
+				return E.db.WT.item.inspect.itemNameText[info[#info]]
 			end,
 			set = function(info, value)
-				E.db.WT.item.inspect.equipText[info[#info]] = value
+				E.db.WT.item.inspect.itemNameText[info[#info]] = value
 			end,
 			args = {
 				name = {
@@ -1352,8 +1364,226 @@ options.inspect = {
 				},
 			},
 		},
-		statsText = {
+		enchantIcon = {
 			order = 8,
+			type = "group",
+			inline = true,
+			name = L["Enchant Icon"],
+			get = function(info)
+				return E.db.WT.item.inspect.enchantIcon[info[#info]]
+			end,
+			set = function(info, value)
+				E.db.WT.item.inspect.enchantIcon[info[#info]] = value
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Show Icon"],
+				},
+				size = {
+					order = 2,
+					name = L["Size"],
+					type = "range",
+					min = 5,
+					max = 30,
+					step = 1,
+				},
+				craftingTier = {
+					order = 4,
+					type = "group",
+					inline = true,
+					name = L["Crafting Quality Tier"],
+					get = function(info)
+						return E.db.WT.item.inspect.enchantIcon.craftingTier[info[#info]]
+					end,
+					set = function(info, value)
+						E.db.WT.item.inspect.enchantIcon.craftingTier[info[#info]] = value
+					end,
+					args = {
+						minTierToShow = {
+							order = 1,
+							type = "range",
+							name = L["Min Tier to Show"],
+							desc = L["Only show the tier text if the item's crafting quality is over the set tier."],
+							min = 0,
+							max = 10,
+							step = 1,
+						},
+						maxTierToShow = {
+							order = 2,
+							type = "range",
+							name = L["Max Tier to Show"],
+							desc = L["Only show the tier text if the item's crafting quality is under the set tier."],
+							min = 0,
+							max = 10,
+							step = 1,
+						},
+						name = {
+							order = 3,
+							type = "select",
+							dialogControl = "LSM30_Font",
+							name = L["Font"],
+							values = LSM:HashTable("font"),
+						},
+						style = {
+							order = 4,
+							type = "select",
+							name = L["Outline"],
+							values = {
+								NONE = L["None"],
+								OUTLINE = L["Outline"],
+								THICKOUTLINE = L["Thick"],
+								SHADOW = L["|cff888888Shadow|r"],
+								SHADOWOUTLINE = L["|cff888888Shadow|r Outline"],
+								SHADOWTHICKOUTLINE = L["|cff888888Shadow|r Thick"],
+								MONOCHROME = L["|cFFAAAAAAMono|r"],
+								MONOCHROMEOUTLINE = L["|cFFAAAAAAMono|r Outline"],
+								MONOCHROMETHICKOUTLINE = L["|cFFAAAAAAMono|r Thick"],
+							},
+						},
+						size = {
+							order = 5,
+							name = L["Size"],
+							type = "range",
+							min = 5,
+							max = 60,
+							step = 1,
+						},
+						xOffset = {
+							order = 6,
+							name = L["X-Offset"],
+							type = "range",
+							min = -50,
+							max = 50,
+							step = 1,
+						},
+						yOffset = {
+							order = 7,
+							name = L["Y-Offset"],
+							type = "range",
+							min = -50,
+							max = 50,
+							step = 1,
+						},
+					},
+				},
+			},
+		},
+		gemIcon = {
+			order = 9,
+			type = "group",
+			inline = true,
+			name = L["Gem Icon"],
+			get = function(info)
+				return E.db.WT.item.inspect.gemIcon[info[#info]]
+			end,
+			set = function(info, value)
+				E.db.WT.item.inspect.gemIcon[info[#info]] = value
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Show Icon"],
+				},
+				showAddableSockets = {
+					order = 2,
+					type = "toggle",
+					name = L["Show Addable Sockets"],
+					desc = L["Show the icon of addable sockets if the item has empty sockets."],
+				},
+				size = {
+					order = 3,
+					name = L["Size"],
+					type = "range",
+					min = 5,
+					max = 30,
+					step = 1,
+				},
+				craftingTier = {
+					order = 4,
+					type = "group",
+					inline = true,
+					name = L["Crafting Quality Tier"],
+					get = function(info)
+						return E.db.WT.item.inspect.gemIcon.craftingTier[info[#info]]
+					end,
+					set = function(info, value)
+						E.db.WT.item.inspect.gemIcon.craftingTier[info[#info]] = value
+					end,
+					args = {
+						minTierToShow = {
+							order = 1,
+							type = "range",
+							name = L["Min Tier to Show"],
+							desc = L["Only show the tier text if the item's crafting quality is over the set tier."],
+							min = 0,
+							max = 10,
+							step = 1,
+						},
+						maxTierToShow = {
+							order = 2,
+							type = "range",
+							name = L["Max Tier to Show"],
+							desc = L["Only show the tier text if the item's crafting quality is under the set tier."],
+							min = 0,
+							max = 10,
+							step = 1,
+						},
+						name = {
+							order = 3,
+							type = "select",
+							dialogControl = "LSM30_Font",
+							name = L["Font"],
+							values = LSM:HashTable("font"),
+						},
+						style = {
+							order = 4,
+							type = "select",
+							name = L["Outline"],
+							values = {
+								NONE = L["None"],
+								OUTLINE = L["Outline"],
+								THICKOUTLINE = L["Thick"],
+								SHADOW = L["|cff888888Shadow|r"],
+								SHADOWOUTLINE = L["|cff888888Shadow|r Outline"],
+								SHADOWTHICKOUTLINE = L["|cff888888Shadow|r Thick"],
+								MONOCHROME = L["|cFFAAAAAAMono|r"],
+								MONOCHROMEOUTLINE = L["|cFFAAAAAAMono|r Outline"],
+								MONOCHROMETHICKOUTLINE = L["|cFFAAAAAAMono|r Thick"],
+							},
+						},
+						size = {
+							order = 5,
+							name = L["Size"],
+							type = "range",
+							min = 5,
+							max = 60,
+							step = 1,
+						},
+						xOffset = {
+							order = 6,
+							name = L["X-Offset"],
+							type = "range",
+							min = -50,
+							max = 50,
+							step = 1,
+						},
+						yOffset = {
+							order = 7,
+							name = L["Y-Offset"],
+							type = "range",
+							min = -50,
+							max = 50,
+							step = 1,
+						},
+					},
+				},
+			},
+		},
+		statsText = {
+			order = 10,
 			type = "group",
 			inline = true,
 			name = L["Statistics"],
@@ -1733,7 +1963,7 @@ options.extendMerchantPages = {
 	end,
 	args = {
 		desc = {
-			order = 0,
+			order = 1,
 			type = "group",
 			inline = true,
 			name = L["Description"],
@@ -1743,10 +1973,9 @@ options.extendMerchantPages = {
 					type = "description",
 					name = function()
 						if EMP.StopRunning then
-							return format(
-								"|cffff3860" .. L["Because of %s, this module will not be loaded."] .. "|r",
-								EMP.StopRunning
-							)
+							local errorMsg =
+								format(L["Because of %s, this module will not be loaded."], EMP.StopRunning)
+							return C.StringByTemplate(errorMsg, "rose-500")
 						else
 							return L["Extends the merchant page to show more items."]
 						end
@@ -1756,7 +1985,7 @@ options.extendMerchantPages = {
 			},
 		},
 		enable = {
-			order = 1,
+			order = 2,
 			type = "toggle",
 			name = L["Enable"],
 			width = "full",
@@ -1765,7 +1994,7 @@ options.extendMerchantPages = {
 			end,
 		},
 		numberOfPages = {
-			order = 2,
+			order = 3,
 			type = "range",
 			name = L["Number of Pages"],
 			desc = L["The number of pages shown in the merchant frame."],

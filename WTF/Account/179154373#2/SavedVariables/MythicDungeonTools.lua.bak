@@ -6377,7 +6377,6 @@ nil,
 ["showInCompartment"] = true,
 ["hide"] = true,
 },
-["currentDifficulty"] = 12,
 ["colorPaletteInfo"] = {
 ["customPaletteValues"] = {
 {
@@ -6444,7 +6443,7 @@ nil,
 },
 ["version"] = 550,
 ["xoffset"] = -105.8723526000977,
-["currentDungeonIdx"] = 119,
+["currentDungeonIdx"] = 111,
 ["nonFullscreenScale"] = 0.900000879786036,
 ["yoffset"] = -60.98761749267578,
 },

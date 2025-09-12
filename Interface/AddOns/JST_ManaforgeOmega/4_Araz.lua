@@ -513,14 +513,11 @@ G.Encounters[2687] = {
 						}
 						
 						function frame:post_remove(element, index, unit, GUID)
-							if C.DB["BossMod"][frame.config_id]["raid_index_bool"] then
-								local unit_frame = T.GetUnitFrame(unit)
-								if unit_frame then					
-									T.CreateRFIndex(unit_frame, index)
-									C_Timer.After(4, function()
-										T.HideRFIndexbyParent(unit_frame)
-									end)
-								end
+							if C.DB["BossMod"][frame.config_id]["raid_index_bool"] then			
+								T.CreateRFIndex(GUID, index)
+								C_Timer.After(4, function()
+									T.HideRFIndexbyGUID(GUID)
+								end)
 							end
 						end
 						
@@ -613,7 +610,7 @@ G.Encounters[2687] = {
 					init = function(frame)
 					
 						function frame:copy_mrt()
-							local str = T.GenerateGroupCCNote(self.config_id, self.config_name, 4)
+							local str = T.GenerateGroupCCNote(self.config_id, self.config_name, 4, true)
 							return str
 						end
 						
@@ -1630,9 +1627,9 @@ G.Encounters[2687] = {
 								self.next_count = self.next_count + 1
 								
 								local dur
-								if self.diffcultyID == 15 then
+								if self.difficultyID == 15 then
 									dur = self.next_count % 2 == 1 and 36 or 8
-								elseif self.diffcultyID == 16 then
+								elseif self.difficultyID == 16 then
 									dur = self.next_count % 3 == 1 and 28 or 8
 								end
 								
@@ -1648,7 +1645,7 @@ G.Encounters[2687] = {
 							end
 						elseif event == "ENCOUNTER_START" then
 							self.round = true
-							self.diffcultyID = select(3, ...)
+							self.difficultyID = select(3, ...)
 						end
 					end,
 				},
@@ -1717,13 +1714,10 @@ G.Encounters[2687] = {
 						
 						function frame:post_remove(element, index, unit, GUID)
 							if C.DB["BossMod"][frame.config_id]["raid_index_bool"] then
-								local unit_frame = T.GetUnitFrame(unit)
-								if unit_frame then					
-									T.CreateRFIndex(unit_frame, index)
-									C_Timer.After(4, function()
-										T.HideRFIndexbyParent(unit_frame)
-									end)
-								end
+								T.CreateRFIndex(GUID, index)
+								C_Timer.After(4, function()
+									T.HideRFIndexbyGUID(GUID)
+								end)
 							end
 						end
 						

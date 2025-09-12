@@ -326,6 +326,7 @@ L["MRT战术板对比"]		= "MRT note"
 L["无信息"]				= "No Info"
 L["相同"]				= "Same"
 L["不同"]				= "Different"
+L["导出团队信息"]		= "Export"
 
 -- 解锁界面
 L["隐藏框体名字"]			= "Hide frame names"

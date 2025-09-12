@@ -1389,7 +1389,7 @@ G.Encounters[2688] = {
 							self:UpdateImmuseBuff(GUID)
 							T.StartTimerBar(bar, 6, true, true)
 							
-							if self.diffcultyID == 16 then
+							if self.difficultyID == 16 then
 								bar.ind_text:SetText(string.format("|cffFFFF00[%d]|r", index))
 								
 								if C.DB["BossMod"][self.config_id]["sound_bool"] then
@@ -1397,13 +1397,10 @@ G.Encounters[2688] = {
 								end
 								
 								if C.DB["BossMod"][self.config_id]["raid_index_bool"] then
-									local unit_frame = T.GetUnitFrame(info.unit)
-									if unit_frame then					
-										T.CreateRFIndex(unit_frame, string.format("|cffFF0000%d|r", index))
-										C_Timer.After(6, function()
-											T.HideRFIndexbyParent(unit_frame)
-										end)
-									end
+									T.CreateRFIndex(GUID, string.format("|cffFF0000%d|r", index))
+									C_Timer.After(4, function()
+										T.HideRFIndexbyGUID(GUID)
+									end)
 								end
 							else
 								bar.ind_text:SetText("")
@@ -1451,9 +1448,9 @@ G.Encounters[2688] = {
 						elseif event == "ENCOUNTER_START" then
 							frame.count = 0
 							
-							frame.diffcultyID = select(3, ...)
+							frame.difficultyID = select(3, ...)
 							
-							if frame.diffcultyID == 16 then
+							if frame.difficultyID == 16 then
 								frame.max_count = 3
 							else
 								frame.max_count = 2

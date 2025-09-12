@@ -1434,7 +1434,9 @@ local CreateIcon = function(parent, icon_tex, size)
 	icon.tex = icon:CreateTexture(nil, "ARTWORK")
 	icon.tex:SetAllPoints()
 	icon.tex:SetTexCoord( .1, .9, .1, .9)
-	icon.tex:SetTexture(icon_tex)
+	if icon_tex then
+		icon.tex:SetTexture(icon_tex)
+	end
 	
 	icon.cooldown = CreateFrame("Cooldown", nil, icon, "CooldownFrameTemplate")
 	icon.cooldown:SetAllPoints()
@@ -4737,11 +4739,8 @@ local function OnElementDisplayed(frame, self, text, i, GUID)
 		end
 	
 		-- 框架序号
-		if frame.raid_index and C.DB["BossMod"][frame.config_id]["raid_index_bool"] then
-			local unit_frame = T.GetUnitFrame(info.unit)
-			if unit_frame then					
-				T.CreateRFIndex(unit_frame, i)
-			end
+		if frame.raid_index and C.DB["BossMod"][frame.config_id]["raid_index_bool"] then					
+			T.CreateRFIndex(GUID, i)
 		end
 	
 		-- 上标记
@@ -5102,7 +5101,7 @@ T.InitAuraMods_ByMrt = function(frame)
 		if custom_count_key then
 			for index, players in pairs(self.custom_assignment[custom_count_key]) do
 				for _, GUID in pairs(players) do
-					if self.backups[GUID] then					
+					if self.backups[GUID] then
 						local element = self.elements[index]
 						if element.available then
 							element:display(GUID, true)						

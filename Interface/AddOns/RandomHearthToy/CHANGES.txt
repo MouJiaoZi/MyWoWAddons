@@ -1,16 +1,10 @@
-lightweight tag a367c1f0733d580742b4b2e5a72ff6e8d4447850 3.1.8
+lightweight tag 7e51a2cb2af43aa498d324d02e2644991681263b 3.2.0
 Author:	GitHub <noreply@github.com>
-Date:	Mon Sep 8 10:28:36 2025 +0100
+Date:	Tue Sep 9 21:48:55 2025 +0100
 
-commit a367c1f0733d580742b4b2e5a72ff6e8d4447850
+commit 7e51a2cb2af43aa498d324d02e2644991681263b
 Author: awls99 <awls99@gmail.com>
-Date:   Mon Sep 8 10:28:36 2025 +0100
+Date:   Tue Sep 9 21:48:55 2025 +0100
 
-    version bump
-
-commit 5704c7a0897ea1c4517b654ca8be5e19acf2d0ea
-Author: zzugg <keechan@gmail.com>
-Date:   Mon Sep 8 18:27:15 2025 +0900
-
-    added support for Korean (#46)
+    adding cosmic hearthstone (#47)
 

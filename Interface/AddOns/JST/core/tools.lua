@@ -794,8 +794,14 @@ local group_spell_tag = "JSTSpells"
 local ControlSpellFrame = CreateSpellLineFrame("GroupSpellFrame", L["队伍控制链监控"], 40, "CENTER", 0, 360)
 
 function ControlSpellFrame:lineup()
+	table.sort(self.active_byindex, function(a, b)
+		if a.index and b.index and a.index ~= b.index then
+			return a.index < b.index
+		end
+	end)
+	
 	local lastframe		
-	for index, icon in pairs(self.active_byindex) do
+	for _, icon in pairs(self.active_byindex) do
 		if icon:IsShown() then
 			icon:ClearAllPoints()
 			if not lastframe then
@@ -837,9 +843,10 @@ local function CreateControlSpellIcon(updater, group, tag)
 		end
 	end
 	
-	function icon:init_display(GUID, spellID)
+	function icon:init_display(index, GUID, spellID)
 		self.GUID = GUID
 		self.spellID = spellID
+		self.index = index
 		
 		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
 		self.source_text:SetText(T.ColorNickNameByGUID(GUID))
@@ -920,7 +927,7 @@ function ControlSpell_Updater:ReadNote(tag, analyze, title, sub_titles)
 	local indexNumber = 0
 	local divide_set
 	local title_displayed
-	local spellCount = #G.GroupTrackedSpellsbyIndex
+	local spellCount = #G.GroupTrackedSpellsbyIndex.CC
 	
 	local ccTag = "CC"..(tag or "")
     for _, line in T.IterateNoteAssignment(ccTag) do
@@ -1076,7 +1083,7 @@ function ControlSpell_Updater:BuildStates()
 		   
 		   if not self.actives_bytag[tag] then
 				local icon = self:GetAlert(1, tag)
-				icon:init_display(GUID, spellID)
+				icon:init_display(index, GUID, spellID)
 				
 				if not self.active_byGUID[GUID] then
 					self.active_byGUID[GUID] = {}
@@ -1118,7 +1125,6 @@ ControlSpell_Updater:SetScript("OnEvent", function(self, event, ...)
 			
 			if not self.ttsPlayed[self.set][spellID] then
 				self.ttsPlayed[self.set][spellID] = true
-				
 				if C.DB["GeneralOption"]["control_tts"] then
 					T.PlaySound("prepare")
 					C_Timer.After(.5, function()
@@ -1152,7 +1158,7 @@ function ControlSpellFrame:CreatePreviewCCIcon(tag, i)
 	local icon = CreateSpellIconBase(ControlSpellFrame, tag)
 	T.SetHighLightBorderColor(icon, icon, {0, 1, 0}, 3)
 	
-	local spellID = G.GroupTrackedSpellsbyIndex[i]
+	local spellID = G.GroupTrackedSpellsbyIndex.CC[i]
 	icon.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
 	icon.source_text:SetText(T.ColorNickNameByGUID(G.PlayerGUID))
 	
@@ -1229,9 +1235,9 @@ T.EditGroupCCFrame = function(option)
 	end
 end
 
-T.GenerateGroupCCNote = function(tag, title, set)	
+T.GenerateGroupCCNote = function(tag, title, set, continued, sub_titles)	
 	local str, full_set_str, short_set_str = "", "", ""
-	for index, spellID in pairs(G.GroupTrackedSpellsbyIndex) do
+	for index, spellID in pairs(G.GroupTrackedSpellsbyIndex.CC) do
 		local spellName = C_Spell.GetSpellName(spellID)
 		local spell = string.format("%s {spell:%d}%s", G.PlayerName, spellID, spellName)
 		
@@ -1243,14 +1249,22 @@ T.GenerateGroupCCNote = function(tag, title, set)
 	
 	if set then
 		for i = 1, set do
+			local sub_title = "set"..i
+			
+			if sub_titles and sub_titles[i] then
+				sub_title = sub_title..sub_titles[i]
+			end
+			
 			if i == 1 then
-				str = str.."set"..i.."\n"..full_set_str.."\n"
+				str = str..sub_title.."\n"..full_set_str.."\n"
 			else
-				str = str.."set"..i.."\n"..short_set_str.."\n"
+				str = str..sub_title.."\n"..short_set_str.."\n"
 			end
 		end
 		
-		str = str..L["可以继续写"]
+		if continued then
+			str = str..L["可以继续写"]
+		end
 	else
 		str = full_set_str
 	end

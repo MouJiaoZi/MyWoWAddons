@@ -3,6 +3,19 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.86
+Salhadaar Manaforged Titan Killing countdown.
+Salhadaar Subdivision Rule timing bar and soak prompt.
+Salhadaar Reap Countdown.
+Dimensius Excess Mass pick up assignment and raid status monitoring.
+Dimensius adds Antimatter timing bar.
+Dimensius adds Mass Destruction assignment.
+Dimensius adds Mass Destruction timing circle.
+Fix the error of glow/index nember not disappearing on the raid frames.
+Bug fix of the incorrect sequence of CC spells.
+The CC chain MRT template no longer includes non group control spells.
+Remove useless functions and correct other errors.
+
 5.85
 Salhadaar add Shadowguard Reaper control chain.
 Dimensius Correct Mythic countdown data.

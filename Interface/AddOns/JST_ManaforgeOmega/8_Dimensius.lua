@@ -10,19 +10,22 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["捡球"] = "捡球"
 	L["大小圈"] = "大小圈"
 	L["超级新星生效计时条"] = "%s 生效计时条"
-	
+	L["补远程"]= "补远程"
+	L["补近战"] = "补近战"
 elseif G.Client == "ruRU" then
 	L["易伤前喊话"] = "Атакуем его! Сейчас!"
 	--L["捡球"] = "Pickup"
 	--L["大小圈"] = "Big/small circles"
 	--L["超级新星生效计时条"] = "%s take effect timing bar"
-	
+	--L["补远程"]= "Ranged (backup)"
+	--L["补近战"] = "Melee (backup)"
 else
 	L["易伤前喊话"] = "We must strike--now!"
 	L["捡球"] = "Pickup"
 	L["大小圈"] = "Big/small circles"
 	L["超级新星生效计时条"] = "%s take effect timing bar"
-	
+	L["补远程"]= "Ranged (backup)"
+	L["补近战"] = "Melee (backup)"
 end
 ---------------------------------Notes--------------------------------
 
@@ -146,40 +149,43 @@ G.Encounters[2691] = {
 					unit = "player",
 					spellID = 1228206,
 					hl = "yel",
-				},
-				{ -- 首领模块 过量物质 多人光环（✓）
-					category = "BossMod",
-					spellID = 1228206,
-					enable_tag = "rl",
-					name = string.format(L["NAME多人光环提示"], T.GetIconLink(1228206)),	
-					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -500},
-					events = {
-						["UNIT_AURA"] = true,	
-					},
-					init = function(frame)
-						frame.spellIDs = {
-							[1228206] = {},-- 过量物质
-						}
-						
-						T.InitUnitAuraBars(frame)			
-					end,
-					update = function(frame, event, ...)
-						T.UpdateUnitAuraBars(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetUnitAuraBars(frame)
-					end,
-				},
+				},				
 				{ -- 首领模块 过量物质分配（待测试）
 					category = "BossMod",
 					spellID = 1227866,
 					enable_tag = "everyone",
 					name = string.format(T.GetIconLink(1228206)..L["分配"]),	
-					points = {hide = true},
+					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 190},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
 					},
 					custom = {
+						{
+							key = "width_sl",
+							text = L["长度"],
+							default = 180,
+							min = 100,
+							max = 300,
+							apply = function(value, alert)
+								alert:SetWidth(value)
+								for _, bar in pairs(alert.bars) do
+									bar:SetWidth(value)
+								end
+							end,
+						},
+						{
+							key = "height_sl",
+							text = L["高度"],
+							default = 20,
+							min = 16,
+							max = 30,
+							apply = function(value, alert)
+								alert:SetHeight((value+2)*6-2)
+								for _, bar in pairs(alert.bars) do
+									bar:SetHeight(value)	
+								end
+							end,
+						},
 						{
 							key = "mrt_custom_btn",
 						},
@@ -188,14 +194,122 @@ G.Encounters[2691] = {
 						},
 					},
 					init = function(frame)
+						frame.bars = {}
+						frame.sort_bars = {}
 						frame.backup_assignments = {}
 						frame.assignments = {}
 						frame.pre_assigned = {}
 						frame.count = 0
 						frame.last_cast = 0
 						frame.my_set = 0
+						frame.debuff1 = 1243577
+						frame.debuff2 = 1243609
+						frame.debuff3 = 1228206
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
+						
+						local strs = {L["近战"], L["补近战"], L["远程"], L["补远程"]}
+						frame.str_order = {}
+						for i, str in pairs(strs) do
+							frame.str_order[str] = i
+						end
+						
+						function frame:lineup()
+							self.sort_bars = table.wipe(self.sort_bars)
+							
+							for _, bar in pairs(self.bars) do
+								table.insert(self.sort_bars, bar)
+							end
+							
+							table.sort(self.sort_bars, function(a,b)
+								if a.assigned and not b.assigned then
+									return true
+								elseif a.set and b.set and a.set ~= b.set then
+									return  a.set < b.set
+								elseif a.str and b.str and a.str ~= b.str then
+									local a_order = self.str_order[a.str]
+									local b_order = self.str_order[b.str]
+									
+									if a_order and b_order and a_order ~= b_order then
+										return  a_order < b_order
+									end
+								elseif a.GUID and b.GUID then
+									return a.GUID < b.GUID
+								end
+							end)
+							
+							local last_set = 1
+							local last_bar
+							for i, bar in pairs(self.sort_bars) do
+								if bar:IsShown() then
+									bar:ClearAllPoints()
+									if not last_bar then
+										bar:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+									else
+										bar:SetPoint("TOPLEFT", last_bar, "BOTTOMLEFT", 0, bar.set ~= last_set and -15 or -4)
+									end
+									last_bar = bar
+									last_set = bar.set
+								end
+							end
+						end
+						
+						function frame:createbar(GUID)
+							local info = GUID and T.GetGroupInfobyGUID(GUID)
+							local h = C.DB["BossMod"][self.config_id]["height_sl"]
+							local w = C.DB["BossMod"][self.config_id]["width_sl"]
+							
+							local icon = C_Spell.GetSpellTexture(frame.debuff3)
+							local bar = T.CreateTimerBar(self, icon, false, false, false, w, h, {1,1,1})
+							
+							bar.spell_icon = T.CreateIcon(bar, nil, h)
+							bar.spell_icon:SetPoint("LEFT", bar, "RIGHT", 2, 0)
+							bar.spell_icon:Hide()
+							
+							function bar:update_status(tag)
+								if tag == "assigned" then
+									bar:SetStatusBarColor(0, 1, 1)
+								elseif tag == "pickup" then
+									bar:SetStatusBarColor(0, 0, 1)
+								end
+							end
+							
+							function bar:SetAssignment(assigned, set)
+								bar.assigned = assigned
+								bar.set = set
+							end
+							
+							function bar:SetText(str)
+								bar.right:SetText(str)
+								bar.str = str
+							end
+							
+							if GUID then
+								bar.GUID = GUID
+								bar.left:SetText(info.format_name)
+								self.bars[GUID] = bar
+							end
+							
+							return bar
+						end
+						
+						function frame:updatedebuffs(GUID)
+							local bar = frame.bars[GUID]
+							if not bar then return end
+							
+							local unit = T.GUIDToUnit(GUID)
+							if unit then
+								if AuraUtil.FindAuraBySpellID(frame.debuff1, unit, "HARMFUL") then  -- 引力倒逆
+									bar.spell_icon.tex:SetTexture(C_Spell.GetSpellTexture(frame.debuff1))
+									bar.spell_icon:Show()
+								elseif AuraUtil.FindAuraBySpellID(frame.debuff2, unit, "HARMFUL") then -- 浮空
+									bar.spell_icon.tex:SetTexture(C_Spell.GetSpellTexture(frame.debuff2))
+									bar.spell_icon:Show()
+								else
+									bar.spell_icon:Hide()
+								end
+							end
+						end
 						
 						function frame:copy_mrt()
 							local str = [[
@@ -223,7 +337,7 @@ G.Encounters[2691] = {
 							return string.format(str, self.config_id, C_Spell.GetSpellName(self.config_id))
 						end
 						
-						function frame:GetBackupArray(tag, line, set)
+						function frame:GetBackupArray(tag, line, set, display)
 							local GUIDs, containsPlayerGUID = T.LineToGUIDArray(line)
 							
 							if next(GUIDs) then
@@ -232,7 +346,7 @@ G.Encounters[2691] = {
 								for _, GUID in pairs(GUIDs) do
 									table.insert(self.backup_assignments[set], GUID)
 									local name = T.ColorNickNameByGUID(GUID)
-									str = str..name
+									str = str.." "..name
 								end
 								
 								if display then
@@ -245,7 +359,7 @@ G.Encounters[2691] = {
 							end
 						end
 						
-						function frame:GetPriorityArray(tag, line, set)
+						function frame:GetPriorityArray(tag, line, set, display)
 							local GUIDs = T.LineToGUIDArray(line)
 									
 							if next(GUIDs) then
@@ -258,7 +372,7 @@ G.Encounters[2691] = {
 									if index <= 2 then
 										self.assignments[set][self.count_left][index] = GUID
 										local name = T.ColorNickNameByGUID(GUID)
-										str = str..name
+										str = str.." "..name
 									end
 								end
 								
@@ -286,9 +400,9 @@ G.Encounters[2691] = {
 							for _, line in T.IterateNoteAssignment(self.config_id.."Backup") do
 								local assignmentType = line:match("^[L%R%-]")
 								if assignmentType == "L" then
-									self:GetBackupArray(L["左"], line, 1)
+									self:GetBackupArray(L["左"], line, 1, display)
 								elseif assignmentType == "R" then
-									self:GetBackupArray(L["右"], line, 2)
+									self:GetBackupArray(L["右"], line, 2, display)
 								end
 							end
 							
@@ -297,9 +411,9 @@ G.Encounters[2691] = {
 							for _, line in T.IterateNoteAssignment(self.config_id) do
 								local assignmentType = line:match("^[L%R%-]")
 								if assignmentType == "L" then
-									self:GetPriorityArray(L["左"], line, 1)
+									self:GetPriorityArray(L["左"], line, 1, display)
 								elseif assignmentType == "R" then
-									self:GetPriorityArray(L["右"], line, 2)
+									self:GetPriorityArray(L["右"], line, 2, display)
 								end
 							end
 						end
@@ -312,7 +426,7 @@ G.Encounters[2691] = {
 							
 							for _, GUID in pairs(GUIDs) do    
 								local unit = T.GUIDToUnit(GUID)
-								if unit and AuraUtil.FindAuraBySpellID(1228206, unit, "HARMFUL") then -- 过量物质
+								if unit and AuraUtil.FindAuraBySpellID(self.debuff3, unit, "HARMFUL") then -- 过量物质
 									num = num + 1
 								end
 							end
@@ -324,15 +438,16 @@ G.Encounters[2691] = {
 							local unit = T.GUIDToUnit(GUID)
 							if unit then
 								local alive = not UnitIsDeadOrGhost(unit)
-								local debuffed1 = AuraUtil.FindAuraBySpellID(unit, 1243577, "HARMFUL") -- 引力倒逆
-								local debuffed2 = AuraUtil.FindAuraBySpellID(unit, 1243609, "HARMFUL") -- 浮空
-								local debuffed3 = AuraUtil.FindAuraBySpellID(unit, 1228206, "HARMFUL") -- 过量物质 
+								local debuffed1 = AuraUtil.FindAuraBySpellID(self.debuff1, unit, "HARMFUL") -- 引力倒逆
+								local debuffed2 = AuraUtil.FindAuraBySpellID(self.debuff2, unit, "HARMFUL") -- 浮空
+								local debuffed3 = AuraUtil.FindAuraBySpellID(self.debuff3, unit, "HARMFUL") -- 过量物质
+								
 								if alive and not debuffed1 and not debuffed2 and not debuffed3 then        
 									return true
 								end
 							end
 						end
-												
+						
 						function frame:GetBackup(set, rev)
 							local GUIDs = self.backup_assignments[set]
 							if not GUIDs then return end
@@ -365,7 +480,7 @@ G.Encounters[2691] = {
 							if melee_GUID and self:PlayerCheck(melee_GUID) then
 								melee_result = melee_GUID
 							else
-								melee_result = self:GetBackup(set)
+								melee_result = self:GetBackup(set, false)
 							end
 							
 							local ranged_GUID = GUIDs and GUIDs[2]
@@ -380,6 +495,16 @@ G.Encounters[2691] = {
 						end
 						
 						function frame:Display(set, GUID, text, sound, backup)
+							if not self.bars[GUID] then
+								frame:createbar(GUID)
+							end
+							
+							local bar = self.bars[GUID]
+							bar:update_status("assigned")
+							bar:SetAssignment(true, set)
+							bar:SetText(text)
+							self:lineup()
+							
 							if GUID == G.PlayerGUID then
 								if backup then
 									self.text_frame.text:SetTextColor(1, .3, 0)
@@ -393,6 +518,29 @@ G.Encounters[2691] = {
 								T.PlaySound(sound)
 								T.StartMsgTicker(self, text)
 							end
+						end
+						
+						function frame:InitAssignment()
+							for unit in T.IterateGroupMembers() do
+								if AuraUtil.FindAuraBySpellID(self.debuff3, unit, "HARMFUL") then
+									local GUID = UnitGUID(unit)
+									if not self.bars[GUID] then
+										frame:createbar(GUID)
+									end
+									local bar = self.bars[GUID]
+									bar:update_status("pickup")
+									bar:SetAssignment(false, 3)
+									bar:SetText("")
+								end
+							end
+							self:lineup()
+						end
+						
+						function frame:ClearAssignments()
+							for GUID, bar in pairs(self.bars) do
+								bar:Hide()
+							end
+							self:lineup()
 						end
 						
 						function frame:Remove()
@@ -425,16 +573,17 @@ G.Encounters[2691] = {
 							end
 						end
 						
-						function frame:CheckforBackUp(set, GUID, text, sound)
+						function frame:CheckforBackUp(set, rev, GUID, text, sound)
 							local name = T.ColorNickNameByGUID(GUID)
 							local unit = T.GUIDToUnit(GUID)
 							local set_name = set == 1 and L["左"] or L["右"]
-							if unit and not AuraUtil.FindAuraBySpellID(1228206, unit, "HARMFUL") and not self:PlayerCheck(GUID) then -- 需要替补 
-								local backup_GUID = self:GetBackup(set)
+							
+							if unit and not AuraUtil.FindAuraBySpellID(self.debuff3, unit, "HARMFUL") and not self:PlayerCheck(GUID) then -- 需要替补
+								local backup_GUID = self:GetBackup(set, rev)
 								if backup_GUID then
 									local backup_name = T.ColorNickNameByGUID(backup_GUID)
-									T.msg(string.format("%s %s(%s) %s", set_name, text, L["替补"], backup_name))
 									self:Display(set, backup_GUID, text, sound, true)
+									T.msg(string.format("%s %s %s", set_name, text, backup_name))
 								end
 							end
 						end
@@ -448,15 +597,49 @@ G.Encounters[2691] = {
 								if lack > 0 and PreAssigned and next(PreAssigned) then    
 									local melee_GUID = PreAssigned[1]
 									if melee_GUID then
-										self:CheckforBackUp(1, melee_GUID, L["近战"], "meleegroup")
+										self:CheckforBackUp(set, false, melee_GUID, L["补近战"], "meleegroup")
 									end
 									
 									local ranged_GUID = PreAssigned[2]
 									if ranged_GUID then
-										self:CheckforBackUp(2, ranged_GUID, L["远程"], "rangegroup")
+										self:CheckforBackUp(set, true, ranged_GUID, L["补远程"], "rangegroup")
 									end									
 								end
 							end
+						end
+					
+						function frame:PreviewShow()
+							for set = 1, 3 do
+								for index = 1, 2 do
+									local bar = frame:createbar()
+									bar.left:SetText(T.ColorNickNameByGUID(G.PlayerGUID))
+									
+									if set ~= 3 then
+										bar:update_status("assigned")
+										bar:SetAssignment(true, set)
+										if index == 1 then
+											bar:SetText(L["近战"])
+										elseif index == 2 then
+											bar:SetText(L["远程"])
+										end
+									else
+										bar:update_status("pickup")
+										bar:SetAssignment(false, set)
+										bar:SetText("")
+									end
+									
+									table.insert(self.bars, bar)
+								end
+							end
+							
+							self:lineup()
+						end
+						
+						function frame:PreviewHide()
+							for _, bar in pairs(frame.bars) do
+								bar:Hide()
+							end
+							frame.bars = table.wipe(frame.bars)
 						end
 					end,
 					update = function(frame, event, ...)
@@ -464,16 +647,19 @@ G.Encounters[2691] = {
 							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()							
 							if sub_event == "SPELL_CAST_START" and spellID == 1230087 then -- 千钧猛击
 								frame.count = frame.count + 1
+								frame:ClearAssignments()
 								frame:Remove()
 								
 								C_Timer.After(12, function()
+									frame:InitAssignment()
 									frame:PreAssign() -- 第一次分配
 								end)
 								
 							elseif sub_event == "SPELL_CAST_SUCCESS" and spellID == 1236617 then -- P2
+								frame:ClearAssignments()
 								frame:Remove()
-								
-							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 1243577 then -- 引力倒逆 补分配
+							
+							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == frame.debuff1 then -- 引力倒逆 补分配
 								if GetTime() - frame.last_cast > 3 then
 									frame.last_cast = GetTime()
 									
@@ -482,7 +668,19 @@ G.Encounters[2691] = {
 									end)
 								end
 								
-							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 1228206 then -- 过量物质
+							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == frame.debuff3 then -- 过量物质
+								if frame.bars[destGUID] then
+									local bar = frame.bars[destGUID]
+									bar:update_status("pickup")
+								else
+									frame:createbar(destGUID)
+									local bar = frame.bars[destGUID]
+									bar:SetAssignment(false, 3)
+									bar:SetText("")
+									bar:update_status("pickup")
+									frame:lineup()
+								end
+								
 								if frame.my_set > 0 and tContains(frame.backup_assignments[frame.my_set], destGUID) then
 									local need = frame.count%2 == 1 and 2 or 4
 									local current = frame:GetActiveNum(frame.my_set)
@@ -490,18 +688,33 @@ G.Encounters[2691] = {
 									if lack == 0 then
 										frame:Remove()
 									end
-								end 
+								end
+							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == frame.debuff3 then -- 过量物质
+								if frame.bars[destGUID] then
+									local bar = frame.bars[destGUID]
+									if bar.assigned then
+										bar:update_status("assigned")
+									else
+										bar:Hide()
+									end
+								end
+							end
+							
+							if (sub_event == "SPELL_AURA_APPLIED" or sub_event == "SPELL_AURA_REMOVED") and (spellID == frame.debuff1 or spellID == frame.debuff2) then -- 引力倒逆/浮空
+								frame:updatedebuffs(destGUID)
 							end
 							
 						elseif event == "ENCOUNTER_START" then
 							frame.count = 0
 							frame.last_cast = 0
 							frame.my_set = 0
-
+							frame.bars = table.wipe(frame.bars)
+							
 							frame:ReadNote()
 						end
 					end,
 					reset = function(frame, event)
+						frame:ClearAssignments()
 						frame:Remove()
 						frame:Hide()
 					end,
@@ -698,6 +911,110 @@ G.Encounters[2691] = {
 					end,
 					reset = function(frame, event)
 						T.StopTimerBar(frame.bar, true, true)
+					end,
+				},
+				{ -- 首领模块 反物质 计时条（✓）
+					category = "BossMod",
+					spellID = 1243702,
+					name = string.format(L["计时条%s"], T.GetIconLink(1243702)),
+					enable_tag = "none",
+					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 300},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+					},
+					init = function(frame)
+						frame.default_bar_width = 300
+						T.GetSingleBarCustomData(frame)
+						
+						frame.time_limit = 10
+						frame.spell_id = 1243702
+						
+						frame.spellName = C_Spell.GetSpellName(frame.spell_id)
+						frame.spellIcon = C_Spell.GetSpellTexture(frame.spell_id)
+						frame.bar = T.CreateTimerBar(frame, frame.spellIcon, false, false, true, nil, nil, {1, .8, 0})
+						
+						T.CreateTagsforBar(frame.bar, 1)
+						
+						frame.bar.tag_indcators[1]:SetVertexColor(1, 0, 0)
+						frame.bar.tag_indcators[1]:SetWidth(4)
+						frame.bar:SetAllPoints(frame)
+						
+						frame.absorb = 0
+						frame.absorb_max = 80
+						frame.bar:SetMinMaxValues(0, frame.absorb_max)
+						
+						function frame:update_absorb()
+							if self.absorb == 0 then
+								self:stop_bar()
+							end
+							self.bar:SetValue(self.absorb)
+							self.bar.right:SetText(self.absorb)							
+						end
+						
+						function frame:update_time()
+							if self.time_limit then
+								local exp_time = GetTime() + self.time_limit
+								
+								self.bar.left:SetText("")
+								self.bar.tag_indcators[1]:Show()
+								
+								self.bar:SetScript('OnUpdate', function(s, e)
+									s.t = s.t + e
+									if s.t > 0.05 then
+										local remain = exp_time - GetTime()
+										if remain > 0 then
+											s.left:SetText(T.FormatTime(remain))
+											s:pointtag(1, remain/self.time_limit)
+										else
+											self:stop_bar()
+										end
+										s.t = 0
+									end
+								end)
+							end
+							self.bar:Show()
+						end
+						
+						function frame:stop_bar()
+							self.bar:Hide()
+							self.bar.tag_indcators[1]:Hide()
+							self.bar:SetScript("OnUpdate", nil)
+						end
+
+						function frame:PreviewShow()
+							self.absorb = math.random(1, 80)	
+							self:update_absorb()
+							self:update_time()
+						end
+						
+						function frame:PreviewHide()
+							self:stop_bar()
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, cast_GUID, cast_spellID = ...
+							if unit == "boss1" and cast_spellID == 1243690 then -- 破碎空间
+								frame.absorb = 80
+								frame:update_absorb()
+								frame:update_time()
+							end
+						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if (sub_event == "SPELL_DAMAGE" or subEvent == "SPELL_MISSED") and spellID == 1243702 then -- 反物质
+								local unit = T.GUIDToUnit(destGUID)
+								local inRange = UnitInRange(unit)
+								
+								if inRange then
+									frame.absorb = frame.absorb - 1
+									frame:update_absorb()
+								end
+							end
+						end
+					end,
+					reset = function(frame, event)
+						frame:stop_bar()
 					end,
 				},
 			},
@@ -1099,6 +1416,82 @@ G.Encounters[2691] = {
 					type = "cast",
 					spellID = 1249423,
 					text = L["射线"],
+				},
+				{ -- 首领模块 物质破坏 点名统计 整体排序（✓） 
+					category = "BossMod",
+					ficon = "12",
+					spellID = 1249423,
+					enable_tag = "none",
+					name = string.format(L["NAME点名排序"], T.GetIconLink(1249425)),
+					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 285},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					init = function(frame)
+						frame.aura_id = 1249425
+						frame.element_type = "bar"
+						frame.color = T.GetSpellColor(frame.aura_id)
+						frame.raid_index = true
+						frame.support_spells = 3
+						frame.bar_num = 4
+					
+						frame.info = {
+							{text = "[1]", msg_applied = "1 %name", msg = "1"},
+							{text = "[2]", msg_applied = "2 %name", msg = "2"},
+							{text = "[3]", msg_applied = "3 %name", msg = "3"},
+							{text = "[4]", msg_applied = "4 %name", msg = "4"},
+						}
+						
+						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
+						
+						function frame:post_display(element, index, unit, GUID)
+							if GUID == G.PlayerGUID then
+								T.Start_Text_Timer(self.text_frame, 5, frame.info[index].text)
+							end
+						end
+						
+						function frame:post_remove(element, index, unit, GUID)
+							if GUID == G.PlayerGUID then
+								T.Stop_Text_Timer(self.text_frame)
+							end
+						end
+						
+						T.InitAuraMods_ByMrt(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateAuraMods_ByMrt(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetAuraMods_ByMrt(frame)
+						T.Stop_Text_Timer(frame.text_frame)
+					end,
+				},
+				{ -- 首领模块 物质破坏 计时圆圈（✓）
+					category = "BossMod",
+					ficon = "12",
+					spellID = 1249425,
+					enable_tag = "none",
+					name = T.GetIconLink(1249425)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[1249425] = { -- 物质破坏
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {0, 1, 1},
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
+					end,
 				},
 				{ -- 图标 碎片地带（✓）
 					category = "AlertIcon",
@@ -1808,66 +2201,6 @@ G.Encounters[2691] = {
 					type = "Aura",
 					spellID = 1250054,
 					color = "red",
-				},
-				{ -- 首领模块 虚空之握 点名统计 整体排序（✓）
-					category = "BossMod",
-					spellID = 1250054,
-					enable_tag = "none",
-					name = string.format(L["NAME点名排序"], T.GetIconLink(1250055)),
-					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 400},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.aura_id = 1250055
-						frame.element_type = "bar"
-						frame.color = T.GetSpellColor(1250055)
-						frame.raid_index = true
-						frame.disable_copy_mrt = true
-						frame.support_spells = 10
-						frame.bar_num = 5
-					
-						frame.info = {
-							{text = "1"},
-							{text = "2"},
-							{text = "3"},
-							{text = "4"},
-							{text = "5"},
-						}
-						
-						frame.total_aura_num = 4
-						frame.last_cast = 0
-						frame.count = 0
-						
-						T.InitAuraMods_ByMrt(frame)
-					end,
-					update = function(frame, event, ...)
-						if frame.difficultyID == 16 then
-							if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-								local _, sub_event, _, sourceGUID, sourceName, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
-								if sub_event == "SPELL_AURA_APPLIED" and spellID == 1250055 then
-									if GetTime() - frame.last_cast > 3 then
-										frame.last_cast = GetTime()
-										frame.count = frame.count + 1
-										if frame.count == 1 then
-											frame.total_aura_num = 4
-										else
-											frame.total_aura_num = 5
-										end
-									end
-								end
-							elseif event == "ENCOUNTER_START" then
-								frame.total_aura_num = 4
-								frame.last_cast = 0
-								frame.count = 0
-							end
-						end
-						
-						T.UpdateAuraMods_ByMrt(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetAuraMods_ByMrt(frame)
-					end,
 				},
 			},
 		},

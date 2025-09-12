@@ -1658,11 +1658,8 @@ G.Encounters[2608] = {
 								if frame.display_finished then
 									frame.extra_index = frame.extra_index + 1
 									local unit_id = UnitTokenFromGUID(destGUID)
-									if unit_id then
-										local unit_frame = T.GetUnitFrame(unit_id)
-										if unit_frame then					
-											T.CreateRFIndex(unit_frame, frame.extra_index)
-										end
+									if unit_id then			
+										T.CreateRFIndex(destGUID, frame.extra_index)
 										if UnitIsUnit(unit_id, "player") then
 											frame.text_frame.text:SetText(string.format("%s [%d]", T.GetSpellIcon(438708), frame.extra_index))
 											frame.text_frame:Show()

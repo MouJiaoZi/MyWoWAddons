@@ -203,6 +203,11 @@ if not addonTable.Constants.IsRetail then
           end
         end
       end
+      for _, info in pairs(equipmentSetInfo) do
+        table.sort(info, function(a, b)
+          return a.name < b.name
+        end)
+      end
       table.sort(equipmentSetNames)
       updatePending = true
 
@@ -294,6 +299,10 @@ if not addonTable.Constants.IsRetail then
         end
       end
       if next(missing) then
+        local keys = GetKeysArray(missing)
+        table.sort(keys, function(a, b)
+          return equipmentSetInfo[a][1].name < equipmentSetInfo[b][1].name
+        end)
         for key in pairs(missing) do
           local itemID = tonumber((key:match("^;?%-?(%d+)")))
           if itemIDToGUID[itemID] and #itemIDToGUID[itemID] > 0 then

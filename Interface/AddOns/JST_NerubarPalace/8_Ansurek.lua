@@ -1733,11 +1733,8 @@ G.Encounters[2602] = {
 							local tag_type = C.DB["BossMod"][self.config_id]["tag_dd"]
 							
 							if tag_type ~= "none" then
-								local unit_frame = T.GetUnitFrame(unit)
-								if unit_frame then
-									local tag = self.tag_info[tag_type][index]
-									T.CreateRFIndex(unit_frame, tag)
-								end
+								local tag = self.tag_info[tag_type][index]
+								T.CreateRFIndex(GUID, tag)
 							end
 							
 							if GUID == G.PlayerGUID then

@@ -367,8 +367,8 @@ MEETINGSTONE_UI_DB = {
 ["FILTER_DAMAGE"] = false,
 }
 MEETINGSTONE_UI_E_POINTS = {
-["y"] = 72.13555908203125,
-["x"] = 83.5078353881836,
+["y"] = 0.5165771842002869,
+["x"] = 225.2222442626953,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["QuickJoin"] = true,

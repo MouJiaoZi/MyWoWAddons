@@ -1,7 +1,8 @@
 # Baganator
 
-## [735](https://github.com/Baganator/Baganator/tree/735) (2025-09-04)
-[Full Changelog](https://github.com/Baganator/Baganator/compare/734...735) 
+## [738](https://github.com/TheMouseNest/Baganator/tree/738) (2025-09-11)
+[Full Changelog](https://github.com/TheMouseNest/Baganator/compare/737...738) 
 
-- Put new sections/categories on the cursor rather than inserting at top of list  
-- Fix deleting empty inner section moving outer section items out  
+- Update discord link  
+- Classic: More fixes for consistent ItemRack set order  
+- Classic: Consistent ordering for ItemRack sets  

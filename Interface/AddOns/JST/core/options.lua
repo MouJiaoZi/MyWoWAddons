@@ -1216,14 +1216,11 @@ G.Options = {
 			option_type = "button",
 			width = .5,
 			text = L["测试"],
-			apply = function()
-				local unit_frame = T.GetUnitFrame("player")
-				if unit_frame then					
-					T.CreateRFIndex(unit_frame, 1)
-					C_Timer.After(5, function()
-						T.HideRFIndexbyParent(unit_frame)
-					end)
-				end				
+			apply = function()				
+				T.CreateRFIndex(G.PlayerGUID, 1)
+				C_Timer.After(5, function()
+					T.HideRFIndexbyGUID(G.PlayerGUID)
+				end)		
 			end,
 		},
 		{ -- 标题:团队数值

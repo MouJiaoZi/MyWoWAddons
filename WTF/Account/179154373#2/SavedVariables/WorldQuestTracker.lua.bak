@@ -689,52 +689,12 @@ WQTrackerDB = {
 },
 ["quests_all_characters"] = {
 ["Player-940-0516206F"] = {
-[81630] = {
-["expireAt"] = 1757545303,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
-[76558] = {
-["expireAt"] = 1757545212,
-["rewardAmount"] = "1",
-["rewardTexture"] = 656679,
-},
-[76989] = {
-["expireAt"] = 1757372472,
-["rewardAmount"] = "1",
-["rewardTexture"] = 656679,
-},
-[76586] = {
-["expireAt"] = 1757545272,
-["rewardAmount"] = "",
-["rewardTexture"] = 1708494,
-},
 },
 ["Player-940-057FAD37"] = {
 },
 ["Player-940-05166F8B"] = {
 },
 ["Player-940-057FDA40"] = {
-[86409] = {
-["expireAt"] = 1757545256,
-["rewardAmount"] = "|cff2292FF662",
-["rewardTexture"] = "Interface\\ICONS\\INV_Bracer_07",
-},
-[86305] = {
-["expireAt"] = 1757545256,
-["rewardAmount"] = "|cff2292FF655",
-["rewardTexture"] = "Interface\\ICONS\\INV_Belt_15",
-},
-[88904] = {
-["expireAt"] = 1757545316,
-["rewardAmount"] = "|cff2292FF662",
-["rewardTexture"] = "Interface\\ICONS\\INV_Jewelry_Ring_22",
-},
-[86696] = {
-["expireAt"] = 1757545256,
-["rewardAmount"] = "25",
-["rewardTexture"] = 133016,
-},
 },
 ["Player-940-051674C6"] = {
 [59234] = {

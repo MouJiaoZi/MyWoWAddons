@@ -255,46 +255,53 @@ LibOpenRaid.RegisterCallback(callbacks, "CooldownAdded", "CooldownAdded")
 G.GroupTrackedSpellsbySpellID = {}
 G.GroupTrackedSpellsbyName = {}
 
-G.GroupTrackedSpellsbyIndex = {
-	-- 控制
-	372048, -- 压迫怒吼
-	368970, -- 扫尾
-	358385, -- 山崩
-	108199, -- 血魔之握
-	179057, -- 混乱新星
-	202138, -- 锁链咒符
-	207684, -- 悲苦咒符
-	119381, -- 扫堂腿
-	116844, -- 平心之环
-	102793, -- 乌索尔旋风
-	102359, -- 群体缠绕
-	192058, -- 电能图腾
-	30283, -- 暗影之怒
-	109248, -- 束缚射击
-	46968, -- 震荡波
-	357214, -- 飞翼打击
-	132469, -- 台风
-	376079, -- 勇士之矛
-	458513, -- 引力失效
+G.GroupTrackedSpellsbyIndex = {	
+	CC = { -- 控制
+		372048, -- 压迫怒吼
+		368970, -- 扫尾
+		358385, -- 山崩
+		108199, -- 血魔之握
+		179057, -- 混乱新星
+		202138, -- 锁链咒符
+		207684, -- 悲苦咒符
+		119381, -- 扫堂腿
+		116844, -- 平心之环
+		102793, -- 乌索尔旋风
+		102359, -- 群体缠绕
+		192058, -- 电能图腾
+		30283, -- 暗影之怒
+		109248, -- 束缚射击
+		46968, -- 震荡波
+		357214, -- 飞翼打击
+		132469, -- 台风
+		376079, -- 勇士之矛
+		458513, -- 引力失效
+	},
 	
-	-- 免疫
-	45438, -- 寒冰屏障
-	196555, -- 虚空行走
-	186265, -- 灵龟守护
-	642, -- 圣盾术
-	31224, -- 暗影斗篷
+	Immuse = { -- 免疫
+		45438, -- 寒冰屏障
+		196555, -- 虚空行走
+		186265, -- 灵龟守护
+		642, -- 圣盾术
+		31224, -- 暗影斗篷
+	},
 	
-	-- 减伤
-	47585, -- 消散
-	22812, -- 树皮术
-	108271, -- 星界转移
+	Defense = { -- 减伤
+		47585, -- 消散
+		22812, -- 树皮术
+		108271, -- 星界转移
+	},
 }
 
-for index, spellID in pairs(G.GroupTrackedSpellsbyIndex) do
-	G.GroupTrackedSpellsbySpellID[spellID] = index
-	
-	local spell = C_Spell.GetSpellName(spellID)
-	G.GroupTrackedSpellsbyName[spell] = spellID
+local index = 0
+for spellType, data in pairs(G.GroupTrackedSpellsbyIndex) do
+	for _, spellID in pairs(data) do
+		index = index + 1
+		G.GroupTrackedSpellsbySpellID[spellID] = index
+		
+		local spell = C_Spell.GetSpellName(spellID)
+		G.GroupTrackedSpellsbyName[spell] = spellID
+	end
 end
 
 local GSFrame = CreateFrame("Frame", nil, UIParent)

@@ -17,12 +17,13 @@ function S:Blizzard_PlayerSpells()
 
 	for _, tab in next, { _G.PlayerSpellsFrame.TabSystem:GetChildren() } do
 		self:ReskinTab(tab)
+		tab:SetPushedTextOffset(0, 0)
 	end
 
 	local SpellBookFrame = _G.PlayerSpellsFrame.SpellBookFrame
 	if SpellBookFrame then
 		for _, tab in next, { SpellBookFrame.CategoryTabSystem:GetChildren() } do
-			self:ReskinTab(tab)
+			tab:SetPushedTextOffset(0, 0)
 		end
 	end
 

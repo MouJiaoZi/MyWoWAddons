@@ -5250,12 +5250,18 @@ end
 local RFTrigger = CreateFrame("Frame", addon_name.."RFTrigger", FrameHolder)
 
 -- 团队框架序号
-local CreateRFIndex = function(parent, index)
+local CreateRFIndex = function(GUID, index)
 	if C.DB["GeneralOption"]["disable_all"] or C.DB["GeneralOption"]["disable_rf"] then return end
+	
+	local unit = T.GUIDToUnit(GUID)
+	local parent = unit and T.GetUnitFrame(unit)
+	
+	if not parent then return end
 	
 	if not parent.RFIndex then
 		local f = CreateFrame("Frame", nil, parent)
 		f._parent = parent
+		f.GUID = GUID
 		
 		local size = C.DB["RFIconOption"]["RFIndex_size"]
 		local anchor = C.DB["RFIconOption"]["RFIndex_anchor"]
@@ -5307,6 +5313,15 @@ local HideRFIndexbyParent = function(parent)
 	end
 end
 T.HideRFIndexbyParent = HideRFIndexbyParent
+
+local HideRFIndexbyGUID = function(GUID)
+	for k, f in pairs(RFIndex) do
+		if f.GUID == GUID  then
+			f:Hide()
+		end
+	end
+end
+T.HideRFIndexbyGUID = HideRFIndexbyGUID
 
 local HideRFIndexbyIndex = function(index)
 	for k, f in pairs(RFIndex) do
@@ -5520,7 +5535,7 @@ local function CancelRFIcon(cast_GUID)
 end
 
 -- 团队框架高亮
-local function ShowRFAuraGlow(frame, auraID, spellID, color)
+local function ShowRFAuraGlow(frame, auraID, spellID, color, unit)
 	if frame then
 		local glow_type = C.DB["RFIconOption"]["glow_type"]
 		local glow_key = string.format("RFAura:%s:%s", auraID, spellID)
@@ -5533,22 +5548,42 @@ local function ShowRFAuraGlow(frame, auraID, spellID, color)
 			if glow_f then
 				glow_f.name = "_ProcGlow"..glow_key
 			end
+			if unit then
+				local GUID = UnitGUID(unit)
+				local name = T.ColorNickNameByGUID(GUID)
+				--print("|cff00ff00+|r proc", name, spellID, "标签", glow_key)
+			end
 		else
 			LCG.PixelGlow_Start(frame, color, 12, .25, nil, 3, 0, 0, true, glow_key)
+			if unit then
+				local GUID = UnitGUID(unit)
+				local name = T.ColorNickNameByGUID(GUID)
+				--print("|cff00ff00+|r pixel", name, spellID, "标签", glow_key)
+			end
 		end
 	end
 end
 T.ShowRFAuraGlow = ShowRFAuraGlow
 
-local function HideRFAuraGlow(frame, extra_match)
+local function HideRFAuraGlow(frame, extra_match, unit)
 	if frame then
 		local glow_type = C.DB["RFIconOption"]["glow_type"]
 		for key, glow_f in pairs(frame) do
 			if string.find(key, "RFAura") and (not extra_match or string.find(key, extra_match)) then
 				if glow_type == "proc" then
 					LCG.ProcGlow_Stop(frame, gsub(key, "_ProcGlow", ""))
+					if unit then
+						local GUID = UnitGUID(unit)
+						local name = T.ColorNickNameByGUID(GUID)
+						--print("|cffff0000-|r proc", name, "标签", extra_match)
+					end
 				else
 					LCG.PixelGlow_Stop(frame, gsub(key, "_PixelGlow", ""))
+					if unit then
+						local GUID = UnitGUID(unit)
+						local name = T.ColorNickNameByGUID(GUID)
+						--print("|cffff0000-|r pixel", name, "标签", extra_match)
+					end
 				end
 			end
 		end
@@ -5656,13 +5691,13 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 	elseif event == "UNIT_AURA" then
 		local unit, updateInfo = ...
 		
-		if not unit or not T.FilterAuraUnit(unit) then return end
+		if not unit or not T.FilterGroupUnit(unit) then return end
 		
 		if updateInfo == nil or updateInfo.isFullUpdate then
 			local frame = T.GetUnitFrame(unit)
 			
 			if frame then
-				HideRFAuraGlow(frame)
+				HideRFAuraGlow(frame, nil, unit)
 				
 				for _, auraType in pairs({"HELPFUL", "HARMFUL"}) do
 					AuraUtil.ForEachAura(unit, auraType, nil, function(aura_data)
@@ -5676,10 +5711,10 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 								
 								if info.amount then
 									if aura_data.applications and aura_data.applications >= info.amount then
-										ShowRFAuraGlow(frame, auraID, spellID, info.color)
+										ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 									end
 								else
-									ShowRFAuraGlow(frame, auraID, spellID, info.color)
+									ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 								end
 							end
 						end
@@ -5701,10 +5736,10 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 								
 								if info.amount then
 									if aura_data.applications and aura_data.applications >= info.amount then
-										ShowRFAuraGlow(frame, auraID, spellID, info.color)
+										ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 									end
 								else
-									ShowRFAuraGlow(frame, auraID, spellID, info.color)
+									ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 								end
 							end
 						end
@@ -5725,14 +5760,14 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 									if frame then
 										if info.amount then
 											if aura_data.applications and aura_data.applications >= info.amount then										
-												ShowRFAuraGlow(frame, auraID, spellID, info.color)
+												ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 											end
 										end
 									end
 								end
 							end
 						else
-							HideRFAuraGlow(T.GetUnitFrame(unit), auraID)
+							HideRFAuraGlow(T.GetUnitFrame(unit), auraID, unit)
 							RFGlowAuraIDs[auraID] = nil
 						end
 					end
@@ -5741,7 +5776,7 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 			if updateInfo.removedAuraInstanceIDs ~= nil then
 				for _, auraID in pairs(updateInfo.removedAuraInstanceIDs) do
 					if RFGlowAuraIDs[auraID] then
-						HideRFAuraGlow(T.GetUnitFrame(unit), auraID)
+						HideRFAuraGlow(T.GetUnitFrame(unit), auraID, unit)
 						RFGlowAuraIDs[auraID] = nil
 					end
 				end
@@ -5751,7 +5786,7 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 		for unit in T.IterateGroupMembers() do
 			local frame = T.GetUnitFrame(unit)
 			if frame then
-				HideRFAuraGlow(frame)
+				HideRFAuraGlow(frame, nil, unit)
 				AuraUtil.ForEachAura(unit, "HELPFUL", nil, function(aura_data)
 					local spellID = RFIconMultiSpellIDs[aura_data.spellId] or aura_data.spellId
 					local info = T.ValueFromPath(RFIconFrames, {"Aura", spellID})
@@ -5763,10 +5798,10 @@ RFTrigger:SetScript("OnEvent", function(self, event, ...)
 							
 							if info.amount then
 								if aura_data.applications and aura_data.applications >= info.amount then
-									ShowRFAuraGlow(frame, auraID, spellID, info.color)
+									ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 								end
 							else
-								ShowRFAuraGlow(frame, auraID, spellID, info.color)
+								ShowRFAuraGlow(frame, auraID, spellID, info.color, unit)
 							end
 						end
 					end

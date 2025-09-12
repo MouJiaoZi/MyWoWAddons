@@ -237,6 +237,9 @@ L.imported_nameplate_settings = "Paramètres de barres d'infos"
 L.imported_mythicplus_settings = "Paramètres mythique +"
 L.mythicplus_settings_import_desc = "Importer tous les paramètres mythique +."
 L.mythicplus_settings_export_desc = "Exporter tous les paramètres mythique +."
+L.imported_battleres_settings = "Paramètres Battle Rez"
+L.battleres_settings_import_desc = "Importer tous les paramètres de Battle Rez."
+L.battleres_settings_export_desc = "Exporter tous les paramètres de Battle Rez."
 
 -- Statistics
 L.statistics = "Statistiques"
@@ -283,6 +286,26 @@ L.toolsDesc = "BigWigs propose divers outils ou des fonctionnalités \"qualité 
 
 L.autoRoleTitle = "Rôle automatique"
 L.autoRoleExplainer = "Lorsque vous rejoignez un groupe, ou que vous changez de spécialisation alors que vous êtes en groupe, BigWigs mettra à jour automatiquement votre rôle de groupe (Tank, Soigneur, Dégâts) en conséquence.\n\n"
+
+-----------------------------------------------------------------------
+-- BattleRes.lua
+--
+
+L.battleResTitle = "Rés. de combat"
+L.battleResDesc = "Une icône qui vous affiche combien de charges de résurrection de combat sont disponibles ainsi que le temps avant qu'une autre charge soit gagnée."
+L.battleResDesc2 = "\nVotre |cFF33FF99Historique de Résurrection de combat|r peut être vu dans l'infobulle lorsque vous placez votre souris sur l'icône.\n\n"
+L.battleResHistory = "Historique de Résurrection de combat :"
+L.battleResResetAll = "Réinitialiser tous les paramètres de Résurrection de combat à leurs paramètres par défaut."
+L.battleResDurationText = "Texte de durée"
+L.battleResChargesText = "Texte de charges"
+L.battleResNoCharges = "0 charges dispo."
+L.battleResHasCharges = "1 charge ou plus dispo."
+L.battleResPlaySound = "Joue un son lorsqu'une charge est gagnée"
+L.iconTextureSpellID = "|T%d:0:0:0:0:64:64:4:60:4:60|t Texture d'icône (ID du sort)"
+L.iconTextureSpellIDError = "Vous devez entrer un ID de sort valide pour l'utiliser en tant que texture d'icône."
+L.battleResModeIcon = "Mode : Icône"
+L.battleResModeText = "Mode : Texte seulement"
+L.battleResModeTextTooltip = "Montre un arrière-plan temporaire pour vous aider à déplacer la fonctionnalité de Résurrection de combat et voir la zone de survol avec la souris."
 
 -----------------------------------------------------------------------
 -- Keystones.lua
@@ -392,6 +415,8 @@ L.instanceKeysShowAllDesc = "Activer cette option vous affichera tous les person
 L.instanceKeysOtherDungeonColor = "Couleur des autres donjons"
 L.instanceKeysOtherDungeonColorDesc = "Choisissez la couleur de la police des personnages ayant une clef n'appartenant pas au donjon actuel."
 L.instanceKeysEndOfRunDesc = "Par défaut, la liste ne s'affichera que si vous êtes dans un donjon mythique. Activer cette option vous affichera la liste même lorsque le donjon mythique + est terminé."
+L.instanceKeysHideTitle = "Cacher le titre"
+L.instanceKeysHideTitleDesc = "Cacher le titre \"Qui a une clef ?\"."
 
 -----------------------------------------------------------------------
 -- LFGTimer.lua
@@ -412,6 +437,10 @@ L.comma = ", "
 L.reset = "Réinitialiser"
 L.resetDesc = "Réinitialise les paramètres ci-dessus à leur valeur d'origine."
 L.resetAll = "Tout réinitialiser"
+L.startTest = "Démarrer le test"
+L.stopTest = "Arrêter le test"
+L.always = "Toujours"
+L.never = "Jamais"
 
 L.positionX = "Position X"
 L.positionY = "Position Y"
@@ -426,6 +455,7 @@ L.disabled = "Désactivé"
 L.disableDesc = "Vous allez désactiver la fonctionnalité '%s', ce qui n'est |cffff4411pas recommandé|r.\n\nÊtes-vous sûr de vouloir faire cela ?"
 L.keybinding = "Raccourci clavier"
 L.dragToResize = "Tirer pour redimensionner"
+L.cannotMoveInCombat = "Vous ne pouvez pas le déplacer pendant que vous êtes en combat."
 
 -- Anchor Points
 L.UP = "Au-dessus"

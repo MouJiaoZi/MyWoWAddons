@@ -340,6 +340,56 @@ MEETINGSTONE_CHARACTER_DB = {
 ["time"] = 1757244045,
 ["class"] = 9,
 },
+{
+["role"] = "DAMAGER",
+["name"] = "安吉拉小男友-国王之谷",
+["time"] = 1757332043,
+["class"] = 8,
+["leader"] = true,
+},
+{
+["role"] = "HEALER",
+["name"] = "萨陛-霜之哀伤",
+["time"] = 1757332043,
+["class"] = 7,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "大眼有神-红龙军团",
+["time"] = 1757332043,
+["class"] = 1,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "好大一只橘子-加里索斯",
+["time"] = 1757332043,
+["class"] = 2,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "冥土之君赫尔-安苏",
+["time"] = 1757333805,
+["class"] = 6,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "小岛南-安苏",
+["time"] = 1757333805,
+["class"] = 6,
+},
+{
+["role"] = "HEALER",
+["name"] = "锁丨萨-芬里斯",
+["time"] = 1757333805,
+["class"] = 7,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "一哈老乱一-凤凰之神",
+["time"] = 1757333805,
+["class"] = 12,
+},
 },
 ["3-378-1619-0"] = {
 {
@@ -2540,8 +2590,8 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 ["version"] = "11.2.0",
 ["searchHistoryList"] = {
-"3-378-1617-0",
 "2-0-0-0",
+"3-378-1617-0",
 "3-378-1618-0",
 "2-391-1016-0",
 "2-542-1281-0",
@@ -2553,7 +2603,7 @@ MEETINGSTONE_CHARACTER_DB = {
 "2-503-1694-0",
 "6-0-0-0",
 },
-["lastSearchCode"] = "3-378-1617-0",
+["lastSearchCode"] = "2-0-0-0",
 },
 },
 }
