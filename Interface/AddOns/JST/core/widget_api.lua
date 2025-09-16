@@ -712,9 +712,76 @@ T.GetTexColor = function(icon)
 	end
 end
 
+-- 渐变颜色
+T.ColorGradient = function(perc, ...)
+	local num = select("#", ...)
+	local hexes = type(select(1, ...)) == "string"
+
+	if perc == 1 then
+		return select(num-2, ...), select(num-1, ...), select(num, ...)
+	end
+
+	num = num / 3
+
+	local segment, relperc = math.modf(perc*(num-1))
+	local r1, g1, b1, r2, g2, b2
+	r1, g1, b1 = select((segment*3)+1, ...), select((segment*3)+2, ...), select((segment*3)+3, ...)
+	r2, g2, b2 = select((segment*3)+4, ...), select((segment*3)+5, ...), select((segment*3)+6, ...)
+
+	if not r2 or not g2 or not b2 then
+		return r1, g1, b1
+	else
+		return r1 + (r2-r1)*relperc,
+		g1 + (g2-g1)*relperc,
+		b1 + (b2-b1)*relperc
+	end
+end
+
 --====================================================--
 --[[                 -- 文本处理 --                  ]]--
 --====================================================--
+
+-- UTF-8 缩写
+T.Utf8Sub = function(input, size)
+  local output = ""
+  input = tostring(input)
+  if type(input) ~= "string" then
+    return output
+  end
+  local i = 1
+  while (size > 0) do
+    local byte = input:byte(i)
+    if not byte then
+      return output
+    end
+    if byte < 128 then
+      -- ASCII byte
+      output = output .. input:sub(i, i)
+      size = size - 1
+    elseif byte < 192 then
+      -- Continuation bytes
+      output = output .. input:sub(i, i)
+    elseif byte < 244 then
+      -- Start bytes
+      output = output .. input:sub(i, i)
+      size = size - 1
+    end
+    i = i + 1
+  end
+
+  -- Add any bytes that are part of the sequence
+  while (true) do
+    local byte = input:byte(i)
+    if byte and byte >= 128 and byte < 192 then
+      output = output .. input:sub(i, i)
+    else
+      break
+    end
+    i = i + 1
+  end
+
+  return output
+end
 
 -- 聊天框提示（一般讯息）
 T.msg = function(...)

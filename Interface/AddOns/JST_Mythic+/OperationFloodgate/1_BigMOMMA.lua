@@ -56,7 +56,7 @@ G.Encounters[2648] = {
 				},
 				{ -- 首领模块 标记 暗锁无人机（✓）
 					category = "BossMod",
-					spellID = 1214780,
+					spellID = 471585,
 					enable_tag = "none",
 					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("228424"), T.FormatRaidMark("5,6,7,8")),
 					points = {hide = true},
@@ -99,14 +99,73 @@ G.Encounters[2648] = {
 			spells = {
 				{1214780},
 			},
-			options = {
-				{ -- 姓名板打断图标 终极失真（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
+			options = {				
+				{ --首领模块 终极失真（待测试）
+					category = "BossMod",
 					spellID = 1214780,
-					mobID = "228424",
-					interrupt = 1,
 					ficon = "6",
+					enable_tag = "none",
+					name = T.GetIconLink(1214780)..L["计时条"],
+					points = {hide = true},
+					events = {					
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_STOP"] = true,
+					},					
+					init = function(frame)
+						local icon = C_Spell.GetSpellTexture(1214780)
+						local color = T.GetSpellColor(1214780)
+						
+						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, icon, "", color)
+						
+						function frame:UpdateInterruptBar(unit)
+							local name, text, _, startTimeMS, endTimeMS = UnitCastingInfo(unit)
+							local dur = (endTimeMS - startTimeMS)/1000
+							local cast_expTime = GetTime() + dur
+							local interrupt_spellID, spell_exp = T.GetInterruptSpell(cast_expTime)
+							if interrupt_spellID then
+								if spell_exp == 0 then
+									self.bar.left:SetText(string.format("|cffffff00%s|r %s", L["打断"], name))
+								else
+									local wait = spell_exp - GetTime()
+									self.bar.left:SetText(string.format("|cffffff00%s|r %s |cffadd6ffCD:%.1f|r", L["打断"], name, wait))
+									C_Timer.After(wait, function()
+										self.bar.left:SetText(string.format("|cffffff00%s|r %s |cff00ff00%s|r", L["打断"], name, L["就绪"]))
+									end)
+								end
+								
+								T.StartTimerBar(self.bar, dur, true, true)
+								T.PlaySound("interrupt")
+								self.bar.GUID = UnitGUID(unit)
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_START" then
+							local unit, castGUID, spellID = ...
+							
+							if string.find(unit, "nameplate") and castGUID and spellID == 1214780 then -- 终极失真
+								frame:UpdateInterruptBar(unit)
+							end
+						elseif event == "UNIT_SPELLCAST_STOP" then
+							local unit, _, spellID = ...
+							
+							if string.find(unit, "nameplate") and spellID == 1214780 then -- 终极失真
+								local GUID = UnitGUID(unit)
+								if GUID == frame.bar.GUID then
+									T.StopTimerBar(frame.bar, true, true)
+								end
+							end
+						end
+					end,
+					reset = function(frame, event)
+						T.StopTimerBar(frame.bar, true, true)
+					end,
+				},
+				{ -- 姓名板施法图标 终极失真（✓）
+					category = "PlateAlert",
+					type = "PlateSpells",
+					spellID = 1214780,
+					hl_np = true,
 				},
 			},
 		},

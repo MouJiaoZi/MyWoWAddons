@@ -282,7 +282,7 @@ G.Encounters["c378"] = {
 					category = "PlateAlert",
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
-					spellID = 1235808,
+					spellID = 1235809,
 				},
 			},
 		},

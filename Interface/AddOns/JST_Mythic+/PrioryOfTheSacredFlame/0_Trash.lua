@@ -511,7 +511,7 @@ G.Encounters["c499"] = {
 					init = function(frame)
 						frame.cast_npcID = {
 							["212831"] = {
-								engage_cd = 9.9,
+								engage_cd = 5.6,
 								cast_cd = 18.2,
 								cast_gap = 5,
 							},

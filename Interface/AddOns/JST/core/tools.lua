@@ -1344,7 +1344,7 @@ local PhaseTrigger = CreateFrame("Frame", nil, FrameHolder)
 
 local phase_data = {} -- 所有首领的转阶段数据
 local current_engageID -- 当前战斗
-local current_diffcultyID -- 当前难度
+local current_difficultyID -- 当前难度
 local current_phase -- 当前阶段
 local current_phase_data = {} -- 当前战斗的转阶段计数
 local engaged_npc = {} -- 转阶段监控：记录BOSS加入战斗
@@ -1365,7 +1365,7 @@ local function AddCurrentData(tag, ...)
 				for key, args in pairs(alert_data) do
 					if T.CheckRole(args.ficon) and not G.Current_Data[category][alert_type][key] then
 						if string.find(tag, "engage") then -- 首领战斗
-							if T.CheckDifficulty(args.ficon, current_diffcultyID) then
+							if T.CheckDifficulty(args.ficon, current_difficultyID) then
 								G.Current_Data[category][alert_type][key] = args
 								G.Current_Data[category][alert_type][key].IsEncounterData = true
 							end
@@ -1403,7 +1403,7 @@ local function UpdateAllData()
 	local mapID = select(8, GetInstanceInfo())
 	AddCurrentData("map"..mapID)
 	
-	if current_engageID and current_diffcultyID then
+	if current_engageID and current_difficultyID then
 		AddCurrentData("engage"..current_engageID)
 	end
 end
@@ -1423,7 +1423,7 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 			
-			current_diffcultyID = select(3, GetInstanceInfo())
+			current_difficultyID = select(3, GetInstanceInfo())
 		end
 		
 		UpdateAllData()
@@ -1431,7 +1431,7 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 		local engageID, _, difficultyID = ...
 		
 		current_engageID = engageID
-		current_diffcultyID = difficultyID
+		current_difficultyID = difficultyID
 		current_phase = 1
 		
 		AddCurrentData("engage"..current_engageID, event, ...)
@@ -1457,7 +1457,7 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 		WipeCurrentData(event)
 		
 		current_engageID = nil
-		current_diffcultyID = nil
+		current_difficultyID = nil
 		current_phase = nil
 		
 		engaged_npc = table.wipe(engaged_npc)
@@ -1470,7 +1470,7 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 		if not current_engageID or not phase_data[current_engageID] or not phase_data[current_engageID].CLEU then return end
 		
 		for i, data in pairs(phase_data[current_engageID].CLEU) do
-			if sub_event == data.sub_event and data.count and (not data.ficon or T.CheckDifficulty(data.ficon, current_diffcultyID)) then -- 记录次数
+			if sub_event == data.sub_event and data.count and (not data.ficon or T.CheckDifficulty(data.ficon, current_difficultyID)) then -- 记录次数
 				if data.spellID then
 					if data.spellID == spellID then
 						local tag = string.format("%s:%s", sub_event, spellID)
@@ -1496,7 +1496,7 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 		end
 		
 		for i, data in pairs(phase_data[current_engageID].CLEU) do
-			if sub_event == data.sub_event and (not data.ficon or T.CheckDifficulty(data.ficon, current_diffcultyID)) then
+			if sub_event == data.sub_event and (not data.ficon or T.CheckDifficulty(data.ficon, current_difficultyID)) then
 				if data.spellID then
 					if data.spellID == spellID then
 						if data.count then
@@ -1542,7 +1542,7 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 			engaged_npc[npcID] = true
 			
 			for i, data in pairs(phase_data[current_engageID].UNIT) do
-				if data.npcID == npcID and (not data.ficon or T.CheckDifficulty(data.ficon, current_diffcultyID)) then
+				if data.npcID == npcID and (not data.ficon or T.CheckDifficulty(data.ficon, current_difficultyID)) then
 					current_phase = data.phase
 					current_phase_data[current_phase] = current_phase_data[current_phase] + 1
 					T.FireEvent("ENCOUNTER_PHASE", current_phase, current_phase_data[current_phase])
@@ -1589,7 +1589,16 @@ PhaseTrigger:SetScript("OnEvent", function(self, event, ...)
 end)
 
 T.GetCurrentEngageID = function()
-	return current_engageID, current_diffcultyID
+	return current_engageID
+end
+
+T.GetCurrentDifficultyID = function()
+	if current_difficultyID then
+		return current_difficultyID
+	else
+		local difficultyID = select(3, GetInstanceInfo())
+		return difficultyID
+	end
 end
 
 T.GetCurrentPhase = function()

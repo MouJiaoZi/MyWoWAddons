@@ -209,17 +209,10 @@ function LL:MemberDisplay_SetActivity(memberDisplay, activity)
 	memberDisplay.resultID = activity and activity.GetID and activity:GetID() or nil
 end
 
----Reskins and customizes role icons in LFG (Looking for Group) lists with various visual enhancements.
----When role is nil, the icon and its elements are hidden by setting alpha to 0.
----@param parent Frame? The parent frame that contains the icon. Required for leader indicator and class line features.
----@param icon Texture The texture object representing the role icon to be reskinned.
----@param role "TANK" | "HEALER" | "DAMAGER" | nil The player's role. If nil, the icon will be hidden.
----@param data [ClassFile, string, boolean]? Optional cached data containing [class, specialization, isLeader] information.
 function LL:ReskinIcon(parent, icon, role, data)
-	local class, spec, isLeader
-	if data then
-		class, spec, isLeader = data[1], data[2], data[3]
-	end
+	local class = data and data[1]
+	local spec = data and data[2]
+	local isLeader = data and data[3]
 
 	if role then
 		if self.db.icon.reskin then
@@ -305,42 +298,39 @@ function LL:UpdateEnumerate(Enumerate)
 		return
 	end
 
-	if self.db.icon.enable then
-		---@type table<string, [ClassFile, string, boolean][]>
-		local cache = { TANK = {}, HEALER = {}, DAMAGER = {} }
+	local cache = { TANK = {}, HEALER = {}, DAMAGER = {} }
 
-		for i = 1, result.numMembers do
-			local playerInfo = C_LFGList_GetSearchResultPlayerInfo(button.resultID, i)
-			if playerInfo then
-				local role, class, spec, isLeader =
-					playerInfo.assignedRole, playerInfo.classFilename, playerInfo.specName, playerInfo.isLeader
-				tinsert(cache[role], { class, spec, isLeader })
+	for i = 1, result.numMembers do
+		local playerInfo = C_LFGList_GetSearchResultPlayerInfo(button.resultID, i)
+		if playerInfo then
+			local role, class, spec, isLeader =
+				playerInfo.assignedRole, playerInfo.classFilename, playerInfo.specName, playerInfo.isLeader
+			tinsert(cache[role], { class, spec, isLeader })
+		end
+	end
+
+	for i = 5, 1, -1 do -- The index of icon starts from right
+		local icon = Enumerate["Icon" .. i]
+		local roleIcon = icon.RoleIcon
+		local classCircle = icon.ClassCircle
+
+		if roleIcon and roleIcon.SetTexture then
+			if #cache.TANK > 0 then
+				self:ReskinIcon(Enumerate, roleIcon, "TANK", cache.TANK[1])
+				tremove(cache.TANK, 1)
+			elseif #cache.HEALER > 0 then
+				self:ReskinIcon(Enumerate, roleIcon, "HEALER", cache.HEALER[1])
+				tremove(cache.HEALER, 1)
+			elseif #cache.DAMAGER > 0 then
+				self:ReskinIcon(Enumerate, roleIcon, "DAMAGER", cache.DAMAGER[1])
+				tremove(cache.DAMAGER, 1)
+			else
+				self:ReskinIcon(Enumerate, roleIcon)
 			end
 		end
 
-		for i = 5, 1, -1 do -- The index of icon starts from right
-			local icon = Enumerate["Icon" .. i]
-			local roleIcon = icon.RoleIcon
-			local classCircle = icon.ClassCircle
-
-			if roleIcon and roleIcon.SetTexture then
-				if #cache.TANK > 0 then
-					self:ReskinIcon(Enumerate, roleIcon, "TANK", cache.TANK[1])
-					tremove(cache.TANK, 1)
-				elseif #cache.HEALER > 0 then
-					self:ReskinIcon(Enumerate, roleIcon, "HEALER", cache.HEALER[1])
-					tremove(cache.HEALER, 1)
-				elseif #cache.DAMAGER > 0 then
-					self:ReskinIcon(Enumerate, roleIcon, "DAMAGER", cache.DAMAGER[1])
-					tremove(cache.DAMAGER, 1)
-				else
-					self:ReskinIcon(Enumerate, roleIcon)
-				end
-			end
-
-			if classCircle and self.db.icon.hideDefaultClassCircle then
-				classCircle:Hide()
-			end
+		if classCircle and self.db.icon.hideDefaultClassCircle then
+			classCircle:Hide()
 		end
 	end
 
@@ -364,10 +354,6 @@ function LL:UpdateEnumerate(Enumerate)
 end
 
 function LL:UpdateRoleCount(RoleCount)
-	if not self.db.icon.enable then
-		return
-	end
-
 	if RoleCount.TankIcon then
 		self:ReskinIcon(nil, RoleCount.TankIcon, "TANK")
 	end
@@ -480,22 +466,22 @@ function LL:InitializePartyKeystoneFrame()
 		frame.lines[i] = { left = leftText, right = rightText }
 	end
 
-	self.partyKeystoneFrame = frame
+	LL.partyKeystoneFrame = frame
 end
 
 function LL:UpdatePartyKeystoneFrame()
 	if not self.db.partyKeystone.enable then
-		if self.partyKeystoneFrame then
-			self.partyKeystoneFrame:Hide()
+		if LL.partyKeystoneFrame then
+			LL.partyKeystoneFrame:Hide()
 		end
 		return
 	end
 
-	if not self.partyKeystoneFrame then
+	if not LL.partyKeystoneFrame then
 		self:InitializePartyKeystoneFrame()
 	end
 
-	local frame = self.partyKeystoneFrame
+	local frame = LL.partyKeystoneFrame
 
 	local scale = self.db.partyKeystone.font.size / 12
 	local heightIncrement = floor(8 * scale)
@@ -1558,95 +1544,101 @@ function LL:UpdateAdvancedFilters()
 	C_LFGList_SaveAdvancedFilter(advFilters)
 end
 
-function LL:OnUpdateResultList(searchPanel)
-	local results = CopyTable(searchPanel.results, true)
-	if _G.LFGListFrame.SearchPanel.categoryID ~= 2 then
-		return
-	end
+function LL.OnUpdateResultListEnclosure(lfg)
+	return function(self)
+		local results = CopyTable(self.results, true)
+		if _G.LFGListFrame.SearchPanel.categoryID ~= 2 then
+			return
+		end
 
-	if not self.db.enable or not self.db.rightPanel.enable or not results or #results == 0 then
-		return
-	end
+		if not lfg.db.enable or not lfg.db.rightPanel.enable or not results or #results == 0 then
+			return false
+		end
 
-	local dfDB = self:GetPlayerDB("dungeonFilter")
+		local dfDB = lfg:GetPlayerDB("dungeonFilter")
 
-	local pendingResults = {}
-	local waitForSortingResults = {}
+		local pendingResults = {}
+		local waitForSortingResults = {}
 
-	local partyMember = self:GetPartyRoles()
-	for _, resultID in ipairs(results) do
-		local pendingStatus = select(3, C_LFGList_GetApplicationInfo(resultID))
-		if pendingStatus then
-			tinsert(pendingResults, resultID)
-		else
-			local verified = true
-			local searchResultInfo = C_LFGList_GetSearchResultInfo(resultID)
+		local partyMember = lfg:GetPartyRoles()
+		for _, resultID in ipairs(results) do
+			local pendingStatus = select(3, C_LFGList_GetApplicationInfo(resultID))
+			if pendingStatus then
+				tinsert(pendingResults, resultID)
+			else
+				local verified = true
+				local searchResultInfo = C_LFGList_GetSearchResultInfo(resultID)
 
-			local sortCache = { id = resultID, overallScore = 0, dungeonScore = 0 }
-
-			if searchResultInfo.leaderOverallDungeonScore then
-				sortCache.overallScore = searchResultInfo.leaderOverallDungeonScore
-			end
-
-			if searchResultInfo.leaderDungeonScoreInfo and searchResultInfo.leaderDungeonScoreInfo.mapScore then
-				sortCache.dungeonScore = searchResultInfo.leaderDungeonScoreInfo.mapScore
-			end
-
-			-- Role available (Party fit) => missing checks on damagers from the 10.2.7 advanced filters
-			if dfDB.roleAvailableEnable then
-				local resultRoles = {
-					TANK = 0,
-					HEALER = 0,
-					DAMAGER = 0,
+				local sortCache = {
+					id = resultID,
+					overallScore = 0,
+					dungeonScore = 0,
 				}
 
-				for i = 1, searchResultInfo.numMembers do
-					local info = C_LFGList_GetSearchResultPlayerInfo(resultID, i)
-					if info then
-						local role = info.assignedRole
-						if resultRoles[role] then
-							resultRoles[role] = resultRoles[role] + 1
+				if searchResultInfo.leaderOverallDungeonScore then
+					sortCache.overallScore = searchResultInfo.leaderOverallDungeonScore
+				end
+
+				if searchResultInfo.leaderDungeonScoreInfo and searchResultInfo.leaderDungeonScoreInfo.mapScore then
+					sortCache.dungeonScore = searchResultInfo.leaderDungeonScoreInfo.mapScore
+				end
+
+				-- Role available (Party fit) => missing checks on damagers from the 10.2.7 advanced filters
+				if dfDB.roleAvailableEnable then
+					local resultRoles = {
+						TANK = 0,
+						HEALER = 0,
+						DAMAGER = 0,
+					}
+
+					for i = 1, searchResultInfo.numMembers do
+						local info = C_LFGList_GetSearchResultPlayerInfo(resultID, i)
+						if info then
+							local role = info.assignedRole
+							if resultRoles[role] then
+								resultRoles[role] = resultRoles[role] + 1
+							end
 						end
+					end
+
+					if partyMember.DAMAGER + resultRoles.DAMAGER > 3 then
+						verified = false
 					end
 				end
 
-				if partyMember.DAMAGER + resultRoles.DAMAGER > 3 then
-					verified = false
+				if verified then
+					tinsert(waitForSortingResults, sortCache)
 				end
 			end
-
-			if verified then
-				tinsert(waitForSortingResults, sortCache)
-			end
 		end
+
+		local sortBy = dfDB.sortBy or availableSortMode[1]
+		if sortMode[sortBy].func then
+			sort(waitForSortingResults, function(a, b)
+				if not a or not b then
+					return false
+				end
+
+				local result = sortMode[sortBy].func(a, b)
+				result = dfDB.sortDescending and result or result * -1
+				return result == 1
+			end)
+		end
+
+		wipe(results)
+
+		for _, result in ipairs(pendingResults) do
+			tinsert(results, result)
+		end
+
+		for _, result in ipairs(waitForSortingResults) do
+			tinsert(results, result.id)
+		end
+
+		_G.LFGListFrame.SearchPanel.results = results
+		_G.LFGListFrame.SearchPanel.totalResults = #results
+		_G.LFGListSearchPanel_UpdateResults(_G.LFGListFrame.SearchPanel)
 	end
-
-	local sortBy = dfDB.sortBy or availableSortMode[1]
-	if sortMode[sortBy].func then
-		sort(waitForSortingResults, function(a, b)
-			if not a or not b then
-				return false
-			end
-
-			local result = sortMode[sortBy].func(a, b)
-			result = dfDB.sortDescending and result or result * -1
-			return result == 1
-		end)
-	end
-
-	wipe(results)
-
-	for _, result in ipairs(pendingResults) do
-		tinsert(results, result)
-	end
-
-	for _, result in ipairs(waitForSortingResults) do
-		tinsert(results, result.id)
-	end
-
-	searchPanel.results = results
-	searchPanel.totalResults = #results
-	_G.LFGListSearchPanel_UpdateResults(searchPanel)
 end
 
 function LL:GROUP_ROSTER_UPDATE(...)
@@ -1672,8 +1664,10 @@ function LL:Initialize()
 	C_MythicPlus.RequestCurrentAffixes()
 	C_MythicPlus.RequestMapInfo()
 
-	self:SecureHook("LFGListGroupDataDisplayEnumerate_Update", "UpdateEnumerate")
-	self:SecureHook("LFGListGroupDataDisplayRoleCount_Update", "UpdateRoleCount")
+	if self.db.icon.enable then
+		self:SecureHook("LFGListGroupDataDisplayEnumerate_Update", "UpdateEnumerate")
+		self:SecureHook("LFGListGroupDataDisplayRoleCount_Update", "UpdateRoleCount")
+	end
 
 	self:SecureHook(_G.PVEFrame, "Show", function()
 		self:RequestKeystoneData()
@@ -1682,7 +1676,7 @@ function LL:Initialize()
 	self:SecureHook("LFGListFrame_SetActivePanel", "UpdateRightPanel")
 	self:SecureHook("GroupFinderFrame_ShowGroupFrame", "UpdateRightPanel")
 	self:SecureHook("PVEFrame_ShowFrame", "UpdateRightPanel")
-	self:SecureHook("LFGListSearchPanel_UpdateResultList", "OnUpdateResultList")
+	hooksecurefunc("LFGListSearchPanel_UpdateResultList", LL.OnUpdateResultListEnclosure(self))
 	self:SecureHook("LFGListSearchPanel_DoSearch", function()
 		LL.lastRefreshTimestamp = GetTime()
 	end)

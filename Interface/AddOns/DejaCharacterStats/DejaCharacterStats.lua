@@ -95,12 +95,6 @@ local loader = CreateFrame("Frame")
 		end
 	end)
 
--- Uncomment below the following three database saved variables setup lines for DejaView integration.
--- SavedVariables Setup
--- local DejaCharacterStats, private = ...
--- private.defaults = {}
--- DejaCharacterStats = {};
-
 ---------------------
 -- DCS Slash Setup --
 ---------------------
@@ -135,32 +129,6 @@ function DejaCharacterStats.ShowHelp()
 	print(L["  /dcs reset:  Resets DejaCharacterStats options to default."])
 end
 
---[[
-function DejaCharacterStats.SetConfigToDefaults()
-	print(L["Resetting config to defaults"])
-	DejaCharacterStatsDBPC = private.db --DBPC not used, when (and if) will, DefaultConfig should be replaced with private.db
-	RELOADUI()
-end
---]]
-
---[[
-function DejaCharacterStats.GetConfigValue(key)
-	return DejaCharacterStatsDBPC[key] --I think here a loop is required -- Called in the dumpconfig loop in the DejaCharacterStats.SlashCmdHandler function.
-end
---]]
-
---[[
-function DejaCharacterStats.PrintPerformanceData()
-	UpdateAddOnMemoryUsage()
-	local mem = GetAddOnMemoryUsage("DejaCharacterStats")
-	print(L["DejaCharacterStats is currently using "] .. mem .. L[" kbytes of memory"])
-	collectgarbage("collect")
-	UpdateAddOnMemoryUsage()
-	mem = GetAddOnMemoryUsage("DejaCharacterStats")
-	print(L["DejaCharacterStats is currently using "] .. mem .. L[" kbytes of memory after garbage collection"])
-end
---]]
-
 function DejaCharacterStats.SlashCmdHandler(msg, editbox)
     msg = string.lower(msg)
 	if (msg == "config") then
@@ -168,26 +136,9 @@ function DejaCharacterStats.SlashCmdHandler(msg, editbox)
 		C_Timer.After(0.1, function()
 			Settings.OpenToCategory(DejaCharacterStats.category:GetID());
 		end)
-	--[[
-	elseif (string.lower(msg) == L["dumpconfig"]) then
-		print(L["With defaults"])
-		for k,v in pairs(private.db) do --produces error
-			print(k,DejaCharacterStats.GetConfigValue(k))
-		end
-		print(L["Direct table"])
-		for k,v in pairs(private.db) do
-			print(k,v)
-		end
-	--]]
-	--elseif (string.lower(msg) == L["reset"]) then
 	elseif (msg == "reset") then
-		--DejaCharacterStatsDBPC = private.defaults;
 		gdbprivate.gdb.gdbdefaults = gdbprivate.gdbdefaults.gdbdefaults
 		ReloadUI();
-	--[[
-	elseif (string.lower(msg) == L["perf"]) then
-		DejaCharacterStats.PrintPerformanceData()
-	--]]
 	else
 		DejaCharacterStats.ShowHelp()
 	end
@@ -296,17 +247,7 @@ local dcsresetcheck = CreateFrame("Button", "DCSResetButton", DejaCharacterStats
 		--print ("enUS = 125")
 		LOCALE = 125
 	end
-	--[[
-	if (LOCALE == "ptBR" or LOCALE == "frFR" or LOCALE == "deDE") then
-		--print ("ptBR, frFR, deDE = 175")
-		LOCALE = 175
-	else
-		--print ("enUS = 125")
-		LOCALE = 125
-	end
-	--]]
 	dcsresetcheck:SetWidth(LOCALE)
-
 	dcsresetcheck:SetHeight(30)
 	_G[dcsresetcheck:GetName() .. "Text"]:SetText(L["Reset to Default"])
 	dcsresetcheck:SetScript("OnClick", function(self, button, down)

@@ -30,5 +30,7 @@
 	<Script file="core\group.lua"/>
 	<Script file="core\tools.lua"/>
 	
+	<Script file="elements\arrow.lua"/>
+	
 	<Script file="mods\hpwatch.lua"/>
 </Ui>

@@ -122,33 +122,13 @@ G.Encounters[2685] = {
 					ficon = "7",
 					amount = 2,
 				},
-				{ -- 首领模块 虚空爆炸 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 虚空爆炸（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1227052,
-					enable_tag = "none",
-					name = T.GetIconLink(1227052).."(3+)"..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1227052] = 3,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
-				},
+					threshold = 65,
+					amount = 3,
+				},				
 			},
 		},
 		{ -- 无缚相位剑士
@@ -392,33 +372,13 @@ G.Encounters[2685] = {
 					spellID = 1242071,
 					tip = L["DOT"],
 				},
-				{ -- 首领模块 奥术驱除 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 奥术驱除（✓）
+					category = "HPWatch",
+					type = "CLEU",
 					spellID = 1242088,
-					enable_tag = "none",
-					name = T.GetIconLink(1242088)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.spellIDs = {
-							[1242088] = {
-								event = "SPELL_CAST_START",
-								dur = 6,
-							},
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyCLEU(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyCLEU(frame)
-					end,
+					event = "SPELL_CAST_START",
+					dur = 6,
+					threshold = 65,
 				},
 				{ -- 图标 奥术能量（✓）
 					category = "AlertIcon",

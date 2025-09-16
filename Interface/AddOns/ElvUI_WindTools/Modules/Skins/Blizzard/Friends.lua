@@ -3,48 +3,32 @@ local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 local pairs = pairs
-local select = select
 
 local CreateColor = CreateColor
 
-local function UpdateFriendButton(button)
-	if button.right then
-		return
-	end
+function S:UpdateFriendButton(button)
+	if not button.right then
+		button.right = button:CreateTexture(nil, "BACKGROUND")
+		button.right:SetWidth(button:GetWidth() / 2)
+		button.right:SetHeight(32)
+		button.right:SetPoint("LEFT", button, "CENTER", 0)
+		button.right:SetTexture(E.Media.Textures.White8x8)
+		button.right:SetGradient("HORIZONTAL", CreateColor(0.243, 0.57, 1, 0), CreateColor(0.243, 0.57, 1, 0.25))
 
-	button.right = button:CreateTexture(nil, "BACKGROUND")
-	button.right:SetWidth(button:GetWidth() / 2)
-	button.right:SetHeight(32)
-	button.right:SetPoint("LEFT", button, "CENTER", 0)
-	button.right:SetTexture(E.Media.Textures.White8x8)
-	button.right:SetGradient("HORIZONTAL", CreateColor(0.243, 0.57, 1, 0), CreateColor(0.243, 0.57, 1, 0.25))
+		if button.gameIcon then
+			button.gameIcon:HookScript("OnShow", function()
+				button.right:Show()
+			end)
 
-	if button.gameIcon then
-		button.gameIcon:HookScript("OnShow", function()
-			button.right:Show()
-		end)
+			button.gameIcon:HookScript("OnHide", function()
+				button.right:Hide()
+			end)
 
-		button.gameIcon:HookScript("OnHide", function()
-			button.right:Hide()
-		end)
-
-		if button.gameIcon:IsShown() then
-			button.right:Show()
-		else
-			button.right:Hide()
-		end
-	end
-end
-
-local function UpdateRewards()
-	for tab in _G.RecruitAFriendRewardsFrame.rewardTabPool:EnumerateActive() do
-		if not tab.__windSkin then
-			S:CreateBackdropShadow(tab)
-			local relativeTo = select(2, tab:GetPoint(1))
-			if relativeTo and relativeTo == _G.RecruitAFriendRewardsFrame then
-				F.Move(tab, 4, 0)
+			if button.gameIcon:IsShown() then
+				button.right:Show()
+			else
+				button.right:Hide()
 			end
-			tab.__windSkin = true
 		end
 	end
 end
@@ -79,9 +63,7 @@ function S:FriendsFrame()
 		self:ReskinTab(_G["FriendsFrameTab" .. i])
 	end
 
-	self:SecureHook("FriendsFrame_UpdateFriendButton", UpdateFriendButton)
-	self:SecureHook(_G.RecruitAFriendRewardsFrame, "UpdateRewards", UpdateRewards)
-	UpdateRewards()
+	self:SecureHook("FriendsFrame_UpdateFriendButton", "UpdateFriendButton")
 end
 
 S:AddCallback("FriendsFrame")

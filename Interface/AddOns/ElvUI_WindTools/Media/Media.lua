@@ -403,11 +403,11 @@ end
 ---Provides texture coordinates for LFG role icons
 do
 	---Get texture coordinates for role icons
-	---@param role "TANK"|"HEALER"|"DPS"|"DAMAGER"|"LEADER"|"READY"|"PENDING"|"REFUSE" The role identifier
-	---@return number left Left texture coordinate
-	---@return number right Right texture coordinate
-	---@return number top Top texture coordinate
-	---@return number bottom Bottom texture coordinate
+	---@param role string The role name ("TANK", "DPS", "DAMAGER", "HEALER", "LEADER", "READY", "PENDING", "REFUSE")
+	---@return number? left Left texture coordinate
+	---@return number? right Right texture coordinate
+	---@return number? top Top texture coordinate
+	---@return number? bottom Bottom texture coordinate
 	function F.GetRoleTexCoord(role)
 		if role == "TANK" then
 			return 0.32 / 9.03, 2.04 / 9.03, 2.65 / 9.03, 4.3 / 9.03
@@ -424,7 +424,7 @@ do
 		elseif role == "REFUSE" then
 			return 2.68 / 9.03, 4.4 / 9.03, 5.02 / 9.03, 6.7 / 9.03
 		end
-		return 0, 1, 0, 1
+		return nil, nil, nil, nil
 	end
 
 	AddMedia("ROLES", "UI-LFG-ICON-ROLES.blp", "Textures")
@@ -582,7 +582,6 @@ AddMedia("buttonGoStart", "Button/GoStart.png", "Icons")
 AddMedia("buttonGoEnd", "Button/GoEnd.png", "Icons")
 AddMedia("buttonDiscord", "Button/Discord.png", "Icons")
 
-AddMedia("round", "round.png", "Textures")
 AddMedia("inspectGemBG", "InspectGemBG.blp", "Textures")
 AddMedia("exchange", "Exchange.tga", "Textures")
 AddMedia("illMurloc1", "Illustration/Murloc1.tga", "Textures")
@@ -592,7 +591,6 @@ do
 	if LSM["LOCALE_BIT_" .. locale] then
 		local region = LSM["LOCALE_BIT_" .. locale]
 		LSM:Register("font", "Accidental Presidency (en)", MediaPath .. "Fonts/AccidentalPresidency.ttf", region)
-		LSM:Register("font", "Chivo Mono (en)", MediaPath .. "Fonts/ChivoMono.ttf", region)
 		LSM:Register("font", "Montserrat (en)", MediaPath .. "Fonts/Montserrat.ttf", region)
 		LSM:Register("font", "Roadway (en)", MediaPath .. "Fonts/Roadway.ttf", region)
 		LSM:Register("font", "Homespun (en)", "Interface/Addons/ElvUI/Core/Media/Fonts/Homespun.ttf", region)
@@ -613,7 +611,6 @@ do
 			MediaPath .. "Fonts/AccidentalPresidency.ttf",
 			LSM.LOCALE_BIT_western
 		)
-		LSM:Register("font", "Chivo Mono", MediaPath .. "Fonts/ChivoMono.ttf", LSM.LOCALE_BIT_western)
 		LSM:Register("font", "Montserrat", MediaPath .. "Fonts/Montserrat.ttf", LSM.LOCALE_BIT_western)
 		LSM:Register("font", "Roadway", MediaPath .. "Fonts/Roadway.ttf", LSM.LOCALE_BIT_western)
 		W.CompatibleFont = false

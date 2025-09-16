@@ -338,7 +338,6 @@ local BlizzardFramesOnDemand = {
 }
 
 local ignorePositionRememberingFrames = {
-	["GameMenuFrame"] = true,
 	["BonusRollFrame"] = true,
 	["PlayerChoiceFrame"] = true,
 }

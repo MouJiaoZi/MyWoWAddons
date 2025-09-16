@@ -689,32 +689,11 @@ G.Encounters[2686] = {
 						end
 					end,
 				},
-				{ -- 首领模块 注能束缚 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 注能束缚（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1226311,
-					enable_tag = "none",
-					name = T.GetIconLink(1226311)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1226311] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 注能束缚（✓）
 					category = "RFIcon",
@@ -1060,33 +1039,13 @@ G.Encounters[2686] = {
 					glow = true,
 					group = 1,
 				},
-				{ -- 首领模块 奥术暴怒 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 奥术暴怒（✓）
+					category = "HPWatch",
+					type = "CLEU",
 					spellID = 1227782,
-					enable_tag = "none",
-					name = T.GetIconLink(1227782)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.spellIDs = {
-							[1227782] = {
-								event = "SPELL_CAST_START",
-								dur = 6,
-							},
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyCLEU(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyCLEU(frame)
-					end,
+					event = "SPELL_CAST_START",
+					dur = 6,
+					threshold = 65,
 				},
 			},
 		},

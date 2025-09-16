@@ -522,14 +522,7 @@ options.minimapButtons = {
 				feature = {
 					order = 1,
 					type = "description",
-					name = function()
-						if MB.StopRunning then
-							local errorMsg = format(L["Because of %s, this module will not be loaded."], MB.StopRunning)
-							return C.StringByTemplate(errorMsg, "rose-500")
-						else
-							return L["Add an extra bar to collect minimap buttons."]
-						end
-					end,
+					name = L["Add an extra bar to collect minimap buttons."],
 					fontSize = "medium",
 				},
 			},
@@ -719,8 +712,10 @@ options.worldMap = {
 					type = "description",
 					name = function()
 						if WM.StopRunning then
-							local errorMsg = format(L["Because of %s, this module will not be loaded."], WM.StopRunning)
-							return C.StringByTemplate(errorMsg, "rose-500")
+							return format(
+								"|cffff3860" .. L["Because of %s, this module will not be loaded."] .. "|r",
+								WM.StopRunning
+							)
 						else
 							return L["This module will help you to reveal and resize maps."]
 						end

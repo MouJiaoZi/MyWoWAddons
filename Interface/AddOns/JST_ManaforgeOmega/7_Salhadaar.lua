@@ -18,6 +18,7 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["歼星斩左右分配"] = "%s点名左右分配"
 	L["不要写坦克"] = "除坦克外都写在这里，顺序从左到右。"
 	L["连招计时条及分担分配"] = "%s%s连招计时条及分担分配"
+	L["高危分担"] = "高危分担"
 elseif G.Client == "ruRU" then
 	--L["显示所有点位"] = "Show all positions"
 	--L["过地刺序号"] = "Pass Index"
@@ -31,6 +32,7 @@ elseif G.Client == "ruRU" then
 	--L["引右"] = "Bait RIGHT"
 	--L["不要写坦克"] = "All except tanks are written here, in order from left to right."
 	--L["连招计时条及分担分配"] = "%s %s timimg bars and soak assignment."
+	--L["高危分担"] = "DANGER SOAK"
 else
 	L["显示所有点位"] = "Show all positions"
 	L["过地刺序号"] = "Pass Index"
@@ -44,6 +46,7 @@ else
 	L["引右"] = "Bait RIGHT"
 	L["不要写坦克"] = "All except tanks are written here, in order from left to right."
 	L["连招计时条及分担分配"] = "%s %s timimg bars and soak assignment."
+	L["高危分担"] = "DANGER SOAK"
 end
 ---------------------------------Notes--------------------------------
 
@@ -355,8 +358,8 @@ G.Encounters[2690] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1224812,
-					ficon = "0",
 					show_tar = true,
+					sound = "[frontal]cast",
 				},
 				{ -- 换坦计时条 主宰（✓）
 					category = "AlertTimerbar",
@@ -385,13 +388,6 @@ G.Encounters[2690] = {
 						},
 						{
 							key = "mrt_analysis_btn",
-						},
-						{
-							key = "hp_perc_sl",
-							text = L["血量阈值百分比"],
-							default = 65,
-							min = 20,
-							max = 100,
 						},
 						{
 							key = "scale_sl",
@@ -624,7 +620,7 @@ G.Encounters[2690] = {
 					update = function(frame, event, ...)
 						if event == "UNIT_SPELLCAST_START" then
 							local unit, castGUID, spellID = ...
-							if string.find(unit, "boss") and (spellID == 1224787 or spellID == 1224812) then
+							if string.find(unit, "boss") and castGUID and (spellID == 1224787 or spellID == 1224812) then
 								frame.count = frame.count + 1
 								frame.order[frame.count] = spellID == 1224787 and "CONQUER" or "VANQUISH"
 								
@@ -637,12 +633,21 @@ G.Encounters[2690] = {
 									local soak_index = (frame.soak_count+1)%2 + 1
 									if soak_index == frame.my_index then
 										T.PlaySound("sharedmg")
-										T.Start_Text_Timer(frame.text_frame, 4, string.format("|cff00ff00%s|r", L["分担"]), true)
-										
-										T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, C.DB["BossMod"][frame.config_id]["hp_perc_sl"], {"TANK"})
-										C_Timer.After(4, function()
-											T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
-										end)
+										if AuraUtil.FindAuraBySpellID(1227549, "player", "HARMFUL") then
+											T.Start_Text_Timer(frame.text_frame, 4, string.format("|cffffba27%s|r", L["高危分担"]), true)
+											
+											T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, 90, {"TANK"})
+											C_Timer.After(4, function()
+												T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+											end)
+										else
+											T.Start_Text_Timer(frame.text_frame, 4, string.format("|cff00ff00%s|r", L["分担"]), true)
+											
+											T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, 70, 	{"TANK"})
+											C_Timer.After(4, function()
+												T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+											end)
+										end
 									else
 										T.PlaySound("dontsharedmg")
 										T.Start_Text_Timer(frame.text_frame, 4, string.format("|cffff0000%s|r", L["不分担"]), true)
@@ -651,9 +656,8 @@ G.Encounters[2690] = {
 							end
 
 						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
-							local unit, _, spellID = ...
-							if string.find(unit, "boss") and (spellID == 1224787 or spellID == 1224812) then
-								-- Hide states after the 4th cast completes
+							local unit, castGUID, spellID = ...
+							if string.find(unit, "boss") and castGUID and (spellID == 1224787 or spellID == 1224812) then
 								if frame.count == 4 then
 									frame.order = table.wipe(frame.order)
 									frame.count = 0
@@ -723,32 +727,11 @@ G.Encounters[2690] = {
 					tip = L["强力DOT"],
 					hl = "red",
 				},
-				{ -- 首领模块 放逐 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 放逐（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1227549,
-					enable_tag = "none",
-					name = T.GetIconLink(1227549)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1227549] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 放逐（✓）
 					category = "RFIcon",
@@ -874,53 +857,7 @@ G.Encounters[2690] = {
 					type = "cast",
 					spellID = 1225016,
 					text = L["吐息"],
-				},
-				{ -- 首领模块 分段计时条 围攻（✓）
-					category = "BossMod",
-					spellID = 1225016,
-					enable_tag = "none",
-					name = string.format(L["计时条%s"], T.GetIconLink(1225016)),
-					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 450},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.spell_info = {
-							["SPELL_CAST_SUCCESS"] = {
-								[1225016] = {
-									dur = 24.5,
-									color = {0, 1, 0},
-									sound = "breath",
-									divide_info = {
-										dur = {3, 5.3, 7.6, 9.9, 12.2, 14.5},
-									},
-								},
-							},
-						}
-						
-						function frame:post_update_show(sub_event, spellID)
-							self.bar:SetStatusBarColor(0, 1, 0)
-							self.state = 1
-						end
-						
-						function frame:progress_update(sub_event, spellID, remain)
-							if remain <= 21.5 then
-								if self.state == 1 then
-									self.state = 2
-									self.bar:SetStatusBarColor(1, 0, 0)
-								end
-							end
-						end
-						
-						T.InitSpellCastBar(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdateSpellCastBar(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetSpellCastBar(frame)
-					end,
-				},
+				},				
 				{ -- 图标 围攻（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -962,39 +899,76 @@ G.Encounters[2690] = {
 				{1228113},--【虚空击碎者】
 			},
 			options = {
-				{ -- 文字 虚空击碎者 倒计时（✓）
+				{ -- 文字 虚空击碎者 倒计时（待测试）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1228115)..L["大圈"]..L["倒计时"],
 					data = {
 						spellID = 1228115,
 						events =  {
-							["ENCOUNTER_PHASE"] = true,
-							["UNIT_SPELLCAST_START"] = true,
-						},
-						info = {
-							[15] = {
-								[2] = {5.5},
-								[2.1] = {75},
-							},
-							[16] = {
-								[2] = {2.5},
-								[2.1] = {70},
-							},
-						},
-						cd_args = {
-							round = true,
+							["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						},
 					},
 					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1228115, L["大圈"], self, event, ...)
+						if event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, _, spellID = ...
+							if string.find(unit, "boss") then
+								if spellID == 1227891 then -- 融合虚空之翼
+									local dur = T.GetCurrentDifficultyID() == 16 and 9 or 12
+									T.Start_Text_DelayTimer(self, dur, L["大圈"], true)
+								elseif spellID == 1228065 then -- 集结影卫
+									local dur = T.GetCurrentDifficultyID() == 16 and 66 or 71
+									T.Start_Text_DelayTimer(self, dur, L["大圈"], true)
+								end
+							end
+						elseif event == "ENCOUNTER_START" then
+							self.round = true
+						end
 					end,
 				},
-				{ -- 计时条 虚空击碎者（✓）
-					category = "AlertTimerbar",
-					type = "cast",
+				{ --首领模块 虚空击碎者（待测试）
+					category = "BossMod",
 					spellID = 1228115,
-					text = L["大圈"],
+					enable_tag = "none",
+					name = T.GetIconLink(1228115)..L["计时条"],
+					points = {hide = true},
+					events = {					
+						["UNIT_SPELLCAST_START"] = true,
+					},					
+					init = function(frame)
+						local icon = C_Spell.GetSpellTexture(1228115)
+						local color = T.GetSpellColor(1228115)
+						
+						frame.bar = T.CreateAlertBarShared(2, "bossmod"..frame.config_id, icon, L["大圈"], color, {2.5, 2.9, 3.3, 3.7, 4.1})
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_START" then
+							local unit, castGUID, spellID = ...
+							
+							if string.find(unit, "boss") and castGUID and spellID == 1228115 then -- 虚空击碎者
+								if frame.difficultyID == 16 then
+									T.StartTimerBar(frame.bar, 4.5, true, true)
+								else
+									T.StartTimerBar(frame.bar, 6, true, true)
+								end
+							end
+							
+						elseif event == "ENCOUNTER_START" then
+							frame.difficultyID = select(3, ...)
+							
+							if frame.difficultyID == 16 then
+								for i = 1, 5 do
+									local perc = (2.1+0.4*i)/4.5
+									frame.bar:pointtag(i, perc)
+								end
+							else
+								frame.bar:hide_tags()
+							end
+						end
+					end,
+					reset = function(frame, event)
+						T.StopTimerBar(frame.bar, true, true)
+					end,
 				},
 			},
 		},
@@ -1032,12 +1006,73 @@ G.Encounters[2690] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1228163, L["头前"], self, event, ...)
 					end,
 				},
-				{ -- 计时条 次元吐息（✓）
-					category = "AlertTimerbar",
-					type = "cast",
+				{ --首领模块 次元吐息计时条（待测试）
+					category = "BossMod",
 					spellID = 1228163,
-					text = L["头前"],
-					sound = "[breath]cast",
+					enable_tag = "none",
+					name = T.GetIconLink(1228163)..L["计时条"],
+					points = {hide = true},
+					events = {					
+						["UNIT_SPELLCAST_START"] = true,
+						["JST_CUSTOM"] = true,
+					},					
+					init = function(frame)
+						local icon = C_Spell.GetSpellTexture(1228163)
+						local spell = C_Spell.GetSpellName(1228163)
+						local color = T.GetSpellColor(1228163)
+						
+						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, icon, spell, color)				
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_START" then
+							local unit, castGUID, spellID = ...
+							
+							if string.find(unit, "boss") and castGUID and spellID == 1228163 then  -- 次元吐息
+								if frame.difficultyID == 16 then
+									C_Timer.After(0, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CAST", 1) end)
+									C_Timer.After(2, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CHANNEL", 1) end)
+								
+									C_Timer.After(6, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CAST", 2) end)
+									C_Timer.After(8, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CHANNEL", 2) end)
+									
+									C_Timer.After(12, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CAST", 3) end)
+									C_Timer.After(14, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CHANNEL", 3) end)
+								else
+									C_Timer.After(0, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CAST", "") end)
+									C_Timer.After(4, function() T.FireEvent("JST_CUSTOM", frame.config_id, "CHANNEL", "") end)
+								end
+							end
+							
+						elseif event == "JST_CUSTOM" then
+							local id, cast_type, set = ...
+							
+							if id ~= frame.config_id then return end
+							
+							frame.bar.ind_text:SetText(set)
+							
+							if cast_type == "CAST" then
+								if frame.difficultyID == 16 then
+									T.PlaySound("1302\\ray"..set)
+									T.StartTimerBar(frame.bar, 2, true, true)
+								else
+									T.PlaySound("breath")
+									T.StartTimerBar(frame.bar, 4, true, true)
+								end
+							else
+								T.StartTimerBar(frame.bar, 4, true, true, true)
+								
+								if frame.difficultyID == 16 then
+									T.StartCountDown("bossmod"..frame.config_id, GetTime()+4, 3)
+								end
+							end
+							
+						elseif event == "ENCOUNTER_START" then
+							frame.difficultyID = select(3, ...)
+						end
+					end,
+					reset = function(frame, event)
+						T.StopTimerBar(frame.bar, true, true)
+					end,
 				},
 			},
 		},
@@ -1400,6 +1435,32 @@ G.Encounters[2690] = {
 					private_aura = true,
 					file = soundfile("1237108aura"),
 				},
+				{ -- 首领模块 暮光屠戮 对我施法计时圆圈（✓）
+					category = "BossMod",
+					spellID = 1237106,
+					enable_tag = "none",
+					name = T.GetIconLink(1237106)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {	
+						["UNIT_SPELLCAST_START"] = true,
+						["UNIT_SPELLCAST_STOP"] = true,
+						["UNIT_TARGET"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[1237106] = {		
+								color = {1, 0, 0},
+							},
+						}
+						T.InitCircleCastTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateCircleCastTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetCircleCastTimers(frame)
+					end,
+				},
 				{ -- 首领模块 收割 倒计时（✓）
 					category = "BossMod",
 					spellID = 1228056,
@@ -1643,6 +1704,63 @@ G.Encounters[2690] = {
 					text = L["易伤"],
 					glow = true,
 					group = 1,
+				},
+				{ --首领模块 处斩计时条（P2.2）（待测试）
+					category = "BossMod",
+					spellID = 1225010,
+					enable_tag = "none",
+					name = T.GetIconLink(1225010)..L["计时条"],
+					points = {hide = true},
+					events = {					
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+						["JST_CUSTOM"] = true,
+					},					
+					init = function(frame)
+						local icon = C_Spell.GetSpellTexture(1225010)
+						frame.color = T.GetSpellColor(1225010)
+						
+						frame.bar = T.CreateAlertBarShared(2, "bossmod"..frame.config_id, icon, L["射线"], frame.color)
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, castGUID, spellID = ...
+							
+							if string.find(unit, "boss") and castGUID and spellID == 1228317 then -- 君王的欲求
+								frame.set = 1
+								T.FireEvent("JST_CUSTOM", frame.config_id, frame.set, 2.5)
+							end
+							
+						elseif event == "JST_CUSTOM" then
+							local id, set, dur = ...
+							
+							if id ~= frame.config_id then return end
+							
+							frame.bar.ind_text:SetText(set)
+							if frame.set == 9 then
+								frame.bar:SetStatusBarColor(1, .73, .15)
+							elseif frame.set == 10 then
+								frame.bar:SetStatusBarColor(1, .1, 0)
+							else
+								frame.bar:SetStatusBarColor(unpack(frame.color))
+							end
+							
+							T.StartTimerBar(frame.bar, dur, true, true)
+							
+							frame.set = frame.set + 1
+							if frame.set < 10 then
+								C_Timer.After(dur, function()
+									T.FireEvent("JST_CUSTOM", frame.config_id, frame.set, 3)
+								end)
+							elseif frame.set == 10 then
+								C_Timer.After(dur, function()
+									T.FireEvent("JST_CUSTOM", frame.config_id, frame.set, 3.5)
+								end)
+							end
+						end
+					end,
+					reset = function(frame, event)
+						T.StopTimerBar(frame.bar, true, true)
+					end,
 				},
 			},
 		},
@@ -2209,32 +2327,11 @@ G.Encounters[2690] = {
 					tip = L["DOT"],
 					hl = "red",
 				},
-				{ -- 首领模块 暮光创痕 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 暮光创痕（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1226362,
-					enable_tag = "none",
-					name = T.GetIconLink(1226362)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1226362] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 暮光创痕（✓）
 					category = "RFIcon",

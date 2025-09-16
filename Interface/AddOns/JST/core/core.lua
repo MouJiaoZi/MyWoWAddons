@@ -217,6 +217,17 @@ T.FilterGroupUnit = function(unit)
 	end
 end
 
+T.UnitInDynamicGroup = function(unit)
+	if not unit then return end
+	if IsInRaid() then
+		return UnitInRaid(unit)
+	elseif IsInGroup() then
+		return UnitInParty(unit) or UnitIsUnit(unit, "player")
+	else
+		return UnitIsUnit(unit, "player")
+	end
+end
+
 local function SoundStrFilter(str)
 	local filter_tag = string.match(str, "no(.+)")
 	if filter_tag then
@@ -1632,8 +1643,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 						local bar = self:GetAlert(args.group or 2, cast_Tag)
 						local dur = (endTimeMS - startTimeMS)/1000
 						local exp_time = endTimeMS/1000
-						self:update("channel", cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
-						bar.target_fixed = false
+						bar.target_fixed = true
 					end
 				end
 			end
@@ -1660,7 +1670,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 					if not self.actives_bytag[cast_Tag] then
 						local bar = self:GetAlert(args.group, cast_Tag)
 						self:update("cast", cast_Tag, bar, args, unit, cast_spellID, args.dur)
-						bar.target_fixed = false
+						bar.target_fixed = true
 					end
 				end
 			end
@@ -3255,6 +3265,7 @@ local function GetInterruptSpell(exp_time)
 		end
 	end
 end
+T.GetInterruptSpell = GetInterruptSpell
 
 -- 打断声音
 local function AlertMyInterruptCasting(icon, unit, GUID)
@@ -5261,7 +5272,6 @@ local CreateRFIndex = function(GUID, index)
 	if not parent.RFIndex then
 		local f = CreateFrame("Frame", nil, parent)
 		f._parent = parent
-		f.GUID = GUID
 		
 		local size = C.DB["RFIconOption"]["RFIndex_size"]
 		local anchor = C.DB["RFIconOption"]["RFIndex_anchor"]
@@ -5303,6 +5313,7 @@ local CreateRFIndex = function(GUID, index)
 	parent.RFIndex:UpdateSize()
 	parent.RFIndex.text:SetText(index)
 	parent.RFIndex.ind = index
+	parent.RFIndex.GUID = GUID
 	parent.RFIndex:Show()
 end
 T.CreateRFIndex = CreateRFIndex

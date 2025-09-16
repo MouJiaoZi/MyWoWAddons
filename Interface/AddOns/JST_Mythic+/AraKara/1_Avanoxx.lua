@@ -67,6 +67,14 @@ G.Encounters[2583] = {
 					spellID = 438476,
 					sound = "[add]cast",
 				},
+				{ -- 自保技能提示 警示尖鸣（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 438476,
+					event = "SPELL_CAST_START",
+					dur = 4.5,
+					threshold = 65,
+				},
 				{ -- 图标 饥肠辘辘（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -111,6 +119,14 @@ G.Encounters[2583] = {
 					type = "cast",
 					spellID = 438473,
 					sound = "[mindstep]cast",
+				},
+				{ -- 自保技能提示 蛛纱强袭（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 438473,
+					event = "SPELL_CAST_START",
+					dur = 9,
+					threshold = 65,
 				},
 				{ -- 图标 邪恶缠网（✓）
 					category = "AlertIcon",

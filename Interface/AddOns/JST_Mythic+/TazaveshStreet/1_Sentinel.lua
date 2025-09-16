@@ -52,14 +52,114 @@ G.Encounters[2437] = {
 					type = "cast",
 					spellID = 348350,
 				},
-				{ -- 计时条 审讯（✓）
-					category = "AlertTimerbar",
-					type = "aura",
-					aura_type = "HARMFUL",
+				{ -- 首领模块 计时条 审讯（✓）
+					category = "BossMod",
 					spellID = 347949,
-					unit = "group",
-					show_tar = true,
-					sound = "[rescue]",
+					name = string.format(L["计时条%s"], T.GetIconLink(347949)),
+					enable_tag = "none",
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						["JST_GROUP_CD_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.trackedspellIDs = {}
+						
+						frame.immuse_class = {
+							MAGE = 45438, -- Ice Block
+							DEMONHUNTER = 196555, -- Netherwalk
+							HUNTER = 186265, -- Turtle
+							PALADIN = 642, -- Divine Shield
+							ROGUE = 31224, -- Cloak of Shadows
+						}
+						
+						for _, spellID in pairs(frame.immuse_class) do
+							frame.trackedspellIDs[spellID] = true
+						end
+						
+						local icon = C_Spell.GetSpellTexture(347949)
+						local spell = C_Spell.GetSpellName(347949)
+						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, icon, spell)
+						
+						function frame:UpdateImmuseBuff()
+							local bar = self.bar
+							local GUID = bar.GUID
+							local info = GUID and T.GetGroupInfobyGUID(GUID)
+							
+							if not info then return end
+							
+							local unit = info.unit
+							local spellID = self.immuse_class[info.class]
+							
+							if spellID then
+								if not bar.spell_icon then
+									local texture = C_Spell.GetSpellTexture(spellID)
+									local size =  bar:GetHeight()
+									bar.spell_icon = T.CreateIcon(bar, texture, size)
+									bar.spell_icon:SetPoint("LEFT", bar, "RIGHT", 2, 0)	
+								end
+								
+								local buffed = AuraUtil.FindAuraBySpellID(spellID, unit, "HELPFUL")
+								
+								if buffed then
+									local exp_time = select(6, AuraUtil.FindAuraBySpellID(spellID, unit, "HELPFUL"))
+									bar.spell_icon:stop_cooldown(true)
+									bar.spell_icon:start(exp_time, true)
+									bar.spell_icon:Show()
+								else
+									local ready, exp_time, duration, remain = T.GetGroupCooldown(GUID, spellID)
+									if ready then
+										bar.spell_icon:stop(true)
+										bar.spell_icon:stop_cooldown(true)
+										bar.spell_icon:Show()
+									elseif remain and remain <= 4 then
+										bar.spell_icon:stop(true)
+										bar.spell_icon:start_cooldown(duration, exp_time, true)
+										bar.spell_icon:Show()
+									else
+										bar.spell_icon:Hide()
+									end
+								end
+							elseif bar.spell_icon then
+								bar.spell_icon:Hide()
+							end
+						end
+					
+						function frame:Start(GUID)
+							local bar = self.bar
+							bar.GUID = GUID
+							
+							local info = T.GetGroupInfobyGUID(GUID)
+							bar.mid:SetText(info and info.format_name or "")
+							
+							self:UpdateImmuseBuff()
+							T.StartTimerBar(bar, 5, true, true)
+							T.PlaySound("rescue")
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_AURA_APPLIED" and spellID == 347949 then -- 审讯
+								frame:Start(destGUID)
+								
+							elseif sub_event == "SPELL_AURA_APPLIED" and destGUID == frame.bar.GUID and frame.trackedspellIDs[spellID] then
+								frame:UpdateImmuseBuff()
+								
+							elseif sub_event == "SPELL_AURA_REMOVED" and destGUID == frame.bar.GUID and frame.trackedspellIDs[spellID] then
+								frame:UpdateImmuseBuff()
+							end
+							
+						elseif event == "JST_GROUP_CD_UPDATE" then
+							frame:UpdateImmuseBuff()
+							
+						elseif event == "ENCOUNTER_START" then
+							frame.bar.GUID = nil
+						end
+					end,
+					reset = function(frame, event)
+						T.StopTimerBar(frame.bar, true, true)
+					end,
 				},
 				{ -- 图标 审讯（✓）
 					category = "AlertIcon",

@@ -1,13 +1,11 @@
 local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
 local T = W.Modules.Tooltips
 local OP = E.Libs.ObjectiveProgress
-local C = W.Utilities.Color
 
 local _G = _G
 local format = format
 local next = next
 local select = select
-local strjoin = strjoin
 local strsplit = strsplit
 local tonumber = tonumber
 
@@ -42,14 +40,11 @@ local function addObjectiveProgress(tt, data)
 	local weightsTable = OP:GetNPCWeightByCurrentQuests(npcID)
 	if weightsTable then
 		for questID, npcWeight in next, weightsTable do
-			local logIndex = questID and C_QuestLog_GetLogIndexForQuestID(questID)
-			local info = logIndex and C_QuestLog_GetInfo(logIndex)
-			if info and info.title then
-				for i = 1, tt:NumLines() do
-					local text = _G["GameTooltipTextLeft" .. i]
-					if text and text:GetText() == info.title then
-						text:SetText(text:GetText() .. format(" + %s%%", E:Round(npcWeight, accuracy)))
-					end
+			local info = C_QuestLog_GetInfo(C_QuestLog_GetLogIndexForQuestID(questID))
+			for i = 1, tt:NumLines() do
+				local text = _G["GameTooltipTextLeft" .. i]
+				if text and text:GetText() == info.title then
+					text:SetText(text:GetText() .. format(" + %s%%", F.Round(npcWeight, accuracy)))
 				end
 			end
 		end
@@ -65,19 +60,9 @@ local function addObjectiveProgress(tt, data)
 		local count, max = _G.MDT:GetEnemyForces(npcID)
 
 		if count and max and count > 0 and max > 0 then
-			local left = strjoin(
-				" ",
-				icon1,
-				C.StringByTemplate(count, "teal-500"),
-				C.StringByTemplate("-", "neutral-50"),
-				C.StringByTemplate(max, "amber-300")
-			)
-			local right = strjoin(
-				" ",
-				icon2,
-				C.StringByTemplate(E:Round(100 * count / max, accuracy), "sky-500"),
-				C.StringByTemplate("%", "neutral-50")
-			)
+			local left = format("%s |cff00d1b2%s|r |cffffffff-|r |cffffdd57%s|r", icon1, count, max)
+			local right = format("%s |cff209cee%s|r|cffffffff%%|r", icon2, F.Round(100 * count / max, accuracy))
+
 			tt:AddDoubleLine(left, right)
 			tt:Show()
 		end

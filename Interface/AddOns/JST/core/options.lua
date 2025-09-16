@@ -1133,7 +1133,7 @@ G.Options = {
 			end,
 		},
 		{ -- 法术图标测试
-			key = "rf_index_test",
+			key = "rf_icon_test",
 			option_type = "button",
 			width = .5,
 			text = L["测试"],

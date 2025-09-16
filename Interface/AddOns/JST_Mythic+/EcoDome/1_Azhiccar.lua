@@ -189,6 +189,12 @@ G.Encounters[2675] = {
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},
+				{ -- 自保技能提示 毒性反刍（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1227748,
+					threshold = 75,
+				},
 				{ -- 团队框架高亮 毒性反刍（✓）
 					category = "RFIcon",
 					type = "Aura",

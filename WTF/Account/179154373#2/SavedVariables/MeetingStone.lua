@@ -90,119 +90,115 @@ MEETINGSTONE_UI_DB = {
 {
 ["LeaderScore"] = {
 ["min"] = 0,
-["enable"] = false,
 ["max"] = 0,
+["enable"] = false,
 },
 ["BossKilled"] = {
 ["min"] = 0,
-["enable"] = false,
 ["max"] = 0,
-},
-["Members"] = {
-["min"] = 0,
 ["enable"] = false,
-["max"] = 0,
-},
-["Age"] = {
-["min"] = 0,
-["enable"] = false,
-["max"] = 0,
 },
 ["ItemLevel"] = {
 ["min"] = 0,
-["enable"] = false,
 ["max"] = 0,
+["enable"] = false,
+},
+["Age"] = {
+["min"] = 0,
+["max"] = 0,
+["enable"] = false,
+},
+["Members"] = {
+["min"] = 0,
+["max"] = 0,
+["enable"] = false,
 },
 },
 {
 ["LeaderScore"] = {
 ["min"] = 0,
-["enable"] = false,
 ["max"] = 0,
+["enable"] = false,
 },
 ["BossKilled"] = {
 ["min"] = 0,
-["enable"] = false,
 ["max"] = 0,
-},
-["Members"] = {
-["min"] = 0,
 ["enable"] = false,
-["max"] = 0,
-},
-["Age"] = {
-["min"] = 0,
-["enable"] = false,
-["max"] = 0,
 },
 ["ItemLevel"] = {
 ["min"] = 0,
-["enable"] = false,
 ["max"] = 0,
+["enable"] = false,
+},
+["Age"] = {
+["min"] = 0,
+["max"] = 0,
+["enable"] = false,
+},
+["Members"] = {
+["min"] = 0,
+["max"] = 0,
+["enable"] = false,
 },
 },
 {
 ["LeaderScore"] = {
 ["min"] = 100,
-["max"] = 0,
 ["enable"] = true,
+["max"] = 0,
 },
 ["BossKilled"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
-},
-["ItemLevel"] = {
-["min"] = 600,
 ["max"] = 0,
-["enable"] = true,
 },
 ["Age"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
 },
 ["Members"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
+},
+["ItemLevel"] = {
+["min"] = 600,
+["enable"] = true,
+["max"] = 0,
 },
 },
 [6] = {
 ["LeaderScore"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
 },
 ["BossKilled"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
-},
-["ItemLevel"] = {
-["min"] = 0,
 ["max"] = 0,
-["enable"] = false,
 },
 ["Members"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
 },
 ["Age"] = {
 ["min"] = 0,
-["max"] = 0,
 ["enable"] = false,
+["max"] = 0,
+},
+["ItemLevel"] = {
+["min"] = 0,
+["enable"] = false,
+["max"] = 0,
 },
 },
 },
-["dataBrokerStorage"] = {
-["y"] = 0,
-["x"] = -298.6666259765625,
-["scale"] = 1,
-},
-["version"] = "11.2.0",
+["showSmRoleIco"] = true,
 ["showspecico"] = true,
+["version"] = "11.2.0",
 ["ActivityProfiles"] = {
 ["尼鲁巴尔王宫（普通）"] = {
 ["ItemLevel"] = 610,
@@ -244,36 +240,20 @@ MEETINGSTONE_UI_DB = {
 ["ItemLevel"] = 580,
 ["HonorLevel"] = 0,
 },
-["破晨号（史诗钥石）"] = {
-["ItemLevel"] = 695,
+["塔扎维什：琳彩天街（史诗钥石）"] = {
+["ItemLevel"] = 690,
 ["HonorLevel"] = 0,
 },
 ["赎罪大厅（史诗钥石）"] = {
 ["ItemLevel"] = 695,
 ["HonorLevel"] = 0,
 },
-["麦卡贡车间（史诗钥石）"] = {
-["ItemLevel"] = 629,
-["HonorLevel"] = 0,
-},
 ["红玉新生法池（史诗钥石）"] = {
 ["ItemLevel"] = 490,
 ["HonorLevel"] = 0,
 },
-["暴富矿区（史诗钥石）"] = {
+["麦卡贡车间（史诗钥石）"] = {
 ["ItemLevel"] = 629,
-["HonorLevel"] = 0,
-},
-["艾拉-卡拉，回响之城（史诗）"] = {
-["ItemLevel"] = 580,
-["HonorLevel"] = 0,
-},
-["自定义PvE"] = {
-["ItemLevel"] = 0,
-["HonorLevel"] = 0,
-},
-["艾拉-卡拉，回响之城（史诗钥石）"] = {
-["ItemLevel"] = 625,
 ["HonorLevel"] = 0,
 },
 ["燧酿酒庄（史诗钥石）"] = {
@@ -284,16 +264,32 @@ MEETINGSTONE_UI_DB = {
 ["ItemLevel"] = 700,
 ["HonorLevel"] = 0,
 },
+["自定义PvE"] = {
+["ItemLevel"] = 0,
+["HonorLevel"] = 0,
+},
+["艾拉-卡拉，回响之城（史诗钥石）"] = {
+["ItemLevel"] = 690,
+["HonorLevel"] = 0,
+},
 ["尼鲁巴尔王宫（英雄）"] = {
 ["ItemLevel"] = 600,
+["HonorLevel"] = 0,
+},
+["艾拉-卡拉，回响之城（史诗）"] = {
+["ItemLevel"] = 580,
+["HonorLevel"] = 0,
+},
+["暴富矿区（史诗钥石）"] = {
+["ItemLevel"] = 629,
 ["HonorLevel"] = 0,
 },
 ["艾拉-卡拉，回响之城（普通）"] = {
 ["ItemLevel"] = 0,
 ["HonorLevel"] = 0,
 },
-["塔扎维什：琳彩天街（史诗钥石）"] = {
-["ItemLevel"] = 690,
+["破晨号（史诗钥石）"] = {
+["ItemLevel"] = 695,
 ["HonorLevel"] = 0,
 },
 },
@@ -302,19 +298,19 @@ MEETINGSTONE_UI_DB = {
 ["text"] = "%d+元",
 },
 {
-["pain"] = true,
 ["text"] = "5173",
+["pain"] = true,
 },
 {
-["pain"] = true,
 ["text"] = "lfg:",
+["pain"] = true,
 },
 {
 ["text"] = "tao.*bao",
 },
 {
-["pain"] = true,
 ["text"] = "平台",
+["pain"] = true,
 },
 {
 ["text"] = "支.*付.*宝",
@@ -323,12 +319,16 @@ MEETINGSTONE_UI_DB = {
 ["text"] = "淘.*宝",
 },
 {
-["pain"] = true,
 ["text"] = "门票",
+["pain"] = true,
 },
 ["default"] = true,
 },
-["showSmRoleIco"] = true,
+["dataBrokerStorage"] = {
+["y"] = 0,
+["x"] = -298.6666259765625,
+["scale"] = 1,
+},
 },
 ["Dungeon_LIST"] = {
 323,
@@ -342,33 +342,33 @@ MEETINGSTONE_UI_DB = {
 },
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "Default",
-["牛牛萨之父 - 霜之哀伤"] = "Default",
+["我们完蛋啦 - 伊森利恩"] = "Default",
 ["某饺子 - 伊森利恩"] = "Default",
 ["凤凰基友之四 - 凤凰之神"] = "Default",
 ["凤凰基友之三 - 凤凰之神"] = "Default",
-["某餃子 - 伊森利恩"] = "Default",
+["凤凰基友之二 - 凤凰之神"] = "Default",
 ["Afdfaf - 苏拉玛"] = "Default",
 ["三减宁静 - 伊森利恩"] = "Default",
 ["三减竖式 - 伊森利恩"] = "Default",
 ["开门的搞 - 伊森利恩"] = "Default",
-["凤凰基友之二 - 凤凰之神"] = "Default",
-["我们完蛋啦 - 伊森利恩"] = "Default",
+["某餃子 - 伊森利恩"] = "Default",
+["牛牛萨之父 - 霜之哀伤"] = "Default",
 },
-["SHAMAN"] = false,
+["DRUID"] = false,
 ["PALADIN"] = false,
 ["PRIEST"] = false,
 ["IGNORE_TIPS_LOG"] = true,
 ["FILTER_TANK"] = true,
 ["WARLOCK"] = false,
 ["DEMONHUNTER"] = false,
-["DRUID"] = false,
+["SHAMAN"] = false,
 ["FILTER_JOB"] = false,
 ["EVOKER"] = false,
 ["FILTER_DAMAGE"] = false,
 }
 MEETINGSTONE_UI_E_POINTS = {
-["y"] = 0.5165771842002869,
-["x"] = 225.2222442626953,
+["y"] = 5.088040828704834,
+["x"] = 41.34931945800781,
 ["a2"] = "CENTER",
 ["a1"] = "CENTER",
 ["QuickJoin"] = true,

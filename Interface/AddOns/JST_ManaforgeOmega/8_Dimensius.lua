@@ -818,31 +818,84 @@ G.Encounters[2691] = {
 					sound = "[spread]cast",
 					text = L["分散"],
 				},
-				{ -- 首领模块 暗物质 计时圆圈（✓）
+				{ -- 首领模块 暗物质 计时圆圈（待测试）
 					category = "BossMod",
 					spellID = 1230979,
 					enable_tag = "none",
 					name = T.GetIconLink(1230979)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
-					events = {	
+					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
 					},
 					init = function(frame)
-						frame.spellIDs = {
-							[1230979] = { -- 暗物质
-								event = "SPELL_CAST_START",
-								dur = 4,
-								color = {1, .5, .1},
-								reverse = true,
-							},
-						}
-						T.InitCircleTimers(frame)
+						frame.count = 0
+						frame.figure = T.CreateRingCD(frame, {1, .5, .1}, true)
+						
+						function frame:Start()
+							local difficultyID = T.GetCurrentDifficultyID
+							local key = string.format("dur%d_%d_sl", difficultyID, frame.count)
+							local dur = C.DB["BossMod"][self.config_id][key] or 3
+							self.figure:begin(GetTime() + dur, dur)
+						end
+						
+						function frame:UpdateDuration(dur)
+							local difficultyID = T.GetCurrentDifficultyID
+							local key = string.format("dur%d_%d_sl", difficultyID, frame.count)
+							C.DB["BossMod"][self.config_id][key] = dur
+						end
+						
+						function frame:GetNumDeadPlayers()
+							local number = 0
+							for unit in T.IterateGroupMembers() do
+								if UnitIsDeadOrGhost(unit) then
+									number = number + 1
+								end
+							end
+							return number
+						end
+						
+						function frame:PreviewShow()
+							self.figure:begin(GetTime() + 3, 3)
+						end
+						
+						function frame:PreviewHide()
+							self.figure:stop()
+						end
+						
+						function frame:ToggleText(value)
+							self.figure.dur_text:SetShown(value)
+						end
+						
+						T.GetFigureCustomData(frame)
 					end,
 					update = function(frame, event, ...)
-						T.UpdateCircleTimers(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_START" and spellID == 1230979 then -- 暗物质
+								frame.count = frame.count + 1
+								frame.castStart = GetTime()
+								
+								frame:Start()
+								
+							elseif sub_event == "SPELL_DAMAGE" and destGUID == G.PlayerGUID and spellID == 1230999 then -- 暗物质
+								
+								local timeSinceCastStart = GetTime() - frame.castStart
+								
+								if timeSinceCastStart < 2 then return end
+								
+								frame.figure:stop()
+								T.PlaySound("sound_water")
+								
+								if frame:GetNumDeadPlayers() >= 4 then return true end
+								
+								frame:UpdateDuration(timeSinceCastStart)
+							end
+						elseif event == "ENCOUNTER_START" then
+							frame.count = 0
+						end
 					end,
 					reset = function(frame, event)
-						T.ResetCircleTimers(frame)
+						frame.figure:stop()
 					end,
 				},
 				{ -- 图标 黑暗能量（✓）
@@ -1002,7 +1055,7 @@ G.Encounters[2691] = {
 							end
 						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
-							if (sub_event == "SPELL_DAMAGE" or subEvent == "SPELL_MISSED") and spellID == 1243702 then -- 反物质
+							if (sub_event == "SPELL_DAMAGE" or sub_event == "SPELL_MISSED") and spellID == 1243702 then -- 反物质
 								local unit = T.GUIDToUnit(destGUID)
 								local inRange = UnitInRange(unit)
 								
@@ -1059,7 +1112,7 @@ G.Encounters[2691] = {
 								if self.next_count > 4 then return end
 								
 								if self.difficultyID == 15 then
-									local cd = gravityCount % 2 == 1 and 51.7 or 42.3
+									local cd = self.next_count % 2 == 1 and 51.7 or 42.3
 									T.Start_Text_DelayTimer(self, cd, T.GetIconLink(1243577), true)
 								elseif self.difficultyID == 16 then
 									cd = 42.1
@@ -1154,14 +1207,20 @@ G.Encounters[2691] = {
 		{ -- 翔空雷什
 			spells = {
 				{1235114},--【翔空雷什】
-				{1235467, "5"},--【晦暗之门】
-				{1241188, "4"},--【无尽黑暗】
-				{1237080, "4"},--【破碎世界】
-				{1235490, "4"},--【天体物理射流】
-				{1232987, "4"},--【黑洞】
+				--{1235467, "5"},--【晦暗之门】
+				--{1241188, "4"},--【无尽黑暗】
+				--{1237080, "4"},--【破碎世界】
+				--{1235490, "4"},--【天体物理射流】
+				--{1232987, "4"},--【黑洞】
 			},
 			options = {
-				
+				{ -- 图标 翔空雷什（✓）
+					category = "AlertIcon",
+					type = "aura",
+					aura_type = "HARMFUL",
+					unit = "player",
+					spellID = 1235114,
+				},
 			},
 		},
 		{ -- 星辰之核
@@ -1276,6 +1335,44 @@ G.Encounters[2691] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 首领模块 伽马爆发 计时圆圈（待测试）
+					category = "BossMod",
+					spellID = 1237319,
+					enable_tag = "none",
+					name = T.GetIconLink(1237319)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+					},
+					init = function(frame)
+						frame.figure = T.CreateRingCD(frame, {1, 0, 0}, true)
+						
+						function frame:PreviewShow()
+							self.figure:begin(GetTime() + 4, 4)
+						end
+						
+						function frame:PreviewHide()
+							self.figure:stop()
+						end
+						
+						function frame:ToggleText(value)
+							self.figure.dur_text:SetShown(value)
+						end
+						
+						T.GetFigureCustomData(frame)
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, cast_GUID, cast_spellID = ...
+							if string.find(unit, "boss") and cast_GUID and cast_spellID == 1237319 then -- 伽马爆发
+								frame.figure:begin(GetTime() + 4, 4)
+							end
+						end
+					end,
+					reset = function(frame, event)
+						frame.figure:stop()
+					end,
+				},
 			},
 		},
 		{ -- 倾压引力/引力倒转
@@ -1331,6 +1428,60 @@ G.Encounters[2691] = {
 								T.Start_Text_DelayTimer(self, cd, L["大小圈"], true)
 							end
 						end
+					end,
+				},
+				{ -- 首领模块 倾压引力 计时圆圈（✓）
+					category = "BossMod",
+					ficon = "12",
+					spellID = 1234243,
+					enable_tag = "none",
+					name = T.GetIconLink(1234243)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[1234243] = { -- 倾压引力
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {1, .29, .98},
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
+					end,
+				},
+				{ -- 首领模块 引力倒转 计时圆圈（✓）
+					category = "BossMod",
+					ficon = "12",
+					spellID = 1234244,
+					enable_tag = "none",
+					name = T.GetIconLink(1234244)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[1234244] = { -- 引力倒转
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {0, 1, 0},
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},
 			},
@@ -1744,32 +1895,11 @@ G.Encounters[2691] = {
 					hl = "org",
 					sound = "[defense]",
 				},
-				{ -- 首领模块 虚无缠缚 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 虚无缠缚（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1246542,
-					enable_tag = "none",
-					name = T.GetIconLink(1246542)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1246542] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 			},
 		},
@@ -2169,32 +2299,11 @@ G.Encounters[2691] = {
 					hl = "red",
 					sound = "[defense]",
 				},
-				{ -- 首领模块 虚空之握 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 虚空之握（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1250055,
-					enable_tag = "none",
-					name = T.GetIconLink(1250055)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1250055] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 虚空之握（✓）
 					category = "RFIcon",

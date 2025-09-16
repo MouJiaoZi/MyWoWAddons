@@ -2562,16 +2562,18 @@ T.InitRaidTarget = function(frame)
 				self.counter = self.start_mark
 			end
 			self.storedGUIDs[GUID] = self.counter
+			return self.counter
 		end
 	end
 	
 	function frame:Mark(unit, GUID)
 		if (not self.trigger or self:trigger(unit, GUID)) and (not IsEncounterInProgress() or self.ignore_combat or UnitAffectingCombat(unit)) then
-			self:Get_counter(GUID)
-			T.SetRaidTarget(unit, self.counter)
+			local mark_index = self:Get_counter(GUID)
+			T.SetRaidTarget(unit, mark_index)
 			self.marked[GUID] = true
+			
 			local npcID = select(6, strsplit("-", GUID))
-			local mark = T.FormatRaidMark(self.counter)
+			local mark = T.FormatRaidMark(mark_index)
 			T.msg(string.format(L["已标记%s"], date("%H:%M:%S"), T.GetNameFromNpcID(npcID), mark))
 		end
 	end
@@ -4641,7 +4643,7 @@ local AuraAction = function(frame, my_index)
 		else
 			count = select(3, AuraUtil.FindAuraBySpellID(frame.aura_id, "player", G.TestMod and "HELPFUL" or "HARMFUL"))
 			exp_time = select(6, AuraUtil.FindAuraBySpellID(frame.aura_id, "player", G.TestMod and "HELPFUL" or "HARMFUL"))
-			remain = exp_time - GetTime()
+			remain = exp_time and exp_time - GetTime() or 0
 		end
 		
 		if info.msg_applied then

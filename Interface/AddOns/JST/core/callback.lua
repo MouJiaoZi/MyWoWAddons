@@ -94,6 +94,7 @@ local CallbackEvents = {
 	["JST_CooldownAdded"] = true,
 	["JST_GROUP_CD_UPDATE"] = true,
 	["JST_GROUP_CC_NEXT"] = true,
+	["UNIT_SPELLCAST_TARGET"] = true,
 }
 
 T.RegisterEventAndCallbacks = function(frame, events, update)
@@ -683,3 +684,59 @@ auraUtilityFrame:SetScript("OnEvent", function(self, event, ...)
 	end
 end)
 
+----------------------------------------------------------
+-----------------[[    施法目标事件    ]]-----------------
+----------------------------------------------------------
+
+local castUtilityFrame = CreateFrame("Frame")
+castUtilityFrame:RegisterEvent("UNIT_SPELLCAST_START")
+castUtilityFrame:RegisterEvent("UNIT_TARGET")
+
+local cast_cache = {}
+local CastTargetDelay = {}
+local TestSpells = {
+	--[1221190] = true,
+}
+
+T.RegisterCastTargetDelay = function(spellID, delay)
+	CastTargetDelay[spellID] = delay
+end
+
+castUtilityFrame:SetScript("OnEvent", function(self, event, ...)
+	if event == "UNIT_SPELLCAST_START" then
+		local unit, cast_GUID, cast_spellID = ...
+		if unit and UnitIsEnemy("player", unit) and cast_GUID and cast_spellID then
+			local wait = .2 or CastTargetDelay[cast_spellID]
+			C_Timer.After(wait, function()
+				local target_unit = T.GetTarget(unit)
+				local GUID = target_unit and UnitGUID(target_unit)
+				if GUID and not cast_cache[cast_GUID] then
+					T.FireEvent("UNIT_SPELLCAST_TARGET", GUID, cast_GUID, cast_spellID)
+					cast_cache[cast_GUID] = GUID
+					if TestSpells[cast_spellID] then
+						local spell = C_Spell.GetSpellName(cast_spellID)
+						T.msg(string.format("%s %s→%s |cffffff00延迟判定 %.3f|r %s", spell, UnitName(unit), T.ColorNickNameByGUID(GUID), wait, cast_GUID))
+					end
+				end
+			end)
+		end
+	elseif event == "UNIT_TARGET" then
+		local unit = ...
+		if unit and UnitIsEnemy("player", unit) and UnitCastingInfo(unit) then
+			local startTimeMS, endTimeMS, _, cast_GUID, _, cast_spellID = select(4, UnitCastingInfo(unit))
+			if cast_GUID and not cast_cache[cast_GUID] and cast_spellID then
+				local target_unit = T.GetTarget(unit)
+				local GUID = target_unit and UnitGUID(target_unit)
+				if GUID then
+					T.FireEvent("UNIT_SPELLCAST_TARGET", GUID)
+					cast_cache[cast_GUID] = GUID
+					if TestSpells[cast_spellID] then
+						local spell = C_Spell.GetSpellName(cast_spellID)
+						local wait = GetTime() - startTimeMS/1000
+						T.msg(string.format("%s %s→%s |cff00ff00目标判定 %.3f|r %s", spell, UnitName(unit), T.ColorNickNameByGUID(GUID), wait, cast_GUID))
+					end
+				end
+			end
+		end
+	end
+end)

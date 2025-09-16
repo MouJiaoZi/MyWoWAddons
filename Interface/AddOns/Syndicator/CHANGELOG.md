@@ -1,6 +1,6 @@
 # Syndicator
 
-## [231](https://github.com/Baganator/Syndicator/tree/231) (2025-09-07)
-[Full Changelog](https://github.com/Baganator/Syndicator/compare/230...231) 
+## [234](https://github.com/TheMouseNest/Syndicator/tree/234) (2025-09-14)
+[Full Changelog](https://github.com/TheMouseNest/Syndicator/compare/233...234) 
 
-- Search Builder: Remove usage of context menus, replaced with DropdownButtons  
+- Search: Prevent subclass keywords with the same name as a root class conflicting  

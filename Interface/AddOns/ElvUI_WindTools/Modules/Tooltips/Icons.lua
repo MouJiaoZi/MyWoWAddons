@@ -106,6 +106,7 @@ local function setTooltipIcon(tt, data, type)
 	local title = data.lines and data.lines[1] and data.lines[1].leftText
 	local iconDB = E.private.WT.tooltips.titleIcon
 	local iconString = icon and F.GetIconString(icon, iconDB.height, iconDB.width, true)
+
 	if not title or not iconString then
 		return
 	end
@@ -113,7 +114,7 @@ local function setTooltipIcon(tt, data, type)
 	for i = 1, 3 do
 		local row = _G[tt:GetName() .. "TextLeft" .. i]
 		local existingText = row and row:GetText()
-		if existingText and strfind(existingText, title, 1, true) then
+		if existingText and strfind(existingText, title) then
 			if iconString and existingText and not strfind(existingText, "^|T") then
 				row:SetText(iconString .. " " .. existingText)
 			end

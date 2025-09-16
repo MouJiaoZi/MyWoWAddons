@@ -281,9 +281,9 @@ options.cvars = {
 					order = 1,
 					type = "description",
 					name = format(
-						"%s\n%s %s",
+						"%s\n|cffff3860%s|r %s",
 						L["A simple editor for CVars."],
-						C.StringByTemplate(format(L["%s never lock the CVars."], W.Title), "rose-500"),
+						format(L["%s never lock the CVars."], W.Title),
 						L["If you found the CVars changed automatically, please check other addons."]
 					),
 					fontSize = "medium",
@@ -389,14 +389,14 @@ options.cvars = {
 					order = 1,
 					type = "description",
 					name = format(
-						"%s\n- %s %s\n- %s %s\n- %s %s",
+						"%s\n|cff209cee-|r %s |cff00d1b2%s|r\n|cff209cee-|r %s |cff00d1b2%s|r\n|cff209cee-|r %s |cffff3860%s|r",
 						L["To enable the name of friendly player in instances, you can set as following:"],
 						L["Friendly Player Name"],
-						C.StringByTemplate(L["On"], "emerald-400"),
+						L["On"],
 						L["Nameplate Only Names"],
-						C.StringByTemplate(L["On"], "emerald-400"),
+						L["On"],
 						L["Debuff on Friendly Nameplates"],
-						C.StringByTemplate(L["Off"], "rose-500")
+						L["Off"]
 					),
 				},
 				UnitNameFriendlyPlayerName = {
@@ -474,8 +474,10 @@ options.moveFrames = {
 					type = "description",
 					name = function()
 						if MF.StopRunning then
-							local errorMsg = format(L["Because of %s, this module will not be loaded."], MF.StopRunning)
-							return C.StringByTemplate(errorMsg, "rose-500")
+							return format(
+								"|cffff3860" .. L["Because of %s, this module will not be loaded."] .. "|r",
+								MF.StopRunning
+							)
 						else
 							return L["This module provides the feature that repositions the frames with drag and drop."]
 						end
@@ -537,10 +539,14 @@ options.moveFrames = {
 				notice = {
 					order = 999,
 					type = "description",
-					name = C.StringByTemplate(L["Notice"], "rose-500") .. " " .. format(
-						L["%s may cause some frames to get messed, but you can use %s button to reset frames."],
-						L["Remember Positions"],
-						C.StringByTemplate(L["Clear History"], "sky-500")
+					name = format(
+						"\n|cffff3860%s|r %s",
+						L["Notice"],
+						format(
+							L["%s may cause some frames to get messed, but you can use %s button to reset frames."],
+							L["Remember Positions"],
+							F.CreateColorString(L["Clear History"], E.db.general.valuecolor)
+						)
 					),
 					fontSize = "medium",
 				},
@@ -618,8 +624,9 @@ options.mute = {
 					type = "toggle",
 					name = L["Crying"],
 					desc = L["Mute crying sounds of all races."]
-						.. "\n"
-						.. C.StringByTemplate(L["It will affect the cry emote sound."], "rose-500"),
+						.. "\n|cffff3860"
+						.. L["It will affect the cry emote sound."]
+						.. "|r",
 					width = 1.3,
 				},
 				["Dragon"] = {
@@ -665,7 +672,7 @@ do
 		},
 		["Elegy of the Eternals"] = {
 			id = 188270,
-			desc = C.StringByTemplate(L["It will also affect the crying sound of all female Blood Elves."], "rose-500"),
+			desc = "|cffff3860" .. L["It will also affect the crying sound of all female Blood Elves."] .. "|r",
 		},
 	}
 
@@ -1673,8 +1680,10 @@ options.lfgList = {
 					type = "description",
 					name = function()
 						if LL.StopRunning then
-							local errorMsg = format(L["Because of %s, this module will not be loaded."], LL.StopRunning)
-							return C.StringByTemplate(errorMsg, "rose-500")
+							return format(
+								"|cffff3860" .. L["Because of %s, this module will not be loaded."] .. "|r",
+								LL.StopRunning
+							)
 						else
 							return L["QoLs for LFG list."]
 						end

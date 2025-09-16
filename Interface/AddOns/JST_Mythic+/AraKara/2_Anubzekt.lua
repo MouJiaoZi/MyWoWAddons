@@ -95,6 +95,12 @@ G.Encounters[2584] = {
 					tip = L["强力DOT"],
 					sound = "[defense]",
 				},
+				{ -- 自保技能提示 感染（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 433740,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 感染（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -109,6 +115,12 @@ G.Encounters[2584] = {
 					spellID = 433781,
 					tip = L["快走开"],
 					sound = "[sound_dd]",
+				},
+				{ -- 自保技能提示 无休虫群（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 433781,
+					threshold = 75,
 				},
 				{ -- 团队框架高亮 无休虫群（✓）
 					category = "RFIcon",

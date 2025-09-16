@@ -32,6 +32,7 @@ function S:BlizzardMiscFrames()
 		return
 	end
 
+	self:CreateBackdropShadow(_G.GameMenuFrame)
 	self:CreateShadow(_G.AutoCompleteBox)
 
 	-- Skip Frame

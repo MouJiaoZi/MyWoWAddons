@@ -9,10 +9,8 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["虚空"] = "虚空"
 	L["复仇"] = "复仇"
 	L["浩劫"] = "浩劫"
-	L["撞球位置分配"] = "撞球位置分配"
-	L["免疫就绪"] = "免疫就绪"
-	L["即将就绪"] = "即将就绪"
-	L["免疫没好"] = "免疫没好"
+	L["转阶段位置分配"] = "转阶段位置分配"
+	L["免疫无需分担"] = "%s[%d]%s使用%s，无需分担。"
 	L["脆弱吃魂剩余数量"] = "%s吃魂剩余数量"
 	L["注意吃魂"] = "注意吃魂"
 	L["坍缩之星剩余数量"] = "%s剩余数量"
@@ -21,22 +19,18 @@ elseif G.Client == "ruRU" then
 	--L["虚空"] = "Void"
 	--L["复仇"] = "Vengeance"
 	--L["浩劫"] = "Havoc"
-	--L["撞球位置分配"] = "Soak location assignment"
-	--L["免疫就绪"] = "Immunity ready"
-	--L["即将就绪"] = "Immunity soon"
-	--L["免疫没好"] = "Immunity CD"	
+	--L["转阶段位置分配"] = "Intermission location assignment"
+	--L["免疫无需分担"] = "%s[%d]%s used %s, no need to soak."
 	--L["脆弱吃魂剩余数量"] = "%s spirit soak remain quantity"
 	--L["注意吃魂"] = "soak spirit"
 	--L["坍缩之星剩余数量"] = "%s’s remain quantity"
-	L["交接"] = "Handover"
+	--L["交接"] = "Handover"
 else
 	L["虚空"] = "Void"
 	L["复仇"] = "Vengeance"
 	L["浩劫"] = "Havoc"
-	L["撞球位置分配"] = "Soak location assignment"
-	L["免疫就绪"] = "Immunity ready"
-	L["即将就绪"] = "Immunity soon"
-	L["免疫没好"] = "Immunity CD"
+	L["转阶段位置分配"] = "Intermission location assignment"
+	L["免疫无需分担"] = "%s[%d]%s used %s, no need to soak."
 	L["脆弱吃魂剩余数量"] = "%s spirit soak remain quantity"
 	L["注意吃魂"] = "soak spirit"
 	L["坍缩之星剩余数量"] = "%s’s remain quantity"
@@ -344,9 +338,9 @@ G.Encounters[2688] = {
 											local isHealer = UnitGroupRolesAssigned(unit) == "HEALER"
 											
 											if isHealer and not healerGUID then
-												healerGUID = GUID											
+												healerGUID = GUID
 												tInsertUnique(assignedHealerGUIDs, healerGUID)
-											end											
+											end
 										end
 										
 										-- Assign each GUID to be dispelled by the found healer
@@ -811,32 +805,11 @@ G.Encounters[2688] = {
 					tip = L["DOT"],
 					hl = "pur",
 				},
-				{ -- 首领模块 湮灭逼近 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 湮灭逼近（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1235045,
-					enable_tag = "none",
-					name = T.GetIconLink(1235045)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1235045] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 			},
 		},
@@ -1016,204 +989,11 @@ G.Encounters[2688] = {
 						end
 					end,
 				},
-				{ -- 首领模块 黑暗残渣 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 黑暗残渣（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1233105,
-					enable_tag = "none",
-					name = T.GetIconLink(1233105)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1233105] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
-				},
-				{ -- 首领模块 转阶段位置分配（✓）
-					category = "BossMod",
-					spellID = 1233093,
-					ficon = "12",
-					name = T.GetIconLink(1233093)..L["撞球位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,7,5,4,3,6")),
-					enable_tag = "everyone",
-					points = {hide = true},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
-					},
-					custom = {
-						{
-							key = "dur_sl",
-							text = L["持续时间"],
-							default = 30,
-							min = 5,
-							max = 30,
-						},
-					},
-					init = function(frame)
-						frame.intermissionCount = 0
-						frame.affectedCount = 0
-						frame.affected = {}
-						frame.isWarlockOrShadowPriest = {}
-						frame.isHealer = {}
-						frame.indexToMark = {1, 2, 7, 5, 4, 3, 6}
-						
-						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
-						
-						function frame:assign()
-							self.intermissionCount = self.intermissionCount + 1
-        
-							-- Sort all subgroups
-							for _, group in pairs(self.affected) do
-								table.sort(group)
-							end
-							
-							-- Sort groups
-							-- Warlocks and Shadow Priests should be close to star
-							table.sort(self.affected, function(groupA, groupB)
-								if #groupA == 0 then return false end
-								if #groupB == 0 then return true end
-								
-								-- Count warlocks/shadow priests in group A
-								local countA = 0
-								
-								for _, GUID in pairs(groupA) do
-									local isWarlockOrShadowPriest = self.isWarlockOrShadowPriest[GUID]
-									
-									if isWarlockOrShadowPriest then
-										countA = countA + 1
-									end
-								end
-								
-								-- Count warlocks/shadow priests in group A
-								local countB = 0
-								
-								for _, GUID in pairs(groupB) do
-									local isWarlockOrShadowPriest = self.isWarlockOrShadowPriest[GUID]
-									
-									if isWarlockOrShadowPriest then
-										countB = countB + 1
-									end
-								end
-								
-								if countA ~= countB then
-									return countA > countB
-								end
-								
-								-- Count healers in group A
-								local healerCountA = 0
-								
-								for _, GUID in pairs(groupA) do
-									local isHealer = self.isHealer[GUID]
-									
-									if isHealer then
-										healerCountA = healerCountA + 1
-									end
-								end
-								
-								-- Count healers in group b
-								local healerCountB = 0
-								
-								for _, GUID in pairs(groupB) do
-									local isHealer = self.isHealer[GUID]
-									
-									if isHealer then
-										healerCountB = healerCountB + 1
-									end
-								end
-								
-								if healerCountA ~= healerCountB then
-									return healerCountA > healerCountB
-								end
-								
-								return groupA[1] < groupB[1]
-							end)
-												
-							for groupIndex, group in pairs(self.affected) do
-								local markIndex = self.indexToMark[groupIndex]
-								
-								local str = ""
-									
-								for _, GUID in ipairs(group) do
-									local info = T.GetGroupInfobyGUID(GUID)
-									str = str.." "..info.format_name
-								end
-								
-								T.msg(string.format("%s%s:%s", L["撞球"], T.FormatRaidMark(markIndex), str))
-								
-								if tContains(group, G.PlayerGUID) then
-									local dur = C.DB["BossMod"][self.config_id]["dur_sl"]
-									T.Start_Text_Timer(self.text_frame, dur, L["撞球"].." "..T.FormatRaidMark(markIndex))
-									T.PlaySound("mark\\mark"..markIndex)
-								end
-							end
-						end
-					end,
-					update = function(frame, event, ...)
-						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
-							
-							if sub_event == "SPELL_AURA_APPLIED" and spellID == 1242883 then -- 灵魂束缚
-								if frame.intermissionCount >= 2 then return end
-            
-								frame.affectedCount = frame.affectedCount + 1
-								
-								local groupIndex = math.floor((frame.affectedCount - 1) / 3) + 1
-								
-								if not frame.affected[groupIndex] then
-									frame.affected[groupIndex] = {}
-								end
-								
-								table.insert(frame.affected[groupIndex], destGUID)
-								
-								if frame.affectedCount == 1 then
-									C_Timer.After(1, function()
-										frame:assign()
-									end)
-								end
-								
-							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == 1245978 then -- 灵魂束缚(BOSS) 转阶段之后才重置
-								frame.affected = table.wipe(frame.affected)
-								frame.affectedCount = 0
-								
-							end
-						elseif event == "ENCOUNTER_START" then
-							frame.intermissionCount = 0
-							frame.isWarlockOrShadowPriest = table.wipe(frame.isWarlockOrShadowPriest)
-							frame.isHealer = table.wipe(frame.isHealer)
-							frame.affected = table.wipe(frame.affected)
-							frame.affectedCount = 0
-							
-							 for unit in T.IterateGroupMembers() do
-								local GUID = UnitGUID(unit)
-								local role = UnitGroupRolesAssigned(unit)
-								local class = UnitClassBase(unit)
-								
-								if class == "WARLOCK" or (class == "PRIEST" and role == "DAMAGER") then
-									frame.isWarlockOrShadowPriest[GUID] = true
-								end
-								
-								if role == "HEALER" then
-									frame.isHealer[GUID] = true
-								end
-							end
-						end
-					end,
-					reset = function(frame, event)
-						T.Stop_Text_Timer(frame.text_frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 图标 黑洞视界（✓）
 					category = "AlertIcon",
@@ -1300,12 +1080,6 @@ G.Encounters[2688] = {
 					},
 					custom = {
 						{
-							key = "sound_bool",
-							text = L["音效"],
-							default = true,
-							sound = "charge",
-						},
-						{
 							key = "raid_index_bool",
 							text = L["团队序号"],
 							default = true,
@@ -1313,12 +1087,12 @@ G.Encounters[2688] = {
 					},
 					init = function(frame)
 						frame.bars = {}
-						frame.max_count = 2
+						frame.count = 0
+						frame.max_count = 3
 						frame.trackedspellIDs = {}
 						
 						frame.immuse_class = {
-							--DRUID = 22812, -- 树皮术 test
-							--SHAMAN = 108271, -- 星界转移 test
+							--DRUID = 22812, -- 树皮术
 							MAGE = 45438, -- Ice Block
 							DEMONHUNTER = 196555, -- Netherwalk
 							HUNTER = 186265, -- Turtle
@@ -1360,7 +1134,7 @@ G.Encounters[2688] = {
 										bar.spell_icon:stop(true)
 										bar.spell_icon:stop_cooldown(true)
 										bar.spell_icon:Show()
-									elseif remain and remain <= 5 then
+									elseif remain and remain <= 4 then
 										bar.spell_icon:stop(true)
 										bar.spell_icon:start_cooldown(duration, exp_time, true)
 										bar.spell_icon:Show()
@@ -1380,7 +1154,7 @@ G.Encounters[2688] = {
 							return bar
 						end
 						
-						function frame:start(index, GUID)
+						function frame:start(set, GUID)
 							local bar = self.bars[GUID] or self:CreateBar(GUID)
 							
 							local info = T.GetGroupInfobyGUID(GUID)
@@ -1390,38 +1164,21 @@ G.Encounters[2688] = {
 							T.StartTimerBar(bar, 6, true, true)
 							
 							if self.difficultyID == 16 then
-								bar.ind_text:SetText(string.format("|cffFFFF00[%d]|r", index))
-								
-								if C.DB["BossMod"][self.config_id]["sound_bool"] then
-									T.PlaySound("1302\\charge"..index)
-								end
-								
+								bar.ind_text:SetText(string.format("|cffFFFF00[%d]|r", set))
+															
 								if C.DB["BossMod"][self.config_id]["raid_index_bool"] then
-									T.CreateRFIndex(GUID, string.format("|cffFF0000%d|r", index))
-									C_Timer.After(4, function()
+									T.CreateRFIndex(GUID, string.format("|cffFF0000%d|r", set))
+									C_Timer.After(6, function()
 										T.HideRFIndexbyGUID(GUID)
 									end)
 								end
 							else
 								bar.ind_text:SetText("")
-								if C.DB["BossMod"][self.config_id]["sound_bool"] then
-									T.PlaySound("charge")
-								end
-							end
-							
-							if C.DB["BossMod"][self.config_id]["sound_bool"] then
-								C_Timer.After(1, function()
-									local name = T.GetNameByGUID(GUID)
-									if name then
-										T.SpeakText(name)
-									end
-								end)
 							end
 						end
 					end,
 					update = function(frame, event, ...)
 						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-							local unit, cast_GUID, cast_spellID = ...
 							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
 							if sub_event == "SPELL_AURA_APPLIED" and spellID == 1227847 then -- 恶魔追击
 								frame.count = frame.count + 1
@@ -1432,7 +1189,7 @@ G.Encounters[2688] = {
 								
 								frame:start(frame.count, destGUID)
 								
-							elseif sub_event == "SPELL_AURA_APPLIED" and frame.trackedspellIDs[spellID] then		
+							elseif sub_event == "SPELL_AURA_APPLIED" and frame.trackedspellIDs[spellID] then
 								frame:UpdateImmuseBuff(destGUID)
 								
 							elseif sub_event == "SPELL_AURA_REMOVED" and frame.trackedspellIDs[spellID] then
@@ -1465,6 +1222,183 @@ G.Encounters[2688] = {
 						T.HideAllRFIndex()
 					end,
 				},
+				{ -- 首领模块 恶魔追击 分配（待测试）
+					category = "BossMod",
+					spellID = 1247415,
+					ficon = "12",
+					name = T.GetIconLink(1227847)..L["分配"],
+					enable_tag = "none",
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					custom = {
+						{
+							key = "mrt_custom_btn",
+						},
+						{
+							key = "mrt_analysis_btn",
+						},
+						{
+							key = "sound_bool",
+							text = L["音效"],
+							default = true,
+						},
+					},
+					init = function(frame)
+						frame.assignment = {}
+						frame.soakGUIDs = {}
+						frame.count = 0
+						frame.max_count = 3
+						frame.trackedspellIDs = {}
+						
+						frame.immuse_class = {
+							--DRUID = 22812, -- 树皮术
+							MAGE = 45438, -- Ice Block
+							DEMONHUNTER = 196555, -- Netherwalk
+							HUNTER = 186265, -- Turtle
+							PALADIN = 642, -- Divine Shield
+							PRIEST = 47585, -- Dispersion
+							ROGUE = 31224, -- Cloak of Shadows
+						}
+						
+						for _, spellID in pairs(frame.immuse_class) do
+							frame.trackedspellIDs[spellID] = true
+						end
+						
+						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
+						
+						function frame:copy_mrt()
+							local str = [[
+								#%dstart%s
+								player player player player player player
+								player player player player player player
+								player player player player player
+								end
+							]]
+							
+							str = gsub(str, "	", "")
+							return string.format(str, self.config_id, C_Spell.GetSpellName(1227847))
+						end
+						
+						function frame:ReadNote(display)
+							self.assignment = table.wipe(self.assignment)
+							
+							local set = 0
+							
+							for _, line in T.IterateNoteAssignment(self.config_id) do
+								local GUIDs = T.LineToGUIDArray(line)
+								
+								if next(GUIDs) then
+									set = set + 1
+									
+									if set <= 3 then
+										self.assignment[set] = {}
+										
+										local str = string.format("[%d]", set)
+										
+										for _, GUID in ipairs(GUIDs) do
+											str = str.." "..T.ColorNickNameByGUID(GUID)
+											tInsertUnique(self.assignment[set], GUID)									
+										end
+										
+										if display then
+											T.msg(str)
+										end
+									end
+								end
+							end
+						end
+													
+						function frame:PlayerCheck(GUID)
+							local unit = T.GUIDToUnit(GUID)
+							if unit then
+								local alive = not UnitIsDeadOrGhost(unit)
+								local debuffed1 = AuraUtil.FindAuraBySpellID(1222232, unit, "HARMFUL") -- 吞噬者之怒
+								local debuffed2 = AuraUtil.FindAuraBySpellID(1247415, unit, "HARMFUL") -- 弱化猎物
+								
+								if alive and not debuffed1 and not debuffed2 then        
+									return true
+								end
+							end
+						end
+						
+						function frame:UpdateSoak(set, GUID)
+							local soak_GUIDs = self.assignment[set]
+							
+							if soak_GUIDs then
+								self.soakGUIDs[GUID] = set
+								C_Timer.After(6, function()
+									self.soakGUIDs[GUID] = nil
+								end)
+								
+								local info = T.GetGroupInfobyGUID(GUID)
+								local spellID = self.immuse_class[info.class]
+								local ImmuseStr = ""
+								if spellID then
+									local ready, exp_time, duration, remain = T.GetGroupCooldown(GUID, spellID)
+									if ready or (remain and remain <= 4) then
+										ImmuseStr = T.GetSpellIcon(spellID)
+									end
+								end
+								
+								local str = string.format("%s %s [%d] %s%s : ", T.GetIconLink(1227847), L["分担伤害"], set, T.ColorNickNameByGUID(GUID), ImmuseStr)
+								for _, soak_GUID in pairs(soak_GUIDs) do
+									if self:PlayerCheck(soak_GUID) then
+										str = str .. T.ColorNickNameByGUID(soak_GUID)
+										if soak_GUID == G.PlayerGUID then
+											T.Start_Text_Timer(self.text_frame, 6, string.format("%s %s|cffff0000[%d]|r %s", L["分担"], T.GetSpellIcon(1227847), set, ImmuseStr), true)
+											if C.DB["BossMod"][self.config_id]["sound_bool"] then
+												T.PlaySound("sharedmg")
+											end
+										end
+									end
+								end
+								
+								T.msg(str)
+							end
+						end
+						
+						function frame:UpdateImmuseUse(GUID, spellID)
+							local set = self.soakGUIDs[GUID]
+							local soak_GUIDs = set and self.assignment[set]
+							if soak_GUIDs then
+								T.msg(string.format(L["免疫无需分担"], T.GetIconLink(1227847), set, T.ColorNickNameByGUID(GUID), T.GetIconLink(spellID)))	
+								if tContains(soak_GUIDs, G.PlayerGUID) then
+									T.Stop_Text_Timer(self.text_frame)
+									if C.DB["BossMod"][self.config_id]["sound_bool"] then
+										T.PlaySound("dontsharedmg")
+									end
+								end
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_AURA_APPLIED" and spellID == 1227847 then -- 恶魔追击
+								frame.count = frame.count + 1
+            
+								if frame.count == (frame.max_count + 1) then
+									frame.count = 1
+								end
+								
+								frame:UpdateSoak(frame.count, destGUID)
+								
+							elseif sub_event == "SPELL_AURA_APPLIED" and frame.trackedspellIDs[spellID] then
+								frame:UpdateImmuseUse(destGUID, spellID)
+							end
+
+						elseif event == "ENCOUNTER_START" then
+							frame.count = 0
+							frame:ReadNote()
+						end
+					end,
+					reset = function(frame, event)
+						frame.soakGUIDs = table.wipe(frame.soakGUIDs)
+						T.Stop_Text_Timer(frame.text_frame)
+					end,
+				},				
 				{ -- 图标 弱化猎物（史诗待测试）
 					category = "AlertIcon",
 					type = "aura",
@@ -1807,32 +1741,12 @@ G.Encounters[2688] = {
 					tip = L["DOT"],
 					hl = "org",
 				},
-				{ -- 首领模块 脆弱 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 脆弱（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1241946,
-					enable_tag = "none",
-					name = T.GetIconLink(1241946).."(2+)"..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1241946] = 2,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 70
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 70,
+					amount = 2,
 				},
 				{ -- 团队框架高亮 脆弱（✓）
 					category = "RFIcon",
@@ -1895,32 +1809,11 @@ G.Encounters[2688] = {
 					hl = "",
 					tip = L["吸收治疗"],
 				},
-				{ -- 首领模块 灵魂重碾 玩家自保技能提示（✓）
-					category = "BossMod",
+				{ -- 自保技能提示 灵魂重碾（✓）
+					category = "HPWatch",
+					type = "Aura",
 					spellID = 1242284,
-					enable_tag = "none",
-					name = T.GetIconLink(1242284)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1242284] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+					threshold = 65,
 				},
 				{ -- 图标 驱逐灵魂（待测试）
 					category = "AlertIcon",
@@ -2094,6 +1987,178 @@ G.Encounters[2688] = {
 					unit = "player",
 					spellID = 1242883,
 				},
+				{ -- 首领模块 转阶段位置分配（✓）
+					category = "BossMod",
+					spellID = 1242883,
+					ficon = "12",
+					name = T.GetIconLink(1242883)..L["转阶段位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,7,5,4,3,6")),
+					enable_tag = "everyone",
+					points = {hide = true},
+					events = {
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
+					},
+					custom = {
+						{
+							key = "dur_sl",
+							text = L["持续时间"],
+							default = 30,
+							min = 5,
+							max = 30,
+						},
+					},
+					init = function(frame)
+						frame.intermissionCount = 0
+						frame.affectedCount = 0
+						frame.affected = {}
+						frame.isWarlockOrShadowPriest = {}
+						frame.isHealer = {}
+						frame.indexToMark = {1, 2, 7, 5, 4, 3, 6}
+						
+						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
+						
+						function frame:assign()
+							self.intermissionCount = self.intermissionCount + 1
+        
+							-- Sort all subgroups
+							for _, group in pairs(self.affected) do
+								table.sort(group)
+							end
+							
+							-- Sort groups
+							-- Warlocks and Shadow Priests should be close to star
+							table.sort(self.affected, function(groupA, groupB)
+								if #groupA == 0 then return false end
+								if #groupB == 0 then return true end
+								
+								-- Count warlocks/shadow priests in group A
+								local countA = 0
+								
+								for _, GUID in pairs(groupA) do
+									local isWarlockOrShadowPriest = self.isWarlockOrShadowPriest[GUID]
+									
+									if isWarlockOrShadowPriest then
+										countA = countA + 1
+									end
+								end
+								
+								-- Count warlocks/shadow priests in group A
+								local countB = 0
+								
+								for _, GUID in pairs(groupB) do
+									local isWarlockOrShadowPriest = self.isWarlockOrShadowPriest[GUID]
+									
+									if isWarlockOrShadowPriest then
+										countB = countB + 1
+									end
+								end
+								
+								if countA ~= countB then
+									return countA > countB
+								end
+								
+								-- Count healers in group A
+								local healerCountA = 0
+								
+								for _, GUID in pairs(groupA) do
+									local isHealer = self.isHealer[GUID]
+									
+									if isHealer then
+										healerCountA = healerCountA + 1
+									end
+								end
+								
+								-- Count healers in group b
+								local healerCountB = 0
+								
+								for _, GUID in pairs(groupB) do
+									local isHealer = self.isHealer[GUID]
+									
+									if isHealer then
+										healerCountB = healerCountB + 1
+									end
+								end
+								
+								if healerCountA ~= healerCountB then
+									return healerCountA > healerCountB
+								end
+								
+								return groupA[1] < groupB[1]
+							end)
+												
+							for groupIndex, group in pairs(self.affected) do
+								local markIndex = self.indexToMark[groupIndex]
+								
+								local str = ""
+									
+								for _, GUID in ipairs(group) do
+									local info = T.GetGroupInfobyGUID(GUID)
+									str = str.." "..info.format_name
+								end
+								
+								T.msg(string.format("%s%s:%s", L["撞球"], T.FormatRaidMark(markIndex), str))
+								
+								if tContains(group, G.PlayerGUID) then
+									local dur = C.DB["BossMod"][self.config_id]["dur_sl"]
+									T.Start_Text_Timer(self.text_frame, dur, L["撞球"].." "..T.FormatRaidMark(markIndex))
+									T.PlaySound("mark\\mark"..markIndex)
+								end
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							
+							if sub_event == "SPELL_AURA_APPLIED" and spellID == 1242883 then -- 灵魂束缚
+								if frame.intermissionCount >= 2 then return end
+            
+								frame.affectedCount = frame.affectedCount + 1
+								
+								local groupIndex = math.floor((frame.affectedCount - 1) / 3) + 1
+								
+								if not frame.affected[groupIndex] then
+									frame.affected[groupIndex] = {}
+								end
+								
+								table.insert(frame.affected[groupIndex], destGUID)
+								
+								if frame.affectedCount == 1 then
+									C_Timer.After(1, function()
+										frame:assign()
+									end)
+								end
+								
+							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == 1245978 then -- 灵魂束缚(BOSS) 转阶段之后才重置
+								frame.affected = table.wipe(frame.affected)
+								frame.affectedCount = 0
+								
+							end
+						elseif event == "ENCOUNTER_START" then
+							frame.intermissionCount = 0
+							frame.isWarlockOrShadowPriest = table.wipe(frame.isWarlockOrShadowPriest)
+							frame.isHealer = table.wipe(frame.isHealer)
+							frame.affected = table.wipe(frame.affected)
+							frame.affectedCount = 0
+							
+							 for unit in T.IterateGroupMembers() do
+								local GUID = UnitGUID(unit)
+								local role = UnitGroupRolesAssigned(unit)
+								local class = UnitClassBase(unit)
+								
+								if class == "WARLOCK" or (class == "PRIEST" and role == "DAMAGER") then
+									frame.isWarlockOrShadowPriest[GUID] = true
+								end
+								
+								if role == "HEALER" then
+									frame.isHealer[GUID] = true
+								end
+							end
+						end
+					end,
+					reset = function(frame, event)
+						T.Stop_Text_Timer(frame.text_frame)
+					end,
+				},			
 			},
 		},
 		{ -- 动荡的灵魂

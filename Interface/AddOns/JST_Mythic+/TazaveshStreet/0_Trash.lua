@@ -512,13 +512,13 @@ G.Encounters["c391"] = {
 				{1244443},
 			},
 			options = {	
-				{ -- 姓名板打断图标 力量增幅器（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
+				{ -- 计时条 力量增幅器（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 1244443,
-					mobID = "179842",
-					interrupt = 1,
-					ficon = "6",
+					ficon = "14",
+					glow = true,
+					group = 1,
 				},
 			},
 		},

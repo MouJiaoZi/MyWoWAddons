@@ -328,8 +328,8 @@ function MB:SkinButton(button, force)
 		button.GRM_MinimapButtonBorder:Hide()
 		button:SetPushedTexture("")
 		button:SetHighlightTexture("")
-		F.InternalizeMethod(button, "SetPushedTexture", true)
-		F.InternalizeMethod(button, "SetHighlightTexture", true)
+		button.SetPushedTexture = E.noop
+		button.SetHighlightTexture = E.noop
 		if button:HasScript("OnEnter") then
 			self:SetButtonMouseOver(button, button, true)
 			button.OldSetScript = button.SetScript
@@ -356,7 +356,7 @@ function MB:SkinButton(button, force)
 		button.icon.Hide = E.noop
 		button.icon2:Kill()
 		button.timer:SetScript("OnUpdate", nil)
-		F.InternalizeMethod(button.timer, "SetScript", true)
+		button.timer.SetScript = E.noop
 	elseif name == "MRPMinimapButton" then
 		for _, region in pairs({ button:GetRegions() }) do
 			if region:GetTexture() > 0 then
@@ -720,11 +720,6 @@ function MB:PLAYER_ENTERING_WORLD()
 end
 
 function MB:Initialize()
-	if C_AddOns_IsAddOnLoaded("BasicMinimap") then
-		self.StopRunning = "BasicMinimap"
-		return
-	end
-
 	self.db = E.private.WT.maps.minimapButtons
 	if not self.db.enable then
 		return

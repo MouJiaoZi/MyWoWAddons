@@ -113,6 +113,12 @@ G.Encounters[2585] = {
 					tip = L["DOT"],
 					ficon = "9",
 				},
+				{ -- 自保技能提示 培植毒药（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 461487,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 培植毒药（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -133,6 +139,12 @@ G.Encounters[2585] = {
 					unit = "player",					
 					spellID = 461507,
 					tip = L["DOT"],
+				},
+				{ -- 自保技能提示 培植毒药（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 461507,
+					threshold = 75,
 				},
 				{ -- 团队框架高亮 培植毒药（✓）
 					category = "RFIcon",

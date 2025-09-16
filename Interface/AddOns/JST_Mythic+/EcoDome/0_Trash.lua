@@ -6,7 +6,16 @@ local function soundfile(filename, arg)
 	return string.format("[c542\\%s]%s", filename, arg or "")
 end
 --------------------------------Locals--------------------------------
+if G.Client == "zhCN" or G.Client == "zhTW" then
+	L["奥尔达尼沙地滤镜"] = "在%s中自动添加深色滤镜"
+	
+elseif G.Client == "ruRU" then
+	--L["奥尔达尼沙地滤镜"] = "Automatically add dark filters in %s"
+	
+else
+	L["奥尔达尼沙地滤镜"] = "Automatically add dark filters in %s"
 
+end
 ---------------------------------Notes--------------------------------
 
 ---------------------------------Data--------------------------------
@@ -83,47 +92,42 @@ G.Encounters["c542"] = {
 			options = {
 				{ -- 计时条 不稳定的喷发（✓）
 					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1226111,
+					type = "aura",
+					aura_type = "HARMFUL",
+					spellID = 1226110,
+					unit = "group",
 					show_tar = true,
 				},
-				{ -- 对我施法图标 不稳定的喷发（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 1226111,
-					hl = "yel_flash",
-					msg = {str_applied = "%name %spell", str_rep = "%spell %dur"},
-					sound = "[ray]cast,cd3",
+				{ -- 自保技能提示 不稳定的喷发（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1226110,
+					threshold = 65,
 				},
-				{ -- 团队框架图标 不稳定的喷发（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1226111,
-				},				
 				{ -- 首领模块 不稳定的喷发 对我施法计时圆圈（✓）
 					category = "BossMod",
-					spellID = 1226111,
+					spellID = 1226110,
 					enable_tag = "none",
-					name = T.GetIconLink(1226111)..L["计时圆圈"],
+					name = T.GetIconLink(1226110)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
-						["UNIT_SPELLCAST_START"] = true,
-						["UNIT_SPELLCAST_STOP"] = true,
-						["UNIT_TARGET"] = true,
+						["UNIT_AURA"] = true,
 					},
 					init = function(frame)
 						frame.spellIDs = {
-							[1226111] = {		
-								color = {1, 1, 0},
+							[1226110] = {		
+								color = {0, 1, 1},
+								sound = "ray",
+								msg = "%name %spell",
 							},
 						}
-						T.InitCircleCastTimers(frame)
+						T.InitUnitAuraCircleTimers(frame)
 					end,
 					update = function(frame, event, ...)
-						T.UpdateCircleCastTimers(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
 					end,
 					reset = function(frame, event)
-						T.ResetCircleCastTimers(frame)
+						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},
 			},
@@ -172,6 +176,13 @@ G.Encounters["c542"] = {
 					type = "cast",
 					spellID = 1221190,
 					show_tar = true,
+				},
+				{ -- 对我施法图标 暴食瘴气（✓）
+					category = "AlertIcon",
+					type = "com",
+					spellID = 1221190,
+					hl = "yel_flash",
+					msg = {str_applied = "%name %spell"},
 					sound = "[spread]cast",
 				},
 				{ -- 团队框架高亮 暴食瘴气（✓）
@@ -204,6 +215,12 @@ G.Encounters["c542"] = {
 					reset = function(frame, event)
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
+				},
+				{ -- 自保技能提示 暴食瘴气（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1221190,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 暴食瘴气（✓）
 					category = "RFIcon",
@@ -273,6 +290,12 @@ G.Encounters["c542"] = {
 					type = "PlateAuras",
 					aura_type = "HELPFUL",
 					spellID = 1231244,
+				},
+				{ -- 声音 不稳定的核心（✓）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 1231244,
+					file = "[mindstep]",
 				},
 			},
 		},
@@ -732,6 +755,58 @@ G.Encounters["c542"] = {
 					unit = "player",
 					spellID = 1239229,
 					tip = L["加速"].."+"..L["加急速"],
+				},
+				{ -- 首领模块 奥尔达尼沙地滤镜（✓）
+					category = "BossMod",
+					spellID = 1239229,
+					enable_tag = "none",
+					name = string.format(L["奥尔达尼沙地滤镜"], C_Map.GetAreaInfo(16422)),
+					points = {hide = true},
+					events = {	
+						["ZONE_CHANGED"] = true,
+					},
+					custom = {
+						{
+							key = "alpha_sl",
+							text = L["透明度"],
+							default = 10,
+							min = 5,
+							max = 50,
+							apply = function(value, alert)
+								alert.filter:SetAlpha(value/100)
+							end
+						},
+					},
+					init = function(frame)					
+						frame.areaNames = {
+							[C_Map.GetAreaInfo(16422)] = true,
+							[C_Map.GetAreaInfo(16569)] = true,	
+						}
+						
+						frame.bg = CreateFrame("Frame", nil, UIParent)
+						frame.bg:SetAllPoints()
+						frame.bg:SetFrameStrata("BACKGROUND")
+						frame.bg:Hide()
+						
+						frame.filter = frame.bg:CreateTexture(nil, "BACKGROUND")
+						frame.filter:SetAllPoints()
+						frame.filter:SetTexture(G.media.blank)
+						frame.filter:SetVertexColor(.05, .05, .05)
+						frame.filter:SetAlpha(0)
+					end,
+					update = function(frame, event, ...)
+						if event == "ZONE_CHANGED" or event == "OPTION_EDIT" then
+							local area = GetSubZoneText()
+							if frame.areaNames[area] then
+								frame.bg:Show()
+							else
+								frame.bg:Hide()
+							end
+						end
+					end,
+					reset = function(frame, event)
+						frame.bg:Hide()
+					end,
 				},
 			},
 		},

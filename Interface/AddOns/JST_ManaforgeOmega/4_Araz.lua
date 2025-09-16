@@ -334,7 +334,7 @@ G.Encounters[2687] = {
 					type = "spell",
 					preview = L["召唤小怪"]..L["倒计时"],
 					data = {
-						spellID = 1228214,
+						spellID = 1233979,
 						events =  {
 							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
 						},
@@ -342,7 +342,7 @@ G.Encounters[2687] = {
 					update = function(self, event, ...)
 						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, _, _, _, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
-							if sub_event == "SPELL_CAST_START" and (spellID == 1228213 or spellID == 1243887) then
+							if sub_event == "SPELL_CAST_START" and spellID == 1228213 then
 								T.Start_Text_Timer(self, 7, L["召唤小怪"], true)
 							end
 						elseif event == "ENCOUNTER_START" then
@@ -452,42 +452,13 @@ G.Encounters[2687] = {
 						T.StopCountDown("bossmod"..frame.config_id)
 					end,
 				},
-				{ -- 首领模块 星界收割 玩家自保技能提示 （✓）
-					category = "BossMod",
-					spellID = 1228213,
-					enable_tag = "none",
-					name = T.GetIconLink(1228214)..T.GetIconLink(1243901)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1233979] = 0, -- 星界收割(点名)
-						}
-						frame.aura_spellIDs = {
-							[1228214] = 0, -- 星界收割(DOT+出小怪)
-						}
-						frame.aura_spellIDs = {
-							[1243873] = 0, -- 虚空收割(点名)
-						}
-						frame.aura_spellIDs = {
-							[1243901] = 0, -- 虚空收割(DOT+出小怪)
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
-				},
+				{ -- 自保技能提示 星界收割（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1233979,
+					spellIDs = {1228214},
+					threshold = 65,
+				},				
 				{ -- 首领模块 星界收割 点名统计 整体排序 （✓）
 					category = "BossMod",
 					spellID = 1233979,
@@ -1254,33 +1225,13 @@ G.Encounters[2687] = {
 					text = L["击退"],
 					sound = "[knockback]cast",
 				},
-				{ -- 首领模块 奥术驱除 玩家自保技能提示 （✓）
-					category = "BossMod",
+				{ -- 自保技能提示 奥术驱除（✓）
+					category = "HPWatch",
+					type = "CLEU",
 					spellID = 1227631,
-					enable_tag = "none",
-					name = T.GetIconLink(1227631)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.spellIDs = {
-							[1227631] = {
-								event = "SPELL_CAST_START",
-								dur = 5,
-							},
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyCLEU(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyCLEU(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyCLEU(frame)
-					end,
+					event = "SPELL_CAST_START",
+					dur = 5,
+					threshold = 65,
 				},
 			},
 		},
@@ -1649,6 +1600,29 @@ G.Encounters[2687] = {
 						end
 					end,
 				},
+				{ -- 文字 虚空收割出小怪 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["召唤小怪"]..L["倒计时"],
+					data = {
+						spellID = 1243873,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+					},					
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_START" and spellID == 1243887 then
+								T.Start_Text_Timer(self, 7, L["召唤小怪"], true)
+							end
+						elseif event == "ENCOUNTER_START" then
+							self.round = true
+							self.count_down_start = 4
+							self.prepare_sound = "add"
+						end
+					end,
+				},
 				{ -- 计时条 虚空收割（✓）
 					category = "AlertTimerbar",
 					type = "cleu",
@@ -1685,6 +1659,13 @@ G.Encounters[2687] = {
 					reset = function(frame, event)
 						T.ResetCircleTimers(frame)
 					end,
+				},
+				{ -- 自保技能提示 虚空收割（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1243873,
+					spellIDs = {1243901},
+					threshold = 65,
 				},
 				{ -- 首领模块 虚空收割 点名统计 整体排序 （✓）
 					category = "BossMod",

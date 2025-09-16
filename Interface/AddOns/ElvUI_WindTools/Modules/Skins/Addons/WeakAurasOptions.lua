@@ -415,7 +415,7 @@ function S:WeakAuras_ShowOptions()
 	for _, region in pairs({ frame:GetRegions() }) do
 		if region:GetObjectType() == "Texture" then
 			region:SetTexture(nil)
-			F.InternalizeMethod(region, "SetTexture", true)
+			region.SetTexture = E.noop
 		end
 	end
 

@@ -668,9 +668,6 @@ HPWatchTrigger:SetScript("OnEvent", function(self, event, ...)
 									end
 								end
 							end
-						else
-							self:RemoveCheck("Aura", spellID)
-							self.WatchedAuraIDs[auraID] = nil
 						end
 					end
 				end

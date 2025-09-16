@@ -26,7 +26,6 @@ local _, gdbprivate = ...
 	PaperDollFrame.ExpandButton = CreateFrame("Button", nil, PaperDollFrame)
 	PaperDollFrame.ExpandButton:SetSize(32, 32)
 	PaperDollFrame.ExpandButton:SetPoint("BOTTOMLEFT", 298, 3)
-	--PaperDollFrame.ExpandButton:SetPoint("TOPRIGHT", CharacterTrinket1Slot, "BOTTOMRIGHT", 2, -3)
 	PaperDollFrame.ExpandButton:SetHighlightTexture("Interface\\BUTTONS\\UI-Common-MouseHilight")
 
 	PaperDollFrame.ExpandButton:SetScript("OnEnter", DCS_ExpandCheck_OnEnter)
@@ -100,19 +99,6 @@ local DCS_ExpandButtonCheck = CreateFrame("CheckButton", "DCS_ExpandButtonCheck"
 				PaperDollFrame.ExpandButton:Hide()
 			end
 		end
-		--[[
-		if event == "PLAYER_LOGIN" then
-		local checked = gdbprivate.gdb.gdbdefaults.dejacharacterstatsExpandButtonChecked
-			self:SetChecked(checked.ExpandButtonSetChecked)
-			if self:GetChecked(true) then
-				PaperDollFrame.ExpandButton:Show()
-				gdbprivate.gdb.gdbdefaults.dejacharacterstatsExpandButtonChecked.ExpandButtonSetChecked = true
-			else
-				PaperDollFrame.ExpandButton:Hide()
-				gdbprivate.gdb.gdbdefaults.dejacharacterstatsExpandButtonChecked.ExpandButtonSetChecked = false
-			end
-		end
-		--]]
 	end)
 
 	DCS_ExpandButtonCheck:SetScript("OnClick", function(self)
@@ -123,14 +109,4 @@ local DCS_ExpandButtonCheck = CreateFrame("CheckButton", "DCS_ExpandButtonCheck"
 		else
 			PaperDollFrame.ExpandButton:Hide()
 		end
-		--[[
-		local checked = gdbprivate.gdb.gdbdefaults.dejacharacterstatsExpandButtonChecked
-		if self:GetChecked(true) then
-			PaperDollFrame.ExpandButton:Show()
-			gdbprivate.gdb.gdbdefaults.dejacharacterstatsExpandButtonChecked.ExpandButtonSetChecked = true
-		else
-			PaperDollFrame.ExpandButton:Hide()
-			gdbprivate.gdb.gdbdefaults.dejacharacterstatsExpandButtonChecked.ExpandButtonSetChecked = false
-		end
-		--]]
 	end)

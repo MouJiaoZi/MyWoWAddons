@@ -260,6 +260,14 @@ G.Encounters["c503"] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 自保技能提示 巢穴的召唤（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 438877,
+					event = "SPELL_CAST_START",
+					dur = 4,
+					threshold = 75,
+				},
 			},
 		},
 		{ -- 伊克辛:惊惧尖鸣
@@ -390,6 +398,14 @@ G.Encounters["c503"] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 自保技能提示 虫群风暴（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 1241693,
+					event = "SPELL_CAST_START",
+					dur = 10,
+					threshold = 65,
+				},
 				{ -- 图标 虫群风暴（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -412,6 +428,12 @@ G.Encounters["c503"] = {
 					ficon = "14",
 					glow = true,
 					group = 1,
+				},
+				{ -- 姓名板施法图标 预警尖鸣（✓）
+					category = "PlateAlert",
+					type = "PlateSpells",
+					spellID = 432967,
+					hl_np = true,
 				},
 			},
 		},

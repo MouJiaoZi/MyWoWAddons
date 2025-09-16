@@ -14,6 +14,8 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["提前5秒提示坦克墙位置"] = "提前5秒提示坦克墙位置"
 	L["放墙错误"] = "%s 放墙位置出错(%s)，实际放在了%s。"
 	L["消墙错误"] = "%s 消墙位置出错(%s)，实际消了%s。"
+	L["显示方向和距离"] = "显示方向和距离"
+	L["格子数"] = "%d格"
 elseif G.Client == "ruRU" then
 	--L["出墙"] = "Spawn wall"
 	--L["消墙"] = "Break wall"
@@ -23,6 +25,8 @@ elseif G.Client == "ruRU" then
 	--L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"
 	--L["放墙错误"] = "%s wall placement error (%s), actually placed in %s."
 	--L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
+	--L["显示方向和距离"] = "Display direction and distance"
+	--L["格子数"] = "%d column"
 else
 	L["出墙"] = "Spawn wall"
 	L["消墙"] = "Break wall"
@@ -32,6 +36,8 @@ else
 	L["提前5秒提示坦克墙位置"] = "Notify the tank wall position 5 seconds in advance"
 	L["放墙错误"] = "%s wall spawn position error(%s), actually spawned %s."
 	L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
+	L["显示方向和距离"] = "Display direction and distance"
+	L["格子数"] = "%d column"
 end
 ---------------------------------Notes--------------------------------
 
@@ -66,6 +72,10 @@ event_frame:SetScript("OnEvent", function(self, event, ...)
 			
 			if frame.spawnGUIDs[GUID] or frame.spawnTankGUIDs[GUID] or frame.breakGUIDs[GUID] then
 				frame:BarDisplayAll()
+			end
+			
+			if GUID == G.PlayerGUID then
+				frame:UpdateDirection()
 			end
 		end
 	else
@@ -239,33 +249,11 @@ G.Encounters[2747] = {
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},				
-
-				{ -- 首领模块 虚无吞噬 玩家自保技能提示（✓）
-					category = "BossMod",
-					spellID = 1247495,
-					enable_tag = "none",
-					name = T.GetIconLink(1247424)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1247424] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
+				{ -- 自保技能提示 虚无吞噬（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1247424,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 虚无吞噬（✓）
 					category = "RFIcon",
@@ -390,6 +378,21 @@ G.Encounters[2747] = {
 							default = false,
 						},
 						{
+							key = "direction_bool",
+							text = L["显示方向和距离"],
+							default = false,
+							apply = function(value, frame)
+								if value then
+									frame.arrowframe.enable = true
+									T.RestoreDragFrame(frame.arrowframe, frame)
+								else
+									frame.arrowframe.enable = false
+									frame.arrowframe:Hide()
+									T.ReleaseDragFrame(frame.arrowframe)
+								end
+							end,
+						},
+						{
 							key = "rl_bool",
 							text = L["团队分配"],
 							default = false,
@@ -423,7 +426,7 @@ G.Encounters[2747] = {
 						frame.spawnGUIDs = {}
 						frame.spawnTankGUIDs = {}
 						frame.breakGUIDs = {}
-						frame.spwans_count = 0
+						frame.spawns_count = 0
 						frame.rotation_count = 0
 						frame.last_cast = 0						
 						
@@ -468,16 +471,19 @@ G.Encounters[2747] = {
 						
 						frame.graph_bg:SetAllPoints(frame)
 						frame.graph_bg:Hide()
+										
+						frame.arrowframe = T.GetArrowFrame(frame)
+						frame.arrowframe:Hide()
 						
 						local bar_width = 60
 						local bar_height = 90
-						T.CreateMovableFrame(frame, "rl_frame", bar_width*6+25, bar_height+15, {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 225, y = -150}, "_rl_frame", L["团队分配"])
+						T.CreateMovableFrame(frame, "rl_frame", bar_width*6+25, bar_height+60, {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 225, y = -150}, "_rl_frame", L["团队分配"])
 						frame.rl_frame.bars = {}
 						
 						for column = 1, 6 do
 							local bar = CreateFrame("StatusBar", nil, frame.rl_frame)
 							bar:SetSize(bar_width, bar_height)
-							bar:SetPoint("BOTTOMLEFT", frame.rl_frame, "BOTTOMLEFT", (bar_width+5)*(column-1), 0)
+							bar:SetPoint("TOPLEFT", frame.rl_frame, "TOPLEFT", (bar_width+5)*(column-1), -15)
 							
 							bar:SetOrientation("VERTICAL")
 							bar:SetStatusBarTexture(G.media.blank)
@@ -488,6 +494,9 @@ G.Encounters[2747] = {
 							
 							bar.name = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "CENTER")
 							bar.name:SetPoint("BOTTOM", bar, "BOTTOM", 0, 0)
+							
+							bar.nameAssign = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "CENTER")
+							bar.nameAssign:SetPoint("TOP", bar, "BOTTOM", 0, -5)
 							
 							bar.rt = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "CENTER")
 							bar.rt:SetPoint("BOTTOM", bar, "TOP", 0, 0)
@@ -500,6 +509,7 @@ G.Encounters[2747] = {
 							bar.extraTex:SetTexture(G.media.overlay1)
 							
 							bar.players = {}
+							bar.playersAssign = {}
 							
 							table.insert(frame.rl_frame.bars, bar)
 						end
@@ -508,36 +518,62 @@ G.Encounters[2747] = {
 							local bar = frame.rl_frame.bars[column]
 								
 							bar.players = table.wipe(bar.players)
+							bar.playersAssign = table.wipe(bar.playersAssign)
 							
-							for GUID in pairs(frame.spawnGUIDs) do
+							for GUID, assign in pairs(frame.spawnGUIDs) do
 								if GUIDToColumn(GUID) == column then
 									table.insert(bar.players, GUID)
 								end
-							end
-							
-							for GUID in pairs(frame.spawnTankGUIDs) do
-								if GUIDToColumn(GUID) == column then
-									table.insert(bar.players, GUID)
+								if assign == column then
+									table.insert(bar.playersAssign, GUID)
 								end
 							end
 							
-							for GUID in pairs(frame.breakGUIDs) do
+							for GUID, assign in pairs(frame.spawnTankGUIDs) do
 								if GUIDToColumn(GUID) == column then
 									table.insert(bar.players, GUID)
+								end
+								if assign == column then
+									table.insert(bar.playersAssign, GUID)
+								end
+							end
+							
+							for GUID, assign in pairs(frame.breakGUIDs) do
+								if GUIDToColumn(GUID) == column then
+									table.insert(bar.players, GUID)
+								end
+								if assign == column then
+									table.insert(bar.playersAssign, GUID)
 								end
 							end							
 							
-							local str = ""
+							local str = ""						
+							table.sort(bar.players)
 							for i, GUID in pairs(bar.players) do
-								local format_name = T.ColorNickNameByGUID(GUID) or ""
+								local info = T.GetGroupInfobyGUID(GUID)
+								local role = info.role == "TANK" and T.GetFlagIconStr("0") or ""
+								local format_name = info.format_name or "?"
 								if i == 1 then
-									str = str..format_name
+									str = str..role..format_name
 								else
-									str = str.."\n"..format_name
+									str = str.."\n"..role..format_name
 								end
 							end
-							
 							bar.name:SetText(str)
+							
+							local strAssign = ""
+							table.sort(bar.playersAssign)
+							for i, GUID in pairs(bar.playersAssign) do
+								local info = T.GetGroupInfobyGUID(GUID)
+								local role = info.role == "TANK" and T.GetFlagIconStr("0") or ""
+								local format_name = info.format_name or "?"
+								if i == 1 then
+									strAssign = strAssign..role..format_name
+								else
+									strAssign = strAssign.."\n"..role..format_name
+								end
+							end
+							bar.nameAssign:SetText(strAssign)
 							
 							local value = self.wallCounts[column]
 							
@@ -595,6 +631,57 @@ G.Encounters[2747] = {
 							end
 						end
 						
+						function frame:UpdateAssign(assignmentType, position, dur)
+							local mark = T.FormatRaidMark(position)
+							
+							if assignmentType == "SPAWN" then
+								T.Start_Text_Timer(self.text_frame, dur, mark..string.format("|cff4EE8FF%s|r", L["出墙"]))
+							else
+								T.Start_Text_Timer(self.text_frame, dur, mark..string.format("|cffFF1D2D%s|r", L["消墙"]))
+							end
+							
+							self.curAssign = position
+							
+							C_Timer.After(dur, function()
+								self.curAssign = nil
+								self:UpdateDirection()
+							end)
+						end
+						
+						function frame:UpdateDirection()
+							if not C.DB["BossMod"][self.config_id]["direction_bool"] then return end
+							
+							local position = self.curAssign
+							
+							if position then
+								local column = GUIDToColumn(G.PlayerGUID)
+								local mark = T.FormatRaidMark(position)
+								if column then
+									local distance = abs(position - column)
+									if distance == 0 then
+										self.arrowframe:SetArrowTitle(mark, "|cff00ff00OK|r")
+										self.arrowframe:SetArrowColor(0,1,0)
+										self.arrowframe:SetArrowDown()
+										self.arrowframe:Show()
+										
+									else
+										self.arrowframe:SetArrowTitle(mark, string.format(L["格子数"], distance))
+										self.arrowframe:SetGradientArrowColor(1-distance/5)
+										if position - column > 0 then
+											self.arrowframe:SetArrowDirection("right")
+										else
+											self.arrowframe:SetArrowDirection("left")
+										end
+										self.arrowframe:Show()
+									end
+								else
+									self.arrowframe:Hide()
+								end
+							else
+								self.arrowframe:Hide()
+							end
+						end
+						
 						function frame:DisplayAssignment(assignmentType, GUID, position, tank, preview)
 							if assignmentType == "SPAWN" then
 								if GUID == G.PlayerGUID then
@@ -602,15 +689,16 @@ G.Encounters[2747] = {
 									local exp_time = select(6, AuraUtil.FindAuraBySpellID(1233411, "player", "HARMFUL")) -- 结晶震荡波
 									if exp_time then
 										local dur = exp_time - GetTime()
-										T.Start_Text_Timer(self.text_frame, dur, T.FormatRaidMark(position)..string.format("|cff4EE8FF%s|r", L["出墙"]))
+										self:UpdateAssign(assignmentType, position, dur)
+										self:UpdateDirection()
+										
 										if not tank then
 											T.SendChatMsg(L["出墙"]..string.format("{rt%d}", position), 5, "SAY")
 										else
 											self.waitng_tankSpawn = true
 											T.SendChatMsg(L["坦克"]..L["出墙"]..string.format("{rt%d}", position), 5, "SAY")
 										end
-									end
-									if not preview then
+										
 										T.PlaySound("mark\\mark"..position)
 									end
 								end
@@ -618,7 +706,7 @@ G.Encounters[2747] = {
 									local info = T.GetGroupInfobyGUID(GUID)
 									if info then
 										if not tank then
-											local ind = mod(self.spwans_count, 2) == 1 and 1 or 3
+											local ind = mod(self.spawns_count, 2) == 1 and 1 or 3
 											T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, ind, info.format_name, L["出墙"], T.FormatRaidMark(position)))
 											self.wallAssigned[position] = self.wallAssigned[position] + 1
 											self.spawnGUIDs[GUID] = position
@@ -637,10 +725,11 @@ G.Encounters[2747] = {
 									local exp_time = select(6, AuraUtil.FindAuraBySpellID(1227373, "player", "HARMFUL")) -- 碎壳
 									if exp_time then
 										local dur = exp_time - GetTime()
-										T.Start_Text_Timer(self.text_frame, dur, T.FormatRaidMark(position)..string.format("|cffFF1D2D%s|r", L["消墙"]))
+										self:UpdateAssign(assignmentType, position, dur)
+										self:UpdateDirection()
+										
 										T.SendChatMsg(L["消墙"]..string.format("{rt%d}", position), 5, "YELL")
-									end
-									if not preview then
+										
 										T.PlaySound("mark\\mark"..position)
 									end
 								end
@@ -656,7 +745,7 @@ G.Encounters[2747] = {
 							end
 						end
 						
-						function frame:DisplayTankSpwan()
+						function frame:DisplayTankSpawn()
 							for unit in T.IterateGroupMembers() do
 								local isTanking = UnitDetailedThreatSituation(unit, "boss1")
 								
@@ -1059,7 +1148,7 @@ G.Encounters[2747] = {
 							frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
 							frame.spawnTankGUIDs = table.wipe(frame.spawnTankGUIDs)
 							frame.breakGUIDs = table.wipe(frame.breakGUIDs)
-							frame.spwans_count = 0
+							frame.spawns_count = 0
 							frame.rotation_count = 0							
 							frame.last_cast = 0
 							
@@ -1093,7 +1182,7 @@ G.Encounters[2747] = {
 								local first_dur = frame.difficultyID == 16 and 16 or 18
 								local wait = first_dur - 5
 								frame.timer = C_Timer.NewTimer(wait, function()
-									frame:DisplayTankSpwan()
+									frame:DisplayTankSpawn()
 								end)
 							end
 							
@@ -1128,10 +1217,10 @@ G.Encounters[2747] = {
 									local tank_dur = frame.difficultyID == 16 and 40 or 51
 									local wait = tank_dur - 5
 									frame.timer = C_Timer.NewTimer(wait, function()
-										frame:DisplayTankSpwan()
+										frame:DisplayTankSpawn()
 									end)
 								else
-									frame:DisplayTankSpwan()
+									frame:DisplayTankSpawn()
 								end
 								
 								for unit in T.IterateGroupMembers() do
@@ -1161,8 +1250,8 @@ G.Encounters[2747] = {
 					
 									if GetTime() - frame.last_cast > 3 then
 										frame.last_cast = GetTime()
-										frame.spwans_count = frame.spwans_count + 1
-										frame.rotation_count = ceil(frame.spwans_count/2)
+										frame.spawns_count = frame.spawns_count + 1
+										frame.rotation_count = ceil(frame.spawns_count/2)
 										
 										C_Timer.After(0.2, function() 
 											frame:Assign("SPAWN")
@@ -1252,10 +1341,15 @@ G.Encounters[2747] = {
 						if frame.timer then
 							frame.timer:Cancel()
 						end
+						
 						T.Stop_Text_Timer(frame.text_frame)
 						frame.graph_bg:Hide()
+						
 						if C.DB["BossMod"][frame.config_id]["rl_bool"] then
 							frame.rl_frame:Hide()
+						end
+						if C.DB["BossMod"][frame.config_id]["direction_bool"] then
+							frame.arrowframe:Hide()
 						end
 					end,
 				},
@@ -1373,33 +1467,12 @@ G.Encounters[2747] = {
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},
-				{ -- 首领模块 碎壳 玩家自保技能提示（✓）
-					category = "BossMod",
-					spellID = 1227367,
-					enable_tag = "none",
-					name = T.GetIconLink(1227373)..L["玩家自保技能提示"],	
-					points = {hide = true},
-					events = {
-						["UNIT_AURA_ADD"] = true,
-						["UNIT_AURA_REMOVED"] = true,
-						["UNIT_AURA_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.aura_spellIDs = {
-							[1227373] = 0,
-						}
-						frame.ignore_roles = {"TANK"}
-						frame.threshold = 65
-						
-						T.InitPersonalSpellAlertbyAura(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdatePersonalSpellAlertbyAura(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetPersonalSpellAlertbyAura(frame)
-					end,
-				},
+				{ -- 自保技能提示 碎壳（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1227373,
+					threshold = 65,
+				},				
 				{ -- 图标 水晶覆体（✓）
 					category = "AlertIcon",
 					type = "aura",

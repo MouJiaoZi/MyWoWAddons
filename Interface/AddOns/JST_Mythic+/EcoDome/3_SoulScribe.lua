@@ -23,40 +23,20 @@ G.Encounters[2677] = {
 				{1224865},
 			},
 			options = {
-				{ -- 文字 命运低语 倒计时（✓）
-					category = "TextAlert",
-					type = "spell",
-					preview = L["影子"]..L["倒计时"],
-					data = {
-						spellID = 1224793,
-						events =  {
-							["ENCOUNTER_PHASE"] = true,
-							["UNIT_SPELLCAST_START"] = true,
-						},					
-						info = {							
-							["all"] = {
-								[1] = {
-									{7.0, 18.2, 18.2, 13.4},
-									{8.6, 18.2, 18.2, 13.4},
-									{8.6, 18.2, 18.2, 13.4},
-									{8.6, 18.2, 18.2, 13.4},
-								},
-							},
-						},
-						cd_args = {
-							round = true,
-						},
-					},
-					update = function(self, event, ...)
-						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1224793, L["影子"], self, event, ...)
-					end,
-				},
 				{ -- 计时条 命运低语（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 1224793,
 					text = L["影子"],
 					sound = "[shadow]cast",
+				},
+				{ -- 自保技能提示 命运低语（✓） 
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 1224793,
+					event = "SPELL_CAST_START",
+					dur = 3,
+					threshold = 70,
 				},
 				{ -- 图标 命缚者（✓）
 					category = "AlertIcon",
@@ -65,6 +45,7 @@ G.Encounters[2677] = {
 					unit = "player",
 					spellID = 1224865,
 					tip = L["增加伤害/治疗"].."%s10%",
+					sound = "[sound_water]stacksfx"
 				},
 			},
 		},
@@ -107,6 +88,14 @@ G.Encounters[2677] = {
 					spellID = 1236703,
 					text = L["躲地板"],
 					sound = "[mindstep]cast",
+				},
+				{ -- 自保技能提示 永恒织缕（✓） 
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 1236703,
+					event = "SPELL_CAST_START",
+					dur = 5,
+					threshold = 80,
 				},
 				{ -- 首领模块 计时条 永恒织缕（✓）
 					category = "BossMod",

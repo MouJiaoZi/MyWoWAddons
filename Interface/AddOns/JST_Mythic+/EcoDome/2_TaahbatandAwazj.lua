@@ -175,11 +175,11 @@ G.Encounters[2676] = {
 					tip = L["DOT"],
 					hl = "red",
 				},
-				{ -- 团队框架高亮 迁跃打击（✓）
-					category = "RFIcon",
+				{ -- 自保技能提示 迁跃打击（✓）
+					category = "HPWatch",
 					type = "Aura",
 					spellID = 1227152,
-					color = "red",
+					threshold = 65,
 					amount = 2,
 				},
 				{ -- 文字 迁跃打击 层数提示（✓）
@@ -201,6 +201,13 @@ G.Encounters[2676] = {
 							end
 						end
 					end,
+				},
+				{ -- 团队框架高亮 迁跃打击（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 1227152,
+					color = "red",
+					amount = 2,
 				},
 			},
 		},
@@ -283,6 +290,12 @@ G.Encounters[2676] = {
 					spellID = 1220671,
 					tip = L["DOT"].."+"..L["减速"].."50%",
 					hl = "org",
+				},
+				{ -- 自保技能提示 束缚的标枪（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1220671,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 束缚的标枪（✓）
 					category = "RFIcon",

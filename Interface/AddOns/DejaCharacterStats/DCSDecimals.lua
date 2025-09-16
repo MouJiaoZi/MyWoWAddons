@@ -22,18 +22,6 @@ local function DCS_Decimals()
 		--version with localisation of PAPERDOLLFRAME_TOOLTIP_FORMAT, HIGHLIGHT_FONT_COLOR_CODE and FONT_COLOR_CODE_CLOSE (doll_tooltip_format, highlight_code and font_color_close)
 	-- Crit Chance
 		--setting of statformat and multiplier values is done by calling function for checkbox (in OnEvent and OnClick)
-		--[[
-		if notinteger then
-			statformat = "%.2f%%"
-			multiplier = 100
-		else
-			statformat = "%.0f%%"
-			multiplier = 1
-		end
-
-		local notexactlyzero = gdbprivate.gdb.gdbdefaults.dejacharacterstatsDCSZeroChecked.SetChecked
-		--]]
-		
 		function PaperDollFrame_SetCritChance(statFrame, unit)
 			if ( unit ~= "player" ) then
 				statFrame:Hide();
@@ -75,7 +63,6 @@ local function DCS_Decimals()
 			else --in PaperDollFrame.lua true instead of false
 				PaperDollFrame_SetLabelAndText(statFrame, STAT_CRITICAL_STRIKE, dcs_format(statformat, critChance), false, critChance);
 			end
-			--PaperDollFrame_SetLabelAndText(statFrame, STAT_CRITICAL_STRIKE, format(statformat1, critChance), true, format(statformat1, critChance)); --can't do it because PaperDollFrame_SetLabelAndText converts to integer
 			statFrame.tooltip = highlight_code..dcs_format(doll_tooltip_format, STAT_CRITICAL_STRIKE).." "..dcs_format("%.2f%%", critChance)..font_color_close;
 			local extraCritChance = GetCombatRatingBonus(rating);
 			local extraCritRating = GetCombatRating(rating);
@@ -154,10 +141,6 @@ local function DCS_Decimals()
 				statFrame:Hide();
 				return;
 			end
-			--if (UnitLevel("player") < SHOW_MASTERY_LEVEL) then
-			--	statFrame:Hide();
-			--	return;
-			--end
 			local color_mastery 
 			if namespace.locale == "zhTW" then
 				color_mastery = STAT_MASTERY .. "：" --Chinese colon
@@ -304,7 +287,6 @@ local function DCS_Decimals()
 			end
 			statFrame:Show();
 		end
-		--PaperDollFrame_UpdateStats() -- needs to get called for checkbox Decimals; will get called for clicks in checkboxes but not during login
 end
 
 	gdbprivate.gdbdefaults.gdbdefaults.dejacharacterstatsShowDecimalsChecked = {
@@ -324,7 +306,6 @@ end
 local DCS_DecimalCheck = CreateFrame("CheckButton", "DCS_DecimalCheck", DejaCharacterStatsPanel, "InterfaceOptionsCheckButtonTemplate")
 	DCS_DecimalCheck:RegisterEvent("PLAYER_LOGIN")
 	DCS_DecimalCheck:ClearAllPoints()
-	--DCS_DecimalCheck:SetPoint("TOPLEFT", 30, -205)
 	DCS_DecimalCheck:SetPoint("TOPLEFT", "dcsStatsPanelcategoryFS", 7, -55) 
 	DCS_DecimalCheck:SetScale(1)
 	DCS_DecimalCheck.tooltipText = L["Displays 'Enhancements' category stats to two decimal places."] --Creates a tooltip on mouseover.
@@ -335,15 +316,11 @@ local DCS_DecimalCheck = CreateFrame("CheckButton", "DCS_DecimalCheck", DejaChar
 			notinteger= gdbprivate.gdb.gdbdefaults.dejacharacterstatsShowDecimalsChecked.SetChecked
 			self:SetChecked(notinteger)
 			set_statformat_multiplier_value()
-			--local status = self:GetChecked(true) --???
-			--DCS_Decimals(status)
 			DCS_Decimals() --PaperDollFrame_UpdateStats() here isn't needed
-			--gdbprivate.gdb.gdbdefaults.dejacharacterstatsShowDecimalsChecked.SetChecked = status --???
 		end
 	end)
 
 	DCS_DecimalCheck:SetScript("OnClick", function(self,event,arg1) 
-		--local checked = gdbprivate.gdb.gdbdefaults.dejacharacterstatsShowDecimalsChecked
 		notinteger = self:GetChecked(true)
 		set_statformat_multiplier_value()
 		gdbprivate.gdb.gdbdefaults.dejacharacterstatsShowDecimalsChecked.SetChecked = notinteger
@@ -358,10 +335,8 @@ local DCS_DecimalCheck = CreateFrame("CheckButton", "DCS_DecimalCheck", DejaChar
 local DCS_MasteryCheck = CreateFrame("CheckButton", "DCS_MasteryCheck", DejaCharacterStatsPanel, "InterfaceOptionsCheckButtonTemplate")
 	DCS_MasteryCheck:RegisterEvent("PLAYER_LOGIN")
 	DCS_MasteryCheck:ClearAllPoints()
-	--DCS_DecimalCheck:SetPoint("TOPLEFT", 30, -205)
 	DCS_MasteryCheck:SetPoint("TOPLEFT", "dcsStatsPanelcategoryFS", 7, -75) 
 	DCS_MasteryCheck:SetScale(1)
-	--DCS_MasteryCheck.tooltipText = L["Hides mastery stat till the character starts to have benefit from it. Unselected mastery stat in PaperDollFrame takes priority over this setting."] --Creates a tooltip on mouseover.
 	DCS_MasteryCheck.tooltipText = L["Hides Mastery stat until the character starts to have benefit from it. Hiding Mastery with Select-A-Stat™ in the character panel has priority over this setting."] --Creates a tooltip on mouseover. 
 	_G[DCS_MasteryCheck:GetName() .. "Text"]:SetText(L["Hide low level mastery"])
 	
@@ -393,8 +368,6 @@ local DCS_BlizHideAtZero = CreateFrame("CheckButton", "DCS_BlizHideAtZero", Deja
 local DCS_DCSHideAtZero = CreateFrame("CheckButton", "DCS_DCSHideAtZero", DejaCharacterStatsPanel, "InterfaceOptionsCheckButtonTemplate") 
 	DCS_DCSHideAtZero:RegisterEvent("PLAYER_LOGIN") 
 	DCS_DCSHideAtZero:ClearAllPoints() 
-	--DCS_DCSHideAtZero:SetPoint("TOPLEFT", 25, -150) 
-	--DCS_DCSHideAtZero:SetPoint("TOPLEFT", 30, -165) 
 	DCS_DCSHideAtZero:SetPoint("TOPLEFT", "dcsStatsPanelcategoryFS", 7, -15) 
 	DCS_DCSHideAtZero:SetScale(1) 
 	DCS_DCSHideAtZero.tooltipText = L["Hides 'Enhancements' stats if their displayed value would be zero. Checking 'Decimals' changes the displayed value."] --Creates a tooltip on mouseover. 
@@ -402,8 +375,6 @@ local DCS_DCSHideAtZero = CreateFrame("CheckButton", "DCS_DCSHideAtZero", DejaCh
 	
 DCS_DCSHideAtZero:SetScript("OnEvent", function(self, event) 
 	if event == "PLAYER_LOGIN" then 
-		--local status = gdbprivate.gdb.gdbdefaults.dejacharacterstatsHideAtZeroChecked.SetChecked
-		--local DCSstatus = gdbprivate.gdbdefaults.gdbdefaults.dejacharacterstatsDCSZeroChecked.SetChecked
 		notexactlyzero = gdbprivate.gdbdefaults.gdbdefaults.dejacharacterstatsDCSZeroChecked.SetChecked
 		local hideatzero = gdbprivate.gdb.gdbdefaults.dejacharacterstatsHideAtZeroChecked.SetChecked
 		if hideatzero then
@@ -417,9 +388,6 @@ DCS_DCSHideAtZero:SetScript("OnEvent", function(self, event)
 end) 
  
 DCS_DCSHideAtZero:SetScript("OnClick", function(self) 
-	--local status = self:GetChecked() 
-	--gdbprivate.gdb.gdbdefaults.dejacharacterstatsHideAtZeroChecked.SetChecked = status
-	--gdbprivate.gdb.gdbdefaults.dejacharacterstatsDCSZeroChecked.SetChecked = status
 	notexactlyzero = not notexactlyzero
 	gdbprivate.gdb.gdbdefaults.dejacharacterstatsHideAtZeroChecked.SetChecked = notexactlyzero
 	gdbprivate.gdb.gdbdefaults.dejacharacterstatsDCSZeroChecked.SetChecked = notexactlyzero
@@ -433,8 +401,6 @@ end)
  _G[DCS_BlizHideAtZero:GetName() .. "Text"]:SetText(L["Blizzard's Hide At Zero"] ) 
 
 DCS_BlizHideAtZero:ClearAllPoints() 
---DCS_BlizHideAtZero:SetPoint("TOPLEFT", 50, -220) 
---DCS_BlizHideAtZero:SetPoint("TOPLEFT", 30, -185) 
 DCS_BlizHideAtZero:SetPoint("TOPLEFT", "dcsStatsPanelcategoryFS", 7, -35) 
 DCS_BlizHideAtZero:SetScale(1) 
 DCS_BlizHideAtZero.tooltipText = L["Hides 'Enhancements' stats only if their numerical value is exactly zero. For example, if stat value is 0.001%, then it would be displayed as 0%."] --Creates a tooltip on mouseover. 

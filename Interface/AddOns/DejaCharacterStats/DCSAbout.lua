@@ -37,7 +37,6 @@ local L = namespace.L 				--localization
 	-------------------------
 	local DCSAboutDCSFrameSeal = CreateFrame("Frame", "DCSAboutDCSFrameSeal", DCSAboutDCSFrame)
 		DCSAboutDCSFrameSeal:ClearAllPoints()
-		--DCSAboutDCSFrameSeal:SetFrameStrata("DIALOG")
 		DCSAboutDCSFrameSeal:SetPoint("BOTTOM", 0, 25)
 		DCSAboutDCSFrameSeal:SetScale(0.65)
 		DCSAboutDCSFrameSeal:SetSize(110, 110)
@@ -70,9 +69,7 @@ local L = namespace.L 				--localization
 			else
 				DCSAboutDCSFrame:Show()
 				local difference = DCSAboutDCSFrame:GetRight() - DCSAboutDCSFrame:GetLeft() - 50 --probably can be moved outside of function. since won't be often used, let remain 
-				--DCSAboutDCS_FS:SetWidth(DCSAboutDCSFrame:GetRight() - DCSAboutDCSFrame:GetLeft() - 50)
 				DCSAboutDCS_FS:SetWidth(difference) --somehow feels wrong to set a width of fontstring repeatedly to the same number. 
-				--DCSAboutDCS_ThanksFS:SetWidth(DCSAboutDCSFrame:GetRight() - DCSAboutDCSFrame:GetLeft() - 50)
 				DCSAboutDCS_ThanksFS:SetWidth(difference)
 			end
 		end)

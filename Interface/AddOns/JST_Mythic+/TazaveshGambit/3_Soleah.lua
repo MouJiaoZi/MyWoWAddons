@@ -406,7 +406,7 @@ G.Encounters[2455] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 351646,
-					sound = "[dodge]cast",
+					sound = "[dodge_circle]cast",
 					text = L["大圈"],
 				},
 			},
