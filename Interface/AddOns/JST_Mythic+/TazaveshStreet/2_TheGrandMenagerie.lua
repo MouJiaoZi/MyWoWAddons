@@ -44,7 +44,6 @@ G.Encounters[2454] = {
 				{ -- 首领模块 暴食 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 349627,
-					enable_tag = "none",
 					name = T.GetIconLink(349627)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -311,7 +310,6 @@ G.Encounters[2454] = {
 				{ -- 首领模块 净化协议 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 349954,
-					enable_tag = "none",
 					name = T.GetIconLink(349954)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	

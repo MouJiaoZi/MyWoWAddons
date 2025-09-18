@@ -57,6 +57,7 @@ local Character_default_Settings = {
 		group_spell_size = 40,
 		personal_spell_enable = true,
 		personal_spell_size = 40,
+		personal_spell_dir = "LEFT",
 		personal_spell_sound = "none",
 		personal_spell_low_hp = true,
 		personal_spell_low_hp_value = 30,
@@ -152,11 +153,11 @@ local LoadNewSettings = function(enable_tag)
 	elseif role_enable_tag == "rl" then -- 全部启用
 		return true
 	elseif enable_tag then -- 有加载标签
-		if enable_tag == "none" or enable_tag == "everyone" then -- 所有人加载
-			return true
-		elseif enable_tag == "rl" or enable_tag == "spell" then -- RL加载
+		if enable_tag == "rl" then
 			return false
-		else -- 其他加载标签（职责）
+		elseif enable_tag == "disable" then
+			return false
+		else
 			return true
 		end
 	else -- 无标记全部加载
@@ -170,7 +171,7 @@ local only_character_keys = {
 
 local InitSettings = function(path, enable_tag, ficon, details)	
 	local detail_table = details or {}
-	detail_table.enable = LoadNewSettings(enable_tag, ficon)
+	detail_table.enable = LoadNewSettings(enable_tag)
 	
 	for key, value in pairs(detail_table) do
 		local key_path = T.CopyTableInsertElement(path, key)	
@@ -205,7 +206,7 @@ local Update_default_Settings = function()
 					end
 					if category == "BossMod" then
 						Character_alert_Settings[category][args.spellID] = {
-							enable = LoadNewSettings(args.enable_tag, args.ficon)
+							enable = LoadNewSettings(args.enable_tag)
 						}
 						if args.custom then
 							for i, t in pairs(args.custom) do -- 细节选项
@@ -214,7 +215,7 @@ local Update_default_Settings = function()
 						end
 					elseif category == "AlertIcon" then
 						Character_alert_Settings[category][alert_type][args.spellID] = {
-							enable = LoadNewSettings(args.enable_tag, args.ficon)
+							enable = LoadNewSettings(args.enable_tag)
 						}
 						if args.sound then
 							Character_alert_Settings[category][alert_type][args.spellID].sound_bool = true
@@ -224,7 +225,7 @@ local Update_default_Settings = function()
 						end
 					elseif category == "AlertTimerbar" then
 						Character_alert_Settings[category][alert_type][args.spellID] = {
-							enable = LoadNewSettings(args.enable_tag, args.ficon)
+							enable = LoadNewSettings(args.enable_tag)
 						}
 						if args.sound then
 							Character_alert_Settings[category][alert_type][args.spellID].sound_bool = true
@@ -232,11 +233,11 @@ local Update_default_Settings = function()
 					elseif category == "TextAlert" then	
 						if alert_type == "hp" or alert_type == "pp" then
 							Character_alert_Settings[category][alert_type][args.data.npc_id] = {
-								enable = LoadNewSettings(args.enable_tag, args.ficon)
+								enable = LoadNewSettings(args.enable_tag)
 							}
 						else
 							Character_alert_Settings[category][alert_type][args.data.spellID] = {
-								enable = LoadNewSettings(args.enable_tag, args.ficon)
+								enable = LoadNewSettings(args.enable_tag)
 							}
 							if args.data.sound then
 								Character_alert_Settings[category][alert_type][args.data.spellID].sound_bool = true
@@ -245,11 +246,11 @@ local Update_default_Settings = function()
 					elseif category == "PlateAlert" then
 						if alert_type == "PlatePower" or alert_type == "PlateNpcID" then
 							Character_alert_Settings[category][alert_type][args.mobID] = {
-								enable = LoadNewSettings(args.enable_tag, args.ficon)
+								enable = LoadNewSettings(args.enable_tag)
 							}
 						else
 							Character_alert_Settings[category][alert_type][args.spellID] = {
-								enable = LoadNewSettings(args.enable_tag, args.ficon)
+								enable = LoadNewSettings(args.enable_tag)
 							}
 							if alert_type == "PlateInterrupt" then
 								Character_alert_Settings[category][alert_type][args.spellID].interrupt_sl = args.interrupt
@@ -261,15 +262,15 @@ local Update_default_Settings = function()
 							Character_alert_Settings[category][sound_type] = {}
 						end
 						Character_alert_Settings[category][sound_type][args.spellID] = {
-							enable = LoadNewSettings(args.enable_tag, args.ficon)
+							enable = LoadNewSettings(args.enable_tag)
 						}
 					elseif category == "RFIcon" then
 						Character_alert_Settings[category][alert_type][args.spellID] = {
-							enable = LoadNewSettings(args.enable_tag, args.ficon)
+							enable = LoadNewSettings(args.enable_tag)
 						}
 					elseif category == "HPWatch" then
 						Character_alert_Settings[category][alert_type][args.spellID] = {
-							enable = LoadNewSettings(args.enable_tag, args.ficon)
+							enable = LoadNewSettings(args.enable_tag)
 						}
 					end
 				end

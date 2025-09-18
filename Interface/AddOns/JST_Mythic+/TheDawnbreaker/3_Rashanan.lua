@@ -84,6 +84,12 @@ G.Encounters[2593] = {
 					spellID = 434668,
 					tip = L["DOT"],
 				},
+				{ -- 自保技能提示 火花四射的阿拉希炸弹（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 434668,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 火花四射的阿拉希炸弹（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -215,7 +221,9 @@ G.Encounters[2593] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 448888,
+					group = 1,
 					text = L["全团AE"],
+					glow = true,
 					sound = "[aoe]cast",
 				},
 				{ -- 图标 萦绕侵蚀（✓）
@@ -225,6 +233,14 @@ G.Encounters[2593] = {
 					unit = "player",
 					spellID = 463428,	
 					tip = L["DOT"],
+				},
+				{ -- 自保技能提示 侵蚀喷涌（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 448888,
+					event = "SPELL_CAST_START",
+					dur = 11.5,
+					threshold = 65,
 				},
 			},
 		},

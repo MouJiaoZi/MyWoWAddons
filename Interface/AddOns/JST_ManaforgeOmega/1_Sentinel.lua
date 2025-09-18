@@ -161,7 +161,7 @@ G.Encounters[2684] = {
 				{ -- 首领模块 根除齐射分担分组（待测试）
 					category = "BossMod",
 					spellID = 1219607,
-					enable_tag = "none",
+					enable_tag = "spell",
 					name = string.format(L["NAME技能轮次安排"], T.GetIconLink(1219607)),
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = 200, width = 320, height = 32},
 					events = {
@@ -454,7 +454,6 @@ G.Encounters[2684] = {
 				{ -- 首领模块 具现矩阵 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1219459,
-					enable_tag = "none",
 					name = T.GetIconLink(1219459)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -543,7 +542,6 @@ G.Encounters[2684] = {
 					category = "BossMod",
 					spellID = 1233999,
 					ficon = "0",
-					enable_tag = "role",					
 					name = L["嘲讽提示"]..T.GetIconLink(1233999),
 					points = {hide = true},
 					events = {					
@@ -677,7 +675,6 @@ G.Encounters[2684] = {
 				{ -- 吸收盾 协议：净化（✓）
 					category = "BossMod",
 					spellID = 1241303,
-					enable_tag = "none",
 					name = string.format(L["NAME吸收盾"], T.GetIconLink(1241303)),
 					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 300},
 					events = {

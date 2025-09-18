@@ -53,7 +53,6 @@ G.Encounters["c391"] = {
 					category = "BossMod",
 					spellID = 356548,
 					name = T.GetIconLink(356548)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -126,6 +125,7 @@ G.Encounters["c391"] = {
 				{356537},
 			},
 			options = {
+				T.Temp_ImportantInterruptBar(356537), -- 强化约束雕文（✓）
 				{ -- 姓名板打断图标 强化约束雕文（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -194,6 +194,9 @@ G.Encounters["c391"] = {
 				{354297},
 			},
 			options = {
+				T.Temp_SubInterruptBar(354297, { -- 凌光箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 凌光箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -220,14 +223,7 @@ G.Encounters["c391"] = {
 				{355934},
 			},
 			options = {		
-				{ -- 计时条 强光屏障（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355934,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(355934), -- 强光屏障（✓）
 				{ -- 姓名板打断图标 强光屏障（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -341,6 +337,7 @@ G.Encounters["c391"] = {
 				{356407},
 			},
 			options = {
+				T.Temp_NormalInterruptBar(356407), -- 上古恐慌（✓）
 				{ -- 姓名板打断图标 上古恐慌（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -406,7 +403,6 @@ G.Encounters["c391"] = {
 				{ -- 首领模块 狂暴冲锋 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 357512,
-					enable_tag = "none",
 					name = T.GetIconLink(357512)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -440,7 +436,6 @@ G.Encounters["c391"] = {
 					category = "BossMod",
 					spellID = 357508,
 					name = T.GetIconLink(357508)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -512,14 +507,9 @@ G.Encounters["c391"] = {
 				{1244443},
 			},
 			options = {	
-				{ -- 计时条 力量增幅器（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1244443,
+				T.Temp_ImportantInterruptBar(1244443, { -- 力量增幅器（✓）
 					ficon = "14",
-					glow = true,
-					group = 1,
-				},
+				}),
 			},
 		},
 		{ -- 老练的火花法师:凌光齐射
@@ -527,6 +517,7 @@ G.Encounters["c391"] = {
 				{355642},
 			},
 			options = {	
+				T.Temp_ImportantInterruptBar(355642), -- 凌光齐射（✓）
 				{ -- 姓名板打断图标 凌光齐射（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -584,7 +575,6 @@ G.Encounters["c391"] = {
 				{ -- 首领模块 致命武力 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 355480,
-					enable_tag = "none",
 					name = T.GetIconLink(355480)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -693,6 +683,9 @@ G.Encounters["c391"] = {
 				{357196},
 			},
 			options = {
+				T.Temp_SubInterruptBar(357196, { -- 凌光箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 凌光箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -851,14 +844,7 @@ G.Encounters["c391"] = {
 				{347775},
 			},
 			options = {				
-				{ -- 计时条 垃圾信息过滤（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 347775,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_NormalInterruptBar(347775), -- 垃圾信息过滤（✓）
 				{ -- 姓名板打断图标 垃圾信息过滤（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -889,6 +875,10 @@ G.Encounters["c391"] = {
 				{347903},
 			},
 			options = {
+				T.Temp_NormalInterruptBar(347903, { -- 垃圾邮件（✓）
+					show_tar = true,
+					ficon = "14",
+				}),
 				{ -- 对我施法图标 垃圾邮件（✓）
 					category = "AlertIcon",
 					type = "com",
@@ -948,7 +938,6 @@ G.Encounters["c391"] = {
 				{ -- 首领模块 充能猛击 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1240820,
-					enable_tag = "none",
 					name = T.GetIconLink(1240820)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	

@@ -30,14 +30,9 @@ G.Encounters["c542"] = {
 				{1229474},
 			},
 			options = {
-				{ -- 计时条 啃噬（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1229474,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_SubInterruptBar(1229474, { -- 啃噬（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 啃噬（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -107,7 +102,6 @@ G.Encounters["c542"] = {
 				{ -- 首领模块 不稳定的喷发 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1226110,
-					enable_tag = "none",
 					name = T.GetIconLink(1226110)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -136,41 +130,7 @@ G.Encounters["c542"] = {
 			spells = {
 				{1221190},
 			},
-			options = {
-				{ -- 首领模块 小怪技能倒计时 暴食瘴气（✓）
-					category = "BossMod",
-					spellID = 1221191,
-					name = T.GetIconLink(1221190)..L["倒计时"],
-					enable_tag = "none",
-					points = {hide = true},
-					events = {
-						["UNIT_ENTERING_COMBAT"] = true,
-						["GROUP_LEAVING_COMBAT"] = true,
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.cast_npcID = {
-							["236995"] = {
-								engage_cd = 6.2,
-								cast_cd = 18.2,
-								cast_gap = 5,
-							},
-						}
-						
-						frame.cast_spellID = 1221190
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["强力DOT"]
-						frame.text_color = T.GetSpellColor(frame.cast_spellID)
-						frame.sound_default = false
-						
-						T.InitMobCooldownText(frame)						
-					end,
-					update = function(frame, event, ...)
-						T.UpdateMobCooldownText(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetMobCooldownText(frame)
-					end,
-				},
+			options = {				
 				{ -- 计时条 暴食瘴气（✓）
 					category = "AlertTimerbar",
 					type = "cast",
@@ -193,7 +153,6 @@ G.Encounters["c542"] = {
 				{ -- 首领模块 暴食瘴气 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1221190,
-					enable_tag = "none",
 					name = T.GetIconLink(1221190)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -239,7 +198,6 @@ G.Encounters["c542"] = {
 					category = "BossMod",
 					spellID = 1221152,
 					name = T.GetIconLink(1221152)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -258,7 +216,6 @@ G.Encounters["c542"] = {
 						frame.cast_spellID = 1221152
 						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["全团AE"]
 						frame.text_color = T.GetSpellColor(frame.cast_spellID)						
-						frame.count_voice = "en"
 						
 						T.InitMobCooldownText(frame)						
 					end,
@@ -354,14 +311,7 @@ G.Encounters["c542"] = {
 				{1229510},
 			},
 			options = {
-				{ -- 计时条 弧光震击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1229510,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_NormalInterruptBar(1229510), -- 弧光震击（✓）
 				{ -- 姓名板打断图标 弧光震击（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -399,6 +349,9 @@ G.Encounters["c542"] = {
 				{1222815},
 			},
 			options = {
+				T.Temp_SubInterruptBar(1222815, { -- 奥术箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 奥术箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -470,7 +423,6 @@ G.Encounters["c542"] = {
 					category = "BossMod",
 					spellID = 1221532,
 					name = T.GetIconLink(1221532)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -507,6 +459,14 @@ G.Encounters["c542"] = {
 					glow = true,
 					group = 1,
 					sound = "[aoe]cast",
+				},
+				{ -- 自保技能提示 异变仪式（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 1221532,
+					event = "SPELL_CAST_START",
+					dur = 8.5,
+					threshold = 65,
 				},
 			},
 		},
@@ -608,7 +568,6 @@ G.Encounters["c542"] = {
 					category = "BossMod",
 					spellID = 1215850,
 					name = T.GetIconLink(1215850)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -669,7 +628,6 @@ G.Encounters["c542"] = {
 				{ -- 首领模块 钻地冲击 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1237195,
-					enable_tag = "none",
 					name = T.GetIconLink(1237195)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -703,7 +661,6 @@ G.Encounters["c542"] = {
 					category = "BossMod",
 					spellID = 1237220,
 					name = T.GetIconLink(1237220)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -741,6 +698,14 @@ G.Encounters["c542"] = {
 					group = 1,
 					sound = "[aoe]cast",
 				},
+				{ -- 自保技能提示 猛烈沙暴（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 1237220,
+					event = "SPELL_CAST_START",
+					dur = 4,
+					threshold = 65,
+				},
 			},
 		},
 		{ -- 卡雷什涌动
@@ -759,7 +724,6 @@ G.Encounters["c542"] = {
 				{ -- 首领模块 奥尔达尼沙地滤镜（✓）
 					category = "BossMod",
 					spellID = 1239229,
-					enable_tag = "none",
 					name = string.format(L["奥尔达尼沙地滤镜"], C_Map.GetAreaInfo(16422)),
 					points = {hide = true},
 					events = {	

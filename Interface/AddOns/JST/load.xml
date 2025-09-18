@@ -33,4 +33,5 @@
 	<Script file="elements\arrow.lua"/>
 	
 	<Script file="mods\hpwatch.lua"/>
+	<Script file="mods\templates.lua"/>
 </Ui>

@@ -80,6 +80,14 @@ G.Encounters[2650] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 自保技能提示 唤醒沼泽（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 473070,
+					event = "SPELL_CAST_START",
+					dur = 8,
+					threshold = 65,
+				},
 				{ -- 图标 汹涌怒涛（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -158,11 +166,13 @@ G.Encounters[2650] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 469478, T.GetIconLink(469478), self, event, ...)
 					end,
 				},
-				{ -- 计时条 淤泥之爪（✓）
+				{ -- 打坦计时条 淤泥之爪（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 469478,
+					group = 1,
 					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 淤泥之爪（✓）
 					category = "AlertIcon",
@@ -172,7 +182,6 @@ G.Encounters[2650] = {
 					spellID = 472878,
 					effect = 1,
 					tip = L["吸收治疗"],
-					ficon = "0",
 				},
 			},
 		},

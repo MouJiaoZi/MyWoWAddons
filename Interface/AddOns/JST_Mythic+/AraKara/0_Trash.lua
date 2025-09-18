@@ -70,6 +70,9 @@ G.Encounters["c503"] = {
 				{434786},
 			},
 			options = {				
+				T.Temp_SubInterruptBar(434786, { -- 蛛网箭 
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 蛛网箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -96,14 +99,9 @@ G.Encounters["c503"] = {
 				{434793},
 			},
 			options = {
-				{ -- 计时条 共振弹幕（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 434793,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_NormalInterruptBar(434793, { -- 共振弹幕（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 共振弹幕（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -164,6 +162,9 @@ G.Encounters["c503"] = {
 				{436322},
 			},
 			options = {				
+				T.Temp_ImportantInterruptBar(436322, { -- 毒液箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 毒液箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -222,7 +223,6 @@ G.Encounters["c503"] = {
 					category = "BossMod",
 					spellID = 438877,
 					name = T.GetIconLink(438877)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -275,6 +275,7 @@ G.Encounters["c503"] = {
 				{434802},
 			},
 			options = {
+				T.Temp_ImportantInterruptBar(434802), -- 惊惧尖鸣（✓）
 				{ -- 姓名板打断图标 惊惧尖鸣（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -287,7 +288,7 @@ G.Encounters["c503"] = {
 		},
 		{ -- 沾血的助手:深掘打击
 			spells = {
-				{433002, "0"},
+				{433002},
 			},
 			options = {			
 				{ -- 对我施法图标 深掘打击（✓）
@@ -303,14 +304,7 @@ G.Encounters["c503"] = {
 				{448248},
 			},
 			options = {				
-				{ -- 计时条 恶臭齐射（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 448248,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(448248), -- 恶臭齐射（✓）
 				{ -- 姓名板打断图标 恶臭齐射（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -361,7 +355,6 @@ G.Encounters["c503"] = {
 					category = "BossMod",
 					spellID = 1241693,
 					name = T.GetIconLink(1241693)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -421,14 +414,9 @@ G.Encounters["c503"] = {
 				{432967},
 			},
 			options = {
-				{ -- 计时条 预警尖鸣（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 432967,
+				T.Temp_ImportantInterruptBar(432967, { -- 预警尖鸣（✓）
 					ficon = "14",
-					glow = true,
-					group = 1,
-				},
+				}),
 				{ -- 姓名板施法图标 预警尖鸣（✓）
 					category = "PlateAlert",
 					type = "PlateSpells",
@@ -455,6 +443,7 @@ G.Encounters["c503"] = {
 				{433841},
 			},
 			options = {
+				T.Temp_ImportantInterruptBar(433841), -- 毒液箭雨（✓）
 				{ -- 姓名板打断图标 毒液箭雨（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -482,9 +471,9 @@ G.Encounters["c503"] = {
 				},
 			},
 		},
-		{ -- 强化雄虫:勒握斩击
+		{ -- 强化雄虫:污血
 			spells = {
-				{1241785, "0"},
+				{1241785},
 			},
 			options = {
 				{ -- 图标 污血（✓）

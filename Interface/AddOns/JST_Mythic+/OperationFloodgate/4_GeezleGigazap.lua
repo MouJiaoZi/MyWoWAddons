@@ -54,6 +54,14 @@ G.Encounters[2651] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 自保技能提示 涡轮增压（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 465463,
+					event = "SPELL_CAST_START",
+					dur = 14,
+					threshold = 65,
+				},
 			},
 		},
 		{ -- 水坝！
@@ -70,6 +78,12 @@ G.Encounters[2651] = {
 					tip = L["强力DOT"],
 					sound = "[defense]",
 					hl = "red",
+				},
+				{ -- 自保技能提示 激荡之水（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 468723,
+					threshold = 80,
 				},
 				{ -- 团队框架高亮 激荡之水（✓）
 					category = "RFIcon",
@@ -152,6 +166,12 @@ G.Encounters[2651] = {
 					sound = "[defense]",
 					hl = "org",
 				},
+				{ -- 自保技能提示 超力震击（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 468815,
+					threshold = 75,
+				},
 				{ -- 团队框架高亮 超力震击（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -189,11 +209,13 @@ G.Encounters[2651] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 466190, T.GetIconLink(466190), self, event, ...)
 					end,
 				},
-				{ -- 计时条 雷霆重拳（✓）
+				{ -- 打坦计时条 雷霆重拳（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 466190,
+					group = 1,
 					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 雷霆重拳（✓）
 					category = "AlertIcon",
@@ -202,7 +224,6 @@ G.Encounters[2651] = {
 					unit = "player",
 					spellID = 466188,
 					tip = L["DOT"],
-					ficon = "0",
 				},
 			},
 		},

@@ -25,7 +25,6 @@ G.Encounters[2573] = {
 				{ -- 吸收盾 圣光屏障（✓）
 					category = "BossMod",
 					spellID = 423588,
-					enable_tag = "none",
 					name = string.format(L["NAME吸收盾"], T.GetIconLink(423588)),
 					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 300},
 					events = {
@@ -68,6 +67,13 @@ G.Encounters[2573] = {
 					text = L["射线"],
 					sound = "[ray]cast",
 				},
+				{ -- 团队框架图标 纯洁圣光（✓）
+					category = "RFIcon",
+					type = "Msg",
+					spellID = 425556,
+					boss_msg = "425556",
+					dur = 7,
+				},
 				{ -- BOSS喊话 纯洁圣光（✓）
 					category = "AlertIcon",
 					type = "bmsg",
@@ -78,6 +84,31 @@ G.Encounters[2573] = {
 					dur = 7,
 					sound = "[run]cd3",
 					msg = {str_applied = "%name %spell", str_rep = "%spell %dur"},
+				},
+				{ -- 首领模块 纯洁圣光 点名密语计时圆圈（✓）
+					category = "BossMod",
+					spellID = 425556,
+					name = T.GetIconLink(425556)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {	
+						["CHAT_MSG_RAID_BOSS_WHISPER"] = true,
+					},
+					init = function(frame)
+						frame.keywords = {
+							["425556"] = {
+								color = {1, 1, 0},
+								dur = 7,
+							},
+						}
+						
+						T.InitCircleMsgTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateCircleMsgTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetCircleMsgTimers(frame)
+					end,
 				},
 				{ -- 图标 神圣之地（✓）
 					category = "AlertIcon",
@@ -103,6 +134,14 @@ G.Encounters[2573] = {
 					sound = "[backto]cast,cd3",
 					glow = true,
 					group = 1,
+				},
+				{ -- 自保技能提示 盲目之光（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 428169,
+					event = "SPELL_CAST_START",
+					dur = 4,
+					threshold = 75,
 				},
 				{ -- 图标 盲目之光（✓）
 					category = "AlertIcon",
@@ -193,11 +232,9 @@ G.Encounters[2573] = {
 				{423536, "6"},
 			},
 			options = {
-				{ -- 团队框架图标 神圣惩击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 423536,
-				},
+				T.Temp_NormalInterruptBar(423536, { -- 神圣惩击（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 神圣惩击（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -205,6 +242,11 @@ G.Encounters[2573] = {
 					mobID = "207940",
 					interrupt = 3,
 					ficon = "6",
+				},
+				{ -- 团队框架图标 神圣惩击（✓）
+					category = "RFIcon",
+					type = "Cast",
+					spellID = 423536,
 				},
 			},
 		},

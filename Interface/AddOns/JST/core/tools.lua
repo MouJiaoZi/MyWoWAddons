@@ -123,7 +123,6 @@ local ClassShareSpellData = {
 		[33206] = "protect", -- 痛苦压制
 		[47788] = "protect", -- 守护之魂
 		[73325] = "rescue", -- 信仰飞跃
-		[194509] = "protect", -- TEST
 	},
 	DRUID = {
 		[102342] = "protect", -- 铁木树皮
@@ -164,7 +163,6 @@ local ClassShareSpellData = {
 		[370665] = "rescue", -- 营救
 	},
 }
-G.ClassShareSpellData = ClassShareSpellData
 
 -- 所有同步CD信息法术
 local ClassShareSpellDatabySpell = {}

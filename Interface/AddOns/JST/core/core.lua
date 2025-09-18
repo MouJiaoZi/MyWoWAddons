@@ -241,6 +241,12 @@ local function SoundStrFilter(str)
 		return true
 	end
 end
+
+local function FilterThreat(unit)
+	if unit and UnitThreatSituation("player", unit) then	
+		return true
+	end
+end
 ----------------------------------------------------------
 -------------------[[    图标提示    ]]--------------------
 ----------------------------------------------------------
@@ -1260,16 +1266,37 @@ local function CreateBarAlertGroupFrame(name, text, anchor, x, y, pa)
 	frame.active_byindex = {}
 	
 	function frame:lineup()
+		table.sort(self.active_byindex, function(a, b)
+			local sub_groupA = a.sub_group or 1
+			local sub_groupB = b.sub_group or 1
+			if sub_groupA ~= sub_groupB then
+				return sub_groupA < sub_groupB
+			else
+				local exp_timeA = a.exp_time or a.exp_time_old
+				local exp_timeB = b.exp_time or b.exp_time_old
+				if exp_timeA and exp_timeB then
+					return exp_timeA < exp_timeB
+				end
+			end
+		end)
+		
+		local lastgroup
 		local lastframe
 		for index, bar in pairs(self.active_byindex) do
 			if bar:IsShown() then
 				bar:ClearAllPoints()
+				
 				if not lastframe then
 					bar:SetPoint("TOP", frame, "TOP")
+				elseif bar.sub_group ~= lastgroup then
+					local sub_group_gap = bar:GetHeight()
+					bar:SetPoint("TOP", lastframe, "BOTTOM", 0, -4-sub_group_gap)
 				else
 					bar:SetPoint("TOP", lastframe, "BOTTOM", 0, -4)
 				end
+				
 				lastframe = bar
+				lastgroup = bar.sub_group
 			end
 		end
 	end
@@ -1281,7 +1308,7 @@ end
 
 local BarFrame = CreateBarAlertGroupFrame("TimerbarFrame", L["计时条提示1"], "BOTTOM", 0, 200) -- 重要
 local BarFrame2 = CreateBarAlertGroupFrame("TimerbarFrame2", L["计时条提示2"], "BOTTOMLEFT", 210, 200) -- 一般
-local BarFrame3 = CreateBarAlertGroupFrame("TimerbarFrame3", L["换坦技能计时条"], "TOPLEFT", 210, 0) -- 一般
+local BarFrame3 = CreateBarAlertGroupFrame("TimerbarFrame3", L["换坦技能计时条"], "TOPLEFT", 210, 0) -- 换坦计时条
 
 T.EditBarAlertFrames = function(option)
 	if option == "all" or option == "bar_size" then
@@ -1308,18 +1335,7 @@ local CreateAlertBar = function(updater, group, tag)
 	end
 	
 	local bar = T.CreateTimerBar(parent, G.media.blank, true, true, true)
-	
-	bar.ind_text = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "LEFT")
-	bar.ind_text:SetPoint("LEFT", bar.left, "RIGHT", 5, 0)
-	
-	bar.value_text = T.createtext(bar, "OVERLAY", 14, "OUTLINE", "RIGHT")
-	bar.value_text:SetPoint("RIGHT", bar.right, "LEFT", -5, 0)
-	
-	bar:HookScript("OnSizeChanged", function(self, width, height)
-		self.ind_text:SetFont(G.Font, floor(height*.6), "OUTLINE")
-		self.value_text:SetFont(G.Font, floor(height*.6), "OUTLINE")
-	end)
-	
+
 	function bar:update_onedit(option) -- 载入配置
 		if option == "all" or option == "enable" then
 			if self.path then
@@ -1356,6 +1372,7 @@ local CreateAlertBar = function(updater, group, tag)
 		self.target_fixed = nil
 		
 		self:SetStatusBarColor(unpack(args.color))
+		self.sub_group = args.sub_group or 1
 		
 		if args.glow then		
 			self.glow:Show()
@@ -1425,6 +1442,10 @@ T.CreateCast = function(option_page, category, args)
 		args.group = 2
 	end
 	
+	if not args.sub_group then
+		args.sub_group = 1
+	end
+	
 	if not args.color then
 		args.color = T.GetSpellColor(args.spellID)
 	end
@@ -1450,14 +1471,13 @@ end
 function AlertBar_Cast_Updater:update_layout(event_type, tag, bar, args, cast_spellID, dur, exp_time)
 	bar:display(args)
 	
+	local icon = args.icon_tex or C_Spell.GetSpellTexture(cast_spellID) or 134400
 	local flagicons = args.ficon and T.GetFlagIconStr(args.ficon) or ""
 	local text = args.text or C_Spell.GetSpellName(cast_spellID) or ""
-	local icon = args.icon_tex or C_Spell.GetSpellTexture(cast_spellID) or 134400
 	
 	bar.icon:SetTexture(icon)
 	bar.left:SetText(string.format("%s %s", flagicons, text))
-	bar.mid:SetText("")
-	
+	bar.mid:SetText("")	
 	bar:SetMinMaxValues(0, dur)
 		
 	if (not args.tags or event_type == "cast") and bar.tag_indcators then
@@ -1485,7 +1505,7 @@ function AlertBar_Cast_Updater:update_layout(event_type, tag, bar, args, cast_sp
 				end
 				
 				local cd_tag = "voi_countdown_"..event_type
-				if s[cd_tag] and not s.ofr then -- 倒数
+				if s[cd_tag] and s.inRange then -- 倒数
 					s.remain_second = ceil(s.remain)
 					
 					if s.remain_second <= s[cd_tag] and s.remain_second > 0 then
@@ -1523,16 +1543,16 @@ end
 
 function AlertBar_Cast_Updater:update_range(bar, args, unit)
 	if args.range_ck then
-		if T.IsUnitOutOfRange(unit) then -- 50码之外
-			bar:SetAlpha(.2)
-			bar.ofr = true
-		else
+		if T.IsUnitInRange(unit) then
 			bar:SetAlpha(1)
-			bar.ofr = false
+			bar.inRange = true
+		else
+			bar:SetAlpha(.2)
+			bar.inRange = false
 		end
 	else
 		bar:SetAlpha(1)
-		bar.ofr = false
+		bar.inRange = true
 	end
 end
 
@@ -1549,8 +1569,17 @@ function AlertBar_Cast_Updater:update_target(bar, args, unit)
 	end
 end
 
+function AlertBar_Cast_Updater:update_raidmark(bar, args, unit)
+	if args.show_rm then
+		local rt = GetRaidTargetIndex(unit)
+		bar.rm_text:SetText(rt and T.FormatRaidMark(rt) or "")
+	else
+		bar.rm_text:SetText("")
+	end
+end
+
 function AlertBar_Cast_Updater:play_sound(event_type, bar, args, unit)
-	if args.sound and string.find(args.sound, event_type) and T.ValueFromDB(bar.path)["sound_bool"] and not bar.ofr and SoundStrFilter(args.sound) then
+	if args.sound and string.find(args.sound, event_type) and T.ValueFromDB(bar.path)["sound_bool"] and bar.inRange and SoundStrFilter(args.sound) then
 		T.PlaySound(string.match(args.sound, "%[(.+)%]"..event_type))
 		
 		if args.show_tar then -- 与朗读序号冲突
@@ -1595,6 +1624,9 @@ function AlertBar_Cast_Updater:update(event_type, cast_Tag, bar, args, unit, cas
 	-- 目标
 	self:update_target(bar, args, unit)
 	
+	-- 标记
+	self:update_raidmark(bar, args, unit)
+	
 	-- 声音
 	self:play_sound(event_type, bar, args, unit)
 end
@@ -1605,7 +1637,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 		if unit and cast_GUID and cast_spellID then
 			local spellID = self.MultiSpellIDs[cast_spellID] or cast_spellID
 			local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "cast", spellID})
-			if args and not args.dur then
+			if args and not args.dur and (not args.threat_ck or FilterThreat(unit)) then
 				local enable = T.ValueFromDB({"AlertTimerbar", "cast", spellID, "enable"})
 				if enable then
 					local startTimeMS, endTimeMS = select(4, UnitCastingInfo(unit))
@@ -1633,7 +1665,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 		if unit and cast_spellID then
 			local spellID = self.MultiSpellIDs[cast_spellID] or cast_spellID			
 			local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "cast", spellID})
-			if args and not args.dur then
+			if args and not args.dur and (not args.threat_ck or FilterThreat(unit)) then
 				local enable = T.ValueFromDB({"AlertTimerbar", "cast", spellID, "enable"})
 				if enable then
 					local GUID = UnitGUID(unit)
@@ -1643,6 +1675,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 						local bar = self:GetAlert(args.group or 2, cast_Tag)
 						local dur = (endTimeMS - startTimeMS)/1000
 						local exp_time = endTimeMS/1000
+						self:update("channel", cast_Tag, bar, args, unit, cast_spellID, dur, exp_time)
 						bar.target_fixed = true
 					end
 				end
@@ -1663,7 +1696,7 @@ AlertBar_Cast_Updater:SetScript("OnEvent", function(self, event, ...)
 		if unit and cast_GUID and cast_spellID then
 			local spellID = self.MultiSpellIDs[cast_spellID] or cast_spellID
 			local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "cast", spellID})
-			if args and args.dur then
+			if args and args.dur and (not args.threat_ck or FilterThreat(unit)) then
 				local enable = T.ValueFromDB({"AlertTimerbar", "cast", spellID, "enable"})
 				if enable then
 					local cast_Tag = "Succeeded-"..cast_GUID
@@ -1730,6 +1763,10 @@ T.CreateCLEU = function(option_page, category, args)
 		args.group = 2
 	end
 	
+	if not args.sub_group then
+		args.sub_group = 1
+	end
+	
 	if not args.color then
 		args.color = T.GetSpellColor(args.spellID)
 	end
@@ -1756,9 +1793,9 @@ function AlertBar_CLEU_Updater:update_layout(cleuTag, bar, args, log_spellID)
 	bar:display(args)
 	
 	local dur = args.dur
-	local flagicons = args.ficon and T.GetFlagIconStr(args.ficon) or ""
-	local text = args.text or C_Spell.GetSpellName(log_spellID) or ""
 	local icon = args.icon_tex or C_Spell.GetSpellTexture(log_spellID) or 134400
+	local flagicons = args.ficon and T.GetFlagIconStr(args.ficon) or ""
+	local text = args.text or C_Spell.GetSpellName(log_spellID) or ""	
 	
 	bar.icon:SetTexture(icon)
 	bar.left:SetText(string.format("%s %s", flagicons, text))
@@ -1784,7 +1821,7 @@ function AlertBar_CLEU_Updater:update_layout(cleuTag, bar, args, log_spellID)
 				s.right:SetText(T.FormatTime(s.remain))
 				s:SetValue(s.dur - s.remain)
 				
-				if s.voi_countdown and not s.ofr then -- 倒数
+				if s.voi_countdown and s.inRange then -- 倒数
 					s.remain_second = ceil(s.remain)
 					
 					if s.remain_second <= s.voi_countdown and s.remain_second > 0 then
@@ -1815,16 +1852,16 @@ end
 function AlertBar_CLEU_Updater:update_range(bar, args, sourceGUID)
 	if args.range_ck then
 		local unit = UnitTokenFromGUID(sourceGUID)
-		if unit and T.IsUnitOutOfRange(unit) then -- 50码之外		
-			bar:SetAlpha(.2)
-			bar.ofr = true
-		else
+		if unit and T.IsUnitInRange(unit) then
 			bar:SetAlpha(1)
-			bar.ofr = false
+			bar.inRange = true
+		else
+			bar:SetAlpha(.2)
+			bar.inRange = false
 		end
 	else
 		bar:SetAlpha(1)
-		bar.ofr = false
+		bar.inRange = true
 	end
 end
 
@@ -1838,8 +1875,17 @@ function AlertBar_CLEU_Updater:update_target(bar, args, destGUID)
 	end
 end
 
+function AlertBar_CLEU_Updater:update_raidmark(bar, args, sourceRaidFlags)
+	if args.show_rm then
+		local rt = T.GetRaidFlagsMark(sourceRaidFlags)
+		bar.rm_text:SetText(rt and T.FormatRaidMark(rt) or "")
+	else
+		bar.rm_text:SetText("")
+	end
+end
+
 function AlertBar_CLEU_Updater:play_sound(bar, args, destGUID)
-	if args.sound and T.ValueFromDB(bar.path)["sound_bool"] and not bar.ofr and SoundStrFilter(args.sound) then
+	if args.sound and T.ValueFromDB(bar.path)["sound_bool"] and bar.inRange and SoundStrFilter(args.sound) then
 		T.PlaySound(string.match(args.sound, "%[(.+)%]"))
 		
 		if args.show_tar and destGUID then -- 与朗读序号冲突
@@ -1866,7 +1912,7 @@ function AlertBar_CLEU_Updater:play_sound(bar, args, destGUID)
 	end
 end
 
-function AlertBar_CLEU_Updater:update(cleuTag, bar, args, log_spellID, sourceGUID, destGUID)
+function AlertBar_CLEU_Updater:update(cleuTag, bar, args, sourceGUID, sourceRaidFlags, destGUID, destRaidFlags, log_spellID)
 	-- 外观
 	self:update_layout(cleuTag, bar, args, log_spellID)
 
@@ -1879,16 +1925,19 @@ function AlertBar_CLEU_Updater:update(cleuTag, bar, args, log_spellID, sourceGUI
 	-- 目标
 	self:update_target(bar, args, destGUID)
 	
+	-- 标记
+	self:update_raidmark(bar, args, sourceRaidFlags)
+	
 	-- 声音
 	self:play_sound(bar, args, destGUID)
 end
 
 AlertBar_CLEU_Updater:SetScript("OnEvent", function(self, event, ...)
 	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, sub_event, _, sourceGUID, _, _, _, destGUID, _, _, _, log_spellID = CombatLogGetCurrentEventInfo()
+		local timestamp, sub_event, hide_caster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags, log_spellID = CombatLogGetCurrentEventInfo()
 		local spellID = self.MultiSpellIDs[log_spellID] or log_spellID
 		local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "cleu", spellID})
-		if args and args.event == sub_event and (not args.target_me or destGUID == G.PlayerGUID) then
+		if args and args.event == sub_event and (not args.target_me or destGUID == G.PlayerGUID) and (not args.threat_ck or FilterThreat(UnitTokenFromGUID(sourceGUID))) then
 			local enable = T.ValueFromDB({"AlertTimerbar", "cleu", spellID, "enable"})
 			if enable then
 				if not self.count_data[args.spellID] then
@@ -1901,7 +1950,7 @@ AlertBar_CLEU_Updater:SetScript("OnEvent", function(self, event, ...)
 				local cleuTag = "CLEU-"..sub_event.."-"..log_spellID..countTag
 
 				local bar = self:GetAlert(args.group, cleuTag)
-				self:update(cleuTag, bar, args, log_spellID, sourceGUID, destGUID)
+				self:update(cleuTag, bar, args, sourceGUID, sourceRaidFlags, destGUID, destRaidFlags, log_spellID)
 			end
 		end
 		
@@ -1938,6 +1987,10 @@ T.CreateAuraBar = function(option_page, category, args)
 		args.group = 2
 	end
 	
+	if not args.sub_group then
+		args.sub_group = 1
+	end
+	
 	if not args.color then
 		args.color = T.GetSpellColor(args.spellID)
 	end
@@ -1972,19 +2025,18 @@ function AlertBar_Aura_Updater:update_index(bar, args)
 	end
 end
 
-function AlertBar_Aura_Updater:update_range(bar, args, GUID)
+function AlertBar_Aura_Updater:update_range(bar, args, unit)
 	if args.range_ck then
-		local unit = UnitTokenFromGUID(GUID)
-		if unit and T.IsUnitOutOfRange(unit) then -- 50码之外		
-			bar:SetAlpha(.2)
-			bar.ofr = true
-		else
+		if T.IsUnitInRange(unit) then	
 			bar:SetAlpha(1)
-			bar.ofr = false
+			bar.inRange = true
+		else
+			bar:SetAlpha(.2)
+			bar.inRange = false
 		end
 	else
 		bar:SetAlpha(1)
-		bar.ofr = false
+		bar.inRange = true
 	end
 end
 
@@ -1998,8 +2050,17 @@ function AlertBar_Aura_Updater:update_target(bar, args, GUID)
 	end
 end
 
+function AlertBar_Aura_Updater:update_raidmark(bar, args, unit)
+	if args.show_rm then
+		local rt = GetRaidTargetIndex(unit)
+		bar.rm_text:SetText(rt and T.FormatRaidMark(rt) or "")
+	else
+		bar.rm_text:SetText("")
+	end
+end
+
 function AlertBar_Aura_Updater:play_sound(bar, args, GUID)
-	if args.sound and T.ValueFromDB(bar.path)["sound_bool"] and not bar.ofr and SoundStrFilter(args.sound) then
+	if args.sound and T.ValueFromDB(bar.path)["sound_bool"] and bar.inRange and SoundStrFilter(args.sound) then
 		T.PlaySound(string.match(args.sound, "%[(.+)%]"))
 		
 		if args.show_tar and GUID then -- 与朗读序号冲突
@@ -2026,7 +2087,7 @@ function AlertBar_Aura_Updater:play_sound(bar, args, GUID)
 	end
 end
 
-function AlertBar_Aura_Updater:update(aura_tag, bar, args, GUID, aura_data, applied) -- 待更新
+function AlertBar_Aura_Updater:update(aura_tag, bar, args, unit, GUID, aura_data, applied) -- 待更新
 	local name = aura_data.name
 	local icon = aura_data.icon
 	local count = aura_data.applications
@@ -2042,10 +2103,13 @@ function AlertBar_Aura_Updater:update(aura_tag, bar, args, GUID, aura_data, appl
 		self:update_index(bar, args)
 		
 		-- 距离
-		self:update_range(bar, args, GUID)
+		self:update_range(bar, args, unit)
 		
 		-- 目标
 		self:update_target(bar, args, GUID)
+		
+		-- 标记
+		self:update_raidmark(bar, args, unit)
 		
 		-- 声音
 		self:play_sound(bar, args, GUID)
@@ -2106,7 +2170,7 @@ function AlertBar_Aura_Updater:update(aura_tag, bar, args, GUID, aura_data, appl
 						s.right:SetText(T.FormatTime(s.remain))
 						s:SetValue(duration - s.remain)
 						
-						if s.voi_countdown and not s.ofr then -- 倒数
+						if s.voi_countdown and s.inRange then -- 倒数
 							s.remain_second = ceil(s.remain)
 							
 							if s.remain_second <= s.voi_countdown and s.remain_second > 0 then
@@ -2144,12 +2208,12 @@ function AlertBar_Aura_Updater:AuraFullCheck(unit, GUID)
 		AuraUtil.ForEachAura(unit, auraType, nil, function(aura_data)
 			local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 			local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "aura", spellID})
-			if args and T.CheckUnit(unit, args.unit, args.roles) and CheckAuraType(args.aura_type, aura_data) then
+			if args and T.CheckUnit(unit, args.unit, args.roles) and CheckAuraType(args.aura_type, aura_data) and (not args.threat_ck or FilterThreat(unit)) then
 				local enable = T.ValueFromDB({"AlertTimerbar", "aura", spellID, "enable"})
 				local aura_tag = GUID.."-"..aura_data.auraInstanceID
 				if enable and not self.actives_bytag[aura_tag] then
 					local bar = self:GetAlert(args.group, aura_tag)
-					self:update(aura_tag, bar, args, GUID, aura_data, true)
+					self:update(aura_tag, bar, args, unit, GUID, aura_data, true)
 				end
 			end
 		end, true)
@@ -2176,13 +2240,13 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 					for _, aura_data in pairs(updateInfo.addedAuras) do
 						local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 						local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "aura", spellID})
-						if args and T.CheckUnit(unit, args.unit, args.roles) and CheckAuraType(args.aura_type, aura_data) then
+						if args and T.CheckUnit(unit, args.unit, args.roles) and CheckAuraType(args.aura_type, aura_data) and (not args.threat_ck or FilterThreat(unit)) then
 							local enable = T.ValueFromDB({"AlertTimerbar", "aura", spellID, "enable"})
 							local GUID = UnitGUID(unit)
 							local aura_tag = GUID and GUID.."-"..aura_data.auraInstanceID
 							if enable and aura_tag and not self.actives_bytag[aura_tag] then
 								local bar = self:GetAlert(args.group, aura_tag)
-								self:update(aura_tag, bar, args, GUID, aura_data, true)
+								self:update(aura_tag, bar, args, unit, GUID, aura_data, true)
 							end
 						end
 					end
@@ -2198,7 +2262,7 @@ AlertBar_Aura_Updater:SetScript("OnEvent", function(self, event, ...)
 								local spellID = self.MultiSpellIDs[aura_data.spellId] or aura_data.spellId
 								local args = T.ValueFromPath(G.Current_Data, {"AlertTimerbar", "aura", spellID})
 								if args then
-									self:update(aura_tag, bar, args, GUID, aura_data)
+									self:update(aura_tag, bar, args, unit, GUID, aura_data)
 								end
 							else
 								self:RemoveAlert(bar.tag)
@@ -3260,7 +3324,7 @@ local function GetInterruptSpell(exp_time)
 					if exp_time - spell_exp > .5 then
 						return spellID, spell_exp
 					end
-				end						
+				end
 			end			
 		end
 	end
@@ -4439,7 +4503,8 @@ local function NamePlates_OnEvent(self, event, ...)
 				if config_spellID and T.ValueFromPath(PlateAlertFrames, {"PlateInterrupt", config_spellID}) then
 					local NpcID = select(6, string.split("-", destGUID))
 					if Npc_InterruptNum[NpcID] and Interrupt_GUIDs[destGUID] then
-						UpdateInterruptInd(destGUID, T.GetRaidFlagsMark(destRaidFlags))
+						local rt = T.GetRaidFlagsMark(destRaidFlags)
+						UpdateInterruptInd(destGUID, rt)
 						Interrupt_GUIDs[destGUID] = nil
 					end
 				end
@@ -4448,7 +4513,8 @@ local function NamePlates_OnEvent(self, event, ...)
 				if config_spellID and T.ValueFromPath(PlateAlertFrames, {"PlateInterrupt", config_spellID}) then
 					local NpcID = select(6, string.split("-", sourceGUID))
 					if Npc_InterruptNum[NpcID] then
-						UpdateInterruptInd(sourceGUID, T.GetRaidFlagsMark(sourceRaidFlags))	
+						local rt = T.GetRaidFlagsMark(sourceRaidFlags)
+						UpdateInterruptInd(sourceGUID, rt)	
 						Interrupt_GUIDs[sourceGUID] = nil
 					end
 				end
@@ -4764,7 +4830,7 @@ RM_Updater:SetScript("OnEvent", function(self, event, ...)
 		local _, sub_event, _, _, _, _, _, destGUID, _, _, destFlags = CombatLogGetCurrentEventInfo()
 		if sub_event == "UNIT_DIED" and destFlags and destFlags > 0 then
 			local rm = T.GetRaidFlagsMark(destFlags)
-			if rm > 0 and not FIX_NOT_UNIT_DEATH_ENCOUNTER then
+			if rm and not FIX_NOT_UNIT_DEATH_ENCOUNTER then
 				marksUsed[rm] = nil
 			end
 		end
@@ -5021,9 +5087,9 @@ local Dispel_Data = {
 			},
 		},
 		["HELPFUL"] = {
-			[11] = {
-				[374346] = {spellID = 406971}, -- 震魂摄魄
-			},
+			--[11] = {
+			--	[374346] = {spellID = 406971}, -- 震魂摄魄
+			--},
 		},
 	},
 }
@@ -5099,6 +5165,7 @@ SoundTrigger:SetScript("OnEvent", function(self, event, ...)
 								T.PlaySound(info.file)
 								SoundTrigger.last_dispel_played = GetTime()
 							end
+							--print("驱散提示音", spellID, C_Spell.GetSpellName(spellID))
 						end
 					else
 						T.PlaySound(info.file)
@@ -5485,7 +5552,9 @@ local function CreateRFIconHolders(parent)
 	end
 	
 	function frame:lineup()
-		table.sort(frame.actives, function(a, b) return a.last_update < b.last_update end)
+		table.sort(frame.actives, function(a, b)
+			return a.last_update < b.last_update
+		end)
 		
 		local x_offset = C.DB["RFIconOption"]["RFIcon_x_offset"]
 		local y_offset = C.DB["RFIconOption"]["RFIcon_y_offset"]
@@ -5982,11 +6051,7 @@ T.EditBossModsFrame = function(option)
 	end
 end
 
-T.CreateBossMod = function(option_page, category, args)
-	if not args.enable_tag then
-		T.msg(args.spellID, args.name, "首领模块未设置enable_tag")
-	end
-	
+T.CreateBossMod = function(option_page, category, args)	
 	local path = {category, args.spellID}
 	local frame = CreateFrame("Frame", addon_name.."_"..args.spellID.."_Mods", FrameHolder)
 	

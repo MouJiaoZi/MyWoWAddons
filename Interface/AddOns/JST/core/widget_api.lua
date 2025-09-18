@@ -57,13 +57,6 @@ T.IsUnitInRange = function(unit)
 	end
 end
 
--- 超出距离（50码）
-T.IsUnitOutOfRange = function(unit)	
-	if not C_Item.IsItemInRange(116139, unit) then
-		return true
-	end
-end
-
 --  [50]116139, -- Haunting Memento
 --  [55]74637, -- Kiryn's Poison Vial
 --  [60]32825, -- Soul Cannon
@@ -1100,8 +1093,6 @@ T.GetRaidFlagsMark = function(RaidFlags)
 		local check = bit.band(RaidFlags, COMBATLOG_OBJECT_RAIDTARGET_MASK)
 		if check and code_of_raid_marks[check] then
 			return code_of_raid_marks[check]
-		else
-			return 0
 		end
 	end
 end

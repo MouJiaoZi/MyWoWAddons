@@ -64,7 +64,6 @@ G.Encounters[2685] = {
 				{ -- 首领模块 虚空剑士奇袭 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1227049,
-					enable_tag = "none",
 					name = T.GetIconLink(1227049)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -208,7 +207,6 @@ G.Encounters[2685] = {
 				{ -- 首领模块 笞魂歼灭 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1227276,
-					enable_tag = "none",
 					name = T.GetIconLink(1227276)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -234,7 +232,7 @@ G.Encounters[2685] = {
 				{ -- 首领模块 笞魂歼灭 点名统计 整体排序（待测试）
 					category = "BossMod",
 					spellID = 1227277,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = string.format(L["NAME点名排序"], T.GetIconLink(1227276)),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 400},
 					events = {
@@ -291,7 +289,6 @@ G.Encounters[2685] = {
 					category = "BossMod",
 					spellID = 1250008,
 					ficon = "2",
-					enable_tag = "role",
 					name = L["团队框架吸收治疗数值"],
 					points = {hide = true},
 					events = {
@@ -414,7 +411,7 @@ G.Encounters[2685] = {
 				{ -- 首领模块 魂火汇聚 点名统计 逐个填坑（待测试）
 					category = "BossMod",
 					spellID = 1225616,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = string.format(L["NAME点名排序"], T.GetIconLink(1249065)),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 350},
 					events = {
@@ -429,10 +426,10 @@ G.Encounters[2685] = {
 						frame.disable_copy_mrt = true							
 						
 						frame.info = {
-							{text = L["左"], msg_applied = L["左"].."%name", msg = L["左"]},
-							{text = L["左"], msg_applied = L["左"].."%name", msg = L["左"]},
-							{text = L["右"], msg_applied = L["右"].."%name", msg = L["右"]},
-							{text = L["右"], msg_applied = L["右"].."%name", msg = L["右"]},
+							{text = L["左"], msg_applied = L["左"].."%name"},
+							{text = L["左"], msg_applied = L["左"].."%name"},
+							{text = L["右"], msg_applied = L["右"].."%name"},
+							{text = L["右"], msg_applied = L["右"].."%name"},
 						}
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
@@ -440,6 +437,13 @@ G.Encounters[2685] = {
 						function frame:post_display(element, index, unit, GUID)
 							if GUID == G.PlayerGUID then
 								T.Start_Text_Timer(self.text_frame, 9, self.info[index].text)
+								C_Timer.After(4, function()
+									if index <= 2 then
+										T.SendChatMsg(L["左"], 4)
+									else
+										T.SendChatMsg(L["右"], 4)
+									end
+								end)
 							end
 						end
 						
@@ -461,7 +465,6 @@ G.Encounters[2685] = {
 				{ -- 首领模块 魂火汇聚 计时圆圈（待测试）
 					category = "BossMod",
 					spellID = 1249065,
-					enable_tag = "none",
 					name = T.GetIconLink(1249065)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -528,8 +531,7 @@ G.Encounters[2685] = {
 				{ -- 嘲讽提示 秘法鞭笞（待测试）
 					category = "BossMod",
 					spellID = 1237607,
-					ficon = "0",
-					enable_tag = "role",					
+					ficon = "0",				
 					name = L["嘲讽提示"]..T.GetIconLink(1237607),
 					points = {hide = true},
 					events = {					

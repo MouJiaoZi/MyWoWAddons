@@ -1,16 +1,17 @@
 local T, C, L, G = unpack(select(2, ...))
 local addon_name = G.addon_name
+local CONST_GLOBALCOOLDOWN_SPELLID = 61304
 
 -- 消耗品
 local playerPersonalItemData = {
 	[5512] = {5512}, -- 治疗石
-	[244837] = {244837, 244838, 244839}, -- 焕生治疗药水
+	[244835] = {244835, 244838, 244839}, -- 焕生治疗药水
 }
 
 local SameNameItemData = {
-	[244837] = 244837, -- 焕生治疗药水1
-	[244838] = 244837, -- 焕生治疗药水2
-	[244839] = 244837, -- 焕生治疗药水3
+	[244835] = 244835, -- 焕生治疗药水1
+	[244838] = 244835, -- 焕生治疗药水2
+	[244839] = 244835, -- 焕生治疗药水3
 }
 
 local PersonalSpell_class = {
@@ -26,12 +27,15 @@ local PersonalSpell_class = {
 		61336, -- 生存本能
 		22842, -- 狂暴回复
 	},
-	SHAMAN = { 
+	SHAMAN = {
 		108271, -- 星界转移
+		{spellID = 108270, buff_spellID = 114893}, -- 石壁图腾
+		{spellID = 198103, buff_spellID = 381755}, -- 土元素
 	},
 	PALADIN = {
         498, -- 圣佑术
-		642, -- 圣盾术
+		{spellID = 642, ignore_debuff = 25771}, -- 圣盾术
+		{spellID = 633, ignore_debuff = 25771}, -- 圣疗术
 	},
 	WARRIOR = { 
 		12975, -- 破釜沉舟
@@ -75,35 +79,91 @@ local PersonalSpell_class = {
 	},
 }
 
+local SigleDefensiveSpells = {
+	33206, -- 痛苦压制
+	47788, -- 守护之魂
+	357170, -- 时间膨胀
+	102342, -- 铁木树皮
+	6940, -- 牺牲祝福
+	116849, -- 作茧缚命
+}
+
+local GroupDefensiveSpells = {
+	363534, -- 回溯
+	108280, -- 治疗之潮
+	374227, -- 微风
+	97463, -- 集结呐喊
+	145629, -- 反魔法领域
+	31821, -- 光环掌握
+	325174, -- 灵魂链接图腾
+	740, -- 宁静
+	64834, -- 神圣赞美诗
+	81782, -- 真言术：障
+	207498, -- 先祖护佑图腾
+	209426, -- 黑暗
+}
+
+
 -- 个人减伤法术
 local playerPersonalSpellData = {}
-for _, spellID in pairs(PersonalSpell_class[G.myClass]) do
-	playerPersonalSpellData[spellID] = true	
+for _, data in pairs(PersonalSpell_class[G.myClass]) do
+	if type(data) == "table" then
+		local spellID = data.spellID
+		playerPersonalSpellData[spellID] = {
+			check_spellID = spellID,
+			buff_spellID = spellID,	
+		}
+		MergeTable(playerPersonalSpellData[spellID], data)	
+	else
+		local spellID = data
+		playerPersonalSpellData[spellID] = {
+			check_spellID = spellID,
+			buff_spellID = spellID,	
+		}
+	end
 end
 
 -- 个人减伤光环
-local playerPersonalBuffData = {}
-for _, spellID in pairs(PersonalSpell_class[G.myClass]) do
-	playerPersonalBuffData[spellID] = true
-	T.RegisterWatchAuraSpellID(spellID)
+local BufftoSpellID = {}
+for _, data in pairs(playerPersonalSpellData) do
+	local spellID = data.spellID
+	local buff_spellID = data.buff_spellID
+	BufftoSpellID[buff_spellID] = spellID
+	T.RegisterWatchAuraSpellID(buff_spellID)
 end
 
-for Class, spells in pairs(G.ClassShareSpellData) do
-	for spellID in pairs(spells) do
-		playerPersonalBuffData[spellID] = true
-		T.RegisterWatchAuraSpellID(spellID)
+for _, buff_spellID in pairs(SigleDefensiveSpells) do
+	if not BufftoSpellID[buff_spellID] then
+		BufftoSpellID[buff_spellID] = 0
+		T.RegisterWatchAuraSpellID(buff_spellID)
+	end
+end
+
+for _, buff_spellID in pairs(GroupDefensiveSpells) do
+	if not BufftoSpellID[buff_spellID] then
+		BufftoSpellID[buff_spellID] = 0
+		T.RegisterWatchAuraSpellID(buff_spellID)
+	end
+end
+
+-- 影响减伤光环
+local ignoreDebufftoSpellID = {}
+for _, data in pairs(playerPersonalSpellData) do
+	local spellID = data.spellID
+	local ignore_debuff = data.ignore_debuff
+	if ignore_debuff then
+		ignoreDebufftoSpellID[ignore_debuff] = spellID
+		T.RegisterWatchAuraSpellID(ignore_debuff)
 	end
 end
 ----------------------------------------------------------
 -----------------[[    个人减伤提示    ]]-----------------
 ----------------------------------------------------------
-local almost_ready_dur = 3
 local checking_hp_tags = {}
 
 local PersonalSpellFrame = T.CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"],  40, "CENTER", 0, 100)
 
 PersonalSpellFrame.text = T.createtext(PersonalSpellFrame, "OVERLAY", 30, "OUTLINE", "LEFT")
-PersonalSpellFrame.text:SetPoint("LEFT", PersonalSpellFrame, "LEFT", 0, 0)
 
 PersonalSpellFrame.events = {
 	["UNIT_HEALTH"] = true,
@@ -133,18 +193,31 @@ function PersonalSpellFrame:lineup()
 		end
 	end)
 	
+	local anchor = C.DB["GeneralOption"]["personal_spell_dir"]
+	
+	self.text:ClearAllPoints()
+	self.text:SetPoint(anchor, self, anchor, 0, 0)
+	
+	local relative_anchor = anchor == "LEFT" and "RIGHT" or "LEFT"
+	local space = anchor == "LEFT" and 5 or -5
 	local lastframe
+	local count = 0
 	for index, icon in pairs(self.active_byindex) do
 		if icon:IsShown() then
 			icon:ClearAllPoints()
 			if not lastframe then
-				icon:SetPoint("LEFT", self.text, "RIGHT", 5, 0)
+				icon:SetPoint(anchor, self.text, relative_anchor, space, 0)
 			else
-				icon:SetPoint("LEFT", lastframe, "RIGHT", 5, 0)	
+				icon:SetPoint(anchor, lastframe, relative_anchor, space, 0)	
 			end
+			count = count + 1
 			lastframe = icon
 		end
 	end
+	
+	local size = C.DB["GeneralOption"]["personal_spell_size"]
+	PersonalSpellFrame:SetHeight(size)
+	PersonalSpellFrame:SetWidth(self.text:GetWidth()+(abs(space)+size)*count)
 end
 
 function PersonalSpellFrame:ShowCheck(perc)	
@@ -166,13 +239,17 @@ function PersonalSpellFrame:HideCheck(perc)
 	return not should_show
 end
 
+local last_sound_played = 0
 T.Play_personlspell_sound = function()
-	if C.DB["GeneralOption"]["personal_spell_sound"] ~= "none" then	
+	if C.DB["GeneralOption"]["personal_spell_sound"] ~= "none" and GetTime() - last_sound_played > 10 then	
 		T.PlaySound(C.DB["GeneralOption"]["personal_spell_sound"])
+		last_sound_played = GetTime()
 	end
 end
 
 function PersonalSpellFrame:Update()
+	if T.IsInPreview() then return end
+	
 	if UnitIsDeadOrGhost("player") then
 		self:Hide()
 	else
@@ -216,6 +293,14 @@ PersonalSpellFrame:SetScript("OnUpdate", function(self, e)
 		self.t = 0
 	end
 end)
+
+function PersonalSpellFrame:PreviewShow()
+	self:Show()
+end
+
+function PersonalSpellFrame:PreviewHide()
+	self:Update()
+end
 
 T.AddPersonalSpellCheckTag = function(tag, perc, ignore_roles)
 	if ignore_roles and type(ignore_roles) == "table" then 
@@ -265,17 +350,7 @@ local function CreatePersonalSpellIcon(updater, group, tag)
 			self.charge_text:SetText("")
 		end
 	end
-	
-	function icon:display_cd(start, dur)
-		if start and dur then
-			self.cooldown:SetCooldown(start, dur)
-			self.texture:SetDesaturated(true)
-		else
-			self.cooldown:SetCooldown(0, 0)
-			self.texture:SetDesaturated(false)
-		end
-	end
-	
+
 	function icon:display_dur(exp_time)
 		if exp_time then
 			self.t = 0
@@ -308,38 +383,27 @@ local function CreatePersonalSpellIcon(updater, group, tag)
 		end
 	end
 	
-	function icon:init_spell_display(spellID, charge, start, dur)
+	function icon:init_spell_display(spellID)
 		self.type = "spell"
 		self.spellID = spellID
-		
-		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
-		
-		self:display_charge(charge)
-		self:display_cd(start, dur)
-		
+		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))		
 		self:update_onedit("all")
 		self:Show()
 	end
 	
-	function icon:init_item_display(itemID, start, dur)
+	function icon:init_item_display(itemID)
 		self.type = "item"
 		self.itemID = itemID
-		
-		self.texture:SetTexture(select(5, C_Item.GetItemInfoInstant(itemID)))
-		self:display_cd(start, dur)
-		
+		self.texture:SetTexture(select(5, C_Item.GetItemInfoInstant(itemID)))	
 		self:update_onedit("all")
 		self:Show()
 	end
 	
-	function icon:init_buff_display(spellID, exp_time)
+	function icon:init_buff_display(spellID)
 		self.type = "buff"
 		self.spellID = spellID		
-		
 		self.texture:SetTexture(C_Spell.GetSpellTexture(spellID))
-		self:display_dur(exp_time)
 		self:display_glow(true)
-		
 		self:update_onedit("all")
 		self:Show()
 	end
@@ -347,10 +411,8 @@ local function CreatePersonalSpellIcon(updater, group, tag)
 	function icon:cancel()
 		self.type = "none"
 		self:display_charge()
-		self:display_cd()
 		self:display_dur()
 		self:display_glow(false)
-		
 		self:Hide()
 	end
 	
@@ -362,34 +424,36 @@ end
 -- 技能
 local PersonalSpell_Updater = T.CreateUpdater(CreatePersonalSpellIcon, PersonalSpellFrame)
 
-local function IsSpellAlmostReady(spellID)
-	if not IsPlayerSpell(spellID) then
-		return
-	end
+local function SpellIsReady(spellID)
+	if not playerPersonalSpellData[spellID] then return end
 	
-	local charge_info = C_Spell.GetSpellCharges(spellID)	
+	local data = playerPersonalSpellData[spellID]
+	local check_spellID = data.check_spellID
+	local buff_spellID = data.buff_spellID
+	local ignore_debuff = data.ignore_debuff
+	
+	if not IsPlayerSpell(spellID) or not IsPlayerSpell(check_spellID) then return end
+	if AuraUtil.FindAuraBySpellID(buff_spellID, "player", "HELPFUL") then return end
+	if ignore_debuff and AuraUtil.FindAuraBySpellID(ignore_debuff, "player", "HARMFUL") then return end
+	
+	local charge_info = C_Spell.GetSpellCharges(spellID)
 	if charge_info then
 		if charge_info.currentCharges > 0 then
 			return charge_info.currentCharges
-		else
-			local start = charge_info.cooldownStartTime
-			local dur = charge_info.cooldownDuration
-			local remain = start + dur - GetTime()
-			if remain < almost_ready_dur then
-				return 0, start, dur
-			end
 		end
 	else
 		local cd_info = C_Spell.GetSpellCooldown(spellID)
 		local start = cd_info.startTime
 		local dur = cd_info.duration
-		if start and dur < 2 then
+		local enable = cd_info.isEnabled
+		if start == 0 then
 			return 1
 		else
-			local remain = start + dur - GetTime()
-			if remain < almost_ready_dur then
-				return 0, start, dur
-			end 
+			local timeLeft = start + dur - GetTime()
+			local globalCooldownInfo = C_Spell.GetSpellCooldown(CONST_GLOBALCOOLDOWN_SPELLID)
+			if (globalCooldownInfo.startTime ~= 0 and globalCooldownInfo.duration >= timeLeft) then
+				return 1
+			end
 		end
 	end
 end
@@ -397,25 +461,43 @@ end
 PersonalSpell_Updater.last_update = 0
 PersonalSpell_Updater:SetScript("OnEvent", function(self, event, ...)
 	if event == "SPELLS_CHANGED" or event == "SPELL_UPDATE_COOLDOWN" or event == "SPELL_UPDATE_CHARGES" then
-		if GetTime() - self.last_update > .5 then
+		if GetTime() - self.last_update > .1 then
 			self.last_update = GetTime()
 			
-			for tag, icon in pairs(self.actives_bytag) do
-				if not IsSpellAlmostReady(icon.spellID) then
+			for spellID, icon in pairs(self.actives_bytag) do
+				local charge = SpellIsReady(spellID)
+				if not charge then
 					self:RemoveAlert(icon.tag)
 				end
 			end
 			
-			for spellID in pairs(playerPersonalSpellData) do	
-				local charge, start, dur = IsSpellAlmostReady(spellID)
+			for spellID in pairs(playerPersonalSpellData) do
+				local charge = SpellIsReady(spellID)
 				if charge then
 					if not self.actives_bytag[spellID] then
 						local icon = self:GetAlert(1, spellID)
-						icon:init_spell_display(spellID, charge, start, dur)
-					else
+						icon:init_spell_display(spellID)
+					end
+					local icon = self.actives_bytag[spellID]
+					icon:display_charge(charge)
+					
+				elseif self.actives_bytag[spellID] then
+					local icon = self.actives_bytag[spellID]
+					self:RemoveAlert(icon.tag)
+					
+				end
+			end
+		end
+	elseif event == "UNIT_AURA_ADD" then
+		local unit, aura_spellID = ...
+		if unit == "player" then
+			if BufftoSpellID[aura_spellID] then
+				local spellID = BufftoSpellID[aura_spellID] or ignoreDebufftoSpellID[aura_spellID]
+				if spellID and spellID ~= 0 and self.actives_bytag[spellID] then
+					local charge = SpellIsReady(spellID)
+					if not charge then
 						local icon = self.actives_bytag[spellID]
-						icon:display_charge(charge)
-						icon:display_cd(start, dur)						
+						self:RemoveAlert(icon.tag)
 					end
 				end
 			end
@@ -427,6 +509,8 @@ local personal_spell_events = {
 	["SPELLS_CHANGED"] = true,
 	["SPELL_UPDATE_COOLDOWN"] = true,
 	["SPELL_UPDATE_CHARGES"] = true,
+	["UNIT_SPELLCAST_SUCCEEDED"] = true,
+	["UNIT_AURA_ADD"] = true,
 }
 
 T.RegisterEventAndCallbacks(PersonalSpell_Updater, personal_spell_events)
@@ -434,13 +518,13 @@ T.RegisterEventAndCallbacks(PersonalSpell_Updater, personal_spell_events)
 -- 消耗品
 local PersonalItem_Updater = T.CreateUpdater(CreatePersonalSpellIcon, PersonalSpellFrame)
 
-local function IsItemAlmostReady(itemID)
+local function ItemIsReady(itemID)
 	-- 数量
 	local items = playerPersonalItemData[itemID]
 	local count = 0
 	for _, key in pairs(items) do
 		count = count + C_Item.GetItemCount(key)
-	end	
+	end
 	if count == 0 then
 		return
 	end
@@ -451,10 +535,11 @@ local function IsItemAlmostReady(itemID)
 		return
 	elseif start == 0 then
 		return 1
-	else		
-		local remain = start + dur - GetTime()
-		if remain < almost_ready_dur then
-			return 0, start, dur
+	else
+		local timeLeft = start + dur - GetTime()
+		local globalCooldownInfo = C_Spell.GetSpellCooldown(CONST_GLOBALCOOLDOWN_SPELLID)
+		if (globalCooldownInfo.startTime ~= 0 and globalCooldownInfo.duration >= timeLeft) then
+			return 1
 		end
 	end
 end
@@ -465,40 +550,34 @@ PersonalItem_Updater:SetScript("OnEvent", function(self, event, ...)
 		local real_itemID = ...
 		local itemID = SameNameItemData[real_itemID] or real_itemID
 		if playerPersonalItemData[itemID] then
-			local charge, start, dur = IsItemAlmostReady(itemID)
+			local charge = ItemIsReady(itemID)
 			if charge then
 				if not self.actives_bytag[itemID] then
 					local icon = self:GetAlert(1, itemID)
-					icon:init_item_display(itemID, start, dur)
-				else
-					local icon = self.actives_bytag[itemID]
-					icon:display_cd(start, dur)						
+					icon:init_item_display(itemID)
 				end
-			elseif self.actives_bytag[itemID] then
-				local icon = self.actives_bytag[itemID]
-				self:RemoveAlert(icon.tag)
+			else
+				if self.actives_bytag[itemID] then
+					local icon = self.actives_bytag[itemID]
+					self:RemoveAlert(icon.tag)
+				end
 			end
 		end
 	elseif event == "BAG_UPDATE_COOLDOWN" then
-		if GetTime() - self.last_update > .5 then
+		if GetTime() - self.last_update > .1 then
 			self.last_update = GetTime()
 			
 			for tag, icon in pairs(self.actives_bytag) do
-				if not IsItemAlmostReady(icon.itemID) then
+				if not ItemIsReady(icon.itemID) then
 					self:RemoveAlert(icon.tag)
 				end
 			end
 			
 			for itemID in pairs(playerPersonalItemData) do	
-				local charge, start, dur = IsItemAlmostReady(itemID)
-				if charge then
-					if not self.actives_bytag[itemID] then
-						local icon = self:GetAlert(1, itemID)
-						icon:init_item_display(itemID, start, dur)
-					else
-						local icon = self.actives_bytag[itemID]
-						icon:display_cd(start, dur)						
-					end
+				local charge = ItemIsReady(itemID)
+				if charge and not self.actives_bytag[itemID] then
+					local icon = self:GetAlert(1, itemID)
+					icon:init_item_display(itemID)
 				end
 			end
 		end
@@ -518,11 +597,12 @@ local PersonalBuff_Updater = T.CreateUpdater(CreatePersonalSpellIcon, PersonalSp
 PersonalBuff_Updater:SetScript("OnEvent", function(self, event, ...)
 	if event == "UNIT_AURA_ADD" then
 		local unit, spellID, auraID = ...
-		if unit == "player" and playerPersonalBuffData[spellID] then
+		if unit == "player" and BufftoSpellID[spellID] then
 			if not self.actives_bytag["buff"..auraID] then
 				local icon = self:GetAlert(1, "buff"..auraID)
 				local aura_data = C_UnitAuras.GetAuraDataByAuraInstanceID("player", auraID)
-				icon:init_buff_display(spellID, aura_data.expirationTime)
+				icon:init_buff_display(spellID)
+				icon:display_dur(aura_data.expirationTime)
 			end
 		end
 	elseif event == "UNIT_AURA_UPDATE" then
@@ -741,6 +821,7 @@ T.EditPersonalSpellFrame = function(option)
 			T.RestoreDragFrame(PersonalSpellFrame)
 			T.RegisterEventAndCallbacks(PersonalSpellFrame, PersonalSpellFrame.events)
 			T.RegisterEventAndCallbacks(HPWatchTrigger, HPWatchTrigger.events)
+			T.AddGeneralHPCheck()
 		else
 			T.ReleaseDragFrame(PersonalSpellFrame)
 			T.UnregisterEventAndCallbacks(PersonalSpellFrame, PersonalSpellFrame.events)
@@ -748,8 +829,8 @@ T.EditPersonalSpellFrame = function(option)
 			PersonalSpellFrame:Hide()
 		end
 	end
-	if option == "all" or option == "icon_size" then
-		PersonalSpellFrame:SetSize(C.DB["GeneralOption"]["personal_spell_size"]*4+20, C.DB["GeneralOption"]["personal_spell_size"])
+	if option == "all" or option == "icon_size" or option == "grow_dir" then
+		PersonalSpellFrame:lineup()
 	end
 	for _, icon in pairs(PersonalSpellFrame.active_byindex) do
 		icon:update_onedit(option)

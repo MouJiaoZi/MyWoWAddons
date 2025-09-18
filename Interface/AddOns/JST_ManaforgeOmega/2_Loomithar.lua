@@ -98,7 +98,6 @@ G.Encounters[2686] = {
 				{ -- 首领模块 姓名板标记 织造结界（✓）
 					category = "BossMod",
 					spellID = 1238502,
-					enable_tag = "none",
 					name = string.format(L["NAME姓名板标记"], T.GetNameFromNpcID("245173")..T.GetIconLink(1238502)),
 					points = {hide = true},
 					events = {
@@ -174,7 +173,7 @@ G.Encounters[2686] = {
 					category = "BossMod",
 					ficon = "12",
 					spellID = 1247672,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = T.GetIconLink(1247672)..L["分配"]..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,3,4")),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = 210, y = -40},
 					events = {
@@ -546,8 +545,7 @@ G.Encounters[2686] = {
 				{ -- 首领模块 注能晶塔 挡线时框架高亮（✓）
 					category = "BossMod",
 					ficon = "12",
-					spellID = 1247045,				
-					enable_tag = "none",
+					spellID = 1247045,
 					name = T.GetIconLink(1247045)..L["团队框架高亮"],
 					points = {hide = true},
 					events = {
@@ -703,7 +701,7 @@ G.Encounters[2686] = {
 				{ -- 首领模块 注能束缚 整体排序（✓）
 					category = "BossMod",
 					spellID = 1226366,
-					enable_tag = "none",
+					enable_tag = "spell",
 					name = string.format(L["NAME点名排序"], T.GetIconLink(1226311)),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 65},
 					events = {
@@ -933,8 +931,7 @@ G.Encounters[2686] = {
 				{ -- 嘲讽提示 贯体束丝（待测试）
 					category = "BossMod",
 					spellID = 1237212,
-					ficon = "0",
-					enable_tag = "role",					
+					ficon = "0",				
 					name = L["嘲讽提示"]..T.GetIconLink(1237212),
 					points = {hide = true},
 					events = {					
@@ -1090,8 +1087,7 @@ G.Encounters[2686] = {
 				{ -- 嘲讽提示 蠕行波（待测试）
 					category = "BossMod",
 					spellID = 1227163,
-					ficon = "0",
-					enable_tag = "role",					
+					ficon = "0",			
 					name = L["嘲讽提示"]..T.GetIconLink(1227163),
 					points = {hide = true},
 					events = {					

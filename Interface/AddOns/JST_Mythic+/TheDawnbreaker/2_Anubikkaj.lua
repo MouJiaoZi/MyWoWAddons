@@ -56,7 +56,6 @@ G.Encounters[2581] = {
 				{ -- 首领模块 恐惧猛击 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 427001,
-					enable_tag = "none",
 					name = T.GetIconLink(427001)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -113,8 +112,18 @@ G.Encounters[2581] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 426787,
+					group = 1,
 					text = L["全团AE"],
+					glow = true,
 					sound = "[aoe]cast",
+				},
+				{ -- 自保技能提示 晦影腐朽（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 426787,
+					event = "SPELL_CAST_START",
+					dur = 7,
+					threshold = 65,
 				},
 			},
 		},
@@ -175,6 +184,10 @@ G.Encounters[2581] = {
 				{452099},
 			},
 			options = {
+				T.Temp_SubInterruptBar(452099, { -- 凝结暗影（✓）
+					show_tar = true,
+					ficon = "14",
+				}),
 				{ -- 对我施法图标 凝结暗影（✓）
 					category = "AlertIcon",
 					type = "com",
@@ -234,7 +247,6 @@ G.Encounters[2581] = {
 				{ -- 首领模块 暗黑法球 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 426860,
-					enable_tag = "none",
 					name = T.GetIconLink(426860)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	

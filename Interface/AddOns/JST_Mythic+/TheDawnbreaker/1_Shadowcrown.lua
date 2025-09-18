@@ -236,6 +236,9 @@ G.Encounters[2580] = {
 				{428086, "6"},
 			},
 			options = {
+				T.Temp_NormalInterruptBar(428086, { -- 暗影箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 暗影箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",

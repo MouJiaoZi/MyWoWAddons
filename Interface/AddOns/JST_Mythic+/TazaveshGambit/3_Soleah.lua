@@ -104,7 +104,6 @@ G.Encounters[2455] = {
 				{ -- 首领模块 坍缩能量 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 350804,
-					enable_tag = "none",
 					name = T.GetIconLink(350804)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -176,7 +175,6 @@ G.Encounters[2455] = {
 				{ -- 首领模块 标记 索财团的刺客（✓）
 					category = "BossMod",
 					spellID = 351119,
-					enable_tag = "none",
 					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("177716"), T.FormatRaidMark("5,6")),
 					points = {hide = true},
 					events = {
@@ -209,6 +207,9 @@ G.Encounters[2455] = {
 						T.ResetRaidTarget(frame)
 					end,
 				},
+				T.Temp_NormalInterruptBar(351119, { -- 闪击手里剑（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 闪击手里剑（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -330,7 +331,6 @@ G.Encounters[2455] = {
 					category = "BossMod",
 					spellID = 351098,
 					name = string.format(L["计时条%s"], T.GetIconLink(351098)),
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,	

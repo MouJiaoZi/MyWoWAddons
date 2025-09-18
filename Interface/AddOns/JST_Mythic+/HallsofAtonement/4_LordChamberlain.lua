@@ -51,7 +51,6 @@ G.Encounters[2413] = {
 					category = "BossMod",
 					spellID = 329113,
 					name = string.format(L["计时条%s"], T.GetIconLink(329113), T.GetIconLink(323129)),
-					enable_tag = "none",
 					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 300},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
@@ -141,7 +140,7 @@ G.Encounters[2413] = {
 					glow = true,
 					group = 1,
 				},
-				{ -- 图标 哀伤仪式
+				{ -- 图标 哀伤仪式（✓）
 					category = "AlertIcon",
 					type = "aura",
 					aura_type = "HARMFUL",
@@ -150,11 +149,17 @@ G.Encounters[2413] = {
 					hl = "red",
 					tip = L["DOT"],
 				},
-				{ -- 团队框架高亮 哀伤仪式
+				{ -- 团队框架高亮 哀伤仪式（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 335338,
 					color = "red",
+				},
+				{ -- 自保技能提示 哀伤仪式（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 335338,
+					threshold = 75,
 				},
 			},
 		},
@@ -212,33 +217,6 @@ G.Encounters[2413] = {
 					spellID = 323236,
 					text = L["冲击波"],
 					sound = "[dodge]cast",
-				},
-			},
-		},
-		{ -- 傲慢罪印
-			spells = {
-				{323437, "2"},
-			},
-			options = {
-				{ -- 计时条 傲慢罪印（✓）
-					category = "AlertTimerbar",
-					type = "com",
-					spellID = 323437,
-				},
-				{ -- 图标 傲慢罪印（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 323437,
-					hl = "red",
-					tip = L["DOT"],
-				},
-				{ -- 团队框架高亮 傲慢罪印（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 323437,
-					color = "red",
 				},
 			},
 		},

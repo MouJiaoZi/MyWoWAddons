@@ -89,7 +89,6 @@ G.Encounters[2687] = {
 					category = "BossMod",
 					spellID = 1231720,
 					ficon = "3",
-					enable_tag = "none",
 					name = string.format(L["标注能量最高的目标"], T.GetFomattedNameFromNpcID("240905")),	
 					points = {hide = true},
 					events = {
@@ -208,7 +207,6 @@ G.Encounters[2687] = {
 				{ -- 首领模块 奥术收集装置血量对比 （✓）
 					category = "BossMod",
 					spellID = 1228103,
-					enable_tag = "none",
 					name = T.GetFomattedNameFromNpcID("240905").." "..L["NAME血量对比"],
 					points = {hide = true},
 					events = {
@@ -365,7 +363,6 @@ G.Encounters[2687] = {
 				{ -- 首领模块 星界收割 计时圆圈 （✓）
 					category = "BossMod",
 					spellID = 1228214,
-					enable_tag = "none",
 					name = T.GetIconLink(1233979)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -462,7 +459,7 @@ G.Encounters[2687] = {
 				{ -- 首领模块 星界收割 点名统计 整体排序 （✓）
 					category = "BossMod",
 					spellID = 1233979,
-					enable_tag = "none",
+					enable_tag = "spell",
 					name = string.format(L["NAME点名排序"], T.GetIconLink(1233979)),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 400},
 					events = {
@@ -564,7 +561,7 @@ G.Encounters[2687] = {
 				{ -- 首领模块 奥术具象 控制链（✓）
 					category = "BossMod",
 					spellID = 1236207,
-					enable_tag = "none",
+					enable_tag = "spell",
 					name = T.GetFomattedNameFromNpcID("242586")..L["控制链"],
 					points = {hide = true},
 					events = {
@@ -787,7 +784,6 @@ G.Encounters[2687] = {
 					category = "BossMod",
 					spellID = 1232775,
 					ficon = "2",
-					enable_tag = "role",
 					name = L["团队框架吸收治疗数值"],
 					points = {hide = true},
 					events = {
@@ -824,7 +820,6 @@ G.Encounters[2687] = {
 				{ -- 奥能回响 血量及击杀倒计时 （✓）
 					category = "BossMod",
 					spellID = 1238867,
-					enable_tag = "none",
 					name = string.format(L["血量及击杀倒计时"], T.GetFomattedNameFromNpcID("241923")),
 					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 300},
 					events = {
@@ -937,8 +932,7 @@ G.Encounters[2687] = {
 				{ -- 嘲讽提示 奥术抹消（待测试）
 					category = "BossMod",
 					spellID = 1228219,
-					ficon = "0",
-					enable_tag = "role",					
+					ficon = "0",				
 					name = L["嘲讽提示"]..T.GetIconLink(1228219),
 					points = {hide = true},
 					events = {					
@@ -1142,7 +1136,6 @@ G.Encounters[2687] = {
 					category = "BossMod",
 					spellID = 1228506,
 					ficon = "0",
-					enable_tag = "role",
 					name = L["嘲讽提示"]..T.GetIconLink(1228506),
 					points = {hide = true},
 					events = {					
@@ -1294,7 +1287,6 @@ G.Encounters[2687] = {
 					category = "BossMod",
 					spellID = 1234328,
 					ficon = "12",
-					enable_tag = "none",
 					name = T.GetIconLink(1234328)..L["倒计时"],	
 					points = {hide = true},
 					events = {
@@ -1436,7 +1428,6 @@ G.Encounters[2687] = {
 				{ -- 首领模块 法力牺牲 倒计时 （✓）
 					category = "BossMod",
 					spellID = 1230529,
-					enable_tag = "none",
 					name = T.GetIconLink(1230529)..L["倒计时"],	
 					points = {hide = true},
 					events = {
@@ -1636,7 +1627,6 @@ G.Encounters[2687] = {
 				{ -- 首领模块 虚空收割 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1243887,
-					enable_tag = "none",
 					name = T.GetIconLink(1243873)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -1670,7 +1660,6 @@ G.Encounters[2687] = {
 				{ -- 首领模块 虚空收割 点名统计 整体排序 （✓）
 					category = "BossMod",
 					spellID = 1243873,
-					enable_tag = "none",
 					name = string.format(L["NAME点名排序"], T.GetIconLink(1243873)),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 150},
 					events = {

@@ -3,6 +3,21 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+5.94
+Salhadaar Starkiller assign bug fix
+The Dawnbreaker Manifested Shadow correct Black Hail target determination errors.
+Eco-Dome Al'dani Azhiccar Toxic Regurgitation add drop pool sound.
+Organize the control/interruption timing bar data of Mythic+ and separate it from other timing bars in the same group.
+Organize the tank timing bar of the Mythic+.
+Organize self-protection prompt of the Mythic+.
+The self-protection prompt can now display a preview effect and select the direction of icon arrangement.
+The self-protection prompt will now monitor activated group cooldown buffs.
+The self-protection prompt now correctly prompts for the heal potion cooldown.
+The sound effects of the self-protection prompt should be spaced at least 10 seconds apart.
+Delete some Mythic+ trash spell countdown. (Abyssal Rot/Abysal Blast/Gluttonous Miasma)
+Cancel Evoker's reminder to dispel Enrage.
+Other error corrections.
+
 5.92
 Fractillus spawn/break wall assignment display the direction and distance of the assigned location.
 Fractillus spawn/break wall assignment group status display allocation position.

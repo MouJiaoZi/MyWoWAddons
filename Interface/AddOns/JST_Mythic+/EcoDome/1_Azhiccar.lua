@@ -166,7 +166,6 @@ G.Encounters[2675] = {
 				{ -- 首领模块 毒性反刍 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1227748,
-					enable_tag = "none",
 					name = T.GetIconLink(1227748)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -209,6 +208,7 @@ G.Encounters[2675] = {
 					spellID = 1217439,
 					tip = L["DOT"],
 					hl = "red",
+					sound = "[sound_water]",
 				},
 				{ -- 团队框架高亮 毒性反刍（✓）
 					category = "RFIcon",

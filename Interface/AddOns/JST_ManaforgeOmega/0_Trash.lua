@@ -38,7 +38,6 @@ G.Encounters["r2810"] = { -- Test
 				{ -- 首领模块 提示稳定飞行模式
 					category = "BossMod",
 					spellID = 404468,
-					enable_tag = "none",
 					name = string.format(L["你正处于稳定飞行"], T.GetIconLink(404468)),
 					points = {hide = true},
 					events = {

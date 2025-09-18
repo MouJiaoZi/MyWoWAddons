@@ -69,7 +69,7 @@ G.Encounters[2449] = {
 		},
 		{ -- 定时炸弹
 			spells = {
-				{1240097, "6"},
+				{1240097, "7"},
 			},
 			options = {
 				{ -- 文字 定时炸弹 倒计时（✓）
@@ -100,7 +100,7 @@ G.Encounters[2449] = {
 					type = "cast",
 					spellID = 1240102,
 					sound = "[bomb]cast",
-					ficon = "6",
+					ficon = "7",
 				},
 				{ -- 图标 定时炸弹（✓）
 					category = "AlertIcon",
@@ -108,7 +108,7 @@ G.Encounters[2449] = {
 					aura_type = "HARMFUL",
 					unit = "player",
 					spellID = 1240097,
-					ficon = "6",
+					ficon = "7",
 					hl = "blu",
 					sound = "[bombonyou]",
 				},

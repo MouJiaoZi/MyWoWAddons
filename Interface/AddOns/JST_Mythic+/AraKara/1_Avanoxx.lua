@@ -168,11 +168,13 @@ G.Encounters[2583] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 438471, T.GetIconLink(438471), self, event, ...)
 					end,
 				},
-				{ -- 对我施法图标 贪食撕咬（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 贪食撕咬（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 438471,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 贪食撕咬（✓）
 					category = "AlertIcon",

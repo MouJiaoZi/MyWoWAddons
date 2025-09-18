@@ -56,7 +56,6 @@ G.Encounters[2688] = {
 				{ -- 首领模块 姓名板标记 阿达拉斯·暮焰
 					category = "BossMod",
 					spellID = 1232569,
-					enable_tag = "none",
 					name = string.format(L["NAME姓名板标记"], T.GetNameFromNpcID("237661"))..T.hex_str(L["虚空"], {.23, .35, .96}),
 					points = {hide = true},
 					events = {
@@ -102,7 +101,6 @@ G.Encounters[2688] = {
 				{ -- 首领模块 姓名板标记 维拉瑞安·血愤
 					category = "BossMod",
 					spellID = 1231501,
-					enable_tag = "none",
 					name = string.format(L["NAME姓名板标记"], T.GetNameFromNpcID("237660"))..T.hex_str(L["浩劫"], {.72, .94, .19}),
 					points = {hide = true},
 					events = {
@@ -148,7 +146,6 @@ G.Encounters[2688] = {
 				{ -- 首领模块 姓名板标记 伊利萨·悲夜
 					category = "BossMod",
 					spellID = 1232568,
-					enable_tag = "none",
 					name = string.format(L["NAME姓名板标记"], T.GetNameFromNpcID("237662"))..T.hex_str(L["复仇"], {.92, .62, .86}),
 					points = {hide = true},
 					events = {
@@ -226,7 +223,6 @@ G.Encounters[2688] = {
 					category = "BossMod",
 					spellID = 1222307,
 					ficon = "2",
-					enable_tag = "role",
 					name = L["团队框架吸收治疗数值"],
 					points = {hide = true},
 					events = {
@@ -245,7 +241,7 @@ G.Encounters[2688] = {
 				{ -- 首领模块 吞噬者之怒 分配及驱散（待测试）
 					category = "BossMod",
 					spellID = 1222232,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = T.GetIconLink(1222232)..L["分配"].."("..string.format(L["NAME驱散提示"], T.GetIconLink(1222232))..")",
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 350},
 					events = {
@@ -1044,7 +1040,6 @@ G.Encounters[2688] = {
 				{ -- 首领模块 恶魔追击 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1227847,
-					enable_tag = "none",
 					name = T.GetIconLink(1227847)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -1072,7 +1067,6 @@ G.Encounters[2688] = {
 					category = "BossMod",
 					spellID = 1227809,
 					name = string.format(L["计时条%s"], T.GetIconLink(1227847)),
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
@@ -1226,8 +1220,8 @@ G.Encounters[2688] = {
 					category = "BossMod",
 					spellID = 1247415,
 					ficon = "12",
+					enable_tag = "spell",
 					name = T.GetIconLink(1227847)..L["分配"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
@@ -1473,7 +1467,6 @@ G.Encounters[2688] = {
 					category = "BossMod",
 					spellID = 1221490,
 					ficon = "0",
-					enable_tag = "role",
 					name = L["嘲讽提示"]..T.GetIconLink(1221490),
 					points = {hide = true},
 					events = {					
@@ -1627,7 +1620,6 @@ G.Encounters[2688] = {
 					category = "BossMod",
 					spellID = 1226493,
 					ficon = "0",
-					enable_tag = "role",
 					name = L["嘲讽提示"]..T.GetIconLink(1226493)..T.GetIconLink(1241917),
 					points = {hide = true},
 					events = {					
@@ -1681,7 +1673,6 @@ G.Encounters[2688] = {
 				{ -- 嘲讽提示 脆弱吃魂剩余数量（✓）
 					category = "BossMod",
 					spellID = 1241917,
-					enable_tag = "none",
 					name = string.format(L["脆弱吃魂剩余数量"], T.GetIconLink(1241917)),
 					points = {hide = true},
 					events = {					
@@ -1917,7 +1908,6 @@ G.Encounters[2688] = {
 				{ -- 首领模块 邪能毁灭 倒计时（待测试）
 					category = "BossMod",
 					spellID = 1227117,
-					enable_tag = "none",
 					name = T.GetIconLink(1227117)..L["引头前"]..L["倒计时"],
 					points = {hide = true},
 					events = {
@@ -1992,7 +1982,7 @@ G.Encounters[2688] = {
 					spellID = 1242883,
 					ficon = "12",
 					name = T.GetIconLink(1242883)..L["转阶段位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,7,5,4,3,6")),
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					points = {hide = true},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,	

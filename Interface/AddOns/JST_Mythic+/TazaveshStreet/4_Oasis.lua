@@ -84,6 +84,17 @@ G.Encounters[2452] = {
 				{353836},
 			},
 			options = {
+				T.Temp_SubInterruptBar(353836, { -- 凌光箭（✓）
+					show_tar = true,
+				}),
+				{ -- 姓名板打断图标 凌光箭（✓）
+					category = "PlateAlert",
+					type = "PlateInterrupt",
+					spellID = 353836,
+					mobID = "176565",
+					interrupt = 2,
+					ficon = "6",
+				},				
 				{ -- 对我施法图标 凌光箭（✓）
 					category = "AlertIcon",
 					type = "com",
@@ -95,14 +106,6 @@ G.Encounters[2452] = {
 					type = "Cast",
 					spellID = 353836,
 				},
-				{ -- 姓名板打断图标 凌光箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 353836,
-					mobID = "176565",
-					interrupt = 2,
-					ficon = "6",
-				},
 			},
 		},
 		{ -- 捣乱的顾客:传送
@@ -113,14 +116,9 @@ G.Encounters[2452] = {
 				{438599},
 			},
 			options = {
-				{ -- 计时条 传送（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 353783,
-					group = 1,
+				T.Temp_SubInterruptBar(353783, { -- 传送（✓）
 					ficon = "14",
-					glow = true,
-				},
+				}),
 			},
 		},
 		{ -- 绿洲保安:安保猛击
@@ -150,6 +148,7 @@ G.Encounters[2452] = {
 				{350922},
 			},
 			options = {
+				T.Temp_ImportantInterruptBar(350922), -- 威吓怒吼（✓）
 				{ -- 姓名板打断图标 威吓怒吼（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -171,7 +170,6 @@ G.Encounters[2452] = {
 				{ -- 吸收盾 最终警告（✓）
 					category = "BossMod",
 					spellID = 1241023,
-					enable_tag = "none",
 					name = string.format(L["NAME吸收盾"], T.GetIconLink(1241023)),
 					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 360},
 					events = {
@@ -236,7 +234,6 @@ G.Encounters[2452] = {
 				{ -- 首领模块 压制冲击 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 355439,
-					enable_tag = "none",
 					name = T.GetIconLink(355439)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	

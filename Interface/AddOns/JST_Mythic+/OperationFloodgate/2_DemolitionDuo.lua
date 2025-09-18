@@ -37,6 +37,12 @@ G.Encounters[2649] = {
 					tip = L["强力DOT"],
 					ficon = "4",
 				},
+				{ -- 自保技能提示 爆燃（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 461994,
+					threshold = 65,
+				},
 			},
 		},
 		{ -- 齐扎:B.B.B.F.G.
@@ -92,6 +98,12 @@ G.Encounters[2649] = {
 					ficon = "7",
 					msg = {str_applied = "{rt7}%spell %name", str_rep = "{rt7}"},
 				},
+				{ -- 自保技能提示 动能胶质炸药（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 473713,
+					threshold = 80,
+				},
 				{ -- 团队框架高亮 动能胶质炸药（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -130,7 +142,6 @@ G.Encounters[2649] = {
 				{ -- 首领模块 滚桶冲锋 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 470022,
-					enable_tag = "none",
 					name = T.GetIconLink(470022)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -194,12 +205,13 @@ G.Encounters[2649] = {
 						end
 					end,
 				},
-				{ -- 对我施法图标 重击（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 重击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 459799,
-					hl = "yel_flash",
-					sound = "[knockoff]",
+					group = 1,
+					ficon = "0",
+					sound = "[knockoff]cast",
 				},
 			},
 		},
@@ -211,7 +223,6 @@ G.Encounters[2649] = {
 				{ -- 血量对比（✓）
 					category = "BossMod",
 					spellID = 470090,
-					enable_tag = "none",
 					name = L["技能提示"].." "..L["NAME血量对比"],
 					points = {hide = true},
 					events = {

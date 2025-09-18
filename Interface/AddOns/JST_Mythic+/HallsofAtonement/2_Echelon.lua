@@ -109,13 +109,21 @@ G.Encounters[2387] = {
 				{ -- 首领模块 石化血肉 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 328206,
-					enable_tag = "none",
 					name = T.GetIconLink(328206)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
 						["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						["UNIT_TARGET"] = true,
 						["UNIT_AURA_ADD"] = true,
+					},
+					custom = {
+						{
+							key = "hp_perc_sl",
+							text = L["血量阈值百分比"],
+							default = 80,
+							min = 20,
+							max = 100,
+						},
 					},
 					init = function(frame)
 						frame.aura_spellID = 319603 -- 石化血肉
@@ -124,6 +132,23 @@ G.Encounters[2387] = {
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
 						frame.figure = T.CreateRingCD(frame, {1, 1, 0})
 
+						function frame:TargetCheck(unit)
+							if not unit then return end
+							
+							if UnitIsUnit(unit, "player") then
+								self.figure:begin(self.exp_time, 6, {
+									{dur = 2, color = {0, 1, 1}},
+								})
+								
+								T.AddPersonalSpellCheckTag("bossmod"..self.config_id, C.DB["BossMod"][self.config_id]["hp_perc_sl"], {"TANK"})
+								C_Timer.After(6, function()
+									T.RemovePersonalSpellCheckTag("bossmod"..self.config_id)
+								end)
+							else
+								T.Start_Text_Timer(self.text_frame, 2, L["没点你"])
+							end
+						end
+						
 						function frame:PreviewShow()
 							self.figure:begin(GetTime() + 6.5, 6.5, {
 								{dur = 2, color = {0, 1, 1}},
@@ -152,25 +177,13 @@ G.Encounters[2387] = {
 							if unit == "boss1" and frame.watched then
 								frame.watched = false
 								local target_unit = T.GetTarget(unit)
-								if UnitIsUnit(target_unit, "player") then
-									frame.figure:begin(frame.exp_time, 6, {
-										{dur = 2, color = {0, 1, 1}},
-									})
-								else
-									T.Start_Text_Timer(frame.text_frame, 2, L["没点你"])
-								end
+								frame:TargetCheck(target_unit)
 							end
 						elseif event == "UNIT_AURA_ADD" then
 							local unit, spellID = ...
 							if spellID == frame.aura_spellID and frame.watched then
 								frame.watched = false
-								if unit == "player" then
-									frame.figure:begin(frame.exp_time, 6, {
-										{dur = 2, color = {0, 1, 1}},
-									})
-								else
-									T.Start_Text_Timer(frame.text_frame, 2, L["没点你"])
-								end	
+								frame:TargetCheck(unit)
 							end
 						elseif event == "ENCOUNTER_START" then
 							T.RegisterWatchAuraSpellID(frame.aura_spellID)

@@ -59,6 +59,8 @@ G.Encounters[2570] = {
 					spellID = 423015,
 					spellIDs = {446649},
 					text = L["减速"].."+"..L["大圈"],
+					group = 1,
+					glow = true,
 				},
 				{ -- 图标 谴罚者之盾（✓）
 					category = "AlertIcon",
@@ -77,6 +79,9 @@ G.Encounters[2570] = {
 				{423051, "6"},
 			},
 			options = {
+				T.Temp_ImportantInterruptBar(423051, { -- 灼烧之光（✓）
+					spellIDs = {446657},
+				}),
 				{ -- 姓名板打断图标 灼烧之光（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -248,6 +253,12 @@ G.Encounters[2570] = {
 					spellID = 446403,
 					tip = L["强力DOT"],
 					hl = "red",
+				},
+				{ -- 自保技能提示 牺牲烈焰（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 446403,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 牺牲烈焰（✓）
 					category = "RFIcon",

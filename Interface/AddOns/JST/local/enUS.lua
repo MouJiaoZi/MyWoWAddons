@@ -590,14 +590,11 @@ L["加入战斗"]				= "%s entering combat"
 
 -- BossMod
 L["首领模块"]				= "Boss Mod"
-L["职责加载"]				= "|cffFFFFFFRole|r"
-L["职责加载tip"]			= "Suggest enabling according to one's own role (tank/dps/healer)"
 L["RL加载"]                 = "|cffFFFFFFRL|r"
 L["RL加载tip"]              = "Suggest RL to enable it"
-L["所有人加载"]				= "|cffFFFFFFEveryone|r"
-L["所有人加载tip"]			= "Suggest everyone to enable it"
 L["技能分配加载"]			= "|cffFFFFFFAssign|r"
-L["技能分配加载tip"]		= "Suggest players assigned to the spell to enable"
+L["技能分配加载tip"]		= "Suggest players assigned to enable"
+
 L["持续时间"] 				= "Duration"
 
 L["显示名字方式"]			= "Name Display Mode"

@@ -37,14 +37,7 @@ G.Encounters["c392"] = {
 				{355057},
 			},
 			options = {
-				{ -- 计时条 鱼人战吼（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355057,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(355057), -- 鱼人战吼（✓）
 				{ -- 姓名板打断图标 鱼人战吼（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -86,6 +79,9 @@ G.Encounters["c392"] = {
 				{355225},
 			},
 			options = {
+				T.Temp_SubInterruptBar(355225, { -- 水箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 水箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -129,7 +125,6 @@ G.Encounters["c392"] = {
 					category = "BossMod",
 					spellID = 355429,
 					name = T.GetIconLink(355429)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -217,6 +212,9 @@ G.Encounters["c392"] = {
 				{356843},
 			},
 			options = {
+				T.Temp_NormalInterruptBar(356843, { -- 盐渍飞弹（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 盐渍飞弹（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -243,14 +241,9 @@ G.Encounters["c392"] = {
 				{356133},
 			},
 			options = {
-				{ -- 计时条 超级塞松啤酒（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 356133,
+				T.Temp_NormalInterruptBar(356133, { -- 超级塞松啤酒（✓）
 					ficon = "14",
-					glow = true,
-					group = 1,
-				},
+				}),
 				{ -- 姓名板光环 超级塞松啤酒（✓）
 					category = "PlateAlert",
 					type = "PlateAuras",
@@ -264,14 +257,7 @@ G.Encounters["c392"] = {
 				{357260},
 			},
 			options = {
-				{ -- 计时条 不稳定的裂隙（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 357260,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(357260), -- 不稳定的裂隙（✓）
 				{ -- 姓名板打断图标 不稳定的裂隙（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -304,7 +290,6 @@ G.Encounters["c392"] = {
 					category = "BossMod",
 					spellID = 357238,
 					name = T.GetIconLink(357238)..L["召唤小怪"]..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -349,7 +334,6 @@ G.Encounters["c392"] = {
 				{ -- 首领模块 流浪的脉冲星 玩家自保技能提示（✓）
 					category = "BossMod",
 					spellID = 357256,
-					enable_tag = "none",
 					name = T.GetIconLink(357238)..L["玩家自保技能提示"],	
 					points = {hide = true},
 					events = {

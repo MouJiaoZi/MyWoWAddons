@@ -1,11 +1,8 @@
 ﻿local T, C, L, G = unpack(select(2, ...))
 
 local enable_tags = {
-	none	 = { tag = "",					tip = ""},
-	everyone = { tag = L["所有人加载"],		tip = L["所有人加载tip"]},
 	rl		 = { tag = L["RL加载"], 		tip = L["RL加载tip"]},
 	spell 	 = { tag = L["技能分配加载"], 	tip = L["技能分配加载tip"]},
-	role 	 = { tag = L["职责加载"], 		tip = L["职责加载tip"]},
 }
 
 local sound_suffix = {
@@ -539,16 +536,9 @@ local Checkbutton_Detail_DB = function(info, key_path, button, alert)
 end
 
 local CreateTagFrame = function(bu, enable_tag, ficon)
-	local str, tip = ""
-	
-	if enable_tag then
-		str = str..enable_tags[enable_tag].tag
-		tip = enable_tags[enable_tag].tip
-	end
-	
-	if ficon then
-		str = str..T.GetFlagIconStr(ficon, false)
-	end
+	local tag = enable_tag and enable_tags[enable_tag] and enable_tags[enable_tag].tag or ""
+	local tip = enable_tag and enable_tags[enable_tag] and enable_tags[enable_tag].tip
+	local ficon = ficon and T.GetFlagIconStr(ficon) or ""
 	
 	local frame = CreateFrame("Frame", nil, bu)
 	frame:SetPoint("RIGHT", bu, "LEFT", 0, 0)	
@@ -556,9 +546,9 @@ local CreateTagFrame = function(bu, enable_tag, ficon)
 	
 	frame.text = T.createtext(bu, "OVERLAY", 14, "OUTLINE", "RIGHT")
 	frame.text:SetPoint("RIGHT", frame, "RIGHT", 0, 0)	
-	frame.text:SetText(str)
+	frame.text:SetText(tag..ficon)
 	
-	if enable_tag and enable_tag ~= "none" then
+	if tip then
 		frame:SetScript("OnEnter", function(self) 
 			GameTooltip:SetOwner(self, "ANCHOR_RIGHT",  -20, 10)
 			GameTooltip:AddLine(tip)

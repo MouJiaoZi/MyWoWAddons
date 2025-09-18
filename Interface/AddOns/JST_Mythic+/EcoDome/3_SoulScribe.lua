@@ -101,7 +101,6 @@ G.Encounters[2677] = {
 					category = "BossMod",
 					spellID = 1236703,
 					name = string.format(L["计时条%s"], T.GetIconLink(1236703)),
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
@@ -171,7 +170,6 @@ G.Encounters[2677] = {
 				{ -- 首领模块 对未知的畏惧 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1225221,
-					enable_tag = "none",
 					name = T.GetIconLink(1225221)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	

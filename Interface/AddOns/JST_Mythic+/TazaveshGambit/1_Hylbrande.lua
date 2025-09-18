@@ -112,7 +112,7 @@ G.Encounters[2448] = {
 					spellID = 346959,
 					event = "CHAT_MSG_RAID_BOSS_WHISPER",
 					boss_msg = "346959",
-					hl = "org",
+					hl = "org_flash",
 					dur = 9,
 					sound = "[fixate]cd3",
 					msg = {str_applied = "%name %spell", str_rep = "{rt1}%dur"},
@@ -120,7 +120,6 @@ G.Encounters[2448] = {
 				{ -- 首领模块 火焰净除 点名密语计时圆圈（✓）
 					category = "BossMod",
 					spellID = 346959,
-					enable_tag = "none",
 					name = T.GetIconLink(346959)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -292,7 +291,6 @@ G.Encounters[2448] = {
 				{ -- 首领模块 标记 宝库净化者（✓）
 					category = "BossMod",
 					spellID = 352347,
-					enable_tag = "none",
 					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("176551"), T.FormatRaidMark("5,6")),
 					points = {hide = true},
 					events = {
@@ -325,6 +323,9 @@ G.Encounters[2448] = {
 						T.ResetRaidTarget(frame)
 					end,
 				},
+				T.Temp_NormalInterruptBar(352347, { -- 英勇冲击（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 英勇冲击（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",

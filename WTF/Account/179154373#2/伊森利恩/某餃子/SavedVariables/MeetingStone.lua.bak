@@ -105,31 +105,6 @@ MEETINGSTONE_CHARACTER_DB = {
 ["2-324-1281-0"] = {
 {
 ["role"] = "DAMAGER",
-["name"] = "鹿衔-红龙女王",
-["time"] = 1755521373,
-["class"] = 9,
-["leader"] = true,
-},
-{
-["role"] = "HEALER",
-["name"] = "傻馒妹妹-血色十字军",
-["time"] = 1755521373,
-["class"] = 7,
-},
-{
-["role"] = "DAMAGER",
-["name"] = "格羅姆什-奥特兰克",
-["time"] = 1755521373,
-["class"] = 1,
-},
-{
-["role"] = "DAMAGER",
-["name"] = "上岸脲脲的鱼-凤凰之神",
-["time"] = 1755521373,
-["class"] = 6,
-},
-{
-["role"] = "DAMAGER",
 ["name"] = "一锤八十-月神殿",
 ["time"] = 1756990002,
 ["class"] = 2,
@@ -383,6 +358,19 @@ MEETINGSTONE_CHARACTER_DB = {
 ["name"] = "萨幔-索拉丁",
 ["time"] = 1757691543,
 ["class"] = 7,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "爽至哀伤-燃烧之刃",
+["time"] = 1758121116,
+["class"] = 9,
+["leader"] = true,
+},
+{
+["role"] = "HEALER",
+["name"] = "啃啃丿-无尽之海",
+["time"] = 1758121116,
+["class"] = 5,
 },
 },
 ["3-0-1289-0"] = {

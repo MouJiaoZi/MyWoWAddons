@@ -1141,15 +1141,31 @@ local CreateTimerBar = function(parent, icon, glow, midtext, hide, width, height
 		end)
 	end
 	
+	bar.rm_text = T.createtext(bar, "OVERLAY", floor(h*.6), "OUTLINE", "LEFT")
+	bar.rm_text:SetPoint("LEFT", bar, "LEFT", 5, 0)
+	
+	bar.ficon_text = T.createtext(bar, "OVERLAY", floor(h*.6), "OUTLINE", "LEFT")
+	bar.ficon_text:SetPoint("LEFT", bar.rm_text, "RIGHT", 0, 0)
+	
 	bar.left = T.createtext(bar, "OVERLAY", floor(h*.6), "OUTLINE", "LEFT")
-	bar.left:SetPoint("LEFT", bar, "LEFT", 5, 0)
-						
+	bar.left:SetPoint("LEFT", bar.ficon_text, "RIGHT", 0, 0)
+	
+	bar.ind_text = T.createtext(bar, "OVERLAY", floor(h*.6), "OUTLINE", "LEFT")
+	bar.ind_text:SetPoint("LEFT", bar.left, "RIGHT", 5, 0)
+	
 	bar.right = T.createtext(bar, "OVERLAY", floor(h*.6), "OUTLINE", "RIGHT")
 	bar.right:SetPoint("RIGHT", bar, "RIGHT", -5, 0)
 	
+	bar.value_text = T.createtext(bar, "OVERLAY", floor(h*.6), "OUTLINE", "RIGHT")
+	bar.value_text:SetPoint("RIGHT", bar.right, "LEFT", -5, 0)
+	
 	bar:HookScript("OnSizeChanged", function(self, width, height)
+		self.rm_text:SetFont(G.Font, floor(height*.6), "OUTLINE")
+		self.ficon_text:SetFont(G.Font, floor(height*.6), "OUTLINE")
 		self.left:SetFont(G.Font, floor(height*.6), "OUTLINE")
+		self.ind_text:SetFont(G.Font, floor(height*.6), "OUTLINE")
 		self.right:SetFont(G.Font, floor(height*.6), "OUTLINE")
+		self.value_text:SetFont(G.Font, floor(height*.6), "OUTLINE")
 	end)
 	
 	if midtext then
@@ -2926,11 +2942,11 @@ local CreateUFBar = function(frame, GUID, extra_bar)
 	
 	function bar:update_mark_by_raidflags(raidFlags)
 		local mark = T.GetRaidFlagsMark(raidFlags)
-		if mark == 0 then
-			self.rt_icon:Hide()
-		else
+		if mark then
 			SetRaidTargetIconTexture(self.rt_icon, mark)
 			self.rt_icon:Show()
+		else
+			self.rt_icon:Hide()
 		end
 	end
 	

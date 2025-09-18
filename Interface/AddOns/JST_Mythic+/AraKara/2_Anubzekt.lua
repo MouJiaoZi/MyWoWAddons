@@ -46,14 +46,9 @@ G.Encounters[2584] = {
 				{28975},
 			},
 			options = {
-				{ -- 计时条 流丝束缚（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 442210,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(442210, { -- 流丝束缚（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 流丝束缚（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -153,7 +148,6 @@ G.Encounters[2584] = {
 				{ -- 首领模块 钻地冲击 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 439506,
-					enable_tag = "none",
 					name = T.GetIconLink(439506)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -185,7 +179,7 @@ G.Encounters[2584] = {
 		},
 		{ -- 穿刺
 			spells = {
-				{433425, "0"},
+				{433425},
 			},
 			options = {
 				{ -- 计时条 穿刺（✓）

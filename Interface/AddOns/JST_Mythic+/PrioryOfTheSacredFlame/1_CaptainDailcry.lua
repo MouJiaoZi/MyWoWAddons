@@ -35,7 +35,6 @@ G.Encounters[2571] = {
 				{ -- 吸收盾 野蛮重殴（✓）
 					category = "BossMod",
 					spellID = 447443,
-					enable_tag = "none",
 					name = string.format(L["NAME吸收盾"], T.GetIconLink(447443)),
 					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 300},
 					events = {
@@ -66,6 +65,12 @@ G.Encounters[2571] = {
 					tip = L["强力DOT"],
 					ficon = "13",
 				},
+				{ -- 自保技能提示 野蛮重殴（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 447439,
+					threshold = 75,
+				},
 				{ -- 团队框架高亮 野蛮重殴（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -79,6 +84,7 @@ G.Encounters[2571] = {
 				{424419, "6,11"},
 			},
 			options = {
+				T.Temp_ImportantInterruptBar(424419), -- 战斗狂啸（✓）
 				{ -- 姓名板打断图标 战斗狂啸（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -117,11 +123,13 @@ G.Encounters[2571] = {
 				{424414, "0,13"},
 			},
 			options = {
-				{ -- 对我施法图标 贯穿护甲（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 贯穿护甲（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 424414,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 驱散提示音 贯穿护甲（✓）
 					category = "Sound",
@@ -145,7 +153,10 @@ G.Encounters[2571] = {
 			npcs = {
 				{27828},
 			},
-			options = {				
+			spells = {
+				{424431},
+			},
+			options = {
 				{ -- 能量（✓）
 					category = "TextAlert",
 					color = {.2, 1, 1},
@@ -168,6 +179,25 @@ G.Encounters[2571] = {
 					group = 1,
 					instance_alert = true,
 				},
+				{ -- 自保技能提示 圣光烁辉（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 424431,
+					event = "SPELL_CAST_START",
+					dur = 10,
+					threshold = 65,
+					instance_alert = true,
+				},
+			},
+		},
+		{ -- 艾蕾娜·安博兰兹
+			npcs = {
+				{27828},
+			},
+			spells = {
+				{448515},
+			},
+			options = {
 				{ -- 计时条 神圣审判（✓）
 					category = "AlertTimerbar",
 					type = "cast",
@@ -208,6 +238,9 @@ G.Encounters[2571] = {
 			npcs = {
 				{27825},
 			},
+			spells = {
+				{424621},
+			},
 			options = {
 				{ -- 计时条 蛮力重击（✓）
 					category = "AlertTimerbar",
@@ -215,7 +248,17 @@ G.Encounters[2571] = {
 					spellID = 424621,
 					sound = "[outcircle]cast",
 					instance_alert = true,
-				},				
+				},			
+			},
+		},
+		{ -- 歇尼麦尔中士
+			npcs = {
+				{27825},
+			},
+			spells = {
+				{424423},
+			},
+			options = {
 				{ -- 计时条 跃进打击（✓）
 					category = "AlertTimerbar",
 					type = "cast",
@@ -233,6 +276,13 @@ G.Encounters[2571] = {
 					tip = L["强力DOT"],
 					ficon = "13",
 					sound = "[defense]",
+					instance_alert = true,
+				},
+				{ -- 自保技能提示 跃进打击（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 424426,
+					threshold = 65,
 					instance_alert = true,
 				},
 				{ -- 驱散提示音 跃进打击（✓）
@@ -256,6 +306,9 @@ G.Encounters[2571] = {
 			npcs = {
 				{27831},
 			},
+			spells = {
+				{424462},
+			},
 			options = {				
 				{ -- 计时条 余烬风暴（✓）
 					category = "AlertTimerbar",
@@ -264,37 +317,21 @@ G.Encounters[2571] = {
 					text = L["躲地板"],
 					sound = "[mindstep]cast",
 					instance_alert = true,
-				},
-				{ -- 姓名板打断图标 余烬冲击（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 424420,
-					mobID = "239834",
-					interrupt = 1,
-					ficon = "6",
+				},				
+			},
+		},		
+		{ -- 泰纳·杜尔玛
+			npcs = {
+				{27831},
+			},
+			spells = {
+				{424421},
+			},
+			options = {				
+				T.Temp_NormalInterruptBar(424421, { -- 火球术（✓）
+					show_tar = true,
 					instance_alert = true,
-				},
-				{ -- 驱散提示音 余烬冲击（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 424420,
-					file = "[dispel_now]",
-					ficon = "7",
-					instance_alert = true,
-				},
-				{ -- 团队框架高亮 余烬冲击（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 424420,
-					color = "blu",
-					instance_alert = true,
-				},
-				{ -- 团队框架图标 火球术（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 424421,
-					instance_alert = true,
-				},
+				}),
 				{ -- 姓名板打断图标 火球术（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -302,6 +339,12 @@ G.Encounters[2571] = {
 					mobID = "239834,211289",
 					interrupt = 2,
 					ficon = "6",
+					instance_alert = true,
+				},
+				{ -- 团队框架图标 火球术（✓）
+					category = "RFIcon",
+					type = "Cast",
+					spellID = 424421,
 					instance_alert = true,
 				},
 			},

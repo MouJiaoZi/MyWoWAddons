@@ -31,6 +31,14 @@ G.Encounters[2648] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 自保技能提示 快速启动（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 460156,
+					event = "SPELL_CAST_START",
+					dur = 13.5,
+					threshold = 65,
+				},
 				{ -- 图标 超量电化（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -57,7 +65,6 @@ G.Encounters[2648] = {
 				{ -- 首领模块 标记 暗锁无人机（✓）
 					category = "BossMod",
 					spellID = 471585,
-					enable_tag = "none",
 					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("228424"), T.FormatRaidMark("5,6,7,8")),
 					points = {hide = true},
 					events = {
@@ -100,11 +107,10 @@ G.Encounters[2648] = {
 				{1214780},
 			},
 			options = {				
-				{ --首领模块 终极失真（待测试）
+				{ --首领模块 终极失真（✓）
 					category = "BossMod",
 					spellID = 1214780,
 					ficon = "6",
-					enable_tag = "none",
 					name = T.GetIconLink(1214780)..L["计时条"],
 					points = {hide = true},
 					events = {					
@@ -124,12 +130,12 @@ G.Encounters[2648] = {
 							local interrupt_spellID, spell_exp = T.GetInterruptSpell(cast_expTime)
 							if interrupt_spellID then
 								if spell_exp == 0 then
-									self.bar.left:SetText(string.format("|cffffff00%s|r %s", L["打断"], name))
+									self.bar.left:SetText(string.format("%s%s", T.GetFlagIconStr("6"), name))
 								else
 									local wait = spell_exp - GetTime()
-									self.bar.left:SetText(string.format("|cffffff00%s|r %s |cffadd6ffCD:%.1f|r", L["打断"], name, wait))
+									self.bar.left:SetText(string.format("%s%s |cffadd6ffCD:%.1f|r", T.GetFlagIconStr("6"), name, wait))
 									C_Timer.After(wait, function()
-										self.bar.left:SetText(string.format("|cffffff00%s|r %s |cff00ff00%s|r", L["打断"], name, L["就绪"]))
+										self.bar.left:SetText(string.format("%s%s |cff00ff00%s|r", T.GetFlagIconStr("6"), name, L["就绪"]))
 									end)
 								end
 								
@@ -238,11 +244,13 @@ G.Encounters[2648] = {
 						end
 					end,
 				},
-				{ -- 计时条 电气重碾（✓）
+				{ -- 打坦计时条 电气重碾（✓）
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 473351,
+					group = 1,
 					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 电气重碾（✓）
 					category = "AlertIcon",
@@ -251,7 +259,6 @@ G.Encounters[2648] = {
 					unit = "player",
 					spellID = 473836,
 					tip = L["DOT"],
-					ficon = "0",
 				},
 			},
 		},
@@ -278,7 +285,6 @@ G.Encounters[2648] = {
 				{ -- 首领模块 音爆 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 473220,
-					enable_tag = "none",
 					name = T.GetIconLink(473220)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	

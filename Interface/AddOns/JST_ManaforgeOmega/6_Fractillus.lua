@@ -225,7 +225,6 @@ G.Encounters[2747] = {
 				{ -- 首领模块 虚无吞噬 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1247424,
-					enable_tag = "none",
 					name = T.GetIconLink(1247424)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -310,7 +309,6 @@ G.Encounters[2747] = {
 				{ -- 首领模块 结晶震荡波 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1233411,
-					enable_tag = "none",
 					name = T.GetIconLink(1233411)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -336,7 +334,7 @@ G.Encounters[2747] = {
 				{ -- 首领模块 出墙、消墙位置分配（待测试）
 					category = "BossMod",
 					spellID = 1233416,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = L["出墙消墙位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,3,4,5,6")),
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = 300, y = 340, width = 200, height = 200},
 					events = {
@@ -1444,7 +1442,6 @@ G.Encounters[2747] = {
 				{ -- 首领模块 碎壳 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1227373,
-					enable_tag = "none",
 					name = T.GetIconLink(1227373)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {
@@ -1527,7 +1524,6 @@ G.Encounters[2747] = {
 					category = "BossMod",
 					spellID = 1231871,
 					ficon = "0",
-					enable_tag = "role",
 					name = L["嘲讽提示"]..T.GetIconLink(1231871),
 					points = {hide = true},
 					events = {					

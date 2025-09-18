@@ -603,7 +603,7 @@ G.Options = {
 		{ -- 启用
 			key = "personal_spell_enable",
 			option_type = "check",
-			width = .5,
+			width = 1,
 			text = L["启用"],
 			apply = function()
 				T.EditPersonalSpellFrame("enable")
@@ -619,6 +619,20 @@ G.Options = {
 			step = 1,
 			apply = function()
 				T.EditPersonalSpellFrame("icon_size")
+			end,
+			rely = "personal_spell_enable",
+		},
+		{ -- 排列方向
+			key = "personal_spell_dir",
+			option_type = "ddmenu",
+			width = .5,
+			text = L["排列方向"],
+			option_table = {
+				{"RIGHT", L["向左延申"]},
+				{"LEFT", L["向右延申"]},
+			},
+			apply = function()
+				T.EditPersonalSpellFrame("grow_dir")
 			end,
 			rely = "personal_spell_enable",
 		},

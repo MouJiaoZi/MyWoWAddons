@@ -143,7 +143,6 @@ G.Encounters[2676] = {
 				{ -- 首领模块 迁跃打击 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1227142,
-					enable_tag = "none",
 					name = T.GetIconLink(1227142)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -253,7 +252,6 @@ G.Encounters[2676] = {
 				{ -- 首领模块 束缚的标枪 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1236126,
-					enable_tag = "none",
 					name = T.GetIconLink(1236126)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -323,7 +321,6 @@ G.Encounters[2676] = {
 				{ -- 首领模块 迁跃打击 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1220427,
-					enable_tag = "none",
 					name = T.GetIconLink(1220427)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -397,11 +394,13 @@ G.Encounters[2676] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss1", 1219482, T.GetIconLink(1219482), self, event, ...)
 					end,
 				},
-				{ -- 对我施法图标 裂隙利爪（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 裂隙利爪（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 1219482,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 裂隙利爪（✓）
 					category = "AlertIcon",

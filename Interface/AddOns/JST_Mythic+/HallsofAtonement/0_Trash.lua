@@ -70,14 +70,7 @@ G.Encounters["c378"] = {
 				{326450},
 			},
 			options = {
-				{ -- 计时条 忠心的野兽（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 326450,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(326450), -- 忠心的野兽（✓）
 				{ -- 姓名板打断图标 忠心的野兽（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -142,7 +135,6 @@ G.Encounters["c378"] = {
 					category = "BossMod",
 					spellID = 326409,
 					name = T.GetIconLink(326409)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -178,6 +170,14 @@ G.Encounters["c378"] = {
 					sound = "[aoe]cast",
 					glow = true,
 					group = 1,
+				},
+				{ -- 自保技能提示 痛击（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 326409,
+					event = "SPELL_CAST_START",
+					dur = 10,
+					threshold = 65,
 				},
 			},
 		},
@@ -215,6 +215,12 @@ G.Encounters["c378"] = {
 					spellID = 325701,
 					color = "red",
 				},
+				{ -- 自保技能提示 生命虹吸（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 325701,
+					threshold = 65,
+				},
 			},
 		},
 		{ -- 堕落的歼灭者:邪恶箭矢
@@ -222,6 +228,9 @@ G.Encounters["c378"] = {
 				{338003},
 			},
 			options = {
+				T.Temp_SubInterruptBar(338003, { -- 邪恶箭矢（✓）
+					show_tar = true,
+				}),	
 				{ -- 姓名板打断图标 邪恶箭矢（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -308,7 +317,6 @@ G.Encounters["c378"] = {
 					category = "BossMod",
 					spellID = 1235326,
 					name = T.GetIconLink(1235326)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -342,7 +350,6 @@ G.Encounters["c378"] = {
 					category = "BossMod",
 					spellID = 1235808,
 					name = string.format(L["计时条%s"], T.GetIconLink(1235326)),
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_SPELLCAST_START"] = true,
@@ -440,12 +447,13 @@ G.Encounters["c378"] = {
 				{1237071},
 			},
 			options = {
-				{ -- 对我施法图标 石拳（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 石拳（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 1237071,
-					hl = "yel_flash",
-					sound = "[knockback]",
+					group = 1,
+					ficon = "0",
+					sound = "[knockback]cast",
 				},
 			},
 		},
@@ -463,12 +471,19 @@ G.Encounters["c378"] = {
 					hl = "",
 					tip = L["DOT"].."+"..L["减速"].."%s20%",
 				},
-				{ -- 团队框架高亮 龟裂创伤（✓）
+				{ -- 团队框架高亮 脚踝撕咬（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 1235245,
 					color = "red",
 					amount = 5,
+				},
+				{ -- 自保技能提示 脚踝撕咬（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1235245,
+					threshold = 75,
+					amount = 3,
 				},
 			},
 		},		
@@ -484,12 +499,10 @@ G.Encounters["c378"] = {
 					spellID = 326638,
 					dur = 1,
 					show_tar = true,
-					sound = "[getout]",
 				},
 				{ -- 首领模块 投掷战刃 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 326638,
-					enable_tag = "none",
 					name = T.GetIconLink(326638)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -503,6 +516,7 @@ G.Encounters["c378"] = {
 								dur = 1,
 								color = {1, 1, 0},
 								reverse = true,
+								sound = "[getout]",
 							},
 						}
 						T.InitCircleTimers(frame)
@@ -534,17 +548,13 @@ G.Encounters["c378"] = {
 				{1235766},
 			},
 			options = {
-				{ -- 对我施法图标 致死打击（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 致死打击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 1235766,
-					hl = "yel_flash",
-					sound = "[defense]",
-				},
-				{ -- 团队框架图标 致死打击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1235766,
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 致死打击（✓）
 					category = "AlertIcon",
@@ -587,7 +597,6 @@ G.Encounters["c378"] = {
 				{ -- 首领模块 耀武扬威 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1236614,
-					enable_tag = "none",
 					name = T.GetIconLink(1236614)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -617,6 +626,9 @@ G.Encounters["c378"] = {
 				{326829},
 			},
 			options = {
+				T.Temp_SubInterruptBar(326829, { -- 邪恶箭矢（✓）
+					show_tar = true,
+				}),	
 				{ -- 姓名板打断图标 邪恶箭矢（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -669,7 +681,6 @@ G.Encounters["c378"] = {
 					category = "BossMod",
 					spellID = 326794,
 					name = T.GetIconLink(326794)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -727,6 +738,12 @@ G.Encounters["c378"] = {
 					type = "Aura",
 					spellID = 340446,
 					color = "red",
+				},
+				{ -- 自保技能提示 嫉妒之印（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 340446,
+					threshold = 75,
 				},
 			},
 		},

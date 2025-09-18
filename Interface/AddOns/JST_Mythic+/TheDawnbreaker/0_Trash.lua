@@ -22,6 +22,10 @@ G.Encounters["c505"] = {
 				{431303},
 			},
 			options = {
+				T.Temp_SubInterruptBar(431303, { -- 暗夜箭（✓）
+					show_tar = true,
+					threat_ck = true,
+				}),
 				{ -- 姓名板打断图标 暗夜箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -82,7 +86,6 @@ G.Encounters["c505"] = {
 					category = "BossMod",
 					spellID = 431364,
 					name = T.GetIconLink(431364)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -113,11 +116,13 @@ G.Encounters["c505"] = {
 				},
 				{ -- 计时条 折磨光束（✓）
 					category = "AlertTimerbar",
-					type = "cast",
+					type = "cleu",
 					spellID = 431364,
-					ficon = "6",
+					event = "SPELL_CAST_START",
+					dur = 2.5,
 					glow = true,
 					group = 1,
+					text = L["强力DOT"],
 				},
 				{ -- 图标 折磨光束（✓）
 					category = "AlertIcon",
@@ -128,6 +133,12 @@ G.Encounters["c505"] = {
 					hl = "red",
 					tip = L["强力DOT"],
 					sound = "[defense]",
+				},
+				{ -- 自保技能提示 折磨光束（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 431365,
+					threshold = 65,
 				},
 				{ -- 团队框架高亮 折磨光束（✓）
 					category = "RFIcon",
@@ -185,11 +196,13 @@ G.Encounters["c505"] = {
 				{431491},
 			},
 			options = {
-				{ -- 对我施法图标 污邪斩击（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 污邪斩击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 431491,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 污邪斩击（✓）
 					category = "AlertIcon",
@@ -227,14 +240,6 @@ G.Encounters["c505"] = {
 					spellID = 450756,
 					ficon = "7",
 				},
-				{ -- 驱散提示音 深渊嗥叫（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 450756,
-					aura_type = "HELPFUL",
-					file = "[dispel]",
-					ficon = "7",
-				},
 			},
 		},
 		{ -- 苏雷吉网法师:迸发虫茧
@@ -267,7 +272,6 @@ G.Encounters["c505"] = {
 				{ -- 首领模块 迸发虫茧 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 451107,
-					enable_tag = "none",
 					name = T.GetIconLink(451107)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -290,6 +294,12 @@ G.Encounters["c505"] = {
 						T.ResetUnitAuraCircleTimers(frame)			
 					end,
 				},
+				{ -- 自保技能提示 迸发虫茧（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 451107,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 迸发虫茧（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -303,6 +313,9 @@ G.Encounters["c505"] = {
 				{451113},
 			},
 			options = {
+				T.Temp_SubInterruptBar(451113, { -- 蛛网箭（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 蛛网箭（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -329,6 +342,9 @@ G.Encounters["c505"] = {
 				{431333},
 			},
 			options = {				
+				T.Temp_NormalInterruptBar(431333, { -- 折磨射线（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 折磨射线（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -346,6 +362,12 @@ G.Encounters["c505"] = {
 					hl = "red",
 					tip = L["强力DOT"],
 				},
+				{ -- 自保技能提示 折磨射线（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 431333,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 折磨射线（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -359,6 +381,7 @@ G.Encounters["c505"] = {
 				{432520},
 			},
 			options = {
+				T.Temp_NormalInterruptBar(432520), -- 暗影屏障（✓）
 				{ -- 姓名板打断图标 暗影屏障（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -373,45 +396,52 @@ G.Encounters["c505"] = {
 			spells = {
 				{432565},
 			},
-			options = {				
-				{ -- 计时条 黑暗之霰（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 432565,
-					sound = "[getout]cast",
-					show_tar = true,
-				},
-				{ -- 对我施法图标 黑暗之霰（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 432565,
-					hl = "yel_flash",
-					msg = {str_applied = "%name %spell", str_rep = "%spell %dur"},
-				},
-				{ -- 首领模块 黑暗之霰 对我施法计时圆圈（✓）
+			options = {
+				{ -- 首领模块 黑暗之霰 对我施法计时圆圈（待测试）
 					category = "BossMod",
 					spellID = 432565,
-					enable_tag = "none",
 					name = T.GetIconLink(432565)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
-						["UNIT_SPELLCAST_START"] = true,
-						["UNIT_SPELLCAST_STOP"] = true,
-						["UNIT_TARGET"] = true,
+						["UNIT_SPELLCAST_TARGET"] = true,
 					},
 					init = function(frame)
-						frame.spellIDs = {
-							[432565] = {		
-								color = {1, 1, 0},
-							},
-						}
-						T.InitCircleCastTimers(frame)
+						frame.figure = T.CreateRingCD(frame, {1, 1, 0}, true)
+						
+						function frame:PreviewShow()
+							self.figure:begin(GetTime() + 2.5, 2.5)
+						end
+						
+						function frame:PreviewHide()
+							self.figure:stop()
+						end
+						
+						function frame:ToggleText(value)
+							self.figure.dur_text:SetShown(value)
+						end
+
+						T.GetFigureCustomData(frame)
 					end,
 					update = function(frame, event, ...)
-						T.UpdateCircleCastTimers(frame, event, ...)
+						if event == "UNIT_SPELLCAST_TARGET" then
+							local unit, cast_GUID, cast_spellID, GUID = ...
+							if cast_spellID == 432565 and GUID == G.PlayerGUID and UnitGroupRolesAssigned("player") ~= "TANK" then -- 黑暗之霰
+								if frame.figure:IsShown() then return end
+								
+								local endTimeMS = select(5, UnitCastingInfo(unit))
+								if not endTimeMS then return end
+								
+								local exp_time = endTimeMS/1000
+								frame.figure:begin(exp_time, 2.5)
+								
+								local spell = C_Spell.GetSpellName(cast_spellID)
+								T.SendChatMsg(spell)
+								T.PlaySound("getout")
+							end
+						end
 					end,
 					reset = function(frame, event)
-						T.ResetCircleCastTimers(frame)		
+						frame.figure:stop()
 					end,
 				},
 			},
@@ -421,41 +451,6 @@ G.Encounters["c505"] = {
 				{453345, "2"},
 			},
 			options = {
-				{ -- 首领模块 小怪技能倒计时 深渊朽烂（✓）
-					category = "BossMod",
-					spellID = 453345,
-					name = T.GetIconLink(453345)..L["倒计时"],
-					enable_tag = "none",
-					points = {hide = true},
-					events = {
-						["UNIT_ENTERING_COMBAT"] = true,
-						["GROUP_LEAVING_COMBAT"] = true,
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.cast_npcID = {
-							["211341"] = {
-								engage_cd = 2,
-								cast_cd = 18.2,
-								cast_gap = 5,
-							},
-						}
-						
-						frame.cast_spellID = 453345
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..C_Spell.GetSpellName(frame.cast_spellID)
-						frame.text_color = T.GetSpellColor(frame.cast_spellID)
-						frame.sub_event = "SPELL_CAST_SUCCESS"
-						frame.count_voice = "en"
-						
-						T.InitMobCooldownText(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdateMobCooldownText(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetMobCooldownText(frame)
-					end,
-				},
 				{ -- 图标 深渊朽烂（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -464,6 +459,12 @@ G.Encounters["c505"] = {
 					spellID = 453345,
 					tip = L["强力DOT"],
 					hl = "red",
+				},
+				{ -- 自保技能提示 深渊朽烂（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 453345,
+					threshold = 75,
 				},
 				{ -- 团队框架高亮 深渊朽烂（✓）
 					category = "RFIcon",
@@ -551,50 +552,7 @@ G.Encounters["c505"] = {
 			spells = {
 				{451119},
 			},
-			options = {
-				{ -- 首领模块 小怪技能倒计时 深渊轰击（✓）
-					category = "BossMod",
-					spellID = 451119,
-					name = T.GetIconLink(451119)..L["倒计时"],
-					enable_tag = "none",
-					points = {hide = true},
-					events = {
-						["UNIT_ENTERING_COMBAT"] = true,
-						["GROUP_LEAVING_COMBAT"] = true,
-						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
-					},
-					init = function(frame)
-						frame.cast_npcID = {
-							["211261"] = { -- 扬升者维斯可里亚
-								engage_cd = 22.8,
-								cast_cd = 12,
-								cast_gap = 5,
-							},
-							["211263"] = { -- 死亡尖啸者艾肯塔克
-								engage_cd = 6.5,
-								cast_cd = 12,
-								cast_gap = 5,
-							},
-							["211262"] = { -- 坚不可摧的伊克斯雷腾
-								engage_cd = 4,
-								cast_cd = 12,
-								cast_gap = 5,
-							},
-						}
-						
-						frame.cast_spellID = 451119
-						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..C_Spell.GetSpellName(frame.cast_spellID)
-						frame.text_color = T.GetSpellColor(frame.cast_spellID)
-						
-						T.InitMobCooldownText(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdateMobCooldownText(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetMobCooldownText(frame)
-					end,
-				},
+			options = {				
 				{ -- 计时条 深渊轰击（✓）
 					category = "AlertTimerbar",
 					type = "cast",
@@ -622,6 +580,12 @@ G.Encounters["c505"] = {
 					tip = L["强力DOT"],	
 					hl = "red",
 				},
+				{ -- 自保技能提示 深渊轰击（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 451119,
+					threshold = 75,
+				},
 				{ -- 团队框架高亮 深渊轰击（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -639,7 +603,6 @@ G.Encounters["c505"] = {
 					category = "BossMod",
 					spellID = 451102,
 					name = T.GetIconLink(451102)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -677,6 +640,14 @@ G.Encounters["c505"] = {
 					group = 1,
 					sound = "[aoe]cast",
 				},
+				{ -- 自保技能提示 晦影腐朽（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 451102,
+					event = "SPELL_CAST_START",
+					dur = 5,
+					threshold = 65,
+				},
 			},
 		},
 		{ -- 死亡尖啸者艾肯塔克:暗黑法球
@@ -701,6 +672,12 @@ G.Encounters["c505"] = {
 					tip = L["强力DOT"],
 					sound = "[defense]",
 				},
+				{ -- 自保技能提示 黑暗伤痕（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 460135,
+					threshold = 85,
+				},
 				{ -- 团队框架高亮 黑暗伤痕（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -724,7 +701,6 @@ G.Encounters["c505"] = {
 				{ -- 首领模块 恐惧猛击 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 451117,
-					enable_tag = "none",
 					name = T.GetIconLink(451117)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -758,7 +734,6 @@ G.Encounters["c505"] = {
 					category = "BossMod",
 					spellID = 431349,
 					name = T.GetIconLink(431349)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -809,7 +784,6 @@ G.Encounters["c505"] = {
 				{ -- 首领模块 折磨喷发 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 431350,
-					enable_tag = "none",
 					name = T.GetIconLink(431350)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -832,6 +806,12 @@ G.Encounters["c505"] = {
 						T.ResetUnitAuraCircleTimers(frame)			
 					end,
 				},
+				{ -- 自保技能提示 折磨喷发（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 431350,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 折磨喷发（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -849,7 +829,6 @@ G.Encounters["c505"] = {
 					category = "BossMod",
 					spellID = 446615,
 					name = T.GetIconLink(446615)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -869,6 +848,7 @@ G.Encounters["c505"] = {
 						frame.cast_str = T.GetSpellIcon(frame.cast_spellID)..L["召唤小怪"]
 						frame.text_color = T.GetSpellColor(frame.cast_spellID)
 						frame.count_voice = "en"
+						frame.sound_default = false
 						
 						T.InitMobCooldownText(frame)
 					end,

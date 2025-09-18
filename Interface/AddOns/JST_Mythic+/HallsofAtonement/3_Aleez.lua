@@ -22,6 +22,9 @@ G.Encounters[2411] = {
 				{323538, "0,6"},
 			},
 			options = {
+				T.Temp_SubInterruptBar(323538, { -- 心能箭矢（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 心能箭矢（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -88,6 +91,12 @@ G.Encounters[2411] = {
 					type = "Aura",
 					spellID = 1236513,
 					color = "blu",
+				},
+				{ -- 自保技能提示 不稳定的心能（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1236513,
+					threshold = 65,
 				},
 			},
 		},

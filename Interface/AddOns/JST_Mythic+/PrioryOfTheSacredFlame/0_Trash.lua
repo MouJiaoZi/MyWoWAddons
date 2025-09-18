@@ -48,6 +48,10 @@ G.Encounters["c499"] = {
 				{462859},
 			},
 			options = {
+				T.Temp_SubInterruptBar(462859, { -- 随意射击（✓）
+					show_tar = true,
+					ficon = "14",
+				}),
 				{ -- 对我施法图标 随意射击（✓）
 					category = "AlertIcon",
 					type = "com",
@@ -82,6 +86,12 @@ G.Encounters["c499"] = {
 					tip = L["DOT"],
 					ficon = "13",
 				},
+				{ -- 自保技能提示 铁蒺藜（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 453461,
+					threshold = 65,
+				},
 				{ -- 驱散提示音 铁蒺藜（✓）
 					category = "Sound",
 					sub_event = "SPELL_AURA_APPLIED",
@@ -94,7 +104,7 @@ G.Encounters["c499"] = {
 					type = "Aura",
 					spellID = 453461,
 					color = "red",
-				},			
+				},
 			},
 		},
 		{ -- 阿拉希骑士:穿刺
@@ -112,6 +122,12 @@ G.Encounters["c499"] = {
 					tip = L["强力DOT"],
 					ficon = "13",
 					sound = "[defense]",
+				},
+				{ -- 自保技能提示 穿刺（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 427621,
+					threshold = 65,
 				},
 				{ -- 驱散提示音 穿刺（✓）
 					category = "Sound",
@@ -137,7 +153,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 453810,
 					name = T.GetIconLink(427609)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -170,7 +185,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 427609,
 					name = string.format(L["计时条%s"], T.GetIconLink(427609)),
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_SPELLCAST_START"] = true,
@@ -261,6 +275,14 @@ G.Encounters["c499"] = {
 						frame.cast_exp = nil
 					end,
 				},
+				{ -- 自保技能提示 瓦解怒吼（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 427609,
+					event = "SPELL_CAST_START",
+					dur = 3,
+					threshold = 75,
+				},
 			},
 		},
 		{ -- 狂热的咒术师 亡灵法师 火球术
@@ -268,11 +290,9 @@ G.Encounters["c499"] = {
 				{427469},
 			},
 			options = {
-				{ -- 团队框架图标 火球术（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 427469,
-				},
+				T.Temp_SubInterruptBar(427469, { -- 火球术（✓）
+					show_tar = true,
+				}),
 				{ -- 姓名板打断图标 火球术（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -281,6 +301,11 @@ G.Encounters["c499"] = {
 					interrupt = 2,
 					ficon = "6",
 				},
+				{ -- 团队框架图标 火球术（✓）
+					category = "RFIcon",
+					type = "Cast",
+					spellID = 427469,
+				},		
 			},
 		},
 		{ -- 狂热的咒术师:烈焰风暴
@@ -301,14 +326,7 @@ G.Encounters["c499"] = {
 				{427356},
 			},
 			options = {
-				{ -- 计时条 强效治疗术（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 427356,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(427356), -- 强效治疗术（✓）
 				{ -- 姓名板打断图标 强效治疗术（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -324,6 +342,17 @@ G.Encounters["c499"] = {
 				{427357},
 			},
 			options = {
+				T.Temp_SubInterruptBar(427357, { -- 神圣惩击（✓）
+					show_tar = true,
+				}),
+				{ -- 姓名板打断图标 神圣惩击（✓）
+					category = "PlateAlert",
+					type = "PlateInterrupt",
+					spellID = 427357,
+					mobID = "206697,212827",
+					interrupt = 2,
+					ficon = "6",
+				},
 				{ -- 对我施法图标 神圣惩击（✓）
 					category = "AlertIcon",
 					type = "com",
@@ -334,14 +363,6 @@ G.Encounters["c499"] = {
 					category = "RFIcon",
 					type = "Cast",
 					spellID = 427357,
-				},
-				{ -- 姓名板打断图标 神圣惩击（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 427357,
-					mobID = "206697,212827",
-					interrupt = 2,
-					ficon = "6",
 				},
 			},
 		},
@@ -360,6 +381,12 @@ G.Encounters["c499"] = {
 					hl = "red",
 					tip = L["强力DOT"],
 					ficon = "13",
+				},
+				{ -- 自保技能提示 痛苦撕裂（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 427635,
+					threshold = 65,
 				},
 				{ -- 驱散提示音 痛苦撕裂（✓）
 					category = "Sound",
@@ -404,13 +431,13 @@ G.Encounters["c499"] = {
 				{448485},
 			},
 			options = {
-				{ -- 对我施法图标 盾牌猛击（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 盾牌猛击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 448485,
-					hl = "yel_flash",
-					tip = L["击退"],
-					sound = "[knockoff]",
+					group = 1,
+					ficon = "0",
+					sound = "[knockoff]cast",
 				},
 			},
 		},
@@ -423,7 +450,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 448492,
 					name = T.GetIconLink(448492)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -501,7 +527,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 427897,
 					name = T.GetIconLink(427897)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -539,6 +564,14 @@ G.Encounters["c499"] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 自保技能提示 热浪（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 427897,
+					event = "SPELL_CAST_START",
+					dur = 5,
+					threshold = 75,
+				},
 				{ -- 图标 热浪（✓）
 					category = "AlertIcon",
 					type = "aura",
@@ -546,6 +579,13 @@ G.Encounters["c499"] = {
 					unit = "player",
 					spellID = 427897,
 					tip = L["减速"].."70%",
+					ficon = "7",
+				},
+				{ -- 团队框架高亮 热浪（✓）
+					category = "RFIcon",
+					type = "Aura",
+					spellID = 427897,
+					color = "blu",
 				},
 			},
 		},
@@ -558,7 +598,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 424431,
 					name = T.GetIconLink(424431)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -600,7 +639,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 424423,
 					name = T.GetIconLink(424423)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -642,7 +680,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID =  424462,
 					name = T.GetIconLink(424462)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -706,7 +743,6 @@ G.Encounters["c499"] = {
 					category = "BossMod",
 					spellID = 448791,
 					name = T.GetIconLink(448791)..L["倒计时"],
-					enable_tag = "none",
 					points = {hide = true},
 					events = {
 						["UNIT_ENTERING_COMBAT"] = true,
@@ -743,6 +779,14 @@ G.Encounters["c499"] = {
 					sound = "[aoe]cast",
 					glow = true,
 					group = 1,
+				},
+				{ -- 自保技能提示 神圣鸣罪（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 448791,
+					event = "SPELL_CAST_START",
+					dur = 2.5,
+					threshold = 75,
 				},
 			},
 		},
@@ -794,6 +838,12 @@ G.Encounters["c499"] = {
 					tip = L["强力DOT"],
 					sound = "[defense]",
 				},
+				{ -- 自保技能提示 纯净（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 448787,
+					threshold = 80,
+				},
 				{ -- 团队框架高亮 纯净（✓）
 					category = "RFIcon",
 					type = "Aura",
@@ -820,14 +870,7 @@ G.Encounters["c499"] = {
 				{444743},
 			},
 			options = {
-				{ -- 计时条 连珠火球（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 444743,
-					ficon = "6",
-					glow = true,
-					group = 1,
-				},
+				T.Temp_ImportantInterruptBar(444743), -- 连珠火球（✓）
 				{ -- 姓名板打断图标 连珠火球（✓）
 					category = "PlateAlert",
 					type = "PlateInterrupt",
@@ -864,11 +907,13 @@ G.Encounters["c499"] = {
 				{435165},
 			},
 			options = {
-				{ -- 对我施法图标 炽热打击（✓）
-					category = "AlertIcon",
-					type = "com",
+				{ -- 打坦计时条 炽热打击（✓）
+					category = "AlertTimerbar",
+					type = "cast",
 					spellID = 435165,
-					hl = "yel_flash",
+					group = 1,
+					ficon = "0",
+					sound = "[minddefense]cast",
 				},
 				{ -- 图标 炽热打击（✓）
 					category = "AlertIcon",

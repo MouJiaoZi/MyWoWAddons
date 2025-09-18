@@ -695,7 +695,7 @@ castUtilityFrame:RegisterEvent("UNIT_TARGET")
 local cast_cache = {}
 local CastTargetDelay = {}
 local TestSpells = {
-	--[1221190] = true,
+	--[432565] = true, -- 黑暗之霰
 }
 
 T.RegisterCastTargetDelay = function(spellID, delay)
@@ -711,11 +711,15 @@ castUtilityFrame:SetScript("OnEvent", function(self, event, ...)
 				local target_unit = T.GetTarget(unit)
 				local GUID = target_unit and UnitGUID(target_unit)
 				if GUID and not cast_cache[cast_GUID] then
-					T.FireEvent("UNIT_SPELLCAST_TARGET", GUID, cast_GUID, cast_spellID)
+					T.FireEvent("UNIT_SPELLCAST_TARGET", unit, cast_GUID, cast_spellID, GUID)
 					cast_cache[cast_GUID] = GUID
+					
 					if TestSpells[cast_spellID] then
+						local startTimeMS, endTimeMS = select(4, UnitCastingInfo(unit))
 						local spell = C_Spell.GetSpellName(cast_spellID)
-						T.msg(string.format("%s %s→%s |cffffff00延迟判定 %.3f|r %s", spell, UnitName(unit), T.ColorNickNameByGUID(GUID), wait, cast_GUID))
+						local dur = endTimeMS/1000 - startTimeMS/1000
+						local remain = endTimeMS/1000 - GetTime()
+						T.msg(string.format("%s %s→%s |cffffff00延迟判定 %.3f|r %s %.2f %.2f", spell, UnitName(unit), T.ColorNickNameByGUID(GUID), wait, cast_GUID, dur, remain))
 					end
 				end
 			end)
@@ -728,12 +732,14 @@ castUtilityFrame:SetScript("OnEvent", function(self, event, ...)
 				local target_unit = T.GetTarget(unit)
 				local GUID = target_unit and UnitGUID(target_unit)
 				if GUID then
-					T.FireEvent("UNIT_SPELLCAST_TARGET", GUID)
+					T.FireEvent("UNIT_SPELLCAST_TARGET", unit, cast_GUID, cast_spellID, GUID)
 					cast_cache[cast_GUID] = GUID
 					if TestSpells[cast_spellID] then
 						local spell = C_Spell.GetSpellName(cast_spellID)
 						local wait = GetTime() - startTimeMS/1000
-						T.msg(string.format("%s %s→%s |cff00ff00目标判定 %.3f|r %s", spell, UnitName(unit), T.ColorNickNameByGUID(GUID), wait, cast_GUID))
+						local dur = endTimeMS/1000 - startTimeMS/1000
+						local remain = endTimeMS/1000 - GetTime()
+						T.msg(string.format("%s %s→%s |cff00ff00目标判定 %.3f|r %s %.2f %.2f", spell, UnitName(unit), T.ColorNickNameByGUID(GUID), wait, cast_GUID, dur, remain))
 					end
 				end
 			end

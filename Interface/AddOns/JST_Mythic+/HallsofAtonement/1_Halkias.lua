@@ -60,7 +60,6 @@ G.Encounters[2406] = {
 					category = "BossMod",
 					spellID = 322711,
 					name = string.format(L["计时条%s"], T.GetIconLink(322711)),
-					enable_tag = "none",
 					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 300},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,

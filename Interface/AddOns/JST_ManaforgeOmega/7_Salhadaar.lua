@@ -139,7 +139,6 @@ G.Encounters[2690] = {
 				{ -- 首领模块 唤动誓言 玩家自保技能提示（✓）
 					category = "BossMod",
 					spellID = 1224906,
-					enable_tag = "none",
 					name = T.GetIconLink(1224906)..L["玩家自保技能提示"],	
 					points = {hide = true},
 					events = {
@@ -211,7 +210,6 @@ G.Encounters[2690] = {
 					spellID = 1238975,
 					ficon = "12",
 					name = string.format(L["计时条%s"], T.GetIconLink(1238975)),
-					enable_tag = "none",
 					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 300},
 					events = {
 						["UNIT_SPELLCAST_SUCCEEDED"] = true,
@@ -375,8 +373,8 @@ G.Encounters[2690] = {
 				{ -- 首领模块 分段计时条 镇压统治和分担轮次（待测试）
 					category = "BossMod",
 					spellID = 1224795,
+					enable_tag = "spell",
 					name = string.format(L["连招计时条及分担分配"], T.GetIconLink(1224787), T.GetIconLink(1224812)),
-					enable_tag = "none",
 					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 400, width = 615, height = 30},
 					events = {
 						["UNIT_SPELLCAST_START"] = true,
@@ -929,7 +927,6 @@ G.Encounters[2690] = {
 				{ --首领模块 虚空击碎者（待测试）
 					category = "BossMod",
 					spellID = 1228115,
-					enable_tag = "none",
 					name = T.GetIconLink(1228115)..L["计时条"],
 					points = {hide = true},
 					events = {					
@@ -1009,7 +1006,6 @@ G.Encounters[2690] = {
 				{ --首领模块 次元吐息计时条（待测试）
 					category = "BossMod",
 					spellID = 1228163,
-					enable_tag = "none",
 					name = T.GetIconLink(1228163)..L["计时条"],
 					points = {hide = true},
 					events = {					
@@ -1122,7 +1118,6 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					spellID = 1234529,
 					ficon = "0",
-					enable_tag = "role",
 					name = L["嘲讽提示"]..T.GetIconLink(1234529),
 					points = {hide = true},
 					events = {					
@@ -1272,7 +1267,6 @@ G.Encounters[2690] = {
 				{ -- 法力铸造泰坦 血量及击杀倒计时 （✓）
 					category = "BossMod",
 					spellID = 1230302,
-					enable_tag = "none",
 					name = string.format(L["血量及击杀倒计时"], T.GetFomattedNameFromNpcID("241800")),
 					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 300},
 					events = {
@@ -1438,7 +1432,6 @@ G.Encounters[2690] = {
 				{ -- 首领模块 暮光屠戮 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1237106,
-					enable_tag = "none",
 					name = T.GetIconLink(1237106)..L["计时圆圈"],
 					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
 					events = {	
@@ -1465,7 +1458,6 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					spellID = 1228056,
 					ficon = "2",
-					enable_tag = "none",
 					name = T.GetIconLink(1228056)..L["DOT"]..L["倒计时"],
 					points = {hide = true},
 					events = {
@@ -1554,7 +1546,7 @@ G.Encounters[2690] = {
 				{ -- 首领模块 集结影卫 控制链（待测试）
 					category = "BossMod",
 					spellID = 1228065,
-					enable_tag = "none",
+					enable_tag = "spell",
 					name = T.GetFomattedNameFromNpcID("241801")..L["控制链"],
 					points = {hide = true},
 					events = {
@@ -1708,7 +1700,6 @@ G.Encounters[2690] = {
 				{ --首领模块 处斩计时条（P2.2）（待测试）
 					category = "BossMod",
 					spellID = 1225010,
-					enable_tag = "none",
 					name = T.GetIconLink(1225010)..L["计时条"],
 					points = {hide = true},
 					events = {					
@@ -1811,7 +1802,7 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					spellID = 1225316,
 					ficon = "12",
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = string.format(L["NAME示意图"], T.GetIconLink(1225316)),	
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = 300, y = 300, width = 240, height = 240},
 					events = {
@@ -2133,7 +2124,7 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					spellID = 1225645,
 					ficon = "12",
-					enable_tag = "none",
+					enable_tag = "spell",
 					name = T.GetIconLink(1225645)..L["计时条"],
 					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 325},
 					events = {					
@@ -2349,7 +2340,6 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					spellID = 1226413,
 					ficon = "0",
-					enable_tag = "role",
 					name = L["嘲讽提示"]..T.GetIconLink(1226413),
 					points = {hide = true},
 					events = {					
@@ -2448,7 +2438,7 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					ficon = "12",
 					spellID = 1226024,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = string.format(L["引歼星斩分配"], T.GetIconLink(1226024)),
 					points = {hide = true},
 					events = {
@@ -2591,7 +2581,7 @@ G.Encounters[2690] = {
 					category = "BossMod",
 					ficon = "12",
 					spellID = 1226018,
-					enable_tag = "everyone",
+					enable_tag = "spell",
 					name = string.format(L["歼星斩左右分配"], T.GetIconLink(1226018)),
 					points = {a1 = "BOTTOM", a2 = "CENTER", x = 0, y = 400, width = 200, height = 60},
 					events = {					
@@ -2714,8 +2704,8 @@ G.Encounters[2690] = {
 									after_me = true
 								end
 								
-								if GUID ~= G.PlayerGUID then
-									if not after_me then
+								if GUID and GUID ~= G.PlayerGUID then
+									if after_me then
 										table.insert(self.anchor_holder.left.GUIDs, GUID)
 										local name = T.ColorNickNameByGUID(GUID)
 										left_str = left_str.." "..name
@@ -2774,7 +2764,7 @@ G.Encounters[2690] = {
 							local role = UnitGroupRolesAssigned("player")
 							if role ~= "TANK" then -- 坦克不创建左右的锚点
 								for _, GUID in pairs(region.GUIDs) do
-									self:CreatePrivateAuraAnchor(region, GUID)
+									self:CreatePrivateAuraAnchor(key, GUID)
 								end
 							end
 						end
