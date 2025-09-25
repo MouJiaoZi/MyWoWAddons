@@ -56,6 +56,10 @@ VER 3 0100000000000084 "死亡凋零" "INV_Misc_QuestionMark"
 /cast [@cursor] 枯萎凋零
 /use [@cursor] 反末日扫帚
 END
+VER 3 010000000000008B "死握" "134400"
+#showtooltip
+/cast [@mouseover,exists,nodead,harm]死亡之握; 死亡之握
+END
 VER 3 0100000000000085 "爆发" "INV_Misc_QuestionMark"
 #showtooltip 爆发
 /click LFDRoleCheckPopupAcceptButton

@@ -2,7 +2,7 @@ local _G = _G
 
 ---------config-------------
 --- 可以改这个数值，即可调整延迟多少秒时间加载。有的人立刻加载不行
-local DELAY_TIME = 3
+local DELAY_TIME = 0.01
 --- 文字输出相关
 local PrintEnable = true --- 是否打印输出文字
 
@@ -29,9 +29,8 @@ local function default()
 
     if IsInInstance() then
         -- 在副本中启用名字模式
-
-        SetCVar("nameplateShowOnlyNames", 0)
-        SetCVar("nameplateShowFriends", 0)
+        SetCVar("nameplateShowFriendlyNPCs", 0) --npc
+        SetCVar("nameplateShowFriends", 1)
 
         --将自定义字体API套用到姓名板的文字上
         ----------------------------------------------------这部分 是更改姓名板上 名字大小的  嫌小的可以改成8   10  12 都行
@@ -58,7 +57,6 @@ local function default()
         --友方显示条件，把非玩家都隐去
         -- SetCVar("nameplateShowFriendlyGuardians", 0) --守护者
         -- SetCVar("nameplateShowFriendlyMinions", 0) --仆从
-        SetCVar("nameplateShowFriendlyNPCs", 0) --npc
         -- SetCVar("nameplateShowFriendlyPets", 0)  --宠物
         -- SetCVar("nameplateShowFriendlyTotems", 0) --图腾
 
@@ -68,8 +66,7 @@ local function default()
         --不在副本中，关闭名字模式
         C_NamePlate.SetNamePlateFriendlySize(1, 15) --血条长度高度
         SetCVar("nameplateShowFriendlyNPCs", 1)     --npc
-        -- SetCVar("nameplateShowFriends", 0) --1不显示血条，0显示
-        SetCVar("nameplateShowOnlyNames", 0)        --1不显示血条，0显示
+        SetCVar("nameplateShowFriends", 0)
     end
 end
 
@@ -77,7 +74,9 @@ local lastEnterTime
 local getFriendInfo = C_BattleNet.GetFriendGameAccountInfo
 C_BattleNet.GetFriendGameAccountInfo = function(...)
     local gameInfo = getFriendInfo(...)
-    gameInfo.isInCurrentRegion = true
+    if IsInInstance() then
+        gameInfo.isInCurrentRegion = true
+    end
     return gameInfo
 end
 
@@ -97,9 +96,12 @@ end
 
 function addon.OnEvent(frame, event, ...)
     if event == 'LOADING_SCREEN_DISABLED' then
-        lastEnterTime = GetTime()
-        addon.eventframe:SetScript("OnUpdate", OnTimerUpdate)
-        addon.eventframe:UnregisterEvent("LOADING_SCREEN_DISABLED")
+        -- lastEnterTime = GetTime()
+        -- addon.eventframe:SetScript("OnUpdate", OnTimerUpdate)
+        -- addon.eventframe:UnregisterEvent("LOADING_SCREEN_DISABLED")
+        C_Timer.After(DELAY_TIME, function()
+            realDoIt()
+        end)
     end
 end
 

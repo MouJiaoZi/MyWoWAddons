@@ -269,15 +269,41 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2441,
 },
+[359028] = {
+["encounterName"] = "麦扎的绿洲",
+["source"] = "佐·格伦",
+["npcID"] = 176563,
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 2440,
+},
 [351960] = {
 ["event"] = "SPELL_AURA_APPLIED",
 ["type"] = "DEBUFF",
 ["source"] = "卖场铁腕战士",
 ["npcID"] = 178388,
 },
+[386176] = {
+["source"] = "未知目标",
+["type"] = "BUFF",
+["event"] = "SPELL_AURA_APPLIED",
+["npcID"] = 17252,
+},
+[352390] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "传送门操控师佐·霍恩",
+["npcID"] = 179334,
+},
+[47442] = {
+["isChanneled"] = false,
+["source"] = "厄苏拉·烈酒",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 26822,
+},
 [433622] = {
-["type"] = "DEBUFF",
 ["source"] = "布莱恩·铜须",
+["type"] = "DEBUFF",
 ["event"] = "SPELL_AURA_APPLIED",
 ["npcID"] = 210759,
 },
@@ -289,7 +315,33 @@ PlaterDB = {
 ["event"] = "SPELL_AURA_APPLIED",
 ["encounterID"] = 2425,
 },
+[12544] = {
+["isChanneled"] = false,
+["source"] = "典狱官斯迪尔基斯",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 9041,
+},
+[355642] = {
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "老练的火花法师",
+["npcID"] = 179841,
+},
+[355981] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "阿尔克鲁克斯",
+["npcID"] = 176556,
+},
 [1248209] = {
+["encounterName"] = "索·阿兹密",
+["source"] = "索·阿兹密",
+["npcID"] = 175806,
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 2437,
+},
+[347632] = {
 ["encounterName"] = "索·阿兹密",
 ["source"] = "索·阿兹密",
 ["npcID"] = 175806,
@@ -311,11 +363,11 @@ PlaterDB = {
 ["source"] = "海关保安",
 ["npcID"] = 177807,
 },
-[457913] = {
-["event"] = "SPELL_AURA_APPLIED",
-["type"] = "BUFF",
-["source"] = "部署的导风塔杖",
-["npcID"] = 227482,
+[50276] = {
+["isChanneled"] = false,
+["source"] = "伊尔萨·烈酒",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 26764,
 },
 [346947] = {
 ["encounterName"] = "收发室乱战",
@@ -334,8 +386,8 @@ PlaterDB = {
 ["encounterID"] = 2440,
 },
 [108446] = {
-["type"] = "BUFF",
 ["source"] = "未知目标",
+["type"] = "BUFF",
 ["event"] = "SPELL_AURA_APPLIED",
 ["npcID"] = 417,
 },
@@ -347,11 +399,29 @@ PlaterDB = {
 ["event"] = "SPELL_AURA_APPLIED",
 ["encounterID"] = 2437,
 },
-[386176] = {
-["type"] = "BUFF",
-["source"] = "未知目标",
-["event"] = "SPELL_AURA_APPLIED",
-["npcID"] = 17252,
+[356548] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "传送门操控师佐·霍恩",
+["npcID"] = 179334,
+},
+[355938] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "阿尔克鲁克斯",
+["npcID"] = 176556,
+},
+[347721] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "损坏的分拣机",
+["npcID"] = 176396,
+},
+[355637] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "集市维和者",
+["npcID"] = 179840,
 },
 [355331] = {
 ["isChanneled"] = false,
@@ -373,19 +443,17 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2441,
 },
-[352390] = {
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "传送门操控师佐·霍恩",
-["npcID"] = 179334,
+[355980] = {
+["event"] = "SPELL_AURA_APPLIED",
+["type"] = "BUFF",
+["source"] = "支援警官",
+["npcID"] = 177817,
 },
-[348566] = {
-["encounterName"] = "麦扎的绿洲",
-["source"] = "打架的顾客",
-["npcID"] = 176562,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2440,
+[1242960] = {
+["event"] = "SPELL_AURA_APPLIED",
+["type"] = "BUFF",
+["source"] = "财团跟班",
+["npcID"] = 178394,
 },
 [350919] = {
 ["encounterName"] = "麦扎的绿洲",
@@ -401,11 +469,11 @@ PlaterDB = {
 ["source"] = "过载的邮件元素",
 ["npcID"] = 176395,
 },
-[355642] = {
-["isChanneled"] = true,
+[15507] = {
+["isChanneled"] = false,
+["source"] = "傀儡统帅阿格曼奇",
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "老练的火花法师",
-["npcID"] = 179841,
+["npcID"] = 8983,
 },
 [349999] = {
 ["encounterName"] = "卖品会",
@@ -415,29 +483,31 @@ PlaterDB = {
 ["event"] = "SPELL_AURA_APPLIED",
 ["encounterID"] = 2441,
 },
-[347814] = {
+[356929] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "损坏的分拣机",
-["npcID"] = 176396,
+["source"] = "追踪者佐·刻斯",
+["npcID"] = 179837,
 },
-[356548] = {
+[350101] = {
+["encounterName"] = "卖品会",
+["source"] = "雯扎·金线",
+["npcID"] = 176705,
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "传送门操控师佐·霍恩",
-["npcID"] = 179334,
+["encounterID"] = 2441,
 },
-[355981] = {
+[356812] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "阿尔克鲁克斯",
-["npcID"] = 176556,
+["source"] = "领袖赛·维勒",
+["npcID"] = 180286,
 },
-[347721] = {
+[15088] = {
 ["isChanneled"] = false,
+["source"] = "狂怒傀儡",
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "损坏的分拣机",
-["npcID"] = 176396,
+["npcID"] = 8906,
 },
 [356001] = {
 ["isChanneled"] = false,
@@ -445,13 +515,13 @@ PlaterDB = {
 ["source"] = "追踪者佐·刻斯",
 ["npcID"] = 179837,
 },
-[347632] = {
-["encounterName"] = "索·阿兹密",
-["source"] = "索·阿兹密",
-["npcID"] = 175806,
+[348128] = {
+["encounterName"] = "哨卫佐·菲克斯",
+["source"] = "佐·菲克斯",
+["npcID"] = 175616,
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2437,
+["encounterID"] = 2425,
 },
 [346286] = {
 ["encounterName"] = "收发室乱战",
@@ -469,19 +539,17 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2425,
 },
-[348128] = {
-["encounterName"] = "哨卫佐·菲克斯",
-["source"] = "佐·菲克斯",
-["npcID"] = 175616,
+[357399] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2425,
+["source"] = "但顿",
+["npcID"] = 180390,
 },
-[355938] = {
+[347814] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "阿尔克鲁克斯",
-["npcID"] = 176556,
+["source"] = "损坏的分拣机",
+["npcID"] = 176396,
 },
 [181089] = {
 ["encounterName"] = "麦扎的绿洲",
@@ -497,59 +565,19 @@ PlaterDB = {
 ["source"] = "装甲监工",
 ["npcID"] = 177808,
 },
-[355637] = {
+[353836] = {
+["encounterName"] = "麦扎的绿洲",
+["source"] = "捣乱的顾客",
+["npcID"] = 176565,
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "集市维和者",
-["npcID"] = 179840,
+["encounterID"] = 2440,
 },
-[358919] = {
+[347716] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "卖场铁腕战士",
-["npcID"] = 178388,
-},
-[1242960] = {
-["event"] = "SPELL_AURA_APPLIED",
-["type"] = "BUFF",
-["source"] = "财团跟班",
-["npcID"] = 178394,
-},
-[1245579] = {
-["encounterName"] = "索·阿兹密",
-["source"] = "索·阿兹密",
-["npcID"] = 175806,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2437,
-},
-[346742] = {
-["encounterName"] = "收发室乱战",
-["source"] = "P.O.S.T.总管",
-["npcID"] = 175646,
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2424,
-},
-[347775] = {
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "过载的邮件元素",
-["npcID"] = 176395,
-},
-[355306] = {
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "裂隙冲击传送门",
-["npcID"] = 179778,
-},
-[349797] = {
-["encounterName"] = "卖品会",
-["source"] = "阿尔克鲁克斯",
-["npcID"] = 176556,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2441,
+["source"] = "P.O.S.T.工人",
+["npcID"] = 176394,
 },
 [348276] = {
 ["encounterName"] = "哨卫佐·菲克斯",
@@ -559,11 +587,53 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2425,
 },
-[357399] = {
+[1245579] = {
+["encounterName"] = "索·阿兹密",
+["source"] = "索·阿兹密",
+["npcID"] = 175806,
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "但顿",
-["npcID"] = 180390,
+["encounterID"] = 2437,
+},
+[347775] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "过载的邮件元素",
+["npcID"] = 176395,
+},
+[349797] = {
+["encounterName"] = "卖品会",
+["source"] = "阿尔克鲁克斯",
+["npcID"] = 176556,
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 2441,
+},
+[355306] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "裂隙冲击传送门",
+["npcID"] = 179778,
+},
+[346742] = {
+["encounterName"] = "收发室乱战",
+["source"] = "P.O.S.T.总管",
+["npcID"] = 175646,
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 2424,
+},
+[9941] = {
+["type"] = "BUFF",
+["source"] = "无敌的潘佐尔",
+["event"] = "SPELL_AURA_APPLIED",
+["npcID"] = 8923,
+},
+[358919] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "卖场铁腕战士",
+["npcID"] = 178388,
 },
 [1244443] = {
 ["isChanneled"] = false,
@@ -571,11 +641,11 @@ PlaterDB = {
 ["source"] = "贸易执行者",
 ["npcID"] = 179842,
 },
-[347716] = {
+[50313] = {
 ["isChanneled"] = false,
+["source"] = "烈酒爪牙",
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "P.O.S.T.工人",
-["npcID"] = 176394,
+["npcID"] = 26776,
 },
 [350037] = {
 ["encounterName"] = "卖品会",
@@ -591,13 +661,11 @@ PlaterDB = {
 ["source"] = "贸易执行者",
 ["npcID"] = 179842,
 },
-[350101] = {
-["encounterName"] = "卖品会",
-["source"] = "雯扎·金线",
-["npcID"] = 176705,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2441,
+[457797] = {
+["event"] = "SPELL_AURA_APPLIED",
+["type"] = "BUFF",
+["source"] = "部署的战斗补给品",
+["npcID"] = 227453,
 },
 [349498] = {
 ["encounterName"] = "卖品会",
@@ -607,13 +675,13 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2441,
 },
-[359028] = {
-["encounterName"] = "麦扎的绿洲",
-["source"] = "佐·格伦",
-["npcID"] = 176563,
+[1245634] = {
+["encounterName"] = "索·阿兹密",
+["source"] = "索·阿兹密",
+["npcID"] = 175806,
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2440,
+["encounterID"] = 2437,
 },
 [346006] = {
 ["encounterName"] = "哨卫佐·菲克斯",
@@ -623,10 +691,10 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2425,
 },
-[353836] = {
+[348566] = {
 ["encounterName"] = "麦扎的绿洲",
-["source"] = "捣乱的顾客",
-["npcID"] = 176565,
+["source"] = "打架的顾客",
+["npcID"] = 176562,
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2440,
@@ -639,37 +707,35 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2440,
 },
-[356812] = {
+[355641] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "领袖赛·维勒",
-["npcID"] = 180286,
+["source"] = "老练的火花法师",
+["npcID"] = 179841,
 },
-[356929] = {
+[15288] = {
 ["isChanneled"] = false,
+["source"] = "暮光使者",
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "追踪者佐·刻斯",
-["npcID"] = 179837,
+["npcID"] = 8913,
 },
-[1245634] = {
-["encounterName"] = "索·阿兹密",
-["source"] = "索·阿兹密",
-["npcID"] = 175806,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 2437,
-},
-[355980] = {
+[453773] = {
 ["event"] = "SPELL_AURA_APPLIED",
 ["type"] = "BUFF",
-["source"] = "支援警官",
-["npcID"] = 177817,
+["source"] = "纳兹戈林",
+["npcID"] = 221634,
 },
-[356404] = {
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "上古熔火恶犬",
-["npcID"] = 180091,
+[13787] = {
+["event"] = "SPELL_AURA_APPLIED",
+["type"] = "BUFF",
+["source"] = "普拉格",
+["npcID"] = 9499,
+},
+[457913] = {
+["event"] = "SPELL_AURA_APPLIED",
+["type"] = "BUFF",
+["source"] = "部署的导风塔杖",
+["npcID"] = 227482,
 },
 [356930] = {
 ["event"] = "SPELL_AURA_APPLIED",
@@ -685,28 +751,28 @@ PlaterDB = {
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2440,
 },
-[355641] = {
+[356404] = {
 ["isChanneled"] = false,
 ["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "老练的火花法师",
-["npcID"] = 179841,
+["source"] = "上古熔火恶犬",
+["npcID"] = 180091,
 },
 },
 ["profileKeys"] = {
 ["迪凯策划没马 - 伊森利恩"] = "Default",
 ["这只是饺子 - 伊森利恩"] = "Default",
 ["我们完蛋啦 - 伊森利恩"] = "Luckyone",
-["某餃子 - 伊森利恩"] = "Luckyone",
-["凤凰基友之一 - 凤凰之神"] = "Default",
 ["凤凰基友之五 - 凤凰之神"] = "Default",
+["凤凰基友之一 - 凤凰之神"] = "Default",
+["某饺子 - 伊森利恩"] = "Luckyone",
 ["凤凰基友之四 - 凤凰之神"] = "Default",
 ["凤凰基友之三 - 凤凰之神"] = "Default",
 ["凤凰基友之二 - 凤凰之神"] = "Default",
 ["Afdfaf - 苏拉玛"] = "Default",
-["三减竖式 - 伊森利恩"] = "Default",
 ["三减宁静 - 伊森利恩"] = "Default",
+["三减竖式 - 伊森利恩"] = "Default",
 ["开门的搞 - 伊森利恩"] = "Default",
-["某饺子 - 伊森利恩"] = "Luckyone",
+["某餃子 - 伊森利恩"] = "Luckyone",
 ["牛牛萨之父 - 霜之哀伤"] = "Default",
 },
 ["profiles"] = {
@@ -763,33 +829,33 @@ PlaterDB = {
 ["Cast - Shining Green [P]"] = 3,
 ["Cast - Tankbuster [P]"] = 1,
 ["Cast - Important Target [P]"] = 2,
-["Cast - Shield Interrupt"] = 2,
-["Cast - AoE Hit All [P]"] = 3,
-["Fixate"] = 11,
 ["Cast - Quick Flash"] = 2,
 ["Cast - Alert + Timer [P]"] = 4,
-["Cast - Voidzone [P]"] = 2,
+["Fixate"] = 11,
+["Cast - Shield Interrupt"] = 2,
+["Cast - AoE Hit All [P]"] = 3,
+["Cast - On Going Cast [P]"] = 2,
 ["Cast - AoE With Range [P]"] = 2,
 ["Aura is Shield [P]"] = 5,
-["Add - Warning [P]"] = 5,
+["Cast - Debuff [P]"] = 2,
 ["Cast - Simple Interrupt [P]"] = 2,
 ["Aura While Casting [P]"] = 1,
 ["Cast - Big Alert"] = 14,
 ["Cast - Ongoing Cast [P]"] = 4,
-["Cast - Stop Casting"] = 4,
+["Cast - Voidzone [P]"] = 2,
 ["Cast - Heal Cut [P]"] = 3,
 ["Aura - Is Cast Bar [P]"] = 1,
-["Spiteful Affix"] = 3,
+["Auto Set Skull"] = 11,
 ["Cast - Very Important"] = 15,
 ["Add - Non Elite Trash [P]"] = 4,
 ["Cast - Circular Swipe"] = 4,
-["Auto Set Skull"] = 11,
-["Cast - On Going Cast [P]"] = 2,
+["Spiteful Affix"] = 3,
+["Countdown"] = 12,
 ["Fixate by Unit Buff [P]"] = 2,
 ["Cast - Frontal Cone"] = 17,
 ["Add - Explode on Die [P]"] = 1,
-["Cast - Debuff [P]"] = 2,
-["Countdown"] = 12,
+["Add - Warning [P]"] = 5,
+["Cast - Stop Casting"] = 4,
 ["Cast - Heroic Leap [P]"] = 3,
 ["Unit - Show Energy"] = 11,
 },
@@ -3212,14 +3278,14 @@ PlaterDB = {
 ["Dont Have Aura"] = 1,
 ["Players Targetting Amount"] = 4,
 ["Color Automation"] = 1,
-["Extra Border"] = 2,
+["Hide Neutral Units"] = 1,
 ["Cast Bar Icon Config"] = 2,
 ["Aura Reorder"] = 3,
-["Hide Neutral Units"] = 1,
+["Combo Points"] = 6,
 ["Attacking Specific Unit"] = 2,
 ["Target Color"] = 3,
 ["Execute Range"] = 1,
-["Combo Points"] = 6,
+["Extra Border"] = 2,
 },
 ["aura_x_offset"] = 0,
 ["number_region_first_run"] = true,
@@ -3250,33 +3316,19 @@ PlaterDB = {
 ["Player-3941-0287D90E"] = "ArcaneCharges",
 },
 },
-["ghost_auras"] = {
-["auras"] = {
-["HUNTER"] = {
-[5] = {
-},
-},
-["WARLOCK"] = {
-{
-[172] = true,
-[980] = true,
-},
-},
-["MONK"] = {
-[5] = {
-},
-},
-["EVOKER"] = {
-[5] = {
-},
-},
-["PRIEST"] = {
-[3] = {
-[589] = true,
-[34914] = true,
-},
-},
-},
+["saved_cvars"] = {
+["nameplateMinAlpha"] = "0.90135484",
+["nameplateMinAlphaDistance"] = "-158489.31924611",
+["nameplateSelectedAlpha"] = "1",
+["nameplateShowPersonalCooldowns"] = "0",
+["nameplateSelfTopInset"] = "0.66",
+["NamePlateClassificationScale"] = "1",
+["nameplateSelfBottomInset"] = "0.33",
+["NamePlateHorizontalScale"] = "1",
+["nameplateShowFriends"] = "0",
+["nameplateShowEnemies"] = "1",
+["nameplateShowFriendlyBuffs"] = "0",
+["NamePlateVerticalScale"] = "1",
 },
 ["npc_cache"] = {
 [201746] = {
@@ -3374,8 +3426,8 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[210290] = {
-"火焰之地烈焰守卫",
+[214608] = {
+"尖叫之魂",
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
@@ -3429,9 +3481,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[189813] = {
-"晋升者达瑟雅",
-"化身巨龙牢窟",
+[202259] = {
+"贾拉丁攀墙者",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [205656] = {
@@ -3439,24 +3491,24 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[199703] = {
-"岩浆秘士",
+[205672] = {
+"烈焰添加剂",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[202259] = {
-"贾拉丁攀墙者",
+[189813] = {
+"晋升者达瑟雅",
+"化身巨龙牢窟",
+"zhCN",
+},
+[205736] = {
+"碎裂攻城大师",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[203831] = {
-"水晶守护者",
-"亚贝鲁斯，焰影熔炉",
-"zhCN",
-},
-[201736] = {
-"碎裂奥术师",
-"亚贝鲁斯，焰影熔炉",
+[9499] = {
+"普拉格",
+"黑石深渊",
 "zhCN",
 },
 [209800] = {
@@ -3469,9 +3521,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[9499] = {
-"普拉格",
-"黑石深渊",
+[201736] = {
+"碎裂奥术师",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [197148] = {
@@ -3504,14 +3556,14 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[205611] = {
-"熔火猎犬",
-"亚贝鲁斯，焰影熔炉",
+[210437] = {
+"苍郁林枝行者",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[26776] = {
-"烈酒爪牙",
-"黑石深渊",
+[187768] = {
+"达瑟雅·风鞭",
+"化身巨龙牢窟",
 "zhCN",
 },
 [197149] = {
@@ -3529,9 +3581,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[26764] = {
-"伊尔萨·烈酒",
-"黑石深渊",
+[201261] = {
+"狱铸者卡扎拉",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [210294] = {
@@ -3539,9 +3591,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[210437] = {
-"苍郁林枝行者",
-"阿梅达希尔，梦境之愿",
+[200912] = {
+"奈尔迪丝",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [202262] = {
@@ -3559,9 +3611,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[187768] = {
-"达瑟雅·风鞭",
-"化身巨龙牢窟",
+[26776] = {
+"烈酒爪牙",
+"黑石深渊",
 "zhCN",
 },
 [201754] = {
@@ -3569,9 +3621,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[200913] = {
-"萨德里奥",
-"亚贝鲁斯，焰影熔炉",
+[198500] = {
+"议会唤地者",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [210295] = {
@@ -3579,9 +3631,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[198500] = {
-"议会唤地者",
-"阿梅达希尔，梦境之愿",
+[200913] = {
+"萨德里奥",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [199659] = {
@@ -3599,9 +3651,9 @@ PlaterDB = {
 "血色修道院",
 "zhCN",
 },
-[214075] = {
-"轮回守望者",
-"阿梅达希尔，梦境之愿",
+[205820] = {
+"匍匐粘液",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [210518] = {
@@ -3629,9 +3681,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[202264] = {
-"原始熔岩元素",
-"亚贝鲁斯，焰影熔炉",
+[214075] = {
+"轮回守望者",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [209090] = {
@@ -3644,8 +3696,8 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[205820] = {
-"匍匐粘液",
+[202264] = {
+"原始熔岩元素",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
@@ -3664,9 +3716,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[26822] = {
-"厄苏拉·烈酒",
-"黑石深渊",
+[200836] = {
+"黑曜卫士",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [206172] = {
@@ -3674,9 +3726,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[200836] = {
-"黑曜卫士",
-"亚贝鲁斯，焰影熔炉",
+[26822] = {
+"厄苏拉·烈酒",
+"黑石深渊",
 "zhCN",
 },
 [187771] = {
@@ -3714,14 +3766,14 @@ PlaterDB = {
 "黑石深渊",
 "zhCN",
 },
-[208521] = {
-"南瓜士兵",
-"血色修道院",
+[198869] = {
+"碎裂湮灭者",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[187772] = {
-"乳石之牙",
-"化身巨龙牢窟",
+[9547] = {
+"醉酒的奴隶主",
+"黑石深渊",
 "zhCN",
 },
 [213696] = {
@@ -3729,18 +3781,18 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[201774] = {
-"暗影精华",
-"亚贝鲁斯，焰影熔炉",
-"zhCN",
-},
-[198869] = {
-"碎裂湮灭者",
-"亚贝鲁斯，焰影熔炉",
-"zhCN",
-},
 [203806] = {
 "黑暗低语",
+"亚贝鲁斯，焰影熔炉",
+"zhCN",
+},
+[208521] = {
+"南瓜士兵",
+"血色修道院",
+"zhCN",
+},
+[201774] = {
+"暗影精华",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
@@ -3749,9 +3801,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[9547] = {
-"醉酒的奴隶主",
-"黑石深渊",
+[187772] = {
+"乳石之牙",
+"化身巨龙牢窟",
 "zhCN",
 },
 [9554] = {
@@ -3804,14 +3856,14 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[200912] = {
-"奈尔迪丝",
+[205611] = {
+"熔火猎犬",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[201261] = {
-"狱铸者卡扎拉",
-"亚贝鲁斯，焰影熔炉",
+[26764] = {
+"伊尔萨·烈酒",
+"黑石深渊",
 "zhCN",
 },
 [198871] = {
@@ -3829,8 +3881,8 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[205736] = {
-"碎裂攻城大师",
+[203831] = {
+"水晶守护者",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
@@ -3839,8 +3891,8 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[205672] = {
-"烈焰添加剂",
+[199703] = {
+"岩浆秘士",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
@@ -3864,8 +3916,8 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[214608] = {
-"尖叫之魂",
+[210290] = {
+"火焰之地烈焰守卫",
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
@@ -3909,41 +3961,55 @@ PlaterDB = {
 ["Desc"] = "Show power bar where its value is the buff value (usualy shown in the buff tooltip)",
 ["__TrashAt"] = 1728398765,
 ["OnShowCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --insert code here\n    \nend\n\n\n",
-["SpellIds"] = {
-343470,
-423228,
-},
+["Name"] = "Aura is Shield [P]",
 ["PlaterCore"] = 1,
 ["Options"] = {
 },
 ["version"] = -1,
-["Name"] = "Aura is Shield [P]",
+["SpellIds"] = {
+343470,
+423228,
+},
 ["NpcNames"] = {
 },
 },
 },
-["tocversion"] = 110000,
-["profile_name"] = "Default",
-["indicator_raidmark_scale"] = 0.9999999403953552,
-["saved_cvars"] = {
-["nameplateMinAlpha"] = "0.90135484",
-["nameplateMinAlphaDistance"] = "-158489.31924611",
-["nameplateSelectedAlpha"] = "1",
-["nameplateShowPersonalCooldowns"] = "0",
-["nameplateSelfTopInset"] = "0.66",
-["NamePlateClassificationScale"] = "1",
-["nameplateSelfBottomInset"] = "0.33",
-["NamePlateHorizontalScale"] = "1",
-["nameplateShowFriends"] = "0",
-["nameplateShowEnemies"] = "1",
-["nameplateShowFriendlyBuffs"] = "0",
-["NamePlateVerticalScale"] = "1",
-},
-["number_region"] = "eastasia",
+["ui_parent_scale_tune"] = 1,
 ["aura2_y_offset"] = 5,
+["indicator_raidmark_scale"] = 0.9999999403953552,
+["ghost_auras"] = {
+["auras"] = {
+["HUNTER"] = {
+[5] = {
+},
+},
+["WARLOCK"] = {
+{
+[172] = true,
+[980] = true,
+},
+},
+["MONK"] = {
+[5] = {
+},
+},
+["EVOKER"] = {
+[5] = {
+},
+},
+["PRIEST"] = {
+[3] = {
+[589] = true,
+[34914] = true,
+},
+},
+},
+},
+["profile_name"] = "Default",
+["number_region"] = "eastasia",
 ["login_counter"] = 177,
 ["health_selection_overlay_alpha"] = 0.09999999403953552,
-["ui_parent_scale_tune"] = 1,
+["tocversion"] = 110000,
 ["aura_tracker"] = {
 ["buff_tracked"] = {
 [209859] = true,
@@ -3988,31 +4054,32 @@ PlaterDB = {
 ["nameplateLargerScale"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateMaxDistance"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateShowFriendlyMinions"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
-["nameplateOtherBottomInset"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateOtherBottomInset"] = "Interface/AddOns/AAJDD/core.lua:25",
 ["nameplateTargetBehindMaxDistance"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateShowEnemies"] = "[C]: in function 'SetCVar'\n[Interface/AddOns/Blizzard_SharedXMLBase/CvarUtil.lua]:76: in function 'SetValue'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Setting.lua]:264: in function 'SetValueDerived'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Setting.lua]:110: in function 'ApplyValue'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Setting.lua]:86: in function 'SetValue'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Settings.lua]:224: in function 'SetValue'\n[NAMEPLATES]:6: in function <[string \"NAMEPLATES\"]:1>\n",
-["NamePlateVerticalScale"] = "...AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua:3048",
+["NamePlateVerticalScale"] = "Interface/AddOns/AAJDD/core.lua:25",
 ["nameplateSelectedAlpha"] = "Interface/AddOns/Plater/Plater.lua:4434",
 ["nameplateShowSelf"] = "...lizzard_Settings_Shared/Blizzard_SettingControls.lua:423",
 ["nameplateShowPersonalCooldowns"] = "Interface/AddOns/Plater/Plater.lua:4434",
 ["nameplateSelfTopInset"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateMotionSpeed"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateShowEnemyMinions"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
-["nameplateShowFriendlyNPCs"] = "...AddOns/Blizzard_ChatFrameBase/Mainline/ChatFrame.lua:3048",
+["nameplateShowFriendlyNPCs"] = "Interface/AddOns/AAJDD/core.lua:25",
 ["nameplateSelectedScale"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateMinAlphaDistance"] = "Interface/AddOns/Plater/Plater.lua:4434",
 ["nameplateMotion"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
-["nameplateMinScale"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
-["nameplateOtherTopInset"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateMinScale"] = "Interface/AddOns/AAJDD/core.lua:25",
 ["nameplateShowFriendlyBuffs"] = "Interface/AddOns/Plater/Plater.lua:4434",
-["nameplateLargeTopInset"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateOtherTopInset"] = "Interface/AddOns/AAJDD/core.lua:25",
+["nameplateLargeTopInset"] = "Interface/AddOns/AAJDD/core.lua:25",
 ["ShowClassColorInNameplate"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateShowFriends"] = "Interface/AddOns/AAJDD/core.lua:25",
 ["nameplateShowFriendlyGuardians"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
-["nameplateOccludedAlphaMult"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
-["nameplateShowFriends"] = "[C]: in function 'SetCVar'\n[Interface/AddOns/Blizzard_SharedXMLBase/CvarUtil.lua]:76: in function 'SetValue'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Setting.lua]:264: in function 'SetValueDerived'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Setting.lua]:110: in function 'ApplyValue'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Setting.lua]:86: in function 'SetValue'\n[Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Settings.lua]:224: in function 'SetValue'\n[FRIENDNAMEPLATES]:3: in function <[string \"FRIENDNAMEPLATES\"]:1>\n",
-["nameplateSelfAlpha"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["NamePlateHorizontalScale"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateOccludedAlphaMult"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateSelfAlpha"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
 ["nameplateShowAll"] = "[string \"=[C]\"]: in function `SetCVar'\n[string \"@Interface/AddOns/Plater/Plater.lua\"]:1574: in function `RestoreProfileCVars'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1052: in function `DoProfileImport'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:872: in function `ConfirmImportProfile'\n[string \"@Interface/AddOns/Plater/Plater_OptionsPanel.lua\"]:1304: in function <Interface/AddOns/Plater/Plater_OptionsPanel.lua:1304>\n[string \"=[C]\"]: in function `xpcall'\n[string \"@Interface/AddOns/Details/Libs/DF/fw.lua\"]:4684: in function `CoreDispatch'\n[string \"@Interface/AddOns/Details/Libs/DF/button.lua\"]:734: in function <Interface/AddOns/Details/Libs/DF/button.lua:670>\n",
+["nameplateLargeBottomInset"] = "Interface/AddOns/AAJDD/core.lua:25",
 },
 ["aura_cache_by_name"] = {
 ["enrage"] = {
@@ -4234,22 +4301,14 @@ PlaterDB = {
 199892,
 315079,
 },
-["blood barrier"] = {
-262980,
-269185,
-269281,
-322759,
-322766,
-322773,
-323482,
-329840,
-329849,
-329852,
-373724,
+["recharge anima"] = {
+321367,
+324046,
+327280,
+327416,
 },
-["in the spotlight"] = {
-227931,
-312926,
+["challenger's burden"] = {
+206151,
 },
 ["boneshatter shield"] = {
 343470,
@@ -4259,11 +4318,9 @@ PlaterDB = {
 333241,
 333242,
 },
-["undying rage"] = {
-333227,
-355297,
-356490,
-356492,
+["forsworn doctrine"] = {
+317936,
+331213,
 },
 ["sanguine ichor"] = {
 226489,
@@ -4285,8 +4342,9 @@ PlaterDB = {
 343502,
 382310,
 },
-["challenger's burden"] = {
-206151,
+["in the spotlight"] = {
+227931,
+312926,
 },
 ["whip rage"] = {
 29340,
@@ -4535,9 +4593,11 @@ PlaterDB = {
 374610,
 376330,
 },
-["forsworn doctrine"] = {
-317936,
-331213,
+["undying rage"] = {
+333227,
+355297,
+356490,
+356492,
 },
 ["morbid fixation"] = {
 338504,
@@ -4547,11 +4607,18 @@ PlaterDB = {
 343556,
 343558,
 },
-["recharge anima"] = {
-321367,
-324046,
-327280,
-327416,
+["blood barrier"] = {
+262980,
+269185,
+269281,
+322759,
+322766,
+322773,
+323482,
+329840,
+329849,
+329852,
+373724,
 },
 ["icebound aegis"] = {
 321368,
@@ -10370,19 +10437,24 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[171772] = {
-"纱雾防御者",
-"塞兹仙林的迷雾",
-"zhCN",
-},
 [246887] = {
 "横冲直撞的魔鬼鱼",
 "塔克-雷桑深渊",
 "zhCN",
 },
-[9547] = {
-"醉酒的奴隶主",
-"黑石深渊",
+[171772] = {
+"纱雾防御者",
+"塞兹仙林的迷雾",
+"zhCN",
+},
+[207481] = {
+"旋菇",
+"真菌之愚",
+"zhCN",
+},
+[77325] = {
+"黑手",
+"黑石铸造厂",
 "zhCN",
 },
 [206068] = {
@@ -10395,9 +10467,9 @@ PlaterDB = {
 "燧酿酒庄",
 "zhCN",
 },
-[77325] = {
-"黑手",
-"黑石铸造厂",
+[9554] = {
+"喝醉的顾客",
+"黑石深渊",
 "zhCN",
 },
 [137989] = {
@@ -10430,9 +10502,9 @@ PlaterDB = {
 "档案馆突袭",
 "zhCN",
 },
-[247476] = {
-"代言人杉文兹",
-"真菌之愚",
+[229855] = {
+"幽卫代言人",
+"夜幕圣所",
 "zhCN",
 },
 [634] = {
@@ -10445,9 +10517,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[229855] = {
-"幽卫代言人",
-"夜幕圣所",
+[241798] = {
+"节点亲王泽沃斯",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [24555] = {
@@ -10475,9 +10547,9 @@ PlaterDB = {
 "奥达曼：提尔的遗产",
 "zhCN",
 },
-[241798] = {
-"节点亲王泽沃斯",
-"法力熔炉：欧米伽",
+[125977] = {
+"复生图腾",
+"阿塔达萨",
 "zhCN",
 },
 [10424] = {
@@ -10490,8 +10562,8 @@ PlaterDB = {
 "通天峰",
 "zhCN",
 },
-[76812] = {
-"保安",
+[76814] = {
+"缚火者卡格拉兹",
 "黑石铸造厂",
 "zhCN",
 },
@@ -10505,18 +10577,18 @@ PlaterDB = {
 "10.1 Zaralek Caverns - Chapter 1 Scenario",
 "zhCN",
 },
-[76814] = {
-"缚火者卡格拉兹",
-"黑石铸造厂",
-"zhCN",
-},
 [642] = {
 "斯尼德的伐木机",
 "死亡矿井",
 "zhCN",
 },
-[76811] = {
-"鼓风者",
+[238608] = {
+"受训的拾荒者",
+"闸板陋巷",
+"zhCN",
+},
+[80708] = {
+"钢铁工头",
 "黑石铸造厂",
 "zhCN",
 },
@@ -10535,9 +10607,9 @@ PlaterDB = {
 "永恒黎明",
 "zhCN",
 },
-[80708] = {
-"钢铁工头",
-"黑石铸造厂",
+[189471] = {
+"卡拉希铁匠",
+"奈萨鲁斯",
 "zhCN",
 },
 [10808] = {
@@ -10560,18 +10632,18 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[219810] = {
-"蛛魔祭师",
-"飞掠裂口",
-"zhCN",
-},
 [84841] = {
 "钢铁码头工人",
 "黑石铸造厂",
 "zhCN",
 },
-[79200] = {
-"黑石熔炉专家",
+[226484] = {
+"未知目标",
+"恐惧陷坑",
+"zhCN",
+},
+[76906] = {
+"主管索戈尔",
 "黑石铸造厂",
 "zhCN",
 },
@@ -10595,9 +10667,9 @@ PlaterDB = {
 "红玉新生法池",
 "zhCN",
 },
-[76906] = {
-"主管索戈尔",
-"黑石铸造厂",
+[137716] = {
+"食泥蟹",
+"暴富矿区！！",
 "zhCN",
 },
 [97678] = {
@@ -10605,9 +10677,9 @@ PlaterDB = {
 "守望者地窟",
 "zhCN",
 },
-[137716] = {
-"食泥蟹",
-"暴富矿区！！",
+[106787] = {
+"苦水奴隶",
+"艾萨拉之眼",
 "zhCN",
 },
 [233203] = {
@@ -10650,14 +10722,14 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[106787] = {
-"苦水奴隶",
-"艾萨拉之眼",
-"zhCN",
-},
 [33823] = {
 "暮光斩杀者",
 "奥杜尔",
+"zhCN",
+},
+[80422] = {
+"钢铁神枪手",
+"黑石铸造厂",
 "zhCN",
 },
 [201468] = {
@@ -10680,11 +10752,6 @@ PlaterDB = {
 "诸王之眠",
 "zhCN",
 },
-[80422] = {
-"钢铁神枪手",
-"黑石铸造厂",
-"zhCN",
-},
 [80409] = {
 "马考格·阿巴迪尔",
 "黑石铸造厂",
@@ -10693,6 +10760,11 @@ PlaterDB = {
 [80411] = {
 "钢铁神枪手",
 "黑石铸造厂",
+"zhCN",
+},
+[164562] = {
+"堕落的驯犬者",
+"赎罪大厅",
 "zhCN",
 },
 [192767] = {
@@ -10710,9 +10782,9 @@ PlaterDB = {
 "恐轨车站",
 "zhCN",
 },
-[164562] = {
-"堕落的驯犬者",
-"赎罪大厅",
+[234623] = {
+"巧手窃贼",
+"真菌之愚",
 "zhCN",
 },
 [137485] = {
@@ -10730,9 +10802,9 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[52413] = {
-"祖利安碾齿鳄鱼",
-"祖尔格拉布",
+[78978] = {
+"暗裂噬咬者",
+"黑石铸造厂",
 "zhCN",
 },
 [188673] = {
@@ -10760,14 +10832,14 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[78978] = {
-"暗裂噬咬者",
-"黑石铸造厂",
-"zhCN",
-},
 [32845] = {
 "霍迪尔",
 "奥杜尔",
+"zhCN",
+},
+[80400] = {
+"钢铁装配车间卫士",
+"黑石铸造厂",
 "zhCN",
 },
 [24556] = {
@@ -10790,9 +10862,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[80400] = {
-"钢铁装配车间卫士",
-"黑石铸造厂",
+[70153] = {
+"生长中的真菌兽",
+"雷电王座",
 "zhCN",
 },
 [137487] = {
@@ -10810,9 +10882,9 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[70153] = {
-"生长中的真菌兽",
-"雷电王座",
+[87411] = {
+"车间守卫",
+"黑石铸造厂",
 "zhCN",
 },
 [180485] = {
@@ -10835,9 +10907,9 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[87411] = {
-"车间守卫",
-"黑石铸造厂",
+[184581] = {
+"巴尔洛戈",
+"奥达曼：提尔的遗产",
 "zhCN",
 },
 [223995] = {
@@ -10850,14 +10922,14 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
+[236072] = {
+"无缚实体",
+"法力熔炉：欧米伽",
+"zhCN",
+},
 [180486] = {
 "泥哨",
 "塔扎维什，帷纱集市",
-"zhCN",
-},
-[184581] = {
-"巴尔洛戈",
-"奥达曼：提尔的遗产",
 "zhCN",
 },
 [131858] = {
@@ -10875,14 +10947,14 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
-[245414] = {
-"入侵的幼虫",
-"奥尔达尼生态圆顶",
-"zhCN",
-},
 [235154] = {
 "低薪蛮兵",
 "恐惧陷坑",
+"zhCN",
+},
+[80534] = {
+"暴躁的铁蹄牛",
+"黑石铸造厂",
 "zhCN",
 },
 [128650] = {
@@ -10900,14 +10972,14 @@ PlaterDB = {
 "奥达曼：提尔的遗产",
 "zhCN",
 },
+[235156] = {
+"低薪蛮兵",
+"恐惧陷坑",
+"zhCN",
+},
 [222461] = {
 "凝固物质",
 "尼鲁巴尔王宫",
-"zhCN",
-},
-[80534] = {
-"暴躁的铁蹄牛",
-"黑石铸造厂",
 "zhCN",
 },
 [97170] = {
@@ -10915,8 +10987,8 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[235156] = {
-"低薪蛮兵",
+[222173] = {
+"入侵的幽暗爬行者",
 "恐惧陷坑",
 "zhCN",
 },
@@ -10925,19 +10997,19 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[222173] = {
-"入侵的幽暗爬行者",
-"恐惧陷坑",
-"zhCN",
-},
-[234051] = {
-"灵牙吠魂者",
-"法力熔炉：欧米伽",
+[249829] = {
+"葬轮",
+"闸板陋巷",
 "zhCN",
 },
 [203811] = {
 "熵能化身",
 "亚贝鲁斯，焰影熔炉",
+"zhCN",
+},
+[222927] = {
+"圣焰酿酒师",
+"圣焰隐修院",
 "zhCN",
 },
 [98706] = {
@@ -10955,9 +11027,9 @@ PlaterDB = {
 "千丝之城",
 "zhCN",
 },
-[33806] = {
-"空灵兽",
-"奥杜尔",
+[244922] = {
+"影卫相位剑士",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [158478] = {
@@ -10970,8 +11042,8 @@ PlaterDB = {
 "千丝之城",
 "zhCN",
 },
-[244922] = {
-"影卫相位剑士",
+[236549] = {
+"结晶魔像",
 "法力熔炉：欧米伽",
 "zhCN",
 },
@@ -10980,9 +11052,9 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
-[244413] = {
-"誓约唤厄者",
-"克莱格瓦之眠",
+[234478] = {
+"迪门修斯",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [34133] = {
@@ -10993,11 +11065,6 @@ PlaterDB = {
 [186120] = {
 "树口",
 "蕨皮山谷",
-"zhCN",
-},
-[234478] = {
-"迪门修斯",
-"法力熔炉：欧米伽",
 "zhCN",
 },
 [242784] = {
@@ -11015,14 +11082,19 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
+[241803] = {
+"节点亲王凯沃尔",
+"法力熔炉：欧米伽",
+"zhCN",
+},
 [176395] = {
 "过载的邮件元素",
 "塔扎维什，帷纱集市",
 "zhCN",
 },
-[241803] = {
-"节点亲王凯沃尔",
-"法力熔炉：欧米伽",
+[244444] = {
+"大吞噬者",
+"真菌之愚",
 "zhCN",
 },
 [98963] = {
@@ -11040,9 +11112,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[81197] = {
-"钢铁掠夺者",
-"黑石铸造厂",
+[198873] = {
+"碎裂锋刃领主",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [128652] = {
@@ -11075,14 +11147,14 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[198873] = {
-"碎裂锋刃领主",
-"亚贝鲁斯，焰影熔炉",
-"zhCN",
-},
 [76806] = {
 "山脉之心",
 "黑石铸造厂",
+"zhCN",
+},
+[241800] = {
+"法力铸造泰坦",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [134423] = {
@@ -11095,9 +11167,9 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[78233] = {
-"暗裂晶脊鬣蜥人",
-"黑石铸造厂",
+[55689] = {
+"缚风者哈格拉",
+"巨龙之魂",
 "zhCN",
 },
 [24685] = {
@@ -11110,19 +11182,9 @@ PlaterDB = {
 "奥杜尔",
 "zhCN",
 },
-[55689] = {
-"缚风者哈格拉",
-"巨龙之魂",
-"zhCN",
-},
-[167607] = {
-"石裔切割者",
-"赎罪大厅",
-"zhCN",
-},
-[10425] = {
-"复生的战斗法师",
-"斯坦索姆",
+[136264] = {
+"未知目标",
+"诸王之眠",
 "zhCN",
 },
 [230927] = {
@@ -11130,19 +11192,14 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
+[10425] = {
+"复生的战斗法师",
+"斯坦索姆",
+"zhCN",
+},
 [164563] = {
 "邪恶的加尔贡",
 "赎罪大厅",
-"zhCN",
-},
-[165137] = {
-"佐尔拉姆斯守门人",
-"通灵战潮",
-"zhCN",
-},
-[218884] = {
-"未知目标",
-"尼鲁巴尔王宫",
 "zhCN",
 },
 [34134] = {
@@ -11150,9 +11207,9 @@ PlaterDB = {
 "奥杜尔",
 "zhCN",
 },
-[186124] = {
-"伤齿",
-"蕨皮山谷",
+[167610] = {
+"石精噬踝者",
+"赎罪大厅",
 "zhCN",
 },
 [237763] = {
@@ -11160,19 +11217,34 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
+[165137] = {
+"佐尔拉姆斯守门人",
+"通灵战潮",
+"zhCN",
+},
+[186124] = {
+"伤齿",
+"蕨皮山谷",
+"zhCN",
+},
+[136984] = {
+"莱班",
+"诸王之眠",
+"zhCN",
+},
 [191243] = {
 "狂野的鞭笞者",
 "蕨皮山谷",
 "zhCN",
 },
-[243241] = {
-"无常具象",
-"法力熔炉：欧米伽",
+[98965] = {
+"库塔洛斯·拉文凯斯",
+"黑鸦堡垒",
 "zhCN",
 },
-[165138] = {
-"凋零之袋",
-"通灵战潮",
+[196576] = {
+"缚法节杖",
+"艾杰斯亚学院",
 "zhCN",
 },
 [106643] = {
@@ -11185,9 +11257,9 @@ PlaterDB = {
 "斯坦索姆",
 "zhCN",
 },
-[98965] = {
-"库塔洛斯·拉文凯斯",
-"黑鸦堡垒",
+[165138] = {
+"凋零之袋",
+"通灵战潮",
 "zhCN",
 },
 [194315] = {
@@ -11195,9 +11267,9 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[196576] = {
-"缚法节杖",
-"艾杰斯亚学院",
+[228424] = {
+"暗索无人机",
+"水闸行动",
 "zhCN",
 },
 [87448] = {
@@ -11210,9 +11282,9 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
-[211061] = {
-"帕特洛",
-"真菌之愚",
+[127879] = {
+"祖尔的持盾卫士",
+"阿塔达萨",
 "zhCN",
 },
 [180495] = {
@@ -11220,9 +11292,9 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
-[127879] = {
-"祖尔的持盾卫士",
-"阿塔达萨",
+[194316] = {
+"唤雷者扎莉伊",
+"诺库德阻击战",
 "zhCN",
 },
 [156949] = {
@@ -11230,9 +11302,9 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[194316] = {
-"唤雷者扎莉伊",
-"诺库德阻击战",
+[222981] = {
+"致命梦魇",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [244426] = {
@@ -11240,14 +11312,14 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[229364] = {
-"专横的死亡调音师",
-"解放安德麦",
-"zhCN",
-},
 [102277] = {
 "神射手诱饵",
 "黑心林地",
+"zhCN",
+},
+[231497] = {
+"爆壳螃蟹",
+"水闸行动",
 "zhCN",
 },
 [61392] = {
@@ -11265,9 +11337,9 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[231497] = {
-"爆壳螃蟹",
-"水闸行动",
+[20041] = {
+"晶核斥候",
+"风暴要塞",
 "zhCN",
 },
 [194317] = {
@@ -11275,14 +11347,14 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[20041] = {
-"晶核斥候",
-"风暴要塞",
-"zhCN",
-},
 [77692] = {
 "克罗莫格",
 "黑石铸造厂",
+"zhCN",
+},
+[237662] = {
+"伊莉萨·悲夜",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [216328] = {
@@ -11295,24 +11367,19 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
-[237662] = {
-"伊莉萨·悲夜",
-"法力熔炉：欧米伽",
-"zhCN",
-},
 [231014] = {
 "载货机器人",
 "水闸行动",
 "zhCN",
 },
-[76444] = {
-"被奴役的亡魂",
-"影月墓地",
-"zhCN",
-},
 [165410] = {
 "高阶裁决官阿丽兹",
 "赎罪大厅",
+"zhCN",
+},
+[76444] = {
+"被奴役的亡魂",
+"影月墓地",
 "zhCN",
 },
 [203826] = {
@@ -11323,6 +11390,11 @@ PlaterDB = {
 [165415] = {
 "劳苦的管理员",
 "赎罪大厅",
+"zhCN",
+},
+[245412] = {
+"贪食的饕餮者",
+"奥尔达尼生态圆顶",
 "zhCN",
 },
 [216329] = {
@@ -11338,11 +11410,6 @@ PlaterDB = {
 [241923] = {
 "奥能回响",
 "法力熔炉：欧米伽",
-"zhCN",
-},
-[245412] = {
-"贪食的饕餮者",
-"奥尔达尼生态圆顶",
 "zhCN",
 },
 [131667] = {
@@ -11365,14 +11432,19 @@ PlaterDB = {
 "克莱格瓦之眠",
 "zhCN",
 },
+[159764] = {
+"杰什拉",
+"尼奥罗萨，觉醒之城",
+"zhCN",
+},
 [195855] = {
 "复活的战士",
 "诺库德阻击战",
 "zhCN",
 },
-[159764] = {
-"杰什拉",
-"尼奥罗萨，觉醒之城",
+[165414] = {
+"堕落的歼灭者",
+"赎罪大厅",
 "zhCN",
 },
 [16152] = {
@@ -11385,14 +11457,14 @@ PlaterDB = {
 "初诞者圣墓",
 "zhCN",
 },
-[165414] = {
-"堕落的歼灭者",
-"赎罪大厅",
-"zhCN",
-},
 [244753] = {
 "节点女亲王凯威扎",
 "虚空之锋庇护所",
+"zhCN",
+},
+[222167] = {
+"虫巢灌注者",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [130192] = {
@@ -11405,9 +11477,9 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[222167] = {
-"虫巢灌注者",
-"尼鲁巴尔王宫",
+[138489] = {
+"祖尔之影",
+"诸王之眠",
 "zhCN",
 },
 [81820] = {
@@ -11415,9 +11487,9 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[138489] = {
-"祖尔之影",
-"诸王之眠",
+[76116] = {
+"飞轮旋舞者",
+"通天峰",
 "zhCN",
 },
 [24686] = {
@@ -11425,9 +11497,9 @@ PlaterDB = {
 "魔导师平台",
 "zhCN",
 },
-[76116] = {
-"飞轮旋舞者",
-"通天峰",
+[226402] = {
+"布隆特",
+"水闸行动",
 "zhCN",
 },
 [231176] = {
@@ -11445,14 +11517,14 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[226402] = {
-"布隆特",
-"水闸行动",
+[134417] = {
+"深海祭师",
+"风暴神殿",
 "zhCN",
 },
-[137486] = {
-"帕特拉女王",
-"诸王之眠",
+[163947] = {
+"精神噬体",
+"尼奥罗萨，觉醒之城",
 "zhCN",
 },
 [192786] = {
@@ -11460,9 +11532,9 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[163947] = {
-"精神噬体",
-"尼奥罗萨，觉醒之城",
+[165408] = {
+"哈尔吉亚斯",
+"赎罪大厅",
 "zhCN",
 },
 [76446] = {
@@ -11480,8 +11552,8 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[131666] = {
-"女巫会塑棘者",
+[131850] = {
+"疯狂的生存专家",
 "维克雷斯庄园",
 "zhCN",
 },
@@ -11500,19 +11572,14 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[131850] = {
-"疯狂的生存专家",
-"维克雷斯庄园",
-"zhCN",
-},
 [130437] = {
 "矿井鼠",
 "暴富矿区！！",
 "zhCN",
 },
-[167615] = {
-"堕落的黑暗剑士",
-"赎罪大厅",
+[135239] = {
+"幽魂巫医",
+"诸王之眠",
 "zhCN",
 },
 [226404] = {
@@ -11525,9 +11592,14 @@ PlaterDB = {
 "维克雷斯庄园",
 "zhCN",
 },
-[100991] = {
-"纠缠之根",
-"黑心林地",
+[235631] = {
+"未知目标",
+"暴富矿区！！",
+"zhCN",
+},
+[125828] = {
+"精灵丨副将",
+"阿塔达萨",
 "zhCN",
 },
 [100249] = {
@@ -11550,9 +11622,9 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
-[125828] = {
-"精灵丨副将",
-"阿塔达萨",
+[98954] = {
+"魔誓侍从",
+"守望者地窟",
 "zhCN",
 },
 [100364] = {
@@ -11560,9 +11632,9 @@ PlaterDB = {
 "守望者地窟",
 "zhCN",
 },
-[230668] = {
-"食腐鸟",
-"卡利姆多",
+[82590] = {
+"恐轨斥候",
+"恐轨车站",
 "zhCN",
 },
 [240905] = {
@@ -11580,14 +11652,14 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
+[134137] = {
+"神殿侍从",
+"风暴神殿",
+"zhCN",
+},
 [136483] = {
 "艾什凡水手",
 "围攻伯拉勒斯",
-"zhCN",
-},
-[82590] = {
-"恐轨斥候",
-"恐轨车站",
 "zhCN",
 },
 [145185] = {
@@ -11595,8 +11667,8 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
-[134137] = {
-"神殿侍从",
+[134139] = {
+"神殿骑士",
 "风暴神殿",
 "zhCN",
 },
@@ -11615,19 +11687,19 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[134139] = {
-"神殿骑士",
-"风暴神殿",
+[34137] = {
+"寒冬冰虫",
+"奥杜尔",
+"zhCN",
+},
+[91792] = {
+"唤雷多头蛇",
+"艾萨拉之眼",
 "zhCN",
 },
 [189719] = {
 "看护者伊里度斯",
 "注能大厅",
-"zhCN",
-},
-[34137] = {
-"寒冬冰虫",
-"奥杜尔",
 "zhCN",
 },
 [214801] = {
@@ -11665,11 +11737,6 @@ PlaterDB = {
 "艾杰斯亚学院",
 "zhCN",
 },
-[91792] = {
-"唤雷多头蛇",
-"艾萨拉之眼",
-"zhCN",
-},
 [200836] = {
 "黑曜卫士",
 "亚贝鲁斯，焰影熔炉",
@@ -11680,6 +11747,11 @@ PlaterDB = {
 "黑心林地",
 "zhCN",
 },
+[91790] = {
+"玛拉纳沙地行者",
+"艾萨拉之眼",
+"zhCN",
+},
 [215826] = {
 "血工",
 "艾拉-卡拉，回响之城",
@@ -11688,11 +11760,6 @@ PlaterDB = {
 [216338] = {
 "魁梧的血卫",
 "艾拉-卡拉，回响之城",
-"zhCN",
-},
-[208478] = {
-"沃尔科罗斯",
-"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [134150] = {
@@ -11718,6 +11785,11 @@ PlaterDB = {
 [104215] = {
 "巡逻队长加多",
 "群星庭院",
+"zhCN",
+},
+[95887] = {
+"格雷泽",
+"守望者地窟",
 "zhCN",
 },
 [61139] = {
@@ -11780,9 +11852,9 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[137940] = {
-"护卫鲨鱼",
-"暴富矿区！！",
+[207639] = {
+"迦拉克隆之荒",
+"永恒黎明",
 "zhCN",
 },
 [125590] = {
@@ -11795,14 +11867,14 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
+[16151] = {
+"午夜",
+"卡拉赞",
+"zhCN",
+},
 [248589] = {
 "虚无束缚者",
 "法力熔炉：欧米伽",
-"zhCN",
-},
-[207639] = {
-"迦拉克隆之荒",
-"永恒黎明",
 "zhCN",
 },
 [216341] = {
@@ -11815,11 +11887,6 @@ PlaterDB = {
 "通灵战潮",
 "zhCN",
 },
-[16151] = {
-"午夜",
-"卡拉赞",
-"zhCN",
-},
 [91796] = {
 "海巨人弄潮者",
 "艾萨拉之眼",
@@ -11830,9 +11897,9 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[72238] = {
-"颓丧的化身",
-"决战奥格瑞玛",
+[99644] = {
+"恶魔卫士歼灭者",
+"守望者地窟",
 "zhCN",
 },
 [178141] = {
@@ -11843,6 +11910,11 @@ PlaterDB = {
 [102788] = {
 "魔怨支配者",
 "黑鸦堡垒",
+"zhCN",
+},
+[131677] = {
+"毒心织符者",
+"维克雷斯庄园",
 "zhCN",
 },
 [216342] = {
@@ -11860,11 +11932,6 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[107114] = {
-"折磨宝珠",
-"守望者地窟",
-"zhCN",
-},
 [162305] = {
 "亚基穿心者",
 "尼奥罗萨，觉醒之城",
@@ -11875,9 +11942,9 @@ PlaterDB = {
 "奈萨里奥的巢穴",
 "zhCN",
 },
-[95885] = {
-"提拉宋·萨瑟利尔",
-"守望者地窟",
+[59915] = {
+"红玉守护者",
+"魔古山宝库",
 "zhCN",
 },
 [229462] = {
@@ -11885,9 +11952,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[245008] = {
-"无缚相位剑士",
-"法力熔炉：欧米伽",
+[98970] = {
+"拉图修斯",
+"黑鸦堡垒",
+"zhCN",
+},
+[114330] = {
+"巴布丽特",
+"重返卡拉赞",
 "zhCN",
 },
 [53206] = {
@@ -11895,19 +11967,9 @@ PlaterDB = {
 "火焰之地",
 "zhCN",
 },
-[98970] = {
-"拉图修斯",
-"黑鸦堡垒",
-"zhCN",
-},
 [104295] = {
 "炽燃小鬼",
 "群星庭院",
-"zhCN",
-},
-[82594] = {
-"恐轨搬运工",
-"恐轨车站",
 "zhCN",
 },
 [136353] = {
@@ -11915,14 +11977,24 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
+[82594] = {
+"恐轨搬运工",
+"恐轨车站",
+"zhCN",
+},
+[16171] = {
+"冷雾寡妇蛛",
+"卡拉赞",
+"zhCN",
+},
 [134144] = {
 "活体激流",
 "风暴神殿",
 "zhCN",
 },
-[102287] = {
-"烬壳统御者",
-"奈萨里奥的巢穴",
+[184020] = {
+"魁梧的狂战士",
+"奥达曼：提尔的遗产",
 "zhCN",
 },
 [45912] = {
@@ -11935,14 +12007,14 @@ PlaterDB = {
 "艾拉-卡拉，回响之城",
 "zhCN",
 },
-[184020] = {
-"魁梧的狂战士",
-"奥达曼：提尔的遗产",
-"zhCN",
-},
 [168112] = {
 "卡尔将军",
 "纳斯利亚堡",
+"zhCN",
+},
+[127315] = {
+"复生图腾",
+"阿塔达萨",
 "zhCN",
 },
 [189727] = {
@@ -11965,8 +12037,8 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
-[127315] = {
-"复生图腾",
+[129553] = {
+"恐龙统领吉什奥",
 "阿塔达萨",
 "zhCN",
 },
@@ -11990,9 +12062,9 @@ PlaterDB = {
 "风暴要塞：生态船",
 "zhCN",
 },
-[129553] = {
-"恐龙统领吉什奥",
-"阿塔达萨",
+[219766] = {
+"某餃子",
+"无底沉穴",
 "zhCN",
 },
 [137517] = {
@@ -12000,14 +12072,14 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[135470] = {
-"征服者阿卡阿里",
-"诸王之眠",
-"zhCN",
-},
 [127732] = {
 "克罗贝克斯",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[102253] = {
+"顶石粉碎者",
+"奈萨里奥的巢穴",
 "zhCN",
 },
 [163623] = {
@@ -12020,9 +12092,9 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[102253] = {
-"顶石粉碎者",
-"奈萨里奥的巢穴",
+[236176] = {
+"未知目标",
+"塔克-雷桑深渊",
 "zhCN",
 },
 [189729] = {
@@ -12070,8 +12142,8 @@ PlaterDB = {
 "祖尔格拉布",
 "zhCN",
 },
-[227843] = {
-"血牙土狼",
+[236823] = {
+"暗索暴徒",
 "解放安德麦",
 "zhCN",
 },
@@ -12080,14 +12152,14 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
+[100713] = {
+"啮岩渔夫",
+"奈萨里奥的巢穴",
+"zhCN",
+},
 [83620] = {
 "血槌碎地者",
 "血槌炉渣矿井",
-"zhCN",
-},
-[236823] = {
-"暗索暴徒",
-"解放安德麦",
 "zhCN",
 },
 [212765] = {
@@ -12105,14 +12177,14 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
-[91789] = {
-"积怨夫人",
-"艾萨拉之眼",
-"zhCN",
-},
 [132713] = {
 "商业大亨拉兹敦克",
 "暴富矿区！！",
+"zhCN",
+},
+[139800] = {
+"唤风者学徒",
+"风暴神殿",
 "zhCN",
 },
 [130436] = {
@@ -12125,14 +12197,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[246341] = {
-"暗黑野牛",
-"解放安德麦",
-"zhCN",
-},
 [45872] = {
 "洛哈西",
 "风神王座",
+"zhCN",
+},
+[114803] = {
+"鬼灵马夫",
+"重返卡拉赞",
 "zhCN",
 },
 [192803] = {
@@ -12140,9 +12212,9 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[114803] = {
-"鬼灵马夫",
-"重返卡拉赞",
+[104217] = {
+"塔丽克萨·火冠",
+"群星庭院",
 "zhCN",
 },
 [82597] = {
@@ -12160,9 +12232,9 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[83621] = {
-"血槌缚火者",
-"血槌炉渣矿井",
+[234955] = {
+"废土遗民诉契者",
+"奥尔达尼生态圆顶",
 "zhCN",
 },
 [195875] = {
@@ -12170,9 +12242,9 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[234955] = {
-"废土遗民诉契者",
-"奥尔达尼生态圆顶",
+[83621] = {
+"血槌缚火者",
+"血槌炉渣矿井",
 "zhCN",
 },
 [135474] = {
@@ -12180,14 +12252,14 @@ PlaterDB = {
 "维克雷斯庄园",
 "zhCN",
 },
-[99359] = {
-"腐心守护者",
-"黑心林地",
-"zhCN",
-},
 [229619] = {
 "灼热的燃料魔鬼",
 "解放安德麦",
+"zhCN",
+},
+[217039] = {
+"蛛魔搬运者",
+"艾拉-卡拉，回响之城",
 "zhCN",
 },
 [190245] = {
@@ -12195,9 +12267,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[217039] = {
-"蛛魔搬运者",
-"艾拉-卡拉，回响之城",
+[57280] = {
+"暮光攻城队长",
+"巨龙之魂",
 "zhCN",
 },
 [81318] = {
@@ -12220,14 +12292,14 @@ PlaterDB = {
 "诸王之眠",
 "zhCN",
 },
-[97171] = {
-"积怨奥术师",
-"艾萨拉之眼",
-"zhCN",
-},
 [234204] = {
 "凝结的黏团",
 "九号挖掘场",
+"zhCN",
+},
+[99366] = {
+"污心召唤师",
+"黑心林地",
 "zhCN",
 },
 [186151] = {
@@ -12235,14 +12307,14 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[101008] = {
-"针刺虫群",
-"黑鸦堡垒",
-"zhCN",
-},
 [84989] = {
 "被感染的唤冰者",
 "永茂林地",
+"zhCN",
+},
+[227931] = {
+"渗流的残泥",
+"解放安德麦",
 "zhCN",
 },
 [195877] = {
@@ -12260,14 +12332,14 @@ PlaterDB = {
 "黑石深渊",
 "zhCN",
 },
-[227931] = {
-"渗流的残泥",
-"解放安德麦",
-"zhCN",
-},
 [202971] = {
 "未知目标",
 "亚贝鲁斯，焰影熔炉",
+"zhCN",
+},
+[130435] = {
+"混乱的暴徒",
+"暴富矿区！！",
 "zhCN",
 },
 [104274] = {
@@ -12300,21 +12372,6 @@ PlaterDB = {
 "死亡矿井",
 "zhCN",
 },
-[180348] = {
-"财团打手",
-"塔扎维什，帷纱集市",
-"zhCN",
-},
-[133430] = {
-"风险投资公司策划",
-"暴富矿区！！",
-"zhCN",
-},
-[39388] = {
-"变异幼崽",
-"格瑞姆巴托",
-"zhCN",
-},
 [235805] = {
 "影卫黑暗法师",
 "法力熔炉：欧米伽",
@@ -12323,6 +12380,21 @@ PlaterDB = {
 [97173] = {
 "焦躁的海潮元素",
 "艾萨拉之眼",
+"zhCN",
+},
+[39388] = {
+"变异幼崽",
+"格瑞姆巴托",
+"zhCN",
+},
+[133430] = {
+"风险投资公司策划",
+"暴富矿区！！",
+"zhCN",
+},
+[55312] = {
+"不眠的约萨希",
+"巨龙之魂",
 "zhCN",
 },
 [83623] = {
@@ -12335,9 +12407,9 @@ PlaterDB = {
 "魔古山宝库",
 "zhCN",
 },
-[55312] = {
-"不眠的约萨希",
-"巨龙之魂",
+[114584] = {
+"幻影员工",
+"重返卡拉赞",
 "zhCN",
 },
 [52441] = {
@@ -12350,14 +12422,14 @@ PlaterDB = {
 "卡利姆多",
 "zhCN",
 },
-[114584] = {
-"幻影员工",
-"重返卡拉赞",
-"zhCN",
-},
 [173016] = {
 "尸体采集者",
 "通灵战潮",
+"zhCN",
+},
+[10411] = {
+"纳克萨玛斯之眼",
+"斯坦索姆",
 "zhCN",
 },
 [133943] = {
@@ -12370,19 +12442,9 @@ PlaterDB = {
 "永恒黎明",
 "zhCN",
 },
-[233247] = {
-"专横的混音者",
-"解放安德麦",
-"zhCN",
-},
-[10411] = {
-"纳克萨玛斯之眼",
-"斯坦索姆",
-"zhCN",
-},
-[221986] = {
-"鲜血恐魔",
-"尼鲁巴尔王宫",
+[184107] = {
+"符文保护者",
+"奥达曼：提尔的遗产",
 "zhCN",
 },
 [106785] = {
@@ -12390,9 +12452,9 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[133432] = {
-"风险投资公司炼金师",
-"暴富矿区！！",
+[221986] = {
+"鲜血恐魔",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [235807] = {
@@ -12405,9 +12467,9 @@ PlaterDB = {
 "通天峰",
 "zhCN",
 },
-[163121] = {
-"缝合先锋",
-"通灵战潮",
+[7246] = {
+"沙怒暗影猎手",
+"祖尔法拉克",
 "zhCN",
 },
 [75786] = {
@@ -12415,19 +12477,24 @@ PlaterDB = {
 "血槌炉渣矿井",
 "zhCN",
 },
+[163121] = {
+"缝合先锋",
+"通灵战潮",
+"zhCN",
+},
 [102295] = {
 "烬壳统御者",
 "奈萨里奥的巢穴",
 "zhCN",
 },
-[189227] = {
-"卡拉希猎人",
-"奈萨鲁斯",
-"zhCN",
-},
 [60701] = {
 "永影之提安",
 "魔古山宝库",
+"zhCN",
+},
+[189227] = {
+"卡拉希猎人",
+"奈萨鲁斯",
 "zhCN",
 },
 [136160] = {
@@ -12443,6 +12510,11 @@ PlaterDB = {
 [98177] = {
 "格雷凡纳·裂魂",
 "守望者地窟",
+"zhCN",
+},
+[61243] = {
+"杰翰",
+"魔古山宫殿",
 "zhCN",
 },
 [163122] = {
@@ -12465,19 +12537,14 @@ PlaterDB = {
 "斯坦索姆",
 "zhCN",
 },
-[61243] = {
-"杰翰",
-"魔古山宫殿",
-"zhCN",
-},
 [114329] = {
 "鲁米诺尔",
 "重返卡拉赞",
 "zhCN",
 },
-[52417] = {
-"锯齿狂鱼",
-"祖尔格拉布",
+[111166] = {
+"坚毅的宫廷卫士",
+"暗夜要塞",
 "zhCN",
 },
 [178133] = {
@@ -12490,6 +12557,11 @@ PlaterDB = {
 "千丝之城",
 "zhCN",
 },
+[116550] = {
+"鬼灵顾客",
+"重返卡拉赞",
+"zhCN",
+},
 [180015] = {
 "肌肉虬结的水手",
 "塔扎维什，帷纱集市",
@@ -12498,11 +12570,6 @@ PlaterDB = {
 [241952] = {
 "群聚之鼠",
 "闸板陋巷",
-"zhCN",
-},
-[116550] = {
-"鬼灵顾客",
-"重返卡拉赞",
 "zhCN",
 },
 [186658] = {
@@ -12515,14 +12582,14 @@ PlaterDB = {
 "水能堡",
 "zhCN",
 },
+[206074] = {
+"摆时者",
+"永恒黎明",
+"zhCN",
+},
 [105636] = {
 "顶石苦力",
 "奈萨里奥的巢穴",
-"zhCN",
-},
-[183500] = {
-"行窃的特工",
-"初诞者圣墓",
 "zhCN",
 },
 [230583] = {
@@ -12530,14 +12597,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[167731] = {
-"分离助理",
-"通灵战潮",
-"zhCN",
-},
 [52373] = {
 "花翼钉刺者",
 "祖尔格拉布",
+"zhCN",
+},
+[18419] = {
+"血警卫看管员",
+"风暴要塞：生态船",
 "zhCN",
 },
 [232602] = {
@@ -12547,6 +12614,11 @@ PlaterDB = {
 },
 [238068] = {
 "磨轮暴怒者",
+"解放安德麦",
+"zhCN",
+},
+[233955] = {
+"焦黑狂热者",
 "解放安德麦",
 "zhCN",
 },
@@ -12575,19 +12647,14 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[91786] = {
-"砂泥蜗牛",
-"艾萨拉之眼",
+[192464] = {
+"狂怒余烬",
+"奈萨鲁斯",
 "zhCN",
 },
 [205611] = {
 "熔火猎犬",
 "亚贝鲁斯，焰影熔炉",
-"zhCN",
-},
-[192464] = {
-"狂怒余烬",
-"奈萨鲁斯",
 "zhCN",
 },
 [98081] = {
@@ -12605,19 +12672,24 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[163126] = {
-"脆骨法师",
-"通灵战潮",
-"zhCN",
-},
 [114544] = {
 "骷髅招待员",
 "重返卡拉赞",
 "zhCN",
 },
+[163126] = {
+"脆骨法师",
+"通灵战潮",
+"zhCN",
+},
 [102566] = {
 "奴役者格里霍恩",
 "守望者地窟",
+"zhCN",
+},
+[19507] = {
+"寻日者基因接合师",
+"风暴要塞：生态船",
 "zhCN",
 },
 [189232] = {
@@ -12635,9 +12707,24 @@ PlaterDB = {
 "格瑞姆巴托",
 "zhCN",
 },
-[116549] = {
-"替补歌手",
-"重返卡拉赞",
+[237861] = {
+"弗兰克提鲁斯",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[76205] = {
+"血腥刀羽战士",
+"通天峰",
+"zhCN",
+},
+[61389] = {
+"克尔格西高阶卫士",
+"魔古山宫殿",
+"zhCN",
+},
+[212779] = {
+"幽爪熊",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [168246] = {
@@ -12650,39 +12737,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[212779] = {
-"幽爪熊",
-"阿梅达希尔，梦境之愿",
-"zhCN",
-},
-[237861] = {
-"弗兰克提鲁斯",
-"法力熔炉：欧米伽",
-"zhCN",
-},
-[76205] = {
-"血腥刀羽战士",
-"通天峰",
-"zhCN",
-},
-[52377] = {
-"花翼钉刺者",
-"祖尔格拉布",
-"zhCN",
-},
 [52379] = {
 "毒尖钉刺者",
 "祖尔格拉布",
-"zhCN",
-},
-[76973] = {
-"汉斯加尔",
-"黑石铸造厂",
-"zhCN",
-},
-[216363] = {
-"强化雄虫",
-"艾拉-卡拉，回响之城",
 "zhCN",
 },
 [228648] = {
@@ -12690,9 +12747,24 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
+[76973] = {
+"汉斯加尔",
+"黑石铸造厂",
+"zhCN",
+},
 [100216] = {
 "积怨牧鱼者",
 "艾萨拉之眼",
+"zhCN",
+},
+[216363] = {
+"强化雄虫",
+"艾拉-卡拉，回响之城",
+"zhCN",
+},
+[158774] = {
+"心智破碎的平民",
+"暴风城的惊魂幻象",
 "zhCN",
 },
 [81236] = {
@@ -12703,11 +12775,6 @@ PlaterDB = {
 [189234] = {
 "未知目标",
 "化身巨龙牢窟",
-"zhCN",
-},
-[10413] = {
-"地穴兽",
-"斯坦索姆",
 "zhCN",
 },
 [234553] = {
@@ -12723,6 +12790,11 @@ PlaterDB = {
 [196045] = {
 "被腐化的嗜魔者",
 "艾杰斯亚学院",
+"zhCN",
+},
+[76132] = {
+"飞天轮舞大师",
+"通天峰",
 "zhCN",
 },
 [216364] = {
@@ -12745,14 +12817,14 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[76407] = {
-"耐奥祖",
-"影月墓地",
-"zhCN",
-},
 [228463] = {
 "震击转轮助理",
 "解放安德麦",
+"zhCN",
+},
+[220193] = {
+"苏雷吉剧毒之刃",
+"千丝之城",
 "zhCN",
 },
 [76974] = {
@@ -12760,9 +12832,9 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
-[216365] = {
-"飞翼运输者",
-"艾拉-卡拉，回响之城",
+[173015] = {
+"纳斯利亚重装执行者",
+"纳斯利亚堡",
 "zhCN",
 },
 [240935] = {
@@ -12775,14 +12847,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[173015] = {
-"纳斯利亚重装执行者",
-"纳斯利亚堡",
-"zhCN",
-},
 [174208] = {
 "王庭执令者",
 "纳斯利亚堡",
+"zhCN",
+},
+[74579] = {
+"未知目标",
+"血槌炉渣矿井",
 "zhCN",
 },
 [61387] = {
@@ -12790,19 +12862,14 @@ PlaterDB = {
 "魔古山宫殿",
 "zhCN",
 },
-[84767] = {
-"扭曲的憎恶",
-"永茂林地",
+[79720] = {
+"格罗姆卡爆破手",
+"恐轨车站",
 "zhCN",
 },
 [74927] = {
 "不稳定的炉渣",
 "血槌炉渣矿井",
-"zhCN",
-},
-[79720] = {
-"格罗姆卡爆破手",
-"恐轨车站",
 "zhCN",
 },
 [69905] = {
@@ -12815,6 +12882,11 @@ PlaterDB = {
 "黑鸦堡垒",
 "zhCN",
 },
+[64947] = {
+"魔古山守望者",
+"魔古山宝库",
+"zhCN",
+},
 [141939] = {
 "艾什凡观察员",
 "围攻伯拉勒斯",
@@ -12825,14 +12897,14 @@ PlaterDB = {
 "10.1 Zaralek Caverns - Chapter 1 Scenario",
 "zhCN",
 },
-[83624] = {
-"血槌执法者",
-"血槌炉渣矿井",
+[160061] = {
+"蠕行腐蚀",
+"暴风城的惊魂幻象",
 "zhCN",
 },
-[32865] = {
-"托里姆",
-"奥杜尔",
+[50485] = {
+"未知目标",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [56923] = {
@@ -12840,9 +12912,9 @@ PlaterDB = {
 "巨龙之魂",
 "zhCN",
 },
-[77231] = {
-"执行者苏卡",
-"黑石铸造厂",
+[52956] = {
+"赞达拉主宰",
+"祖尔格拉布",
 "zhCN",
 },
 [122532] = {
@@ -12855,9 +12927,9 @@ PlaterDB = {
 "风暴要塞：生态船",
 "zhCN",
 },
-[160061] = {
-"蠕行腐蚀",
-"暴风城的惊魂幻象",
+[32865] = {
+"托里姆",
+"奥杜尔",
 "zhCN",
 },
 [205618] = {
@@ -12865,19 +12937,14 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[50485] = {
-"未知目标",
-"亚贝鲁斯，焰影熔炉",
+[98368] = {
+"幽灵卫兵",
+"黑鸦堡垒",
 "zhCN",
 },
 [57819] = {
 "被腐蚀的碎片",
 "巨龙之魂",
-"zhCN",
-},
-[61442] = {
-"力冠三军库乌艾",
-"魔古山宫殿",
 "zhCN",
 },
 [16407] = {
@@ -12890,14 +12957,19 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[216649] = {
-"维克斯",
-"千丝之城",
+[61247] = {
+"格林托克绿角战士",
+"魔古山宫殿",
 "zhCN",
 },
 [241433] = {
 "觉醒的侍从",
 "真菌之愚",
+"zhCN",
+},
+[24690] = {
+"失心行尸",
+"魔导师平台",
 "zhCN",
 },
 [205619] = {
@@ -12910,9 +12982,9 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[24690] = {
-"失心行尸",
-"魔导师平台",
+[165481] = {
+"王庭刺客",
+"纳斯利亚堡",
 "zhCN",
 },
 [123480] = {
@@ -12925,9 +12997,9 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[205620] = {
-"玛尔苟萨·缚法",
-"亚贝鲁斯，焰影熔炉",
+[39392] = {
+"无面腐蚀者",
+"格瑞姆巴托",
 "zhCN",
 },
 [212786] = {
@@ -12945,19 +13017,14 @@ PlaterDB = {
 "暴富矿区！！",
 "zhCN",
 },
-[137029] = {
-"军械专家",
-"暴富矿区！！",
-"zhCN",
-},
-[39392] = {
-"无面腐蚀者",
-"格瑞姆巴托",
-"zhCN",
-},
 [123906] = {
 "加洛西歼灭者",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[23795] = {
+"黑铁捣乱者",
+"黑石深渊",
 "zhCN",
 },
 [105715] = {
@@ -12965,14 +13032,19 @@ PlaterDB = {
 "群星庭院",
 "zhCN",
 },
-[179821] = {
-"指挥官佐·法",
-"塔扎维什，帷纱集市",
+[98691] = {
+"复活的斥候",
+"黑鸦堡垒",
 "zhCN",
 },
 [123726] = {
 "邪能净化者",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[163620] = {
+"烂吐",
+"通灵战潮",
 "zhCN",
 },
 [212981] = {
@@ -12990,9 +13062,9 @@ PlaterDB = {
 "死亡矿井",
 "zhCN",
 },
-[231727] = {
-"1500磅的“哑弹”",
-"解放安德麦",
+[231904] = {
+"重拳恶党",
+"克莱格瓦之眠",
 "zhCN",
 },
 [227632] = {
@@ -13005,14 +13077,14 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
-[231904] = {
-"重拳恶党",
-"克莱格瓦之眠",
+[174100] = {
+"纳斯利亚护罪者",
+"纳斯利亚堡",
 "zhCN",
 },
-[151649] = {
-"防御机器人MkI型",
-"麦卡贡行动",
+[10437] = {
+"奈鲁布恩坎",
+"斯坦索姆",
 "zhCN",
 },
 [78001] = {
@@ -13025,11 +13097,6 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[10437] = {
-"奈鲁布恩坎",
-"斯坦索姆",
-"zhCN",
-},
 [53889] = {
 "堕落熔岩",
 "巨龙之魂",
@@ -13040,14 +13107,19 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
+[79467] = {
+"黎明精锐",
+"通天峰",
+"zhCN",
+},
 [237871] = {
 "无缚刺客",
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[205623] = {
-"德拉佐斯·黑翼",
-"亚贝鲁斯，焰影熔炉",
+[57388] = {
+"暗影血球",
+"巨龙之魂",
 "zhCN",
 },
 [184124] = {
@@ -13070,24 +13142,24 @@ PlaterDB = {
 "暗夜要塞",
 "zhCN",
 },
-[57388] = {
-"暗影血球",
-"巨龙之魂",
-"zhCN",
-},
 [129366] = {
 "水鼠帮海盗",
 "围攻伯拉勒斯",
 "zhCN",
 },
-[210108] = {
-"E.D.N.A",
-"矶石宝库",
+[196679] = {
+"未知目标",
+"化身巨龙牢窟",
 "zhCN",
 },
-[17653] = {
-"影月导魔者",
-"地狱火堡垒：鲜血熔炉",
+[10876] = {
+"亡灵甲虫",
+"斯坦索姆",
+"zhCN",
+},
+[169601] = {
+"顽石军团特种兵",
+"纳斯利亚堡",
 "zhCN",
 },
 [184125] = {
@@ -13100,9 +13172,9 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[10876] = {
-"亡灵甲虫",
-"斯坦索姆",
+[165521] = {
+"伊涅瓦·暗脉女勋爵",
+"纳斯利亚堡",
 "zhCN",
 },
 [210231] = {
@@ -13120,11 +13192,6 @@ PlaterDB = {
 "幽暗要塞",
 "zhCN",
 },
-[165521] = {
-"伊涅瓦·暗脉女勋爵",
-"纳斯利亚堡",
-"zhCN",
-},
 [10439] = {
 "吞咽者拉姆斯登",
 "斯坦索姆",
@@ -13135,9 +13202,14 @@ PlaterDB = {
 "通灵战潮",
 "zhCN",
 },
-[114328] = {
-"库格斯顿",
-"重返卡拉赞",
+[152326] = {
+"凯拉·布舍尔",
+"暴风城的惊魂幻象",
+"zhCN",
+},
+[223541] = {
+"失窃的装货者",
+"夜幕圣所",
 "zhCN",
 },
 [226100] = {
@@ -13150,24 +13222,24 @@ PlaterDB = {
 "螺旋织纹",
 "zhCN",
 },
+[235489] = {
+"潜航恶党",
+"塔克-雷桑深渊",
+"zhCN",
+},
 [101549] = {
 "奥术仆从",
 "黑鸦堡垒",
 "zhCN",
 },
-[223541] = {
-"失窃的装货者",
-"夜幕圣所",
+[133963] = {
+"测试对象",
+"暴富矿区！！",
 "zhCN",
 },
-[52958] = {
-"赞达拉圣职者",
-"祖尔格拉布",
-"zhCN",
-},
-[235489] = {
-"潜航恶党",
-"塔克-雷桑深渊",
+[56781] = {
+"格里昂纳",
+"巨龙之魂",
 "zhCN",
 },
 [18421] = {
@@ -13180,14 +13252,14 @@ PlaterDB = {
 "闸板陋巷",
 "zhCN",
 },
-[56781] = {
-"格里昂纳",
-"巨龙之魂",
-"zhCN",
-},
 [57807] = {
 "暮光冰霜塑能师",
 "巨龙之魂",
+"zhCN",
+},
+[212793] = {
+"虚空晋升者",
+"驭雷栖巢",
 "zhCN",
 },
 [214840] = {
@@ -13195,9 +13267,9 @@ PlaterDB = {
 "艾拉-卡拉，回响之城",
 "zhCN",
 },
-[208698] = {
-"永恒裂隙法师",
-"永恒黎明",
+[205627] = {
+"扎卡利射弩者",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [11452] = {
@@ -13210,9 +13282,9 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[212793] = {
-"虚空晋升者",
-"驭雷栖巢",
+[208698] = {
+"永恒裂隙法师",
+"永恒黎明",
 "zhCN",
 },
 [100526] = {
@@ -13220,9 +13292,9 @@ PlaterDB = {
 "黑心林地",
 "zhCN",
 },
-[205627] = {
-"扎卡利射弩者",
-"亚贝鲁斯，焰影熔炉",
+[189247] = {
+"驯服的凤凰",
+"奈萨鲁斯",
 "zhCN",
 },
 [165189] = {
@@ -13235,24 +13307,9 @@ PlaterDB = {
 "祖尔格拉布",
 "zhCN",
 },
-[129879] = {
-"铁潮斩杀者",
-"围攻伯拉勒斯",
-"zhCN",
-},
-[115115] = {
-"冷雾追猎者",
-"重返卡拉赞",
-"zhCN",
-},
-[227127] = {
-"食草的苔绒羱",
-"地匍矿洞",
-"zhCN",
-},
-[3450] = {
-"迪菲亚鹦鹉",
-"死亡矿井",
+[226103] = {
+"落网的受害者",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [229686] = {
@@ -13260,9 +13317,24 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
-[226103] = {
-"落网的受害者",
-"尼鲁巴尔王宫",
+[3450] = {
+"迪菲亚鹦鹉",
+"死亡矿井",
+"zhCN",
+},
+[206070] = {
+"克罗纳克西",
+"永恒黎明",
+"zhCN",
+},
+[19509] = {
+"寻日者收割员",
+"风暴要塞：生态船",
+"zhCN",
+},
+[115115] = {
+"冷雾追猎者",
+"重返卡拉赞",
 "zhCN",
 },
 [206140] = {
@@ -13275,9 +13347,9 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[206070] = {
-"克罗纳克西",
-"永恒黎明",
+[17356] = {
+"蠕动的软泥怪",
+"地狱火堡垒：破碎大厅",
 "zhCN",
 },
 [248626] = {
@@ -13305,9 +13377,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[17356] = {
-"蠕动的软泥怪",
-"地狱火堡垒：破碎大厅",
+[10381] = {
+"被毁坏的死尸",
+"斯坦索姆",
 "zhCN",
 },
 [231223] = {
@@ -13325,9 +13397,9 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[177269] = {
-"索·莉亚",
-"塔扎维什，帷纱集市",
+[11469] = {
+"艾德雷斯怨魂",
+"厄运之槌",
 "zhCN",
 },
 [184131] = {
@@ -13335,14 +13407,14 @@ PlaterDB = {
 "奥达曼：提尔的遗产",
 "zhCN",
 },
-[11469] = {
-"艾德雷斯怨魂",
-"厄运之槌",
-"zhCN",
-},
 [24675] = {
 "未知目标",
 "魔导师平台",
+"zhCN",
+},
+[138061] = {
+"风险投资公司装卸工",
+"暴富矿区！！",
 "zhCN",
 },
 [226617] = {
@@ -13350,9 +13422,9 @@ PlaterDB = {
 "塔克-雷桑深渊",
 "zhCN",
 },
-[229177] = {
-"托克",
-"解放安德麦",
+[184132] = {
+"土灵看守",
+"奥达曼：提尔的遗产",
 "zhCN",
 },
 [211261] = {
@@ -13365,24 +13437,19 @@ PlaterDB = {
 "黑石深渊",
 "zhCN",
 },
+[229177] = {
+"托克",
+"解放安德麦",
+"zhCN",
+},
 [83892] = {
 "生命守卫高拉",
 "永茂林地",
 "zhCN",
 },
-[184132] = {
-"土灵看守",
-"奥达曼：提尔的遗产",
-"zhCN",
-},
 [8477] = {
 "骷髅仆从",
 "斯坦索姆",
-"zhCN",
-},
-[17371] = {
-"影月术士",
-"地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
 [192764] = {
@@ -13395,14 +13462,14 @@ PlaterDB = {
 "幽暗要塞",
 "zhCN",
 },
-[211262] = {
-"坚不可摧的伊克斯雷腾",
-"破晨号",
-"zhCN",
-},
 [94224] = {
 "石化图腾",
 "奈萨里奥的巢穴",
+"zhCN",
+},
+[211262] = {
+"坚不可摧的伊克斯雷腾",
+"破晨号",
 "zhCN",
 },
 [158284] = {
@@ -13415,6 +13482,11 @@ PlaterDB = {
 "诸王之眠",
 "zhCN",
 },
+[17398] = {
+"初生的邪兽人",
+"地狱火堡垒：鲜血熔炉",
+"zhCN",
+},
 [17462] = {
 "碎手狂热者",
 "地狱火堡垒：破碎大厅",
@@ -13425,9 +13497,9 @@ PlaterDB = {
 "暗夜要塞",
 "zhCN",
 },
-[134994] = {
-"幽魂猎头者",
-"诸王之眠",
+[77559] = {
+"日光放大器",
+"通天峰",
 "zhCN",
 },
 [103344] = {
@@ -13460,9 +13532,9 @@ PlaterDB = {
 "主机觉醒",
 "zhCN",
 },
-[77559] = {
-"日光放大器",
-"通天峰",
+[134994] = {
+"幽魂猎头者",
+"诸王之眠",
 "zhCN",
 },
 [226620] = {
@@ -13470,9 +13542,9 @@ PlaterDB = {
 "地匍矿洞",
 "zhCN",
 },
-[208193] = {
-"白银之手圣骑士",
-"永恒黎明",
+[7795] = {
+"水占师维蕾萨",
+"祖尔法拉克",
 "zhCN",
 },
 [219454] = {
@@ -13495,14 +13567,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[7795] = {
-"水占师维蕾萨",
-"祖尔法拉克",
-"zhCN",
-},
-[186125] = {
-"狡诈图腾",
-"蕨皮山谷",
+[152325] = {
+"瑞贝卡·拉弗林",
+"暴风城的惊魂幻象",
 "zhCN",
 },
 [88820] = {
@@ -13510,24 +13577,14 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
-[194373] = {
-"蕨皮豺狼人",
+[186125] = {
+"狡诈图腾",
 "蕨皮山谷",
 "zhCN",
 },
-[129601] = {
-"破浪持戟者",
-"自由镇",
-"zhCN",
-},
-[211777] = {
-"喷火引线看护者",
-"水能堡",
-"zhCN",
-},
-[87989] = {
-"女铁匠火手",
-"黑石铸造厂",
+[194373] = {
+"蕨皮豺狼人",
+"蕨皮山谷",
 "zhCN",
 },
 [83894] = {
@@ -13535,9 +13592,9 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[71865] = {
-"加尔鲁什·地狱咆哮",
-"决战奥格瑞玛",
+[211777] = {
+"喷火引线看护者",
+"水能堡",
 "zhCN",
 },
 [15547] = {
@@ -13545,9 +13602,14 @@ PlaterDB = {
 "卡拉赞",
 "zhCN",
 },
-[165197] = {
-"骸骨巨怪",
-"通灵战潮",
+[229181] = {
+"弗莱兰多",
+"解放安德麦",
+"zhCN",
+},
+[71865] = {
+"加尔鲁什·地狱咆哮",
+"决战奥格瑞玛",
 "zhCN",
 },
 [83893] = {
@@ -13555,9 +13617,9 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[186696] = {
-"未知目标",
-"奥达曼：提尔的遗产",
+[165197] = {
+"骸骨巨怪",
+"通灵战潮",
 "zhCN",
 },
 [236838] = {
@@ -13565,14 +13627,19 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
+[186696] = {
+"未知目标",
+"奥达曼：提尔的遗产",
+"zhCN",
+},
 [70557] = {
 "赞达拉预言者",
 "雷电王座",
 "zhCN",
 },
-[79463] = {
-"辐光新星战士",
-"通天峰",
+[125547] = {
+"魔触掠行蛛",
+"安托鲁斯，燃烧王座",
 "zhCN",
 },
 [199717] = {
@@ -13580,14 +13647,19 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[214338] = {
-"人偶大师的操纵对象",
-"螺旋织纹",
-"zhCN",
-},
 [161103] = {
 "雇来的痞子",
 "渣客城",
+"zhCN",
+},
+[218306] = {
+"甲虫队长沃拉坎",
+"尼鲁巴尔王宫",
+"zhCN",
+},
+[214338] = {
+"人偶大师的操纵对象",
+"螺旋织纹",
 "zhCN",
 },
 [70586] = {
@@ -13610,9 +13682,9 @@ PlaterDB = {
 "恐惧陷坑",
 "zhCN",
 },
-[7269] = {
-"圣甲虫",
-"祖尔法拉克",
+[226065] = {
+"岩洞巨菌",
+"丝菌师洞穴",
 "zhCN",
 },
 [229695] = {
@@ -13625,14 +13697,14 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[226065] = {
-"岩洞巨菌",
-"丝菌师洞穴",
-"zhCN",
-},
 [197831] = {
 "采石场碎岩者",
 "化身巨龙牢窟",
+"zhCN",
+},
+[33983] = {
+"未知目标",
+"奥杜尔",
 "zhCN",
 },
 [133463] = {
@@ -13640,14 +13712,14 @@ PlaterDB = {
 "暴富矿区！！",
 "zhCN",
 },
-[208198] = {
-"某餃子",
-"血色修道院",
-"zhCN",
-},
 [234936] = {
 "遥控嘀嗒机器人",
 "塔克-雷桑深渊",
+"zhCN",
+},
+[208198] = {
+"某餃子",
+"血色修道院",
 "zhCN",
 },
 [192329] = {
@@ -13695,11 +13767,6 @@ PlaterDB = {
 "初诞者圣墓",
 "zhCN",
 },
-[24722] = {
-"邪能水晶",
-"魔导师平台",
-"zhCN",
-},
 [233474] = {
 "加乐宫恶棍",
 "解放安德麦",
@@ -13710,14 +13777,14 @@ PlaterDB = {
 "巨龙之魂",
 "zhCN",
 },
+[198878] = {
+"拜荒暴风匠师",
+"化身巨龙牢窟",
+"zhCN",
+},
 [227929] = {
 "亲王卫士歼灭者",
 "解放安德麦",
-"zhCN",
-},
-[17370] = {
-"嘲颅执行者",
-"地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
 [223674] = {
@@ -13730,14 +13797,14 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
+[189722] = {
+"吞喉巨蛙",
+"注能大厅",
+"zhCN",
+},
 [17399] = {
 "魅惑者",
 "地狱火堡垒：鲜血熔炉",
-"zhCN",
-},
-[220730] = {
-"皇家毒壳者",
-"千丝之城",
 "zhCN",
 },
 [214066] = {
@@ -13745,24 +13812,9 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
-[56848] = {
-"暮光斩杀者精英",
-"巨龙之魂",
-"zhCN",
-},
-[56161] = {
-"腐蚀之触",
-"巨龙之魂",
-"zhCN",
-},
-[77557] = {
-"加安上将",
-"黑石铸造厂",
-"zhCN",
-},
-[135002] = {
-"恶魔暴君",
-"法力熔炉：欧米伽",
+[195821] = {
+"未知目标",
+"诺库德阻击战",
 "zhCN",
 },
 [220485] = {
@@ -13770,34 +13822,14 @@ PlaterDB = {
 "螺旋织纹",
 "zhCN",
 },
+[77557] = {
+"加安上将",
+"黑石铸造厂",
+"zhCN",
+},
 [60384] = {
 "赞达拉恐惧之翼",
 "魔古山宝库",
-"zhCN",
-},
-[17975] = {
-"高级植物学家弗雷温",
-"风暴要塞：生态船",
-"zhCN",
-},
-[203594] = {
-"笨拙的巨石",
-"10.1 Zaralek Caverns - Chapter 1 Scenario",
-"zhCN",
-},
-[214343] = {
-"蜃鱼人欺诈者",
-"无底沉穴",
-"zhCN",
-},
-[130024] = {
-"湿乎乎的船舱鼠",
-"自由镇",
-"zhCN",
-},
-[207177] = {
-"永恒巡视者",
-"永恒黎明",
 "zhCN",
 },
 [52962] = {
@@ -13805,9 +13837,49 @@ PlaterDB = {
 "祖尔格拉布",
 "zhCN",
 },
-[183496] = {
-"恶心的饕餮者",
-"初诞者圣墓",
+[75451] = {
+"被亵渎的幽灵",
+"影月墓地",
+"zhCN",
+},
+[135002] = {
+"恶魔暴君",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[17975] = {
+"高级植物学家弗雷温",
+"风暴要塞：生态船",
+"zhCN",
+},
+[130024] = {
+"湿乎乎的船舱鼠",
+"自由镇",
+"zhCN",
+},
+[214343] = {
+"蜃鱼人欺诈者",
+"无底沉穴",
+"zhCN",
+},
+[21270] = {
+"宇宙灌注者",
+"风暴要塞",
+"zhCN",
+},
+[207177] = {
+"永恒巡视者",
+"永恒黎明",
+"zhCN",
+},
+[203594] = {
+"笨拙的巨石",
+"10.1 Zaralek Caverns - Chapter 1 Scenario",
+"zhCN",
+},
+[15548] = {
+"鬼灵骏马",
+"卡拉赞",
 "zhCN",
 },
 [184143] = {
@@ -13820,9 +13892,9 @@ PlaterDB = {
 "破晨号",
 "zhCN",
 },
-[224070] = {
-"未知目标",
-"死亡矿井",
+[17429] = {
+"邪兽人新兵",
+"地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
 [218439] = {
@@ -13840,9 +13912,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[15548] = {
-"鬼灵骏马",
-"卡拉赞",
+[224070] = {
+"未知目标",
+"死亡矿井",
 "zhCN",
 },
 [163157] = {
@@ -13850,9 +13922,9 @@ PlaterDB = {
 "通灵战潮",
 "zhCN",
 },
-[75964] = {
-"兰吉特",
-"通天峰",
+[159219] = {
+"幽影先知",
+"尼奥罗萨，觉醒之城",
 "zhCN",
 },
 [225606] = {
@@ -13860,9 +13932,9 @@ PlaterDB = {
 "破晨号",
 "zhCN",
 },
-[159219] = {
-"幽影先知",
-"尼奥罗萨，觉醒之城",
+[212411] = {
+"炬龇",
+"暗焰裂口",
 "zhCN",
 },
 [218440] = {
@@ -13870,9 +13942,9 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[212411] = {
-"炬龇",
-"暗焰裂口",
+[185008] = {
+"不稳定的哨兵",
+"初诞者圣墓",
 "zhCN",
 },
 [194894] = {
@@ -13885,14 +13957,14 @@ PlaterDB = {
 "奥达曼：提尔的遗产",
 "zhCN",
 },
-[185008] = {
-"不稳定的哨兵",
-"初诞者圣墓",
-"zhCN",
-},
 [7789] = {
 "沙怒智障者",
 "祖尔法拉克",
+"zhCN",
+},
+[234938] = {
+"斯普洛克",
+"幽暗要塞",
 "zhCN",
 },
 [19511] = {
@@ -13910,9 +13982,9 @@ PlaterDB = {
 "自由镇",
 "zhCN",
 },
-[204109] = {
-"邃穴尖啸者",
-"水能堡",
+[201790] = {
+"洛斯凯勒兹",
+"永恒黎明",
 "zhCN",
 },
 [194895] = {
@@ -13930,9 +14002,9 @@ PlaterDB = {
 "恐轨车站",
 "zhCN",
 },
-[201790] = {
-"洛斯凯勒兹",
-"永恒黎明",
+[192333] = {
+"头领鹰隼",
+"艾杰斯亚学院",
 "zhCN",
 },
 [230419] = {
@@ -13945,24 +14017,9 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[203825] = {
-"贪食的岩浆虫",
-"亚贝鲁斯，焰影熔炉",
-"zhCN",
-},
 [212412] = {
 "灰鼻",
 "暗焰裂口",
-"zhCN",
-},
-[194896] = {
-"原始暴风之盾",
-"诺库德阻击战",
-"zhCN",
-},
-[97720] = {
-"枯碎蜘蛛",
-"奈萨里奥的巢穴",
 "zhCN",
 },
 [135241] = {
@@ -13970,14 +14027,29 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[209230] = {
-"凯里欧斯",
-"驭雷栖巢",
+[194896] = {
+"原始暴风之盾",
+"诺库德阻击战",
 "zhCN",
 },
-[102583] = {
-"邪能烧灼者",
-"守望者地窟",
+[191313] = {
+"冒泡的树液",
+"碧蓝魔馆",
+"zhCN",
+},
+[164185] = {
+"艾谢朗",
+"赎罪大厅",
+"zhCN",
+},
+[169924] = {
+"精英石卫",
+"纳斯利亚堡",
+"zhCN",
+},
+[32872] = {
+"符印巨像",
+"奥杜尔",
 "zhCN",
 },
 [189266] = {
@@ -14005,9 +14077,9 @@ PlaterDB = {
 "血槌炉渣矿井",
 "zhCN",
 },
-[169924] = {
-"精英石卫",
-"纳斯利亚堡",
+[102583] = {
+"邪能烧灼者",
+"守望者地窟",
 "zhCN",
 },
 [159578] = {
@@ -14015,14 +14087,9 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
-[164185] = {
-"艾谢朗",
-"赎罪大厅",
-"zhCN",
-},
-[210518] = {
-"轮回守望者",
-"阿梅达希尔，梦境之愿",
+[209230] = {
+"凯里欧斯",
+"驭雷栖巢",
 "zhCN",
 },
 [212764] = {
@@ -14035,14 +14102,14 @@ PlaterDB = {
 "巨龙之魂",
 "zhCN",
 },
+[17400] = {
+"恶魔卫士歼灭者",
+"地狱火堡垒：鲜血熔炉",
+"zhCN",
+},
 [194898] = {
 "拜荒弧光之刃",
 "诺库德阻击战",
-"zhCN",
-},
-[102584] = {
-"恶毒污染者",
-"守望者地窟",
 "zhCN",
 },
 [220599] = {
@@ -14050,9 +14117,14 @@ PlaterDB = {
 "艾拉-卡拉，回响之城",
 "zhCN",
 },
-[17400] = {
-"恶魔卫士歼灭者",
-"地狱火堡垒：鲜血熔炉",
+[102584] = {
+"恶毒污染者",
+"守望者地窟",
+"zhCN",
+},
+[188244] = {
+"原始主宰",
+"红玉新生法池",
 "zhCN",
 },
 [229706] = {
@@ -14060,9 +14132,9 @@ PlaterDB = {
 "主机觉醒",
 "zhCN",
 },
-[223562] = {
-"酒滴",
-"燧酿酒庄",
+[17976] = {
+"指挥官萨拉妮丝",
+"风暴要塞：生态船",
 "zhCN",
 },
 [214350] = {
@@ -14075,9 +14147,9 @@ PlaterDB = {
 "死亡矿井",
 "zhCN",
 },
-[237897] = {
-"影卫刺客",
-"法力熔炉：欧米伽",
+[69927] = {
+"赞达拉圣武士",
+"雷电王座",
 "zhCN",
 },
 [128434] = {
@@ -14095,9 +14167,9 @@ PlaterDB = {
 "魔古山宝库",
 "zhCN",
 },
-[17976] = {
-"指挥官萨拉妮丝",
-"风暴要塞：生态船",
+[180567] = {
+"狂乱的夜爪豹",
+"塔扎维什，帷纱集市",
 "zhCN",
 },
 [40167] = {
@@ -14105,14 +14177,14 @@ PlaterDB = {
 "格瑞姆巴托",
 "zhCN",
 },
-[69927] = {
-"赞达拉圣武士",
-"雷电王座",
-"zhCN",
-},
 [234931] = {
 "芬戴尔·断轴",
 "塔克-雷桑深渊",
+"zhCN",
+},
+[136139] = {
+"机械化维和者",
+"暴富矿区！！",
 "zhCN",
 },
 [198995] = {
@@ -14125,39 +14197,14 @@ PlaterDB = {
 "泽克维尔的巢穴",
 "zhCN",
 },
-[136139] = {
-"机械化维和者",
-"暴富矿区！！",
-"zhCN",
-},
-[230421] = {
-"天灾复生者",
-"卡利姆多",
+[83622] = {
+"血槌食人魔法师",
+"血槌炉渣矿井",
 "zhCN",
 },
 [24561] = {
 "亚赛",
 "魔导师平台",
-"zhCN",
-},
-[128435] = {
-"剧毒细颚龙",
-"阿塔达萨",
-"zhCN",
-},
-[218447] = {
-"未知目标",
-"尼鲁巴尔王宫",
-"zhCN",
-},
-[247624] = {
-"钢魂奥能守卫",
-"真菌之愚",
-"zhCN",
-},
-[207186] = {
-"任性的雷鸫",
-"驭雷栖巢",
 "zhCN",
 },
 [219983] = {
@@ -14170,6 +14217,26 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
+[218447] = {
+"未知目标",
+"尼鲁巴尔王宫",
+"zhCN",
+},
+[194389] = {
+"熔岩之裔",
+"奈萨鲁斯",
+"zhCN",
+},
+[198996] = {
+"时间流具象",
+"永恒黎明",
+"zhCN",
+},
+[128435] = {
+"剧毒细颚龙",
+"阿塔达萨",
+"zhCN",
+},
 [220946] = {
 "风险投资公司蜂蜜收割者",
 "燧酿酒庄",
@@ -14180,14 +14247,19 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
+[79545] = {
+"尼托格·雷塔",
+"恐轨车站",
+"zhCN",
+},
 [205651] = {
 "冒泡的软泥",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[187224] = {
-"恶毒的腐烂妖术师",
-"蕨皮山谷",
+[235853] = {
+"界门观察者",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [239435] = {
@@ -14210,9 +14282,9 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
-[198998] = {
-"永恒守护者提尔",
-"永恒黎明",
+[127124] = {
+"自由镇酒客",
+"自由镇",
 "zhCN",
 },
 [19512] = {
@@ -14230,14 +14302,14 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[70594] = {
-"雾行鬼",
-"雷电王座",
+[218961] = {
+"饥饿爬蛛",
+"艾拉-卡拉，回响之城",
 "zhCN",
 },
-[235853] = {
-"界门观察者",
-"法力熔炉：欧米伽",
+[198998] = {
+"永恒守护者提尔",
+"永恒黎明",
 "zhCN",
 },
 [133990] = {
@@ -14260,9 +14332,9 @@ PlaterDB = {
 "黑心林地",
 "zhCN",
 },
-[127124] = {
-"自由镇酒客",
-"自由镇",
+[225204] = {
+"泽克维尔",
+"泽克维尔的巢穴",
 "zhCN",
 },
 [177500] = {
@@ -14280,9 +14352,9 @@ PlaterDB = {
 "永恒黎明",
 "zhCN",
 },
-[225204] = {
-"泽克维尔",
-"泽克维尔的巢穴",
+[196946] = {
+"潜伏的大家伙",
+"化身巨龙牢窟",
 "zhCN",
 },
 [195928] = {
@@ -14290,9 +14362,9 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[196946] = {
-"潜伏的大家伙",
-"化身巨龙牢窟",
+[234168] = {
+"幽坑太保",
+"破拆穹顶",
 "zhCN",
 },
 [32874] = {
@@ -14310,19 +14382,14 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[234168] = {
-"幽坑太保",
-"破拆穹顶",
-"zhCN",
-},
-[10398] = {
-"图萨丁暗影法师",
-"斯坦索姆",
-"zhCN",
-},
 [184580] = {
 "奥拉夫",
 "奥达曼：提尔的遗产",
+"zhCN",
+},
+[199000] = {
+"时空领主戴欧斯",
+"永恒黎明",
 "zhCN",
 },
 [195929] = {
@@ -14330,9 +14397,14 @@ PlaterDB = {
 "诺库德阻击战",
 "zhCN",
 },
-[190688] = {
-"炽焰魔",
-"化身巨龙牢窟",
+[240974] = {
+"影卫编织大师",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[205656] = {
+"碎裂炼金师",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [92350] = {
@@ -14345,19 +14417,19 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[185181] = {
-"自动抹除者",
-"初诞者圣墓",
-"zhCN",
-},
-[205656] = {
-"碎裂炼金师",
+[205638] = {
+"未知目标",
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [17477] = {
 "地狱火小鬼",
 "地狱火堡垒：鲜血熔炉",
+"zhCN",
+},
+[220501] = {
+"未知目标",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [130485] = {
@@ -14390,8 +14462,8 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[75459] = {
-"疫病蝙蝠",
+[75715] = {
+"复苏的祭祀之骨",
 "影月墓地",
 "zhCN",
 },
@@ -14400,19 +14472,19 @@ PlaterDB = {
 "暴富矿区！！",
 "zhCN",
 },
+[5648] = {
+"沙怒暗影法师",
+"祖尔法拉克",
+"zhCN",
+},
+[75459] = {
+"疫病蝙蝠",
+"影月墓地",
+"zhCN",
+},
 [208728] = {
 "未知目标",
 "恐惧陷坑",
-"zhCN",
-},
-[220501] = {
-"未知目标",
-"尼鲁巴尔王宫",
-"zhCN",
-},
-[75715] = {
-"复苏的祭祀之骨",
-"影月墓地",
 "zhCN",
 },
 [17977] = {
@@ -14440,9 +14512,9 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[230740] = {
-"撕碎王3000型",
-"水闸行动",
+[70341] = {
+"痛苦的灵魂",
+"雷电王座",
 "zhCN",
 },
 [53094] = {
@@ -14455,9 +14527,9 @@ PlaterDB = {
 "火焰之地",
 "zhCN",
 },
-[5648] = {
-"沙怒暗影法师",
-"祖尔法拉克",
+[32875] = {
+"钢铁荣誉卫士",
+"奥杜尔",
 "zhCN",
 },
 [193373] = {
@@ -14470,9 +14542,9 @@ PlaterDB = {
 "燧酿酒庄",
 "zhCN",
 },
-[70341] = {
-"痛苦的灵魂",
-"雷电王座",
+[230991] = {
+"火焰驱逐者",
+"黑石深渊",
 "zhCN",
 },
 [211289] = {
@@ -14490,14 +14562,14 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[230991] = {
-"火焰驱逐者",
-"黑石深渊",
+[137511] = {
+"水鼠帮杀手",
+"围攻伯拉勒斯",
 "zhCN",
 },
-[210267] = {
-"艾帕",
-"燧酿酒庄",
+[19513] = {
+"变异恐惧尖啸者",
+"风暴要塞：生态船",
 "zhCN",
 },
 [172899] = {
@@ -14505,9 +14577,9 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[213338] = {
-"炉铸愈疗者",
-"矶石宝库",
+[206172] = {
+"尼穆威",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [186208] = {
@@ -14520,9 +14592,9 @@ PlaterDB = {
 "圣焰隐修院",
 "zhCN",
 },
-[165222] = {
-"佐尔拉姆斯愈骨者",
-"通灵战潮",
+[212405] = {
+"上进的铸手",
+"矶石宝库",
 "zhCN",
 },
 [220504] = {
@@ -14535,24 +14607,9 @@ PlaterDB = {
 "圣焰隐修院",
 "zhCN",
 },
-[19513] = {
-"变异恐惧尖啸者",
-"风暴要塞：生态船",
-"zhCN",
-},
-[212405] = {
-"上进的铸手",
+[213338] = {
+"炉铸愈疗者",
 "矶石宝库",
-"zhCN",
-},
-[206172] = {
-"尼穆威",
-"阿梅达希尔，梦境之愿",
-"zhCN",
-},
-[129208] = {
-"恐怖船长洛克伍德",
-"围攻伯拉勒斯",
 "zhCN",
 },
 [158056] = {
@@ -14560,14 +14617,29 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[236886] = {
-"悬浮灾厄",
-"真菌之愚",
+[165222] = {
+"佐尔拉姆斯愈骨者",
+"通灵战潮",
+"zhCN",
+},
+[129208] = {
+"恐怖船长洛克伍德",
+"围攻伯拉勒斯",
+"zhCN",
+},
+[211291] = {
+"歇尼麦尔中士",
+"圣焰隐修院",
 "zhCN",
 },
 [61947] = {
 "克尔格西碎肋者",
 "魔古山宫殿",
+"zhCN",
+},
+[236886] = {
+"悬浮灾厄",
+"真菌之愚",
 "zhCN",
 },
 [212827] = {
@@ -14580,14 +14652,14 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[24696] = {
-"库斯卡女巫",
-"魔导师平台",
+[204127] = {
+"狗头人领职者",
+"水能堡",
 "zhCN",
 },
-[220507] = {
-"人偶大师？",
-"螺旋织纹",
+[152939] = {
+"无尽腐蚀",
+"暴风城的惊魂幻象",
 "zhCN",
 },
 [239445] = {
@@ -14625,19 +14697,9 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[152939] = {
-"无尽腐蚀",
-"暴风城的惊魂幻象",
-"zhCN",
-},
-[233816] = {
-"缚魂者娜欣达利",
-"法力熔炉：欧米伽",
-"zhCN",
-},
-[207198] = {
-"被诅咒的雷霆使",
-"驭雷栖巢",
+[210269] = {
+"雇佣的打手",
+"燧酿酒庄",
 "zhCN",
 },
 [229296] = {
@@ -14645,9 +14707,19 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
-[204127] = {
-"狗头人领职者",
-"水能堡",
+[207198] = {
+"被诅咒的雷霆使",
+"驭雷栖巢",
+"zhCN",
+},
+[233816] = {
+"缚魂者娜欣达利",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[220507] = {
+"人偶大师？",
+"螺旋织纹",
 "zhCN",
 },
 [33772] = {
@@ -14670,9 +14742,9 @@ PlaterDB = {
 "燧酿酒庄",
 "zhCN",
 },
-[228538] = {
-"夜幕咒刃",
-"破晨号",
+[233817] = {
+"熔炉编织者阿拉兹",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [207199] = {
@@ -14680,14 +14752,14 @@ PlaterDB = {
 "驭雷栖巢",
 "zhCN",
 },
-[205152] = {
-"勒莱，时誓圣女",
-"永恒黎明",
-"zhCN",
-},
 [220508] = {
 "人偶大师？",
 "螺旋织纹",
+"zhCN",
+},
+[73415] = {
+"亚煞极脓水",
+"决战奥格瑞玛",
 "zhCN",
 },
 [163690] = {
@@ -14695,34 +14767,9 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
-[233817] = {
-"熔炉编织者阿拉兹",
-"法力熔炉：欧米伽",
-"zhCN",
-},
-[75975] = {
-"通天峰督军",
-"通天峰",
-"zhCN",
-},
-[210271] = {
-"酿造大师阿德里尔",
-"燧酿酒庄",
-"zhCN",
-},
-[220509] = {
-"人偶大师？",
-"螺旋织纹",
-"zhCN",
-},
-[213343] = {
-"熔炉装货工",
-"矶石宝库",
-"zhCN",
-},
-[113128] = {
-"枯法潜伏者",
-"暗夜要塞",
+[205152] = {
+"勒莱，时誓圣女",
+"永恒黎明",
 "zhCN",
 },
 [134514] = {
@@ -14730,14 +14777,19 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
+[210271] = {
+"酿造大师阿德里尔",
+"燧酿酒庄",
+"zhCN",
+},
 [212831] = {
 "铸炉大师达米安",
 "圣焰隐修院",
 "zhCN",
 },
-[17978] = {
-"看管者索恩格林",
-"风暴要塞：生态船",
+[113128] = {
+"枯法潜伏者",
+"暗夜要塞",
 "zhCN",
 },
 [131527] = {
@@ -14745,9 +14797,49 @@ PlaterDB = {
 "维克雷斯庄园",
 "zhCN",
 },
+[220509] = {
+"人偶大师？",
+"螺旋织纹",
+"zhCN",
+},
+[233306] = {
+"垃圾制造机",
+"解放安德麦",
+"zhCN",
+},
+[213343] = {
+"熔炉装货工",
+"矶石宝库",
+"zhCN",
+},
+[53224] = {
+"火妖监督者",
+"火焰之地",
+"zhCN",
+},
 [234842] = {
 "虚帷蝠鲼",
 "法力熔炉：欧米伽",
+"zhCN",
+},
+[53096] = {
+"火焰幼龟",
+"火焰之地",
+"zhCN",
+},
+[234843] = {
+"相位追猎者",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[187238] = {
+"枯萎喽啰",
+"蕨皮山谷",
+"zhCN",
+},
+[220510] = {
+"人偶大师？",
+"螺旋织纹",
 "zhCN",
 },
 [229212] = {
@@ -14760,34 +14852,14 @@ PlaterDB = {
 "11.0 - 隐修院场景",
 "zhCN",
 },
-[187238] = {
-"枯萎喽啰",
-"蕨皮山谷",
-"zhCN",
-},
-[53096] = {
-"火焰幼龟",
-"火焰之地",
-"zhCN",
-},
-[53224] = {
-"火妖监督者",
-"火焰之地",
+[78832] = {
+"格罗姆卡重装步兵",
+"黑石铸造厂",
 "zhCN",
 },
 [230748] = {
 "暗索扭血者",
 "水闸行动",
-"zhCN",
-},
-[91332] = {
-"石爪猎手",
-"奈萨里奥的巢穴",
-"zhCN",
-},
-[234843] = {
-"相位追猎者",
-"法力熔炉：欧米伽",
 "zhCN",
 },
 [198500] = {
@@ -14810,9 +14882,9 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[78832] = {
-"格罗姆卡重装步兵",
-"黑石铸造厂",
+[125570] = {
+"裂隙世界助手",
+"安托鲁斯，燃烧王座",
 "zhCN",
 },
 [75976] = {
@@ -14820,14 +14892,14 @@ PlaterDB = {
 "通天峰",
 "zhCN",
 },
-[125570] = {
-"裂隙世界助手",
-"安托鲁斯，燃烧王座",
+[236892] = {
+"宝藏螃蟹",
+"真菌之愚",
 "zhCN",
 },
-[191847] = {
-"诺库德平原践踏者",
-"诺库德阻击战",
+[14398] = {
+"艾德雷斯精龙",
+"厄运之槌",
 "zhCN",
 },
 [198501] = {
@@ -14835,19 +14907,19 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[16507] = {
-"碎手斥候",
-"地狱火堡垒：破碎大厅",
+[239454] = {
+"暗法师扎杜斯",
+"法力熔炉：欧米伽",
 "zhCN",
 },
-[134005] = {
-"页岩啃噬者",
-"暴富矿区！！",
+[187240] = {
+"龙人破坏者",
+"碧蓝魔馆",
 "zhCN",
 },
-[236892] = {
-"宝藏螃蟹",
-"真菌之愚",
+[191847] = {
+"诺库德平原践踏者",
+"诺库德阻击战",
 "zhCN",
 },
 [98243] = {
@@ -14855,19 +14927,19 @@ PlaterDB = {
 "黑鸦堡垒",
 "zhCN",
 },
-[206694] = {
-"热诚的神射手",
-"圣焰隐修院",
-"zhCN",
-},
-[137591] = {
-"未知目标",
-"诸王之眠",
-"zhCN",
-},
-[10463] = {
-"尖叫的女妖",
+[10399] = {
+"图萨丁侍僧",
 "斯坦索姆",
+"zhCN",
+},
+[205158] = {
+"斯普洛克，时誓戒卫",
+"永恒黎明",
+"zhCN",
+},
+[105705] = {
+"被束缚的能量",
+"群星庭院",
 "zhCN",
 },
 [198502] = {
@@ -14880,9 +14952,9 @@ PlaterDB = {
 "地匍矿洞",
 "zhCN",
 },
-[220001] = {
-"黑血软泥",
-"幽暗要塞",
+[75209] = {
+"熔火土元素",
+"血槌炉渣矿井",
 "zhCN",
 },
 [56168] = {
@@ -14890,9 +14962,9 @@ PlaterDB = {
 "巨龙之魂",
 "zhCN",
 },
-[212835] = {
-"复活的步兵",
-"圣焰隐修院",
+[19962] = {
+"未知目标",
+"风暴要塞：生态船",
 "zhCN",
 },
 [221537] = {
@@ -14905,9 +14977,9 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
-[105705] = {
-"被束缚的能量",
-"群星庭院",
+[10463] = {
+"尖叫的女妖",
+"斯坦索姆",
 "zhCN",
 },
 [198503] = {
@@ -14935,14 +15007,14 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[205158] = {
-"斯普洛克，时誓戒卫",
-"永恒黎明",
+[233823] = {
+"皇家虚空之翼",
+"法力熔炉：欧米伽",
 "zhCN",
 },
-[14398] = {
-"艾德雷斯精龙",
-"厄运之槌",
+[16507] = {
+"碎手斥候",
+"地狱火堡垒：破碎大厅",
 "zhCN",
 },
 [33134] = {
@@ -14950,14 +15022,14 @@ PlaterDB = {
 "奥杜尔",
 "zhCN",
 },
-[239454] = {
-"暗法师扎杜斯",
-"法力熔炉：欧米伽",
+[206694] = {
+"热诚的神射手",
+"圣焰隐修院",
 "zhCN",
 },
-[10399] = {
-"图萨丁侍僧",
-"斯坦索姆",
+[137591] = {
+"未知目标",
+"诸王之眠",
 "zhCN",
 },
 [75210] = {
@@ -14970,9 +15042,9 @@ PlaterDB = {
 "地匍矿洞",
 "zhCN",
 },
-[201465] = {
-"烬步融化者",
-"10.1 Zaralek Caverns - Chapter 1 Scenario",
+[69459] = {
+"被束缚的水元素",
+"雷电王座",
 "zhCN",
 },
 [229729] = {
@@ -14995,14 +15067,14 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[69459] = {
-"被束缚的水元素",
-"雷电王座",
-"zhCN",
-},
 [193462] = {
 "巴塔克",
 "诺库德阻击战",
+"zhCN",
+},
+[114625] = {
+"幻影访客",
+"重返卡拉赞",
 "zhCN",
 },
 [212838] = {
@@ -15010,9 +15082,9 @@ PlaterDB = {
 "圣焰隐修院",
 "zhCN",
 },
-[114625] = {
-"幻影访客",
-"重返卡拉赞",
+[208743] = {
+"布雷炙孔",
+"暗焰裂口",
 "zhCN",
 },
 [75979] = {
@@ -15075,9 +15147,9 @@ PlaterDB = {
 "圣焰隐修院",
 "zhCN",
 },
-[208745] = {
-"蜡烛之王",
-"暗焰裂口",
+[223150] = {
+"扬升虚空语者",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [187246] = {
@@ -15085,9 +15157,9 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[223150] = {
-"扬升虚空语者",
-"尼鲁巴尔王宫",
+[208745] = {
+"蜡烛之王",
+"暗焰裂口",
 "zhCN",
 },
 [114626] = {
@@ -15105,9 +15177,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[15550] = {
-"猎手阿图门",
-"卡拉赞",
+[134012] = {
+"监工阿斯加里",
+"暴富矿区！！",
 "zhCN",
 },
 [206698] = {
@@ -15115,14 +15187,14 @@ PlaterDB = {
 "圣焰隐修院",
 "zhCN",
 },
+[221102] = {
+"长者织影",
+"千丝之城",
+"zhCN",
+},
 [11455] = {
 "荒野魔仆",
 "厄运之槌",
-"zhCN",
-},
-[134012] = {
-"监工阿斯加里",
-"暴富矿区！！",
 "zhCN",
 },
 [11487] = {
@@ -15135,9 +15207,9 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[221102] = {
-"长者织影",
-"千丝之城",
+[15550] = {
+"猎手阿图门",
+"卡拉赞",
 "zhCN",
 },
 [197697] = {
@@ -15165,9 +15237,9 @@ PlaterDB = {
 "无底沉穴",
 "zhCN",
 },
-[229222] = {
-"暗索熔蚀者",
-"解放安德麦",
+[61131] = {
+"魔古山藏秘者",
+"魔古山宝库",
 "zhCN",
 },
 [208747] = {
@@ -15175,14 +15247,9 @@ PlaterDB = {
 "暗焰裂口",
 "zhCN",
 },
-[61131] = {
-"魔古山藏秘者",
-"魔古山宝库",
-"zhCN",
-},
-[10558] = {
-"弗雷斯特恩",
-"斯坦索姆",
+[218316] = {
+"卡赫提先锋",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [11471] = {
@@ -15195,19 +15262,14 @@ PlaterDB = {
 "丝菌师洞穴",
 "zhCN",
 },
-[186737] = {
-"泰拉什·灰翼",
-"碧蓝魔馆",
-"zhCN",
-},
 [56162] = {
 "腐蚀之触",
 "巨龙之魂",
 "zhCN",
 },
-[224616] = {
-"未知目标",
-"破晨号",
+[186737] = {
+"泰拉什·灰翼",
+"碧蓝魔馆",
 "zhCN",
 },
 [174012] = {
@@ -15215,14 +15277,24 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
+[224616] = {
+"未知目标",
+"破晨号",
+"zhCN",
+},
 [636] = {
 "迪菲亚恶棍",
 "死亡矿井",
 "zhCN",
 },
-[77006] = {
-"骸骨幼蛛",
-"影月墓地",
+[166264] = {
+"备用部件",
+"通灵战潮",
+"zhCN",
+},
+[184693] = {
+"活化烈焰",
+"化身巨龙牢窟",
 "zhCN",
 },
 [214379] = {
@@ -15240,9 +15312,9 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[164218] = {
-"宫务大臣",
-"赎罪大厅",
+[186229] = {
+"萎蔫橡树",
+"蕨皮山谷",
 "zhCN",
 },
 [245092] = {
@@ -15270,14 +15342,14 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[210797] = {
-"黑暗之主",
-"暗焰裂口",
+[186227] = {
+"巨型腐朽",
+"蕨皮山谷",
 "zhCN",
 },
-[166264] = {
-"备用部件",
-"通灵战潮",
+[16700] = {
+"碎手军团士兵",
+"地狱火堡垒：破碎大厅",
 "zhCN",
 },
 [150396] = {
@@ -15310,9 +15382,9 @@ PlaterDB = {
 "11.0 - 隐修院场景",
 "zhCN",
 },
-[166266] = {
-"备用部件",
-"通灵战潮",
+[73967] = {
+"砮皂",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [215405] = {
@@ -15330,19 +15402,19 @@ PlaterDB = {
 "地匍矿洞",
 "zhCN",
 },
-[131009] = {
-"黄金之灵",
-"阿塔达萨",
+[229226] = {
+"暗索渣客",
+"解放安德麦",
 "zhCN",
 },
-[184693] = {
-"活化烈焰",
-"化身巨龙牢窟",
+[164218] = {
+"宫务大臣",
+"赎罪大厅",
 "zhCN",
 },
-[73967] = {
-"砮皂",
-"法力熔炉：欧米伽",
+[56427] = {
+"战争大师黑角",
+"巨龙之魂",
 "zhCN",
 },
 [214382] = {
@@ -15350,9 +15422,9 @@ PlaterDB = {
 "11.0 - 隐修院场景",
 "zhCN",
 },
-[186229] = {
-"萎蔫橡树",
-"蕨皮山谷",
+[206704] = {
+"热切的圣骑士",
+"圣焰隐修院",
 "zhCN",
 },
 [186741] = {
@@ -15360,9 +15432,9 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[229739] = {
-"未知目标",
-"主机觉醒",
+[187969] = {
+"闪霜塑地者",
+"红玉新生法池",
 "zhCN",
 },
 [52076] = {
@@ -15375,14 +15447,14 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[56427] = {
-"战争大师黑角",
-"巨龙之魂",
+[229739] = {
+"未知目标",
+"主机觉醒",
 "zhCN",
 },
-[187969] = {
-"闪霜塑地者",
-"红玉新生法池",
+[189813] = {
+"晋升者达瑟雅",
+"化身巨龙牢窟",
 "zhCN",
 },
 [210288] = {
@@ -15395,14 +15467,14 @@ PlaterDB = {
 "圣焰隐修院",
 "zhCN",
 },
-[215407] = {
-"收割者吉卡塔尔",
-"艾拉-卡拉，回响之城",
+[199027] = {
+"玛格玛斯",
+"化身巨龙牢窟",
 "zhCN",
 },
-[189813] = {
-"晋升者达瑟雅",
-"化身巨龙牢窟",
+[61453] = {
+"穆辛巴",
+"魔古山宫殿",
 "zhCN",
 },
 [208241] = {
@@ -15420,19 +15492,9 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[60043] = {
-"青玉守护者",
-"魔古山宝库",
-"zhCN",
-},
 [196856] = {
 "原始风暴哨卫",
 "化身巨龙牢窟",
-"zhCN",
-},
-[208242] = {
-"蛛魔暗法师",
-"地匍矿洞",
 "zhCN",
 },
 [231788] = {
@@ -15440,14 +15502,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[187767] = {
-"恩巴尔·火途",
-"化身巨龙牢窟",
-"zhCN",
-},
 [95947] = {
 "玛拉纳硬壳战士",
 "艾萨拉之眼",
+"zhCN",
+},
+[199028] = {
+"格拉西亚斯",
+"化身巨龙牢窟",
 "zhCN",
 },
 [138254] = {
@@ -15455,14 +15517,24 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
+[187767] = {
+"恩巴尔·火途",
+"化身巨龙牢窟",
+"zhCN",
+},
 [129547] = {
 "黑齿拳手",
 "自由镇",
 "zhCN",
 },
-[202256] = {
-"贾拉丁熔岩术师",
-"亚贝鲁斯，焰影熔炉",
+[53095] = {
+"雌火焰龟",
+"火焰之地",
+"zhCN",
+},
+[205843] = {
+"烬步融化者",
+"10.1 Zaralek Caverns - Chapter 1 Scenario",
 "zhCN",
 },
 [210290] = {
@@ -15480,14 +15552,14 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[205843] = {
-"烬步融化者",
-"10.1 Zaralek Caverns - Chapter 1 Scenario",
-"zhCN",
-},
 [208243] = {
 "蛛魔斩击者",
 "地匍矿洞",
+"zhCN",
+},
+[187768] = {
+"达瑟雅·风鞭",
+"化身巨龙牢窟",
 "zhCN",
 },
 [186739] = {
@@ -15495,14 +15567,14 @@ PlaterDB = {
 "碧蓝魔馆",
 "zhCN",
 },
-[230422] = {
-"未知目标",
-"卡利姆多",
-"zhCN",
-},
 [193457] = {
 "巴拉拉",
 "诺库德阻击战",
+"zhCN",
+},
+[230422] = {
+"未知目标",
+"卡利姆多",
 "zhCN",
 },
 [189816] = {
@@ -15520,9 +15592,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[19964] = {
-"未知目标",
-"风暴要塞：生态船",
+[229288] = {
+"喷焰大王",
+"解放安德麦",
 "zhCN",
 },
 [208244] = {
@@ -15535,24 +15607,9 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
-[229288] = {
-"喷焰大王",
-"解放安德麦",
-"zhCN",
-},
-[178394] = {
-"财团跟班",
-"塔扎维什，帷纱集市",
-"zhCN",
-},
-[85711] = {
-"水力技师",
-"黑石铸造厂",
-"zhCN",
-},
-[173949] = {
-"纳斯利亚士兵",
-"纳斯利亚堡",
+[19964] = {
+"未知目标",
+"风暴要塞：生态船",
 "zhCN",
 },
 [208245] = {
@@ -15560,14 +15617,14 @@ PlaterDB = {
 "地匍矿洞",
 "zhCN",
 },
-[114632] = {
-"鬼魅随从",
-"重返卡拉赞",
-"zhCN",
-},
 [14303] = {
 "僵硬守护者",
 "厄运之槌",
+"zhCN",
+},
+[173949] = {
+"纳斯利亚士兵",
+"纳斯利亚堡",
 "zhCN",
 },
 [163712] = {
@@ -15580,6 +15637,21 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
+[85711] = {
+"水力技师",
+"黑石铸造厂",
+"zhCN",
+},
+[241517] = {
+"迪门修斯",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[162689] = {
+"外科医生缝肉",
+"通灵战潮",
+"zhCN",
+},
 [14399] = {
 "奥术洪流",
 "厄运之槌",
@@ -15590,9 +15662,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[78801] = {
-"暗裂酸脊鬣蜥人",
-"黑石铸造厂",
+[214900] = {
+"燃烧的古树",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [10400] = {
@@ -15600,9 +15672,9 @@ PlaterDB = {
 "斯坦索姆",
 "zhCN",
 },
-[162689] = {
-"外科医生缝肉",
-"通灵战潮",
+[134024] = {
+"贪吃的蛆虫",
+"维克雷斯庄园",
 "zhCN",
 },
 [10464] = {
@@ -15635,9 +15707,9 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[20064] = {
-"亵渎者萨拉德雷",
-"风暴要塞",
+[114633] = {
+"鬼灵侍从",
+"重返卡拉赞",
 "zhCN",
 },
 [126918] = {
@@ -15650,14 +15722,9 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[114633] = {
-"鬼灵侍从",
-"重返卡拉赞",
-"zhCN",
-},
-[185508] = {
-"利爪斗士",
-"蕨皮山谷",
+[135049] = {
+"恐翼渡鸦",
+"维克雷斯庄园",
 "zhCN",
 },
 [194991] = {
@@ -15665,14 +15732,14 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[210295] = {
-"火妖狱焰卫士",
-"阿梅达希尔，梦境之愿",
-"zhCN",
-},
 [173044] = {
 "缝合助理",
 "通灵战潮",
+"zhCN",
+},
+[210295] = {
+"火妖狱焰卫士",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [61399] = {
@@ -15680,14 +15747,14 @@ PlaterDB = {
 "魔古山宫殿",
 "zhCN",
 },
+[165251] = {
+"幻影仙狐",
+"塞兹仙林的迷雾",
+"zhCN",
+},
 [162691] = {
 "凋骨",
 "通灵战潮",
-"zhCN",
-},
-[222581] = {
-"未知目标",
-"尼鲁巴尔王宫",
 "zhCN",
 },
 [176563] = {
@@ -15695,9 +15762,14 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
-[165763] = {
-"恶毒的神秘学者",
-"纳斯利亚堡",
+[216326] = {
+"扬升新兵",
+"千丝之城",
+"zhCN",
+},
+[114634] = {
+"亡灵仆从",
+"重返卡拉赞",
 "zhCN",
 },
 [40177] = {
@@ -15705,9 +15777,9 @@ PlaterDB = {
 "格瑞姆巴托",
 "zhCN",
 },
-[165251] = {
-"幻影仙狐",
-"塞兹仙林的迷雾",
+[222581] = {
+"未知目标",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [173953] = {
@@ -15725,14 +15797,14 @@ PlaterDB = {
 "通灵战潮",
 "zhCN",
 },
+[216584] = {
+"蛛魔队长",
+"地匍矿洞",
+"zhCN",
+},
 [126919] = {
 "铁潮唤雷者",
 "自由镇",
-"zhCN",
-},
-[114634] = {
-"亡灵仆从",
-"重返卡拉赞",
 "zhCN",
 },
 [5649] = {
@@ -15740,19 +15812,19 @@ PlaterDB = {
 "祖尔法拉克",
 "zhCN",
 },
-[216584] = {
-"蛛魔队长",
-"地匍矿洞",
+[162693] = {
+"缚霜者纳尔佐",
+"通灵战潮",
 "zhCN",
 },
-[245617] = {
-"熔骨者",
-"法力熔炉：欧米伽",
+[122477] = {
+"法尔格",
+"安托鲁斯，燃烧王座",
 "zhCN",
 },
-[165764] = {
-"缚石征服者",
-"纳斯利亚堡",
+[111563] = {
+"暮色卫队卫兵",
+"群星庭院",
 "zhCN",
 },
 [166276] = {
@@ -15760,9 +15832,9 @@ PlaterDB = {
 "塞兹仙林的迷雾",
 "zhCN",
 },
-[162693] = {
-"缚霜者纳尔佐",
-"通灵战潮",
+[128455] = {
+"特隆加",
+"阿塔达萨",
 "zhCN",
 },
 [33651] = {
@@ -15775,9 +15847,9 @@ PlaterDB = {
 "围攻伯拉勒斯",
 "zhCN",
 },
-[122477] = {
-"法尔格",
-"安托鲁斯，燃烧王座",
+[102094] = {
+"复活的剑士",
+"黑鸦堡垒",
 "zhCN",
 },
 [205691] = {
@@ -15805,9 +15877,9 @@ PlaterDB = {
 "雷电王座",
 "zhCN",
 },
-[102094] = {
-"复活的剑士",
-"黑鸦堡垒",
+[216441] = {
+"苍白幻象",
+"无底沉穴",
 "zhCN",
 },
 [245618] = {
@@ -15815,19 +15887,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[24689] = {
-"失心狂徒",
-"魔导师平台",
-"zhCN",
-},
 [219682] = {
 "暗影癫狂之猪",
 "丝菌师洞穴",
-"zhCN",
-},
-[173444] = {
-"卡拉梅恩",
-"纳斯利亚堡",
 "zhCN",
 },
 [176562] = {
@@ -15835,9 +15897,19 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
+[202109] = {
+"贾拉丁指挥官",
+"亚贝鲁斯，焰影熔炉",
+"zhCN",
+},
 [206710] = {
 "光耀之子",
 "圣焰隐修院",
+"zhCN",
+},
+[11453] = {
+"荒野欺诈者",
+"厄运之槌",
 "zhCN",
 },
 [207740] = {
@@ -15855,19 +15927,19 @@ PlaterDB = {
 "祖尔法拉克",
 "zhCN",
 },
-[11453] = {
-"荒野欺诈者",
-"厄运之槌",
-"zhCN",
-},
-[186242] = {
-"潜伏的捅肠者",
-"蕨皮山谷",
-"zhCN",
-},
 [173445] = {
 "辛德雷尔",
 "纳斯利亚堡",
+"zhCN",
+},
+[13021] = {
+"扭木摧毁者",
+"厄运之槌",
+"zhCN",
+},
+[234870] = {
+"入侵的幼虫",
+"奥尔达尼生态圆顶",
 "zhCN",
 },
 [210812] = {
@@ -15890,29 +15962,24 @@ PlaterDB = {
 "黑鸦堡垒",
 "zhCN",
 },
-[13021] = {
-"扭木摧毁者",
-"厄运之槌",
-"zhCN",
-},
 [220314] = {
 "泽笛手",
 "丝菌师洞穴",
 "zhCN",
 },
-[173446] = {
-"哈尔基塔司",
-"纳斯利亚堡",
-"zhCN",
-},
-[230776] = {
-"影卫矛舞者",
-"档案馆突袭",
+[122367] = {
+"海军上将斯芙拉克丝",
+"安托鲁斯，燃烧王座",
 "zhCN",
 },
 [211977] = {
 "运货鼹鼠",
 "暗焰裂口",
+"zhCN",
+},
+[230776] = {
+"影卫矛舞者",
+"档案馆突袭",
 "zhCN",
 },
 [125569] = {
@@ -15925,9 +15992,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[201756] = {
-"徐风伴春秋",
-"永恒黎明",
+[172312] = {
+"锥喉饕餮者",
+"塞兹仙林的迷雾",
+"zhCN",
+},
+[135052] = {
+"瘟疫蟾蜍",
+"维克雷斯庄园",
 "zhCN",
 },
 [128969] = {
@@ -15950,11 +16022,6 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[135052] = {
-"瘟疫蟾蜍",
-"维克雷斯庄园",
-"zhCN",
-},
 [79469] = {
 "旋风苦修者",
 "通天峰",
@@ -15965,14 +16032,9 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[237432] = {
-"亲信",
-"破拆穹顶",
-"zhCN",
-},
-[196482] = {
-"茂林古树",
-"艾杰斯亚学院",
+[199368] = {
+"未知目标",
+"碧蓝魔馆",
 "zhCN",
 },
 [205737] = {
@@ -15980,9 +16042,19 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[163128] = {
-"佐尔拉姆斯巫师",
-"通灵战潮",
+[196482] = {
+"茂林古树",
+"艾杰斯亚学院",
+"zhCN",
+},
+[237432] = {
+"亲信",
+"破拆穹顶",
+"zhCN",
+},
+[165472] = {
+"纳斯利亚虹吸者",
+"纳斯利亚堡",
 "zhCN",
 },
 [173448] = {
@@ -16000,14 +16072,14 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[165472] = {
-"纳斯利亚虹吸者",
-"纳斯利亚堡",
-"zhCN",
-},
 [11456] = {
 "荒野暗影行者",
 "厄运之槌",
+"zhCN",
+},
+[114637] = {
+"鬼灵斥候",
+"重返卡拉赞",
 "zhCN",
 },
 [245623] = {
@@ -16015,34 +16087,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[168973] = {
-"高阶折磨官达利索斯",
-"纳斯利亚堡",
-"zhCN",
-},
-[186246] = {
-"裂肉秃鹫",
-"蕨皮山谷",
-"zhCN",
-},
-[13280] = {
-"海多斯博恩",
-"厄运之槌",
-"zhCN",
-},
 [219006] = {
 "毒素大师奈扎洛克斯",
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[223613] = {
-"未知目标",
-"螺旋织纹",
-"zhCN",
-},
-[220542] = {
-"暴怒海藻",
-"水能堡",
+[24761] = {
+"亮鳞浮龙",
+"魔导师平台",
 "zhCN",
 },
 [204162] = {
@@ -16050,9 +16102,29 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
+[186246] = {
+"裂肉秃鹫",
+"蕨皮山谷",
+"zhCN",
+},
+[223613] = {
+"未知目标",
+"螺旋织纹",
+"zhCN",
+},
 [205736] = {
 "碎裂攻城大师",
 "亚贝鲁斯，焰影熔炉",
+"zhCN",
+},
+[220542] = {
+"暴怒海藻",
+"水能堡",
+"zhCN",
+},
+[13280] = {
+"海多斯博恩",
+"厄运之槌",
 "zhCN",
 },
 [32885] = {
@@ -16075,14 +16147,14 @@ PlaterDB = {
 "巨龙群岛",
 "zhCN",
 },
-[168988] = {
-"未知目标",
-"塞兹仙林的迷雾",
-"zhCN",
-},
 [125545] = {
 "炽燃小鬼",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[160341] = {
+"下水道幼兽",
+"暴风城的惊魂幻象",
 "zhCN",
 },
 [183688] = {
@@ -16090,9 +16162,9 @@ PlaterDB = {
 "初诞者圣墓",
 "zhCN",
 },
-[160341] = {
-"下水道幼兽",
-"暴风城的惊魂幻象",
+[189318] = {
+"被感染的熊",
+"蕨皮山谷",
 "zhCN",
 },
 [129227] = {
@@ -16105,9 +16177,9 @@ PlaterDB = {
 "红玉新生法池",
 "zhCN",
 },
-[197147] = {
-"卡拉希荣誉卫兵",
-"化身巨龙牢窟",
+[76778] = {
+"生命契约魔仆",
+"通天峰",
 "zhCN",
 },
 [210818] = {
@@ -16115,14 +16187,9 @@ PlaterDB = {
 "暗焰裂口",
 "zhCN",
 },
-[76778] = {
-"生命契约魔仆",
-"通天峰",
-"zhCN",
-},
-[14350] = {
-"水浪幼崽",
-"厄运之槌",
+[197147] = {
+"卡拉希荣誉卫兵",
+"化身巨龙牢窟",
 "zhCN",
 },
 [205735] = {
@@ -16140,14 +16207,14 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
+[156795] = {
+"军情七处线人",
+"暴风城的惊魂幻象",
+"zhCN",
+},
 [87761] = {
 "地下城训练假人",
 "FW Horde Garrison Level 3",
-"zhCN",
-},
-[165111] = {
-"德鲁斯特恶爪者",
-"塞兹仙林的迷雾",
 "zhCN",
 },
 [219588] = {
@@ -16160,19 +16227,14 @@ PlaterDB = {
 "巨龙之魂",
 "zhCN",
 },
-[60143] = {
-"缚灵者戈拉亚",
-"魔古山宝库",
-"zhCN",
-},
 [33136] = {
 "尤格-萨隆的卫士",
 "奥杜尔",
 "zhCN",
 },
-[159632] = {
-"教徒暗影之刃",
-"暴风城的惊魂幻象",
+[60143] = {
+"缚灵者戈拉亚",
+"魔古山宝库",
 "zhCN",
 },
 [242589] = {
@@ -16180,9 +16242,19 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[8095] = {
-"苏利萨斯沙行者",
-"祖尔法拉克",
+[159632] = {
+"教徒暗影之刃",
+"暴风城的惊魂幻象",
+"zhCN",
+},
+[220741] = {
+"未知目标",
+"无底沉穴",
+"zhCN",
+},
+[1731] = {
+"地精工匠",
+"死亡矿井",
 "zhCN",
 },
 [101075] = {
@@ -16195,11 +16267,6 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[1731] = {
-"地精工匠",
-"死亡矿井",
-"zhCN",
-},
 [61340] = {
 "格林托克妖术师",
 "魔古山宫殿",
@@ -16210,14 +16277,19 @@ PlaterDB = {
 "地狱火堡垒：破碎大厅",
 "zhCN",
 },
+[126767] = {
+"巨拳兽王",
+"安托鲁斯，燃烧王座",
+"zhCN",
+},
 [159633] = {
 "教徒处决者",
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[14400] = {
-"奥术回馈者",
-"厄运之槌",
+[190377] = {
+"拜荒唤冰者",
+"注能大厅",
 "zhCN",
 },
 [213892] = {
@@ -16228,11 +16300,6 @@ PlaterDB = {
 [206214] = {
 "永恒渗透者",
 "永恒黎明",
-"zhCN",
-},
-[190377] = {
-"拜荒唤冰者",
-"注能大厅",
 "zhCN",
 },
 [199749] = {
@@ -16260,14 +16327,14 @@ PlaterDB = {
 "飞掠裂口",
 "zhCN",
 },
+[61345] = {
+"魔古射手",
+"魔古山宝库",
+"zhCN",
+},
 [213893] = {
 "夜幕暗法师",
 "破晨号",
-"zhCN",
-},
-[186615] = {
-"狂怒风暴",
-"诺库德阻击战",
 "zhCN",
 },
 [219066] = {
@@ -16280,14 +16347,19 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
+[24697] = {
+"痛苦妖女",
+"魔导师平台",
+"zhCN",
+},
 [134041] = {
 "被感染的农夫",
 "维克雷斯庄园",
 "zhCN",
 },
-[24697] = {
-"痛苦妖女",
-"魔导师平台",
+[223497] = {
+"未知目标",
+"燧酿酒庄",
 "zhCN",
 },
 [229250] = {
@@ -16320,14 +16392,14 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[13022] = {
-"抽笞者",
-"厄运之槌",
-"zhCN",
-},
 [1729] = {
 "迪菲亚招魂师",
 "死亡矿井",
+"zhCN",
+},
+[13022] = {
+"抽笞者",
+"厄运之槌",
 "zhCN",
 },
 [229251] = {
@@ -16345,16 +16417,6 @@ PlaterDB = {
 "破晨号",
 "zhCN",
 },
-[174070] = {
-"狗舍监督者",
-"纳斯利亚堡",
-"zhCN",
-},
-[137626] = {
-"未知目标",
-"围攻伯拉勒斯",
-"zhCN",
-},
 [81114] = {
 "小戈隆劳工",
 "黑石铸造厂",
@@ -16365,9 +16427,19 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
+[137626] = {
+"未知目标",
+"围攻伯拉勒斯",
+"zhCN",
+},
 [207454] = {
 "人偶大师的操纵对象",
 "螺旋织纹",
+"zhCN",
+},
+[218016] = {
+"未知目标",
+"燧酿酒庄",
 "zhCN",
 },
 [229252] = {
@@ -16375,9 +16447,9 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
-[218016] = {
-"未知目标",
-"燧酿酒庄",
+[11489] = {
+"特迪斯·扭木",
+"厄运之槌",
 "zhCN",
 },
 [209801] = {
@@ -16405,14 +16477,14 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[11489] = {
-"特迪斯·扭木",
-"厄运之槌",
+[220551] = {
+"苏雷吉铁纹士",
+"尼鲁巴尔王宫",
 "zhCN",
 },
-[33966] = {
-"重压触须",
-"奥杜尔",
+[164406] = {
+"啸翼",
+"纳斯利亚堡",
 "zhCN",
 },
 [129231] = {
@@ -16420,9 +16492,9 @@ PlaterDB = {
 "暴富矿区！！",
 "zhCN",
 },
-[164406] = {
-"啸翼",
-"纳斯利亚堡",
+[229175] = {
+"暗索敲昏者",
+"解放安德麦",
 "zhCN",
 },
 [157456] = {
@@ -16445,9 +16517,9 @@ PlaterDB = {
 "10.1 Zaralek Caverns - Chapter 6 Scenario",
 "zhCN",
 },
-[40166] = {
-"熔核巨人",
-"格瑞姆巴托",
+[187139] = {
+"水晶痛击者",
+"碧蓝魔馆",
 "zhCN",
 },
 [126928] = {
@@ -16455,19 +16527,19 @@ PlaterDB = {
 "自由镇",
 "zhCN",
 },
-[187139] = {
-"水晶痛击者",
-"碧蓝魔馆",
-"zhCN",
-},
-[17464] = {
-"碎手角斗士",
-"地狱火堡垒：破碎大厅",
+[214920] = {
+"品酒间侍从",
+"燧酿酒庄",
 "zhCN",
 },
 [16699] = {
 "碎手撕裂者",
 "地狱火堡垒：破碎大厅",
+"zhCN",
+},
+[220437] = {
+"监督者卡斯凯尔",
+"螺旋织纹",
 "zhCN",
 },
 [211339] = {
@@ -16480,19 +16552,19 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[18422] = {
-"寻日者植物学家",
-"风暴要塞：生态船",
-"zhCN",
-},
 [166971] = {
 "堡主尼克劳斯",
 "纳斯利亚堡",
 "zhCN",
 },
-[104918] = {
-"未知目标",
-"群星庭院",
+[210153] = {
+"老蜡须",
+"暗焰裂口",
+"zhCN",
+},
+[198370] = {
+"汇聚风暴",
+"化身巨龙牢窟",
 "zhCN",
 },
 [20031] = {
@@ -16520,19 +16592,14 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[198370] = {
-"汇聚风暴",
-"化身巨龙牢窟",
+[193291] = {
+"绝顶焰翼鸦",
+"奈萨鲁斯",
 "zhCN",
 },
 [127119] = {
 "自由镇水手",
 "自由镇",
-"zhCN",
-},
-[172858] = {
-"顽石军团巨怪",
-"纳斯利亚堡",
 "zhCN",
 },
 [157461] = {
@@ -16545,19 +16612,24 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
+[16704] = {
+"碎手狙击者",
+"地狱火堡垒：破碎大厅",
+"zhCN",
+},
 [152987] = {
 "无面碎心者",
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[244101] = {
-"影卫相位斩裂者",
+[242054] = {
+"泰坦风暴水晶",
 "真菌之愚",
 "zhCN",
 },
-[16704] = {
-"碎手狙击者",
-"地狱火堡垒：破碎大厅",
+[244101] = {
+"影卫相位斩裂者",
+"真菌之愚",
 "zhCN",
 },
 [87515] = {
@@ -16570,14 +16642,14 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
+[129996] = {
+"铁潮斩杀者",
+"围攻伯拉勒斯",
+"zhCN",
+},
 [229769] = {
 "未知目标",
 "主机觉醒",
-"zhCN",
-},
-[242054] = {
-"泰坦风暴水晶",
-"真菌之愚",
 "zhCN",
 },
 [234376] = {
@@ -16600,19 +16672,19 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
-[211341] = {
-"暗影具象",
-"破晨号",
-"zhCN",
-},
 [234393] = {
 "虚空畸变体",
 "九号挖掘场",
 "zhCN",
 },
-[217518] = {
-"人偶大师的操纵对象",
-"螺旋织纹",
+[211341] = {
+"暗影具象",
+"破晨号",
+"zhCN",
+},
+[169457] = {
+"巴加斯特",
+"纳斯利亚堡",
 "zhCN",
 },
 [98521] = {
@@ -16620,9 +16692,9 @@ PlaterDB = {
 "黑鸦堡垒",
 "zhCN",
 },
-[169457] = {
-"巴加斯特",
-"纳斯利亚堡",
+[220572] = {
+"暗影元素",
+"飞掠裂口",
 "zhCN",
 },
 [173464] = {
@@ -16635,11 +16707,6 @@ PlaterDB = {
 "死亡矿井",
 "zhCN",
 },
-[220572] = {
-"暗影元素",
-"飞掠裂口",
-"zhCN",
-},
 [130521] = {
 "自由镇水手",
 "自由镇",
@@ -16648,6 +16715,11 @@ PlaterDB = {
 [201471] = {
 "地裔冲锋者",
 "10.1 Zaralek Caverns - Chapter 1 Scenario",
+"zhCN",
+},
+[217485] = {
+"人偶大师的操纵对象",
+"螺旋织纹",
 "zhCN",
 },
 [60402] = {
@@ -16660,14 +16732,14 @@ PlaterDB = {
 "祖尔格拉布",
 "zhCN",
 },
-[219714] = {
-"寒冰屏障",
-"幽暗要塞",
-"zhCN",
-},
 [76518] = {
 "未知目标",
 "影月墓地",
+"zhCN",
+},
+[219714] = {
+"寒冰屏障",
+"幽暗要塞",
 "zhCN",
 },
 [84957] = {
@@ -16678,11 +16750,6 @@ PlaterDB = {
 [166299] = {
 "纱雾照看者",
 "塞兹仙林的迷雾",
-"zhCN",
-},
-[123402] = {
-"加洛西屠戮者",
-"安托鲁斯，燃烧王座",
 "zhCN",
 },
 [98792] = {
@@ -16705,14 +16772,14 @@ PlaterDB = {
 "永恒黎明",
 "zhCN",
 },
-[173466] = {
-"法拉",
-"纳斯利亚堡",
-"zhCN",
-},
 [68221] = {
 "钻地蠕虫",
 "雷电王座",
+"zhCN",
+},
+[218511] = {
+"聚形低语",
+"11.0 - 隐修院场景",
 "zhCN",
 },
 [190370] = {
@@ -16725,14 +16792,19 @@ PlaterDB = {
 "幽暗要塞",
 "zhCN",
 },
-[212453] = {
-"阴森的虚空之魂",
-"矶石宝库",
+[163621] = {
+"碎淤",
+"通灵战潮",
 "zhCN",
 },
 [129232] = {
 "商业大亨拉兹敦克",
 "暴富矿区！！",
+"zhCN",
+},
+[57823] = {
+"缚风者精兵",
+"巨龙之魂",
 "zhCN",
 },
 [213905] = {
@@ -16760,24 +16832,14 @@ PlaterDB = {
 "塞兹仙林的迷雾",
 "zhCN",
 },
-[200945] = {
-"诺库德好战者",
-"诺库德阻击战",
-"zhCN",
-},
-[230798] = {
-"烈焰行者",
-"黑石深渊",
-"zhCN",
-},
 [234893] = {
 "阿兹希卡",
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[217489] = {
-"阿努巴拉什",
-"尼鲁巴尔王宫",
+[230807] = {
+"传送锚点",
+"黑石深渊",
 "zhCN",
 },
 [234902] = {
@@ -16785,9 +16847,9 @@ PlaterDB = {
 "螺旋织纹",
 "zhCN",
 },
-[198038] = {
-"原始化形",
-"化身巨龙牢窟",
+[217489] = {
+"阿努巴拉什",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [197535] = {
@@ -16795,9 +16857,9 @@ PlaterDB = {
 "红玉新生法池",
 "zhCN",
 },
-[166302] = {
-"尸体收割者",
-"通灵战潮",
+[198038] = {
+"原始化形",
+"化身巨龙牢窟",
 "zhCN",
 },
 [20033] = {
@@ -16805,14 +16867,24 @@ PlaterDB = {
 "风暴要塞",
 "zhCN",
 },
+[166302] = {
+"尸体收割者",
+"通灵战潮",
+"zhCN",
+},
+[173469] = {
+"库兰",
+"纳斯利亚堡",
+"zhCN",
+},
 [104154] = {
 "古尔丹",
 "暗夜要塞",
 "zhCN",
 },
-[214419] = {
-"虚咒碾压者",
-"驭雷栖巢",
+[10082] = {
+"泽雷利斯",
+"祖尔法拉克",
 "zhCN",
 },
 [20032] = {
@@ -16825,19 +16897,14 @@ PlaterDB = {
 "燧酿酒庄",
 "zhCN",
 },
-[173469] = {
-"库兰",
-"纳斯利亚堡",
+[193944] = {
+"卡拉希熔岩术师",
+"奈萨鲁斯",
 "zhCN",
 },
-[10082] = {
-"泽雷利斯",
-"祖尔法拉克",
-"zhCN",
-},
-[183707] = {
-"未知目标",
-"初诞者圣墓",
+[230312] = {
+"志愿火箭兵",
+"解放安德麦",
 "zhCN",
 },
 [244115] = {
@@ -16845,14 +16912,19 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
+[183707] = {
+"未知目标",
+"初诞者圣墓",
+"zhCN",
+},
 [236942] = {
 "幽坑太保",
 "夜幕圣所",
 "zhCN",
 },
-[217491] = {
-"纺束者塔卡兹基",
-"尼鲁巴尔王宫",
+[234901] = {
+"幽坑太保的亲密好友",
+"真菌之愚",
 "zhCN",
 },
 [14369] = {
@@ -16885,19 +16957,19 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
-[234901] = {
-"幽坑太保的亲密好友",
-"真菌之愚",
-"zhCN",
-},
-[144300] = {
-"麦卡贡市民",
-"麦卡贡行动",
+[217491] = {
+"纺束者塔卡兹基",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [229782] = {
 "觉醒的方阵兵",
 "主机觉醒",
+"zhCN",
+},
+[144300] = {
+"麦卡贡市民",
+"麦卡贡行动",
 "zhCN",
 },
 [144294] = {
@@ -16915,11 +16987,6 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[130011] = {
-"铁潮冒险家",
-"自由镇",
-"zhCN",
-},
 [212383] = {
 "狗头人履职者",
 "暗焰裂口",
@@ -16930,9 +16997,14 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[213913] = {
-"狗头人护焰者",
-"暗焰裂口",
+[144298] = {
+"防御机器人MkIII型",
+"麦卡贡行动",
+"zhCN",
+},
+[218520] = {
+"唤夜者威利斯",
+"11.0 - 隐修院场景",
 "zhCN",
 },
 [229778] = {
@@ -16950,9 +17022,9 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[218520] = {
-"唤夜者威利斯",
-"11.0 - 隐修院场景",
+[213913] = {
+"狗头人护焰者",
+"暗焰裂口",
 "zhCN",
 },
 [244111] = {
@@ -16965,14 +17037,14 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
-[144298] = {
-"防御机器人MkIII型",
-"麦卡贡行动",
+[215040] = {
+"蜃鱼人嚼骨者",
+"无底沉穴",
 "zhCN",
 },
-[144295] = {
-"麦卡贡机械师",
-"麦卡贡行动",
+[5650] = {
+"沙怒巫医",
+"祖尔法拉克",
 "zhCN",
 },
 [88288] = {
@@ -16990,11 +17062,6 @@ PlaterDB = {
 "祖尔格拉布",
 "zhCN",
 },
-[180640] = {
-"雷鸣破灭者",
-"塔扎维什，帷纱集市",
-"zhCN",
-},
 [236947] = {
 "掘地蠕行者",
 "法力熔炉：欧米伽",
@@ -17003,6 +17070,11 @@ PlaterDB = {
 [87521] = {
 "钢铁塑渣者",
 "黑石铸造厂",
+"zhCN",
+},
+[244113] = {
+"影卫碎魂者",
+"真菌之愚",
 "zhCN",
 },
 [236946] = {
@@ -17015,14 +17087,14 @@ PlaterDB = {
 "巨龙之魂",
 "zhCN",
 },
-[5650] = {
-"沙怒巫医",
-"祖尔法拉克",
+[180640] = {
+"雷鸣破灭者",
+"塔扎维什，帷纱集市",
 "zhCN",
 },
-[244113] = {
-"影卫碎魂者",
-"真菌之愚",
+[11458] = {
+"僵化的树人",
+"厄运之槌",
 "zhCN",
 },
 [87520] = {
@@ -17040,9 +17112,9 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[11458] = {
-"僵化的树人",
-"厄运之槌",
+[134060] = {
+"斯托颂勋爵",
+"风暴神殿",
 "zhCN",
 },
 [11490] = {
@@ -17050,9 +17122,9 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[134060] = {
-"斯托颂勋爵",
-"风暴神殿",
+[144295] = {
+"麦卡贡机械师",
+"麦卡贡行动",
 "zhCN",
 },
 [164261] = {
@@ -17070,11 +17142,6 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[215040] = {
-"蜃鱼人嚼骨者",
-"无底沉穴",
-"zhCN",
-},
 [230799] = {
 "燃烧之魂",
 "黑石深渊",
@@ -17083,6 +17150,11 @@ PlaterDB = {
 [123929] = {
 "加洛西破坏者",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[130011] = {
+"铁潮冒险家",
+"自由镇",
 "zhCN",
 },
 [204188] = {
@@ -17125,14 +17197,14 @@ PlaterDB = {
 "格瑞姆巴托",
 "zhCN",
 },
-[230312] = {
-"志愿火箭兵",
-"解放安德麦",
+[214419] = {
+"虚咒碾压者",
+"驭雷栖巢",
 "zhCN",
 },
-[193944] = {
-"卡拉希熔岩术师",
-"奈萨鲁斯",
+[230798] = {
+"烈焰行者",
+"黑石深渊",
 "zhCN",
 },
 [96480] = {
@@ -17145,9 +17217,9 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[230807] = {
-"传送锚点",
-"黑石深渊",
+[198047] = {
+"暴风引导者",
+"红玉新生法池",
 "zhCN",
 },
 [219034] = {
@@ -17155,9 +17227,9 @@ PlaterDB = {
 "幽暗要塞",
 "zhCN",
 },
-[198047] = {
-"暴风引导者",
-"红玉新生法池",
+[200945] = {
+"诺库德好战者",
+"诺库德阻击战",
 "zhCN",
 },
 [134063] = {
@@ -17175,9 +17247,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[57823] = {
-"缚风者精兵",
-"巨龙之魂",
+[212453] = {
+"阴森的虚空之魂",
+"矶石宝库",
 "zhCN",
 },
 [144301] = {
@@ -17185,9 +17257,9 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
-[163621] = {
-"碎淤",
-"通灵战潮",
+[8876] = {
+"沙怒侍僧",
+"祖尔法拉克",
 "zhCN",
 },
 [219035] = {
@@ -17195,19 +17267,14 @@ PlaterDB = {
 "幽暗要塞",
 "zhCN",
 },
-[8876] = {
-"沙怒侍僧",
-"祖尔法拉克",
+[173466] = {
+"法拉",
+"纳斯利亚堡",
 "zhCN",
 },
 [162729] = {
 "帕奇维克士兵",
 "通灵战潮",
-"zhCN",
-},
-[218511] = {
-"聚形低语",
-"11.0 - 隐修院场景",
 "zhCN",
 },
 [232443] = {
@@ -17218,6 +17285,11 @@ PlaterDB = {
 [222572] = {
 "未知目标",
 "尼鲁巴尔王宫",
+"zhCN",
+},
+[123402] = {
+"加洛西屠戮者",
+"安托鲁斯，燃烧王座",
 "zhCN",
 },
 [205727] = {
@@ -17235,9 +17307,9 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[217485] = {
-"人偶大师的操纵对象",
-"螺旋织纹",
+[60381] = {
+"赞达拉渗透者",
+"魔古山宝库",
 "zhCN",
 },
 [220060] = {
@@ -17250,9 +17322,9 @@ PlaterDB = {
 "雷电王座",
 "zhCN",
 },
-[60381] = {
-"赞达拉渗透者",
-"魔古山宝库",
+[217518] = {
+"人偶大师的操纵对象",
+"螺旋织纹",
 "zhCN",
 },
 [176551] = {
@@ -17275,14 +17347,14 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[129996] = {
-"铁潮斩杀者",
-"围攻伯拉勒斯",
-"zhCN",
-},
 [214503] = {
 "席克兰",
 "尼鲁巴尔王宫",
+"zhCN",
+},
+[42975] = {
+"疾病食尸鬼",
+"斯坦索姆",
 "zhCN",
 },
 [220573] = {
@@ -17290,9 +17362,9 @@ PlaterDB = {
 "飞掠裂口",
 "zhCN",
 },
-[42975] = {
-"疾病食尸鬼",
-"斯坦索姆",
+[172858] = {
+"顽石军团巨怪",
+"纳斯利亚堡",
 "zhCN",
 },
 [92387] = {
@@ -17305,9 +17377,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[193291] = {
-"绝顶焰翼鸦",
-"奈萨鲁斯",
+[104918] = {
+"未知目标",
+"群星庭院",
 "zhCN",
 },
 [190373] = {
@@ -17315,9 +17387,9 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[210153] = {
-"老蜡须",
-"暗焰裂口",
+[18422] = {
+"寻日者植物学家",
+"风暴要塞：生态船",
 "zhCN",
 },
 [130522] = {
@@ -17330,9 +17402,9 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[220437] = {
-"监督者卡斯凯尔",
-"螺旋织纹",
+[17464] = {
+"碎手角斗士",
+"地狱火堡垒：破碎大厅",
 "zhCN",
 },
 [205218] = {
@@ -17340,9 +17412,9 @@ PlaterDB = {
 "黑石深渊",
 "zhCN",
 },
-[214920] = {
-"品酒间侍从",
-"燧酿酒庄",
+[40166] = {
+"熔核巨人",
+"格瑞姆巴托",
 "zhCN",
 },
 [218527] = {
@@ -17370,9 +17442,9 @@ PlaterDB = {
 "飞掠裂口",
 "zhCN",
 },
-[229175] = {
-"暗索敲昏者",
-"解放安德麦",
+[33966] = {
+"重压触须",
+"奥杜尔",
 "zhCN",
 },
 [192934] = {
@@ -17385,9 +17457,9 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[220551] = {
-"苏雷吉铁纹士",
-"尼鲁巴尔王宫",
+[205628] = {
+"扭曲的源质",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [231325] = {
@@ -17395,9 +17467,9 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
-[205628] = {
-"扭曲的源质",
-"亚贝鲁斯，焰影熔炉",
+[174070] = {
+"狗舍监督者",
+"纳斯利亚堡",
 "zhCN",
 },
 [134069] = {
@@ -17425,11 +17497,6 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[223497] = {
-"未知目标",
-"燧酿酒庄",
-"zhCN",
-},
 [644] = {
 "拉克佐",
 "死亡矿井",
@@ -17438,6 +17505,11 @@ PlaterDB = {
 [210423] = {
 "梦境守护者",
 "阿梅达希尔，梦境之愿",
+"zhCN",
+},
+[186615] = {
+"狂怒风暴",
+"诺库德阻击战",
 "zhCN",
 },
 [220065] = {
@@ -17450,9 +17522,9 @@ PlaterDB = {
 "祖尔格拉布",
 "zhCN",
 },
-[61345] = {
-"魔古射手",
-"魔古山宝库",
+[53786] = {
+"炽炎巨鹰",
+"火焰之地",
 "zhCN",
 },
 [176556] = {
@@ -17460,14 +17532,14 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
-[53786] = {
-"炽炎巨鹰",
-"火焰之地",
-"zhCN",
-},
 [45412] = {
 "奥里克斯·瑞文戴尔领主",
 "斯坦索姆",
+"zhCN",
+},
+[14400] = {
+"奥术回馈者",
+"厄运之槌",
 "zhCN",
 },
 [130012] = {
@@ -17480,11 +17552,6 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[126767] = {
-"巨拳兽王",
-"安托鲁斯，燃烧王座",
-"zhCN",
-},
 [195851] = {
 "尤克赫尔亡语者",
 "诺库德阻击战",
@@ -17493,6 +17560,11 @@ PlaterDB = {
 [201222] = {
 "瓦罗，时誓守护者",
 "永恒黎明",
+"zhCN",
+},
+[8095] = {
+"苏利萨斯沙行者",
+"祖尔法拉克",
 "zhCN",
 },
 [14370] = {
@@ -17505,11 +17577,6 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[220741] = {
-"未知目标",
-"无底沉穴",
-"zhCN",
-},
 [197985] = {
 "烈焰引导者",
 "红玉新生法池",
@@ -17518,6 +17585,11 @@ PlaterDB = {
 [207438] = {
 "无头骑士",
 "血色修道院",
+"zhCN",
+},
+[165111] = {
+"德鲁斯特恶爪者",
+"塞兹仙林的迷雾",
 "zhCN",
 },
 [10435] = {
@@ -17535,9 +17607,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[156795] = {
-"军情七处线人",
-"暴风城的惊魂幻象",
+[14350] = {
+"水浪幼崽",
+"厄运之槌",
 "zhCN",
 },
 [76266] = {
@@ -17560,14 +17632,14 @@ PlaterDB = {
 "群星庭院",
 "zhCN",
 },
-[189318] = {
-"被感染的熊",
-"蕨皮山谷",
-"zhCN",
-},
 [70060] = {
 "暗影巫毒邪魂",
 "雷电王座",
+"zhCN",
+},
+[168988] = {
+"未知目标",
+"塞兹仙林的迷雾",
 "zhCN",
 },
 [229282] = {
@@ -17595,9 +17667,9 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[24761] = {
-"亮鳞浮龙",
-"魔导师平台",
+[168973] = {
+"高阶折磨官达利索斯",
+"纳斯利亚堡",
 "zhCN",
 },
 [224164] = {
@@ -17605,14 +17677,14 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[114637] = {
-"鬼灵斥候",
-"重返卡拉赞",
-"zhCN",
-},
 [152324] = {
 "奥德文·拉弗林",
 "暴风城的惊魂幻象",
+"zhCN",
+},
+[163128] = {
+"佐尔拉姆斯巫师",
+"通灵战潮",
 "zhCN",
 },
 [11043] = {
@@ -17635,14 +17707,14 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[199368] = {
-"未知目标",
-"碧蓝魔馆",
-"zhCN",
-},
 [17980] = {
 "拉伊",
 "风暴要塞：生态船",
+"zhCN",
+},
+[201756] = {
+"徐风伴春秋",
+"永恒黎明",
 "zhCN",
 },
 [73452] = {
@@ -17655,13 +17727,13 @@ PlaterDB = {
 "恐轨车站",
 "zhCN",
 },
-[172312] = {
-"锥喉饕餮者",
-"塞兹仙林的迷雾",
-"zhCN",
-},
 [169458] = {
 "赫库提斯",
+"纳斯利亚堡",
+"zhCN",
+},
+[173446] = {
+"哈尔基塔司",
 "纳斯利亚堡",
 "zhCN",
 },
@@ -17670,14 +17742,14 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[122367] = {
-"海军上将斯芙拉克丝",
-"安托鲁斯，燃烧王座",
-"zhCN",
-},
 [7274] = {
 "沙怒刽子手",
 "祖尔法拉克",
+"zhCN",
+},
+[186242] = {
+"潜伏的捅肠者",
+"蕨皮山谷",
 "zhCN",
 },
 [11459] = {
@@ -17685,14 +17757,14 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[234870] = {
-"入侵的幼虫",
-"奥尔达尼生态圆顶",
-"zhCN",
-},
 [10390] = {
 "骷髅守护者",
 "斯坦索姆",
+"zhCN",
+},
+[173444] = {
+"卡拉梅恩",
+"纳斯利亚堡",
 "zhCN",
 },
 [160182] = {
@@ -17700,9 +17772,9 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
-[202109] = {
-"贾拉丁指挥官",
-"亚贝鲁斯，焰影熔炉",
+[24689] = {
+"失心狂徒",
+"魔导师平台",
 "zhCN",
 },
 [214441] = {
@@ -17710,9 +17782,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[216441] = {
-"苍白幻象",
-"无底沉穴",
+[245617] = {
+"熔骨者",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [194990] = {
@@ -17720,14 +17792,14 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[128455] = {
-"特隆加",
-"阿塔达萨",
+[165764] = {
+"缚石征服者",
+"纳斯利亚堡",
 "zhCN",
 },
-[111563] = {
-"暮色卫队卫兵",
-"群星庭院",
+[165763] = {
+"恶毒的神秘学者",
+"纳斯利亚堡",
 "zhCN",
 },
 [229286] = {
@@ -17740,11 +17812,6 @@ PlaterDB = {
 "尼奥罗萨，觉醒之城",
 "zhCN",
 },
-[216326] = {
-"扬升新兵",
-"千丝之城",
-"zhCN",
-},
 [189470] = {
 "熔岩耀光",
 "奈萨鲁斯",
@@ -17753,6 +17820,11 @@ PlaterDB = {
 [11454] = {
 "荒野背叛者",
 "厄运之槌",
+"zhCN",
+},
+[185508] = {
+"利爪斗士",
+"蕨皮山谷",
 "zhCN",
 },
 [158136] = {
@@ -17765,9 +17837,9 @@ PlaterDB = {
 "风暴要塞：生态船",
 "zhCN",
 },
-[135049] = {
-"恐翼渡鸦",
-"维克雷斯庄园",
+[20064] = {
+"亵渎者萨拉德雷",
+"风暴要塞",
 "zhCN",
 },
 [229287] = {
@@ -17790,19 +17862,19 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[134024] = {
-"贪吃的蛆虫",
-"维克雷斯庄园",
+[78801] = {
+"暗裂酸脊鬣蜥人",
+"黑石铸造厂",
 "zhCN",
 },
-[214900] = {
-"燃烧的古树",
-"阿梅达希尔，梦境之愿",
+[114632] = {
+"鬼魅随从",
+"重返卡拉赞",
 "zhCN",
 },
-[241517] = {
-"迪门修斯",
-"法力熔炉：欧米伽",
+[178394] = {
+"财团跟班",
+"塔扎维什，帷纱集市",
 "zhCN",
 },
 [53115] = {
@@ -17835,9 +17907,9 @@ PlaterDB = {
 "安德麦",
 "zhCN",
 },
-[187768] = {
-"达瑟雅·风鞭",
-"化身巨龙牢窟",
+[202256] = {
+"贾拉丁熔岩术师",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [187315] = {
@@ -17845,14 +17917,14 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[53095] = {
-"雌火焰龟",
-"火焰之地",
-"zhCN",
-},
 [60009] = {
 "受诅者魔封",
 "魔古山宝库",
+"zhCN",
+},
+[208242] = {
+"蛛魔暗法师",
+"地匍矿洞",
 "zhCN",
 },
 [217516] = {
@@ -17865,9 +17937,9 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
-[199028] = {
-"格拉西亚斯",
-"化身巨龙牢窟",
+[60043] = {
+"青玉守护者",
+"魔古山宝库",
 "zhCN",
 },
 [198577] = {
@@ -17880,19 +17952,19 @@ PlaterDB = {
 "群星庭院",
 "zhCN",
 },
-[61453] = {
-"穆辛巴",
-"魔古山宫殿",
-"zhCN",
-},
-[199027] = {
-"玛格玛斯",
-"化身巨龙牢窟",
+[215407] = {
+"收割者吉卡塔尔",
+"艾拉-卡拉，回响之城",
 "zhCN",
 },
 [229220] = {
 "垃圾场伐木机",
 "解放安德麦",
+"zhCN",
+},
+[166266] = {
+"备用部件",
+"通灵战潮",
 "zhCN",
 },
 [217517] = {
@@ -17905,14 +17977,14 @@ PlaterDB = {
 "破晨号",
 "zhCN",
 },
-[206704] = {
-"热切的圣骑士",
-"圣焰隐修院",
+[131009] = {
+"黄金之灵",
+"阿塔达萨",
 "zhCN",
 },
-[114629] = {
-"鬼灵家仆",
-"重返卡拉赞",
+[77006] = {
+"骸骨幼蛛",
+"影月墓地",
 "zhCN",
 },
 [158140] = {
@@ -17920,24 +17992,14 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[16700] = {
-"碎手军团士兵",
-"地狱火堡垒：破碎大厅",
+[210797] = {
+"黑暗之主",
+"暗焰裂口",
 "zhCN",
 },
-[186227] = {
-"巨型腐朽",
-"蕨皮山谷",
-"zhCN",
-},
-[229226] = {
-"暗索渣客",
-"解放安德麦",
-"zhCN",
-},
-[52348] = {
-"狂暴滚石者",
-"祖尔格拉布",
+[114629] = {
+"鬼灵家仆",
+"重返卡拉赞",
 "zhCN",
 },
 [417] = {
@@ -17945,14 +18007,24 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
+[52348] = {
+"狂暴滚石者",
+"祖尔格拉布",
+"zhCN",
+},
+[10558] = {
+"弗雷斯特恩",
+"斯坦索姆",
+"zhCN",
+},
 [40319] = {
 "达加·燃影者",
 "格瑞姆巴托",
 "zhCN",
 },
-[218316] = {
-"卡赫提先锋",
-"尼鲁巴尔王宫",
+[229222] = {
+"暗索熔蚀者",
+"解放安德麦",
 "zhCN",
 },
 [105704] = {
@@ -18015,9 +18087,9 @@ PlaterDB = {
 "千丝之城",
 "zhCN",
 },
-[208743] = {
-"布雷炙孔",
-"暗焰裂口",
+[144246] = {
+"狂犬K.U.-J.0.",
+"麦卡贡行动",
 "zhCN",
 },
 [213937] = {
@@ -18025,9 +18097,9 @@ PlaterDB = {
 "破晨号",
 "zhCN",
 },
-[144246] = {
-"狂犬K.U.-J.0.",
-"麦卡贡行动",
+[201465] = {
+"烬步融化者",
+"10.1 Zaralek Caverns - Chapter 1 Scenario",
 "zhCN",
 },
 [97259] = {
@@ -18045,29 +18117,29 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[233823] = {
-"皇家虚空之翼",
-"法力熔炉：欧米伽",
+[212835] = {
+"复活的步兵",
+"圣焰隐修院",
 "zhCN",
 },
-[19962] = {
-"未知目标",
-"风暴要塞：生态船",
+[220001] = {
+"黑血软泥",
+"幽暗要塞",
 "zhCN",
 },
-[75209] = {
-"熔火土元素",
-"血槌炉渣矿井",
-"zhCN",
-},
-[187240] = {
-"龙人破坏者",
-"碧蓝魔馆",
+[134005] = {
+"页岩啃噬者",
+"暴富矿区！！",
 "zhCN",
 },
 [70445] = {
 "风暴使者达兹基尔",
 "雷电王座",
+"zhCN",
+},
+[91332] = {
+"石爪猎手",
+"奈萨里奥的巢穴",
 "zhCN",
 },
 [194487] = {
@@ -18090,9 +18162,9 @@ PlaterDB = {
 "矶石宝库",
 "zhCN",
 },
-[220510] = {
-"人偶大师？",
-"螺旋织纹",
+[75975] = {
+"通天峰督军",
+"通天峰",
 "zhCN",
 },
 [20036] = {
@@ -18110,9 +18182,9 @@ PlaterDB = {
 "格瑞姆巴托",
 "zhCN",
 },
-[233306] = {
-"垃圾制造机",
-"解放安德麦",
+[17978] = {
+"看管者索恩格林",
+"风暴要塞：生态船",
 "zhCN",
 },
 [244140] = {
@@ -18120,9 +18192,9 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[73415] = {
-"亚煞极脓水",
-"决战奥格瑞玛",
+[228538] = {
+"夜幕咒刃",
+"破晨号",
 "zhCN",
 },
 [65402] = {
@@ -18140,9 +18212,9 @@ PlaterDB = {
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
-[210269] = {
-"雇佣的打手",
-"燧酿酒庄",
+[24696] = {
+"库斯卡女巫",
+"魔导师平台",
 "zhCN",
 },
 [161217] = {
@@ -18170,9 +18242,9 @@ PlaterDB = {
 "影月墓地",
 "zhCN",
 },
-[211291] = {
-"歇尼麦尔中士",
-"圣焰隐修院",
+[210267] = {
+"艾帕",
+"燧酿酒庄",
 "zhCN",
 },
 [197982] = {
@@ -18185,14 +18257,14 @@ PlaterDB = {
 "塞兹仙林的迷雾",
 "zhCN",
 },
-[137511] = {
-"水鼠帮杀手",
-"围攻伯拉勒斯",
-"zhCN",
-},
 [68248] = {
 "骸骨蜘蛛",
 "雷电王座",
+"zhCN",
+},
+[230740] = {
+"撕碎王3000型",
+"水闸行动",
 "zhCN",
 },
 [85232] = {
@@ -18210,9 +18282,9 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
-[32875] = {
-"钢铁荣誉卫士",
-"奥杜尔",
+[185181] = {
+"自动抹除者",
+"初诞者圣墓",
 "zhCN",
 },
 [192955] = {
@@ -18225,9 +18297,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[205638] = {
-"未知目标",
-"亚贝鲁斯，焰影熔炉",
+[190688] = {
+"炽焰魔",
+"化身巨龙牢窟",
 "zhCN",
 },
 [17669] = {
@@ -18235,14 +18307,9 @@ PlaterDB = {
 "地狱火堡垒：破碎大厅",
 "zhCN",
 },
-[240974] = {
-"影卫编织大师",
-"法力熔炉：欧米伽",
-"zhCN",
-},
-[199000] = {
-"时空领主戴欧斯",
-"永恒黎明",
+[10398] = {
+"图萨丁暗影法师",
+"斯坦索姆",
 "zhCN",
 },
 [152331] = {
@@ -18250,29 +18317,29 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[180159] = {
-"打架的顾客",
-"塔扎维什，帷纱集市",
-"zhCN",
-},
 [229918] = {
 "腐蚀剃天者",
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[218961] = {
-"饥饿爬蛛",
-"艾拉-卡拉，回响之城",
+[180159] = {
+"打架的顾客",
+"塔扎维什，帷纱集市",
+"zhCN",
+},
+[70594] = {
+"雾行鬼",
+"雷电王座",
+"zhCN",
+},
+[187224] = {
+"恶毒的腐烂妖术师",
+"蕨皮山谷",
 "zhCN",
 },
 [52606] = {
 "古拉巴什好战者",
 "祖尔格拉布",
-"zhCN",
-},
-[79545] = {
-"尼托格·雷塔",
-"恐轨车站",
 "zhCN",
 },
 [53732] = {
@@ -18285,14 +18352,19 @@ PlaterDB = {
 "塞兹仙林的迷雾",
 "zhCN",
 },
-[198996] = {
-"时间流具象",
-"永恒黎明",
+[207186] = {
+"任性的雷鸫",
+"驭雷栖巢",
 "zhCN",
 },
-[194389] = {
-"熔岩之裔",
-"奈萨鲁斯",
+[247624] = {
+"钢魂奥能守卫",
+"真菌之愚",
+"zhCN",
+},
+[230421] = {
+"天灾复生者",
+"卡利姆多",
 "zhCN",
 },
 [98542] = {
@@ -18310,14 +18382,14 @@ PlaterDB = {
 "红玉新生法池",
 "zhCN",
 },
-[83622] = {
-"血槌食人魔法师",
-"血槌炉渣矿井",
+[237897] = {
+"影卫刺客",
+"法力熔炉：欧米伽",
 "zhCN",
 },
-[180567] = {
-"狂乱的夜爪豹",
-"塔扎维什，帷纱集市",
+[223562] = {
+"酒滴",
+"燧酿酒庄",
 "zhCN",
 },
 [11460] = {
@@ -18335,14 +18407,14 @@ PlaterDB = {
 "赎罪大厅",
 "zhCN",
 },
-[188244] = {
-"原始主宰",
-"红玉新生法池",
-"zhCN",
-},
 [124158] = {
 "未知目标",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[210518] = {
+"轮回守望者",
+"阿梅达希尔，梦境之愿",
 "zhCN",
 },
 [234932] = {
@@ -18355,19 +18427,19 @@ PlaterDB = {
 "血槌炉渣矿井",
 "zhCN",
 },
-[32872] = {
-"符印巨像",
-"奥杜尔",
-"zhCN",
-},
 [206352] = {
 "联盟弓手",
 "永恒黎明",
 "zhCN",
 },
-[191313] = {
-"冒泡的树液",
-"碧蓝魔馆",
+[97720] = {
+"枯碎蜘蛛",
+"奈萨里奥的巢穴",
+"zhCN",
+},
+[203825] = {
+"贪食的岩浆虫",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [55294] = {
@@ -18380,9 +18452,9 @@ PlaterDB = {
 "丝菌师洞穴",
 "zhCN",
 },
-[192333] = {
-"头领鹰隼",
-"艾杰斯亚学院",
+[204109] = {
+"邃穴尖啸者",
+"水能堡",
 "zhCN",
 },
 [234933] = {
@@ -18395,19 +18467,9 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[234938] = {
-"斯普洛克",
-"幽暗要塞",
-"zhCN",
-},
 [176396] = {
 "损坏的分拣机",
 "塔扎维什，帷纱集市",
-"zhCN",
-},
-[75509] = {
-"莎达娜·血怒",
-"影月墓地",
 "zhCN",
 },
 [22997] = {
@@ -18415,14 +18477,24 @@ PlaterDB = {
 "黑暗神殿",
 "zhCN",
 },
+[75509] = {
+"莎达娜·血怒",
+"影月墓地",
+"zhCN",
+},
+[75964] = {
+"兰吉特",
+"通天峰",
+"zhCN",
+},
 [20037] = {
 "风暴驯鹰者",
 "风暴要塞",
 "zhCN",
 },
-[17429] = {
-"邪兽人新兵",
-"地狱火堡垒：鲜血熔炉",
+[183496] = {
+"恶心的饕餮者",
+"初诞者圣墓",
 "zhCN",
 },
 [88818] = {
@@ -18435,19 +18507,9 @@ PlaterDB = {
 "艾萨拉之眼",
 "zhCN",
 },
-[21270] = {
-"宇宙灌注者",
-"风暴要塞",
-"zhCN",
-},
-[75451] = {
-"被亵渎的幽灵",
-"影月墓地",
-"zhCN",
-},
-[53119] = {
-"火妖先锋",
-"火焰之地",
+[56161] = {
+"腐蚀之触",
+"巨龙之魂",
 "zhCN",
 },
 [645] = {
@@ -18455,14 +18517,24 @@ PlaterDB = {
 "死亡矿井",
 "zhCN",
 },
+[53119] = {
+"火妖先锋",
+"火焰之地",
+"zhCN",
+},
+[56848] = {
+"暮光斩杀者精英",
+"巨龙之魂",
+"zhCN",
+},
 [217531] = {
 "伊克辛",
 "艾拉-卡拉，回响之城",
 "zhCN",
 },
-[195821] = {
-"未知目标",
-"诺库德阻击战",
+[220730] = {
+"皇家毒壳者",
+"千丝之城",
 "zhCN",
 },
 [234935] = {
@@ -18470,9 +18542,9 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[189722] = {
-"吞喉巨蛙",
-"注能大厅",
+[17370] = {
+"嘲颅执行者",
+"地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
 [79093] = {
@@ -18490,14 +18562,14 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[198878] = {
-"拜荒暴风匠师",
-"化身巨龙牢窟",
-"zhCN",
-},
 [127233] = {
 "织焰者",
 "安托鲁斯，燃烧王座",
+"zhCN",
+},
+[24722] = {
+"邪能水晶",
+"魔导师平台",
 "zhCN",
 },
 [205759] = {
@@ -18515,14 +18587,14 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[33983] = {
-"未知目标",
-"奥杜尔",
-"zhCN",
-},
 [201288] = {
 "碎裂勇士",
 "亚贝鲁斯，焰影熔炉",
+"zhCN",
+},
+[7269] = {
+"圣甲虫",
+"祖尔法拉克",
 "zhCN",
 },
 [85748] = {
@@ -18540,24 +18612,19 @@ PlaterDB = {
 "艾拉-卡拉，回响之城",
 "zhCN",
 },
-[218306] = {
-"甲虫队长沃拉坎",
-"尼鲁巴尔王宫",
-"zhCN",
-},
 [118791] = {
 "结实的爱情娃娃",
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
+[79463] = {
+"辐光新星战士",
+"通天峰",
+"zhCN",
+},
 [17670] = {
 "碎手驯犬者",
 "地狱火堡垒：破碎大厅",
-"zhCN",
-},
-[125547] = {
-"魔触掠行蛛",
-"安托鲁斯，燃烧王座",
 "zhCN",
 },
 [230994] = {
@@ -18575,9 +18642,14 @@ PlaterDB = {
 "厄运之槌",
 "zhCN",
 },
-[229181] = {
-"弗莱兰多",
-"解放安德麦",
+[87989] = {
+"女铁匠火手",
+"黑石铸造厂",
+"zhCN",
+},
+[129601] = {
+"破浪持戟者",
+"自由镇",
 "zhCN",
 },
 [56575] = {
@@ -18595,9 +18667,9 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[152325] = {
-"瑞贝卡·拉弗林",
-"暴风城的惊魂幻象",
+[208193] = {
+"白银之手圣骑士",
+"永恒黎明",
 "zhCN",
 },
 [211904] = {
@@ -18615,14 +18687,14 @@ PlaterDB = {
 "艾杰斯亚学院",
 "zhCN",
 },
-[17398] = {
-"初生的邪兽人",
-"地狱火堡垒：鲜血熔炉",
-"zhCN",
-},
 [214548] = {
 "湿滑虹吸鳗",
 "无底沉穴",
+"zhCN",
+},
+[39450] = {
+"洞窟穴居人",
+"格瑞姆巴托",
 "zhCN",
 },
 [127723] = {
@@ -18630,9 +18702,9 @@ PlaterDB = {
 "安托鲁斯，燃烧王座",
 "zhCN",
 },
-[39450] = {
-"洞窟穴居人",
-"格瑞姆巴托",
+[17371] = {
+"影月术士",
+"地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
 [158158] = {
@@ -18650,14 +18722,14 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
-[138061] = {
-"风险投资公司装卸工",
-"暴富矿区！！",
-"zhCN",
-},
 [173798] = {
 "尺寸惊人的老鼠",
 "纳斯利亚堡",
+"zhCN",
+},
+[177269] = {
+"索·莉亚",
+"塔扎维什，帷纱集市",
 "zhCN",
 },
 [201668] = {
@@ -18675,14 +18747,14 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[10381] = {
-"被毁坏的死尸",
-"斯坦索姆",
-"zhCN",
-},
 [180484] = {
 "维尔特",
 "塔扎维什，帷纱集市",
+"zhCN",
+},
+[227127] = {
+"食草的苔绒羱",
+"地匍矿洞",
 "zhCN",
 },
 [98035] = {
@@ -18695,9 +18767,9 @@ PlaterDB = {
 "恐轨车站",
 "zhCN",
 },
-[19509] = {
-"寻日者收割员",
-"风暴要塞：生态船",
+[129879] = {
+"铁潮斩杀者",
+"围攻伯拉勒斯",
 "zhCN",
 },
 [213954] = {
@@ -18708,11 +18780,6 @@ PlaterDB = {
 [127724] = {
 "狂热的炎术士",
 "安托鲁斯，燃烧王座",
-"zhCN",
-},
-[189247] = {
-"驯服的凤凰",
-"奈萨鲁斯",
 "zhCN",
 },
 [75426] = {
@@ -18730,9 +18797,14 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[133963] = {
-"测试对象",
-"暴富矿区！！",
+[52958] = {
+"赞达拉圣职者",
+"祖尔格拉布",
+"zhCN",
+},
+[114328] = {
+"库格斯顿",
+"重返卡拉赞",
 "zhCN",
 },
 [20038] = {
@@ -18745,14 +18817,14 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[152326] = {
-"凯拉·布舍尔",
-"暴风城的惊魂幻象",
-"zhCN",
-},
 [207459] = {
 "人偶大师的操纵对象",
 "螺旋织纹",
+"zhCN",
+},
+[17653] = {
+"影月导魔者",
+"地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
 [219586] = {
@@ -18760,9 +18832,9 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[169601] = {
-"顽石军团特种兵",
-"纳斯利亚堡",
+[210108] = {
+"E.D.N.A",
+"矶石宝库",
 "zhCN",
 },
 [53121] = {
@@ -18770,14 +18842,14 @@ PlaterDB = {
 "火焰之地",
 "zhCN",
 },
-[196679] = {
-"未知目标",
-"化身巨龙牢窟",
-"zhCN",
-},
 [228539] = {
 "夜幕暗法师",
 "破晨号",
+"zhCN",
+},
+[205623] = {
+"德拉佐斯·黑翼",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [132056] = {
@@ -18790,9 +18862,9 @@ PlaterDB = {
 "安托鲁斯，燃烧王座",
 "zhCN",
 },
-[79467] = {
-"黎明精锐",
-"通天峰",
+[151649] = {
+"防御机器人MkI型",
+"麦卡贡行动",
 "zhCN",
 },
 [10405] = {
@@ -18810,9 +18882,9 @@ PlaterDB = {
 "奥杜尔",
 "zhCN",
 },
-[174100] = {
-"纳斯利亚护罪者",
-"纳斯利亚堡",
+[231727] = {
+"1500磅的“哑弹”",
+"解放安德麦",
 "zhCN",
 },
 [131545] = {
@@ -18825,9 +18897,9 @@ PlaterDB = {
 "阿塔达萨",
 "zhCN",
 },
-[163620] = {
-"烂吐",
-"通灵战潮",
+[179821] = {
+"指挥官佐·法",
+"塔扎维什，帷纱集市",
 "zhCN",
 },
 [97269] = {
@@ -18840,14 +18912,14 @@ PlaterDB = {
 "注能大厅",
 "zhCN",
 },
-[98691] = {
-"复活的斥候",
-"黑鸦堡垒",
+[137029] = {
+"军械专家",
+"暴富矿区！！",
 "zhCN",
 },
-[23795] = {
-"黑铁捣乱者",
-"黑石深渊",
+[205620] = {
+"玛尔苟萨·缚法",
+"亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
 [98293] = {
@@ -18860,14 +18932,14 @@ PlaterDB = {
 "夜幕圣所",
 "zhCN",
 },
-[165481] = {
-"王庭刺客",
-"纳斯利亚堡",
-"zhCN",
-},
 [237554] = {
 "陶克·铮火",
 "克莱格瓦之眠",
+"zhCN",
+},
+[216649] = {
+"维克斯",
+"千丝之城",
 "zhCN",
 },
 [17671] = {
@@ -18875,14 +18947,14 @@ PlaterDB = {
 "地狱火堡垒：破碎大厅",
 "zhCN",
 },
-[61247] = {
-"格林托克绿角战士",
-"魔古山宫殿",
-"zhCN",
-},
 [52311] = {
 "毒卫毁灭者",
 "祖尔格拉布",
+"zhCN",
+},
+[61442] = {
+"力冠三军库乌艾",
+"魔古山宫殿",
 "zhCN",
 },
 [196043] = {
@@ -18890,14 +18962,14 @@ PlaterDB = {
 "UNKNOWN",
 "zhCN",
 },
-[98368] = {
-"幽灵卫兵",
-"黑鸦堡垒",
+[77231] = {
+"执行者苏卡",
+"黑石铸造厂",
 "zhCN",
 },
-[52956] = {
-"赞达拉主宰",
-"祖尔格拉布",
+[83624] = {
+"血槌执法者",
+"血槌炉渣矿井",
 "zhCN",
 },
 [222149] = {
@@ -18910,11 +18982,6 @@ PlaterDB = {
 "奈萨鲁斯",
 "zhCN",
 },
-[64947] = {
-"魔古山守望者",
-"魔古山宝库",
-"zhCN",
-},
 [76309] = {
 "大型防御构装体",
 "通天峰",
@@ -18922,6 +18989,11 @@ PlaterDB = {
 },
 [81737] = {
 "失控蔓生",
+"永茂林地",
+"zhCN",
+},
+[84767] = {
+"扭曲的憎恶",
 "永茂林地",
 "zhCN",
 },
@@ -18935,14 +19007,14 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
-[74579] = {
-"未知目标",
-"血槌炉渣矿井",
-"zhCN",
-},
 [163058] = {
 "纱雾防御者",
 "塞兹仙林的迷雾",
+"zhCN",
+},
+[216365] = {
+"飞翼运输者",
+"艾拉-卡拉，回响之城",
 "zhCN",
 },
 [82682] = {
@@ -18950,9 +19022,9 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[220193] = {
-"苏雷吉剧毒之刃",
-"千丝之城",
+[76407] = {
+"耐奥祖",
+"影月墓地",
 "zhCN",
 },
 [53890] = {
@@ -18975,9 +19047,9 @@ PlaterDB = {
 "奈萨里奥的巢穴",
 "zhCN",
 },
-[76132] = {
-"飞天轮舞大师",
-"通天峰",
+[10413] = {
+"地穴兽",
+"斯坦索姆",
 "zhCN",
 },
 [148441] = {
@@ -18990,11 +19062,6 @@ PlaterDB = {
 "奥杜尔",
 "zhCN",
 },
-[158774] = {
-"心智破碎的平民",
-"暴风城的惊魂幻象",
-"zhCN",
-},
 [74366] = {
 "锻造大师戈杜哈",
 "血槌炉渣矿井",
@@ -19005,19 +19072,24 @@ PlaterDB = {
 "斯坦索姆",
 "zhCN",
 },
+[52377] = {
+"花翼钉刺者",
+"祖尔格拉布",
+"zhCN",
+},
 [220616] = {
 "通道沉眠者",
 "暗焰裂口",
 "zhCN",
 },
-[61389] = {
-"克尔格西高阶卫士",
-"魔古山宫殿",
-"zhCN",
-},
 [76057] = {
 "食腐蛆虫",
 "影月墓地",
+"zhCN",
+},
+[116549] = {
+"替补歌手",
+"重返卡拉赞",
 "zhCN",
 },
 [148442] = {
@@ -19028,11 +19100,6 @@ PlaterDB = {
 [234949] = {
 "葬轮",
 "闸板陋巷",
-"zhCN",
-},
-[19507] = {
-"寻日者基因接合师",
-"风暴要塞：生态船",
 "zhCN",
 },
 [95861] = {
@@ -19050,6 +19117,11 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
+[91786] = {
+"砂泥蜗牛",
+"艾萨拉之眼",
+"zhCN",
+},
 [196559] = {
 "不稳定的树液",
 "碧蓝魔馆",
@@ -19065,11 +19137,6 @@ PlaterDB = {
 "达萨罗之战",
 "zhCN",
 },
-[233955] = {
-"焦黑狂热者",
-"解放安德麦",
-"zhCN",
-},
 [173280] = {
 "顽石军团散兵",
 "纳斯利亚堡",
@@ -19080,19 +19147,19 @@ PlaterDB = {
 "卡拉赞",
 "zhCN",
 },
-[18419] = {
-"血警卫看管员",
-"风暴要塞：生态船",
+[167731] = {
+"分离助理",
+"通灵战潮",
+"zhCN",
+},
+[183500] = {
+"行窃的特工",
+"初诞者圣墓",
 "zhCN",
 },
 [8179] = {
 "强效治疗结界",
 "祖尔法拉克",
-"zhCN",
-},
-[206074] = {
-"摆时者",
-"永恒黎明",
 "zhCN",
 },
 [238833] = {
@@ -19110,6 +19177,11 @@ PlaterDB = {
 "黑心林地",
 "zhCN",
 },
+[52417] = {
+"锯齿狂鱼",
+"祖尔格拉布",
+"zhCN",
+},
 [33288] = {
 "尤格-萨隆",
 "奥杜尔",
@@ -19118,11 +19190,6 @@ PlaterDB = {
 [53891] = {
 "腐蚀之触",
 "巨龙之魂",
-"zhCN",
-},
-[111166] = {
-"坚毅的宫廷卫士",
-"暗夜要塞",
 "zhCN",
 },
 [76307] = {
@@ -19140,14 +19207,14 @@ PlaterDB = {
 "旋云之巅",
 "zhCN",
 },
-[242630] = {
-"疯狂的蛛魔领主",
-"真菌之愚",
-"zhCN",
-},
 [114802] = {
 "鬼灵短工",
 "重返卡拉赞",
+"zhCN",
+},
+[242630] = {
+"疯狂的蛛魔领主",
+"真菌之愚",
 "zhCN",
 },
 [45477] = {
@@ -19165,9 +19232,9 @@ PlaterDB = {
 "解放安德麦",
 "zhCN",
 },
-[7246] = {
-"沙怒暗影猎手",
-"祖尔法拉克",
+[133432] = {
+"风险投资公司炼金师",
+"暴富矿区！！",
 "zhCN",
 },
 [91784] = {
@@ -19180,14 +19247,14 @@ PlaterDB = {
 "塞兹仙林的迷雾",
 "zhCN",
 },
+[233247] = {
+"专横的混音者",
+"解放安德麦",
+"zhCN",
+},
 [242631] = {
 "过载的哨兵",
 "奥尔达尼生态圆顶",
-"zhCN",
-},
-[184107] = {
-"符文保护者",
-"奥达曼：提尔的遗产",
 "zhCN",
 },
 [97172] = {
@@ -19205,6 +19272,11 @@ PlaterDB = {
 "蕨皮山谷",
 "zhCN",
 },
+[180348] = {
+"财团打手",
+"塔扎维什，帷纱集市",
+"zhCN",
+},
 [175576] = {
 "监禁室",
 "塔扎维什，帷纱集市",
@@ -19220,14 +19292,14 @@ PlaterDB = {
 "永恒黎明",
 "zhCN",
 },
-[130435] = {
-"混乱的暴徒",
-"暴富矿区！！",
-"zhCN",
-},
 [191736] = {
 "克罗兹",
 "艾杰斯亚学院",
+"zhCN",
+},
+[101008] = {
+"针刺虫群",
+"黑鸦堡垒",
 "zhCN",
 },
 [223181] = {
@@ -19240,9 +19312,9 @@ PlaterDB = {
 "奈萨里奥的巢穴",
 "zhCN",
 },
-[99366] = {
-"污心召唤师",
-"黑心林地",
+[97171] = {
+"积怨奥术师",
+"艾萨拉之眼",
 "zhCN",
 },
 [13285] = {
@@ -19255,9 +19327,9 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[57280] = {
-"暮光攻城队长",
-"巨龙之魂",
+[99359] = {
+"腐心守护者",
+"黑心林地",
 "zhCN",
 },
 [98810] = {
@@ -19280,14 +19352,14 @@ PlaterDB = {
 "化身巨龙牢窟",
 "zhCN",
 },
-[104217] = {
-"塔丽克萨·火冠",
-"群星庭院",
-"zhCN",
-},
 [134418] = {
 "溺水的深渊使者",
 "风暴神殿",
+"zhCN",
+},
+[246341] = {
+"暗黑野牛",
+"解放安德麦",
 "zhCN",
 },
 [245705] = {
@@ -19305,9 +19377,9 @@ PlaterDB = {
 "奥杜尔",
 "zhCN",
 },
-[139800] = {
-"唤风者学徒",
-"风暴神殿",
+[91789] = {
+"积怨夫人",
+"艾萨拉之眼",
 "zhCN",
 },
 [84990] = {
@@ -19315,9 +19387,9 @@ PlaterDB = {
 "永茂林地",
 "zhCN",
 },
-[100713] = {
-"啮岩渔夫",
-"奈萨里奥的巢穴",
+[227843] = {
+"血牙土狼",
+"解放安德麦",
 "zhCN",
 },
 [81407] = {
@@ -19340,9 +19412,9 @@ PlaterDB = {
 "麦卡贡行动",
 "zhCN",
 },
-[236176] = {
-"未知目标",
-"塔克-雷桑深渊",
+[135470] = {
+"征服者阿卡阿里",
+"诸王之眠",
 "zhCN",
 },
 [234957] = {
@@ -19353,11 +19425,6 @@ PlaterDB = {
 [178139] = {
 "浊盐碎壳者",
 "塔扎维什，帷纱集市",
-"zhCN",
-},
-[219766] = {
-"某餃子",
-"无底沉穴",
 "zhCN",
 },
 [91008] = {
@@ -19375,6 +19442,11 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
+[102287] = {
+"烬壳统御者",
+"奈萨里奥的巢穴",
+"zhCN",
+},
 [20040] = {
 "晶核摧毁者",
 "风暴要塞",
@@ -19383,11 +19455,6 @@ PlaterDB = {
 [156641] = {
 "被奴役的武器匠",
 "暴风城的惊魂幻象",
-"zhCN",
-},
-[16171] = {
-"冷雾寡妇蛛",
-"卡拉赞",
 "zhCN",
 },
 [245411] = {
@@ -19400,9 +19467,14 @@ PlaterDB = {
 "守望者地窟",
 "zhCN",
 },
-[114330] = {
-"巴布丽特",
-"重返卡拉赞",
+[245008] = {
+"无缚相位剑士",
+"法力熔炉：欧米伽",
+"zhCN",
+},
+[95885] = {
+"提拉宋·萨瑟利尔",
+"守望者地窟",
 "zhCN",
 },
 [220626] = {
@@ -19410,14 +19482,14 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[59915] = {
-"红玉守护者",
-"魔古山宝库",
-"zhCN",
-},
 [156145] = {
 "掘地附肢",
 "暴风城的惊魂幻象",
+"zhCN",
+},
+[107114] = {
+"折磨宝珠",
+"守望者地窟",
 "zhCN",
 },
 [156642] = {
@@ -19425,9 +19497,9 @@ PlaterDB = {
 "暴风城的惊魂幻象",
 "zhCN",
 },
-[131677] = {
-"毒心织符者",
-"维克雷斯庄园",
+[72238] = {
+"颓丧的化身",
+"决战奥格瑞玛",
 "zhCN",
 },
 [190426] = {
@@ -19445,11 +19517,6 @@ PlaterDB = {
 "斯坦索姆",
 "zhCN",
 },
-[99644] = {
-"恶魔卫士歼灭者",
-"守望者地窟",
-"zhCN",
-},
 [210156] = {
 "斯卡莫拉克",
 "矶石宝库",
@@ -19458,6 +19525,11 @@ PlaterDB = {
 [173800] = {
 "下水道老鼠",
 "纳斯利亚堡",
+"zhCN",
+},
+[137940] = {
+"护卫鲨鱼",
+"暴富矿区！！",
 "zhCN",
 },
 [246733] = {
@@ -19473,11 +19545,6 @@ PlaterDB = {
 [178142] = {
 "浊盐鱼术师",
 "塔扎维什，帷纱集市",
-"zhCN",
-},
-[95887] = {
-"格雷泽",
-"守望者地窟",
 "zhCN",
 },
 [114541] = {
@@ -19500,14 +19567,14 @@ PlaterDB = {
 "风暴神殿",
 "zhCN",
 },
+[208478] = {
+"沃尔科罗斯",
+"阿梅达希尔，梦境之愿",
+"zhCN",
+},
 [98813] = {
 "血气地狱犬",
 "黑鸦堡垒",
-"zhCN",
-},
-[91790] = {
-"玛拉纳沙地行者",
-"艾萨拉之眼",
 "zhCN",
 },
 [226403] = {
@@ -19535,6 +19602,11 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
+[230668] = {
+"食腐鸟",
+"卡利姆多",
+"zhCN",
+},
 [17993] = {
 "血警卫保护者",
 "风暴要塞：生态船",
@@ -19550,9 +19622,9 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[98954] = {
-"魔誓侍从",
-"守望者地窟",
+[100991] = {
+"纠缠之根",
+"黑心林地",
 "zhCN",
 },
 [122104] = {
@@ -19560,14 +19632,14 @@ PlaterDB = {
 "安托鲁斯，燃烧王座",
 "zhCN",
 },
-[235631] = {
-"未知目标",
-"暴富矿区！！",
-"zhCN",
-},
 [239360] = {
 "未知目标",
 "飞掠裂口",
+"zhCN",
+},
+[167615] = {
+"堕落的黑暗剑士",
+"赎罪大厅",
 "zhCN",
 },
 [61444] = {
@@ -19575,14 +19647,14 @@ PlaterDB = {
 "魔古山宫殿",
 "zhCN",
 },
-[135239] = {
-"幽魂巫医",
-"诸王之眠",
-"zhCN",
-},
 [174842] = {
 "好斗的侍者",
 "纳斯利亚堡",
+"zhCN",
+},
+[131666] = {
+"女巫会塑棘者",
+"维克雷斯庄园",
 "zhCN",
 },
 [157158] = {
@@ -19595,19 +19667,14 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
-[165408] = {
-"哈尔吉亚斯",
-"赎罪大厅",
+[137486] = {
+"帕特拉女王",
+"诸王之眠",
 "zhCN",
 },
 [11462] = {
 "扭木树人",
 "厄运之槌",
-"zhCN",
-},
-[134417] = {
-"深海祭师",
-"风暴神殿",
 "zhCN",
 },
 [134331] = {
@@ -19620,14 +19687,14 @@ PlaterDB = {
 "奥尔达尼生态圆顶",
 "zhCN",
 },
-[129527] = {
-"水鼠帮海盗",
-"自由镇",
-"zhCN",
-},
 [52155] = {
 "高阶祭司温诺希斯",
 "祖尔格拉布",
+"zhCN",
+},
+[129527] = {
+"水鼠帮海盗",
+"自由镇",
 "zhCN",
 },
 [131864] = {
@@ -19695,19 +19762,24 @@ PlaterDB = {
 "影月墓地",
 "zhCN",
 },
-[96512] = {
-"大德鲁伊格兰达里斯",
-"黑心林地",
-"zhCN",
-},
 [208445] = {
 "拉罗达尔，烈焰守护者",
 "阿梅达希尔，梦境之愿",
 "zhCN",
 },
+[96512] = {
+"大德鲁伊格兰达里斯",
+"黑心林地",
+"zhCN",
+},
 [226396] = {
 "沼面",
 "水闸行动",
+"zhCN",
+},
+[229364] = {
+"专横的死亡调音师",
+"解放安德麦",
 "zhCN",
 },
 [186338] = {
@@ -19720,9 +19792,9 @@ PlaterDB = {
 "亚贝鲁斯，焰影熔炉",
 "zhCN",
 },
-[222981] = {
-"致命梦魇",
-"尼鲁巴尔王宫",
+[211061] = {
+"帕特洛",
+"真菌之愚",
 "zhCN",
 },
 [53127] = {
@@ -19735,9 +19807,9 @@ PlaterDB = {
 "魔古山宫殿",
 "zhCN",
 },
-[228424] = {
-"暗索无人机",
-"水闸行动",
+[243241] = {
+"无常具象",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [205790] = {
@@ -19745,19 +19817,14 @@ PlaterDB = {
 "永恒黎明",
 "zhCN",
 },
-[136984] = {
-"莱班",
-"诸王之眠",
+[218884] = {
+"未知目标",
+"尼鲁巴尔王宫",
 "zhCN",
 },
 [186339] = {
 "提拉",
 "诺库德阻击战",
-"zhCN",
-},
-[167610] = {
-"石精噬踝者",
-"赎罪大厅",
 "zhCN",
 },
 [127757] = {
@@ -19770,14 +19837,19 @@ PlaterDB = {
 "地狱火堡垒：鲜血熔炉",
 "zhCN",
 },
+[167607] = {
+"石裔切割者",
+"赎罪大厅",
+"zhCN",
+},
 [196577] = {
 "缚法战斧",
 "艾杰斯亚学院",
 "zhCN",
 },
-[136264] = {
-"未知目标",
-"诸王之眠",
+[78233] = {
+"暗裂晶脊鬣蜥人",
+"黑石铸造厂",
 "zhCN",
 },
 [129529] = {
@@ -19795,9 +19867,9 @@ PlaterDB = {
 "水闸行动",
 "zhCN",
 },
-[241800] = {
-"法力铸造泰坦",
-"法力熔炉：欧米伽",
+[81197] = {
+"钢铁掠夺者",
+"黑石铸造厂",
 "zhCN",
 },
 [224219] = {
@@ -19808,11 +19880,6 @@ PlaterDB = {
 [224731] = {
 "掠网者",
 "千丝之城",
-"zhCN",
-},
-[244444] = {
-"大吞噬者",
-"真菌之愚",
 "zhCN",
 },
 [1763] = {
@@ -19835,14 +19902,19 @@ PlaterDB = {
 "真菌之愚",
 "zhCN",
 },
+[244413] = {
+"誓约唤厄者",
+"克莱格瓦之眠",
+"zhCN",
+},
 [137713] = {
 "值钱的螃蟹",
 "暴富矿区！！",
 "zhCN",
 },
-[236549] = {
-"结晶魔像",
-"法力熔炉：欧米伽",
+[33806] = {
+"空灵兽",
+"奥杜尔",
 "zhCN",
 },
 [224732] = {
@@ -19850,9 +19922,9 @@ PlaterDB = {
 "千丝之城",
 "zhCN",
 },
-[222927] = {
-"圣焰酿酒师",
-"圣焰隐修院",
+[234051] = {
+"灵牙吠魂者",
+"法力熔炉：欧米伽",
 "zhCN",
 },
 [17994] = {
@@ -19865,11 +19937,6 @@ PlaterDB = {
 "法力熔炉：欧米伽",
 "zhCN",
 },
-[249829] = {
-"葬轮",
-"闸板陋巷",
-"zhCN",
-},
 [69390] = {
 "赞达拉唤雨者",
 "雷电王座",
@@ -19878,6 +19945,11 @@ PlaterDB = {
 [245255] = {
 "阿托席恩",
 "法力熔炉：欧米伽",
+"zhCN",
+},
+[245414] = {
+"入侵的幼虫",
+"奥尔达尼生态圆顶",
 "zhCN",
 },
 [224221] = {
@@ -19890,24 +19962,19 @@ PlaterDB = {
 "火焰之地",
 "zhCN",
 },
-[236072] = {
-"无缚实体",
-"法力熔炉：欧米伽",
-"zhCN",
-},
 [80526] = {
 "难驯的铁蹄牛",
+"黑石铸造厂",
+"zhCN",
+},
+[80677] = {
+"钢铁工匠",
 "黑石铸造厂",
 "zhCN",
 },
 [242649] = {
 "初生的助祭",
 "法力熔炉：欧米伽",
-"zhCN",
-},
-[80677] = {
-"钢铁工匠",
-"黑石铸造厂",
 "zhCN",
 },
 [239702] = {
@@ -19920,14 +19987,14 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
+[52413] = {
+"祖利安碾齿鳄鱼",
+"祖尔格拉布",
+"zhCN",
+},
 [75272] = {
 "血槌食人魔法师",
 "血槌炉渣矿井",
-"zhCN",
-},
-[234623] = {
-"巧手窃贼",
-"真菌之愚",
 "zhCN",
 },
 [33488] = {
@@ -19955,13 +20022,18 @@ PlaterDB = {
 "塔扎维什，帷纱集市",
 "zhCN",
 },
+[80676] = {
+"钢铁控火者",
+"黑石铸造厂",
+"zhCN",
+},
 [240091] = {
 "巨大的幼虫",
 "真菌之愚",
 "zhCN",
 },
-[80676] = {
-"钢铁控火者",
+[79200] = {
+"黑石熔炉专家",
 "黑石铸造厂",
 "zhCN",
 },
@@ -19970,9 +20042,9 @@ PlaterDB = {
 "通灵战潮",
 "zhCN",
 },
-[226484] = {
-"未知目标",
-"恐惧陷坑",
+[219810] = {
+"蛛魔祭师",
+"飞掠裂口",
 "zhCN",
 },
 [229854] = {
@@ -19985,9 +20057,9 @@ PlaterDB = {
 "恐惧陷坑",
 "zhCN",
 },
-[189471] = {
-"卡拉希铁匠",
-"奈萨鲁斯",
+[76811] = {
+"鼓风者",
+"黑石铸造厂",
 "zhCN",
 },
 [223200] = {
@@ -19995,13 +20067,13 @@ PlaterDB = {
 "尼鲁巴尔王宫",
 "zhCN",
 },
-[238608] = {
-"受训的拾荒者",
-"闸板陋巷",
-"zhCN",
-},
 [76829] = {
 "熔渣元素",
+"黑石铸造厂",
+"zhCN",
+},
+[76812] = {
+"保安",
 "黑石铸造厂",
 "zhCN",
 },
@@ -20010,9 +20082,9 @@ PlaterDB = {
 "纳斯利亚堡",
 "zhCN",
 },
-[125977] = {
-"复生图腾",
-"阿塔达萨",
+[247476] = {
+"代言人杉文兹",
+"真菌之愚",
 "zhCN",
 },
 [217570] = {
@@ -20035,8 +20107,8 @@ PlaterDB = {
 "黑石铸造厂",
 "zhCN",
 },
-[9554] = {
-"喝醉的顾客",
+[9547] = {
+"醉酒的奴隶主",
 "黑石深渊",
 "zhCN",
 },
@@ -20045,9 +20117,9 @@ PlaterDB = {
 "雷电王座",
 "zhCN",
 },
-[207481] = {
-"旋菇",
-"真菌之愚",
+[26776] = {
+"烈酒爪牙",
+"黑石深渊",
 "zhCN",
 },
 },
@@ -20114,14 +20186,14 @@ nil,
 ["Dont Have Aura"] = 1,
 ["Players Targetting Amount"] = 4,
 ["Color Automation"] = 1,
-["Aura Reorder"] = 3,
-["Cast Bar Icon Config"] = 2,
 ["Execute Range"] = 1,
-["Extra Border"] = 2,
+["Cast Bar Icon Config"] = 2,
+["Aura Reorder"] = 3,
+["Combo Points"] = 6,
 ["Hide Neutral Units"] = 1,
 ["Target Color"] = 3,
 ["Attacking Specific Unit"] = 2,
-["Combo Points"] = 6,
+["Extra Border"] = 2,
 },
 ["minor_width_scale"] = 0.9999999403953552,
 ["aura_frame1_anchor"] = {
@@ -20140,7 +20212,7 @@ nil,
 ["saved_cvars"] = {
 ["nameplateShowOnlyNames"] = "0",
 ["nameplateOverlapV"] = "1.7000000476837",
-["nameplateLargeTopInset"] = "-1",
+["nameplateLargeTopInset"] = "0.08",
 ["nameplateShowEnemyMinus"] = "1",
 ["NamePlateClassificationScale"] = "1",
 ["nameplateShowFriendlyTotems"] = "0",
@@ -20154,7 +20226,7 @@ nil,
 ["nameplateShowAll"] = "1",
 ["nameplateMaxDistance"] = "100",
 ["nameplateShowFriendlyMinions"] = "0",
-["nameplateOtherBottomInset"] = "-1",
+["nameplateOtherBottomInset"] = "0.1",
 ["nameplateTargetBehindMaxDistance"] = "30",
 ["nameplateShowEnemies"] = "1",
 ["NamePlateVerticalScale"] = "1.5",
@@ -20164,23 +20236,24 @@ nil,
 ["nameplateSelfTopInset"] = "-1",
 ["nameplateMotionSpeed"] = "0.05",
 ["nameplateShowEnemyMinions"] = "1",
-["nameplateShowFriendlyNPCs"] = "0",
+["nameplateShowFriendlyNPCs"] = "1",
 ["nameplateSelectedScale"] = "1",
 ["nameplateMinAlphaDistance"] = "-158489.31924611",
 ["nameplateMotion"] = "1",
 ["nameplateMinScale"] = "1",
-["nameplateOtherTopInset"] = "-1",
 ["nameplateShowFriendlyBuffs"] = "0",
+["nameplateOtherTopInset"] = "0.08",
 ["nameplateShowFriends"] = "0",
-["NamePlateHorizontalScale"] = "1",
-["nameplateShowFriendlyGuardians"] = "0",
 ["nameplateSelfAlpha"] = "1",
 ["nameplateLargerScale"] = "1",
+["nameplateShowFriendlyGuardians"] = "0",
 ["nameplateOccludedAlphaMult"] = "1",
+["NamePlateHorizontalScale"] = "1",
 ["ShowClassColorInNameplate"] = "1",
 ["ShowNamePlateLoseAggroFlash"] = "0",
+["nameplateLargeBottomInset"] = "0.1",
 },
-["login_counter"] = 19561,
+["login_counter"] = 19567,
 ["extra_icon_caster_name"] = false,
 ["click_space_friendly"] = {
 nil,
@@ -20459,12 +20532,7 @@ nil,
 ["x"] = 1,
 ["side"] = 11,
 },
-["spellpercent_text_shadow_color"] = {
-nil,
-nil,
-nil,
-0,
-},
+["spellname_text_font"] = "Expressway",
 ["quest_color_neutral"] = {
 1,
 0.65,
@@ -20484,23 +20552,28 @@ nil,
 ["percent_text_font"] = "Expressway",
 ["quest_enabled"] = true,
 ["quest_color_enabled"] = true,
-["spellname_text_size"] = 9,
+["health_incombat"] = {
+128,
+14,
+},
 ["health"] = {
 128,
 14,
 },
 ["percent_show_health"] = false,
-["health_incombat"] = {
-128,
-14,
-},
+["spellname_text_size"] = 9,
 ["spellname_text_shadow_color"] = {
 nil,
 nil,
 nil,
 0,
 },
-["spellname_text_font"] = "Expressway",
+["spellpercent_text_shadow_color"] = {
+nil,
+nil,
+nil,
+0,
+},
 ["level_text_enabled"] = false,
 },
 ["enemynpc"] = {
@@ -20610,12 +20683,12 @@ nil,
 ["Player-1598-0BD22701"] = "ComboPoints",
 ["Player-1598-0BEFA545"] = "Chi",
 ["Player-1598-0C0DD01B"] = "SoulShards",
-["Player-1598-0BFABB95"] = "ArcaneCharges",
+["Player-1598-0E1A06DE"] = "ComboPoints",
 ["Player-940-0516206F"] = "Runes",
 ["Player-940-057FAD37"] = "Essence",
 ["Player-1598-0BF18248"] = "Runes",
 ["Player-1598-0F5E4639"] = "ComboPoints",
-["Player-1598-0E1A06DE"] = "ComboPoints",
+["Player-1598-0BFABB95"] = "ArcaneCharges",
 ["Player-1598-0F46FF5A"] = "Essence",
 },
 },
@@ -21363,32 +21436,24 @@ nil,
 nil,
 1,
 },
-["cast_statusbar_color_interrupted"] = {
-0.30196078431373,
-0.30196078431373,
-0.30196078431373,
-},
+["patch_version"] = 39,
 ["hook_data"] = {
 {
 ["Enabled"] = true,
 ["Revision"] = 163,
-["Options"] = {
-},
-["LastHookEdited"] = "Nameplate Updated",
-["Author"] = "Luckyone-Laughing Skull",
 ["OptionsValues"] = {
+},
+["HooksTemp"] = {
+},
+["Author"] = "Luckyone-Laughing Skull",
+["Options"] = {
 },
 ["Desc"] = "",
 ["Hooks"] = {
 ["Nameplate Updated"] = "function(self, unitId, unitFrame, envTable)\n    local strsplit = strsplit\n    local unitName = UnitName(unitId)\n    -- Show First Name [Whitelist table]\n    local firstName = {\n        [3527] = true, -- Healing Stream Totem\n        [2630] = true, -- Earthbind Totem\n        [61245] = true, -- Capacitor Totem\n        [5925] = true, -- Grounding Totem\n        [105451] = true, -- Counterstrike Totem\n        [105427] = true, -- Skyfury Totem\n        [97369] = true, -- Liquid Magma Totem\n        [207796] = true, -- Burning Colossus (Fyrakk Mythic)\n        [214012] = true, -- Dark Colossus (Fyrakk Mythic)\n    }\n    -- Show Full Name [Whitelist table]\n    local fullName = {\n        -- [123456] = true,\n    }\n    if (unitName) then\n        local a , b, c, d, e, f = strsplit(' ', unitName, 5)\n        if firstName[unitFrame.namePlateNpcId] then\n            unitFrame.healthBar.unitName:SetText(a)\n        elseif fullName[unitFrame.namePlateNpcId] then\n            unitFrame.healthBar.unitName:SetText(unitName)\n        else\n            unitFrame.healthBar.unitName:SetText(f or e or d or c or b or a)\n        end\n    end\nend",
 },
 ["Prio"] = 1,
-["Name"] = "LuckyoneUI - Name",
-["PlaterCore"] = 1,
-["HooksTemp"] = {
-},
 ["Time"] = 1704317322,
-["Icon"] = 2178488,
 ["LoadConditions"] = {
 ["talent"] = {
 },
@@ -21411,15 +21476,20 @@ nil,
 ["spec"] = {
 },
 },
+["LastHookEdited"] = "Nameplate Updated",
+["Name"] = "LuckyoneUI - Name",
+["Icon"] = 2178488,
+["PlaterCore"] = 1,
 },
 {
 ["Enabled"] = true,
 ["Revision"] = 134,
-["Options"] = {
-},
-["LastHookEdited"] = "Cast Start",
-["Author"] = "Luckyone-Laughing Skull",
 ["OptionsValues"] = {
+},
+["HooksTemp"] = {
+},
+["Author"] = "Luckyone-Laughing Skull",
+["Options"] = {
 },
 ["Desc"] = "",
 ["Hooks"] = {
@@ -21429,12 +21499,7 @@ nil,
 ["Constructor"] = "function (self, unitId, unitFrame, envTable)\n    envTable.ShowIcon = Plater.db.profile.castbar_icon_show\n    \n    function envTable.UpdateIconPosition (unitFrame)\n        local castBar = unitFrame.castBar\n        local icon = castBar.Icon\n        local shield = castBar.BorderShield\n        \n        if (envTable.ShowIcon) then\n            icon:ClearAllPoints()\n            icon:SetPoint('topright', unitFrame.castBar, 'topleft', 12, 0)\n            icon:SetPoint('bottomright', unitFrame.castBar, 'bottomleft', 0, 0)\n            icon:SetWidth(icon:GetHeight())\n            icon:Show()\n        else\n            icon:Hide()\n        end\n        shield:Hide()\n    end\n    \n    function envTable.UpdateBorder (unitFrame, casting)\n        local castBar = unitFrame.castBar\n        local healthBar = unitFrame.healthBar\n        \n        if casting then\n            healthBar.border:SetPoint('TOPLEFT', healthBar, 'TOPLEFT', 0, 0)\n            healthBar.border:SetPoint('BOTTOMRIGHT', castBar, 'BOTTOMRIGHT', 0, 0)\n        else\n            healthBar.border:SetPoint('TOPLEFT', healthBar, 'TOPLEFT', 0, 0)\n            healthBar.border:SetPoint('BOTTOMRIGHT', healthBar, 'BOTTOMRIGHT', 0, 0)\n        end\n    end\n    \n    if not unitFrame.castBar.borderChangeHooked then\n        hooksecurefunc(unitFrame.castBar, 'Hide', function() envTable.UpdateBorder(unitFrame, false) end)\n        unitFrame.castBar.borderChangeHooked = true\n    end\nend",
 },
 ["Prio"] = 1,
-["Name"] = "LuckyoneUI - Castbar",
-["PlaterCore"] = 1,
-["HooksTemp"] = {
-},
 ["Time"] = 1703167061,
-["Icon"] = 4298240,
 ["LoadConditions"] = {
 ["talent"] = {
 },
@@ -21457,6 +21522,10 @@ nil,
 ["spec"] = {
 },
 },
+["LastHookEdited"] = "Cast Start",
+["Name"] = "LuckyoneUI - Castbar",
+["Icon"] = 4298240,
+["PlaterCore"] = 1,
 },
 {
 ["OptionsValues"] = {
@@ -21629,7 +21698,7 @@ nil,
 nil,
 0,
 },
-["extra_icon_height"] = 20,
+["range_check_alpha_friendlies"] = 1,
 ["pet_width_scale"] = 0.9999999403953552,
 ["quick_hide"] = true,
 ["target_highlight_color"] = {
@@ -21661,9 +21730,9 @@ nil,
 ["target_shady_combat_only"] = false,
 ["pet_height_scale"] = 0.9999999403953552,
 ["aura_x_offset"] = -2,
-["range_check_alpha_friendlies"] = 1,
+["first_run3"] = true,
+["indicator_elite"] = false,
 ["indicator_pet"] = false,
-["indicator_rare"] = false,
 ["ui_parent_scale_tune"] = 1.430000066757202,
 ["widget_bar_scale"] = 0.9999999403953552,
 ["health_statusbar_bgtexture"] = "Minimalist",
@@ -21672,15 +21741,7 @@ nil,
 ["x"] = 2,
 ["side"] = 9,
 },
-["tank"] = {
-["colors"] = {
-["nocombat"] = {
-0.91764705882353,
-0.12549019607843,
-0.070588235294118,
-},
-},
-},
+["aura_show_enrage"] = true,
 ["aura_tracker"] = {
 ["buff_tracked"] = {
 ["209859"] = false,
@@ -21713,7 +21774,15 @@ nil,
 ["indicator_extra_raidmark"] = false,
 ["extra_icon_timer_font"] = "Expressway",
 ["not_affecting_combat_alpha"] = 1,
-["ui_parent_target_strata"] = "BACKGROUND",
+["tank"] = {
+["colors"] = {
+["nocombat"] = {
+0.91764705882353,
+0.12549019607843,
+0.070588235294118,
+},
+},
+},
 ["target_highlight_alpha"] = 1,
 ["news_frame"] = {
 ["PlaterNewsFrame"] = {
@@ -21733,10 +21802,13 @@ nil,
 ["ScriptType"] = 2,
 ["UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    --update the percent\n    envTable.overlaySpark:SetPoint (\"left\", unitFrame.healthBar:GetWidth() * (envTable._CastPercent / 100)-9, 0)\n    \n    envTable.topArrow:SetPoint (\"bottomleft\", unitFrame.healthBar, \"topleft\", unitFrame.healthBar:GetWidth() * (envTable._CastPercent / 100) - 4, 2 )\n    \n    --forces the script to run the update as fast as the game framerate\n    self.ThrottleUpdate = 0\n    \n    if (scriptTable.config.useNameplateColor) then\n        Plater.SetNameplateColor(unitFrame, envTable.NameplateColor)\n    end\n    \n    local dotSpeed = abs(envTable._Duration - envTable._RemainingTime) + 1.5\n    envTable.dotAnimation.textureInfo.speedMultiplier = dotSpeed\nend\n\n\n\n\n",
 ["Time"] = 1674915149,
+["Icon"] = 2175503,
+["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    --settings\n    envTable.NameplateSizeOffset = scriptTable.config.castBarHeight\n    envTable.ShowArrow = scriptTable.config.showArrow\n    envTable.ArrowAlpha = scriptTable.config.arrowAlpha\n    \n    --creates the spark to show the cast progress inside the health bar\n    envTable.overlaySpark = envTable.overlaySpark or Plater:CreateImage (unitFrame.healthBar)\n    envTable.overlaySpark:SetBlendMode (\"ADD\")\n    envTable.overlaySpark.width = 16\n    envTable.overlaySpark.height = 36\n    envTable.overlaySpark.alpha = .9\n    envTable.overlaySpark.texture = [[Interface\\AddOns\\Plater\\images\\spark3]]\n    \n    envTable.topArrow = envTable.topArrow or Plater:CreateImage (unitFrame.healthBar)\n    envTable.topArrow:SetBlendMode (\"ADD\")\n    envTable.topArrow.width = scriptTable.config.arrowWidth\n    envTable.topArrow.height = scriptTable.config.arrowHeight\n    envTable.topArrow.alpha = envTable.ArrowAlpha\n    envTable.topArrow.texture = [[Interface\\BUTTONS\\Arrow-Down-Up]]\n    \n    --scale animation\n    envTable.smallScaleAnimation = envTable.smallScaleAnimation or Plater:CreateAnimationHub (unitFrame.healthBar)\n    Plater:CreateAnimation (envTable.smallScaleAnimation, \"SCALE\", 1, 0.075, 1, 1, 1.08, 1.08)\n    Plater:CreateAnimation (envTable.smallScaleAnimation, \"SCALE\", 2, 0.075, 1, 1, 0.95, 0.95)    \n    --envTable.smallScaleAnimation:Play() --envTable.smallScaleAnimation:Stop()\n    \nend\n\n\n\n\n\n\n\n",
 ["NpcNames"] = {
 },
-["url"] = "",
-["Icon"] = 2175503,
+["semver"] = "",
+["Enabled"] = true,
+["Revision"] = 544,
 ["Options"] = {
 {
 ["Type"] = 2,
@@ -21908,23 +21980,20 @@ nil,
 ["Desc"] = "Health Bar Color",
 },
 },
-["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    Plater.StopDotAnimation(unitFrame.healthBar, envTable.dotAnimation)\n    \n    envTable.overlaySpark:Hide()\n    envTable.topArrow:Hide()\n    \n    Plater.RefreshNameplateColor (unitFrame)\n    \n    envTable.smallScaleAnimation:Stop()\n    \n    --increase the nameplate size\n    local nameplateHeight = Plater.db.profile.plate_config.enemynpc.health_incombat [2]\n    unitFrame.healthBar:SetHeight (nameplateHeight)\n    \n    Plater.DenyColorChange(unitFrame, false)\nend\n\n\n",
-["Revision"] = 544,
-["semver"] = "",
-["Desc"] = "Explosive Affix",
-["version"] = -1,
-["Author"] = "Bombad�o-Azralon",
-["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
 ["OnShowCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    envTable.overlaySpark:Show()\n    \n    if (envTable.ShowArrow) then\n        envTable.topArrow:Show()\n    end\n    \n    Plater.FlashNameplateBorder (unitFrame, 0.05)   \n    Plater.FlashNameplateBody (unitFrame, \"\", 0.075)\n    \n    envTable.smallScaleAnimation:Play()\n    \n    --increase the nameplate size\n    local nameplateHeight = Plater.db.profile.plate_config.enemynpc.health_incombat [2]\n    unitFrame.healthBar:SetHeight (nameplateHeight + envTable.NameplateSizeOffset)\n    \n    envTable.overlaySpark.height = nameplateHeight + 5\n    \n    envTable.dotAnimation = Plater.PlayDotAnimation(unitFrame.healthBar, 2, scriptTable.config.dotColor, scriptTable.config.xOffset, scriptTable.config.yOffset)\n    \n    Plater.SetCastBarColorForScript(self, true, scriptTable.config.castBarColor, envTable)\n    \n    if (scriptTable.config.useNameplateColor) then\n        envTable.NameplateColor = Plater.GetColorByPriority(unitFrame, scriptTable.config.healthBarColor)\n        Plater.DenyColorChange(unitFrame, true)\n    end       \nend\n\n\n\n\n\n\n",
 ["Name"] = "Explosive Affix",
-["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    --update the percent\n    envTable.overlaySpark:SetPoint (\"left\", unitFrame.healthBar:GetWidth() * (envTable._CastPercent / 100)-9, 0)\n    \n    envTable.topArrow:SetPoint (\"bottomleft\", unitFrame.healthBar, \"topleft\", unitFrame.healthBar:GetWidth() * (envTable._CastPercent / 100) - 4, 2 )\n    \n    --forces the script to run the update as fast as the game framerate\n    self.ThrottleUpdate = 0\n    \n    if (scriptTable.config.useNameplateColor) then\n        Plater.SetNameplateColor(unitFrame, envTable.NameplateColor)\n    end\n    \n    local dotSpeed = abs(envTable._Duration - envTable._RemainingTime) + 1.5\n    envTable.dotAnimation.textureInfo.speedMultiplier = dotSpeed\nend\n\n\n\n\n",
+["Author"] = "Bombad�o-Azralon",
+["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
+["Desc"] = "Explosive Affix",
+["version"] = -1,
+["Prio"] = 99,
 ["SpellIds"] = {
 },
 ["PlaterCore"] = 1,
-["Prio"] = 99,
+["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    --update the percent\n    envTable.overlaySpark:SetPoint (\"left\", unitFrame.healthBar:GetWidth() * (envTable._CastPercent / 100)-9, 0)\n    \n    envTable.topArrow:SetPoint (\"bottomleft\", unitFrame.healthBar, \"topleft\", unitFrame.healthBar:GetWidth() * (envTable._CastPercent / 100) - 4, 2 )\n    \n    --forces the script to run the update as fast as the game framerate\n    self.ThrottleUpdate = 0\n    \n    if (scriptTable.config.useNameplateColor) then\n        Plater.SetNameplateColor(unitFrame, envTable.NameplateColor)\n    end\n    \n    local dotSpeed = abs(envTable._Duration - envTable._RemainingTime) + 1.5\n    envTable.dotAnimation.textureInfo.speedMultiplier = dotSpeed\nend\n\n\n\n\n",
 ["Temp_Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
-["Enabled"] = true,
-["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    --settings\n    envTable.NameplateSizeOffset = scriptTable.config.castBarHeight\n    envTable.ShowArrow = scriptTable.config.showArrow\n    envTable.ArrowAlpha = scriptTable.config.arrowAlpha\n    \n    --creates the spark to show the cast progress inside the health bar\n    envTable.overlaySpark = envTable.overlaySpark or Plater:CreateImage (unitFrame.healthBar)\n    envTable.overlaySpark:SetBlendMode (\"ADD\")\n    envTable.overlaySpark.width = 16\n    envTable.overlaySpark.height = 36\n    envTable.overlaySpark.alpha = .9\n    envTable.overlaySpark.texture = [[Interface\\AddOns\\Plater\\images\\spark3]]\n    \n    envTable.topArrow = envTable.topArrow or Plater:CreateImage (unitFrame.healthBar)\n    envTable.topArrow:SetBlendMode (\"ADD\")\n    envTable.topArrow.width = scriptTable.config.arrowWidth\n    envTable.topArrow.height = scriptTable.config.arrowHeight\n    envTable.topArrow.alpha = envTable.ArrowAlpha\n    envTable.topArrow.texture = [[Interface\\BUTTONS\\Arrow-Down-Up]]\n    \n    --scale animation\n    envTable.smallScaleAnimation = envTable.smallScaleAnimation or Plater:CreateAnimationHub (unitFrame.healthBar)\n    Plater:CreateAnimation (envTable.smallScaleAnimation, \"SCALE\", 1, 0.075, 1, 1, 1.08, 1.08)\n    Plater:CreateAnimation (envTable.smallScaleAnimation, \"SCALE\", 2, 0.075, 1, 1, 0.95, 0.95)    \n    --envTable.smallScaleAnimation:Play() --envTable.smallScaleAnimation:Stop()\n    \nend\n\n\n\n\n\n\n\n",
+["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    Plater.StopDotAnimation(unitFrame.healthBar, envTable.dotAnimation)\n    \n    envTable.overlaySpark:Hide()\n    envTable.topArrow:Hide()\n    \n    Plater.RefreshNameplateColor (unitFrame)\n    \n    envTable.smallScaleAnimation:Stop()\n    \n    --increase the nameplate size\n    local nameplateHeight = Plater.db.profile.plate_config.enemynpc.health_incombat [2]\n    unitFrame.healthBar:SetHeight (nameplateHeight)\n    \n    Plater.DenyColorChange(unitFrame, false)\nend\n\n\n",
+["url"] = "",
 },
 {
 ["ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --insert code here\n    \nend\n\n\n",
@@ -21935,10 +22004,13 @@ nil,
 ["ScriptType"] = 1,
 ["UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    if (UnitIsUnit(unitId .. \"target\", \"player\")) then\n        Plater.SetNameplateColor(unitFrame, scriptTable.config.nameplateColor)\n    else\n        Plater.RefreshNameplateColor(unitFrame)\n    end\nend\n\n\n\n\n\n\n\n\n\n\n\n",
 ["Time"] = 1674915158,
+["Icon"] = "Interface\\ICONS\\Ability_Fixated_State_Red",
+["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --insert code here\n    \nend\n\n\n",
 ["NpcNames"] = {
 },
-["url"] = "",
-["Icon"] = "Interface\\ICONS\\Ability_Fixated_State_Red",
+["semver"] = "",
+["Enabled"] = true,
+["Revision"] = 43,
 ["Options"] = {
 {
 ["Type"] = 1,
@@ -21954,23 +22026,20 @@ nil,
 ["Desc"] = "Change the enemy nameplate color to this color when fixating you!",
 },
 },
-["Temp_OnHideCode"] = "		function (self, unitId, unitFrame, envTable, scriptTable)\n			--insert code here\n			\n		end\n	",
-["Revision"] = 43,
-["semver"] = "",
-["Desc"] = "Fixated by Unit",
-["version"] = -1,
-["Author"] = "Ditador-Azralon",
-["Initialization"] = "		function (scriptTable)\n			--insert code here\n			\n		end\n	",
 ["OnShowCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --insert code here\n    \nend\n\n\n",
 ["Name"] = "Fixated by Unit",
-["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    if (UnitIsUnit(unitId .. \"target\", \"player\")) then\n        Plater.SetNameplateColor(unitFrame, scriptTable.config.nameplateColor)\n    else\n        Plater.RefreshNameplateColor(unitFrame)\n    end\nend\n\n\n\n\n\n\n\n\n\n\n\n",
+["Author"] = "Ditador-Azralon",
+["Initialization"] = "		function (scriptTable)\n			--insert code here\n			\n		end\n	",
+["Desc"] = "Fixated by Unit",
+["version"] = -1,
+["Prio"] = 99,
 ["SpellIds"] = {
 },
 ["PlaterCore"] = 1,
-["Prio"] = 99,
+["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    if (UnitIsUnit(unitId .. \"target\", \"player\")) then\n        Plater.SetNameplateColor(unitFrame, scriptTable.config.nameplateColor)\n    else\n        Plater.RefreshNameplateColor(unitFrame)\n    end\nend\n\n\n\n\n\n\n\n\n\n\n\n",
 ["Temp_Initialization"] = "		function (scriptTable)\n			--insert code here\n			\n		end\n	",
-["Enabled"] = true,
-["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --insert code here\n    \nend\n\n\n",
+["Temp_OnHideCode"] = "		function (self, unitId, unitFrame, envTable, scriptTable)\n			--insert code here\n			\n		end\n	",
+["url"] = "",
 },
 {
 ["ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    local castBar = unitFrame.castBar\n    local castBarPortion = castBar:GetWidth()/scriptTable.config.segmentsAmount\n    local castBarHeight = castBar:GetHeight()\n    \n    unitFrame.felAnimation = unitFrame.felAnimation or {}\n    \n    if (not unitFrame.felAnimation.textureStretched) then\n        unitFrame.felAnimation.textureStretched = castBar:CreateTexture(nil, \"overlay\", nil, 5)\n    end\n    \n    if (not unitFrame.felAnimation.Textures) then\n        unitFrame.felAnimation.Textures = {}\n        \n        for i = 1, 20 do --max amount of segments is 20\n            local texture = castBar:CreateTexture(nil, \"overlay\", nil, 6)\n            unitFrame.felAnimation.Textures[i] = texture            \n            \n            texture.animGroup = texture.animGroup or texture:CreateAnimationGroup()\n            local animationGroup = texture.animGroup\n            animationGroup:SetToFinalAlpha(true)            \n            animationGroup:SetLooping(\"NONE\")\n            \n            texture:SetTexture([[Interface\\COMMON\\XPBarAnim]])\n            texture:SetTexCoord(0.2990, 0.0010, 0.0010, 0.4159)\n            texture:SetBlendMode(\"ADD\")\n            \n            texture.scale = animationGroup:CreateAnimation(\"SCALE\")\n            texture.scale:SetTarget(texture)\n            \n            texture.alpha = animationGroup:CreateAnimation(\"ALPHA\")\n            texture.alpha:SetTarget(texture)\n            \n            texture.alpha2 = animationGroup:CreateAnimation(\"ALPHA\")\n            texture.alpha2:SetTarget(texture)\n        end\n    end\n    \n    \n    \nend\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
@@ -22027,10 +22096,13 @@ nil,
 ["ScriptType"] = 2,
 ["UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    if (self.channeling) then\n        return \n    end\n    \n    if (not envTable.NextPercent) then\n        return\n    end\n    \n    local castBar = unitFrame.castBar\n    \n    local textures = unitFrame.felAnimation.Textures\n    \n    if (envTable._CastPercent > envTable.NextPercent) then --eeror here, compare with nil\n        local nextPercent = 100  / scriptTable.config.segmentsAmount\n        \n        textures[envTable.CurrentTexture]:Show()\n        textures[envTable.CurrentTexture].animGroup:Play()\n        envTable.NextPercent = envTable.NextPercent + nextPercent \n        envTable.CurrentTexture = envTable.CurrentTexture + 1\n        \n        if (envTable.CurrentTexture == #textures) then\n            envTable.NextPercent = 98\n        elseif (envTable.CurrentTexture > #textures) then\n            envTable.NextPercent = 999\n        end\n    end\n    \n    local normalizedPercent = envTable._CastPercent / 100\n    local textureStretched = unitFrame.felAnimation.textureStretched\n    local point = DetailsFramework:GetBezierPoint(normalizedPercent, 0, 0.001, 1)\n    textureStretched:SetPoint(\"left\", castBar, \"left\", point * envTable.castBarWidth, 0)\n    \n    self.ThrottleUpdate = 0\nend",
 ["Time"] = 1674915219,
+["Icon"] = "Interface\\AddOns\\Plater\\images\\cast_bar_glow",
+["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    local castBar = unitFrame.castBar\n    local castBarPortion = castBar:GetWidth()/scriptTable.config.segmentsAmount\n    local castBarHeight = castBar:GetHeight()\n    \n    unitFrame.felAnimation = unitFrame.felAnimation or {}\n    \n    if (not unitFrame.felAnimation.textureStretched) then\n        unitFrame.felAnimation.textureStretched = castBar:CreateTexture(nil, \"overlay\", nil, 5)\n    end\n    \n    if (not unitFrame.felAnimation.Textures) then\n        unitFrame.felAnimation.Textures = {}\n        \n        for i = 1, 20 do --max amount of segments is 20\n            local texture = castBar:CreateTexture(nil, \"overlay\", nil, 6)\n            unitFrame.felAnimation.Textures[i] = texture            \n            \n            texture.animGroup = texture.animGroup or texture:CreateAnimationGroup()\n            local animationGroup = texture.animGroup\n            animationGroup:SetToFinalAlpha(true)            \n            animationGroup:SetLooping(\"NONE\")\n            \n            texture:SetTexture([[Interface\\COMMON\\XPBarAnim]])\n            texture:SetTexCoord(0.2990, 0.0010, 0.0010, 0.4159)\n            texture:SetBlendMode(\"ADD\")\n            \n            texture.scale = animationGroup:CreateAnimation(\"SCALE\")\n            texture.scale:SetTarget(texture)\n            \n            texture.alpha = animationGroup:CreateAnimation(\"ALPHA\")\n            texture.alpha:SetTarget(texture)\n            \n            texture.alpha2 = animationGroup:CreateAnimation(\"ALPHA\")\n            texture.alpha2:SetTarget(texture)\n        end\n    end\n    \n    \n    \nend\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
 ["NpcNames"] = {
 },
-["url"] = "",
-["Icon"] = "Interface\\AddOns\\Plater\\images\\cast_bar_glow",
+["semver"] = "",
+["Enabled"] = false,
+["Revision"] = 562,
 ["Options"] = {
 {
 ["Type"] = 2,
@@ -22123,23 +22195,20 @@ nil,
 ["Desc"] = "Insert the Spell ID in the to Key and a color name into the Value",
 },
 },
-["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    if (unitFrame.felAnimation and unitFrame.felAnimation.Textures) then\n        for i = 1, scriptTable.config.segmentsAmount  do\n            local texture = unitFrame.felAnimation.Textures[i]\n            if (texture) then\n                texture:Hide()\n            end\n        end\n    end\n    \n    if (unitFrame.felAnimation and unitFrame.felAnimation.textureStretched) then\n        local textureStretched = unitFrame.felAnimation.textureStretched\n        if (textureStretched) then\n            textureStretched:Hide()\n        end\n    end\nend\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
-["Revision"] = 562,
-["semver"] = "",
-["Desc"] = "Castbar Glow",
-["version"] = -1,
-["Author"] = "Terciob",
-["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
 ["OnShowCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    if (self.channeling) then\n        return \n    end\n    \n    local castBar = unitFrame.castBar\n    envTable.castBarWidth = castBar:GetWidth()\n    castBar.Spark:SetVertexColor(DetailsFramework:ParseColors(scriptTable.config.sparkColor))\n    \n    local textureStretched = unitFrame.felAnimation.textureStretched\n    textureStretched:Show()\n    textureStretched:SetVertexColor(DetailsFramework:ParseColors(scriptTable.config.glowColor))\n    textureStretched:SetAtlas(\"XPBarAnim-OrangeTrail\")\n    textureStretched:ClearAllPoints()\n    textureStretched:SetPoint(\"right\", castBar.Spark, \"center\", 0, 0)\n    textureStretched:SetHeight(castBar:GetHeight())\n    textureStretched:SetBlendMode(\"ADD\") \n    textureStretched:SetAlpha(0.5)\n    textureStretched:SetDrawLayer(\"overlay\", 7)\n    \n    for i = 1, scriptTable.config.segmentsAmount  do\n        local texture = unitFrame.felAnimation.Textures[i]\n        --texture:SetVertexColor(DetailsFramework:ParseColors(scriptTable.config.trailColor))\n        texture:SetVertexColor(1, 1, 1, 1)\n        texture:SetDesaturated(true)\n        \n        local castBarPortion = castBar:GetWidth()/scriptTable.config.segmentsAmount\n        \n        texture:SetSize(castBarPortion+5, castBar:GetHeight())\n        texture:SetDrawLayer(\"overlay\", 6)\n        \n        texture:ClearAllPoints()\n        if (i == scriptTable.config.segmentsAmount) then\n            texture:SetPoint(\"right\", castBar, \"right\", 0, 0)\n        else\n            texture:SetPoint(\"left\", castBar, \"left\", (i-1)*castBarPortion, 2)\n        end\n        \n        texture:SetAlpha(0)\n        texture:Hide()\n        \n        texture.scale:SetOrder(1)\n        texture.scale:SetDuration(0.5)\n        texture.scale:SetScaleFrom(0.2, 1)\n        texture.scale:SetScaleTo(1, 1.5)\n        texture.scale:SetOrigin(\"right\", 0, 0)\n        \n        local durationTime = DetailsFramework:GetBezierPoint(i / scriptTable.config.segmentsAmount, 0.2, 0.01, 0.6)\n        local duration = abs(durationTime-0.6)\n        \n        texture.alpha:SetOrder(1)\n        texture.alpha:SetDuration(0.05)\n        texture.alpha:SetFromAlpha(0)\n        texture.alpha:SetToAlpha(0.4)\n        \n        texture.alpha2:SetOrder(1)\n        texture.alpha2:SetDuration(duration) --0.6\n        texture.alpha2:SetStartDelay(duration)\n        texture.alpha2:SetFromAlpha(0.5)\n        texture.alpha2:SetToAlpha(0)\n    end\n    \n    envTable.CurrentTexture = 1\n    envTable.NextPercent  = 100  / scriptTable.config.segmentsAmount\n    \n    local customColor = scriptTable.config.castColor[tostring(envTable._SpellID)]\n    Plater.SetCastBarColorForScript(self, true, customColor or scriptTable.config.castBarColor, envTable)\nend\n\n\n\n\n\n\n\n\n\n\n\n\n",
 ["Name"] = "Castbar Glow",
-["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    if (self.channeling) then\n        return \n    end\n    \n    if (not envTable.NextPercent) then\n        return\n    end\n    \n    local castBar = unitFrame.castBar\n    \n    local textures = unitFrame.felAnimation.Textures\n    \n    if (envTable._CastPercent > envTable.NextPercent) then --eeror here, compare with nil\n        local nextPercent = 100  / scriptTable.config.segmentsAmount\n        \n        textures[envTable.CurrentTexture]:Show()\n        textures[envTable.CurrentTexture].animGroup:Play()\n        envTable.NextPercent = envTable.NextPercent + nextPercent \n        envTable.CurrentTexture = envTable.CurrentTexture + 1\n        \n        if (envTable.CurrentTexture == #textures) then\n            envTable.NextPercent = 98\n        elseif (envTable.CurrentTexture > #textures) then\n            envTable.NextPercent = 999\n        end\n    end\n    \n    local normalizedPercent = envTable._CastPercent / 100\n    local textureStretched = unitFrame.felAnimation.textureStretched\n    local point = DetailsFramework:GetBezierPoint(normalizedPercent, 0, 0.001, 1)\n    textureStretched:SetPoint(\"left\", castBar, \"left\", point * envTable.castBarWidth, 0)\n    \n    self.ThrottleUpdate = 0\nend",
+["Author"] = "Terciob",
+["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
+["Desc"] = "Castbar Glow",
+["version"] = -1,
+["Prio"] = 99,
 ["SpellIds"] = {
 },
 ["PlaterCore"] = 1,
-["Prio"] = 99,
+["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    if (self.channeling) then\n        return \n    end\n    \n    if (not envTable.NextPercent) then\n        return\n    end\n    \n    local castBar = unitFrame.castBar\n    \n    local textures = unitFrame.felAnimation.Textures\n    \n    if (envTable._CastPercent > envTable.NextPercent) then --eeror here, compare with nil\n        local nextPercent = 100  / scriptTable.config.segmentsAmount\n        \n        textures[envTable.CurrentTexture]:Show()\n        textures[envTable.CurrentTexture].animGroup:Play()\n        envTable.NextPercent = envTable.NextPercent + nextPercent \n        envTable.CurrentTexture = envTable.CurrentTexture + 1\n        \n        if (envTable.CurrentTexture == #textures) then\n            envTable.NextPercent = 98\n        elseif (envTable.CurrentTexture > #textures) then\n            envTable.NextPercent = 999\n        end\n    end\n    \n    local normalizedPercent = envTable._CastPercent / 100\n    local textureStretched = unitFrame.felAnimation.textureStretched\n    local point = DetailsFramework:GetBezierPoint(normalizedPercent, 0, 0.001, 1)\n    textureStretched:SetPoint(\"left\", castBar, \"left\", point * envTable.castBarWidth, 0)\n    \n    self.ThrottleUpdate = 0\nend",
 ["Temp_Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
-["Enabled"] = false,
-["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    local castBar = unitFrame.castBar\n    local castBarPortion = castBar:GetWidth()/scriptTable.config.segmentsAmount\n    local castBarHeight = castBar:GetHeight()\n    \n    unitFrame.felAnimation = unitFrame.felAnimation or {}\n    \n    if (not unitFrame.felAnimation.textureStretched) then\n        unitFrame.felAnimation.textureStretched = castBar:CreateTexture(nil, \"overlay\", nil, 5)\n    end\n    \n    if (not unitFrame.felAnimation.Textures) then\n        unitFrame.felAnimation.Textures = {}\n        \n        for i = 1, 20 do --max amount of segments is 20\n            local texture = castBar:CreateTexture(nil, \"overlay\", nil, 6)\n            unitFrame.felAnimation.Textures[i] = texture            \n            \n            texture.animGroup = texture.animGroup or texture:CreateAnimationGroup()\n            local animationGroup = texture.animGroup\n            animationGroup:SetToFinalAlpha(true)            \n            animationGroup:SetLooping(\"NONE\")\n            \n            texture:SetTexture([[Interface\\COMMON\\XPBarAnim]])\n            texture:SetTexCoord(0.2990, 0.0010, 0.0010, 0.4159)\n            texture:SetBlendMode(\"ADD\")\n            \n            texture.scale = animationGroup:CreateAnimation(\"SCALE\")\n            texture.scale:SetTarget(texture)\n            \n            texture.alpha = animationGroup:CreateAnimation(\"ALPHA\")\n            texture.alpha:SetTarget(texture)\n            \n            texture.alpha2 = animationGroup:CreateAnimation(\"ALPHA\")\n            texture.alpha2:SetTarget(texture)\n        end\n    end\n    \n    \n    \nend\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    if (unitFrame.felAnimation and unitFrame.felAnimation.Textures) then\n        for i = 1, scriptTable.config.segmentsAmount  do\n            local texture = unitFrame.felAnimation.Textures[i]\n            if (texture) then\n                texture:Hide()\n            end\n        end\n    end\n    \n    if (unitFrame.felAnimation and unitFrame.felAnimation.textureStretched) then\n        local textureStretched = unitFrame.felAnimation.textureStretched\n        if (textureStretched) then\n            textureStretched:Hide()\n        end\n    end\nend\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+["url"] = "",
 },
 {
 ["ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    local movingArrowTexture = unitFrame._movingArrowTexture\n    if (not movingArrowTexture) then\n        movingArrowTexture = self:CreateTexture(nil, \"artwork\", nil, 6)\n        unitFrame._movingArrowTexture = movingArrowTexture\n    end\n    \n    envTable.movingAnimation = envTable.movingAnimation or Plater:CreateAnimationHub (unitFrame._movingArrowTexture, \n        function() \n            unitFrame._movingArrowTexture:Show() \n            unitFrame._movingArrowTexture:SetPoint(\"left\", 0, 0)\n        end, \n        function() unitFrame._movingArrowTexture:Hide() end)\n    \n    envTable.movingAnimation:SetLooping (\"REPEAT\")\n    \n    envTable.arrowAnimation = envTable.arrowAnimation or Plater:CreateAnimation (envTable.movingAnimation, \"translation\", 1, 0.20, self:GetWidth()-16, 0)\n    \n    envTable.arrowAnimation:SetDuration(scriptTable.config.animSpeed)\nend\n\n\n\n\n\n\n",
@@ -22151,10 +22220,13 @@ nil,
 ["ScriptType"] = 2,
 ["UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    unitFrame._movingArrowTexture:SetAlpha(scriptTable.config.arrowAlpha)\n    \n    local percent = envTable.movingAnimation:GetProgress()\n    \n    if (percent < 0.4) then\n        local value = Lerp(0.01, scriptTable.config.arrowAlpha, percent) or 0\n        unitFrame._movingArrowTexture:SetAlpha(Saturate(value))\n        \n    elseif (percent > 0.6) then\n        local value = Lerp(scriptTable.config.arrowAlpha, 0.01, percent) or 0\n        unitFrame._movingArrowTexture:SetAlpha(Saturate(value))\n    end\n    \n    --unitFrame._movingArrowTexture:SetAlpha(1)\n    \n    self.ThrottleUpdate = 0\nend",
 ["Time"] = 1702818759,
+["Icon"] = "Interface\\AddOns\\Plater\\images\\cast_bar_frontal",
+["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    local movingArrowTexture = unitFrame._movingArrowTexture\n    if (not movingArrowTexture) then\n        movingArrowTexture = self:CreateTexture(nil, \"artwork\", nil, 6)\n        unitFrame._movingArrowTexture = movingArrowTexture\n    end\n    \n    envTable.movingAnimation = envTable.movingAnimation or Plater:CreateAnimationHub (unitFrame._movingArrowTexture, \n        function() \n            unitFrame._movingArrowTexture:Show() \n            unitFrame._movingArrowTexture:SetPoint(\"left\", 0, 0)\n        end, \n        function() unitFrame._movingArrowTexture:Hide() end)\n    \n    envTable.movingAnimation:SetLooping (\"REPEAT\")\n    \n    envTable.arrowAnimation = envTable.arrowAnimation or Plater:CreateAnimation (envTable.movingAnimation, \"translation\", 1, 0.20, self:GetWidth()-16, 0)\n    \n    envTable.arrowAnimation:SetDuration(scriptTable.config.animSpeed)\nend\n\n\n\n\n\n\n",
 ["NpcNames"] = {
 },
-["url"] = "",
-["Icon"] = "Interface\\AddOns\\Plater\\images\\cast_bar_frontal",
+["semver"] = "",
+["Enabled"] = false,
+["Revision"] = 631,
 ["Options"] = {
 {
 ["Type"] = 6,
@@ -22219,23 +22291,20 @@ nil,
 ["Desc"] = "If enabled, the arrow color will be desaturated.",
 },
 },
-["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    envTable.movingAnimation:Stop()\nend\n\n\n",
-["Revision"] = 631,
-["semver"] = "",
-["Desc"] = "Castbar Glow",
-["version"] = -1,
-["Author"] = "Izimode-Azralon",
-["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
 ["OnShowCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    unitFrame._movingArrowTexture:SetTexture([[Interface\\PETBATTLES\\PetBattle-StatIcons]])\n    unitFrame._movingArrowTexture:SetSize(16, self:GetHeight() - 2)\n    unitFrame._movingArrowTexture:SetTexCoord(unpack({0, 15/32, 18/32, 30/32}))\n    unitFrame._movingArrowTexture:SetAlpha(scriptTable.config.arrowAlpha)\n    unitFrame._movingArrowTexture:SetDesaturated(scriptTable.config.desaturateArrow)    \n    \n    unitFrame._movingArrowTexture:SetParent(self.FrameOverlay)\n    unitFrame._movingArrowTexture:SetDrawLayer(\"overlay\",  7)\n    \n    envTable.arrowAnimation:SetDuration(scriptTable.config.animSpeed)\n    envTable.movingAnimation:Play()\nend\n\n\n",
 ["Name"] = "Frontal Casts",
-["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    unitFrame._movingArrowTexture:SetAlpha(scriptTable.config.arrowAlpha)\n    \n    local percent = envTable.movingAnimation:GetProgress()\n    \n    if (percent < 0.4) then\n        local value = Lerp(0.01, scriptTable.config.arrowAlpha, percent) or 0\n        unitFrame._movingArrowTexture:SetAlpha(Saturate(value))\n        \n    elseif (percent > 0.6) then\n        local value = Lerp(scriptTable.config.arrowAlpha, 0.01, percent) or 0\n        unitFrame._movingArrowTexture:SetAlpha(Saturate(value))\n    end\n    \n    --unitFrame._movingArrowTexture:SetAlpha(1)\n    \n    self.ThrottleUpdate = 0\nend",
+["Author"] = "Izimode-Azralon",
+["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
+["Desc"] = "Castbar Glow",
+["version"] = -1,
+["Prio"] = 99,
 ["SpellIds"] = {
 },
 ["PlaterCore"] = 1,
-["Prio"] = 99,
+["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    unitFrame._movingArrowTexture:SetAlpha(scriptTable.config.arrowAlpha)\n    \n    local percent = envTable.movingAnimation:GetProgress()\n    \n    if (percent < 0.4) then\n        local value = Lerp(0.01, scriptTable.config.arrowAlpha, percent) or 0\n        unitFrame._movingArrowTexture:SetAlpha(Saturate(value))\n        \n    elseif (percent > 0.6) then\n        local value = Lerp(scriptTable.config.arrowAlpha, 0.01, percent) or 0\n        unitFrame._movingArrowTexture:SetAlpha(Saturate(value))\n    end\n    \n    --unitFrame._movingArrowTexture:SetAlpha(1)\n    \n    self.ThrottleUpdate = 0\nend",
 ["Temp_Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
-["Enabled"] = false,
-["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    local movingArrowTexture = unitFrame._movingArrowTexture\n    if (not movingArrowTexture) then\n        movingArrowTexture = self:CreateTexture(nil, \"artwork\", nil, 6)\n        unitFrame._movingArrowTexture = movingArrowTexture\n    end\n    \n    envTable.movingAnimation = envTable.movingAnimation or Plater:CreateAnimationHub (unitFrame._movingArrowTexture, \n        function() \n            unitFrame._movingArrowTexture:Show() \n            unitFrame._movingArrowTexture:SetPoint(\"left\", 0, 0)\n        end, \n        function() unitFrame._movingArrowTexture:Hide() end)\n    \n    envTable.movingAnimation:SetLooping (\"REPEAT\")\n    \n    envTable.arrowAnimation = envTable.arrowAnimation or Plater:CreateAnimation (envTable.movingAnimation, \"translation\", 1, 0.20, self:GetWidth()-16, 0)\n    \n    envTable.arrowAnimation:SetDuration(scriptTable.config.animSpeed)\nend\n\n\n\n\n\n\n",
+["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    envTable.movingAnimation:Stop()\nend\n\n\n",
+["url"] = "",
 },
 {
 ["ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --create a texture to use for a flash behind the cast bar\n    local backGroundFlashTexture = Plater:CreateImage (self, [[Interface\\ACHIEVEMENTFRAME\\UI-Achievement-Alert-Glow]], self:GetWidth()+40, self:GetHeight()+20, \"background\", {0, 400/512, 0, 170/256})\n    backGroundFlashTexture:SetBlendMode (\"ADD\")\n    backGroundFlashTexture:SetDrawLayer(\"OVERLAY\", 7)\n    backGroundFlashTexture:SetPoint (\"center\", self, \"center\")\n    backGroundFlashTexture:SetVertexColor(Plater:ParseColors(scriptTable.config.flashColor))\n    backGroundFlashTexture:Hide()\n    \n    --create the animation hub to hold the flash animation sequence\n    envTable.BackgroundFlash = envTable.BackgroundFlash or Plater:CreateAnimationHub (backGroundFlashTexture, \n        function()\n            backGroundFlashTexture:Show()\n        end,\n        function()\n            backGroundFlashTexture:Hide()\n        end\n    )\n    \n    --create the flash animation sequence\n    local fadeIn = Plater:CreateAnimation (envTable.BackgroundFlash, \"ALPHA\", 1, scriptTable.config.flashDuration/2, 0, 1)\n    local fadeOut = Plater:CreateAnimation (envTable.BackgroundFlash, \"ALPHA\", 2, scriptTable.config.flashDuration/2, 1, 0)\n    \n    --create a camera shake for the nameplate\n    envTable.FrameShake = Plater:CreateFrameShake (unitFrame, scriptTable.config.shakeDuration, scriptTable.config.shakeAmplitude, scriptTable.config.shakeFrequency, false, false, 0, 1, 0.05, 0.1, Plater.GetPoints (unitFrame))\n    \n    --update the config for the flash here so it wont need a /reload\n    fadeIn:SetDuration (scriptTable.config.flashDuration/2)\n    fadeOut:SetDuration (scriptTable.config.flashDuration/2)\n    \n    --update the config for the skake here so it wont need a /reload\n    envTable.FrameShake.OriginalAmplitude = scriptTable.config.shakeAmplitude\n    envTable.FrameShake.OriginalDuration = scriptTable.config.shakeDuration\n    envTable.FrameShake.OriginalFrequency = scriptTable.config.shakeFrequency\nend",
@@ -22246,10 +22315,13 @@ nil,
 ["ScriptType"] = 2,
 ["UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \nend\n\n\n",
 ["Time"] = 1702818754,
+["Icon"] = "Interface\\AddOns\\Plater\\images\\cast_bar_darkorange",
+["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --create a texture to use for a flash behind the cast bar\n    local backGroundFlashTexture = Plater:CreateImage (self, [[Interface\\ACHIEVEMENTFRAME\\UI-Achievement-Alert-Glow]], self:GetWidth()+40, self:GetHeight()+20, \"background\", {0, 400/512, 0, 170/256})\n    backGroundFlashTexture:SetBlendMode (\"ADD\")\n    backGroundFlashTexture:SetDrawLayer(\"OVERLAY\", 7)\n    backGroundFlashTexture:SetPoint (\"center\", self, \"center\")\n    backGroundFlashTexture:SetVertexColor(Plater:ParseColors(scriptTable.config.flashColor))\n    backGroundFlashTexture:Hide()\n    \n    --create the animation hub to hold the flash animation sequence\n    envTable.BackgroundFlash = envTable.BackgroundFlash or Plater:CreateAnimationHub (backGroundFlashTexture, \n        function()\n            backGroundFlashTexture:Show()\n        end,\n        function()\n            backGroundFlashTexture:Hide()\n        end\n    )\n    \n    --create the flash animation sequence\n    local fadeIn = Plater:CreateAnimation (envTable.BackgroundFlash, \"ALPHA\", 1, scriptTable.config.flashDuration/2, 0, 1)\n    local fadeOut = Plater:CreateAnimation (envTable.BackgroundFlash, \"ALPHA\", 2, scriptTable.config.flashDuration/2, 1, 0)\n    \n    --create a camera shake for the nameplate\n    envTable.FrameShake = Plater:CreateFrameShake (unitFrame, scriptTable.config.shakeDuration, scriptTable.config.shakeAmplitude, scriptTable.config.shakeFrequency, false, false, 0, 1, 0.05, 0.1, Plater.GetPoints (unitFrame))\n    \n    --update the config for the flash here so it wont need a /reload\n    fadeIn:SetDuration (scriptTable.config.flashDuration/2)\n    fadeOut:SetDuration (scriptTable.config.flashDuration/2)\n    \n    --update the config for the skake here so it wont need a /reload\n    envTable.FrameShake.OriginalAmplitude = scriptTable.config.shakeAmplitude\n    envTable.FrameShake.OriginalDuration = scriptTable.config.shakeDuration\n    envTable.FrameShake.OriginalFrequency = scriptTable.config.shakeFrequency\nend",
 ["NpcNames"] = {
 },
-["url"] = "",
-["Icon"] = "Interface\\AddOns\\Plater\\images\\cast_bar_darkorange",
+["semver"] = "",
+["Enabled"] = false,
+["Revision"] = 833,
 ["Options"] = {
 {
 ["Type"] = 6,
@@ -22493,23 +22565,20 @@ nil,
 ["Desc"] = "Cast bar color.",
 },
 },
-["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    Plater.StopDotAnimation(unitFrame.castBar, envTable.dotAnimation)    \n    \n    envTable.BackgroundFlash:Stop()\n    \n    unitFrame:StopFrameShake (envTable.FrameShake)    \n    \nend\n\n\n",
-["Revision"] = 833,
-["semver"] = "",
-["Desc"] = "",
-["version"] = -1,
-["Author"] = "Bombad�o-Azralon",
-["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
 ["OnShowCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    envTable.dotAnimation = Plater.PlayDotAnimation(unitFrame.castBar, 5, scriptTable.config.dotColor, scriptTable.config.xOffset, scriptTable.config.yOffset)\n    \n    envTable.BackgroundFlash:Play()\n    \n    Plater.FlashNameplateBorder (unitFrame, 0.05)   \n    Plater.FlashNameplateBody (unitFrame, \"\", 0.075)\n    \n    unitFrame:PlayFrameShake (envTable.FrameShake)\n    \n    Plater.SetCastBarColorForScript(self, scriptTable.config.useCastbarColor, scriptTable.config.castBarColor, envTable)\n    \n    --Dominator on Shadowmoon Burial Grounds\n    if (envTable._SpellID == 154327) then\n        if (UnitHealth(unitId) == UnitHealthMax(unitId)) then\n            if (envTable._Duration == 604800) then\n                Plater.SetCastBarColorForScript(self, scriptTable.config.useCastbarColor, {1, 0, 0, 1}, envTable)\n            end\n        end\n    end\nend",
 ["Name"] = "Important Casts",
-["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \nend\n\n\n",
+["Author"] = "Bombad�o-Azralon",
+["Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
+["Desc"] = "",
+["version"] = -1,
+["Prio"] = 99,
 ["SpellIds"] = {
 },
 ["PlaterCore"] = 1,
-["Prio"] = 99,
+["Temp_UpdateCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \nend\n\n\n",
 ["Temp_Initialization"] = "function (scriptTable)\n    --insert code here\n    \nend\n\n\n",
-["Enabled"] = false,
-["Temp_ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    --create a texture to use for a flash behind the cast bar\n    local backGroundFlashTexture = Plater:CreateImage (self, [[Interface\\ACHIEVEMENTFRAME\\UI-Achievement-Alert-Glow]], self:GetWidth()+40, self:GetHeight()+20, \"background\", {0, 400/512, 0, 170/256})\n    backGroundFlashTexture:SetBlendMode (\"ADD\")\n    backGroundFlashTexture:SetDrawLayer(\"OVERLAY\", 7)\n    backGroundFlashTexture:SetPoint (\"center\", self, \"center\")\n    backGroundFlashTexture:SetVertexColor(Plater:ParseColors(scriptTable.config.flashColor))\n    backGroundFlashTexture:Hide()\n    \n    --create the animation hub to hold the flash animation sequence\n    envTable.BackgroundFlash = envTable.BackgroundFlash or Plater:CreateAnimationHub (backGroundFlashTexture, \n        function()\n            backGroundFlashTexture:Show()\n        end,\n        function()\n            backGroundFlashTexture:Hide()\n        end\n    )\n    \n    --create the flash animation sequence\n    local fadeIn = Plater:CreateAnimation (envTable.BackgroundFlash, \"ALPHA\", 1, scriptTable.config.flashDuration/2, 0, 1)\n    local fadeOut = Plater:CreateAnimation (envTable.BackgroundFlash, \"ALPHA\", 2, scriptTable.config.flashDuration/2, 1, 0)\n    \n    --create a camera shake for the nameplate\n    envTable.FrameShake = Plater:CreateFrameShake (unitFrame, scriptTable.config.shakeDuration, scriptTable.config.shakeAmplitude, scriptTable.config.shakeFrequency, false, false, 0, 1, 0.05, 0.1, Plater.GetPoints (unitFrame))\n    \n    --update the config for the flash here so it wont need a /reload\n    fadeIn:SetDuration (scriptTable.config.flashDuration/2)\n    fadeOut:SetDuration (scriptTable.config.flashDuration/2)\n    \n    --update the config for the skake here so it wont need a /reload\n    envTable.FrameShake.OriginalAmplitude = scriptTable.config.shakeAmplitude\n    envTable.FrameShake.OriginalDuration = scriptTable.config.shakeDuration\n    envTable.FrameShake.OriginalFrequency = scriptTable.config.shakeFrequency\nend",
+["Temp_OnHideCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    Plater.StopDotAnimation(unitFrame.castBar, envTable.dotAnimation)    \n    \n    envTable.BackgroundFlash:Stop()\n    \n    unitFrame:StopFrameShake (envTable.FrameShake)    \n    \nend\n\n\n",
+["url"] = "",
 },
 {
 ["ConstructorCode"] = "function (self, unitId, unitFrame, envTable, scriptTable)\n    \n    --create a flash texture which keep blinking while the cast in going on\n    self.OGC_BlinkTexture = self.OGC_BlinkTexture or self:CreateTexture(nil, \"overlay\")\n    self.OGC_BlinkTexture:SetColorTexture(1, 1, 1)\n    self.OGC_BlinkTexture:SetAlpha(0)\n    \n    --create the animation group for the blinking texture\n    self.OGC_BlinkAnimation = self.OGC_BlinkAnimation or Plater:CreateAnimationHub(self.OGC_BlinkTexture, function() self.OGC_BlinkTexture:Show() end, function() self.OGC_BlinkTexture:Hide() end)\n    \n    self.OGC_BlinkAnimation.In = self.OGC_BlinkAnimation.In or Plater:CreateAnimation(self.OGC_BlinkAnimation, \"alpha\", 1, 0.5, 0.3, 1)\n    \n    self.OGC_BlinkAnimation.Out = self.OGC_BlinkAnimation.Out or Plater:CreateAnimation(self.OGC_BlinkAnimation, \"alpha\", 2, 0.5, 1, 0.2)    \n    \n    \nend\n\n\n",
@@ -25038,7 +25107,11 @@ nil,
 ["url"] = "https://wago.io/LuckyoneUI-Plater/25",
 ["cast_statusbar_spark_alpha"] = 0.8999999761581421,
 ["indicator_spec"] = false,
-["patch_version"] = 39,
+["cast_statusbar_color_interrupted"] = {
+0.30196078431373,
+0.30196078431373,
+0.30196078431373,
+},
 ["range_check_in_range_or_target_alpha"] = 1,
 ["aura_timer_text_size"] = 10,
 ["number_region_first_run"] = true,
@@ -25062,10 +25135,10 @@ nil,
 },
 ["HooksTemp"] = {
 },
-["Desc"] = "",
+["UID"] = "0x68ca8bd511a759f0",
 ["Author"] = "某餃子-伊森利恩",
 ["Time"] = 1758104533,
-["UID"] = "0x68ca8bd511a759f0",
+["Desc"] = "",
 ["Hooks"] = {
 },
 ["__TrashAt"] = 1758104536,
@@ -25116,15 +25189,15 @@ nil,
 ["Relics 9.2 M Dungeons"] = 2,
 ["Add - Tag Number [P]"] = 2,
 ["Unit - Health Markers"] = 12,
-["Cast - Glowing [P]"] = 10,
-["Cast - Special Ability [P]"] = 3,
 ["Cast - Heroic Leap [P]"] = 3,
-["Unit - Important"] = 11,
+["Cast - Special Ability [P]"] = 3,
+["Cast - Tank Interrupt"] = 12,
+["Cast - Important Target [P]"] = 2,
 ["Cast - Spark Color [P]"] = 2,
 ["Cast - Heal Stun [P]"] = 2,
 ["Fixate"] = 11,
 ["Cast - Tankbuster [P]"] = 1,
-["Cast - Important Target [P]"] = 2,
+["Unit - Important"] = 11,
 ["Cast - Very Important"] = 15,
 ["Fixate by Unit Buff [P]"] = 2,
 ["Cast - Stop Casting"] = 4,
@@ -25133,34 +25206,34 @@ nil,
 ["Cast - On Going Cast [P]"] = 2,
 ["Cast - Circular Swipe"] = 4,
 ["Aura is Shield [P]"] = 5,
-["Cast - Debuff [P]"] = 2,
+["Add - Warning [P]"] = 5,
 ["Cast - Simple Interrupt [P]"] = 2,
 ["Aura While Casting [P]"] = 1,
 ["Cast - Big Alert"] = 14,
 ["Cast - Ongoing Cast [P]"] = 4,
 ["Cast - Quick Flash"] = 2,
 ["Cast - Heal Cut [P]"] = 3,
-["Auto Set Skull"] = 11,
 ["Spiteful Affix"] = 3,
+["Auto Set Skull"] = 11,
 ["Cast - Alert + Timer [P]"] = 4,
 ["Add - Non Elite Trash [P]"] = 4,
-["Add - Warning [P]"] = 5,
+["Cast - Debuff [P]"] = 2,
 ["Cast - Shining Green [P]"] = 3,
-["Cast - Voidzone [P]"] = 2,
+["Countdown"] = 12,
 ["Cast - AoE With Range [P]"] = 2,
 ["Cast - Frontal Cone"] = 17,
 ["Add - Explode on Die [P]"] = 1,
-["Countdown"] = 12,
-["Cast - Tank Interrupt"] = 12,
+["Cast - Voidzone [P]"] = 2,
+["Cast - Glowing [P]"] = 10,
 ["Aura - Is Cast Bar [P]"] = 1,
 ["Unit - Show Energy"] = 11,
 },
 ["aura_alpha"] = 1,
 ["indicator_faction"] = false,
-["indicator_elite"] = false,
-["first_run3"] = true,
+["indicator_rare"] = false,
+["extra_icon_height"] = 20,
 ["target_shady_enabled"] = false,
-["aura_show_enrage"] = true,
+["ui_parent_target_strata"] = "BACKGROUND",
 },
 },
 ["InterruptableSpells"] = {
@@ -25371,7 +25444,7 @@ nil,
 [8936] = true,
 [96231] = true,
 [327130] = true,
-[272581] = true,
+[340544] = true,
 [430097] = true,
 [375596] = true,
 [367500] = true,
@@ -25383,7 +25456,7 @@ nil,
 [1245669] = true,
 [392924] = true,
 [384365] = true,
-[386026] = true,
+[369674] = true,
 [328667] = true,
 [369675] = true,
 [183752] = true,
@@ -25421,9 +25494,9 @@ nil,
 [391528] = true,
 [386546] = true,
 [441351] = true,
-[369674] = true,
+[386026] = true,
 [429545] = true,
-[340544] = true,
+[272581] = true,
 [453616] = true,
 [371984] = true,
 [396640] = true,
@@ -40530,17 +40603,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 199853,
 },
-[1239963] = {
-["source"] = "蔽影塑命者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 242517,
-},
 [207261] = {
 ["encounterName"] = "巡逻队长加多",
 ["source"] = "巡逻队长加多",
 ["encounterID"] = 1868,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 104215,
+},
+[1239963] = {
+["source"] = "蔽影塑命者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 242517,
 },
 [62318] = {
 ["event"] = "SPELL_CAST_START",
@@ -41065,10 +41138,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 205061,
 },
-[1240058] = {
+[1231867] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "启迪者约瑟夫",
-["npcID"] = 229952,
+["source"] = "凝望之目伊希瑟尔",
+["npcID"] = 232128,
 },
 [1215481] = {
 ["encounterName"] = "穆格·兹伊，安保头子",
@@ -41094,10 +41167,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 733,
 },
-[1231867] = {
+[1240058] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "凝望之目伊希瑟尔",
-["npcID"] = 232128,
+["source"] = "启迪者约瑟夫",
+["npcID"] = 229952,
 },
 [1235052] = {
 ["isChanneled"] = false,
@@ -41176,17 +41249,17 @@ nil,
 ["source"] = "雷霆要塞士兵",
 ["npcID"] = 66200,
 },
+[1231882] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "影卫渗透者",
+["npcID"] = 234403,
+},
 [377658] = {
 ["encounterName"] = "莱萨杰丝，噬雷之龙",
 ["source"] = "莱萨杰丝",
 ["encounterID"] = 2607,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 189492,
-},
-[1231882] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "影卫渗透者",
-["npcID"] = 234403,
 },
 [454201] = {
 ["isChanneled"] = false,
@@ -41298,19 +41371,19 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2529,
 },
-[1215521] = {
-["encounterName"] = "幽坑太保",
-["source"] = "幽坑太保",
-["npcID"] = 234168,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 3126,
-},
 [346947] = {
 ["encounterName"] = "收发室乱战",
 ["source"] = "P.O.S.T.总管",
 ["npcID"] = 175646,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2424,
+},
+[1215521] = {
+["encounterName"] = "幽坑太保",
+["source"] = "幽坑太保",
+["npcID"] = 234168,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 3126,
 },
 [1237293] = {
 ["isChanneled"] = true,
@@ -41494,10 +41567,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 198995,
 },
-[387910] = {
-["source"] = "艾杰斯亚回声骑士",
+[1231935] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 196200,
+["source"] = "夜色收割者",
+["npcID"] = 232111,
 },
 [473351] = {
 ["encounterName"] = "老大娘",
@@ -41506,10 +41579,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 226398,
 },
-[392006] = {
-["source"] = "病态蛮兵",
+[1231937] = {
+["source"] = "掠食者考加拉斯",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 186668,
+["npcID"] = 232077,
 },
 [451391] = {
 ["source"] = "无面腐蚀者",
@@ -42076,13 +42149,12 @@ nil,
 ["source"] = "影卫主宰",
 ["npcID"] = 241666,
 },
-[198079] = {
-["encounterName"] = "可恨的斯麦斯帕",
-["source"] = "可恨的斯麦斯帕",
-["npcID"] = 98949,
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 1834,
+[346980] = {
+["encounterName"] = "希尔布兰德",
+["source"] = "宝库净化者",
+["npcID"] = 176551,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2426,
 },
 [458775] = {
 ["source"] = "觉醒的硫磺破坏者",
@@ -42248,15 +42320,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2442,
 },
-[443232] = {
-["source"] = "夜幕哨兵",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 217485,
-},
 [451423] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "谢非提克",
 ["npcID"] = 219984,
+},
+[443232] = {
+["source"] = "夜幕哨兵",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 217485,
 },
 [432031] = {
 ["encounterName"] = "收割者吉卡塔尔",
@@ -42824,10 +42896,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 229272,
 },
-[396159] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "熔岩破坏者",
-["npcID"] = 186836,
+[453496] = {
+["isChanneled"] = true,
+["source"] = "夜幕咒刃",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 225479,
 },
 [455543] = {
 ["event"] = "SPELL_CAST_START",
@@ -42846,11 +42919,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 208208,
 },
-[453496] = {
-["isChanneled"] = true,
-["source"] = "夜幕咒刃",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 225479,
+[396159] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "熔岩破坏者",
+["npcID"] = 186836,
 },
 [211406] = {
 ["source"] = "炽燃小鬼",
@@ -42980,12 +43052,10 @@ nil,
 ["source"] = "绞肉者索托克",
 ["npcID"] = 186777,
 },
-[259531] = {
-["encounterName"] = "沃卡尔",
-["source"] = "复生图腾",
-["npcID"] = 125977,
+[445311] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2085,
+["source"] = "影冠钳蟹",
+["npcID"] = 216963,
 },
 [207806] = {
 ["encounterName"] = "巡逻队长加多",
@@ -43114,10 +43184,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 209098,
 },
-[167385] = {
+[441221] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "地下城训练假人",
-["npcID"] = 92168,
+["source"] = "逃脱的追踪者",
+["npcID"] = 232257,
 },
 [367503] = {
 ["source"] = "腐朽代言人",
@@ -43333,10 +43403,10 @@ nil,
 ["source"] = "亡缚躯壳",
 ["npcID"] = 220272,
 },
-[396180] = {
+[355225] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "熔岩破坏者",
-["npcID"] = 186836,
+["source"] = "浊盐鱼术师",
+["npcID"] = 178142,
 },
 [1215870] = {
 ["encounterName"] = "芬戴尔·断轴",
@@ -43542,10 +43612,10 @@ nil,
 ["source"] = "影卫织暗者",
 ["npcID"] = 230962,
 },
-[355234] = {
+[1215905] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "浊盐鱼术师",
-["npcID"] = 178142,
+["source"] = "葬轮",
+["npcID"] = 234949,
 },
 [465813] = {
 ["source"] = "幽暗爬行者",
@@ -43624,10 +43694,13 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 79545,
 },
-[400288] = {
-["source"] = "无常剧痛",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 201290,
+[269232] = {
+["encounterName"] = "达萨大王",
+["source"] = "莱班",
+["encounterID"] = 2143,
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 136984,
 },
 [375475] = {
 ["encounterName"] = "巢穴守护者迪乌尔娜",
@@ -43641,17 +43714,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 57807,
 },
+[433053] = {
+["source"] = "心牙",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 216035,
+},
 [375716] = {
 ["encounterName"] = "巢穴守护者迪乌尔娜",
 ["source"] = "拜荒法师",
 ["npcID"] = 191206,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2614,
-},
-[433053] = {
-["source"] = "心牙",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 216035,
 },
 [443292] = {
 ["source"] = "噬光魔影",
@@ -43711,10 +43784,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 198047,
 },
-[1248699] = {
+[62335] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "废土遗民诉契者",
-["npcID"] = 234955,
+["source"] = "黑暗符文助手",
+["npcID"] = 32886,
 },
 [385958] = {
 ["encounterName"] = "维克萨姆斯",
@@ -43747,10 +43820,12 @@ nil,
 ["source"] = "泰坦防御矩阵",
 ["npcID"] = 193244,
 },
-[465822] = {
-["source"] = "暗索交叉火力机关",
+[64383] = {
+["encounterName"] = "米米尔隆",
+["source"] = "巨兽二型",
+["npcID"] = 33432,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 230299,
+["encounterID"] = 1138,
 },
 [388008] = {
 ["encounterName"] = "泰拉什·灰翼",
@@ -43759,12 +43834,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2583,
 },
-[64383] = {
-["encounterName"] = "米米尔隆",
-["source"] = "巨兽二型",
-["npcID"] = 33432,
+[465822] = {
+["source"] = "暗索交叉火力机关",
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 1138,
+["npcID"] = 230299,
 },
 [209378] = {
 ["source"] = "伊玛库塔",
@@ -43815,12 +43888,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 199972,
 },
-[449444] = {
-["encounterName"] = "铸炉之主索朗格斯",
-["source"] = "铸炉之主索朗格斯",
-["encounterID"] = 1050,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 40177,
+[465826] = {
+["isChanneled"] = true,
+["source"] = "暗索交叉火力机关",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 230299,
 },
 [1215953] = {
 ["encounterName"] = "穆格·兹伊，安保头子",
@@ -43856,18 +43928,17 @@ nil,
 ["source"] = "暗影巫毒邪魂",
 ["npcID"] = 70060,
 },
-[465826] = {
-["isChanneled"] = true,
-["source"] = "暗索交叉火力机关",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 230299,
-},
-[271290] = {
-["encounterName"] = "殓尸者姆沁巴",
-["source"] = "殓尸者姆沁巴",
-["encounterID"] = 2142,
+[449444] = {
+["encounterName"] = "铸炉之主索朗格斯",
+["source"] = "铸炉之主索朗格斯",
+["encounterID"] = 1050,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 134993,
+["npcID"] = 40177,
+},
+[410537] = {
+["source"] = "鳞长萨卡雷斯",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 199984,
 },
 [161258] = {
 ["encounterName"] = "尼托格·雷塔",
@@ -44051,17 +44122,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 210050,
 },
-[306111] = {
-["encounterName"] = "拉希奥",
-["source"] = "拉希奥",
-["npcID"] = 156818,
+[404403] = {
+["encounterName"] = "鳞长萨卡雷斯",
+["source"] = "萨卡雷斯",
+["encounterID"] = 2685,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2329,
+["npcID"] = 201754,
 },
-[455596] = {
+[1240567] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "巴瑟拉斯镇长",
-["npcID"] = 10435,
+["source"] = "格拉波尔",
+["npcID"] = 238540,
 },
 [449453] = {
 ["source"] = "监督者洛斯卡拉格",
@@ -44073,12 +44144,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 197697,
 },
-[404403] = {
-["encounterName"] = "鳞长萨卡雷斯",
-["source"] = "萨卡雷斯",
-["encounterID"] = 2685,
+[306111] = {
+["encounterName"] = "拉希奥",
+["source"] = "拉希奥",
+["npcID"] = 156818,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 201754,
+["encounterID"] = 2329,
 },
 [256709] = {
 ["source"] = "激流破浪者",
@@ -44181,12 +44252,10 @@ nil,
 ["source"] = "冒泡的树液",
 ["npcID"] = 191313,
 },
-[1232399] = {
-["encounterName"] = "节点之王萨哈达尔",
-["source"] = "法力铸造泰坦",
-["npcID"] = 241800,
+[428981] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 3134,
+["source"] = "被拍卖的往昔纸页",
+["npcID"] = 214069,
 },
 [447411] = {
 ["encounterName"] = "安苏雷克女王",
@@ -44647,21 +44716,21 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 225821,
 },
-[123648] = {
+[1216093] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "哈飒克唤风者",
-["npcID"] = 61946,
-},
-[175609] = {
-["source"] = "钢铁缚火者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 87515,
+["source"] = "虚幻眼魔",
+["npcID"] = 230426,
 },
 [441287] = {
 ["isChanneled"] = true,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["source"] = "卡赫提哨兵",
 ["npcID"] = 218315,
+},
+[15587] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "影月侍僧",
+["npcID"] = 16594,
 },
 [130265] = {
 ["event"] = "SPELL_CAST_START",
@@ -44804,10 +44873,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 1839,
 },
-[328667] = {
+[193018] = {
+["encounterName"] = "深须国王",
+["source"] = "深须国王",
+["npcID"] = 91797,
 ["event"] = "SPELL_CAST_START",
-["source"] = "脆骨法师",
-["npcID"] = 163126,
+["encounterID"] = 1812,
 },
 [453580] = {
 ["source"] = "焦灼散播者",
@@ -45043,6 +45114,11 @@ nil,
 ["source"] = "愤怒卫士剑圣",
 ["npcID"] = 98810,
 },
+[461781] = {
+["source"] = "海咒",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 220762,
+},
 [1232543] = {
 ["encounterName"] = "集能哨兵",
 ["source"] = "集能哨兵",
@@ -45050,11 +45126,6 @@ nil,
 ["isChanneled"] = true,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 243241,
-},
-[461781] = {
-["source"] = "海咒",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 220762,
 },
 [424581] = {
 ["encounterName"] = "丁达尔·迅贤，烈焰预言者",
@@ -45136,11 +45207,6 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 77803,
 },
-[461785] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "马尾藻护卫",
-["npcID"] = 212582,
-},
 [153094] = {
 ["encounterName"] = "莎达娜·血怒",
 ["source"] = "莎达娜·血怒",
@@ -45149,15 +45215,20 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 75509,
 },
-[426974] = {
-["source"] = "疯狂的奥法师",
+[461785] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 84990,
+["source"] = "马尾藻护卫",
+["npcID"] = 212582,
 },
 [435165] = {
 ["source"] = "布朗派克爵士",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 217658,
+},
+[426974] = {
+["source"] = "疯狂的奥法师",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 84990,
 },
 [164357] = {
 ["encounterName"] = "枯木",
@@ -45178,11 +45249,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2613,
 },
-[445406] = {
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "游荡的开膛者",
-["npcID"] = 214551,
+[123654] = {
+["encounterName"] = "君王的试炼",
+["source"] = "鬼谋神算冥谷子",
+["npcID"] = 61444,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 1442,
 },
 [312680] = {
 ["event"] = "SPELL_CAST_START",
@@ -45217,12 +45289,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2592,
 },
-[123654] = {
-["encounterName"] = "君王的试炼",
-["source"] = "鬼谋神算冥谷子",
-["npcID"] = 61444,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 1442,
+[445406] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "游荡的开膛者",
+["npcID"] = 214551,
 },
 [192003] = {
 ["encounterName"] = "瑟芬崔斯克",
@@ -45244,10 +45315,10 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2553,
 },
-[355306] = {
+[445407] = {
+["source"] = "游荡的开膛者",
 ["event"] = "SPELL_CAST_START",
-["source"] = "裂隙冲击传送门",
-["npcID"] = 179778,
+["npcID"] = 214551,
 },
 [22662] = {
 ["source"] = "荒野变形者奥兹恩",
@@ -45310,15 +45381,20 @@ nil,
 ["source"] = "结晶魔像",
 ["npcID"] = 236549,
 },
-[386026] = {
-["source"] = "不稳定的狂风",
+[443363] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 194895,
+["source"] = "圣物承载者山德雷斯",
+["npcID"] = 217534,
 },
 [455649] = {
 ["source"] = "狂暴之血",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 223955,
+},
+[386026] = {
+["source"] = "不稳定的狂风",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 194895,
 },
 [1232590] = {
 ["encounterName"] = "熔炉编织者阿拉兹",
@@ -45326,11 +45402,6 @@ nil,
 ["encounterID"] = 3132,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 240905,
-},
-[443363] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "圣物承载者山德雷斯",
-["npcID"] = 217534,
 },
 [404456] = {
 ["encounterName"] = "鳞长萨卡雷斯",
@@ -45912,12 +45983,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 187033,
 },
-[424958] = {
-["encounterName"] = "雷卫戈伦",
-["source"] = "雷卫戈伦",
-["encounterID"] = 2861,
+[408576] = {
+["encounterName"] = "被遗忘的实验体",
+["source"] = "里翁苏斯",
+["encounterID"] = 2693,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 207205,
+["npcID"] = 200918,
 },
 [197137] = {
 ["event"] = "SPELL_CAST_START",
@@ -46083,12 +46154,10 @@ nil,
 ["source"] = "托塞德林王子",
 ["npcID"] = 11486,
 },
-[369677] = {
-["encounterName"] = "失落的矮人",
-["source"] = "奥拉夫",
-["encounterID"] = 2555,
+[197141] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 184580,
+["source"] = "积怨牧鱼者",
+["npcID"] = 100216,
 },
 [347151] = {
 ["encounterName"] = "时空船长钩尾",
@@ -46107,10 +46176,12 @@ nil,
 ["source"] = "集市监督者",
 ["npcID"] = 246285,
 },
-[197141] = {
+[369677] = {
+["encounterName"] = "失落的矮人",
+["source"] = "奥拉夫",
+["encounterID"] = 2555,
 ["event"] = "SPELL_CAST_START",
-["source"] = "积怨牧鱼者",
-["npcID"] = 100216,
+["npcID"] = 184580,
 },
 [448002] = {
 ["event"] = "SPELL_CAST_START",
@@ -46389,11 +46460,10 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 153760,
 },
-[394265] = {
-["isChanneled"] = true,
-["source"] = "土狼大师杜尔衮",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 186515,
+[263209] = {
+["source"] = "矿井鼠",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 130437,
 },
 [472378] = {
 ["isChanneled"] = true,
@@ -46406,10 +46476,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 227903,
 },
-[64653] = {
+[451600] = {
+["encounterName"] = "安苏雷克女王",
+["source"] = "内室驱逐者",
+["encounterID"] = 2922,
 ["event"] = "SPELL_CAST_START",
-["source"] = "寒冬亡魂",
-["npcID"] = 34134,
+["npcID"] = 224368,
 },
 [412693] = {
 ["event"] = "SPELL_CAST_START",
@@ -46450,10 +46522,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 232127,
 },
-[263209] = {
-["source"] = "矿井鼠",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 130437,
+[394265] = {
+["isChanneled"] = true,
+["source"] = "土狼大师杜尔衮",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 186515,
 },
 [396313] = {
 ["source"] = "空气元素",
@@ -46486,23 +46559,23 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2905,
 },
-[353312] = {
-["encounterName"] = "希尔布兰德",
-["source"] = "希尔布兰德",
-["npcID"] = 175663,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2426,
+[1232790] = {
+["isChanneled"] = false,
+["source"] = "暗影队长拉基什",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 230781,
 },
 [1232789] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "影卫虚空驯服者",
 ["npcID"] = 234429,
 },
-[1232790] = {
-["isChanneled"] = false,
-["source"] = "暗影队长拉基什",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 230781,
+[353312] = {
+["encounterName"] = "希尔布兰德",
+["source"] = "希尔布兰德",
+["npcID"] = 175663,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2426,
 },
 [1242162] = {
 ["encounterName"] = "传送门主管哈尔桑",
@@ -46534,12 +46607,12 @@ nil,
 ["source"] = "诺库德狩猎大师",
 ["npcID"] = 185353,
 },
-[267308] = {
-["encounterName"] = "部族议会",
-["source"] = "智者扎纳扎尔",
-["encounterID"] = 2140,
+[1216414] = {
+["encounterName"] = "链齿狂人洛肯斯多",
+["source"] = "光束炮台",
+["encounterID"] = 3013,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 135472,
+["npcID"] = 230358,
 },
 [456851] = {
 ["event"] = "SPELL_CAST_START",
@@ -46551,20 +46624,22 @@ nil,
 ["source"] = "冰原徒工",
 ["npcID"] = 26705,
 },
-[396317] = {
+[298025] = {
+["source"] = "军情七处线人",
 ["event"] = "SPELL_CAST_START",
-["source"] = "洛阿玛斯",
-["npcID"] = 199030,
+["npcID"] = 156795,
 },
-[64654] = {
+[459799] = {
+["encounterName"] = "破拆双人组",
+["source"] = "布隆特",
+["encounterID"] = 3019,
 ["event"] = "SPELL_CAST_START",
-["source"] = "寒冬滚石",
-["npcID"] = 34135,
+["npcID"] = 226402,
 },
-[263215] = {
-["source"] = "巨石之怒",
+[451608] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 130635,
+["source"] = "蜃鱼人斩潮者",
+["npcID"] = 213599,
 },
 [172578] = {
 ["isChanneled"] = true,
@@ -46587,10 +46662,10 @@ nil,
 ["source"] = "碎裂湮灭者",
 ["npcID"] = 198869,
 },
-[451608] = {
+[263215] = {
+["source"] = "巨石之怒",
 ["event"] = "SPELL_CAST_START",
-["source"] = "蜃鱼人斩潮者",
-["npcID"] = 213599,
+["npcID"] = 130635,
 },
 [313526] = {
 ["isChanneled"] = true,
@@ -46618,18 +46693,18 @@ nil,
 ["source"] = "影月术士",
 ["npcID"] = 17371,
 },
-[1241004] = {
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "财宝地精",
-["npcID"] = 205490,
-},
 [1216431] = {
 ["encounterName"] = "坦克大战",
 ["source"] = "仁慈侏儒4.U.型",
 ["encounterID"] = 2257,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 145185,
+},
+[1241004] = {
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "财宝地精",
+["npcID"] = 205490,
 },
 [410655] = {
 ["source"] = "鳞长萨卡雷斯",
@@ -46689,6 +46764,11 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 3126,
 },
+[1224634] = {
+["source"] = "掘地蠕行者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 236947,
+},
 [1216443] = {
 ["encounterName"] = "坦克大战",
 ["source"] = "仁慈侏儒4.U.型",
@@ -46696,11 +46776,6 @@ nil,
 ["isChanneled"] = true,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 145185,
-},
-[1224634] = {
-["source"] = "掘地蠕行者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 236947,
 },
 [369703] = {
 ["encounterName"] = "布罗马奇",
@@ -46766,10 +46841,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 199855,
 },
-[408614] = {
+[343086] = {
+["encounterName"] = "顽石军团干将",
+["source"] = "卡尔将军",
+["npcID"] = 168112,
 ["event"] = "SPELL_CAST_START",
-["source"] = "碎裂湮灭者",
-["npcID"] = 198869,
+["encounterID"] = 2417,
 },
 [449568] = {
 ["encounterName"] = "蛛网将军阿贝纳尔",
@@ -46778,27 +46855,29 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2877,
 },
-[1241036] = {
+[465952] = {
+["encounterName"] = "铬武大王加里维克斯",
+["source"] = "铬武大王加里维克斯",
+["encounterID"] = 3016,
 ["event"] = "SPELL_CAST_START",
-["source"] = "沉沦魔萨满",
-["npcID"] = 245907,
+["npcID"] = 231075,
 },
 [429091] = {
 ["source"] = "高阶牧师艾姆雅",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 212827,
 },
-[406566] = {
-["source"] = "原始熔岩元素",
+[195108] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 202264,
+["source"] = "积怨织雷者",
+["npcID"] = 91783,
 },
-[343086] = {
-["encounterName"] = "顽石军团干将",
-["source"] = "卡尔将军",
-["npcID"] = 168112,
+[1241032] = {
+["encounterName"] = "麦扎的绿洲",
+["source"] = "佐·格伦",
+["npcID"] = 176563,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2417,
+["encounterID"] = 2440,
 },
 [287797] = {
 ["encounterName"] = "梅卡托克",
@@ -46820,12 +46899,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 189893,
 },
-[465952] = {
-["encounterName"] = "铬武大王加里维克斯",
-["source"] = "铬武大王加里维克斯",
-["encounterID"] = 3016,
+[1241036] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 231075,
+["source"] = "沉沦魔萨满",
+["npcID"] = 245907,
 },
 [443427] = {
 ["event"] = "SPELL_CAST_START",
@@ -46859,19 +46936,19 @@ nil,
 ["source"] = "诺库德哨兵",
 ["npcID"] = 185357,
 },
-[326707] = {
-["encounterName"] = "德纳修斯大帝",
-["source"] = "德纳修斯大帝",
-["npcID"] = 167406,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2407,
-},
 [441381] = {
 ["encounterName"] = "女王之牙",
 ["source"] = "恩克斯",
 ["npcID"] = 216648,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2908,
+},
+[326707] = {
+["encounterName"] = "德纳修斯大帝",
+["source"] = "德纳修斯大帝",
+["npcID"] = 167406,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2407,
 },
 [463905] = {
 ["event"] = "SPELL_CAST_START",
@@ -46897,12 +46974,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2605,
 },
-[328756] = {
-["encounterName"] = "英格拉·马洛克",
-["source"] = "英格拉·马洛克",
-["npcID"] = 164567,
+[443430] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2397,
+["source"] = "苏雷吉缚丝者",
+["npcID"] = 220195,
 },
 [468274] = {
 ["source"] = "饮海者格洛德",
@@ -46959,17 +47034,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2708,
 },
-[16102] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "影月召唤者",
-["npcID"] = 17395,
-},
 [400430] = {
 ["encounterName"] = "狱铸者卡扎拉",
 ["source"] = "狱铸者卡扎拉",
 ["encounterID"] = 2688,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 201261,
+},
+[441385] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "空洞织霜者",
+["npcID"] = 222193,
 },
 [443433] = {
 ["event"] = "SPELL_CAST_START",
@@ -47031,10 +47106,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 195119,
 },
-[398385] = {
-["source"] = "暴怒的炽焰猎犬",
+[17228] = {
+["source"] = "相位鞭笞者",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 207429,
+["npcID"] = 13196,
 },
 [424087] = {
 ["event"] = "SPELL_CAST_START",
@@ -47124,10 +47199,12 @@ nil,
 ["source"] = "影月术士",
 ["npcID"] = 17371,
 },
-[406581] = {
-["source"] = "原始熔岩元素",
+[64145] = {
+["encounterName"] = "尤格-萨隆",
+["source"] = "重压触须",
+["npcID"] = 33966,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 202264,
+["encounterID"] = 1143,
 },
 [293954] = {
 ["source"] = "蚀光之握",
@@ -47144,79 +47221,74 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 229227,
 },
-[64145] = {
-["encounterName"] = "尤格-萨隆",
-["source"] = "重压触须",
-["npcID"] = 33966,
+[406581] = {
+["source"] = "原始熔岩元素",
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 1143,
+["npcID"] = 202264,
 },
-[465966] = {
-["isChanneled"] = true,
-["source"] = "水能堡食泥者",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 231312,
+[449584] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "猎颅者克鲁基",
+["npcID"] = 218074,
 },
 [422964] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "奥罗斯托",
 ["npcID"] = 209574,
 },
-[453683] = {
-["source"] = "节点女亲王凯威扎",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 217748,
-},
-[357436] = {
-["encounterName"] = "麦扎的绿洲",
-["source"] = "维利席安",
-["npcID"] = 180470,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2440,
-},
-[1224719] = {
-["source"] = "进流守护者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 246874,
-},
 [445492] = {
 ["source"] = "游荡的开膛者",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 214551,
 },
-[1216525] = {
-["encounterName"] = "链齿狂人洛肯斯多",
-["source"] = "火箭发射器",
-["encounterID"] = 3013,
+[1241095] = {
+["source"] = "财宝地精",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 230360,
-},
-[472111] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "暗飙路霸",
-["npcID"] = 230626,
-},
-[1241100] = {
-["encounterName"] = "缚魂者娜欣达利",
-["source"] = "缚魂者娜欣达利",
-["encounterID"] = 3130,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 233816,
+["npcID"] = 205490,
 },
 [193069] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "魔誓寄生者",
 ["npcID"] = 96587,
 },
+[396346] = {
+["source"] = "好战者卡拉德",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 190932,
+},
+[429108] = {
+["encounterName"] = "尼穆威，轮回编织者",
+["source"] = "轮回守望者",
+["npcID"] = 209800,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2708,
+},
+[472111] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "暗飙路霸",
+["npcID"] = 230626,
+},
+[441395] = {
+["encounterName"] = "凝结聚合体",
+["source"] = "凝结聚合体",
+["npcID"] = 216320,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2905,
+},
+[1224719] = {
+["source"] = "进流守护者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 246874,
+},
 [429109] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "炉铸愈疗者",
 ["npcID"] = 213338,
 },
-[1241106] = {
-["source"] = "财宝地精",
+[453683] = {
+["source"] = "节点女亲王凯威扎",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 205490,
+["npcID"] = 217748,
 },
 [474160] = {
 ["event"] = "SPELL_CAST_START",
@@ -47228,10 +47300,10 @@ nil,
 ["source"] = "尖翔妖爪者",
 ["npcID"] = 183995,
 },
-[396346] = {
-["source"] = "好战者卡拉德",
+[1241106] = {
+["source"] = "财宝地精",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 190932,
+["npcID"] = 205490,
 },
 [1241107] = {
 ["source"] = "财宝地精",
@@ -47250,23 +47322,23 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2614,
 },
-[200238] = {
-["encounterName"] = "萨维斯之影",
-["source"] = "萨维斯之影",
-["npcID"] = 99192,
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 1839,
+[375871] = {
+["encounterName"] = "巢穴守护者迪乌尔娜",
+["source"] = "巢穴守护者迪乌尔娜",
+["npcID"] = 190245,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2614,
 },
 [355640] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "集市维和者",
 ["npcID"] = 179840,
 },
-[465971] = {
-["source"] = "暗索天火射手",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 227955,
+[400443] = {
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "石晶塔",
+["npcID"] = 201339,
 },
 [1224731] = {
 ["encounterName"] = "节点之王萨哈达尔",
@@ -47287,12 +47359,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 207939,
 },
-[375871] = {
-["encounterName"] = "巢穴守护者迪乌尔娜",
-["source"] = "巢穴守护者迪乌尔娜",
-["npcID"] = 190245,
+[318534] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2614,
+["source"] = "幽影守门人",
+["npcID"] = 163708,
 },
 [308172] = {
 ["source"] = "堕落的虚空语者",
@@ -47366,12 +47436,10 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 227904,
 },
-[461880] = {
-["encounterName"] = "凝结聚合体",
-["source"] = "凝结聚合体",
-["npcID"] = 216320,
+[1216557] = {
+["source"] = "候补刺客",
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2905,
+["npcID"] = 225872,
 },
 [376997] = {
 ["encounterName"] = "克罗兹",
@@ -47418,18 +47486,21 @@ nil,
 ["source"] = "纱雾守护者",
 ["npcID"] = 166276,
 },
+[396355] = {
+["source"] = "仪式守护者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 186787,
+},
+[175668] = {
+["source"] = "钢铁工人",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 87448,
+},
 [1224760] = {
 ["isChanneled"] = true,
 ["source"] = "熔炉哨兵",
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 234041,
-},
-[192050] = {
-["encounterName"] = "瑟芬崔斯克",
-["source"] = "瑟芬崔斯克",
-["npcID"] = 91808,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 1813,
 },
 [429119] = {
 ["encounterName"] = "梦境议会",
@@ -47437,11 +47508,6 @@ nil,
 ["npcID"] = 208365,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2728,
-},
-[396355] = {
-["source"] = "仪式守护者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 186787,
 },
 [382555] = {
 ["source"] = "蕨斑战灾者",
@@ -47526,6 +47592,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 204582,
 },
+[472126] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "贪婪的变节者",
+["npcID"] = 225768,
+},
 [40598] = {
 ["encounterName"] = "伊利丹·怒风",
 ["source"] = "伊利丹·怒风",
@@ -47533,20 +47604,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 22917,
 },
-[472126] = {
+[269399] = {
+["encounterName"] = "低语者沃尔兹斯",
+["source"] = "低语者沃尔兹斯",
+["encounterID"] = 2133,
 ["event"] = "SPELL_CAST_START",
-["source"] = "贪婪的变节者",
-["npcID"] = 225768,
-},
-[441410] = {
-["source"] = "工蜂",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 210265,
-},
-[396360] = {
-["source"] = "仪式守护者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 186787,
+["npcID"] = 134069,
 },
 [420933] = {
 ["encounterName"] = "沃尔科罗斯",
@@ -47554,6 +47617,11 @@ nil,
 ["encounterID"] = 2737,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 208478,
+},
+[396360] = {
+["source"] = "仪式守护者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 186787,
 },
 [407200] = {
 ["encounterName"] = "狱铸者卡扎拉",
@@ -47573,22 +47641,23 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 81407,
 },
-[334929] = {
-["encounterName"] = "顽石军团干将",
-["source"] = "卡尔将军",
-["npcID"] = 168112,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2417,
-},
-[308308] = {
-["source"] = "堕落的穿心者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 158092,
-},
 [425030] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "扎卡利主宰",
 ["npcID"] = 210172,
+},
+[472128] = {
+["encounterName"] = "泽克维尔",
+["source"] = "泽克维尔",
+["encounterID"] = 2985,
+["event"] = "SPELL_CAST_START",
+["npcID"] = 221427,
+},
+[441412] = {
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "亡瓣之花",
+["npcID"] = 206184,
 },
 [1224787] = {
 ["encounterName"] = "节点之王萨哈达尔",
@@ -47597,12 +47666,6 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 3134,
 },
-[267354] = {
-["isChanneled"] = true,
-["source"] = "雇来的刺客",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 134232,
-},
 [439365] = {
 ["encounterName"] = "艾帕",
 ["source"] = "艾帕",
@@ -47610,10 +47673,18 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 210267,
 },
-[159290] = {
-["source"] = "日光魔仆",
+[267354] = {
+["isChanneled"] = true,
+["source"] = "雇来的刺客",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 134232,
+},
+[257582] = {
+["encounterName"] = "艾泽洛克",
+["source"] = "地怒者",
+["encounterID"] = 2106,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 76097,
+["npcID"] = 129802,
 },
 [320596] = {
 ["encounterName"] = "凋骨",
@@ -47622,19 +47693,19 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2387,
 },
-[1224793] = {
-["encounterName"] = "撰魂师",
-["source"] = "撰魂师",
-["npcID"] = 234935,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 3109,
-},
 [291928] = {
 ["encounterName"] = "麦卡贡国王",
 ["source"] = "R-21/X型空中单位",
 ["encounterID"] = 2260,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 150396,
+},
+[1224793] = {
+["encounterName"] = "撰魂师",
+["source"] = "撰魂师",
+["npcID"] = 234935,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 3109,
 },
 [407107] = {
 ["source"] = "裂地者库西瓦",
@@ -47687,12 +47758,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 187321,
 },
-[263262] = {
-["encounterName"] = "投币式群体打击者",
-["source"] = "页岩啃噬者",
-["encounterID"] = 2105,
+[139838] = {
+["encounterName"] = "墨格瑞拉",
+["source"] = "毒素之头",
+["npcID"] = 70247,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 134005,
+["encounterID"] = 1578,
 },
 [298074] = {
 ["source"] = "掘地附肢",
@@ -47737,10 +47808,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2063,
 },
-[425037] = {
-["source"] = "上古熔火恶犬",
+[200248] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 210288,
+["source"] = "复活的奥术师",
+["npcID"] = 98280,
 },
 [1224812] = {
 ["encounterName"] = "节点之王萨哈达尔",
@@ -47756,17 +47827,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 134069,
 },
-[200248] = {
+[425037] = {
+["source"] = "上古熔火恶犬",
 ["event"] = "SPELL_CAST_START",
-["source"] = "复活的奥术师",
-["npcID"] = 98280,
+["npcID"] = 210288,
 },
-[271456] = {
-["encounterName"] = "商业大亨拉兹敦克",
-["source"] = "商业大亨拉兹敦克",
-["encounterID"] = 2108,
+[459849] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 129232,
+["source"] = "女王护卫安杰克·夏布提尔",
+["npcID"] = 219665,
 },
 [382249] = {
 ["source"] = "诡爪秘术师",
@@ -47778,10 +47847,10 @@ nil,
 ["source"] = "积怨碾压者",
 ["npcID"] = 91782,
 },
-[171580] = {
-["source"] = "钢铁虐待者",
+[204344] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 85748,
+["source"] = "黑爪刺客",
+["npcID"] = 186634,
 },
 [459850] = {
 ["source"] = "尊贵牧师",
@@ -48004,17 +48073,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 204931,
 },
-[22478] = {
-["source"] = "瑟雷姆·刺蹄",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 11490,
-},
 [425048] = {
 ["encounterName"] = "雷卫戈伦",
 ["source"] = "雷卫戈伦",
 ["encounterID"] = 2861,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 207205,
+},
+[22478] = {
+["source"] = "瑟雷姆·刺蹄",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 11490,
 },
 [377950] = {
 ["encounterName"] = "劈爪的战团",
@@ -48023,17 +48092,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 186125,
 },
-[1216674] = {
-["encounterName"] = "链齿狂人洛肯斯多",
-["source"] = "虚空炮台",
-["encounterID"] = 3013,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 231846,
-},
-[275563] = {
+[275564] = {
 ["source"] = "饥影牛蛙",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 214406,
+},
+[463956] = {
+["source"] = "岩浆蛇",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 215770,
 },
 [392285] = {
 ["source"] = "腐化的始祖龙",
@@ -48053,10 +48120,12 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 231223,
 },
-[275564] = {
-["source"] = "饥影牛蛙",
+[291946] = {
+["encounterName"] = "狂犬K.U.-J.0.",
+["source"] = "狂犬K.U.-J.0.",
+["encounterID"] = 2258,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 214406,
+["npcID"] = 144246,
 },
 [1242028] = {
 ["source"] = "影卫哨兵扎·德林",
@@ -48125,10 +48194,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 202824,
 },
-[1216687] = {
+[257593] = {
+["encounterName"] = "艾泽洛克",
+["source"] = "艾泽洛克",
+["encounterID"] = 2106,
 ["event"] = "SPELL_CAST_START",
-["source"] = "地精教父",
-["npcID"] = 231821,
+["npcID"] = 129227,
 },
 [323149] = {
 ["encounterName"] = "英格拉·马洛克",
@@ -48245,13 +48316,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 133463,
 },
-[1233093] = {
-["encounterName"] = "狩魂猎手",
-["source"] = "阿达拉斯·暮焰",
-["npcID"] = 237661,
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 3122,
+[408677] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "碎裂鳞卫",
+["npcID"] = 198871,
 },
 [1216709] = {
 ["isChanneled"] = true,
@@ -48265,10 +48333,13 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 218671,
 },
-[408677] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "碎裂鳞卫",
-["npcID"] = 198871,
+[257596] = {
+["encounterName"] = "艾泽洛克",
+["source"] = "艾泽洛克",
+["encounterID"] = 2106,
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 129227,
 },
 [472158] = {
 ["encounterName"] = "泽克维尔",
@@ -48315,11 +48386,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 221427,
 },
-[412775] = {
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "狄恩",
-["npcID"] = 203646,
+[265337] = {
+["encounterName"] = "贪食的拉尔",
+["source"] = "血渍小猪",
+["encounterID"] = 2115,
+["event"] = "SPELL_CAST_START",
+["npcID"] = 135048,
 },
 [193093] = {
 ["encounterName"] = "深须国王",
@@ -48328,12 +48400,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 1812,
 },
-[265337] = {
-["encounterName"] = "贪食的拉尔",
-["source"] = "血渍小猪",
-["encounterID"] = 2115,
+[355438] = {
+["encounterName"] = "麦扎的绿洲",
+["source"] = "佐·格伦",
+["npcID"] = 176563,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 135048,
+["encounterID"] = 2440,
 },
 [267385] = {
 ["encounterName"] = "低语者沃尔兹斯",
@@ -48347,12 +48419,12 @@ nil,
 ["source"] = "扎卡利塑钢者",
 ["npcID"] = 210173,
 },
-[445541] = {
-["encounterName"] = "机械大师",
-["source"] = "代言人布洛克",
-["npcID"] = 213217,
+[347249] = {
+["encounterName"] = "索·阿兹密",
+["source"] = "索·阿兹密",
+["npcID"] = 175806,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2888,
+["encounterID"] = 2437,
 },
 [355439] = {
 ["encounterName"] = "麦扎的绿洲",
@@ -48362,10 +48434,12 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 2440,
 },
-[316532] = {
+[423015] = {
+["encounterName"] = "布朗派克男爵",
+["source"] = "布朗派克男爵",
+["encounterID"] = 2835,
 ["event"] = "SPELL_CAST_START",
-["source"] = "自愿的祭品",
-["npcID"] = 162647,
+["npcID"] = 207939,
 },
 [200261] = {
 ["event"] = "SPELL_CAST_START",
@@ -48379,12 +48453,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 129227,
 },
-[347249] = {
-["encounterName"] = "索·阿兹密",
-["source"] = "索·阿兹密",
-["npcID"] = 175806,
+[445541] = {
+["encounterName"] = "机械大师",
+["source"] = "代言人布洛克",
+["npcID"] = 213217,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2437,
+["encounterID"] = 2888,
 },
 [79965] = {
 ["event"] = "SPELL_CAST_START",
@@ -48443,19 +48517,19 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 164702,
 },
-[365682] = {
-["encounterName"] = "圣物匠赛·墨克斯",
-["source"] = "赛财团助战者",
-["npcID"] = 184140,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2553,
-},
 [439401] = {
 ["encounterName"] = "大捻接师艾佐",
 ["source"] = "大捻接师艾佐",
 ["npcID"] = 216658,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2909,
+},
+[64152] = {
+["encounterName"] = "尤格-萨隆",
+["source"] = "腐蚀触须",
+["npcID"] = 33985,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 1143,
 },
 [449640] = {
 ["source"] = "癫狂的攻城轰炸者",
@@ -48524,19 +48598,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 202318,
 },
-[441452] = {
-["encounterName"] = "噬灭者乌格拉克斯",
-["source"] = "噬灭者乌格拉克斯",
-["npcID"] = 215657,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2902,
-},
-[369781] = {
+[375924] = {
 ["encounterName"] = "失落的矮人",
 ["source"] = "迅捷的埃瑞克",
 ["encounterID"] = 2555,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 184582,
+},
+[443500] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "皇家虫群卫士",
+["npcID"] = 220197,
 },
 [1241991] = {
 ["encounterName"] = "传送门主管哈尔桑",
@@ -48633,10 +48705,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 204918,
 },
-[359547] = {
+[375929] = {
+["encounterName"] = "巴拉卡可汗",
+["source"] = "巴拉卡可汗",
+["encounterID"] = 2580,
 ["event"] = "SPELL_CAST_START",
-["source"] = "被统御的哨兵",
-["npcID"] = 185314,
+["npcID"] = 186151,
 },
 [64153] = {
 ["encounterName"] = "尤格-萨隆",
@@ -48645,25 +48719,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 1143,
 },
-[375929] = {
-["encounterName"] = "巴拉卡可汗",
-["source"] = "巴拉卡可汗",
-["encounterID"] = 2580,
+[359547] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 186151,
+["source"] = "被统御的哨兵",
+["npcID"] = 185314,
 },
 [31602] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "奈鲁布恩坎",
 ["npcID"] = 10437,
-},
-[1241357] = {
-["encounterName"] = "缚魂者娜欣达利",
-["source"] = "无缚相位剑士",
-["encounterID"] = 3130,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 245008,
 },
 [369788] = {
 ["event"] = "SPELL_CAST_START",
@@ -48675,6 +48739,14 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["source"] = "悬浮灾厄",
 ["npcID"] = 236886,
+},
+[1241357] = {
+["encounterName"] = "缚魂者娜欣达利",
+["source"] = "无缚相位剑士",
+["encounterID"] = 3130,
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 245008,
 },
 [287877] = {
 ["encounterName"] = "梅卡托克",
@@ -48749,24 +48821,24 @@ nil,
 ["source"] = "冒牌的药水调制人",
 ["npcID"] = 232992,
 },
-[1216794] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "悬浮灾厄",
-["npcID"] = 236886,
-},
-[369791] = {
-["encounterName"] = "失落的矮人",
-["source"] = "迅捷的埃瑞克",
-["encounterID"] = 2555,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 184582,
-},
 [455796] = {
 ["encounterName"] = "流丝之庭",
 ["source"] = "纺束者塔卡兹基",
 ["npcID"] = 217491,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2921,
+},
+[443510] = {
+["source"] = "夜幕行刑者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 217516,
+},
+[472178] = {
+["encounterName"] = "独臂盗匪",
+["source"] = "炽焰炸药宝贝",
+["encounterID"] = 3014,
+["event"] = "SPELL_CAST_START",
+["npcID"] = 231028,
 },
 [335129] = {
 ["encounterName"] = "猎手阿尔迪莫",
@@ -48775,10 +48847,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2418,
 },
-[443510] = {
-["source"] = "夜幕行刑者",
+[386173] = {
+["encounterName"] = "维克萨姆斯",
+["source"] = "维克萨姆斯",
+["encounterID"] = 2562,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 217516,
+["npcID"] = 194181,
 },
 [453749] = {
 ["source"] = "藻泽",
@@ -48830,10 +48904,12 @@ nil,
 ["source"] = "出故障的打击者",
 ["npcID"] = 236895,
 },
-[1216806] = {
+[414844] = {
+["encounterName"] = "无头骑士",
+["source"] = "无头骑士",
+["encounterID"] = 2725,
 ["event"] = "SPELL_CAST_START",
-["source"] = "出故障的打击者",
-["npcID"] = 236895,
+["npcID"] = 207438,
 },
 [375937] = {
 ["encounterName"] = "巴拉卡可汗",
@@ -48901,12 +48977,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 189798,
 },
-[1225010] = {
-["encounterName"] = "节点之王萨哈达尔",
-["source"] = "节点之王萨哈达尔",
-["npcID"] = 237763,
+[326794] = {
+["source"] = "审判官西加尔",
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 3134,
+["npcID"] = 167876,
 },
 [406798] = {
 ["isChanneled"] = true,
@@ -48933,22 +49007,21 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2585,
 },
-[357512] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "暴怒的恐角龙",
-["npcID"] = 180495,
-},
-[1225016] = {
-["encounterName"] = "节点之王萨哈达尔",
-["source"] = "节点之王萨哈达尔",
-["npcID"] = 237763,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 3134,
-},
 [308366] = {
 ["source"] = "审判官达克斯比",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 158136,
+},
+[355464] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "踏滨巨人",
+["npcID"] = 178165,
+},
+[1216826] = {
+["isChanneled"] = true,
+["source"] = "暗索士兵",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 230748,
 },
 [375943] = {
 ["encounterName"] = "巴拉卡可汗",
@@ -49014,10 +49087,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 180485,
 },
-[373897] = {
-["source"] = "腐朽老树",
+[341133] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 189531,
+["source"] = "纳斯利亚主教",
+["npcID"] = 174090,
 },
 [375945] = {
 ["event"] = "SPELL_CAST_START",
@@ -49044,19 +49117,19 @@ nil,
 ["source"] = "疱爪土狼",
 ["npcID"] = 5426,
 },
-[1216845] = {
-["encounterName"] = "铬武大王加里维克斯",
-["source"] = "暗索扳手狂人",
-["encounterID"] = 3016,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 231939,
-},
 [265368] = {
 ["encounterName"] = "毒心三姝",
 ["source"] = "着魔的队长",
 ["encounterID"] = 2113,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 131587,
+},
+[1216845] = {
+["encounterName"] = "铬武大王加里维克斯",
+["source"] = "暗索扳手狂人",
+["encounterID"] = 3016,
+["event"] = "SPELL_CAST_START",
+["npcID"] = 231939,
 },
 [472323] = {
 ["source"] = "污芯",
@@ -49144,10 +49217,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 4323,
 },
-[255567] = {
+[265372] = {
+["source"] = "着魔的队长",
 ["event"] = "SPELL_CAST_START",
-["source"] = "特隆加",
-["npcID"] = 128455,
+["npcID"] = 131587,
 },
 [308375] = {
 ["source"] = "堕落的虚空语者",
@@ -49177,12 +49250,10 @@ nil,
 ["source"] = "幽坑太保的铁杆粉丝",
 ["npcID"] = 234900,
 },
-[423051] = {
-["encounterName"] = "布朗派克男爵",
-["source"] = "布朗派克男爵",
-["encounterID"] = 2835,
+[455815] = {
+["source"] = "癫狂的卷心菜拍击者",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 207939,
+["npcID"] = 206514,
 },
 [417030] = {
 ["encounterName"] = "迷时战场",
@@ -49198,10 +49269,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 165408,
 },
-[455815] = {
-["source"] = "癫狂的卷心菜拍击者",
+[64156] = {
+["encounterName"] = "尤格-萨隆",
+["source"] = "腐蚀触须",
+["npcID"] = 33985,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 206514,
+["encounterID"] = 1143,
 },
 [20825] = {
 ["source"] = "醉酒的奴隶主",
@@ -49251,12 +49324,10 @@ nil,
 ["source"] = "亡瓣之花",
 ["npcID"] = 206184,
 },
-[328857] = {
-["encounterName"] = "啸翼",
-["source"] = "啸翼",
-["npcID"] = 164406,
+[209495] = {
+["source"] = "构造体卫兵",
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2398,
+["npcID"] = 104270,
 },
 [335119] = {
 ["encounterName"] = "猎手阿尔迪莫",
@@ -49389,10 +49460,13 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 208747,
 },
-[369818] = {
-["source"] = "魁梧的狂战士",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 184020,
+[271526] = {
+["encounterName"] = "艾泽洛克",
+["source"] = "地怒者",
+["encounterID"] = 2106,
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 129802,
 },
 [453776] = {
 ["event"] = "SPELL_CAST_START",
@@ -49451,15 +49525,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 130488,
 },
-[410776] = {
-["source"] = "永恒保护者",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 204658,
-},
 [378012] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "召唤熔岩的拜荒者",
 ["npcID"] = 186823,
+},
+[410776] = {
+["source"] = "永恒保护者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 204658,
 },
 [46150] = {
 ["source"] = "库斯卡女巫",
@@ -49515,32 +49589,25 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 76143,
 },
-[470164] = {
+[404636] = {
+["source"] = "纳尔雷娜中尉",
 ["event"] = "SPELL_CAST_START",
-["source"] = "烈焰行者",
-["npcID"] = 233203,
+["npcID"] = 202244,
 },
 [404737] = {
 ["source"] = "汉苏尔",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 198914,
 },
-[451734] = {
-["source"] = "执着的稠蜜",
+[459925] = {
+["source"] = "王宫守卫",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 222843,
+["npcID"] = 222305,
 },
-[404636] = {
-["source"] = "纳尔雷娜中尉",
+[470164] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 202244,
-},
-[335013] = {
-["encounterName"] = "圣物匠赛·墨克斯",
-["source"] = "圣物匠赛·墨克斯",
-["npcID"] = 166644,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2405,
+["source"] = "烈焰行者",
+["npcID"] = 233203,
 },
 [449687] = {
 ["encounterName"] = "铸炉之主索朗格斯",
@@ -49548,6 +49615,13 @@ nil,
 ["encounterID"] = 1050,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 40177,
+},
+[335013] = {
+["encounterName"] = "圣物匠赛·墨克斯",
+["source"] = "圣物匠赛·墨克斯",
+["npcID"] = 166644,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2405,
 },
 [400641] = {
 ["encounterName"] = "永恒守护者提尔",
@@ -49568,23 +49642,6 @@ nil,
 ["source"] = "熔颚孢子蝠",
 ["npcID"] = 211651,
 },
-[324776] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "纱雾塑形者",
-["npcID"] = 166275,
-},
-[457880] = {
-["source"] = "飞掠之恐",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 208239,
-},
-[421020] = {
-["encounterName"] = "梦境议会",
-["source"] = "乌克托斯",
-["npcID"] = 208363,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2728,
-},
 [406686] = {
 ["source"] = "贾拉丁岩浆塑形者",
 ["event"] = "SPELL_CAST_START",
@@ -49597,17 +49654,30 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2407,
 },
-[357542] = {
-["encounterName"] = "麦扎的绿洲",
-["source"] = "维尔特",
-["npcID"] = 180484,
+[453784] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2440,
+["source"] = "征服者欧索什",
+["npcID"] = 222723,
 },
-[404639] = {
-["source"] = "汉苏尔",
+[324776] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 198914,
+["source"] = "纱雾塑形者",
+["npcID"] = 166275,
+},
+[384161] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "卡拉希焚钢者",
+["npcID"] = 189464,
+},
+[398497] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "潮奔岩喉蝠",
+["npcID"] = 220887,
+},
+[371875] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "卡拉希新兵",
+["npcID"] = 189266,
 },
 [414974] = {
 ["event"] = "SPELL_CAST_START",
@@ -49624,17 +49694,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 184023,
 },
-[17235] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "奈鲁布恩坎",
-["npcID"] = 10437,
-},
 [260697] = {
 ["encounterName"] = "毒心三姝",
 ["source"] = "女巫布里亚",
 ["encounterID"] = 2113,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 131825,
+},
+[17235] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "奈鲁布恩坎",
+["npcID"] = 10437,
 },
 [255577] = {
 ["encounterName"] = "女祭司阿伦扎",
@@ -49717,22 +49787,22 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 167876,
 },
-[398501] = {
-["source"] = "狩猎的石蝰蛇",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 203783,
-},
-[453790] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "征服者欧索什",
-["npcID"] = 222723,
-},
 [260699] = {
 ["encounterName"] = "毒心三姝",
 ["source"] = "女巫索林娜",
 ["encounterID"] = 2113,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 131824,
+},
+[453790] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "征服者欧索什",
+["npcID"] = 222723,
+},
+[154216] = {
+["source"] = "炎阳法器",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 76094,
 },
 [269493] = {
 ["encounterName"] = "投币式群体打击者",
@@ -49884,12 +49954,12 @@ nil,
 ["source"] = "致命幼苗",
 ["npcID"] = 220316,
 },
-[287929] = {
-["encounterName"] = "梅卡托克",
-["source"] = "大工匠梅卡托克",
-["npcID"] = 144796,
+[427176] = {
+["encounterName"] = "黑暗之主",
+["source"] = "蠕动暗嗣",
+["encounterID"] = 2788,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2276,
+["npcID"] = 213008,
 },
 [445819] = {
 ["event"] = "SPELL_CAST_START",
@@ -50223,11 +50293,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 186616,
 },
-[451764] = {
-["isChanneled"] = false,
-["source"] = "布朗派克爵士",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 217658,
+[44196] = {
+["encounterName"] = "凯尔萨斯·逐日者",
+["source"] = "凤凰",
+["encounterID"] = 1894,
+["event"] = "SPELL_CAST_START",
+["npcID"] = 24674,
 },
 [326851] = {
 ["encounterName"] = "德纳修斯大帝",
@@ -50236,12 +50307,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2407,
 },
-[44196] = {
-["encounterName"] = "凯尔萨斯·逐日者",
-["source"] = "凤凰",
-["encounterID"] = 1894,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 24674,
+[451764] = {
+["isChanneled"] = false,
+["source"] = "布朗派克爵士",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 217658,
 },
 [322756] = {
 ["event"] = "SPELL_CAST_START",
@@ -50500,10 +50570,10 @@ nil,
 ["source"] = "猎龙者伊戈尔丹",
 ["npcID"] = 191611,
 },
-[322767] = {
+[421059] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "德鲁斯特收割者",
-["npcID"] = 164921,
+["source"] = "奥罗斯托",
+["npcID"] = 209574,
 },
 [64163] = {
 ["encounterName"] = "尤格-萨隆",
@@ -50547,11 +50617,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2529,
 },
-[421061] = {
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "奥罗斯托",
-["npcID"] = 209574,
+[14443] = {
+["source"] = "黑铁神射手",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 8338,
 },
 [423109] = {
 ["encounterName"] = "布雷炙孔",
@@ -50616,21 +50685,21 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 228159,
 },
-[302295] = {
-["source"] = "深水主母",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 231986,
+[449733] = {
+["isChanneled"] = true,
+["source"] = "查塔克",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 216042,
 },
 [431303] = {
 ["source"] = "夜幕影法师",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 223994,
 },
-[449733] = {
-["isChanneled"] = true,
-["source"] = "查塔克",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 216042,
+[302295] = {
+["source"] = "深水主母",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 231986,
 },
 [271579] = {
 ["encounterName"] = "投币式群体打击者",
@@ -50658,12 +50727,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 213937,
 },
-[451782] = {
-["encounterName"] = "泽克维尔",
-["source"] = "泽克维尔",
-["encounterID"] = 2985,
+[1241693] = {
+["source"] = "魁梧的血卫",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 221427,
+["npcID"] = 216338,
 },
 [330965] = {
 ["encounterName"] = "猩红议会",
@@ -50770,11 +50837,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 53891,
 },
-[373972] = {
-["isChanneled"] = true,
-["source"] = "拜荒烈焰舞者",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 190206,
+[431309] = {
+["source"] = "夜幕影法师",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 213892,
 },
 [392451] = {
 ["source"] = "烈焰引导者",
@@ -51300,10 +51366,11 @@ nil,
 ["source"] = "颤地始祖龙",
 ["npcID"] = 190069,
 },
-[431309] = {
-["source"] = "夜幕影法师",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 213892,
+[373972] = {
+["isChanneled"] = true,
+["source"] = "拜荒烈焰舞者",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 190206,
 },
 [474335] = {
 ["source"] = "机灵的斯洛格",
@@ -51342,10 +51409,12 @@ nil,
 ["source"] = "高吉克的血腥伐木机",
 ["npcID"] = 225754,
 },
-[1241693] = {
-["source"] = "魁梧的血卫",
+[451782] = {
+["encounterName"] = "泽克维尔",
+["source"] = "泽克维尔",
+["encounterID"] = 2985,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 216338,
+["npcID"] = 221427,
 },
 [474337] = {
 ["source"] = "撕碎王3000型",
@@ -51373,10 +51442,11 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 215770,
 },
-[14443] = {
-["source"] = "黑铁神射手",
-["event"] = "SPELL_CAST_START",
-["npcID"] = 8338,
+[421061] = {
+["isChanneled"] = false,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "奥罗斯托",
+["npcID"] = 209574,
 },
 [466860] = {
 ["encounterName"] = "链齿狂人洛肯斯多",
@@ -51408,10 +51478,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 3047,
 },
-[421059] = {
+[322767] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "奥罗斯托",
-["npcID"] = 209574,
+["source"] = "德鲁斯特收割者",
+["npcID"] = 164921,
 },
 [385145] = {
 ["event"] = "SPELL_CAST_START",
@@ -51742,12 +51812,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2406,
 },
-[427176] = {
-["encounterName"] = "黑暗之主",
-["source"] = "蠕动暗嗣",
-["encounterID"] = 2788,
+[287929] = {
+["encounterName"] = "梅卡托克",
+["source"] = "大工匠梅卡托克",
+["npcID"] = 144796,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 213008,
+["encounterID"] = 2276,
 },
 [388349] = {
 ["event"] = "SPELL_CAST_START",
@@ -51801,10 +51871,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 225263,
 },
-[154216] = {
-["source"] = "炎阳法器",
+[398501] = {
+["source"] = "狩猎的石蝰蛇",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 76094,
+["npcID"] = 203783,
 },
 [469792] = {
 ["event"] = "SPELL_CAST_START",
@@ -51837,10 +51907,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 207199,
 },
-[398497] = {
+[357542] = {
+["encounterName"] = "麦扎的绿洲",
+["source"] = "维尔特",
+["npcID"] = 180484,
 ["event"] = "SPELL_CAST_START",
-["source"] = "潮奔岩喉蝠",
-["npcID"] = 220887,
+["encounterID"] = 2440,
 },
 [406783] = {
 ["encounterName"] = "融合体密室",
@@ -51856,18 +51928,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 3107,
 },
-[371875] = {
+[404639] = {
+["source"] = "汉苏尔",
 ["event"] = "SPELL_CAST_START",
-["source"] = "卡拉希新兵",
-["npcID"] = 189266,
+["npcID"] = 198914,
 },
-[1225130] = {
-["encounterName"] = "狩魂猎手",
-["source"] = "维拉瑞安·血愤",
-["npcID"] = 237660,
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["encounterID"] = 3122,
+[457880] = {
+["source"] = "飞掠之恐",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 208239,
 },
 [374020] = {
 ["isChanneled"] = true,
@@ -51880,10 +51949,12 @@ nil,
 ["source"] = "飞天小子斯努提",
 ["npcID"] = 230840,
 },
-[1216937] = {
-["source"] = "幽坑太保",
+[421020] = {
+["encounterName"] = "梦境议会",
+["source"] = "乌克托斯",
+["npcID"] = 208363,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 236948,
+["encounterID"] = 2728,
 },
 [255626] = {
 ["isChanneled"] = false,
@@ -51891,10 +51962,13 @@ nil,
 ["source"] = "复活的荣誉卫士",
 ["npcID"] = 127757,
 },
-[384161] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "卡拉希焚钢者",
-["npcID"] = 189464,
+[1225130] = {
+["encounterName"] = "狩魂猎手",
+["source"] = "维拉瑞安·血愤",
+["npcID"] = 237660,
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 3122,
 },
 [400642] = {
 ["encounterName"] = "永恒守护者提尔",
@@ -51904,15 +51978,15 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 198998,
 },
-[453784] = {
+[1216937] = {
+["source"] = "幽坑太保",
 ["event"] = "SPELL_CAST_START",
-["source"] = "征服者欧索什",
-["npcID"] = 222723,
+["npcID"] = 236948,
 },
-[459925] = {
-["source"] = "王宫守卫",
+[451734] = {
+["source"] = "执着的稠蜜",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 222305,
+["npcID"] = 222843,
 },
 [455932] = {
 ["source"] = "心牙",
@@ -51939,13 +52013,10 @@ nil,
 ["source"] = "欧雷米克斯·破焰者",
 ["npcID"] = 222743,
 },
-[271526] = {
-["encounterName"] = "艾泽洛克",
-["source"] = "地怒者",
-["encounterID"] = 2106,
-["isChanneled"] = false,
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 129802,
+[369818] = {
+["source"] = "魁梧的狂战士",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 184020,
 },
 [463052] = {
 ["source"] = "觉醒的方阵兵",
@@ -52012,10 +52083,12 @@ nil,
 ["source"] = "蛛魔暗法师",
 ["npcID"] = 208242,
 },
-[209495] = {
-["source"] = "构造体卫兵",
+[328857] = {
+["encounterName"] = "啸翼",
+["source"] = "啸翼",
+["npcID"] = 164406,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 104270,
+["encounterID"] = 2398,
 },
 [396552] = {
 ["event"] = "SPELL_CAST_START",
@@ -52032,12 +52105,12 @@ nil,
 ["source"] = "黑檀链卫",
 ["npcID"] = 185316,
 },
-[64156] = {
-["encounterName"] = "尤格-萨隆",
-["source"] = "腐蚀触须",
-["npcID"] = 33985,
+[423051] = {
+["encounterName"] = "布朗派克男爵",
+["source"] = "布朗派克男爵",
+["encounterID"] = 2835,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 1143,
+["npcID"] = 207939,
 },
 [404744] = {
 ["encounterName"] = "狱铸者卡扎拉",
@@ -52063,10 +52136,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 207205,
 },
-[265372] = {
-["source"] = "着魔的队长",
+[255567] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 131587,
+["source"] = "特隆加",
+["npcID"] = 128455,
 },
 [267546] = {
 ["source"] = "吵闹的狂欢者",
@@ -52139,10 +52212,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 188067,
 },
-[341133] = {
+[373897] = {
+["source"] = "腐朽老树",
 ["event"] = "SPELL_CAST_START",
-["source"] = "纳斯利亚主教",
-["npcID"] = 174090,
+["npcID"] = 189531,
 },
 [31704] = {
 ["encounterName"] = "黑色阔步者",
@@ -52167,16 +52240,17 @@ nil,
 ["source"] = "暗影碎步者",
 ["npcID"] = 223601,
 },
-[1216826] = {
-["isChanneled"] = true,
-["source"] = "暗索士兵",
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 230748,
-},
-[355464] = {
+[357512] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "踏滨巨人",
-["npcID"] = 178165,
+["source"] = "暴怒的恐角龙",
+["npcID"] = 180495,
+},
+[1225016] = {
+["encounterName"] = "节点之王萨哈达尔",
+["source"] = "节点之王萨哈达尔",
+["npcID"] = 237763,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 3134,
 },
 [396559] = {
 ["event"] = "SPELL_CAST_START",
@@ -52188,10 +52262,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 129214,
 },
-[326794] = {
-["source"] = "审判官西加尔",
+[1225010] = {
+["encounterName"] = "节点之王萨哈达尔",
+["source"] = "节点之王萨哈达尔",
+["npcID"] = 237763,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 167876,
+["encounterID"] = 3134,
 },
 [394512] = {
 ["source"] = "虚空爪牙",
@@ -52221,12 +52297,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 228159,
 },
-[414844] = {
-["encounterName"] = "无头骑士",
-["source"] = "无头骑士",
-["encounterID"] = 2725,
+[1216806] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 207438,
+["source"] = "出故障的打击者",
+["npcID"] = 236895,
 },
 [88427] = {
 ["encounterName"] = "奥拉基尔",
@@ -52241,19 +52315,17 @@ nil,
 ["source"] = "卡拉梅恩",
 ["npcID"] = 173444,
 },
-[386173] = {
-["encounterName"] = "维克萨姆斯",
-["source"] = "维克萨姆斯",
-["encounterID"] = 2562,
+[369791] = {
+["encounterName"] = "失落的矮人",
+["source"] = "迅捷的埃瑞克",
+["encounterID"] = 2555,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 194181,
+["npcID"] = 184582,
 },
-[472178] = {
-["encounterName"] = "独臂盗匪",
-["source"] = "炽焰炸药宝贝",
-["encounterID"] = 3014,
+[1216794] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 231028,
+["source"] = "悬浮灾厄",
+["npcID"] = 236886,
 },
 [414992] = {
 ["event"] = "SPELL_CAST_START",
@@ -52371,17 +52443,19 @@ nil,
 ["source"] = "幽坑太保的亲密好友",
 ["npcID"] = 234901,
 },
-[443500] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "皇家虫群卫士",
-["npcID"] = 220197,
-},
-[375924] = {
+[369781] = {
 ["encounterName"] = "失落的矮人",
 ["source"] = "迅捷的埃瑞克",
 ["encounterID"] = 2555,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 184582,
+},
+[441452] = {
+["encounterName"] = "噬灭者乌格拉克斯",
+["source"] = "噬灭者乌格拉克斯",
+["npcID"] = 215657,
+["event"] = "SPELL_CAST_START",
+["encounterID"] = 2902,
 },
 [455013] = {
 ["source"] = "灵魂疖子",
@@ -52410,12 +52484,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 223654,
 },
-[64152] = {
-["encounterName"] = "尤格-萨隆",
-["source"] = "腐蚀触须",
-["npcID"] = 33985,
+[365682] = {
+["encounterName"] = "圣物匠赛·墨克斯",
+["source"] = "赛财团助战者",
+["npcID"] = 184140,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 1143,
+["encounterID"] = 2553,
 },
 [392474] = {
 ["isChanneled"] = true,
@@ -52442,19 +52516,16 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 190342,
 },
-[423015] = {
-["encounterName"] = "布朗派克男爵",
-["source"] = "布朗派克男爵",
-["encounterID"] = 2835,
+[316532] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 207939,
+["source"] = "自愿的祭品",
+["npcID"] = 162647,
 },
-[355438] = {
-["encounterName"] = "麦扎的绿洲",
-["source"] = "佐·格伦",
-["npcID"] = 176563,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2440,
+[412775] = {
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["source"] = "狄恩",
+["npcID"] = 203646,
 },
 [470290] = {
 ["source"] = "咸潮畸怪",
@@ -52483,13 +52554,13 @@ nil,
 ["source"] = "影袭装货者",
 ["npcID"] = 223866,
 },
-[257596] = {
-["encounterName"] = "艾泽洛克",
-["source"] = "艾泽洛克",
-["encounterID"] = 2106,
-["isChanneled"] = false,
+[1233093] = {
+["encounterName"] = "狩魂猎手",
+["source"] = "阿达拉斯·暮焰",
+["npcID"] = 237661,
+["isChanneled"] = true,
 ["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 129227,
+["encounterID"] = 3122,
 },
 [405870] = {
 ["event"] = "SPELL_CAST_START",
@@ -52544,12 +52615,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2563,
 },
-[257593] = {
-["encounterName"] = "艾泽洛克",
-["source"] = "艾泽洛克",
-["encounterID"] = 2106,
+[1216687] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 129227,
+["source"] = "地精教父",
+["npcID"] = 231821,
 },
 [1217449] = {
 ["event"] = "SPELL_CAST_START",
@@ -52597,17 +52666,17 @@ nil,
 ["source"] = "女王护卫安杰克·夏布提尔",
 ["npcID"] = 219665,
 },
-[291946] = {
-["encounterName"] = "狂犬K.U.-J.0.",
-["source"] = "狂犬K.U.-J.0.",
-["encounterID"] = 2258,
+[1216674] = {
+["encounterName"] = "链齿狂人洛肯斯多",
+["source"] = "虚空炮台",
+["encounterID"] = 3013,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 144246,
+["npcID"] = 231846,
 },
-[463956] = {
-["source"] = "岩浆蛇",
+[275563] = {
+["source"] = "饥影牛蛙",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 215770,
+["npcID"] = 214406,
 },
 [384291] = {
 ["source"] = "旧忆剑龙",
@@ -52749,15 +52818,17 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 3133,
 },
-[204344] = {
+[171580] = {
+["source"] = "钢铁虐待者",
 ["event"] = "SPELL_CAST_START",
-["source"] = "黑爪刺客",
-["npcID"] = 186634,
+["npcID"] = 85748,
 },
-[459849] = {
+[271456] = {
+["encounterName"] = "商业大亨拉兹敦克",
+["source"] = "商业大亨拉兹敦克",
+["encounterID"] = 2108,
 ["event"] = "SPELL_CAST_START",
-["source"] = "女王护卫安杰克·夏布提尔",
-["npcID"] = 219665,
+["npcID"] = 129232,
 },
 [221577] = {
 ["source"] = "星界先知",
@@ -52771,12 +52842,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2888,
 },
-[139838] = {
-["encounterName"] = "墨格瑞拉",
-["source"] = "毒素之头",
-["npcID"] = 70247,
+[263262] = {
+["encounterName"] = "投币式群体打击者",
+["source"] = "页岩啃噬者",
+["encounterID"] = 2105,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 1578,
+["npcID"] = 134005,
 },
 [378155] = {
 ["encounterName"] = "劈爪的战团",
@@ -52823,25 +52894,22 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2708,
 },
-[257582] = {
-["encounterName"] = "艾泽洛克",
-["source"] = "地怒者",
-["encounterID"] = 2106,
+[159290] = {
+["source"] = "日光魔仆",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 129802,
+["npcID"] = 76097,
 },
-[441412] = {
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "亡瓣之花",
-["npcID"] = 206184,
-},
-[472128] = {
-["encounterName"] = "泽克维尔",
-["source"] = "泽克维尔",
-["encounterID"] = 2985,
+[334929] = {
+["encounterName"] = "顽石军团干将",
+["source"] = "卡尔将军",
+["npcID"] = 168112,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 221427,
+["encounterID"] = 2417,
+},
+[308308] = {
+["source"] = "堕落的穿心者",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 158092,
 },
 [1242071] = {
 ["encounterName"] = "缚魂者娜欣达利",
@@ -52856,12 +52924,10 @@ nil,
 ["source"] = "尖翔怨妇",
 ["npcID"] = 184816,
 },
-[269399] = {
-["encounterName"] = "低语者沃尔兹斯",
-["source"] = "低语者沃尔兹斯",
-["encounterID"] = 2133,
+[441410] = {
+["source"] = "工蜂",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 134069,
+["npcID"] = 210265,
 },
 [214692] = {
 ["source"] = "邪恶的格伦斯",
@@ -52940,10 +53006,12 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 3130,
 },
-[175668] = {
-["source"] = "钢铁工人",
+[192050] = {
+["encounterName"] = "瑟芬崔斯克",
+["source"] = "瑟芬崔斯克",
+["npcID"] = 91808,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 87448,
+["encounterID"] = 1813,
 },
 [1242088] = {
 ["encounterName"] = "缚魂者娜欣达利",
@@ -52974,10 +53042,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 186615,
 },
-[1216557] = {
-["source"] = "候补刺客",
+[461880] = {
+["encounterName"] = "凝结聚合体",
+["source"] = "凝结聚合体",
+["npcID"] = 216320,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 225872,
+["encounterID"] = 2905,
 },
 [355638] = {
 ["isChanneled"] = true,
@@ -53033,10 +53103,13 @@ nil,
 ["source"] = "赞达拉缚水者",
 ["npcID"] = 69455,
 },
-[318534] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "幽影守门人",
-["npcID"] = 163708,
+[200238] = {
+["encounterName"] = "萨维斯之影",
+["source"] = "萨维斯之影",
+["npcID"] = 99192,
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 1839,
 },
 [425264] = {
 ["encounterName"] = "代言人夏多克朗",
@@ -53045,11 +53118,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 211087,
 },
-[400443] = {
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["source"] = "石晶塔",
-["npcID"] = 201339,
+[465971] = {
+["source"] = "暗索天火射手",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 227955,
 },
 [355641] = {
 ["event"] = "SPELL_CAST_START",
@@ -53063,34 +53135,37 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2441,
 },
-[441395] = {
-["encounterName"] = "凝结聚合体",
-["source"] = "凝结聚合体",
-["npcID"] = 216320,
+[1241100] = {
+["encounterName"] = "缚魂者娜欣达利",
+["source"] = "缚魂者娜欣达利",
+["encounterID"] = 3130,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2905,
+["npcID"] = 233816,
 },
-[429108] = {
-["encounterName"] = "尼穆威，轮回编织者",
-["source"] = "轮回守望者",
-["npcID"] = 209800,
+[1216525] = {
+["encounterName"] = "链齿狂人洛肯斯多",
+["source"] = "火箭发射器",
+["encounterID"] = 3013,
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2708,
+["npcID"] = 230360,
 },
 [355642] = {
 ["event"] = "SPELL_CAST_START",
 ["source"] = "老练的火花法师",
 ["npcID"] = 179841,
 },
-[1241095] = {
-["source"] = "财宝地精",
+[357436] = {
+["encounterName"] = "麦扎的绿洲",
+["source"] = "维利席安",
+["npcID"] = 180470,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 205490,
+["encounterID"] = 2440,
 },
-[449584] = {
-["event"] = "SPELL_CAST_START",
-["source"] = "猎颅者克鲁基",
-["npcID"] = 218074,
+[465966] = {
+["isChanneled"] = true,
+["source"] = "水能堡食泥者",
+["event"] = "SPELL_CAST_SUCCESS",
+["npcID"] = 231312,
 },
 [419123] = {
 ["encounterName"] = "火光之龙菲莱克",
@@ -53137,10 +53212,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 2612,
 },
-[17228] = {
-["source"] = "相位鞭笞者",
+[398385] = {
+["source"] = "暴怒的炽焰猎犬",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 13196,
+["npcID"] = 207429,
 },
 [453937] = {
 ["encounterName"] = "泽克维尔",
@@ -53183,10 +53258,10 @@ nil,
 ["source"] = "女王护卫吉利克斯",
 ["npcID"] = 211858,
 },
-[441385] = {
+[16102] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "空洞织霜者",
-["npcID"] = 222193,
+["source"] = "影月召唤者",
+["npcID"] = 17395,
 },
 [382749] = {
 ["event"] = "SPELL_CAST_START",
@@ -53215,10 +53290,12 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 3122,
 },
-[443430] = {
+[328756] = {
+["encounterName"] = "英格拉·马洛克",
+["source"] = "英格拉·马洛克",
+["npcID"] = 164567,
 ["event"] = "SPELL_CAST_START",
-["source"] = "苏雷吉缚丝者",
-["npcID"] = 220195,
+["encounterID"] = 2397,
 },
 [426206] = {
 ["encounterName"] = "拉罗达尔，烈焰守护者",
@@ -53249,17 +53326,15 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 75426,
 },
-[1241032] = {
-["encounterName"] = "麦扎的绿洲",
-["source"] = "佐·格伦",
-["npcID"] = 176563,
+[408614] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 2440,
+["source"] = "碎裂湮灭者",
+["npcID"] = 198869,
 },
-[195108] = {
+[406566] = {
+["source"] = "原始熔岩元素",
 ["event"] = "SPELL_CAST_START",
-["source"] = "积怨织雷者",
-["npcID"] = 91783,
+["npcID"] = 202264,
 },
 [153268] = {
 ["source"] = "影月盗墓者",
@@ -53344,12 +53419,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 187159,
 },
-[459799] = {
-["encounterName"] = "破拆双人组",
-["source"] = "布隆特",
-["encounterID"] = 3019,
+[64654] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 226402,
+["source"] = "寒冬滚石",
+["npcID"] = 34135,
 },
 [453946] = {
 ["isChanneled"] = true,
@@ -53357,22 +53430,22 @@ nil,
 ["source"] = "顺服的掠食者",
 ["npcID"] = 247446,
 },
+[396317] = {
+["event"] = "SPELL_CAST_START",
+["source"] = "洛阿玛斯",
+["npcID"] = 199030,
+},
 [109334] = {
 ["source"] = "暮光冰霜塑能师",
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 57807,
 },
-[298025] = {
-["source"] = "军情七处线人",
+[267308] = {
+["encounterName"] = "部族议会",
+["source"] = "智者扎纳扎尔",
+["encounterID"] = 2140,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 156795,
-},
-[1216414] = {
-["encounterName"] = "链齿狂人洛肯斯多",
-["source"] = "光束炮台",
-["encounterID"] = 3013,
-["event"] = "SPELL_CAST_START",
-["npcID"] = 230358,
+["npcID"] = 135472,
 },
 [453947] = {
 ["source"] = "战争主母欧格丽",
@@ -53404,12 +53477,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 193457,
 },
-[451600] = {
-["encounterName"] = "安苏雷克女王",
-["source"] = "内室驱逐者",
-["encounterID"] = 2922,
+[64653] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 224368,
+["source"] = "寒冬亡魂",
+["npcID"] = 34134,
 },
 [460092] = {
 ["event"] = "SPELL_CAST_START",
@@ -53684,12 +53755,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 219022,
 },
-[408576] = {
-["encounterName"] = "被遗忘的实验体",
-["source"] = "里翁苏斯",
-["encounterID"] = 2693,
+[424958] = {
+["encounterName"] = "雷卫戈伦",
+["source"] = "雷卫戈伦",
+["encounterID"] = 2861,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 200918,
+["npcID"] = 207205,
 },
 [423479] = {
 ["source"] = "皇家点芯者",
@@ -53990,10 +54061,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 184581,
 },
-[445407] = {
-["source"] = "游荡的开膛者",
+[355306] = {
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 214551,
+["source"] = "裂隙冲击传送门",
+["npcID"] = 179778,
 },
 [437592] = {
 ["encounterName"] = "安苏雷克女王",
@@ -54245,12 +54316,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 214757,
 },
-[193018] = {
-["encounterName"] = "深须国王",
-["source"] = "深须国王",
-["npcID"] = 91797,
+[328667] = {
 ["event"] = "SPELL_CAST_START",
-["encounterID"] = 1812,
+["source"] = "脆骨法师",
+["npcID"] = 163126,
 },
 [389054] = {
 ["source"] = "奥术抢劫者",
@@ -54305,15 +54374,15 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["encounterID"] = 1813,
 },
-[15587] = {
+[175609] = {
+["source"] = "钢铁缚火者",
 ["event"] = "SPELL_CAST_START",
-["source"] = "影月侍僧",
-["npcID"] = 16594,
+["npcID"] = 87515,
 },
-[1216093] = {
+[123648] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "虚幻眼魔",
-["npcID"] = 230426,
+["source"] = "哈飒克唤风者",
+["npcID"] = 61946,
 },
 [393302] = {
 ["event"] = "SPELL_CAST_START",
@@ -54595,10 +54664,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 129374,
 },
-[428981] = {
+[1232399] = {
+["encounterName"] = "节点之王萨哈达尔",
+["source"] = "法力铸造泰坦",
+["npcID"] = 241800,
 ["event"] = "SPELL_CAST_START",
-["source"] = "被拍卖的往昔纸页",
-["npcID"] = 214069,
+["encounterID"] = 3134,
 },
 [429427] = {
 ["event"] = "SPELL_CAST_START",
@@ -54635,10 +54706,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 216052,
 },
-[1240567] = {
+[455596] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "格拉波尔",
-["npcID"] = 238540,
+["source"] = "巴瑟拉斯镇长",
+["npcID"] = 10435,
 },
 [437620] = {
 ["encounterName"] = "节点女亲王凯威扎",
@@ -54752,10 +54823,12 @@ nil,
 ["source"] = "腐臭橡树",
 ["npcID"] = 231083,
 },
-[410537] = {
-["source"] = "鳞长萨卡雷斯",
+[271290] = {
+["encounterName"] = "殓尸者姆沁巴",
+["source"] = "殓尸者姆沁巴",
+["encounterID"] = 2142,
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 199984,
+["npcID"] = 134993,
 },
 [439673] = {
 ["isChanneled"] = true,
@@ -54794,10 +54867,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 227513,
 },
-[62335] = {
+[1248699] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "黑暗符文助手",
-["npcID"] = 32886,
+["source"] = "废土遗民诉契者",
+["npcID"] = 234955,
 },
 [268846] = {
 ["source"] = "武器测试员",
@@ -54838,13 +54911,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["encounterID"] = 1790,
 },
-[269232] = {
-["encounterName"] = "达萨大王",
-["source"] = "莱班",
-["encounterID"] = 2143,
-["isChanneled"] = true,
-["event"] = "SPELL_CAST_SUCCESS",
-["npcID"] = 136984,
+[400288] = {
+["source"] = "无常剧痛",
+["event"] = "SPELL_CAST_START",
+["npcID"] = 201290,
 },
 [264407] = {
 ["source"] = "无面女仆",
@@ -54877,10 +54947,10 @@ nil,
 ["event"] = "SPELL_CAST_SUCCESS",
 ["npcID"] = 76446,
 },
-[1215905] = {
+[355234] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "葬轮",
-["npcID"] = 234949,
+["source"] = "浊盐鱼术师",
+["npcID"] = 178142,
 },
 [451965] = {
 ["source"] = "熔核巨人",
@@ -54985,10 +55055,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 189232,
 },
-[355225] = {
+[396180] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "浊盐鱼术师",
-["npcID"] = 178142,
+["source"] = "熔岩破坏者",
+["npcID"] = 186836,
 },
 [458113] = {
 ["source"] = "贝雷达尔之威",
@@ -55116,10 +55186,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 207197,
 },
-[441221] = {
+[167385] = {
 ["event"] = "SPELL_CAST_START",
-["source"] = "逃脱的追踪者",
-["npcID"] = 232257,
+["source"] = "地下城训练假人",
+["npcID"] = 92168,
 },
 [458867] = {
 ["encounterName"] = "潜伏者奈拉瑟克",
@@ -55207,10 +55277,12 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 216052,
 },
-[445311] = {
+[259531] = {
+["encounterName"] = "沃卡尔",
+["source"] = "复生图腾",
+["npcID"] = 125977,
 ["event"] = "SPELL_CAST_START",
-["source"] = "影冠钳蟹",
-["npcID"] = 216963,
+["encounterID"] = 2085,
 },
 [191524] = {
 ["event"] = "SPELL_CAST_START",
@@ -55683,12 +55755,13 @@ nil,
 ["source"] = "影卫编织大师",
 ["npcID"] = 240974,
 },
-[346980] = {
-["encounterName"] = "希尔布兰德",
-["source"] = "宝库净化者",
-["npcID"] = 176551,
-["event"] = "SPELL_CAST_START",
-["encounterID"] = 2426,
+[198079] = {
+["encounterName"] = "可恨的斯麦斯帕",
+["source"] = "可恨的斯麦斯帕",
+["npcID"] = 98949,
+["isChanneled"] = true,
+["event"] = "SPELL_CAST_SUCCESS",
+["encounterID"] = 1834,
 },
 [1239665] = {
 ["isChanneled"] = false,
@@ -56002,10 +56075,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 201522,
 },
-[1231937] = {
-["source"] = "掠食者考加拉斯",
+[392006] = {
+["source"] = "病态蛮兵",
 ["event"] = "SPELL_CAST_START",
-["npcID"] = 232077,
+["npcID"] = 186668,
 },
 [429487] = {
 ["encounterName"] = "斯卡丁巨怪",
@@ -56014,10 +56087,10 @@ nil,
 ["event"] = "SPELL_CAST_START",
 ["npcID"] = 207207,
 },
-[1231935] = {
+[387910] = {
+["source"] = "艾杰斯亚回声骑士",
 ["event"] = "SPELL_CAST_START",
-["source"] = "夜色收割者",
-["npcID"] = 232111,
+["npcID"] = 196200,
 },
 [425392] = {
 ["source"] = "火妖狱焰卫士",
@@ -56616,6 +56689,8 @@ PlaterLanguage = {
 }
 PlaterLogs = {
 ["_general_logs"] = {
+"2025-09-25 14:39:54 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 某餃子",
+"2025-09-25 14:37:55 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 某餃子",
 "2025-09-25 08:47:03 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 某餃子",
 "2025-09-25 07:09:26 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 某餃子",
 "2025-09-25 07:05:09 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 某饺子",
@@ -56633,8 +56708,6 @@ PlaterLogs = {
 "2025-09-23 16:21:41 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 凤凰基友之一",
 "2025-09-23 16:18:19 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 开门的搞",
 "2025-09-23 16:14:21 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 迪凯策划没马",
-"2025-09-23 16:10:17 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 这只是饺子",
-"2025-09-23 16:06:43 | INIT | Plater-v615-Retail | Framework v621 | 11.2.0 | zhCN | 三减竖式",
 },
 ["_error_logs"] = {
 },
