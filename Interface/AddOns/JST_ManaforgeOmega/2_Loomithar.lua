@@ -226,9 +226,9 @@ G.Encounters[2686] = {
 						frame.set = 0
 						frame.PYLON_DURATION = 27 -- Time between the Pylons becoming visible (not active) and disappearing
 						
-						frame.text_frame_self_highstacks = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
-						frame.text_frame_group_highstacks = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
-						frame.text_frame_tether = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
+						frame.text_frame_self_highstacks = T.CreateAlertTextShared("bossmod"..frame.config_id.."self_highstacks", 1)
+						frame.text_frame_group_highstacks = T.CreateAlertTextShared("bossmod"..frame.config_id.."group_highstacks", 1)
+						frame.text_frame_tether = T.CreateAlertTextShared("bossmod"..frame.config_id.."tether", 1)
 						frame.text_frame_soak = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
 						function frame:line_up()

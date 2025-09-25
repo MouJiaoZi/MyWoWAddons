@@ -3,7 +3,7 @@ OneRing_Config = nil
 OPie_SavedData = {
 ["CharProfiles"] = {
 },
-["_OPieVersion"] = "Ånd 7.2a (4.135)",
+["_OPieVersion"] = "Ånd 7.3a (4.136)",
 ["_StoreVersion"] = 122,
 ["_GameLocale"] = "zhCN",
 ["CenterActions"] = {
@@ -105,10 +105,10 @@ OPie_SavedData = {
 ["OPieDeletedRings"] = {
 ["RaidSymbols"] = true,
 ["SpecMenu"] = true,
-["WorldMarkers"] = true,
-["CommonTrades"] = true,
 ["OPieAutoQuest"] = true,
+["CommonTrades"] = true,
 ["DKCombat"] = true,
+["WorldMarkers"] = true,
 ["CommonHearth"] = true,
 },
 ["OPieFlagStore"] = {

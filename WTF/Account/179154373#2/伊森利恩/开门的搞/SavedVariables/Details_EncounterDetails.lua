@@ -1,6 +1,26 @@
 
 EncounterDetailsDB = {
 ["chartData"] = {
+[17] = {
+["Raid Damage Done"] = {
+11089,
+12266,
+23234,
+42605,
+33003,
+18703,
+48556,
+57583,
+50560,
+46683,
+50414,
+41679,
+46499,
+29829,
+["max_value"] = 57583,
+["__time"] = 1758615630,
+},
+},
 },
 ["encounter_spells"] = {
 [414843] = {
@@ -50,13 +70,15 @@ EncounterDetailsDB = {
 ["SPELL_DAMAGE"] = true,
 },
 },
-[1604] = {
-["school"] = 1,
+[414851] = {
+["school"] = 4,
 ["type"] = "DEBUFF",
 ["token"] = {
 ["SPELL_AURA_APPLIED"] = true,
+["SPELL_PERIODIC_DAMAGE"] = true,
+["SPELL_CAST_SUCCESS"] = true,
 },
-["source"] = "南瓜士兵",
+["source"] = "无头骑士",
 },
 [414842] = {
 ["school"] = 4,
@@ -74,15 +96,13 @@ EncounterDetailsDB = {
 },
 ["source"] = "无头骑士",
 },
-[414851] = {
-["school"] = 4,
+[1604] = {
+["school"] = 1,
 ["type"] = "DEBUFF",
 ["token"] = {
 ["SPELL_AURA_APPLIED"] = true,
-["SPELL_PERIODIC_DAMAGE"] = true,
-["SPELL_CAST_SUCCESS"] = true,
 },
-["source"] = "无头骑士",
+["source"] = "南瓜士兵",
 },
 },
 ["emotes"] = {

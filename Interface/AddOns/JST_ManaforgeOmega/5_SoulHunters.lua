@@ -92,6 +92,15 @@ G.Encounters[2688] = {
 							if npcID == frame.mobID then
 								T.ShowNameplateExtraTex(unit, "npc237661")
 							end
+						elseif event == "ENCOUNTER_START" then
+							for i, namePlate in ipairs(C_NamePlate.GetNamePlates()) do
+								local unit = namePlate.namePlateUnitToken
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								if npcID and npcID == frame.mobID then
+									T.ShowNameplateExtraTex(unit, "npc237661")
+								end
+							end
 						end
 					end,
 					reset = function(frame, event)
@@ -137,6 +146,15 @@ G.Encounters[2688] = {
 							if npcID == frame.mobID then
 								T.ShowNameplateExtraTex(unit, "npc237660")
 							end
+						elseif event == "ENCOUNTER_START" then
+							for i, namePlate in ipairs(C_NamePlate.GetNamePlates()) do
+								local unit = namePlate.namePlateUnitToken
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								if npcID and npcID == frame.mobID then
+									T.ShowNameplateExtraTex(unit, "npc237660")
+								end
+							end
 						end
 					end,
 					reset = function(frame, event)
@@ -181,6 +199,15 @@ G.Encounters[2688] = {
 							local npcID = select(6, strsplit("-", GUID))
 							if npcID == frame.mobID then
 								T.ShowNameplateExtraTex(unit, "npc237662")
+							end
+						elseif event == "ENCOUNTER_START" then
+							for i, namePlate in ipairs(C_NamePlate.GetNamePlates()) do
+								local unit = namePlate.namePlateUnitToken
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								if npcID and npcID == frame.mobID then
+									T.ShowNameplateExtraTex(unit, "npc237662")
+								end
 							end
 						end
 					end,

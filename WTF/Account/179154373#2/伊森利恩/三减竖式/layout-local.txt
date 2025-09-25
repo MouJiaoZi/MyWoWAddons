@@ -27,6 +27,13 @@ X: 0
 Y: 0
 W: 476
 H: 230
+Frame: DevToolFrame
+FrameLevel: 1
+Anchor: CENTER
+X: 0
+Y: 0
+W: 750
+H: 500
 Frame: HeroTalentsSelectionDialog
 FrameLevel: 1
 Anchor: CENTER
@@ -34,10 +41,3 @@ X: 0
 Y: 63
 W: 970
 H: 832
-Frame: PlayerSpellsFrame
-FrameLevel: 1
-Anchor: TOP
-X: -41
-Y: -11
-W: 1618
-H: 883

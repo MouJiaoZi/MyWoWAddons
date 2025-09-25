@@ -21,7 +21,7 @@
 	tDeleteItem(table, element)
 	
 	tIndexOf(table, element)
-	tContains(table, element)	
+	tContains(table, element)
 	
 	CountTable(tbl)
 	TableUtil.FindMin(tbl, op)

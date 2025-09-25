@@ -539,7 +539,28 @@ G.NameplateTextures = {
 		fs = 16,
 		fc = {1, .72, .12},
 	},
+	value = {
+		y_offset = -25,
+		w = 35,
+		h = 12,
+		tex = G.media.blank,
+		fs = 12,
+		text = "?",
+	},
 }
+
+local GetNameplateFrame = function(unit, GUID)
+	if not unit then return end
+	
+	local GUID = GUID or UnitGUID(unit)
+	if not G.Textured_GUIDs[GUID] then return end
+	
+	local namePlate = C_NamePlate.GetNamePlateForUnit(unit)
+	if namePlate and namePlate.jstuf then
+		return namePlate.jstuf
+	end
+end
+T.GetNameplateFrame = GetNameplateFrame
 
 local ShowNameplateExtraTex = function(unit, tex, GUID)
 	local GUID = GUID or UnitGUID(unit)
@@ -556,38 +577,58 @@ local ShowNameplateExtraTex = function(unit, tex, GUID)
 	if namePlate and namePlate.jstuf then
 		local info = G.NameplateTextures[tex]
 		
-		if info.w and info.h then
-			namePlate.jstuf.plate_texture:SetSize(info.w, info.h)
+		local w = info.w or 50
+		local h = info.h or 50
+		namePlate.jstuf.plate_texture:SetSize(w, h)			
+
+		local x_offset = info.x_offset or 0
+		local y_offset = info.y_offset or 0
+		namePlate.jstuf.plate_texture:SetPoint("TOP", namePlate.jstuf, "BOTTOM", 0+x_offset, -50+y_offset)
+		
+		if info.w and info.h and (info.atlas or info.tex) then
 			if info.atlas then
 				namePlate.jstuf.plate_texture:SetAtlas(info.atlas)
 			elseif info.tex then
 				namePlate.jstuf.plate_texture:SetTexture(info.tex)
 			end
+			
 			if info.color then
 				namePlate.jstuf.plate_texture:SetVertexColor(unpack(info.color))
 			else
 				namePlate.jstuf.plate_texture:SetVertexColor(1, 1, 1)
 			end
+			
 			if info.desaturated then
 				namePlate.jstuf.plate_texture:SetDesaturated(true)
 			else
 				namePlate.jstuf.plate_texture:SetDesaturated(false)
 			end
+			
 			namePlate.jstuf.plate_texture:Show()
 		else
 			namePlate.jstuf.plate_texture:Hide()
 		end
 		
-		if info.bg_w and info.bg_h then
+		if info.bg_w and info.bg_h and (info.bg_atlas or info.bg_tex) then
 			namePlate.jstuf.plate_bgtex:SetSize(info.bg_w, info.bg_h)
 			if info.bg_atlas then
 				namePlate.jstuf.plate_bgtex:SetAtlas(info.bg_atlas)
 			elseif info.bg_tex then
 				namePlate.jstuf.plate_bgtex:SetTexture(info.bg_tex)
 			end
+			
 			if info.bg_color then
 				namePlate.jstuf.plate_bgtex:SetVertexColor(unpack(info.bg_color))
+			else
+				namePlate.jstuf.plate_bgtex:SetVertexColor(1, 1, 1)
 			end
+			
+			if info.bg_desaturated then
+				namePlate.jstuf.plate_bgtex:SetDesaturated(true)
+			else
+				namePlate.jstuf.plate_bgtex:SetDesaturated(false)
+			end
+			
 			namePlate.jstuf.plate_bgtex:Show()
 		else
 			namePlate.jstuf.plate_bgtex:Hide()
@@ -595,12 +636,19 @@ local ShowNameplateExtraTex = function(unit, tex, GUID)
 		
 		if info.text then
 			namePlate.jstuf.plate_text:SetText(info.text)
+			
 			if info.fs then
 				namePlate.jstuf.plate_text:SetFont(G.Font, info.fs, "OUTLINE")
+			else
+				namePlate.jstuf.plate_text:SetFont(G.Font, 20, "OUTLINE")
 			end
+			
 			if info.fc then
 				namePlate.jstuf.plate_text:SetTextColor(unpack(info.fc))
+			else
+				namePlate.jstuf.plate_text:SetTextColor(1, 1, 1)
 			end
+			
 			namePlate.jstuf.plate_text:Show()
 		else
 			namePlate.jstuf.plate_text:Hide()
@@ -2017,112 +2065,7 @@ local function ResetPersonalSpellAlertBase(frame)
 	frame:RemoveCheck()
 end
 T.ResetPersonalSpellAlertBase = ResetPersonalSpellAlertBase
---------------------------------------------------------
---------------  [首领模块]自保技能提示 AURA ------------
---------------------------------------------------------
--- event: UNIT_AURA_ADD
--- event: UNIT_AURA_REMOVED
--- event: UNIT_AURA_UPDATE
 
---		frame.aura_spellIDs = {
---			[8936] = 0, -- 忽略层数
---			[774] = 2,
---		}
---		frame.ignore_roles = {"TANK"} -- 忽略的职业
---		frame.threshold = 65
-
-T.InitPersonalSpellAlertbyAura = function(frame)	
-	CreatePersonalSpellAlertBase(frame)
-end
-
-T.UpdatePersonalSpellAlertbyAura = function(frame, event, ...)
-	if event == "UNIT_AURA_ADD" then
-		local unit, spellID, auraID = ...
-		if unit == "player" and frame.aura_spellIDs[spellID] then
-			local check_stack = frame.aura_spellIDs[spellID]
-			if check_stack == 0 then
-				frame:ActiveCheck()
-			else
-				local aura_data = C_UnitAuras.GetAuraDataByAuraInstanceID("player", auraID)
-				if aura_data and aura_data.applications >= check_stack then
-					frame:ActiveCheck()
-				end
-			end
-		end
-	elseif event == "UNIT_AURA_UPDATE" then
-		local unit, spellID, auraID = ...
-		if unit == "player" and frame.aura_spellIDs[spellID] then
-			local check_stack = frame.aura_spellIDs[spellID]
-			if check_stack > 0 then
-				local aura_data = C_UnitAuras.GetAuraDataByAuraInstanceID("player", auraID)
-				if aura_data and aura_data.applications >= check_stack then
-					frame:ActiveCheck()
-				else
-					frame:RemoveCheck()
-				end
-			end
-		end
-	elseif event == "UNIT_AURA_REMOVED" then
-		local unit, spellID, auraID = ...
-		if unit == "player" and frame.aura_spellIDs[spellID] then
-			frame:RemoveCheck()
-		end
-	elseif event == "ENCOUNTER_START" then
-		for spellID in pairs(frame.aura_spellIDs) do
-			T.RegisterWatchAuraSpellID(spellID)
-		end
-		frame.check = false
-	end
-end
-
-T.ResetPersonalSpellAlertbyAura = function(frame)
-	for spellID in pairs(frame.aura_spellIDs) do
-		T.UnregisterWatchAuraSpellID(spellID)
-	end
-	ResetPersonalSpellAlertBase(frame)
-end
---------------------------------------------------------
---------------  [首领模块]自保技能提示 CLEU ------------
---------------------------------------------------------
--- event: COMBAT_LOG_EVENT_UNFILTERED
-
---		frame.spellIDs = {
---			[8936] = {
---				event = "SPELL_AURA_APPLIED",
---				target_me = true, -- 目标是我
---				dur = 4.5, -- 持续时间
---			},
---		}
---		frame.ignore_roles = {"TANK"} -- 忽略的职业
---		frame.threshold = 65
-
-
-
-T.InitPersonalSpellAlertbyCLEU = function(frame)	
-	CreatePersonalSpellAlertBase(frame)
-end
-
-T.UpdatePersonalSpellAlertbyCLEU = function(frame, event, ...)
-	if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-		local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
-		if frame.spellIDs and frame.spellIDs[spellID] and sub_event == frame.spellIDs[spellID]["event"] then -- 开始
-			if not frame.spellIDs[spellID]["target_me"] or G.PlayerGUID == destGUID then
-				frame:ActiveCheck()
-				
-				local dur = frame.spellIDs[spellID].dur
-				C_Timer.After(dur, function()
-					frame:RemoveCheck()
-				end)
-			end
-		end
-	elseif event == "ENCOUNTER_START" then
-		frame.check = false
-	end
-end
-
-T.ResetPersonalSpellAlertbyCLEU = function(frame)
-	ResetPersonalSpellAlertBase(frame)
-end
 --------------------------------------------------------
 ---------  [首领模块]法术圆圈计时器模板 CLEU -----------
 --------------------------------------------------------
@@ -2698,6 +2641,7 @@ end
 
 local InitUnitFrameMod = function(frame)
 	frame.bars = {}
+	frame.sort_bars = {}
 	frame.watched_auraTypes = {}
 	
 	T.GetBarsCustomData(frame)
@@ -2711,8 +2655,18 @@ local InitUnitFrameMod = function(frame)
 	end
 	
 	function frame:lineup()
+		self.sort_bars = table.wipe(self.sort_bars)
+		
+		for _, bar in pairs(self.bars) do
+			table.insert(self.sort_bars, bar)
+		end
+		
+		if frame.sort then
+			frame:sort()
+		end
+		
 		local lastbar
-		for GUID, bar in pairs(self.bars) do
+		for GUID, bar in pairs(self.sort_bars) do
 			bar:ClearAllPoints()
 			if not lastbar then
 				bar:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
@@ -3106,6 +3060,7 @@ end
 --		frame:post_update_health(bar, unit)
 -- 		frame:post_update_absorb(bar, unit)
 --		frame:post_update_name(bar, unit)
+--		frame:sort() -- 排序
 
 --		frame.npcIDs = {
 --			["182822"] = {n = "", color = {0, .3, .1}}, -- NpcID 名字，颜色
@@ -3287,6 +3242,7 @@ end
 
 --		frame:post_update_power(bar, unit)
 --		frame:post_update_name(bar, unit)
+--		frame:sort() -- 排序
 
 --		frame.npcIDs = {
 --			["182822"] = {n = "", color = {0, .3, .1}}, -- NpcID 名字，颜色
@@ -3416,6 +3372,7 @@ end
 -- 		frame:post_update_absorb(bar, unit)
 --		frame:post_update_power(bar, unit)
 --		frame:post_update_name(bar, unit)
+--		frame:sort() -- 排序
 
 --		frame.npcIDs = {
 --			["182822"] = {n = "", color = {0, .3, .1}, color2 = {1, 1, 0}}, -- NpcID 名字，颜色

@@ -65,13 +65,6 @@ EncounterDetailsDB = {
 ["__time"] = 1729913255,
 },
 },
-[14] = {
-["Raid Damage Done"] = {
-773,
-["max_value"] = 773,
-["__time"] = 1729913256,
-},
-},
 },
 ["encounter_spells"] = {
 [415047] = {
@@ -84,13 +77,11 @@ EncounterDetailsDB = {
 },
 ["source"] = "无头骑士",
 },
-[414851] = {
+[414844] = {
 ["school"] = 4,
-["type"] = "DEBUFF",
 ["token"] = {
-["SPELL_AURA_APPLIED"] = true,
-["SPELL_PERIODIC_DAMAGE"] = true,
 ["SPELL_CAST_SUCCESS"] = true,
+["SPELL_CAST_START"] = true,
 },
 ["source"] = "无头骑士",
 },
@@ -102,11 +93,9 @@ EncounterDetailsDB = {
 },
 ["source"] = "无头骑士",
 },
-[415262] = {
-["school"] = 32,
+[414842] = {
+["school"] = 4,
 ["token"] = {
-["SPELL_CAST_START"] = true,
-["SPELL_CAST_SUCCESS"] = true,
 ["SPELL_DAMAGE"] = true,
 },
 ["source"] = "无头骑士",
@@ -119,18 +108,22 @@ EncounterDetailsDB = {
 },
 ["source"] = "南瓜士兵",
 },
-[414842] = {
-["school"] = 4,
+[415262] = {
+["school"] = 32,
 ["token"] = {
+["SPELL_CAST_START"] = true,
+["SPELL_CAST_SUCCESS"] = true,
 ["SPELL_DAMAGE"] = true,
 },
 ["source"] = "无头骑士",
 },
-[414844] = {
+[414851] = {
 ["school"] = 4,
+["type"] = "DEBUFF",
 ["token"] = {
+["SPELL_AURA_APPLIED"] = true,
+["SPELL_PERIODIC_DAMAGE"] = true,
 ["SPELL_CAST_SUCCESS"] = true,
-["SPELL_CAST_START"] = true,
 },
 ["source"] = "无头骑士",
 },

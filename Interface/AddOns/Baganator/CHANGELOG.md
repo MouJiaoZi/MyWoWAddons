@@ -1,7 +1,7 @@
 # Baganator
 
-## [743](https://github.com/TheMouseNest/Baganator/tree/743) (2025-09-17)
-[Full Changelog](https://github.com/TheMouseNest/Baganator/compare/742...743) 
+## [754](https://github.com/TheMouseNest/Baganator/tree/754) (2025-09-24)
+[Full Changelog](https://github.com/TheMouseNest/Baganator/compare/753...754) 
 
-- Retail: Bank: Combine stacks first before prioritising tabs for right-click  
-- Rename Main.lua -> Initialize.lua where appropriate  
+- Always show deposit buttons in bank if "Show buttons when holding alt" enabled  
+- Categories: Prioritise default "Quest" category slightly  

@@ -5,7 +5,7 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 ["profiles"] = {
 ["凤凰基友之四 - 凤凰之神"] = {
-["version"] = "11.0.5",
+["version"] = "11.2.0",
 },
 },
 }

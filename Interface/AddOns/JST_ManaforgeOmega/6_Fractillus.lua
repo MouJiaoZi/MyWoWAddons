@@ -16,6 +16,7 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["消墙错误"] = "%s 消墙位置出错(%s)，实际消了%s。"
 	L["显示方向和距离"] = "显示方向和距离"
 	L["格子数"] = "%d格"
+	L["下个坦克墙"] = "下个坦克墙"
 elseif G.Client == "ruRU" then
 	--L["出墙"] = "Spawn wall"
 	--L["消墙"] = "Break wall"
@@ -27,6 +28,7 @@ elseif G.Client == "ruRU" then
 	--L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
 	--L["显示方向和距离"] = "Display direction and distance"
 	--L["格子数"] = "%d column"
+	--L["下个坦克墙"] = "Next tank wall"
 else
 	L["出墙"] = "Spawn wall"
 	L["消墙"] = "Break wall"
@@ -38,6 +40,7 @@ else
 	L["消墙错误"] = "%s wall break position error (%s), actually breaked %s."
 	L["显示方向和距离"] = "Display direction and distance"
 	L["格子数"] = "%d column"
+	L["下个坦克墙"] = "Next tank wall"
 end
 ---------------------------------Notes--------------------------------
 
@@ -336,7 +339,7 @@ G.Encounters[2747] = {
 					spellID = 1233416,
 					enable_tag = "spell",
 					name = L["出墙消墙位置分配"].." "..string.format(L["使用标记%s"], T.FormatRaidMark("1,2,3,4,5,6")),
-					points = {a1 = "TOPLEFT", a2 = "CENTER", x = 300, y = 340, width = 200, height = 200},
+					points = {a1 = "BOTTOMLEFT", a2 = "CENTER", x = 210, y = 250, width = 200, height = 200},
 					events = {
 						["UNIT_SPELLCAST_SUCCEEDED"] = true,
 						["UNIT_SPELLCAST_START"] = true,
@@ -362,19 +365,7 @@ G.Encounters[2747] = {
 						},
 						{
 							key = "mrt_analysis_btn",
-						},
-						{
-							key = "safe_dur_sl",
-							text = L["安全区文字持续时间"],
-							default = 30,
-							min = 5,
-							max = 50,
-						},
-						{
-							key = "tank_advance_bool",
-							text = L["提前5秒提示坦克墙位置"],
-							default = false,
-						},
+						},	
 						{
 							key = "direction_bool",
 							text = L["显示方向和距离"],
@@ -408,13 +399,19 @@ G.Encounters[2747] = {
 								end
 							end,
 						},
+						{
+							key = "safe_dur_sl",
+							text = L["安全区文字持续时间"],
+							default = 30,
+							min = 5,
+							max = 50,
+						},
 					},
 					init = function(frame)
 						T.GetScaleCustomData(frame)
 						
 						frame.tankSpawnCount = 1
-						frame.waitng_tankSpawn = false
-
+						
 						frame.spawns = {}
 						frame.tankSpawns = {}
 						frame.breaks = {}
@@ -432,6 +429,7 @@ G.Encounters[2747] = {
 						frame.wallAssigned = {}
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
+						frame.text_frame_tankwall = T.CreateAlertTextShared("bossmod"..frame.config_id.."tankwall", 1)
 						
 						frame.graphs = {}
 						frame.graph_bg = CreateFrame("Frame", nil, frame)
@@ -466,10 +464,7 @@ G.Encounters[2747] = {
 						end
 						
 						T.UpdateGraphTextures(frame, frame.graph_bg)
-						
-						frame.graph_bg:SetAllPoints(frame)
-						frame.graph_bg:Hide()
-										
+								
 						frame.arrowframe = T.GetArrowFrame(frame)
 						frame.arrowframe:Hide()
 						
@@ -563,12 +558,14 @@ G.Encounters[2747] = {
 							table.sort(bar.playersAssign)
 							for i, GUID in pairs(bar.playersAssign) do
 								local info = T.GetGroupInfobyGUID(GUID)
-								local role = info.role == "TANK" and T.GetFlagIconStr("0") or ""
-								local format_name = info.format_name or "?"
-								if i == 1 then
-									strAssign = strAssign..role..format_name
-								else
-									strAssign = strAssign.."\n"..role..format_name
+								if info then
+									local role = info.role == "TANK" and T.GetFlagIconStr("0") or ""
+									local format_name = info.format_name or "?"
+									if i == 1 then
+										strAssign = strAssign..role..format_name
+									else
+										strAssign = strAssign.."\n"..role..format_name
+									end
 								end
 							end
 							bar.nameAssign:SetText(strAssign)
@@ -684,61 +681,54 @@ G.Encounters[2747] = {
 							if assignmentType == "SPAWN" then
 								if GUID == G.PlayerGUID then
 									self:Display(position, string.format("|cff4EE8FF%s|r", L["出墙"]))
-									local exp_time = select(6, AuraUtil.FindAuraBySpellID(1233411, "player", "HARMFUL")) -- 结晶震荡波
-									if exp_time then
-										local dur = exp_time - GetTime()
-										self:UpdateAssign(assignmentType, position, dur)
+								end
+								
+								if not preview then
+									if GUID == G.PlayerGUID then
+										self:UpdateAssign(assignmentType, position, tank and 4 or 10)
 										self:UpdateDirection()
 										
 										if not tank then
 											T.SendChatMsg(L["出墙"]..string.format("{rt%d}", position), 5, "SAY")
 										else
-											self.waitng_tankSpawn = true
 											T.SendChatMsg(L["坦克"]..L["出墙"]..string.format("{rt%d}", position), 5, "SAY")
 										end
 										
 										T.PlaySound("mark\\mark"..position)
 									end
-								end
-								if not preview then
-									local info = T.GetGroupInfobyGUID(GUID)
-									if info then
-										if not tank then
-											local ind = mod(self.spawns_count, 2) == 1 and 1 or 3
-											T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, ind, info.format_name, L["出墙"], T.FormatRaidMark(position)))
-											self.wallAssigned[position] = self.wallAssigned[position] + 1
-											self.spawnGUIDs[GUID] = position
-											T.FireEvent("JST_CUSTOM", frame.config_id)
-										else
-											T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 2, info.format_name, L["坦克"]..L["出墙"], T.FormatRaidMark(position)))
-											self.wallAssigned[position] = self.wallAssigned[position] + self.tankSpawnCount
-											self.spawnTankGUIDs[GUID] = position
-											T.FireEvent("JST_CUSTOM", frame.config_id)
-										end
+									
+									if not tank then
+										local ind = mod(self.spawns_count, 2) == 1 and 1 or 3
+										T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, ind, T.ColorNickNameByGUID(GUID), L["出墙"], T.FormatRaidMark(position)))
+										self.wallAssigned[position] = self.wallAssigned[position] + 1
+										self.spawnGUIDs[GUID] = position
+									else
+										T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 2, T.ColorNickNameByGUID(GUID), L["坦克"]..L["出墙"], T.FormatRaidMark(position)))
+										self.wallAssigned[position] = self.wallAssigned[position] + self.tankSpawnCount
+										self.spawnTankGUIDs[GUID] = position
 									end
+									
+									T.FireEvent("JST_CUSTOM", frame.config_id)
 								end
 							else
 								if GUID == G.PlayerGUID then
 									self:Display(position, string.format("|cffFF1D2D%s|r", L["消墙"]))
-									local exp_time = select(6, AuraUtil.FindAuraBySpellID(1227373, "player", "HARMFUL")) -- 碎壳
-									if exp_time then
-										local dur = exp_time - GetTime()
-										self:UpdateAssign(assignmentType, position, dur)
+								end
+								
+								if not preview then
+									if GUID == G.PlayerGUID then
+										self:UpdateAssign(assignmentType, position, 6)
 										self:UpdateDirection()
 										
 										T.SendChatMsg(L["消墙"]..string.format("{rt%d}", position), 5, "YELL")
 										
 										T.PlaySound("mark\\mark"..position)
 									end
-								end
-								if not preview then
-									local info = T.GetGroupInfobyGUID(GUID)
-									if info then
-										T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 4, info.format_name, L["消墙"], T.FormatRaidMark(position)))
-										self.wallAssigned[position] = self.wallAssigned[position] - 1
-										self.breakGUIDs[GUID] = position
-										T.FireEvent("JST_CUSTOM", frame.config_id)
-									end
+									
+									T.msg(string.format("[%d-%d]%s%s%s", self.rotation_count, 4, T.ColorNickNameByGUID(GUID), L["消墙"], T.FormatRaidMark(position)))
+									self.wallAssigned[position] = self.wallAssigned[position] - 1
+									self.breakGUIDs[GUID] = position
+									T.FireEvent("JST_CUSTOM", frame.config_id)
 								end
 							end
 						end
@@ -759,6 +749,58 @@ G.Encounters[2747] = {
 								end
 							end
 						end
+						
+						function frame:StartTankWallCountdown(dur)
+							if UnitGroupRolesAssigned("player") ~= "TANK" then return end
+							
+							local tankwall = self.text_frame_tankwall
+							local position = self.tankSpawns[1]
+							
+							tankwall.exp_time = GetTime() + dur
+							tankwall.show_time = 10
+							tankwall.cur_text = string.format("%s %s", L["下个坦克墙"], T.FormatRaidMark(position))
+							
+							if dur > tankwall.show_time then
+								tankwall.collapse = true
+							else
+								tankwall.collapse = false
+							end
+							
+							tankwall.text:SetText("")
+							tankwall:Show()
+							
+							tankwall:SetScript("OnUpdate", function(s, e)
+								s.t = s.t + e
+								if s.t > 0.05 then
+									s.remain = s.exp_time - GetTime()
+									if s.remain > s.show_time then
+										s.text:SetText("")
+										if not s.collapse then
+											s.collapse = true
+											T.LineUpTexts(s.group)
+										end
+									elseif s.remain > 0 then
+										local isTanking = UnitDetailedThreatSituation("player", "boss1")
+										if isTanking then
+											if s.collapse then
+												s.collapse = false
+												T.LineUpTexts(s.group)
+											end
+										else
+											if not s.collapse then
+												s.collapse = true
+												T.LineUpTexts(s.group)
+											end
+										end
+										s.text:SetText(string.format("%s %.1f", s.cur_text, s.remain))
+									else
+										s:Hide()
+										s:SetScript("OnUpdate", nil)
+									end
+									s.t = 0
+								end
+							end)
+						end	
 						
 						local normalDefault = [[
 							+ 1 1 0 1 0 0 (3)
@@ -1130,7 +1172,7 @@ G.Encounters[2747] = {
 							if C.DB["BossMod"][self.config_id]["rl_bool"] then
 								self.rl_frame:Hide()
 							end
-						end						
+						end
 					end,
 					update = function(frame, event, ...)
 						if event == "ENCOUNTER_START" then
@@ -1141,7 +1183,6 @@ G.Encounters[2747] = {
 							else
 								frame.tankSpawnCount = 1
 							end
-							frame.waitng_tankSpawn = false
 							
 							frame.spawnGUIDs = table.wipe(frame.spawnGUIDs)
 							frame.spawnTankGUIDs = table.wipe(frame.spawnTankGUIDs)
@@ -1176,13 +1217,8 @@ G.Encounters[2747] = {
 								frame.rl_frame:Show()
 							end
 							
-							if C.DB["BossMod"][frame.config_id]["tank_advance_bool"] then
-								local first_dur = frame.difficultyID == 16 and 16 or 18
-								local wait = first_dur - 5
-								frame.timer = C_Timer.NewTimer(wait, function()
-									frame:DisplayTankSpawn()
-								end)
-							end
+							local tank_dur = frame.difficultyID == 16 and 16 or 18
+							frame:StartTankWallCountdown(tank_dur)
 							
 							T.FireEvent("JST_CUSTOM", frame.config_id)
 							
@@ -1194,14 +1230,10 @@ G.Encounters[2747] = {
 							if unit == "boss1" then
 								if spellID == 1233416 then -- 结晶震荡波
 									frame.safespot = table.remove(frame.safespots, 1)
-									
-									if not frame.waitng_tankSpawn then
-										frame:DisplaySafe(frame.safespot)
-									end
+									frame:DisplaySafe(frame.safespot)
 								elseif spellID == 1231871 then -- 震波猛击
 									frame.safespot = table.remove(frame.safespots, 1)
 									frame:DisplaySafe(frame.safespot)
-									frame.waitng_tankSpawn = false
 								elseif spellID == 1220394 then -- 粉碎抽打
 									frame:DisplaySafe(frame.safespot)
 								end
@@ -1210,27 +1242,13 @@ G.Encounters[2747] = {
 						elseif event == "UNIT_SPELLCAST_START" then
 							local unit, castGUID, spellID = ...
 							
+							if not castGUID then return end
+							
 							if unit == "boss1" and spellID == 1231871 then -- 震波猛击
-								if C.DB["BossMod"][frame.config_id]["tank_advance_bool"] then
-									local tank_dur = frame.difficultyID == 16 and 40 or 51
-									local wait = tank_dur - 5
-									frame.timer = C_Timer.NewTimer(wait, function()
-										frame:DisplayTankSpawn()
-									end)
-								else
-									frame:DisplayTankSpawn()
-								end
+								frame:DisplayTankSpawn()
 								
-								for unit in T.IterateGroupMembers() do
-									local isTanking = UnitDetailedThreatSituation(unit, "boss1")
-									
-									if isTanking then
-										local GUID = UnitGUID(unit)
-										frame.spawnTankGUIDs[GUID] = 0
-										T.FireEvent("JST_CUSTOM", frame.config_id)
-										return
-									end
-								end
+								local tank_dur = frame.difficultyID == 16 and 40 or 51
+								frame:StartTankWallCountdown(tank_dur)
 							end
 							
 						elseif event == "JST_CUSTOM" then
@@ -1341,6 +1359,7 @@ G.Encounters[2747] = {
 						end
 						
 						T.Stop_Text_Timer(frame.text_frame)
+						T.Stop_Text_Timer(frame.text_frame_tankwall)
 						frame.graph_bg:Hide()
 						
 						if C.DB["BossMod"][frame.config_id]["rl_bool"] then

@@ -35,15 +35,15 @@ else
 end
 
 G.media = {
+	arrow = "Interface\\AddOns\\JST\\media\\arrow",
 	blank = "Interface\\Buttons\\WHITE8x8",
-	logo = "Interface\\AddOns\\JST\\media\\logo.png",
-	ring = "Interface\\AddOns\\JST\\media\\ring",
 	circle = "Interface\\AddOns\\JST\\media\\circle",
-	red_arrow = "Interface\\AddOns\\JST\\media\\arrow",
-	triangle = "Interface\\AddOns\\JST\\media\\triangle",
+	logo = "Interface\\AddOns\\JST\\media\\logo.png",
 	overlay1 = "Interface\\AddOns\\JST\\media\\overlay_indicator_1",
 	overlay2 = "Interface\\AddOns\\JST\\media\\overlay_indicator_2",
 	overlay3 = "Interface\\AddOns\\JST\\media\\overlay_indicator_3",
+	ring = "Interface\\AddOns\\JST\\media\\ring",
+	triangle = "Interface\\AddOns\\JST\\media\\triangle",
 }
 
 --====================================================--

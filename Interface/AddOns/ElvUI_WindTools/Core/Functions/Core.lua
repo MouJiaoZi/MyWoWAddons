@@ -13,6 +13,7 @@ local pairs = pairs
 local pcall = pcall
 local print = print
 local strfind = strfind
+local strjoin = strjoin
 local strmatch = strmatch
 local tonumber = tonumber
 local tostring = tostring
@@ -70,8 +71,8 @@ function F.SetFontOutline(text, font, size)
 	end
 	local fontName, fontHeight = text:GetFont()
 
-	if size and type(size) == "string" then
-		size = fontHeight + tonumber(size)
+	if type(size) == "string" then
+		size = fontHeight + (tonumber(size) or 0)
 	end
 
 	if font and not strfind(font, "%.ttf") and not strfind(font, "%.otf") then
@@ -85,10 +86,10 @@ end
 
 ---Create colored string from database settings
 ---@param text string The text to colorize
----@param db table Color database containing r, g, b values
+---@param db RGB Color database containing r, g, b values
 ---@return string? coloredText The colored string or nil if parameters are invalid
 function F.CreateColorString(text, db)
-	if not text or not type(text) == "string" then
+	if not text or type(text) ~= "string" then
 		F.Developer.LogDebug("Functions.CreateColorString: text not found")
 		return
 	end
@@ -108,7 +109,7 @@ end
 ---@param classFile ClassFile? The English class name (e.g., "WARRIOR", "MAGE")
 ---@return string? coloredText The class colored string or nil if parameters are invalid
 function F.CreateClassColorString(text, classFile)
-	if not text or not type(text) == "string" then
+	if not text or type(text) ~= "string" then
 		F.Developer.LogDebug("Functions.CreateClassColorString: text not found")
 		return
 	end
@@ -154,14 +155,9 @@ function F.PrintGradientLine()
 end
 
 ---Print message with WindTools title prefix
----@param text string? The text to print
-function F.Print(text)
-	if not text then
-		return
-	end
-
-	local message = format("%s: %s", W.Title, text)
-	print(message)
+---@param ... string|number Message parts to print
+function F.Print(...)
+	print(format("%s: %s", W.Title, strjoin(" ", ...)))
 end
 
 ---Delay unhook all hooks from a module
@@ -180,14 +176,6 @@ function F.DelayUnhookAll(module)
 	else
 		F.Developer.LogDebug("Functions.DelayUnhookAll: Module not found!")
 	end
-end
-
----Round a number to specified decimal places
----@param number number The number to round
----@param decimals number Number of decimal places
----@return string roundedNumber The rounded number as string
-function F.Round(number, decimals)
-	return format(format("%%.%df", decimals), number)
 end
 
 ---Set callback with retry mechanism
@@ -323,8 +311,13 @@ local throttleStates = {}
 ---@param func function The function to throttle
 ---@param ... any Arguments to pass to the function
 function F.Throttle(duration, key, func, ...)
-	if type(duration) ~= "number" or duration <= 0 then
+	if type(duration) ~= "number" or duration < 0 then
 		F.Developer.ThrowError("Invalid duration for F.Throttle: must be a positive number")
+	end
+
+	if duration == 0 then
+		func(...) -- No throttling (only for testing purpose)
+		return
 	end
 
 	if type(func) ~= "function" then
@@ -363,6 +356,27 @@ function F.Throttle(duration, key, func, ...)
 	end)
 end
 
+---Create a throttled version of a function
+---@param duration number Duration in seconds to throttle
+---@param func function The function to throttle
+---@return function throttledFunction The throttled version of the function
+function F.ThrottleFunction(duration, func)
+	return function(...)
+		F.Throttle(duration, func, func, ...)
+	end
+end
+
+---Cancel throttle for a specific key
+---@param key any The throttle key to cancel
+function F.CancelThrottle(key)
+	local state = throttleStates[key]
+	if state and state.timer then
+		state.timer:Cancel()
+		state.timer = nil
+		state.isThrottling = false
+	end
+end
+
 ---Wait for condition to be true, then execute callback
 ---@param condition function Function that returns boolean when condition is met
 ---@param callback function Function to execute when condition is true
@@ -376,7 +390,11 @@ function F.WaitFor(condition, callback, interval, maxTimes)
 		local leftTimes = maxTimes
 
 		while leftTimes > 0 do
-			if condition() then
+			local success, result = pcall(condition)
+			if success and result then
+				if type(result) == "string" and result == "end" then
+					break
+				end
 				callback()
 				return
 			end

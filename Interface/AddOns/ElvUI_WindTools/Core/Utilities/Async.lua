@@ -10,6 +10,8 @@ local GetAchievementInfo = GetAchievementInfo
 local Item = Item
 local Spell = Spell
 
+local C_Item_GetItemInfoInstant = C_Item.GetItemInfoInstant
+
 ---@cast F Functions
 
 ---@class AsyncUtility Asynchronous operation utilities
@@ -23,9 +25,12 @@ local cache = {
 	spell = {},
 }
 
----Load item data asynchronously and execute callback
+
+---@alias ItemCallback fun(itemInstance:ItemMixin)
+
+---Load item data asynchronously and execute callback by item ID
 ---@param itemID number The item ID to load
----@param callback function? Callback function to execute when item is loaded
+---@param callback ItemCallback? Callback function to execute when item is loaded
 ---@return any? item Cached item data if available
 function W.Utilities.Async.WithItemID(itemID, callback)
 	if type(itemID) ~= "number" then
@@ -60,9 +65,37 @@ function W.Utilities.Async.WithItemID(itemID, callback)
 	return itemInstance
 end
 
+---Load item data asynchronously and execute callback by item link
+---@param itemLink string The item link to load
+---@param callback ItemCallback? Callback function to execute when item is loaded
+---@return any
+function W.Utilities.Async.WithItemLink(itemLink, callback)
+	if type(itemLink) ~= "string" then
+		return
+	end
+
+	if not callback then
+		callback = function(...) end
+	end
+
+	if type(callback) ~= "function" then
+		return
+	end
+
+	local itemID = C_Item_GetItemInfoInstant(itemLink)
+	if not itemID then
+		F.Developer.LogDebug("Failed to get itemID for itemLink: " .. itemLink)
+		return
+	end
+
+	return W.Utilities.Async.WithItemID(itemID, callback)
+end
+
+---@alias SpellCallback fun(spellInstance:SpellMixin)
+
 ---Load spell data asynchronously and execute callback
 ---@param spellID number The spell ID to load
----@param callback function? Callback function to execute when spell is loaded
+---@param callback SpellCallback? Callback function to execute when spell is loaded
 ---@return any? spell Cached spell data if available
 function W.Utilities.Async.WithSpellID(spellID, callback)
 	if type(spellID) ~= "number" then
@@ -102,7 +135,7 @@ end
 ---Load multiple items asynchronously from a table
 ---@param itemIDTable table Table containing item IDs
 ---@param tType string? Type of table processing
----@param callback function? Callback for individual items
+---@param callback ItemCallback? Callback for individual items
 ---@param tableCallback function? Callback for completed table
 function W.Utilities.Async.WithItemIDTable(itemIDTable, tType, callback, tableCallback)
 	if type(itemIDTable) ~= "table" then
@@ -198,7 +231,7 @@ end
 ---Load multiple spells asynchronously from a table
 ---@param spellIDTable table Table containing spell IDs
 ---@param tType string? Type of table processing
----@param callback function? Callback for individual spells
+---@param callback SpellCallback? Callback for individual spells
 ---@param tableCallback function? Callback for completed table
 function W.Utilities.Async.WithSpellIDTable(spellIDTable, tType, callback, tableCallback)
 	if type(spellIDTable) ~= "table" then

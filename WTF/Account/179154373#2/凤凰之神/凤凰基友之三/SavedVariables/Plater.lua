@@ -10,13 +10,13 @@ PlaterDBChr = {
 ["Player-1515-03CA5680"] = true,
 ["Player-1515-03CA5FC1"] = true,
 },
-["minimap"] = {
+["spellRangeCheckRangeEnemy"] = {
+[577] = 30,
+[581] = 30,
 },
 ["resources_on_target"] = false,
 ["debuffsBanned"] = {
 },
-["spellRangeCheckRangeEnemy"] = {
-[577] = 30,
-[581] = 30,
+["minimap"] = {
 },
 }

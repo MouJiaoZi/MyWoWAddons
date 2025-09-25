@@ -3,6 +3,34 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+6.00
+Dimensius Crushing Gravity/Inverse Gravity assignment.
+Salhadaar Subdivision Rule timing bar glow border bug fix.
+
+5.99
+Dimensius Reverse Gravity assignment.
+Fractillus Tank wall spawn assignment bug fix.
+
+5.97
+Forgeweaver Araz Arcane Collector HP comparison nameplate mark.
+Forgeweaver Araz Arcane Convergence Add timing bars and self-protection spell prompts.
+Salhadaar Netherbreaker Add sound prompts.
+Dimensius Living Mass auto-mark.
+Dimensius Living Mass HP comparison nameplate mark.
+Dimensius Soaring Reshii countdown text.
+Dimensius Devour(P3) raid mark assignment (say spawn).
+Other error corrections.
+
+5.95
+Fractillus Add a countdown text for the tank wall, displayed 10 seconds in advance. (The original assignment text is retained and will only be displayed when the boss starts casting Shockwave Slam.)
+Dimensius Devour effective countdown.
+Dimensius Living Mass HP monitor.
+Dimensius Airborne Rescue player quantity monitoring.
+Dimensius Stellar Core group debuff monitoring.
+Dimensius Starrard Nova soaking MRT assignment. 
+Dimensius Supernova timing bar adds sound effects.
+Other error corrections.
+
 5.94
 Salhadaar Starkiller assign bug fix
 The Dawnbreaker Manifested Shadow correct Black Hail target determination errors.

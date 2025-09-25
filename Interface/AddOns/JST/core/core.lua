@@ -4233,7 +4233,7 @@ local function OnNamePlateCreated(namePlate)
 	end
 	
 	namePlate.jstuf.plate_texture = namePlate.jstuf:CreateTexture(nil, "OVERLAY")
-	namePlate.jstuf.plate_texture:SetPoint("TOP", namePlate.jstuf, "BOTTOM", 0, -50)	
+	namePlate.jstuf.plate_texture:SetPoint("TOP", namePlate.jstuf, "BOTTOM", 0, -50)
 	namePlate.jstuf.plate_texture:Hide()
 	
 	namePlate.jstuf.plate_bgtex = namePlate.jstuf:CreateTexture(nil, "BORDER")

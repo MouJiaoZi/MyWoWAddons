@@ -47,8 +47,9 @@ VER 3 0100000000000082 "天灾打击" "INV_Misc_QuestionMark"
 END
 VER 3 0100000000000083 "心灵冰冻" "INV_Misc_QuestionMark"
 #showtooltip 心灵冰冻
-/cast [@focus,exists,harm] 心灵冰冻
-/cast [@target,exists,harm] 心灵冰冻
+/cast [@mouseover,exists,harm,nodead] 心灵冰冻
+/cast [@focus,exists,harm,nodead] 心灵冰冻
+/cast [@target,exists,harm,nodead] 心灵冰冻
 END
 VER 3 0100000000000084 "死亡凋零" "INV_Misc_QuestionMark"
 #showtooltip

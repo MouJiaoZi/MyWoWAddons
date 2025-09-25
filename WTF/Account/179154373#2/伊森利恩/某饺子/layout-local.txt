@@ -44,8 +44,8 @@ H: 689
 Frame: MRTNote
 FrameLevel: 1
 Anchor: RIGHT
-X: -228
-Y: 14
+X: -410
+Y: 1
 W: 211
 H: 605
 Frame: JST_GUI

@@ -45,6 +45,12 @@ T.ScanForUnitFrames = function()
 	LGF:ScanForUnitFrames()
 end
 
+T.UnitInRange = function(unit)
+	if unit then
+		return UnitIsUnit(unit, "player") or UnitInRange(unit)
+	end
+end
+
 -- 获取距离
 T.GetRange = function(unit, checkVisible)
   return LRC:GetRange(unit, checkVisible)
@@ -159,7 +165,7 @@ T.IterateBoss = function()
   end
 end
 
-T.GetBossUnit = function(target_npcID)
+T.GetBossUnitbyNpcID = function(target_npcID)
 	local matched = {}
 	if target_npcID then
 		for unit in T.IterateBoss() do
@@ -176,10 +182,23 @@ T.GetBossUnit = function(target_npcID)
 	end
 end
 
-T.GetCurrentTank = function(npcID)
+T.GetBossUnitbyGUID = function(target_GUID)
+	if target_GUID then
+		for unit in T.IterateBoss() do
+			local GUID = UnitGUID(unit)
+			if GUID == target_GUID then
+				return unit
+			end
+		end
+	end
+end
+
+T.GetCurrentTank = function(k) -- GUID/npcID
 	local boss_unit
-	if npcID then
-		boss_unit = T.GetBossUnit(npcID)
+	if string.find(k, "-") then -- GUID
+		boss_unit = T.GetBossUnitbyGUID(k)
+	elseif k then -- NpcID
+		boss_unit = T.GetBossUnitbyNpcID(k)
 	else
 		boss_unit = "boss1"
 	end
@@ -219,7 +238,7 @@ local FlagRoles = {
 	["2"] = "HEALER",
 }
 
-T.CheckRole = function(ficon)	
+T.CheckRole = function(ficon)
 	if not ficon or not C.DB["GeneralOption"]["role_enable"] then
 		return true
 	else
@@ -236,7 +255,7 @@ T.CheckRole = function(ficon)
 			local tree = GetSpecialization()
 			if tree then
 				local role = select(5, GetSpecializationInfo(tree))
-				if string.find(str, role) then
+				if role and string.find(str, role) then
 					return true
 				end
 			end
@@ -523,8 +542,8 @@ end
 T.StopCountDown = function(tag)
 	if cd_frame.data[tag] then
 		cd_frame.data[tag] = nil
-		if T.GetTableNum(self.data) == 0 then
-			self:SetScript("OnUpdate", nil)
+		if T.GetTableNum(cd_frame.data) == 0 then
+			cd_frame:SetScript("OnUpdate", nil)
 		end
 	end
 end
@@ -560,29 +579,22 @@ end
 -- 循环消息
 T.StartMsgTicker = function(parent, msg, rp, channel)
 	if rp then
-		if not parent.msg_ticker then
-			parent.msg_ticker = C_Timer.NewTicker(1, function(self)
-				local remain = rp - floor(GetTime() - self.start) + 1
-				local msg_rp = gsub(msg, "%%dur", remain)
-				SendChatMessage(msg_rp.."..", channel or "SAY")
-			end, rp)
-			parent.msg_ticker.start = GetTime()
-			
-		elseif parent.msg_ticker:IsCancelled() then
-			parent.msg_ticker:Invoke()
-			parent.msg_ticker.start = GetTime()
-			
+		if parent.msg_ticker then
+			parent.msg_ticker:Cancel()
 		end
+		parent.msg_ticker = C_Timer.NewTicker(1, function(self)
+			local remain = rp - floor(GetTime() - self.start) + 1
+			local msg_rp = gsub(msg, "%%dur", remain)
+			SendChatMessage(msg_rp.."..", channel or "SAY")
+		end, rp)
+		parent.msg_ticker.start = GetTime()
 	else
-		if not parent.msg_ticker then
-			parent.msg_ticker = C_Timer.NewTicker(1, function(self)	
-				SendChatMessage(msg.."..", channel or "SAY")
-			end)
-			
-		elseif parent.msg_ticker:IsCancelled() then
-			parent.msg_ticker:Invoke()
-			
+		if parent.msg_ticker then
+			parent.msg_ticker:Cancel()
 		end
+		parent.msg_ticker = C_Timer.NewTicker(1, function(self)	
+			SendChatMessage(msg.."..", channel or "SAY")
+		end)
 	end
 end
 
@@ -730,6 +742,28 @@ T.ColorGradient = function(perc, ...)
 	end
 end
 
+-- From https://github.com/EmmanuelOga/columns/blob/master/utils/color.lua
+T.hsvToRgb = function(h, s, v)
+    local r, g, b
+    
+    local i = math.floor(h * 6);
+    local f = h * 6 - i;
+    local p = v * (1 - s);
+    local q = v * (1 - f * s);
+    local t = v * (1 - (1 - f) * s);
+    
+    i = i % 6
+    
+    if i == 0 then r, g, b = v, t, p
+    elseif i == 1 then r, g, b = q, v, p
+    elseif i == 2 then r, g, b = p, v, t
+    elseif i == 3 then r, g, b = p, q, v
+    elseif i == 4 then r, g, b = t, p, v
+    elseif i == 5 then r, g, b = v, p, q
+    end
+    
+    return r, g, b
+end
 --====================================================--
 --[[                 -- 文本处理 --                  ]]--
 --====================================================--

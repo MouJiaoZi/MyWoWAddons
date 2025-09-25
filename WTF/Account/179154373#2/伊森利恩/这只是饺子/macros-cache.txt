@@ -1,0 +1,4 @@
+VER 3 0100000000000007 "毁灭打击" "135291"
+#showtooltip
+/cast [modifier=alt]英勇投掷;毁灭打击
+END

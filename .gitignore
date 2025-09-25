@@ -3,6 +3,8 @@
 !Interface
 !Interface/AddOns
 !/Interface/AddOns/**
+!Interface/TargetingFrame
+!/Interface/TargetingFrame/**
 !WTF
 !WTF/**
 !commit.bat

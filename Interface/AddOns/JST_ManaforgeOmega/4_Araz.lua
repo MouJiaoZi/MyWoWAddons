@@ -85,213 +85,9 @@ G.Encounters[2687] = {
 					spellIDs = {1254321},
 					sound = soundfile("1231720cast", "cast"),
 				},
-				{ -- 首领模块 奥术收集装置 标注能量最高的目标（✓）
-					category = "BossMod",
-					spellID = 1231720,
-					ficon = "3",
-					name = string.format(L["标注能量最高的目标"], T.GetFomattedNameFromNpcID("240905")),	
-					points = {hide = true},
-					events = {
-						["UNIT_POWER_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.mob_npcID = "240905"
-						frame.old_target = 0
-						
-						function frame:GetHighestPowerUnit()
-							local highestPower = 0
-							local highestUnit
-							local highestGUID
-							
-							for unit in T.IterateBoss() do
-								local GUID = UnitGUID(unit)
-								local npcID = select(6, strsplit("-", GUID))
-								local power = UnitPower(unit)
-								
-								if npcID == self.mob_npcID and power > highestPower then -- 奥术收集装置
-									highestPower = power
-									highestUnit = unit
-									highestGUID = GUID
-								end
-							end
-							
-							return highestGUID, highestUnit
-						end					
-					end,
-					update = function(frame, event, ...)
-						if event == "UNIT_POWER_UPDATE" then
-							local unit = ...
-							if string.find(unit, "boss") then
-								local highestGUID, highestUnit = frame:GetHighestPowerUnit()
-								if highestGUID then
-									if frame.old_target ~= highestGUID then
-										T.ShowNameplateExtraTex(highestUnit, "check", highestGUID)
-										frame.old_target = highestGUID
-									end
-								else
-									if frame.old_target ~= 0 then
-										T.HideAllNameplateExtraTex()
-										frame.old_target = 0
-									end
-								end
-							end
-						elseif event == "ENCOUNTER_START" then
-							frame.old_target = 0
-						end
-					end,
-					reset = function(frame, event)
-						T.HideAllNameplateExtraTex()
-					end,
-				},
-				{ -- 首领模块 标记 奥术收集装置（✓）
-					category = "BossMod",
-					spellID = 1254321,
-					enable_tag = "rl",
-					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("240905"), T.FormatRaidMark("5,6,7")),
-					points = {hide = true},
-					events = {
-						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
-						["ENCOUNTER_PHASE"] = true,
-					},
-					init = function(frame)
-						frame.start_mark = 5
-						frame.end_mark = 7
-						frame.mob_npcID = "240905"
-						frame.ignore_combat = true
-						frame.use_stored_mark = true
-						
-						T.InitRaidTarget(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdateRaidTarget(frame, event, ...)
-						
-						if event == "ENCOUNTER_PHASE" then
-							frame.marked = table.wipe(frame.marked)
-						end
-					end,
-					reset = function(frame, event)
-						T.ResetRaidTarget(frame)
-					end,
-				},
-				{ -- 首领模块 BOSS血量和能量 奥术收集装置 （✓）
-					category = "BossMod",
-					spellID = 1248171,
-					enable_tag = "rl",
-					name = string.format(L["NAME小怪血量和能量"], T.GetFomattedNameFromNpcID("240905")),
-					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -300},
-					events = {
-						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
-						["ENCOUNTER_HIDE_BOSS_UNIT"] = true,
-						["UNIT_HEALTH"] = true,
-						["UNIT_POWER_UPDATE"] = true,
-						["RAID_TARGET_UPDATE"] = true,
-					},
-					init = function(frame)
-						frame.npcIDs = {
-							["240905"] = { -- 奥术收集装置
-								n = L["收集装置"],
-								color = {.5, .5, .5},
-								color2 = {1, 1, 0},
-							},
-						}
-						
-						T.InitMobUF(frame)
-					end,
-					update = function(frame, event, ...)
-						T.UpdateMobUF(frame, event, ...)
-					end,
-					reset = function(frame, event)
-						T.ResetMobUF(frame)
-					end,
-				},
-				{ -- 首领模块 奥术收集装置血量对比 （✓）
-					category = "BossMod",
-					spellID = 1228103,
-					name = T.GetFomattedNameFromNpcID("240905").." "..L["NAME血量对比"],
-					points = {hide = true},
-					events = {
-						["UNIT_HEALTH"] = true,
-						["PLAYER_TARGET_CHANGED"] = true,
-					},
-					custom = {
-						{
-							key = "hp_perc_sl",
-							text = L["目标血量低于多少时开始对比"],
-							default = 25,
-							min = 5,
-							max = 50,
-						},
-					},
-					init = function(frame)						
-						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
-						frame.update_rate = .1
-						frame.last_update = 0
-						
-						function frame:UpdateHighestHealth()
-							local highestHealth = 0
-							local totalHealth
-							local highestUnit
-							local targetHealth
-							
-							for unit in T.IterateBoss() do
-								local GUID = UnitGUID(unit)
-								local npcID = select(6, strsplit("-", GUID))
-								local isArcaneCollector = npcID == "240905"
-								
-								if isArcaneCollector then
-									local health = UnitHealth(unit)
-									
-									if UnitIsUnit(unit, "target") then
-										targetHealth = health
-									end
-									
-									if health >= highestHealth then
-										highestHealth = health
-										highestUnit = unit
-									end
-									
-									highestHealth = math.max(highestHealth, health)
-									totalHealth = UnitHealthMax(unit)
-								end
-							end
-							
-							-- If we are not targeting a collector, or we are targeting the highest HP collector, hide states
-							if not targetHealth or UnitIsUnit("target", highestUnit) or targetHealth/totalHealth*100 > C.DB["BossMod"][self.config_id]["hp_perc_sl"] then
-								if self.text_frame:IsShown() then
-									self.text_frame:Hide()
-								end
-							else
-								local difference = highestHealth - targetHealth
-								local differencePercent = (difference / totalHealth) * 100
-								
-								self.text_frame.text:SetText(string.format(L["血量领先"], differencePercent))
-								
-								if not self.text_frame:IsShown() then
-									self.text_frame:Show()
-								end
-							end
-						end
-					end,
-					update = function(frame, event, ...)
-						if event == "UNIT_HEALTH" then
-							if GetTime() - frame.last_update > frame.update_rate then
-								frame.last_update = GetTime()
-								frame:UpdateHighestHealth()
-							end
-						elseif event == "PLAYER_TARGET_CHANGED" then
-							frame:UpdateHighestHealth()
-						end
-					end,
-					reset = function(frame, event)
-						frame.text_frame:Hide()
-					end,
-				},
 			},
 		},
 		{ -- 星界收割
-			npcs = {
-				{33707},--【奥术收集装置】
-			},
 			spells = {
 				{1228214, "5"},--【星界收割】
 			},
@@ -455,7 +251,7 @@ G.Encounters[2687] = {
 					spellID = 1233979,
 					spellIDs = {1228214},
 					threshold = 65,
-				},				
+				},
 				{ -- 首领模块 星界收割 点名统计 整体排序 （✓）
 					category = "BossMod",
 					spellID = 1233979,
@@ -1277,10 +1073,316 @@ G.Encounters[2687] = {
 			npcs = {
 				{33707},--【奥术收集装置】
 			},
+			options = {
+				{ -- 首领模块 标记 奥术收集装置（✓）
+					category = "BossMod",
+					spellID = 1254321,
+					enable_tag = "rl",
+					name = string.format(L["NAME小怪标记"], T.GetFomattedNameFromNpcID("240905"), T.FormatRaidMark("5,6,7")),
+					points = {hide = true},
+					events = {
+						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
+						["ENCOUNTER_PHASE"] = true,
+					},
+					init = function(frame)
+						frame.start_mark = 5
+						frame.end_mark = 7
+						frame.mob_npcID = "240905"
+						frame.ignore_combat = true
+						frame.use_stored_mark = true
+						
+						T.InitRaidTarget(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateRaidTarget(frame, event, ...)
+						
+						if event == "ENCOUNTER_PHASE" then
+							frame.marked = table.wipe(frame.marked)
+						end
+					end,
+					reset = function(frame, event)
+						T.ResetRaidTarget(frame)
+					end,
+				},
+				{ -- 首领模块 BOSS血量和能量 奥术收集装置（✓）
+					category = "BossMod",
+					spellID = 1248171,
+					enable_tag = "rl",
+					name = string.format(L["NAME小怪血量和能量"], T.GetFomattedNameFromNpcID("240905")),
+					points = {a1 = "TOPLEFT", a2 = "TOPLEFT", x = 30, y = -300},
+					events = {
+						["ENCOUNTER_SHOW_BOSS_UNIT"] = true,
+						["ENCOUNTER_HIDE_BOSS_UNIT"] = true,
+						["UNIT_HEALTH"] = true,
+						["UNIT_POWER_UPDATE"] = true,
+						["RAID_TARGET_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.npcIDs = {
+							["240905"] = { -- 奥术收集装置
+								n = L["收集装置"],
+								color = {.5, .5, .5},
+								color2 = {1, 1, 0},
+							},
+						}
+						
+						T.InitMobUF(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateMobUF(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetMobUF(frame)
+					end,
+				},				
+				{ -- 首领模块 奥术收集装置 标注能量最高的目标（✓）
+					category = "BossMod",
+					spellID = 1231720,
+					ficon = "3",
+					name = string.format(L["标注能量最高的目标"], T.GetFomattedNameFromNpcID("240905")),	
+					points = {hide = true},
+					events = {
+						["UNIT_POWER_UPDATE"] = true,
+					},
+					init = function(frame)
+						frame.mob_npcID = "240905"
+						frame.old_target = 0
+						
+						function frame:GetHighestPowerUnit()
+							local highestPower = 0
+							local highestUnit
+							local highestGUID
+							
+							for unit in T.IterateBoss() do
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								local power = UnitPower(unit)
+								
+								if npcID == self.mob_npcID and power > highestPower then -- 奥术收集装置
+									highestPower = power
+									highestUnit = unit
+									highestGUID = GUID
+								end
+							end
+							
+							return highestGUID, highestUnit
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_POWER_UPDATE" then
+							local unit = ...
+							if string.find(unit, "boss") then
+								local highestGUID, highestUnit = frame:GetHighestPowerUnit()
+								if highestGUID then
+									if frame.old_target ~= highestGUID then
+										T.ShowNameplateExtraTex(highestUnit, "check", highestGUID)
+										frame.old_target = highestGUID
+									end
+								else
+									if frame.old_target ~= 0 then
+										T.HideAllNameplateExtraTex()
+										frame.old_target = 0
+									end
+								end
+							end
+						elseif event == "ENCOUNTER_START" then
+							frame.old_target = 0
+						end
+					end,
+					reset = function(frame, event)
+						T.HideAllNameplateExtraTex()
+					end,
+				},
+				{ -- 首领模块 奥术收集装置血量对比（✓）
+					category = "BossMod",
+					ficon = "12",
+					spellID = 1226260,
+					name = string.format("%s %s (%s)", T.GetFomattedNameFromNpcID("240905"), L["NAME血量对比"], L["姓名板标记"]),
+					points = {hide = true},
+					events = {
+						["UNIT_HEALTH"] = true,
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+					},
+					custom = {
+						{
+							key = "test_btn", 
+							text = L["测试姓名板标记"],
+							onclick = function(alert)
+								T.ShowAllNameplateExtraTex("value")
+								C_Timer.After(3, function()
+									T.HideAllNameplateExtraTex()
+								end)
+							end
+						},
+					},
+					init = function(frame)
+						frame.mob_npcID = "240905"
+						frame.GUIDs = {}
+						frame.update_rate = .1
+						frame.last_update = 0
+						
+						function frame:UpdateAverageHealth()
+							local MobCount = 0
+							local averageHealth = 0
+							local averageHealthFraction, totalHealth
+							
+							for unit in T.IterateBoss() do
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								local isArcaneCollector = npcID == self.mob_npcID
+								
+								if isArcaneCollector then
+									MobCount = MobCount + 1
+									averageHealth = averageHealth + UnitHealth(unit)
+									totalHealth = UnitHealthMax(unit)
+								end
+							end
+							
+							if MobCount == 0 then return true end
+							
+							averageHealth = averageHealth / MobCount
+							averageHealthFraction = averageHealth / totalHealth
+							
+							for _, GUID in pairs(self.GUIDs) do
+								local unit = T.GetBossUnitbyGUID(GUID)
+								local jstuf = unit and T.GetNameplateFrame(unit, GUID)
+								if jstuf and unit then
+									local currentHealth = UnitHealth(unit)
+									local differenceFromAverage = currentHealth - averageHealth
+									local percentage = (differenceFromAverage / totalHealth) * 100
+									
+									if percentage and averageHealthFraction then
+										local redValue = -10 * averageHealthFraction
+										local colorPercentage = Clamp(percentage, redValue, 0)
+										local fraction = colorPercentage / redValue
+										local hueDifference = 0.33 * fraction
+										local h = 0.33 - hueDifference
+										local r, g, b = T.hsvToRgb(h, 0.9, 1)
+										jstuf.plate_texture:SetVertexColor(r, g, b)
+										jstuf.plate_text:SetText(string.format("%d%%", percentage))
+									end
+								end
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_HEALTH" then
+							if GetTime() - frame.last_update > frame.update_rate then
+								frame.last_update = GetTime()
+								frame:UpdateAverageHealth()
+							end
+						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, cast_GUID, cast_spellID = ...
+							if not cast_GUID then return end
+							if unit == "boss1" and cast_spellID == 1227631 then -- 奥术驱除
+								for unit in T.IterateBoss() do
+									local GUID = UnitGUID(unit)
+									local npcID = select(6, strsplit("-", GUID))
+									local isArcaneCollector = npcID == frame.mob_npcID
+									
+									if isArcaneCollector then
+										table.insert(frame.GUIDs, GUID)
+										T.ShowNameplateExtraTex(unit, "value")
+									end
+								end
+							elseif unit == "boss1" and cast_spellID == 1230529 then -- 法力牺牲
+								T.HideAllNameplateExtraTex()
+							end
+						end
+					end,
+					reset = function(frame, event)
+						T.HideAllNameplateExtraTex()
+						frame.GUIDs = table.wipe(frame.GUIDs)
+					end,
+				},
+				{ -- 首领模块 奥术收集装置血量对比 文字提示（✓）
+					category = "BossMod",
+					spellID = 1228103,
+					name = string.format("%s %s (%s)", T.GetFomattedNameFromNpcID("240905"), L["NAME血量对比"], L["文字提示"]),
+					points = {hide = true},
+					events = {
+						["UNIT_HEALTH"] = true,
+						["PLAYER_TARGET_CHANGED"] = true,
+					},
+					custom = {
+						{
+							key = "hp_perc_sl",
+							text = L["目标血量低于多少时开始对比"],
+							default = 25,
+							min = 5,
+							max = 50,
+						},
+					},
+					init = function(frame)						
+						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
+						frame.update_rate = .1
+						frame.last_update = 0
+						frame.mob_npcID = "240905"
+						
+						function frame:UpdateHighestHealth()
+							local highestHealth = 0
+							local totalHealth
+							local highestUnit
+							local targetHealth
+							
+							for unit in T.IterateBoss() do
+								local GUID = UnitGUID(unit)
+								local npcID = select(6, strsplit("-", GUID))
+								local isArcaneCollector = npcID == self.mob_npcID
+								
+								if isArcaneCollector then
+									local health = UnitHealth(unit)
+									
+									if UnitIsUnit(unit, "target") then
+										targetHealth = health
+									end
+									
+									if health >= highestHealth then
+										highestHealth = health
+										highestUnit = unit
+									end
+									
+									highestHealth = math.max(highestHealth, health)
+									totalHealth = UnitHealthMax(unit)
+								end
+							end
+							
+							-- If we are not targeting a collector, or we are targeting the highest HP collector, hide states
+							if not targetHealth or UnitIsUnit("target", highestUnit) or targetHealth/totalHealth*100 > C.DB["BossMod"][self.config_id]["hp_perc_sl"] then
+								if self.text_frame:IsShown() then
+									self.text_frame:Hide()
+								end
+							else
+								local difference = highestHealth - targetHealth
+								local differencePercent = (difference / totalHealth) * 100
+								
+								self.text_frame.text:SetText(string.format(L["血量领先"], differencePercent))
+								
+								if not self.text_frame:IsShown() then
+									self.text_frame:Show()
+								end
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_HEALTH" then
+							if GetTime() - frame.last_update > frame.update_rate then
+								frame.last_update = GetTime()
+								frame:UpdateHighestHealth()
+							end
+						elseif event == "PLAYER_TARGET_CHANGED" then
+							frame:UpdateHighestHealth()
+						end
+					end,
+					reset = function(frame, event)
+						frame.text_frame:Hide()
+					end,
+				},				
+			},
+		},
+		{ -- 光子轰击
 			spells = {
 				{1234328},--【光子轰击】
-				--{1226260},--【奥术汇流】
-				--{1243272},--【抑制裂口】
 			},
 			options = {
 				{ -- 首领模块 光子轰击 倒计时 （✓）
@@ -1400,6 +1502,26 @@ G.Encounters[2687] = {
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 1234324,
+				},
+			},
+		},
+		{ -- 奥术汇流
+			spells = {
+				{1226260},--【奥术汇流】
+			},
+			options = {
+				{ -- 计时条 奥术汇流（✓）
+					category = "AlertTimerbar",
+					type = "cast",
+					spellID = 1232590,
+				},
+				{ -- 自保技能提示 奥术汇流（✓）
+					category = "HPWatch",
+					type = "CLEU",
+					spellID = 1232590,
+					event = "SPELL_CAST_SUCCESS",
+					dur = 4,
+					threshold = 65,
 				},
 			},
 		},

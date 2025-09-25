@@ -27,6 +27,13 @@ X: 0
 Y: 0
 W: 476
 H: 230
+Frame: DevToolFrame
+FrameLevel: 1
+Anchor: CENTER
+X: 0
+Y: 0
+W: 750
+H: 500
 Frame: HeroTalentsSelectionDialog
 FrameLevel: 1
 Anchor: CENTER

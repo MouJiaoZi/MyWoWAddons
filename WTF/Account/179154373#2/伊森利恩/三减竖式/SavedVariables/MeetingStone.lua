@@ -5,7 +5,7 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 ["profiles"] = {
 ["三减竖式 - 伊森利恩"] = {
-["version"] = "11.0.5",
+["version"] = "11.2.0",
 },
 },
 }

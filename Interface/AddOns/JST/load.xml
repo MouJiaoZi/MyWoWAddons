@@ -29,6 +29,7 @@
 	<Script file="core\core.lua"/>
 	<Script file="core\group.lua"/>
 	<Script file="core\tools.lua"/>
+	<Script file="core\public.lua"/>
 	
 	<Script file="elements\arrow.lua"/>
 	

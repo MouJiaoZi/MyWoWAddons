@@ -370,7 +370,7 @@ G.Encounters[2690] = {
 					show_tar = true,
 					roles = {"TANK"},
 				},
-				{ -- 首领模块 分段计时条 镇压统治和分担轮次（待测试）
+				{ -- 首领模块 分段计时条 镇压统治和分担轮次（✓）
 					category = "BossMod",
 					spellID = 1224795,
 					enable_tag = "spell",
@@ -399,6 +399,8 @@ G.Encounters[2690] = {
 						},
 					},
 					init = function(frame)
+						frame.conquerSpellID = 1224787 -- 征服
+						frame.vanquishSpellID = 1224812 -- 主宰
 						frame.bars = {}
 						frame.order = {}
 						frame.count = 0
@@ -439,7 +441,8 @@ G.Encounters[2690] = {
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
 						for i = 1, 4 do
-							local bar = T.CreateTimerBar(frame, nil, true, false, true, 150, 30)
+							local bar = T.CreateTimerBar(frame, nil, false, false, true, 150, 30)
+							
 							T.SetHighLightBorderColor(bar, bar, {0, 1, 0}, 3)
 							bar.innerBD:Hide()
 							
@@ -450,22 +453,6 @@ G.Encounters[2690] = {
 								bar:SetPoint("LEFT", frame.bars[i-1], "RIGHT", 5, 0)
 							end
 							table.insert(frame.bars, bar)
-						end
-						
-						function frame:update_soak()
-							local soak_index = 0
-							for i, bar in pairs(frame.bars) do
-								if bar.castType == "CONQUER" then
-									soak_index = soak_index + 1
-									if soak_index == self.my_index then
-										bar.innerBD:Show()
-									else
-										bar.innerBD:Hide()
-									end
-								else
-									bar.innerBD:Hide()
-								end
-							end
 						end
 						
 						function frame:update_bar(index, spell, assigned)
@@ -493,12 +480,24 @@ G.Encounters[2690] = {
 							end
 							
 							if assigned then
-								bar.glow:Show()
+								bar.innerBD:Show()
 							else
-								bar.glow:Hide()
+								bar.innerBD:Hide()
 							end
 							
 							bar:Show()
+						end
+						
+						function frame:GetConquerIndex(index)
+							local conquerIndex = 0
+							for i, bar in pairs(frame.bars) do
+								if bar.castType == "CONQUER" then
+									conquerIndex = conquerIndex + 1
+									if i == index then
+										return conquerIndex
+									end
+								end
+							end
 						end
 						
 						function frame:SetConquer(index)
@@ -506,20 +505,29 @@ G.Encounters[2690] = {
 							local isTanking = UnitDetailedThreatSituation("player", "boss1")
 							local assigned = false
 							
-							if isTank and isTanking then
-								local othersAssigned
-								if self.order[1] == "CONQUER" and index == 1 then
-									othersAssigned = true
-								elseif self.order[1] == "VANQUISH" and index == 3 then
-									othersAssigned = true
+							if isTank then
+								if isTanking then
+									local othersAssigned
+									if self.order[1] == "CONQUER" and index == 1 then
+										othersAssigned = true
+									elseif self.order[1] == "VANQUISH" and index == 3 then
+										othersAssigned = true
+									end
+									
+									assigned = not othersAssigned
+								else -- Non-active tank
+									if self.order[1] == "CONQUER" and index == 1 then
+										assigned = true
+									elseif self.order[1] == "VANQUISH" and index == 3 then
+										assigned = true
+									end
 								end
-								
-								assigned = not othersAssigned
-							else -- Non-active tank
-								if self.order[1] == "CONQUER" and index == 1 then
+							else
+								local soak_index = self:GetConquerIndex(index)
+								if soak_index == self.my_index then
 									assigned = true
-								elseif self.order[1] == "VANQUISH" and index == 3 then
-									assigned = true
+								else
+									assigned = false
 								end
 							end
 							
@@ -597,8 +605,6 @@ G.Encounters[2690] = {
 									self:SetUnknown(index)
 								end
 							end
-							
-							self:update_soak()
 						end
 						
 						function frame:PreviewShow()
@@ -618,15 +624,15 @@ G.Encounters[2690] = {
 					update = function(frame, event, ...)
 						if event == "UNIT_SPELLCAST_START" then
 							local unit, castGUID, spellID = ...
-							if string.find(unit, "boss") and castGUID and (spellID == 1224787 or spellID == 1224812) then
+							if string.find(unit, "boss") and castGUID and (spellID == frame.conquerSpellID or spellID == frame.vanquishSpellID) then
 								frame.count = frame.count + 1
-								frame.order[frame.count] = spellID == 1224787 and "CONQUER" or "VANQUISH"
+								frame.order[frame.count] = spellID == frame.conquerSpellID and "CONQUER" or "VANQUISH"
 								
 								frame:UpdateOrder()
 								frame:UpdateStates()
 								frame:Start(frame.count)
 								
-								if spellID == 1224787 and frame.my_index then
+								if spellID == frame.conquerSpellID and frame.my_index then
 									frame.soak_count = frame.soak_count + 1
 									local soak_index = (frame.soak_count+1)%2 + 1
 									if soak_index == frame.my_index then
@@ -655,7 +661,7 @@ G.Encounters[2690] = {
 
 						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
 							local unit, castGUID, spellID = ...
-							if string.find(unit, "boss") and castGUID and (spellID == 1224787 or spellID == 1224812) then
+							if string.find(unit, "boss") and castGUID and (spellID == frame.conquerSpellID or spellID == frame.vanquishSpellID) then
 								if frame.count == 4 then
 									frame.order = table.wipe(frame.order)
 									frame.count = 0
@@ -897,7 +903,7 @@ G.Encounters[2690] = {
 				{1228113},--【虚空击碎者】
 			},
 			options = {
-				{ -- 文字 虚空击碎者 倒计时（待测试）
+				{ -- 文字 虚空击碎者 倒计时（✓）
 					category = "TextAlert",
 					type = "spell",
 					preview = T.GetIconLink(1228115)..L["大圈"]..L["倒计时"],
@@ -924,7 +930,7 @@ G.Encounters[2690] = {
 						end
 					end,
 				},
-				{ --首领模块 虚空击碎者（待测试）
+				{ -- 首领模块 虚空击碎者（✓）
 					category = "BossMod",
 					spellID = 1228115,
 					name = T.GetIconLink(1228115)..L["计时条"],
@@ -967,6 +973,13 @@ G.Encounters[2690] = {
 						T.StopTimerBar(frame.bar, true, true)
 					end,
 				},
+				{ -- 声音 虚空击碎者（✓）
+					category = "Sound",
+					sub_event = "SPELL_AURA_APPLIED",
+					spellID = 1228114,
+					private_aura = true,
+					file = "[dropnow]",
+				},
 			},
 		},
 		{ -- 次元吐息
@@ -1003,7 +1016,7 @@ G.Encounters[2690] = {
 						T.UpdateCooldownTimer("UNIT_SPELLCAST_START", "boss", 1228163, L["头前"], self, event, ...)
 					end,
 				},
-				{ --首领模块 次元吐息计时条（待测试）
+				{ -- 首领模块 次元吐息计时条（待测试）
 					category = "BossMod",
 					spellID = 1228163,
 					name = T.GetIconLink(1228163)..L["计时条"],
@@ -1340,7 +1353,7 @@ G.Encounters[2690] = {
 							if sub_event == "SPELL_CAST_START" and spellID == 1230302 then -- 自毁
 								local unit = UnitTokenFromGUID(sourceGUID)
 								if unit and T.IsUnitInRange(unit) then
-									frame.current_mob = destGUID
+									frame.current_mob = sourceGUID
 									frame:update_time()
 									frame:update_health(unit)
 								end
@@ -1543,7 +1556,7 @@ G.Encounters[2690] = {
 					type = "Aura",
 					spellID = 1228056,
 				},
-				{ -- 首领模块 集结影卫 控制链（待测试）
+				{ -- 首领模块 集结影卫 控制链（✓）
 					category = "BossMod",
 					spellID = 1228065,
 					enable_tag = "spell",
@@ -1598,7 +1611,7 @@ G.Encounters[2690] = {
 						if event == "ENCOUNTER_PHASE" then
 							local phase = ...
 							if phase ~= 2.1 then return end
-							frame.timer = C_Timer.After(7, function()
+							frame.timer = C_Timer.After(10, function()
 								local set = frame:GetSet()
 								if set then
 									T.DisplayGroupCCFrame(set)
@@ -1697,7 +1710,7 @@ G.Encounters[2690] = {
 					glow = true,
 					group = 1,
 				},
-				{ --首领模块 处斩计时条（P2.2）（待测试）
+				{ -- 首领模块 处斩计时条（P2.2）（✓）
 					category = "BossMod",
 					spellID = 1225010,
 					name = T.GetIconLink(1225010)..L["计时条"],

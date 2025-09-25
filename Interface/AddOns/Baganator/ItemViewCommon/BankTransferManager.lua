@@ -11,18 +11,14 @@ function addonTable.BankTransferManagerMixin:OnLoad()
   self.queue = {}
 end
 
-local function GetMatching(tabFlags, item)
-  if tabFlags == 0 then
-    return false
-  end
-
+local function GetMatching(depositFlags, item)
   local class, subClass, _, xpac, _, isReagent = select(12, C_Item.GetItemInfo(item.itemID))
   local expansionFlags = {
     [Enum.BagSlotFlags.ExpansionCurrent] = xpac and xpac == LE_EXPANSION_LEVEL_CURRENT or false,
     [Enum.BagSlotFlags.ExpansionLegacy] = xpac and xpac ~= LE_EXPANSION_LEVEL_CURRENT or false,
   }
   for flag, state in pairs(expansionFlags) do
-    if FlagsUtil.IsSet(tabFlags, flag) then
+    if FlagsUtil.IsSet(depositFlags, flag) then
       if not state then
         return false
       end
@@ -38,14 +34,14 @@ local function GetMatching(tabFlags, item)
   }
   local typesSet = false
   for flag, state in pairs(typeFlags) do
-    if FlagsUtil.IsSet(tabFlags, flag) then
+    if FlagsUtil.IsSet(depositFlags, flag) then
       typesSet = true
       if state then
         return true
       end
     end
   end
-  return not typesSet
+  return not typesSet and depositFlags ~= 0 and depositFlags ~= Enum.BagSlotFlags.DisableAutoSort
 end
 
 function addonTable.BankTransferManagerMixin:Queue(bagID, slotID)
@@ -67,12 +63,15 @@ function addonTable.BankTransferManagerMixin:Queue(bagID, slotID)
   end
 
   local tabData, indexes
-  if addonTable.Config.Get(addonTable.Config.Options.BANK_CURRENT_TAB) == addonTable.Constants.BankTabType.Character then
+  local bankFrame = addonTable.ViewManagement.GetBankFrame()
+  if bankFrame.Character:IsVisible() then
     tabData = Syndicator.API.GetCharacter(Syndicator.API.GetCurrentCharacter()).bankTabs
     indexes = Syndicator.Constants.AllBankIndexes
-  else
+  elseif bankFrame.Warband:IsVisible() then
     tabData = Syndicator.API.GetWarband(1).bank
     indexes = Syndicator.Constants.AllWarbandIndexes
+  else
+    error("Unknown bank type")
   end
 
   local stackLimit = C_Item.GetItemMaxStackSizeByID(source.itemID)
@@ -103,15 +102,20 @@ function addonTable.BankTransferManagerMixin:Queue(bagID, slotID)
   -- Tabs with specific items in them prioritised
   for tabIndex, tabDetails in ipairs(tabData) do
     local targets = addonTable.Transfers.GetBagsSlots({tabDetails.slots}, {indexes[tabIndex]})
-    if GetMatching(tabDetails.depositFlags, source) then
-      CheckTargets(targets)
-      if match then
-        break
-      end
-    else
-      CheckStackTargets(targets)
-      if match then
-        break
+    CheckStackTargets(targets)
+    if match then
+      break
+    end
+  end
+  -- Then scan for tabs with matching settings
+  if not match then
+    for tabIndex, tabDetails in ipairs(tabData) do
+      local targets = addonTable.Transfers.GetBagsSlots({tabDetails.slots}, {indexes[tabIndex]})
+      if GetMatching(tabDetails.depositFlags, source) then
+        CheckTargets(targets)
+        if match then
+          break
+        end
       end
     end
   end

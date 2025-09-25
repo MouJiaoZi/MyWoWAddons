@@ -15,7 +15,26 @@ BAGANATOR_CONFIG = {
 ["currencyID"] = 3008,
 },
 },
-["我们完蛋啦-伊森利恩"] = {
+["三减竖式-伊森利恩"] = {
+},
+["三减宁静-伊森利恩"] = {
+{
+["currencyID"] = 1710,
+},
+{
+["currencyID"] = 1718,
+},
+{
+["currencyID"] = 1755,
+},
+},
+["凤凰基友之四-凤凰之神"] = {
+},
+["凤凰基友之三-凤凰之神"] = {
+},
+["凤凰基友之一-凤凰之神"] = {
+},
+["凤凰基友之二-凤凰之神"] = {
 },
 ["某餃子-伊森利恩"] = {
 {
@@ -24,6 +43,17 @@ BAGANATOR_CONFIG = {
 {
 ["currencyID"] = 3290,
 },
+},
+["这只是饺子-伊森利恩"] = {
+{
+["currencyID"] = 1560,
+},
+},
+["我们完蛋啦-伊森利恩"] = {
+},
+["凤凰基友之五-凤凰之神"] = {
+},
+["开门的搞-伊森利恩"] = {
 },
 ["迪凯策划没马-伊森利恩"] = {
 },
@@ -177,7 +207,14 @@ BAGANATOR_CONFIG = {
 -235,
 },
 ["new_items_flashing"] = true,
-["debug_timers"] = false,
+["category_sections"] = {
+["1"] = {
+["name"] = "EQUIPMENT",
+},
+["2"] = {
+["name"] = "CRAFTING",
+},
+},
 ["seen_welcome"] = 1,
 ["hide_special_container"] = {
 },
@@ -191,13 +228,13 @@ BAGANATOR_CONFIG = {
 },
 ["category_sort_method"] = "type",
 ["category_horizontal_spacing_2"] = 0.3,
+["debug_categories"] = false,
+["category_default_import"] = 2,
 ["bag_view_position"] = {
 "BOTTOMRIGHT",
--451.2537841796875,
-126.47607421875,
+-354.7457275390625,
+223.9999542236328,
 },
-["category_default_import"] = 2,
-["debug_categories"] = false,
 ["character_bank_current_tab"] = 0,
 ["bag_view_show_bag_slots"] = true,
 ["bag_empty_space_at_top"] = false,
@@ -205,21 +242,15 @@ BAGANATOR_CONFIG = {
 ["sort_ignore_bank_slots_count"] = {
 ["某餃子-伊森利恩"] = 0,
 },
+["category_migration"] = 5,
 ["saved_searches"] = {
 },
-["category_migration"] = 5,
 ["guild_view_position"] = {
 "LEFT",
 20,
 0,
 },
 ["category_modifications"] = {
-["default_armor"] = {
-["addedItems"] = {
-["i:219313"] = true,
-["i:223006"] = true,
-},
-},
 ["default_gem"] = {
 ["addedItems"] = {
 ["i:231756"] = true,
@@ -240,11 +271,21 @@ BAGANATOR_CONFIG = {
 ["i:219905"] = true,
 },
 },
+["default_toy"] = {
+["addedItems"] = {
+["i:112384"] = true,
+["i:111820"] = true,
+},
+},
+["default_armor"] = {
+["addedItems"] = {
+["i:219313"] = true,
+["i:223006"] = true,
+},
+},
 },
 ["warband_bank_view_width"] = 14,
-["category_section_toggled"] = {
-["装备"] = false,
-},
+["sort_ignore_slots_at_end"] = false,
 ["add_to_category_buttons_2"] = "drag",
 ["view_type"] = "unset",
 ["bank_current_tab"] = 2,
@@ -253,13 +294,12 @@ BAGANATOR_CONFIG = {
 },
 ["icon_text_font_size"] = 14,
 ["show_buttons_on_alt"] = false,
+["view_alpha"] = 1,
 ["disabled_skins"] = {
 },
-["view_alpha"] = 1,
-["bag_view_width"] = 12,
+["setting_anchors"] = false,
 ["upgrade_plugin"] = "none",
 ["guild_bank_sort_method"] = "unset",
-["debug_keywords"] = false,
 ["skins"] = {
 ["elvui"] = {
 ["use_bag_font"] = false,
@@ -279,23 +319,27 @@ BAGANATOR_CONFIG = {
 ["recent_characters_main_view"] = {
 "某餃子-伊森利恩",
 "某饺子-伊森利恩",
-"迪凯策划没马-伊森利恩",
-"我们完蛋啦-伊森利恩",
-"凤凰基友之三-凤凰之神",
+"凤凰基友之五-凤凰之神",
 "凤凰基友之四-凤凰之神",
+"凤凰基友之三-凤凰之神",
+"凤凰基友之二-凤凰之神",
+"凤凰基友之一-凤凰之神",
 "开门的搞-伊森利恩",
+"迪凯策划没马-伊森利恩",
+"这只是饺子-伊森利恩",
 "三减竖式-伊森利恩",
 "三减宁静-伊森利恩",
+"我们完蛋啦-伊森利恩",
 "牛牛萨之父-霜之哀伤",
-"凤凰基友之二-凤凰之神",
 "Afdfaf-苏拉玛",
 },
+["debug_keywords"] = false,
 ["auto_sort_on_open"] = false,
 ["guild_current_tab"] = 0,
+["bag_view_width"] = 12,
 ["sort_ignore_slots_count_2"] = {
 ["某餃子-伊森利恩"] = 0,
 },
-["setting_anchors"] = false,
 ["currencies_tracked"] = {
 ["三减竖式-伊森利恩"] = {
 },
@@ -337,7 +381,9 @@ BAGANATOR_CONFIG = {
 0,
 0,
 },
-["sort_ignore_slots_at_end"] = false,
+["category_section_toggled"] = {
+["装备"] = false,
+},
 ["bank_only_view_position"] = {
 "LEFT",
 20,
@@ -355,14 +401,7 @@ BAGANATOR_CONFIG = {
 0,
 },
 ["lock_frames"] = false,
-["category_sections"] = {
-["1"] = {
-["name"] = "EQUIPMENT",
-},
-["2"] = {
-["name"] = "CRAFTING",
-},
-},
+["debug_timers"] = false,
 ["icon_mark_unusable"] = false,
 ["custom_categories"] = {
 },

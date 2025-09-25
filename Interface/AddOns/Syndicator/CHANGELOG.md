@@ -1,6 +1,6 @@
 # Syndicator
 
-## [234](https://github.com/TheMouseNest/Syndicator/tree/234) (2025-09-14)
-[Full Changelog](https://github.com/TheMouseNest/Syndicator/compare/233...234) 
+## [238](https://github.com/TheMouseNest/Syndicator/tree/238) (2025-09-23)
+[Full Changelog](https://github.com/TheMouseNest/Syndicator/compare/237...238) 
 
-- Search: Prevent subclass keywords with the same name as a root class conflicting  
+- All: Unify toc lines (client restart required)  
