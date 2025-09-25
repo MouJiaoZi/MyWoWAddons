@@ -419,7 +419,7 @@ function BrowsePanel:OnInitialize()
 
     local ActivityLabel = self:CreateFontString(nil, 'ARTWORK', 'GameFontHighlight')
     do
-        ActivityLabel:SetPoint('TOPLEFT', MainPanel, 'TOPLEFT', 70, -30)
+        ActivityLabel:SetPoint('TOPLEFT', MainPanel, 'TOPLEFT', 30, -30)
         ActivityLabel:SetText(L['活动类型'])
     end
 
@@ -441,14 +441,17 @@ function BrowsePanel:OnInitialize()
                     self:EndSet()  
                 else
                     if data.value == 'mplus' or data.value == '2-0-0-0' then
-                        self:StartSet()
-                        self.ActivityDropdown:SetValue('2-0-0-0')
-                        self:EndSet()  
-                        self:DoSearch()
+                        -- self:StartSet()
+                        -- self.ActivityDropdown:SetValue('2-0-0-0')
+                        -- self:EndSet()  
+                        C_Timer.After(1, function()
+                            self:DoSearch()
+                        end)
                     end    
                     C_LFGList.ClearSearchTextFields()
                 end
-                if data.value == 'mplus' or data.value == '2-0-0-0' then
+                
+                if data.value == 'mplus' then
                     if self.BlzFilterPanel then
                         self.BlzFilterPanel:Show()
                     end 
@@ -592,12 +595,24 @@ function BrowsePanel:OnInitialize()
                 -- Shine:Hide()
                 AdvButton:SetScript('OnClick', function()
                     self.AdvFilterPanel:SetShown(not self.AdvFilterPanel:IsShown())
+                    if self.ExFilterPanel then
+                        self.ExFilterPanel:Hide()
+                    end 
+                    if self.BlzFilterPanel then
+                        self.BlzFilterPanel:Hide()
+                    end    
                 end)
                 AdvButton:GetScript('OnClick')(AdvButton)
             end)
         else
             AdvButton:SetScript('OnClick', function()
                 self.AdvFilterPanel:SetShown(not self.AdvFilterPanel:IsShown())
+                if self.ExFilterPanel then
+                    self.ExFilterPanel:Hide()
+                end 
+                if self.BlzFilterPanel then
+                    self.BlzFilterPanel:Hide()
+                end    
             end)
         end
     end
@@ -1060,7 +1075,7 @@ function BrowsePanel:Search()
     end
 
     Profile:SetLastSearchCode(searchCode)
-    LfgService:Search(categoryId, baseFilter, activityId)
+    LfgService:Search(categoryId, baseFilter, activityId, activityItem.value == 'mplus')
     self:UpdateFilters()
 
     self.searchTimer = nil

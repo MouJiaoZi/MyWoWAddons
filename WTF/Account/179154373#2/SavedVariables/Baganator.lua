@@ -207,7 +207,14 @@ BAGANATOR_CONFIG = {
 -235,
 },
 ["new_items_flashing"] = true,
-["debug_timers"] = false,
+["category_sections"] = {
+["1"] = {
+["name"] = "EQUIPMENT",
+},
+["2"] = {
+["name"] = "CRAFTING",
+},
+},
 ["seen_welcome"] = 1,
 ["hide_special_container"] = {
 },
@@ -221,13 +228,13 @@ BAGANATOR_CONFIG = {
 },
 ["category_sort_method"] = "type",
 ["category_horizontal_spacing_2"] = 0.3,
+["debug_categories"] = false,
+["category_default_import"] = 2,
 ["bag_view_position"] = {
 "BOTTOMRIGHT",
 -354.7457275390625,
 223.9999542236328,
 },
-["category_default_import"] = 2,
-["debug_categories"] = false,
 ["character_bank_current_tab"] = 0,
 ["bag_view_show_bag_slots"] = true,
 ["bag_empty_space_at_top"] = false,
@@ -235,9 +242,9 @@ BAGANATOR_CONFIG = {
 ["sort_ignore_bank_slots_count"] = {
 ["某餃子-伊森利恩"] = 0,
 },
+["category_migration"] = 5,
 ["saved_searches"] = {
 },
-["category_migration"] = 5,
 ["guild_view_position"] = {
 "LEFT",
 20,
@@ -278,9 +285,7 @@ BAGANATOR_CONFIG = {
 },
 },
 ["warband_bank_view_width"] = 14,
-["category_section_toggled"] = {
-["装备"] = false,
-},
+["sort_ignore_slots_at_end"] = false,
 ["add_to_category_buttons_2"] = "drag",
 ["view_type"] = "unset",
 ["bank_current_tab"] = 2,
@@ -289,9 +294,9 @@ BAGANATOR_CONFIG = {
 },
 ["icon_text_font_size"] = 14,
 ["show_buttons_on_alt"] = false,
+["view_alpha"] = 1,
 ["disabled_skins"] = {
 },
-["view_alpha"] = 1,
 ["sort_ignore_slots_count_2"] = {
 ["某餃子-伊森利恩"] = 0,
 },
@@ -376,7 +381,9 @@ BAGANATOR_CONFIG = {
 0,
 0,
 },
-["sort_ignore_slots_at_end"] = false,
+["category_section_toggled"] = {
+["装备"] = false,
+},
 ["bank_only_view_position"] = {
 "LEFT",
 20,
@@ -394,14 +401,7 @@ BAGANATOR_CONFIG = {
 0,
 },
 ["lock_frames"] = false,
-["category_sections"] = {
-["1"] = {
-["name"] = "EQUIPMENT",
-},
-["2"] = {
-["name"] = "CRAFTING",
-},
-},
+["debug_timers"] = false,
 ["icon_mark_unusable"] = false,
 ["custom_categories"] = {
 },

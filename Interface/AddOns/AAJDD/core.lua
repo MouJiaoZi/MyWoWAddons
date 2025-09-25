@@ -3,9 +3,6 @@ local _G = _G
 ---------config-------------
 --- 可以改这个数值，即可调整延迟多少秒时间加载。有的人立刻加载不行
 local DELAY_TIME = 0.01
---- 文字输出相关
-local PrintEnable = true --- 是否打印输出文字
-
 
 local EnableYourCVars = true -- 开启你的输入
 ---------config end-----------
@@ -70,29 +67,11 @@ local function default()
     end
 end
 
-local lastEnterTime
-local getFriendInfo = C_BattleNet.GetFriendGameAccountInfo
-C_BattleNet.GetFriendGameAccountInfo = function(...)
-    local gameInfo = getFriendInfo(...)
-    if IsInInstance() then
-        gameInfo.isInCurrentRegion = true
-    end
-    return gameInfo
-end
-
 local function realDoIt()
     if EnableYourCVars then
         default()
     end
 end
-
-local function OnTimerUpdate()
-    if (GetTime() - lastEnterTime) >= DELAY_TIME then
-        realDoIt()
-        addon.eventframe:SetScript("OnUpdate", nil)
-    end
-end
-
 
 function addon.OnEvent(frame, event, ...)
     if event == 'LOADING_SCREEN_DISABLED' then

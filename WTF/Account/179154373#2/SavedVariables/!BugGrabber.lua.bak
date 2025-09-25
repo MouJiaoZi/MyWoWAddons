@@ -1,6 +1,6 @@
 
 BugGrabberDB = {
-["session"] = 806,
+["session"] = 812,
 ["lastSanitation"] = 3,
 ["errors"] = {
 {
@@ -154,6 +154,14 @@ BugGrabberDB = {
 ["stack"] = "[Interface/AddOns/Blizzard_FrameXML/SecureHandlers.lua]:296: in function <...nterface/AddOns/Blizzard_FrameXML/SecureHandlers.lua:279>\n[tail call]: ?",
 ["session"] = 798,
 ["counter"] = 14,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 'ElvUI' 尝试调用保护功能 'StatusBar:Show()'。",
+["time"] = "2025/09/25 20:25:32",
+["locals"] = "keystate = \"down\"\n",
+["stack"] = "[TOGGLECHARACTER0]:1: in function <[string \"TOGGLECHARACTER0\"]:1>",
+["session"] = 811,
+["counter"] = 1,
 },
 },
 }

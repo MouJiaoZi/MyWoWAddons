@@ -200,8 +200,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -482,8 +482,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -705,8 +705,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -931,8 +931,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -1162,8 +1162,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -1384,8 +1384,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -1610,8 +1610,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -1836,8 +1836,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -2065,8 +2065,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -2291,8 +2291,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -2517,8 +2517,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -2742,8 +2742,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -2970,8 +2970,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -3198,8 +3198,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -3429,8 +3429,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -3652,8 +3652,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -3820,8 +3820,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = false,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -4105,8 +4105,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -4330,8 +4330,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
@@ -4512,8 +4512,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -4792,8 +4792,8 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
@@ -5021,8 +5021,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
 ["hideAt"] = 0,
+["hidden"] = true,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -5249,8 +5249,8 @@ DCS_ClassSpecDB = {
 ["roles"] = {
 "TANK",
 },
-["hideAt"] = 0,
 ["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",

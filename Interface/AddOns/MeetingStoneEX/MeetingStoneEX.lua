@@ -18,12 +18,10 @@ if not MEETINGSTONE_UI_DB.IGNORE_LIST then
     MEETINGSTONE_UI_DB.IGNORE_LIST = {}
 end
 
-local _dungeon = C_LFGList.GetAvailableActivityGroups(GROUP_FINDER_CATEGORY_ID_DUNGEONS, bit.bor(Enum.LFGListFilter.CurrentSeason, Enum.LFGListFilter.PvE))
-if #_dungeon > 0 then
-    MEETINGSTONE_UI_DB.Dungeon_LIST = _dungeon
-elseif  not MEETINGSTONE_UI_DB.Dungeon_LIST then   
-    MEETINGSTONE_UI_DB.Dungeon_LIST = { 323, 324, 326, 371, 381, 261 ,280,281}
-end    
+local Dungeons = C_LFGList.GetAvailableActivityGroups(GROUP_FINDER_CATEGORY_ID_DUNGEONS, bit.bor(Enum.LFGListFilter.CurrentSeason, Enum.LFGListFilter.PvE))
+if #Dungeons == 0 then
+    Dungeons = { 323, 324, 326, 371, 381, 261 ,280,281}
+end
 
 -- if not MEETINGSTONE_UI_DB.CLEAR_IGNORE_LIST_V1 then
 --     MEETINGSTONE_UI_DB.CLEAR_IGNORE_LIST_V1 = false
@@ -86,11 +84,10 @@ if MEETINGSTONE_UI_DB.FILTER_MULTY == nil then
 end
 
 --职责过滤
-local function CheckJobsFilter(data, tcount, hcount, dcount, activity, hasDungeon)
+local function CheckJobsFilter(data, tcount, hcount, dcount, activity, isSeasonDungeon)
     local enabled = C_LFGList.GetAdvancedFilter()
-    local isSeasonDungeon = activity and containsValue(enabled.activities,activity:GetGroupID()) or false
-    if not hasDungeon and isSeasonDungeon then
-        local enabled = C_LFGList.GetAdvancedFilter()
+    local isDungeon = activity and containsValue(enabled.activities,activity:GetGroupID()) or #(enabled.activities)==0 or false
+    if isSeasonDungeon and isDungeon then
         if enabled.needsMyClass then
             local _, myclass, _2 = UnitClass("player")
             for i = 1, activity:GetNumMembers() do
@@ -102,7 +99,9 @@ local function CheckJobsFilter(data, tcount, hcount, dcount, activity, hasDungeo
         end 
         return (not enabled.needsHealer and not enabled.needsDamage or (enabled.needsHealer and data.HEALER < hcount) or (enabled.needsDamage and data.DAMAGER < dcount)) 
             and (not enabled.hasTank or data.TANK >= tcount )
+            and (not enabled.needsTank or data.TANK < tcount)
             and (not enabled.hasHealer or data.HEALER >= hcount )
+            and (not enabled.needsHealer or data.HEALER < hcount)
             or false
              
     else  
@@ -130,6 +129,22 @@ local function CheckPVPJobsFilter(data, hcount, dcount)
     end
     return true
 end
+--副本过滤
+local function CheckDungeonsFilter(activity)
+    local enabled = C_LFGList.GetAdvancedFilter()
+    local result = false
+    groupID = activity:GetGroupID()
+    for i,v in ipairs(enabled.activities) do
+        if groupID == v then 
+            result = true
+        end    
+    end
+    if not result and #(enabled.activities)>0 then
+        return false
+    else
+        return true    
+    end  
+end    
 
 --添加过滤功能
 BrowsePanel.ActivityList:RegisterFilter(function(activity, ...)
@@ -165,14 +180,24 @@ BrowsePanel.ActivityList:RegisterFilter(function(activity, ...)
         local categoryId = activityItem.categoryId
         local activityId = activityItem.activityId
 
+
+        --显示自己的队伍
+        if activity:IsSelf() or activity:IsAnyFriend() or activity:IsInActivity() or activity:IsApplication() then
+            return true
+        end    
+    
         --修复自定义搜索文本时会有不对应的内容出现
         if categoryId ~= activity:GetCategoryID() then
             return false
         end    
-
+        if activityItem.value == 'mplus' then
+            if not CheckDungeonsFilter(activity) then
+                return false
+            end    
+        end    
         --任务1 地下堡121 地下城2 团队3 jjc4 评级9 自定义6
-        if categoryId == 2 then
-            if not CheckJobsFilter(data, 1, 1, 3, activity, activityId ~= nil)then
+        if categoryId == 2 then  
+            if not CheckJobsFilter(data, 1, 1, 3, activity, activityItem.value == 'mplus')then
                 return false
             end
         elseif categoryId == 3 then
@@ -271,16 +296,79 @@ BrowsePanel.ActivityList:RegisterFilter(function(activity, ...)
     return activity:Match(...)
 end)
 
+function BrowsePanel:createSeasonFilter()
+    if self.RefreshButton then 
+        self.RefreshButton:SetPoint('TOPRIGHT', MainPanel, 'TOPRIGHT', -180, -38)
+    end
+    
+    if self.AdvButton then 
+        self.AdvButton:SetPoint('LEFT', self.RefreshButton, 'RIGHT', 80, 0)
+    end        
+    local ExSearchButton = CreateFrame('Button', nil, self, 'UIMenuButtonStretchTemplate')
+
+    function btnClick()
+        local activityItem = self.ActivityDropdown:GetItem()
+        if not activityItem then
+            self.ExFilterPanel:SetShown(not self.ExFilterPanel:IsShown())
+            return
+        end
+        --local categoryId = activityItem.categoryId
+        if activityItem.value == 'mplus' then
+            self.BlzFilterPanel:SetShown(not self.BlzFilterPanel:IsShown())
+            self.ExFilterPanel:SetShown(false) 
+        else 
+            self.ExFilterPanel:SetShown(not self.ExFilterPanel:IsShown())
+            self.BlzFilterPanel:SetShown(false) 
+        end   
+        self.AdvFilterPanel:SetShown(false) 
+    end    
+    do
+        GUI:Embed(ExSearchButton, 'Tooltip')
+        ExSearchButton:SetTooltipAnchor('ANCHOR_RIGHT')
+        ExSearchButton:SetTooltip('过滤器')
+        ExSearchButton:SetSize(83, 31)
+        ExSearchButton:SetPoint('LEFT', self.RefreshButton, 'RIGHT', 0, 0)
+        ExSearchButton:SetText('过滤器')
+        ExSearchButton:SetNormalFontObject('GameFontNormal')
+        ExSearchButton:SetHighlightFontObject('GameFontHighlight')
+        ExSearchButton:SetDisabledFontObject('GameFontDisable')
+
+        if Profile:IsProfileKeyNew('advShine', 60200.09) then
+            local Shine = GUI:GetClass('ShineWidget'):New(ExSearchButton)
+            do
+                Shine:SetPoint('TOPLEFT', 5, -5)
+                Shine:SetPoint('BOTTOMRIGHT', -5, 5)
+               -- Shine:Start()
+            end
+            ExSearchButton.Shine = Shine
+            ExSearchButton:SetScript('OnClick', function()
+                -- Profile:ClearProfileKeyNew('advShine')
+                -- Shine:Stop()
+                -- Shine:Hide()
+                ExSearchButton:SetScript('OnClick', btnClick)
+                ExSearchButton:GetScript('OnClick')(ExSearchButton)
+            end)
+        else
+            ExSearchButton:SetScript('OnClick', btnClick)
+        end
+    end
+    self.ExSearchButton = ExSearchButton
+end    
 
 function BrowsePanel:CreateBlzFilterPanel()
     -- body
     local BlzFilterPanel = CreateFrame('Frame', nil, self, 'SimplePanelTemplate')
+
+    local closeButton = CreateFrame('Button', nil, BlzFilterPanel, 'UIPanelCloseButton')
+        do
+            closeButton:SetPoint('TOPRIGHT', 0, -1)
+        end
 	
     do
         GUI:Embed(BlzFilterPanel, 'Refresh')
-        BlzFilterPanel:SetSize(200, 480)
-        BlzFilterPanel:SetPoint('TOPRIGHT', MainPanel, 'TOPLEFT', 0, 0)
-        BlzFilterPanel:SetFrameLevel(self.ActivityList:GetFrameLevel() + 5)
+        BlzFilterPanel:SetSize(200, 400)
+        BlzFilterPanel:SetPoint('TOPLEFT', MainPanel, 'TOPRIGHT', 2, -10)--SetPoint('TOPRIGHT', self.ExSearchButton, 'BOTTOM', 115, 0)
+        BlzFilterPanel:SetFrameLevel(self.ActivityList:GetFrameLevel() + 15)
         BlzFilterPanel:EnableMouse(true)
         local Label = BlzFilterPanel:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
         do
@@ -291,8 +379,6 @@ function BrowsePanel:CreateBlzFilterPanel()
     self.BlzFilterPanel = BlzFilterPanel
     BlzFilterPanel:SetShown(false)
 
-
-    local Dungeons = MEETINGSTONE_UI_DB.Dungeon_LIST
 
     local enabled = C_LFGList.GetAdvancedFilter()
     -- enabled.needsTank = false
@@ -317,10 +403,10 @@ function BrowsePanel:CreateBlzFilterPanel()
 
     
     function saveAdvFilter()
-        -- enabled.difficultyNormal = false
-        -- enabled.difficultyHeroic = false
-        -- enabled.difficultyMythic = false
-        -- enabled.difficultyMythicPlus = true
+        enabled.difficultyNormal = false
+        enabled.difficultyHeroic = false
+        enabled.difficultyMythic = true
+        enabled.difficultyMythicPlus = true
         -- if enabled.minimumRating == 0 then
         --    enabled.minimumRating = 1
         -- end    
@@ -330,6 +416,14 @@ function BrowsePanel:CreateBlzFilterPanel()
                 table.remove(enabled.activities,index)
             end    
         end
+        if enabled.needsTank and enabled.hasTank then
+             GUI:CallWarningDialog('不能同时选择缺坦克和已有坦克', true, nil)
+        end    
+        if enabled.needsHealer and enabled.hasHealer then
+             GUI:CallWarningDialog('不能同时选择缺治疗和已有治疗', true, nil)
+        end      
+
+
         C_LFGList.SaveAdvancedFilter(enabled)
     end   
     
@@ -344,6 +438,13 @@ function BrowsePanel:CreateBlzFilterPanel()
         text = string.gsub(text, "姆诺兹多的崛起 - 永恒黎明", "崛起")
 
         Box.Check:SetText(text)
+        if index <= #Dungeons then
+            if checked then
+                Box.Check:GetFontString():SetTextColor(GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b, 1)
+            else
+                Box.Check:GetFontString():SetTextColor(1, 1, 1, 0.5)    
+            end 
+        end       
         Box.Check:SetChecked(checked)
         Box.dataValue = value
         Box:SetCallback(cbEvent,cbFunc)
@@ -386,47 +487,51 @@ function BrowsePanel:CreateBlzFilterPanel()
     end  
 
 
-    
     for i, id in ipairs(Dungeons) do
         local name = C_LFGList.GetActivityGroupInfo(id)
-        createCheckBox(i,name,containsValue(enabled.activities,id),id,'OnChanged',function(box)
+        createCheckBox(i,name,#enabled.activities==0 and fasle or containsValue(enabled.activities,id),id,'OnChanged',function(box)
             local value = box.Check:GetChecked()
             local stats,index = containsValue(enabled.activities,box.dataValue)
             if value then
                 if not stats then
                     table.insert(enabled.activities,box.dataValue)
+                    box.Check:GetFontString():SetAlpha(1)  
                 end
             else
                 if stats then
                     table.remove(enabled.activities,index)
+                    box.Check:GetFontString():SetAlpha(0.5)  
                 end    
             end
             saveAdvFilter()
+            --C_Timer.After(1,function()
+                --self.ActivityList:Refresh()
+            --end) 
         end)        
     end
 
 
-    createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY1,enabled.difficultyNormal,"difficultyNormal",'OnChanged', roleFunc)
-    createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY2,enabled.difficultyHeroic,"difficultyHeroic",'OnChanged', roleFunc)
-    createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY6,enabled.difficultyMythic,"difficultyMythic",'OnChanged', roleFunc)
-    createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY_MYTHIC_PLUS,enabled.difficultyMythicPlus,"difficultyMythicPlus",'OnChanged', roleFunc)
+    --createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY1,enabled.difficultyNormal,"difficultyNormal",'OnChanged', roleFunc)
+    --createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY2,enabled.difficultyHeroic,"difficultyHeroic",'OnChanged', roleFunc)
+    --createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY6,enabled.difficultyMythic,"difficultyMythic",'OnChanged', roleFunc)
+    --createCheckBox(#self.MD + 1, PLAYER_DIFFICULTY_MYTHIC_PLUS,enabled.difficultyMythicPlus,"difficultyMythicPlus",'OnChanged', roleFunc)
 
 
-    local availTank, availHealer, availDPS = C_LFGList.GetAvailableRoles();
-    if availTank then 
-        createCheckBox(#self.MD + 1, LFG_LIST_NEEDS_TANK,enabled.needsTank,"needsTank",'OnChanged', roleFunc)
-    end  
-    if availHealer then 
-        createCheckBox(#self.MD + 1, LFG_LIST_NEEDS_HEALER,enabled.needsHealer,"needsHealer",'OnChanged',roleFunc)
-    end  
-    if availDPS then 
-        createCheckBox(#self.MD + 1, LFG_LIST_NEEDS_DAMAGE,enabled.needsDamage,"needsDamage",'OnChanged', roleFunc)
-    end    
-    createCheckBox(#self.MD + 1, string.format(LFG_LIST_CLASS_AVAILABLE, PlayerUtil.GetClassName()),enabled.needsMyClass,"needsMyClass",'OnChanged', roleFunc)
-    createCheckBox(#self.MD + 1, LFG_LIST_HAS_TANK,enabled.hasTank,"hasTank",'OnChanged', roleFunc)
-    createCheckBox(#self.MD + 1, LFG_LIST_HAS_HEALER,enabled.hasHealer,"hasHealer",'OnChanged', roleFunc)
+    --local availTank, availHealer, availDPS = C_LFGList.GetAvailableRoles();
+    --if availTank then 
+        createCheckBox(#self.MD + 1, "缺坦克",enabled.needsTank,"needsTank",'OnChanged', roleFunc)--LFG_LIST_NEEDS_TANK
+    --end  
+    --if availHealer then 
+        createCheckBox(#self.MD + 1, "缺治疗",enabled.needsHealer,"needsHealer",'OnChanged',roleFunc)--LFG_LIST_NEEDS_HEALER
+    --end  
+    --if availDPS then 
+        createCheckBox(#self.MD + 1, "缺DPS",enabled.needsDamage,"needsDamage",'OnChanged', roleFunc)--LFG_LIST_NEEDS_DAMAGE
+    --end    
+    createCheckBox(#self.MD + 1, "已有坦克",enabled.hasTank,"hasTank",'OnChanged', roleFunc)--LFG_LIST_HAS_TANK
+    createCheckBox(#self.MD + 1, "已有治疗",enabled.hasHealer,"hasHealer",'OnChanged', roleFunc)--LFG_LIST_HAS_HEALER
+    createCheckBox(#self.MD + 1, "过滤同职业",enabled.needsMyClass,"needsMyClass",'OnChanged', roleFunc)--string.format(LFG_LIST_CLASS_AVAILABLE, PlayerUtil.GetClassName())
 
-    createFilterBox(#self.MD + 1, LFG_LIST_MINIMUM_RATING,enabled.minimumRating,'OnChanged',function(box) 
+    createFilterBox(#self.MD + 1, LFG_LIST_MINIMUM_RATING,enabled.minimumRating,'OnChanged',function(box) --
         enabled.minimumRating = box.MinBox:GetNumber()
     end)
      
@@ -434,15 +539,24 @@ function BrowsePanel:CreateBlzFilterPanel()
     do
         ResetFilterButton:SetSize(160, 22)
         ResetFilterButton:SetPoint('BOTTOM', BlzFilterPanel, 'BOTTOM', 0, 3)
-        ResetFilterButton:SetText('搜索')
+        ResetFilterButton:SetText('搜索更多队伍')
         ResetFilterButton:SetScript('OnClick', function(button)
             saveAdvFilter()
+            for i,v in ipairs(self.MD) do
+                if i<= #Dungeons then
+                    if containsValue(enabled.activities,v.dataValue) then
+                        v.Check:GetFontString():SetTextColor(GREEN_FONT_COLOR.r, GREEN_FONT_COLOR.g, GREEN_FONT_COLOR.b, 1)
+                    else
+                        v.Check:GetFontString():SetTextColor(1, 1, 1, 0.5)
+                    end
+                end    
+            end
             --C_LFGList.ClearSearchTextFields()
             --self.ActivityDropdown:SetValue('2-0-0-0')
             button:Disable()
             self:DoSearch()
             C_Timer.After(3,function()
-                button:Enable()
+                button:Enable() 
             end)
         end)
     end
@@ -480,12 +594,17 @@ end
 function BrowsePanel:CreateExSearchButton()
 
     local ExFilterPanel = CreateFrame('Frame', nil, self, 'SimplePanelTemplate')
+
+    local closeButton = CreateFrame('Button', nil, ExFilterPanel, 'UIPanelCloseButton')
+    do
+        closeButton:SetPoint('TOPRIGHT', 0, -1)
+    end
 	
     do
         GUI:Embed(ExFilterPanel, 'Refresh')
         ExFilterPanel:SetSize(200, 180)
-        ExFilterPanel:SetPoint('TOPRIGHT', MainPanel, 'TOPLEFT', 0, -10)
-        ExFilterPanel:SetFrameLevel(self.ActivityList:GetFrameLevel() + 5)
+        ExFilterPanel:SetPoint('TOPLEFT', MainPanel, 'TOPRIGHT', 2, -10)--SetPoint('TOPRIGHT', self.ExSearchButton, 'BOTTOM', 125, 0)
+        ExFilterPanel:SetFrameLevel(self.ActivityList:GetFrameLevel() + 15)
         ExFilterPanel:EnableMouse(true)
         local Label = ExFilterPanel:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
         do
@@ -535,9 +654,11 @@ end
 
 --添加大秘境过滤功能
 function BrowsePanel:EX_INIT()
+    self:createSeasonFilter()
     self:CreateBlzFilterPanel()
     self:CreateExSearchButton()
 end
+
 
 function BrowsePanel:ToggleActivityMenu(anchor, activity)
     local usable, reason = self:CheckSignUpStatus(activity)
