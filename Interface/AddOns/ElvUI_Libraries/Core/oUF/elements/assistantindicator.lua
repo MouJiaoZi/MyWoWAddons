@@ -25,6 +25,11 @@ A default texture will be applied if the widget is a Texture and doesn't have a 
 local _, ns = ...
 local oUF = ns.oUF
 
+local UnitInRaid = UnitInRaid
+local UnitIsGroupAssistant = UnitIsGroupAssistant
+local UnitIsGroupLeader = UnitIsGroupLeader
+local UnitAffectingCombat = UnitAffectingCombat
+
 local function Update(self, event)
 	local element = self.AssistantIndicator
 	local unit = self.unit
@@ -79,10 +84,10 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		oUF:RegisterEvent(self, 'UNIT_FLAGS', Path)
-		oUF:RegisterEvent(self, 'GROUP_ROSTER_UPDATE', Path, true)
-		oUF:RegisterEvent(self, 'PLAYER_REGEN_DISABLED', Path, true)
-		oUF:RegisterEvent(self, 'PLAYER_REGEN_ENABLED', Path, true)
+		self:RegisterEvent('UNIT_FLAGS', Path)
+		self:RegisterEvent('GROUP_ROSTER_UPDATE', Path, true)
+		self:RegisterEvent('PLAYER_REGEN_DISABLED', Path, true)
+		self:RegisterEvent('PLAYER_REGEN_ENABLED', Path, true)
 
 		if(element:IsObjectType('Texture') and not element:GetTexture()) then
 			element:SetTexture([[Interface\GroupFrame\UI-Group-AssistantIcon]])
@@ -97,10 +102,10 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		oUF:UnregisterEvent(self, 'UNIT_FLAGS', Path)
-		oUF:UnregisterEvent(self, 'GROUP_ROSTER_UPDATE', Path)
-		oUF:UnregisterEvent(self, 'PLAYER_REGEN_DISABLED', Path)
-		oUF:UnregisterEvent(self, 'PLAYER_REGEN_ENABLED', Path)
+		self:UnregisterEvent('UNIT_FLAGS', Path)
+		self:UnregisterEvent('GROUP_ROSTER_UPDATE', Path)
+		self:UnregisterEvent('PLAYER_REGEN_DISABLED', Path)
+		self:UnregisterEvent('PLAYER_REGEN_ENABLED', Path)
 	end
 end
 

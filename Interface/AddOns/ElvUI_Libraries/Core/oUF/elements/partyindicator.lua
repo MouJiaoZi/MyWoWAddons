@@ -9,6 +9,9 @@
 local _, ns = ...
 local oUF = ns.oUF
 
+local _G = _G
+local IsInGroup = IsInGroup
+
 local function Update(self, event)
 	local element = self.PartyIndicator
 
@@ -18,7 +21,7 @@ local function Update(self, event)
 
 	local forced = not event or event == 'ElvUI_UpdateAllElements'
 	if forced or event == 'GROUP_ROSTER_UPDATE' then
-		if IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+		if IsInGroup(_G.LE_PARTY_CATEGORY_HOME) and IsInGroup(_G.LE_PARTY_CATEGORY_INSTANCE) then
 			element:Show()
 		else
 			element:Hide()
@@ -26,12 +29,12 @@ local function Update(self, event)
 	end
 
 	if forced or event == 'UPDATE_CHAT_COLOR' then
-		local private = ChatTypeInfo.PARTY
+		local private = _G.ChatTypeInfo.PARTY
 		if private and element.HomeIcon then
 			element.HomeIcon:SetVertexColor(private.r, private.g, private.b, 1)
 		end
 
-		local public = ChatTypeInfo.INSTANCE_CHAT
+		local public = _G.ChatTypeInfo.INSTANCE_CHAT
 		if public and element.InstanceIcon then
 			element.InstanceIcon:SetVertexColor(public.r, public.g, public.b, 1)
 		end
@@ -62,8 +65,8 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		oUF:RegisterEvent(self, 'UPDATE_CHAT_COLOR', Path, true)
-		oUF:RegisterEvent(self, 'GROUP_ROSTER_UPDATE', Path, true)
+		self:RegisterEvent('UPDATE_CHAT_COLOR', Path, true)
+		self:RegisterEvent('GROUP_ROSTER_UPDATE', Path, true)
 
 		if(element.HomeIcon and element.HomeIcon:IsObjectType('Texture') and not element.HomeIcon:GetTexture()) then
 			element.HomeIcon:SetTexture([[Interface\FriendsFrame\UI-Toast-FriendOnlineIcon]])
@@ -82,8 +85,8 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		oUF:UnregisterEvent(self, 'UPDATE_CHAT_COLOR', Path)
-		oUF:UnregisterEvent(self, 'GROUP_ROSTER_UPDATE', Path)
+		self:UnregisterEvent('UPDATE_CHAT_COLOR', Path)
+		self:UnregisterEvent('GROUP_ROSTER_UPDATE', Path)
 	end
 end
 

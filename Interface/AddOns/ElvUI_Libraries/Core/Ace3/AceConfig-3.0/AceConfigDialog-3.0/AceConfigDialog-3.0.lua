@@ -7,7 +7,7 @@ local LibStub = LibStub
 local gui = LibStub("AceGUI-3.0")
 local reg = LibStub("AceConfigRegistry-3.0-ElvUI")
 
-local MAJOR, MINOR = "AceConfigDialog-3.0-ElvUI", 91 -- based off 87
+local MAJOR, MINOR = "AceConfigDialog-3.0-ElvUI", 93 -- based off 87
 local AceConfigDialog, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not AceConfigDialog then return end
@@ -24,10 +24,19 @@ AceConfigDialog.frame.closeAllOverride = AceConfigDialog.frame.closeAllOverride 
 -- Lua APIs
 local tinsert, tsort, tremove, wipe = table.insert, table.sort, table.remove, table.wipe
 local strmatch, format = string.match, string.format
-local error = error
 local pairs, next, select, type, unpack, ipairs = pairs, next, select, type, unpack, ipairs
-local tostring, tonumber = tostring, tonumber
+local tostring, tonumber, error = tostring, tonumber, error
 local math_min, math_max, math_floor = math.min, math.max, math.floor
+
+local _G = _G
+local geterrorhandler = geterrorhandler
+local CreateFrame = CreateFrame
+local PlaySound = PlaySound
+local Settings = Settings
+
+local NORMAL_FONT_COLOR = NORMAL_FONT_COLOR
+
+-- GLOBALS: CloseSpecialWindows
 
 local emptyTbl = {}
 
@@ -57,7 +66,6 @@ Group Types
         - Grandchild groups will default to inline unless specified otherwise
 
   Select- Same as Tab but with entries in a dropdown rather than tabs
-
 
   Inline Groups
     - Will not become nodes of a select group, they will be effectivly part of thier parent group seperated by a border
@@ -164,7 +172,6 @@ local allIsLiteral = {
 local function GetOptionsMemberValue(membername, option, options, path, appName, ...)
 	--get definition for the member
 	local inherits = isInherited[membername]
-
 
 	--get the member of the option, traversing the tree if it can be inherited
 	local member
@@ -302,8 +309,6 @@ local function compareOptions(a,b)
 	return OrderA < OrderB
 end
 
-
-
 --builds 2 tables out of an options group
 -- keySort, sorted keys
 -- opts, combined options from .plugins and args
@@ -431,7 +436,6 @@ end
 function AceConfigDialog:SelectGroup(appName, ...)
 	local path = new()
 
-
 	local app = reg:GetOptionsTable(appName)
 	if not app then
 		error(("%s isn't registed with AceConfigRegistry, unable to open config"):format(appName), 2)
@@ -528,6 +532,7 @@ local function OptionOnMouseOver(widget, event)
 		Max = (opt.max and "|cFFCCCCCCMax:|r "..(opt.isPercent and (opt.max*100).."%" or opt.max)) or ""
 		softText = Min ~= "" or Max ~= ""
 	end
+
 	if bigText then
 		local dec = opt.step and format("%f", opt.step):gsub('%.?0-$','')
 		local num = dec and tonumber(dec)
@@ -535,7 +540,16 @@ local function OptionOnMouseOver(widget, event)
 		bigText = Step ~= ""
 	end
 
-	if descText or usageText or userText or softText or bigText then
+	if opt.dragdrop then
+		tooltip:SetOwner(widget.frame, "ANCHOR_TOPRIGHT")
+		tooltip:SetText(user.title or name, 1, .82, 0, true)
+
+		if user.desc then
+			tooltip:AddLine(user.desc, 1, 1, 1, true)
+		end
+
+		tooltip:Show()
+	elseif descText or usageText or userText or softText or bigText then
 		tooltip:SetOwner(widget.frame, "ANCHOR_TOPRIGHT")
 		tooltip:SetText(name, 1, .82, 0, true)
 
@@ -616,8 +630,8 @@ do
 		local function newButton(newText)
 			local button = CreateFrame("Button", nil, frame)
 			button:SetSize(128, 21)
-			button:SetNormalFontObject(GameFontNormal)
-			button:SetHighlightFontObject(GameFontHighlight)
+			button:SetNormalFontObject(_G.GameFontNormal)
+			button:SetHighlightFontObject(_G.GameFontHighlight)
 			button:SetNormalTexture(130763) -- "Interface\\Buttons\\UI-DialogBox-Button-Up"
 			button:GetNormalTexture():SetTexCoord(0.0, 1.0, 0.0, 0.71875)
 			button:SetPushedTexture(130761) -- "Interface\\Buttons\\UI-DialogBox-Button-Down"
@@ -871,8 +885,6 @@ local function ActivateControl(widget, event, ...)
 		elseif type(func) == "function" then
 			safecall(func,info, ...)
 		end
-
-
 
 		local iscustom = user.rootframe:GetUserData("iscustom")
 		local basepath = user.rootframe:GetUserData("basepath") or emptyTbl
@@ -1420,12 +1432,16 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 							local text = values[value]
 							if dragdrop then
 								local button = gui:Create("Button-ElvUI")
-								button:SetDisabled(disabled)
+
+								local title = v.dragGetTitle and v.dragGetTitle(button, text, value) or nil
+								local desc = v.dragGetDesc and v.dragGetDesc(button, text, value) or nil
+								button:SetText(format("|cFF888888%d|r %s", s, title or text))
 								button:SetUserData("value", value)
 								button:SetUserData("text", text)
-								local state = v.stateSwitchGetText and v.stateSwitchGetText(button, text, value)
-								button:SetText(format("|cFF888888%d|r %s", s, state or text))
-								button.stateSwitchOnClick = v.stateSwitchOnClick
+								button:SetUserData("title", title)
+								button:SetUserData("desc", desc)
+								button:SetDisabled(disabled)
+
 								button.dragOnMouseDown = v.dragOnMouseDown
 								button.dragOnMouseUp = v.dragOnMouseUp
 								button.dragOnEnter = v.dragOnEnter
@@ -1508,11 +1524,11 @@ local function FeedOptions(appName, options,container,rootframe,path,group,inlin
 
 					local fontSize = GetOptionsMemberValue("fontSize",v, options, path, appName)
 					if fontSize == "medium" then
-						control:SetFontObject(GameFontHighlight)
+						control:SetFontObject(_G.GameFontHighlight)
 					elseif fontSize == "large" then
-						control:SetFontObject(GameFontHighlightLarge)
+						control:SetFontObject(_G.GameFontHighlightLarge)
 					else -- small or invalid
-						control:SetFontObject(GameFontHighlightSmall)
+						control:SetFontObject(_G.GameFontHighlightSmall)
 					end
 
 					local imageCoords = GetOptionsMemberValue("imageCoords",v, options, path, appName)
@@ -1588,7 +1604,6 @@ local function BuildPath(path, ...)
 	end
 end
 
-
 local function TreeOnButtonEnter(widget, event, uniquevalue, button)
 	local user = widget:GetUserDataTable()
 	if not user then return end
@@ -1635,7 +1650,6 @@ local function TreeOnButtonLeave(widget, event, value, button)
 	AceConfigDialog.tooltip:Hide()
 	AceConfigDialog.tooltip:ClearAllPoints()
 end
-
 
 local function GroupExists(appName, options, path, uniquevalue)
 	if not uniquevalue then return false end
@@ -1686,8 +1700,6 @@ local function GroupSelected(widget, event, uniquevalue)
 	del(feedpath)
 end
 
-
-
 --[[
 -- INTERNAL --
 This function will feed one group, and any inline child groups into the given container
@@ -1709,7 +1721,6 @@ function AceConfigDialog:FeedGroup(appName,options,container,rootframe,path, isR
 	--follow the path to get to the curent group
 	local inline
 	local grouptype, parenttype = options.childGroups, "none"
-
 
 	for i = 1, #path do
 		local v = path[i]
@@ -1862,9 +1873,6 @@ function AceConfigDialog:FeedGroup(appName,options,container,rootframe,path, isR
 	end
 end
 
-local old_CloseSpecialWindows
-
-
 local function RefreshOnUpdate(this)
 	for appName in pairs(this.closing) do
 		if AceConfigDialog.OpenFrames[appName] then
@@ -1959,9 +1967,10 @@ end
 -- @param appName The application name as given to `:RegisterOptionsTable()`
 -- @param container An optional container frame to feed the options into
 -- @param ... The path to open after creating the options window (see `:SelectGroup` for details)
+local old_CloseSpecialWindows
 function AceConfigDialog:Open(appName, container, ...)
 	if not old_CloseSpecialWindows then
-		old_CloseSpecialWindows = CloseSpecialWindows
+		old_CloseSpecialWindows = _G.CloseSpecialWindows
 		CloseSpecialWindows = function()
 			local found = old_CloseSpecialWindows()
 			return self:CloseAll() or found
@@ -2139,7 +2148,7 @@ function AceConfigDialog:AddToBlizOptions(appName, name, parent, ...)
 			end
 		else
 			group:SetName(name or appName, parent)
-			InterfaceOptions_AddCategory(group.frame)
+			_G.InterfaceOptions_AddCategory(group.frame)
 		end
 		return group.frame, group.frame.name
 	else

@@ -4,15 +4,17 @@ local DT = E:GetModule('DataTexts')
 local next = next
 local pairs = pairs
 local strjoin = strjoin
+
 local HasNewMail = HasNewMail
 local GetLatestThreeSenders = GetLatestThreeSenders
+
 local HAVE_MAIL_FROM = HAVE_MAIL_FROM
 local MAIL_LABEL = MAIL_LABEL
 
 local displayString = ''
 
 local function OnEvent(self)
-	self.text:SetFormattedText(displayString, HasNewMail() and 'New Mail' or 'No Mail')
+	self.text:SetFormattedText(displayString, HasNewMail() and L["New Mail"] or L["No Mail"])
 end
 
 local function OnEnter()

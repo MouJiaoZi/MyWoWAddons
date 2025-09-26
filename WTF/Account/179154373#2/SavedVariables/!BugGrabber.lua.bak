@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
-["session"] = 816,
 ["lastSanitation"] = 3,
+["session"] = 819,
 ["errors"] = {
 {
 ["message"] = "光环'Inverse/Crushing Gravity positions'的Lua错误：init\nWeakAuras 版本：5.20.2\n光环版本：1.0.96\n堆栈追踪：\n[string \"return function() local INVERSE_SIZE = Weak...\"]:66: attempt to index global 'LiquidWeakAuras' (a nil value)",
@@ -50,14 +50,6 @@ BugGrabberDB = {
 ["stack"] = "[Interface/AddOns/WeakAuras/GenericTrigger.lua]:1221: in function <Interface/AddOns/WeakAuras/GenericTrigger.lua:1209>",
 ["session"] = 731,
 ["counter"] = 5,
-},
-{
-["message"] = "[ADDON_ACTION_BLOCKED] 插件 'BlizzMove' 尝试调用保护功能 'Frame:SetPropagateMouseClicks()'。",
-["time"] = "2025/09/14 11:01:28",
-["locals"] = "",
-["stack"] = "[C]: in function 'ToggleWorldMap'\n[TOGGLEWORLDMAP]:1: in function <[string \"TOGGLEWORLDMAP\"]:1>",
-["session"] = 763,
-["counter"] = 2,
 },
 {
 ["message"] = "Interface/AddOns/JST/core/widget_api.lua:526: attempt to index global 'self' (a nil value)",
@@ -140,14 +132,6 @@ BugGrabberDB = {
 ["counter"] = 41,
 },
 {
-["message"] = "[ADDON_ACTION_BLOCKED] 插件 '*** ForceTaint_Strong ***' 尝试调用保护功能 'MouTotemFrameTotem:SetAttribute()'。",
-["time"] = "2025/09/11 07:59:15",
-["locals"] = "self = ElvUI_Bar3Button7 {\n BorderShadow = Texture {\n }\n TargetReticleAnimFrame = Frame {\n }\n RightEdge = Texture {\n }\n keyBoundTarget = \"MULTIACTIONBAR3BUTTON7\"\n glossTex = true\n flashing = false\n CooldownFlash = Frame {\n }\n __windSkin = true\n TopEdge = Texture {\n }\n Count = ElvUI_Bar3Button7Count {\n }\n _state_type = \"action\"\n LeftEdge = Texture {\n }\n arrowDownTexture = \"UI-HUD-ActionBar-Flyout-Down\"\n NormalTexture = ElvUI_Bar3Button7NormalTexture {\n }\n CheckedTexture = Texture {\n }\n Flash = ElvUI_Bar3Button7Flash {\n }\n _state_action = 31\n pushed = Texture {\n }\n AuraCooldown = Cooldown {\n }\n action = 31\n Arrow = Texture {\n }\n parentName = \"ElvUI_Bar3\"\n TextOverlayContainer = Frame {\n }\n SpellHighlightTexture = Texture {\n }\n down = true\n cooldown = ElvUI_Bar3Button7Cooldown {\n }\n popupDirection = \"UP\"\n NewActionTexture = Texture {\n }\n icon = ElvUI_Bar3Button7Icon {\n }\n SlotArt = Texture {\n }\n __windShadow = 1\n InterruptDisplay = Frame {\n }\n arrowCrossAxisSize = 7\n HotKey = ElvUI_Bar3Button7HotKey {\n }\n IconMask = MaskTexture {\n }\n arrowMainAxisSize = 18\n hover = Texture {\n }\n PushedTexture = Texture {\n }\n config = <table> {\n }\n Name = ElvUI_Bar3Button7Name {\n }\n state_types = <table> {\n }\n state_actions = <table> {\n }\n shadow = Frame {\n }\n ProfessionQualityOverlayFrame = Frame {\n }\n checked = Texture {\n }\n openArrowOffset = 2\n arrowNormalTexture = \"UI-HUD-ActionBar-Flyout\"\n SpellCastAnimFrame = Frame {\n }\n abilityName = \"召唤玄牛雕像\"\n useMasque = false\n Center = Texture {\n }\n template = \"Default\"\n arrowOverTexture = \"UI-HUD-ActionBar-Flyout-Mouseover\"\n BottomEdge = Texture {\n }\n closedArrowOffset = 4\n BottomRightCorner = Texture {\n }\n BottomLeftCorner = Texture {\n }\n TopRightCorner = Texture {\n }\n TopLeftCorner = Texture {\n }\n popupOffset = -4\n PixelSnapDisabled = true\n backdropInfo = <table> {\n }\n HighlightTexture = Texture {\n }\n abilityID = 115315\n db = <table> {\n }\n SpellHighlightAnim = AnimationGroup {\n }\n isFlyoutButton = false\n AutoCastOverlay = Frame {\n }\n id = 7\n LevelLinkLockIcon = Texture {\n }\n __LAB_Version = 66\n popupCrossAxisSize = 47\n handleBackdrop = true\n header = ElvUI_Bar3 {\n }\n MasqueSkinned = true\n SlotBackground = Texture {\n }\n Border = ElvUI_Bar3Button7Border {\n }\n}\nheader = ElvUI_Bar3 {\n __windShadow = 2\n buttons = <table> {\n }\n id = 3\n mover = ElvAB_3 {\n }\n backdrop = Frame {\n }\n mouseover = false\n db = <table> {\n }\n buttonConfig = <table> {\n }\n MasqueGroup = <table> {\n }\n bindButtons = \"MULTIACTIONBAR3BUTTON\"\n}\npreBody = \"		if self:GetAttribute(\"type\") == \"action\" then\n			local type, action = GetActionInfo(self:GetAttribute(\"action\"))\n\n			if type == \"flyout\" and self:GetAttribute(\"LABUseCustomFlyout\") then\n				local flyoutHandler = owner:GetFrameRef(\"flyoutHandler\")\n				if not down and flyoutHandler then\n					flyoutHandler:SetAttribute(\"flyoutParentHandle\", self)\n					flyoutHandler:RunAttribute(\"HandleFlyout\", action)\n				end\n\n				self:CallMethod(\"UpdateFlyout\")\n				return false\n			end\n\n			-- hide the flyout\n			local flyoutHandler = owner:GetFrameRef(\"flyoutHandler\")\n			if flyoutHandler then\n				flyoutHandler:Hide()\n			end\n\n			-- if this is a pickup click, disable on-down casting\n			-- it should get re-enabled in the post handler, or the OnDragStart handler, whichever occurs\n			if button ~= \"Keybind\" and ((self:GetAttribute(\"unlockedpreventdrag\") and not self:GetAttribute(\"buttonlock\")) or IsModifiedClick(\"PICKUPACTION\")) and not self:GetAttribute(\"LABdisableDragNDrop\") then\n				local useOnkeyDown = self:GetAttribupostBody = \"		local type, action = GetActionInfo(self:GetAttribute(\"action\"))\n		if message ~= format(\"%s|%s\", tostring(type), tostring(action)) then\n			self:RunAttribute(\"UpdateState\", self:GetAttribute(\"state\"))\n		end\n\n		-- re-enable ondown casting if needed\n		if self:GetAttribute(\"LABToggledOnDown\") then\n			self:SetAttribute(\"useOnKeyDown\", self:GetAttribute(\"LABToggledOnDownBackup\"))\n			self:SetAttribute(\"LABToggledOnDown\", nil)\n			self:SetAttribute(\"LABToggledOnDownBackup\", nil)\n		end\n	\"\nbutton = \"LeftButton\"\ndown = true\nmessage = \"macro|115315\"\nnewbutton = nil\n",
-["stack"] = "[Interface/AddOns/Blizzard_FrameXML/SecureHandlers.lua]:296: in function <...nterface/AddOns/Blizzard_FrameXML/SecureHandlers.lua:279>\n[tail call]: ?",
-["session"] = 798,
-["counter"] = 14,
-},
-{
 ["message"] = "[ADDON_ACTION_BLOCKED] 插件 'ElvUI' 尝试调用保护功能 'StatusBar:Show()'。",
 ["time"] = "2025/09/25 20:25:32",
 ["locals"] = "keystate = \"down\"\n",
@@ -170,6 +154,54 @@ BugGrabberDB = {
 ["stack"] = "[Interface/AddOns/WorldQuestTracker/WorldQuestTracker_FrameAPI.lua]:776: in function <...Ons/WorldQuestTracker/WorldQuestTracker_FrameAPI.lua:728>",
 ["session"] = 813,
 ["counter"] = 1,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 'BlizzMove' 尝试调用保护功能 'Frame:SetPropagateMouseClicks()'。",
+["time"] = "2025/09/14 11:01:28",
+["locals"] = "",
+["stack"] = "[C]: in function 'ToggleWorldMap'\n[TOGGLEWORLDMAP]:1: in function <[string \"TOGGLEWORLDMAP\"]:1>",
+["session"] = 818,
+["counter"] = 3,
+},
+{
+["message"] = "Interface/AddOns/JST/core/api.lua:5513: attempt to index a nil value",
+["time"] = "2025/09/26 20:32:48",
+["locals"] = "self = JST_1227226_Mods {\n assignment = <table> {\n }\n movingname = \"卢米萨尔根据MRT分配|T5764933:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[蠕行波]|r各轮次人员\"\n cast_id = 1227226\n encounterID = 2686\n enable_tag = \"spell\"\n raid_glow = \"pixel\"\n ficon = \"3,12\"\n t = 0\n npcID = <table> {\n }\n alert_dur = 4\n loop = true\n count = 2\n text_frame = Frame {\n }\n engageID = 3131\n point = <table> {\n }\n enable = true\n df = JST_1227226_ModsDragFrame {\n }\n config_name = \"根据MRT分配|T5764933:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[蠕行波]|r各轮次人员\"\n spell = \"蠕行波\"\n display_count = 2\n movingtag = 2686\n sub_event = \"SPELL_CAST_START\"\n assign_count = 2\n events = <table> {\n }\n config_id = 1227226\n text = FontString {\n }\n}\ncount = 2\nstr = \" |cffc41e3a某餃子|r\"\n(for state) = <table> {\n 1 = \"Player-940-0516206F\"\n 2 = \"Player-741-064C2C97\"\n 3 = \"Player-838-05A46498\"\n 4 = \"Player-707-068816CF\"\n 5 = \"Player-746-0445D0F3\"\n 6 = \"Player-707-04AB0052\"\n 7 = \"Player-741-0662CA0D\"\n 8 = \"Player-2133-0BF4A03D\"\n 9 = \"Player-2133-0EA47618\"\n}\n(for control) = 2\nindex = 2\nGUID = \"Player-741-064C2C97\"\nname = nil\n(*temporary) = nil\n(*temporary) = \"Player-741-064C2C97\"\n(*temporary) = nil\n(*temporary) = nil\n(*temporary) = \"attempt to index a nil value\"\nT = <table> {\n}\n",
+["stack"] = "[Interface/AddOns/JST/core/api.lua]:5513: in function 'GetPlayerStatusStr'\n[Interface/AddOns/JST/core/api.lua]:5585: in function 'CountUp'\n[Interface/AddOns/JST/core/api.lua]:5635: in function 'UpdateSpellBars'\n[Interface/AddOns/JST_ManaforgeOmega/2_Loomithar.lua]:1214: in function 'update'\n[Interface/AddOns/JST/core/core.lua]:6150: in function <Interface/AddOns/JST/core/core.lua:6145>",
+["session"] = 818,
+["counter"] = 43,
+},
+{
+["message"] = "Interface/AddOns/JST/mods/hpwatch.lua:605: attempt to index local 'aura_data' (a nil value)",
+["time"] = "2025/09/26 22:01:13",
+["locals"] = "self = Frame {\n actives_bytag = <table> {\n }\n CallbackRegisted = <table> {\n }\n}\nevent = \"UNIT_AURA_ADD\"\nunit = \"player\"\nspellID = 325174\nauraID = 466884\nicon = Frame {\n PixelSnapDisabled = true\n source_text = FontString {\n }\n charge_text = FontString {\n }\n exp_time = 0\n texture = Texture {\n }\n tag = \"buff466884\"\n dur_text = FontString {\n }\n style = true\n spellID = 325174\n t = 0\n itemID = 5512\n type = \"buff\"\n sd = Frame {\n }\n _PixelGlowactive_buff = Frame {\n }\n cooldown = Cooldown {\n }\n}\naura_data = nil\n(*temporary) = Frame {\n PixelSnapDisabled = true\n source_text = FontString {\n }\n charge_text = FontString {\n }\n exp_time = 0\n texture = Texture {\n }\n tag = \"buff466884\"\n dur_text = FontString {\n }\n style = true\n spellID = 325174\n t = 0\n itemID = 5512\n type = \"buff\"\n sd = Frame {\n }\n _PixelGlowactive_buff = Frame {\n }\n cooldown = Cooldown {\n }\n}\n(*temporary) = 325174\n(*temporary) = \"attempt to index local 'aura_data' (a nil value)\"\nBufftoSpellID = <table> {\n 47788 = 0\n 363534 = 0\n 145629 = 0\n 6940 = 0\n 31821 = 0\n 325174 = 0\n 81782 = 0\n 33206 = 0\n 116849 = 0\n 209426 = 0\n 207498 = 0\n 102342 = 0\n 740 = 0\n 64834 = 0\n 374227 = 0\n 108280 = 0\n 97463 = 0\n 357170 = 0\n}\n",
+["stack"] = "[Interface/AddOns/JST/mods/hpwatch.lua]:605: in function <Interface/AddOns/JST/mods/hpwatch.lua:597>\n[Interface/AddOns/JST/core/callback.lua]:109: in function <Interface/AddOns/JST/core/callback.lua:108>\n[C]: in function 'securecall'\n[Interface/AddOns/JST/core/callback.lua]:13: in function 'fireEvent'\n[Interface/AddOns/JST/core/callback.lua]:18: in function 'FireEvent'\n[Interface/AddOns/JST/core/callback.lua]:662: in function <Interface/AddOns/JST/core/callback.lua:630>",
+["session"] = 818,
+["counter"] = 1,
+},
+{
+["message"] = "...nterface/AddOns/JST_ManaforgeOmega/5_SoulHunters.lua:1322: attempt to concatenate a nil value",
+["time"] = "2025/09/26 22:09:18",
+["locals"] = "self = JST_1247415_Mods {\n assignment = <table> {\n }\n movingname = \"狩魂猎手|T6035307:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[恶魔追击]|r分配\"\n encounterID = 2688\n enable = true\n config_name = \"|T6035307:12:12:0:0:64:64:4:60:4:60|t|cff71d5ff[恶魔追击]|r分配\"\n immuse_class = <table> {\n }\n enable_tag = \"spell\"\n config_id = 1247415\n t = 0\n ficon = \"12\"\n movingtag = 2688\n count = 0\n npcID = <table> {\n }\n trackedspellIDs = <table> {\n }\n max_count = 3\n events = <table> {\n }\n text_frame = Frame {\n }\n soakGUIDs = <table> {\n }\n engageID = 3122\n}\ndisplay = nil\nset = 1\n(for state) = nil\n(for control) = 1\n_ = 1\nline = \"||cff00ff98禅意梵心||r ||cffc41e3a某餃子||r ||cffc41e3a佐巴扬的救赎||r ||cffc41e3a黑曜石大魔王||r ||cffc41e3a春日野大淀||r ||cffc69b6dDirection||r ||cffa330c9糊汤粉丶||r \"\nGUIDs = <table> {\n 1 = \"Player-940-0516206F\"\n 2 = \"Player-829-05D6A73B\"\n 3 = \"Player-1515-0559DC2B\"\n 4 = \"Player-707-06CC172C\"\n 5 = \"Player-962-057A6FC5\"\n 6 = \"Player-741-04AA10D1\"\n}\nstr = \"[1] |cffc41e3a某餃子|r |cffc41e3a佐巴扬的救赎|r\"\n(for state) = <table> {\n 1 = \"Player-940-0516206F\"\n 2 = \"Player-829-05D6A73B\"\n 3 = \"Player-1515-0559DC2B\"\n 4 = \"Player-707-06CC172C\"\n 5 = \"Player-962-057A6FC5\"\n 6 = \"Player-741-04AA10D1\"\n}\n(for control) = 3\n_ = 3\nGUID = \"Player-1515-0559DC2B\"\n(*temporary) = \"[1] |cffc41e3a某餃子|r |cffc41e3a佐巴扬的救赎|r\"\n(*temporary) = \" \"\n(*temporary) = nil\n(*temporary) = \"Player-1515-0559DC2B\"\n(*temporary) = \"attempt to concatenate a nil value\"\nT = <table> {\n}\n",
+["stack"] = "[Interface/AddOns/JST_ManaforgeOmega/5_SoulHunters.lua]:1322: in function 'ReadNote'\n[Interface/AddOns/JST_ManaforgeOmega/5_SoulHunters.lua]:1415: in function 'update'\n[Interface/AddOns/JST/core/core.lua]:6142: in function 'init_update'\n[Interface/AddOns/JST/core/core.lua]:86: in function <Interface/AddOns/JST/core/core.lua:45>\n[Interface/AddOns/JST/core/core.lua]:6147: in function <Interface/AddOns/JST/core/core.lua:6145>",
+["session"] = 818,
+["counter"] = 14,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 'Acamar' 尝试调用保护功能 'RaidGroup1:Hide()'。",
+["time"] = "2025/09/26 23:13:16",
+["locals"] = "self = RaidFrame {\n hasRaidInfo = 1\n RaidFrameNotInRaid = RaidFrameNotInRaid {\n }\n RoleCount = Frame {\n }\n}\nevent = \"GROUP_ROSTER_UPDATE\"\n",
+["stack"] = "[Interface/AddOns/Blizzard_RaidUI/Blizzard_RaidUI.lua]:168: in function <Interface/AddOns/Blizzard_RaidUI/Blizzard_RaidUI.lua:167>",
+["session"] = 818,
+["counter"] = 1,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 '*** ForceTaint_Strong ***' 尝试调用保护功能 'MouTotemFrameTotem:SetAttribute()'。",
+["time"] = "2025/09/11 07:59:15",
+["locals"] = "self = ElvUI_Bar3Button7 {\n BorderShadow = Texture {\n }\n TargetReticleAnimFrame = Frame {\n }\n RightEdge = Texture {\n }\n keyBoundTarget = \"MULTIACTIONBAR3BUTTON7\"\n glossTex = true\n flashing = false\n CooldownFlash = Frame {\n }\n __windSkin = true\n TopEdge = Texture {\n }\n Count = ElvUI_Bar3Button7Count {\n }\n _state_type = \"action\"\n LeftEdge = Texture {\n }\n arrowDownTexture = \"UI-HUD-ActionBar-Flyout-Down\"\n NormalTexture = ElvUI_Bar3Button7NormalTexture {\n }\n CheckedTexture = Texture {\n }\n Flash = ElvUI_Bar3Button7Flash {\n }\n _state_action = 31\n pushed = Texture {\n }\n AuraCooldown = Cooldown {\n }\n action = 31\n Arrow = Texture {\n }\n parentName = \"ElvUI_Bar3\"\n TextOverlayContainer = Frame {\n }\n SpellHighlightTexture = Texture {\n }\n down = true\n cooldown = ElvUI_Bar3Button7Cooldown {\n }\n popupDirection = \"UP\"\n NewActionTexture = Texture {\n }\n icon = ElvUI_Bar3Button7Icon {\n }\n SlotArt = Texture {\n }\n __windShadow = 1\n InterruptDisplay = Frame {\n }\n arrowCrossAxisSize = 7\n HotKey = ElvUI_Bar3Button7HotKey {\n }\n IconMask = MaskTexture {\n }\n arrowMainAxisSize = 18\n hover = Texture {\n }\n PushedTexture = Texture {\n }\n config = <table> {\n }\n Name = ElvUI_Bar3Button7Name {\n }\n state_types = <table> {\n }\n state_actions = <table> {\n }\n shadow = Frame {\n }\n ProfessionQualityOverlayFrame = Frame {\n }\n checked = Texture {\n }\n openArrowOffset = 2\n arrowNormalTexture = \"UI-HUD-ActionBar-Flyout\"\n SpellCastAnimFrame = Frame {\n }\n abilityName = \"召唤玄牛雕像\"\n useMasque = false\n Center = Texture {\n }\n template = \"Default\"\n arrowOverTexture = \"UI-HUD-ActionBar-Flyout-Mouseover\"\n BottomEdge = Texture {\n }\n closedArrowOffset = 4\n BottomRightCorner = Texture {\n }\n BottomLeftCorner = Texture {\n }\n TopRightCorner = Texture {\n }\n TopLeftCorner = Texture {\n }\n popupOffset = -4\n PixelSnapDisabled = true\n backdropInfo = <table> {\n }\n HighlightTexture = Texture {\n }\n abilityID = 115315\n db = <table> {\n }\n SpellHighlightAnim = AnimationGroup {\n }\n isFlyoutButton = false\n AutoCastOverlay = Frame {\n }\n id = 7\n LevelLinkLockIcon = Texture {\n }\n __LAB_Version = 66\n popupCrossAxisSize = 47\n handleBackdrop = true\n header = ElvUI_Bar3 {\n }\n MasqueSkinned = true\n SlotBackground = Texture {\n }\n Border = ElvUI_Bar3Button7Border {\n }\n}\nheader = ElvUI_Bar3 {\n __windShadow = 2\n buttons = <table> {\n }\n id = 3\n mover = ElvAB_3 {\n }\n backdrop = Frame {\n }\n mouseover = false\n db = <table> {\n }\n buttonConfig = <table> {\n }\n MasqueGroup = <table> {\n }\n bindButtons = \"MULTIACTIONBAR3BUTTON\"\n}\npreBody = \"		if self:GetAttribute(\"type\") == \"action\" then\n			local type, action = GetActionInfo(self:GetAttribute(\"action\"))\n\n			if type == \"flyout\" and self:GetAttribute(\"LABUseCustomFlyout\") then\n				local flyoutHandler = owner:GetFrameRef(\"flyoutHandler\")\n				if not down and flyoutHandler then\n					flyoutHandler:SetAttribute(\"flyoutParentHandle\", self)\n					flyoutHandler:RunAttribute(\"HandleFlyout\", action)\n				end\n\n				self:CallMethod(\"UpdateFlyout\")\n				return false\n			end\n\n			-- hide the flyout\n			local flyoutHandler = owner:GetFrameRef(\"flyoutHandler\")\n			if flyoutHandler then\n				flyoutHandler:Hide()\n			end\n\n			-- if this is a pickup click, disable on-down casting\n			-- it should get re-enabled in the post handler, or the OnDragStart handler, whichever occurs\n			if button ~= \"Keybind\" and ((self:GetAttribute(\"unlockedpreventdrag\") and not self:GetAttribute(\"buttonlock\")) or IsModifiedClick(\"PICKUPACTION\")) and not self:GetAttribute(\"LABdisableDragNDrop\") then\n				local useOnkeyDown = self:GetAttribupostBody = \"		local type, action = GetActionInfo(self:GetAttribute(\"action\"))\n		if message ~= format(\"%s|%s\", tostring(type), tostring(action)) then\n			self:RunAttribute(\"UpdateState\", self:GetAttribute(\"state\"))\n		end\n\n		-- re-enable ondown casting if needed\n		if self:GetAttribute(\"LABToggledOnDown\") then\n			self:SetAttribute(\"useOnKeyDown\", self:GetAttribute(\"LABToggledOnDownBackup\"))\n			self:SetAttribute(\"LABToggledOnDown\", nil)\n			self:SetAttribute(\"LABToggledOnDownBackup\", nil)\n		end\n	\"\nbutton = \"LeftButton\"\ndown = true\nmessage = \"macro|115315\"\nnewbutton = nil\n",
+["stack"] = "[Interface/AddOns/Blizzard_FrameXML/SecureHandlers.lua]:296: in function <...nterface/AddOns/Blizzard_FrameXML/SecureHandlers.lua:279>\n[tail call]: ?",
+["session"] = 819,
+["counter"] = 15,
 },
 },
 }

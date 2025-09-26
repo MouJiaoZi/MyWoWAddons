@@ -25,6 +25,8 @@ A default texture will be applied if the widget is a Texture and doesn't have a 
 local _, ns = ...
 local oUF = ns.oUF
 
+local UnitIsQuestBoss = UnitIsQuestBoss
+
 local function Update(self, event, unit)
 	if(unit ~= self.unit) then return end
 
@@ -78,7 +80,7 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		oUF:RegisterEvent(self, 'UNIT_CLASSIFICATION_CHANGED', Path)
+		self:RegisterEvent('UNIT_CLASSIFICATION_CHANGED', Path)
 
 		if(element:IsObjectType('Texture') and not element:GetTexture()) then
 			element:SetTexture([[Interface\TargetingFrame\PortraitQuestBadge]])
@@ -93,7 +95,7 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		oUF:UnregisterEvent(self, 'UNIT_CLASSIFICATION_CHANGED', Path)
+		self:UnregisterEvent('UNIT_CLASSIFICATION_CHANGED', Path)
 	end
 end
 

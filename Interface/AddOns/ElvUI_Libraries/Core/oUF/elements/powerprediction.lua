@@ -43,9 +43,6 @@ A default texture will be applied if the widget is a StatusBar and doesn't have 
 local _, ns = ...
 local oUF = ns.oUF
 
-local _, playerClass = UnitClass('player')
-
--- ElvUI block
 local next = next
 local GetSpellPowerCost = C_Spell.GetSpellPowerCost or GetSpellPowerCost
 local UnitCastingInfo = UnitCastingInfo
@@ -55,7 +52,6 @@ local UnitIsUnit = UnitIsUnit
 
 local POWERTYPE_MANA = Enum.PowerType.Mana
 local ALT_POWER_BAR_PAIR_DISPLAY_INFO = ALT_POWER_BAR_PAIR_DISPLAY_INFO
--- end block
 
 local function UpdateSize(self, event, unit)
 	local element = self.PowerPrediction
@@ -89,7 +85,7 @@ local function Update(self, event, unit)
 	local mainMax = UnitPowerMax(unit, mainType)
 	local isPlayer = UnitIsUnit('player', unit)
 	local DISPLAY_INFO = isPlayer and ALT_POWER_BAR_PAIR_DISPLAY_INFO
-	local altManaInfo = DISPLAY_INFO and DISPLAY_INFO[playerClass]
+	local altManaInfo = DISPLAY_INFO and DISPLAY_INFO[oUF.myclass]
 	local hasAltManaBar = altManaInfo and altManaInfo[mainType]
 	local _, _, _, startTime, endTime, _, _, _, spellID = UnitCastingInfo(unit)
 
@@ -212,10 +208,10 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		oUF:RegisterEvent(self, 'UNIT_SPELLCAST_START', Path)
-		oUF:RegisterEvent(self, 'UNIT_SPELLCAST_STOP', Path)
-		oUF:RegisterEvent(self, 'UNIT_SPELLCAST_FAILED', Path)
-		oUF:RegisterEvent(self, 'UNIT_SPELLCAST_SUCCEEDED', Path)
+		self:RegisterEvent('UNIT_SPELLCAST_START', Path)
+		self:RegisterEvent('UNIT_SPELLCAST_STOP', Path)
+		self:RegisterEvent('UNIT_SPELLCAST_FAILED', Path)
+		self:RegisterEvent('UNIT_SPELLCAST_SUCCEEDED', Path)
 
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
 
@@ -246,10 +242,10 @@ local function Disable(self)
 			element.altBar:Hide()
 		end
 
-		oUF:UnregisterEvent(self, 'UNIT_SPELLCAST_START', Path)
-		oUF:UnregisterEvent(self, 'UNIT_SPELLCAST_STOP', Path)
-		oUF:UnregisterEvent(self, 'UNIT_SPELLCAST_FAILED', Path)
-		oUF:UnregisterEvent(self, 'UNIT_SPELLCAST_SUCCEEDED', Path)
+		self:UnregisterEvent('UNIT_SPELLCAST_START', Path)
+		self:UnregisterEvent('UNIT_SPELLCAST_STOP', Path)
+		self:UnregisterEvent('UNIT_SPELLCAST_FAILED', Path)
+		self:UnregisterEvent('UNIT_SPELLCAST_SUCCEEDED', Path)
 
 		self:UnregisterEvent('UNIT_DISPLAYPOWER', Path)
 	end

@@ -25,6 +25,8 @@ A default texture will be applied if the widget is a Texture and doesn't have a 
 local _, ns = ...
 local oUF = ns.oUF
 
+local UnitAffectingCombat = UnitAffectingCombat
+
 local function Update(self, event, unit)
 	if not unit or self.unit ~= unit then return end
 	local element = self.CombatIndicator
@@ -76,7 +78,7 @@ local function Enable(self)
 		element.__owner = self
 		element.ForceUpdate = ForceUpdate
 
-		oUF:RegisterEvent(self, 'UNIT_FLAGS', Path)
+		self:RegisterEvent('UNIT_FLAGS', Path)
 
 		if(element:IsObjectType('Texture') and not element:GetTexture()) then
 			element:SetTexture([[Interface\CharacterFrame\UI-StateIcon]])
@@ -92,7 +94,7 @@ local function Disable(self)
 	if(element) then
 		element:Hide()
 
-		oUF:UnregisterEvent(self, 'UNIT_FLAGS', Path)
+		self:UnregisterEvent('UNIT_FLAGS', Path)
 	end
 end
 

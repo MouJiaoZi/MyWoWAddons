@@ -42,13 +42,14 @@ A default texture will be applied if the sub-widgets are StatusBars and don't ha
     self.Runes = Runes
 --]]
 
-if(select(2, UnitClass('player')) ~= 'DEATHKNIGHT') then return end
-
 local _, ns = ...
 local oUF = ns.oUF
 
+if oUF.myclass ~= 'DEATHKNIGHT' then return end
+
 local sort = sort
 local ipairs = ipairs
+
 local UnitHasVehicleUI = UnitHasVehicleUI
 local GetSpecialization = C_SpecializationInfo.GetSpecialization or GetSpecialization
 local GetRuneCooldown = GetRuneCooldown
@@ -273,7 +274,7 @@ local function Enable(self, unit)
 		-- end block
 
 		if oUF.isRetail then
-			oUF:RegisterEvent(self, 'PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+			self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
 		else
 			self:RegisterEvent('RUNE_TYPE_UPDATE', ColorPath, true)
 		end
@@ -298,7 +299,7 @@ local function Disable(self)
 		-- end block
 
 		if oUF.isRetail then
-			oUF:UnregisterEvent(self, 'PLAYER_SPECIALIZATION_CHANGED', ColorPath)
+			self:UnregisterEvent('PLAYER_SPECIALIZATION_CHANGED', ColorPath)
 		else
 			self:UnregisterEvent('RUNE_TYPE_UPDATE', ColorPath)
 		end

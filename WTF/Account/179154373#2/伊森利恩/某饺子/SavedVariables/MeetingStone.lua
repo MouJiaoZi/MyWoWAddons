@@ -2239,6 +2239,31 @@ MEETINGSTONE_CHARACTER_DB = {
 ["time"] = 1758422453,
 ["class"] = 2,
 },
+{
+["role"] = "DAMAGER",
+["name"] = "智愚無双-布兰卡德",
+["time"] = 1758901412,
+["class"] = 13,
+["leader"] = true,
+},
+{
+["role"] = "HEALER",
+["name"] = "帅气丫丫-布兰卡德",
+["time"] = 1758901412,
+["class"] = 11,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "心语如栩-艾露恩",
+["time"] = 1758901412,
+["class"] = 3,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "堕落飌神-布兰卡德",
+["time"] = 1758901412,
+["class"] = 6,
+},
 },
 ["3-362-1504-0"] = {
 {
@@ -2448,6 +2473,33 @@ MEETINGSTONE_CHARACTER_DB = {
 ["name"] = "王小黑-冰风岗",
 ["time"] = 1758629585,
 ["class"] = 12,
+},
+},
+["2-381-1709-0"] = {
+{
+["role"] = "DAMAGER",
+["name"] = "伊耿-红龙军团",
+["time"] = 1758328170,
+["class"] = 13,
+["leader"] = true,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "霜满天灵月-海克泰尔",
+["time"] = 1758328170,
+["class"] = 8,
+},
+{
+["role"] = "DAMAGER",
+["name"] = "揽月入怀眠-安苏",
+["time"] = 1758328170,
+["class"] = 3,
+},
+{
+["role"] = "HEALER",
+["name"] = "Abri-白银之手",
+["time"] = 1758328170,
+["class"] = 5,
 },
 },
 ["3-378-1617-0"] = {
@@ -2917,33 +2969,6 @@ MEETINGSTONE_CHARACTER_DB = {
 ["class"] = 7,
 },
 },
-["2-381-1709-0"] = {
-{
-["role"] = "DAMAGER",
-["name"] = "伊耿-红龙军团",
-["time"] = 1758328170,
-["class"] = 13,
-["leader"] = true,
-},
-{
-["role"] = "DAMAGER",
-["name"] = "霜满天灵月-海克泰尔",
-["time"] = 1758328170,
-["class"] = 8,
-},
-{
-["role"] = "DAMAGER",
-["name"] = "揽月入怀眠-安苏",
-["time"] = 1758328170,
-["class"] = 3,
-},
-{
-["role"] = "HEALER",
-["name"] = "Abri-白银之手",
-["time"] = 1758328170,
-["class"] = 5,
-},
-},
 ["2-323-1284-0"] = {
 {
 ["role"] = "DAMAGER",
@@ -2973,6 +2998,7 @@ MEETINGSTONE_CHARACTER_DB = {
 },
 ["version"] = "11.2.0",
 ["searchHistoryList"] = {
+"mplus",
 "3-378-1617-0",
 "3-362-1504-0",
 "3-378-1618-0",
@@ -2989,7 +3015,7 @@ MEETINGSTONE_CHARACTER_DB = {
 "2-503-1694-0",
 "6-0-0-0",
 },
-["lastSearchCode"] = "3-378-1617-0",
+["lastSearchCode"] = "mplus",
 },
 },
 }

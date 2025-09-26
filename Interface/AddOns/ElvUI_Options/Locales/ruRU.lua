@@ -8,7 +8,7 @@ L["NONE"] = "Нет"
 L["GROUP"] = "Группа"
 
 -----------  Position  -----------
-L["CENTER"] = true
+L["CENTER"] = "По центру"
 L["BOTTOM"] = "Внизу"
 L["BOTTOMLEFT"] = "Внизу слева"
 L["BOTTOMRIGHT"] = "Внизу справа"
@@ -17,6 +17,7 @@ L["TOPRIGHT"] = "Вверху справа"
 L["LEFT"] = "Слева"
 L["RIGHT"] = "Справа"
 L["TOP"] = "Вверху"
+
 ------------  Strata  ------------
 L["BACKGROUND"] = true
 L["DIALOG"] = true
@@ -28,9 +29,9 @@ L["TOOLTIP"] = true
 
 L["BigWigs Spell Rename"] = true
 L["Allows BigWigs to rename specific encounter spells on your castbar to something better to understand.\nExample: 'Impaling Eruption' becomes 'Frontal' and 'Twilight Massacre' becomes 'Dash'."] = true
-L["Add Aura ID"] = true
-L["Remove Aura"] = true
-L["Select Aura"] = true
+L["Add Aura ID"] = "Добавить ID Ауры"
+L["Remove Aura"] = "Удалить Ауру"
+L["Select Aura"] = "Выбрать Ауру"
 L["Add an aura to the filter. Aura IDs can be acquired using the tooltip to find the correct ID."] = true
 L["Primary Unit"] = "Основная цель"
 L["Requires the unit to be the primary target to display."] = "Отображается, когда юнит является основной целью"
@@ -628,7 +629,7 @@ L["Equipped Item"] = "Надетый предмет"
 L["Equipped"] = "Надето"
 L["Error decoding data. Import string may be corrupted!"] = "Ошибка при кодировании. Импортируемая строка может быть повреждена!"
 L["Error exporting profile!"] = "Ошибка при экспорте профиля!"
-L["Quest Progress and Error Text"] = true
+L["Quest Progress and Error Text"] = "Выполнение заданий и сообщения об ошибках"
 L["Event Log"] = "Журнал событий"
 L["Exclude Name"] = "Исключить имя"
 L["Excluded names will not be class colored."] = "Исключенные имена не окрашиваются в цвет класса"
@@ -712,7 +713,7 @@ L["Full Time"] = "Время полностью"
 L["Full"] = "Полный"
 L["FURY"] = "Гнев"
 L["Gaining Threat"] = "Получение угрозы"
-L["Game Menu"] = true
+L["Game Menu"] = "Меню игры"
 L["GARRISON_LOCATION_TOOLTIP"] = "Гарнизон"
 L["Gems"] = "Самоцветы"
 L["Gender"] = "Пол"
@@ -788,7 +789,7 @@ L["Hide Chat Toggles"] = "Скрыть переключатели чата"
 L["Hide Cooldown Bling"] = "Скрыть вспышку восстановления"
 L["Hide Copy Button"] = "Скрыть кнопку копирования"
 L["Hide Delay"] = "Задержка скрытия"
-L["Hide Quest Progress and Error Text"] = true
+L["Hide Quest Progress and Error Text"] = "Скрыть выполнение заданий и сообщения об ошибках"
 L["Hide Frame"] = "Скрыть рамку"
 L["Hide Icon"] = "Скрыть иконку"
 L["Hide In Combat"] = "Скрывать в бою"
@@ -1277,7 +1278,7 @@ L["Per Row"] = "Кол-во в ряду"
 L["Percent"] = "Процент"
 L["Percentage amount for horizontal overlap of Nameplates."] = "Процент перекрытия индикаторов по горизонтали."
 L["Percentage amount for vertical overlap of Nameplates."] = "Процент перекрытия индикаторов по вертикали."
-L["Trading Post"] = true
+L["Trading Post"] = "Торговая лавка"
 L["Personal"] = "Свое"
 L["Pet Battle"] = "Битвы питомцев"
 L["Pet Group"] = "Питомцы"
@@ -1315,6 +1316,8 @@ L["Power Prediction"] = "Предсказание ресурса"
 L["Power text will be hidden on NPC targets, in addition the name text will be repositioned to the power texts anchor point."] = "Текст ресурса будет спрятан для НИП. Также текст имени будет смещен в точку расположения текста ресурса."
 L["Power Threshold"] = "Лимит ресурса"
 L["Power"] = "Ресурс"
+L["MAELSTROM_WEAPON"] = "Maelstrom Weapon"
+L["FROST_ICICLES"] = "Icicles"
 L["POWER_TYPE_ARCANE_CHARGES"] = "Чародейские заряды"
 L["POWER_TYPE_ESSENCE"] = "Сущность"
 L["Prefer Target Color"] = "Предпочитать цвет цели"
@@ -1588,6 +1591,7 @@ L["Smooth Bars"] = "Плавные полосы"
 L["Smooth"] = "Плавность"
 L["Smoothing Amount"] = "Значение плавности"
 L["Socket Frame"] = "Инкрустирование"
+L["Solo Color"] = true
 L["Sort By"] = "Сортировать по"
 L["Sort Direction"] = "Направление сортировки"
 L["Sort Inverted"] = "Инвертированная сортировка"
@@ -1767,6 +1771,10 @@ L["Toggle Off While In Combat"] = "Включать в бою"
 L["Toggle On While In Combat"] = "Отключить в бою"
 L["Toggle showing of the left and right chat panels."] = "Переключить отображение панелей чата."
 L["Toggle the camera spin on the AFK screen."] = "Включает вращение камеры на экране АФК."
+L["Idle Animation"] = true
+L["Select the idle animation on the AFK screen."] = true
+L["Dance"] = true
+L["Lean"] = true
 L["Toggle the chat tab panel backdrop."] = "Показать/скрыть фон панели под вкладками чата"
 L["Toggle Tutorials"] = "Показать помощь"
 L["Tooltip Body"] = "Тело подсказки"
@@ -1844,7 +1852,8 @@ L["Use Modifier for Item Count"] = "Использовать модификат�
 L["Use Off Tank Color when another Tank has threat."] = "Использовать цвета второго танка, когда другой танк держит агро."
 L["Use Portrait"] = "Отображать портрет"
 L["Use Real ID BattleTag"] = "Использовать BattleTag"
-L["Use Shift+LeftClick to toggle between friendly or enemy or normal state. Normal state will allow the filter to be checked on all units. Friendly state is for friendly units only and enemy state is for enemy units."] = "Используйте Shift + ЛКМ для переключения между дружественным, враждебным или нормальным режимами. В нормальном режиме фильтр будет проверять все юниты. В дружеском - только дружественные, во враждебном - только враждебные."
+L["Use Solo Color"] = true
+L["Use solo threat color when not in a group."] = true
 L["Use Static Position"] = "Фиксированная позиция"
 L["Use Subzone Names"] = "Использовать имена сублокаций"
 L["Use the custom backdrop color instead of a multiple of the main color."] = "Использовать свой цвет фона вместо вариации основного цвета."
@@ -1937,24 +1946,31 @@ L["RAID_TARGET_7"] = "Крест"
 L["RAID_TARGET_8"] = "Череп"
 
 ----------------------------------
+L["NoDuration"] = "No Duration"
 L["BlizzardNameplate"] = "Индикатор Blizzard"
-L["blockCastByPlayers"] = "[Блокировать] Принадлежат игрокам"
-L["blockDispellable"] = "[Блокировать] Развеиваемые"
-L["blockNoDuration"] = "[Блокировать] Без длительности"
-L["blockNonPersonal"] = "[Блокировать] Чужие"
-L["blockNotDispellable"] = "[Блокировать] Не развеиваемые"
-L["blockMount"] = "[Блокировать] Транспорт"
 L["Mount"] = "Транспорт"
 L["CastByNPC"] = "Принадлежит НИП"
 L["CastByPlayers"] = "Принадлежат игрокам"
 L["CastByUnit"] = "Принадлежит юниту"
 L["Dispellable"] = "Развеиваемые"
 L["MyPet"] = "Мой питомец"
-L["nonPersonal"] = "Чужие"
-L["notCastByUnit"] = "Не принадлежит юниту"
-L["notDispellable"] = "Не развеиваемые"
+L["NonPersonal"] = "Чужие"
+L["NotCastByUnit"] = "Не принадлежит юниту"
+L["NotDispellable"] = "Не развеиваемые"
 L["OtherPet"] = "Чужой питомец"
 L["Personal"] = "Личные"
+
+L["FILTER_PRIORITY_DESC"] = [[
+Используйте перетаскивание для установки приоритета фильтров.
+
+ПКМ: Удалить фильтр.
+Shift + ЛКМ: Переключиться между обычным , дружеским и враждебным режимами.
+Ctrl + ЛКМ: Переключиться между режимами разрешения, блокирования или обычным.
+
+- Обычный режим позволяет фильтру применяться ко всем юнитам.
+- Дружеский режим применяет их только к дружественным целям, а враждебный только ко врагам.
+- Режим блокирования будет принудительно применять фильтр как черный список, а режим разрешения как белый список.
+]]
 ----------------------------------
 
 L["ACTIONBARS_DESC"] = "Изменение настроек панелей команд."
@@ -1973,33 +1989,28 @@ L["TEXTURE_EXAMPLE"] = [=[Укажите имя файла в папке World o
 
 Пожалуйста, учтите:
 -Рекомендованный размер изображения 256x128
--Вы должны полностью перезапустить игру после добавления нового файла в папку.
--Тип файла должен быть tga.
+-Вы должны полностью перезапустить игру после добавления нового файла в папку
+-Тип файла должен быть tga
 
 Пример: Interface\AddOns\ElvUI\Core\Media\Textures\Copy
 
 Для большинства пользователей будет легче просто положить tga файл в папку игры, а затем написать имя файла здесь.]=]
 
 ----------  FilterHelp  ----------
-L["*Whitelists:|r ^Boss, Mount, MyPet, OtherPet, Personal, nonPersonal, CastByUnit, notCastByUnit, Dispellable (includes steal-able), notDispellable, CastByNPC, CastByPlayers, BlizzardNameplate|r"] = "*Белые списки:|r ^Босс, Транспорт, Мой питомец, Чужой питомец, Личные, Принадлежит юниту, Не принадлежит юниту, Развеиваемые (включая те, что можно украсть), Не развеиваемые, Принадлежит НИП, Принадлежат игрокам, Индикатор Blizzard|r"
-L["*Blacklists:|r ^blockMount, blockNonPersonal, blockCastByPlayers, blockNoDuration, blockDispellable, blockNotDispellable | A blacklist filter is only effective against filters that come after it in the priority list. It will not block anything from the filters before it.|r"] = "*Черные списки:|r ^[Блокировать] Транспорт, [Блокировать] Чужие, [Блокировать] Принадлежат игрокам, [Блокировать] Без длительности, [Блокировать] Развеиваемые, [Блокировать] Не развеиваемые | Фильтр типа черный список работают только на на фильтры, которые идут после них в списке приоритета. Они не будут блокировать ничего из фильтров перед ними.|r"
-L["^A blacklist filter is only effective against filters that come after it in the priority list. It will not block anything from the filters before it."] = "^Фильтр типа черный список работают только на фильтры, которые идут после них в списке приоритета. Они не будут блокировать ничего из фильтров перед ними.|r"
 L["*Boss:|r ^Auras (debuffs only?) cast by a boss unit.|r"] = "*Босс:|r ^Ауры (только дебаффы?), наложенные боссом.|r"
 L["*Mount:|r ^Auras which are classified as mounts.|r"] = "*Транспорт:|r ^Ауры, которые классифицируются как средства передвижения.|r"
 L["*Personal:|r ^Auras cast by yourself.|r"] = "*Личные:|r ^Ауры, наложенные Вами.|r"
-L["*nonPersonal:|r ^Auras cast by anyone other than yourself.|r"] = "*Чужие:|r ^Ауры, наложенные кем угодно, только не Вами.|r"
+L["*NonPersonal:|r ^Auras cast by anyone other than yourself.|r"] = "*Чужие:|r ^Ауры, наложенные кем угодно, только не Вами.|r"
 L["*CastByUnit:|r ^Auras cast by the unit of the unitframe or nameplate (so on target frame it only shows auras cast by the target unit).|r"] = "*Принадлежит юниту:|r ^Ауры, наложенные юнитом рамки или индикатора (например, на фрейме цели будут показаны только ауры, наложенные целью).|r"
-L["*notCastByUnit:|r ^Auras cast by anyone other than the unit of the unitframe or nameplate.|r"] = "*Не принадлежит юниту:|r ^Ауры, наложенные любым юнитом, кроме юнита рамки или индикатора.|r"
+L["*NotCastByUnit:|r ^Auras cast by anyone other than the unit of the unitframe or nameplate.|r"] = "*Не принадлежит юниту:|r ^Ауры, наложенные любым юнитом, кроме юнита рамки или индикатора.|r"
 L["*Dispellable:|r ^Auras you can either dispel or spellsteal.|r"] = "*Развеиваемые:|r ^Ауры, которые Вы можете развеять или украсть.|r"
 L["*CastByNPC:|r ^Auras cast by any NPC.|r"] = "*Принадлежит НИП:|r ^Ауры, наложенные НИПами.|r"
 L["*CastByPlayers:|r ^Auras cast by any player-controlled unit (so no NPCs).|r"] = "*Принадлежат игрокам:|r ^Ауры, наложенные любым юнитом под контролем игрока (т.е. не НИПы).|r"
-L["*blockCastByPlayers:|r ^Blocks any aura that is cast by player-controlled units (so will only show auras cast by NPCs).|r"] = "*[Блокировать] Принадлежат игрокам:|r ^Блокирует ауры, наложенные любым юнитом под контролем игрока (будут показаны только ауры НИПов).|r"
-L["*blockNoDuration:|r ^Blocks any aura without a duration.|r"] = "*[Блокировать] Без длительности:|r ^Блокирует ауры без длительности или определенного времени действия.|r"
-L["*blockNonPersonal:|r ^Blocks any aura that is not cast by yourself.|r"] = "*[Блокировать] Чужие:|r ^Блокирует ауры, наложенные не Вами.|r"
-L["*Show Everything:|r ^Set 'Max Duration' to 0 & Leave Priority List Empty or (1) Personal | (2) nonPersonal"] = "*Показывать все:|r ^Установите 'Максимальная длительность' на 0 и оставьте список приоритета пустым или (1) 'Личные' | (2) 'Чужие'"
-L["*Block Blacklisted Auras, Show Everything Else:|r ^(1) Blacklist| (2) Personal | (3) nonPersonal"] = "*Блокировать ауры в черном списке, показывать все остальное:|r ^(1) 'Черный список'| (2) 'Личные' | (3) 'Чужие'"
-L["*Block Auras Without Duration, Show Everything Else:|r ^(1) blockNoDuration | (2) Personal | (3) nonPersonal"] = "*Блокировать ауры без длительности, показывать все остальное:|r ^(1) '[Блокировать] Без длительности' | (2) 'Личные' | (3) 'Чужие'"
-L["*Block Auras Without Duration, Block Blacklisted Auras, Show Everything Else:|r ^(1) blockNoDuration | (2) Blacklist | (3) Personal | (4) nonPersonal"] = "*Блокировать ауры без длительности, блокировать ауры в черном списке, показывать все остальное:|r ^(1) '[Блокировать] Без длительности' | (2) 'Черный список' | (3) 'Личные' | (4) 'Чужие'"
+
+L["*Show Everything:|r ^Set 'Max Duration' to 0 & Leave Priority List Empty or (1) Personal | (2) NonPersonal"] = "*Показывать все:|r ^Установите 'Максимальная длительность' на 0 и оставьте список приоритета пустым или (1) 'Личные' | (2) 'Чужие'"
+L["*Block Blacklisted Auras, Show Everything Else:|r ^(1) Blacklist| (2) Personal | (3) NonPersonal"] = "*Блокировать ауры в черном списке, показывать все остальное:|r ^(1) 'Черный список'| (2) 'Личные' | (3) 'Чужие'"
+L["*Block Auras Without Duration, Show Everything Else:|r ^(1) blockNoDuration | (2) Personal | (3) NonPersonal"] = "*Блокировать ауры без длительности, показывать все остальное:|r ^(1) '[Блокировать] Без длительности' | (2) 'Личные' | (3) 'Чужие'"
+L["*Block Auras Without Duration, Block Blacklisted Auras, Show Everything Else:|r ^(1) blockNoDuration | (2) Blacklist | (3) Personal | (4) NonPersonal"] = "*Блокировать ауры без длительности, блокировать ауры в черном списке, показывать все остальное:|r ^(1) '[Блокировать] Без длительности' | (2) 'Черный список' | (3) 'Личные' | (4) 'Чужие'"
 L["*Block Everything, Except Your Own Auras:|r ^(1) Personal"] = "*Блокировать все, кроме своих аур:|r ^(1) 'Личные'"
 L["*Block Everything, Except Whitelisted Auras:|r ^(1) Whitelist"] = "*Блокировать все, кроме аур в белом списке:|r ^(1) 'Белый список'"
 L["*Block Everything, Except Whitelisted Auras That Are Cast By Yourself:|r ^(1) blockNonPersonal | (2) Whitelist"] = "*Блокировать все, кроме аур в белом списке, наложенных Вами:|r ^(1) '[Блокировать] Чужие' | (2) 'Белый список'"

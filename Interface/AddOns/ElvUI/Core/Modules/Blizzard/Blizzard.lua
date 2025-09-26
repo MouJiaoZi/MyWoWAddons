@@ -3,7 +3,9 @@ local BL = E:GetModule('Blizzard')
 local LSM = E.Libs.LSM
 
 local _G = _G
-local ipairs, wipe = ipairs, wipe
+local wipe = wipe
+local next = next
+local ipairs = ipairs
 
 local UIParent = UIParent
 local UnitXP = UnitXP
@@ -17,6 +19,7 @@ local UnregisterStateDriver = UnregisterStateDriver
 
 local C_QuestLog_ShouldShowQuestRewards = C_QuestLog.ShouldShowQuestRewards
 local C_QuestLog_GetSelectedQuest = C_QuestLog.GetSelectedQuest
+local IsAddOnLoaded = C_AddOns.IsAddOnLoaded
 local hooksecurefunc = hooksecurefunc
 
 --------------------------------------------------------------------
@@ -215,6 +218,12 @@ function BL:Initialize()
 		end
 	elseif not BL:ObjectiveTracker_HasQuestTracker() then
 		BL:ObjectiveTracker_Setup()
+	end
+
+	for _, addon in next, { 'Blizzard_GuildBankUI', 'Blizzard_QuestTimer' } do
+		if IsAddOnLoaded(addon) then
+			BL:ADDON_LOADED(nil, addon)
+		end
 	end
 
 	local MinimapAnchor = _G.ElvUI_MinimapHolder or _G.Minimap

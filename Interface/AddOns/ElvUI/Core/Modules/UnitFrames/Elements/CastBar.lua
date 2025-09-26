@@ -3,8 +3,9 @@ local UF = E:GetModule('UnitFrames')
 local LSM = E.Libs.LSM
 local ElvUF = E.oUF
 
-local abs, next = abs, next
 local unpack = unpack
+local abs, next = abs, next
+local utf8sub = string.utf8sub
 
 local CreateFrame = CreateFrame
 local GetTime = GetTime
@@ -107,7 +108,7 @@ function UF:Construct_Castbar(frame, moverName)
 	local castbar = CreateFrame('StatusBar', '$parent_CastBar', frame)
 	castbar:SetFrameLevel(frame.RaisedElementParent.CastBarLevel)
 
-	UF.statusbars[castbar] = true
+	UF.statusbars[castbar] = 'castbar'
 	castbar.ModuleStatusBars = UF.statusbars -- not oUF
 
 	castbar.CustomDelayText = UF.CustomCastDelayText
@@ -128,6 +129,7 @@ function UF:Construct_Castbar(frame, moverName)
 	castbar.Time:Point('RIGHT', castbar, 'RIGHT', -4, 0)
 	castbar.Time:SetTextColor(0.84, 0.75, 0.65)
 	castbar.Time:SetJustifyH('RIGHT')
+	castbar.Time:SetWordWrap(false)
 	castbar.Time:FontTemplate()
 
 	castbar.Text = castbar:CreateFontString(nil, 'OVERLAY')
@@ -237,9 +239,6 @@ function UF:Configure_Castbar(frame)
 	castbar.Text:Point('LEFT', castbar, 'LEFT', db.xOffsetText, db.yOffsetText)
 	castbar.Time:Point('RIGHT', castbar, 'RIGHT', db.xOffsetTime, db.yOffsetTime)
 
-	castbar.Text:SetWidth(castbar.Text:GetStringWidth())
-	castbar.Time:SetWidth(castbar.Time:GetStringWidth())
-
 	if db.spark then
 		castbar.Spark = castbar.Spark_
 		castbar.Spark:ClearAllPoints()
@@ -315,16 +314,8 @@ function UF:Configure_Castbar(frame)
 		castbar.Icon = nil
 	end
 
-	if db.hidetext then
-		castbar.Text:SetAlpha(0)
-		castbar.Time:SetAlpha(0)
-	else
-		castbar.Text:SetAlpha(1)
-		castbar.Time:SetAlpha(1)
-	end
-
-	--Adjust tick heights
-	castbar.tickHeight = height
+	castbar.Text:SetAlpha(db.hideName and 0 or 1)
+	castbar.Time:SetAlpha(db.hideTime and 0 or 1)
 
 	if db.ticks then --Only player unitframe has this
 		--Set tick width and color
@@ -391,8 +382,6 @@ function UF:CustomCastDelayText(duration)
 			self.Time:SetFormattedText('%.1f / %.1f |cffaf5050%s %.1f|r', abs(duration - self.max), self.max, '+', self.delay)
 		end
 	end
-
-	self.Time:SetWidth(self.Time:GetStringWidth())
 end
 
 function UF:CustomTimeText(duration)
@@ -421,8 +410,6 @@ function UF:CustomTimeText(duration)
 			self.Time:SetFormattedText('%.1f / %.1f', abs(duration - self.max), self.max)
 		end
 	end
-
-	self.Time:SetWidth(self.Time:GetStringWidth())
 end
 
 function UF:HideTicks(frame)
@@ -449,8 +436,9 @@ function UF:SetCastTicks(frame, numTicks)
 
 		tick:SetVertexColor(frame.tickColor.r, frame.tickColor.g, frame.tickColor.b, frame.tickColor.a)
 		tick:ClearAllPoints()
+		tick:Point('TOP')
+		tick:Point('BOTTOM')
 		tick:Point('RIGHT', frame, 'LEFT', offset * i, 0)
-		tick:Height(frame.tickHeight)
 		tick:Show()
 	end
 end
@@ -481,6 +469,16 @@ function UF:GetInterruptColor(db, unit)
 	return r, g, b
 end
 
+function UF:GetCasterColor(unit)
+	if not unit then return end
+
+	local _, className = UnitClass(unit)
+	local classColor = className and E:ClassColor(className)
+	if classColor then
+		return classColor.colorStr
+	end
+end
+
 function UF:PostCastStart(unit)
 	local parent = self.__owner
 	local db = parent and parent.db
@@ -492,20 +490,29 @@ function UF:PostCastStart(unit)
 
 	local spellRename = db.castbar.spellRename and E:GetSpellRename(self.spellID)
 	local spellName = spellRename or self.spellName
+	local length = db.castbar.nameLength
+	local name = (length and length > 0 and utf8sub(spellName, 1, length)) or spellName
+	local changed = spellRename or (name ~= spellName)
 
 	if db.castbar.displayTarget then -- player or NPCs; if used on other players: the cast target doesn't match their target, can be misleading if they mouseover cast
 		if parent.unitframeType == 'player' then
 			if self.curTarget then
-				self.Text:SetText(spellName..' > '..self.curTarget)
+				local color = db.castbar.displayTargetClass and UF:GetCasterColor(self.curTarget)
+				self.Text:SetFormattedText('%s: |c%s%s|r', name, color or 'FFdddddd', self.curTarget)
+			elseif changed then
+				self.Text:SetText(name)
 			end
 		elseif parent.unitframeType == 'pet' or parent.unitframeType == 'boss' then
 			local target = self.curTarget or UnitName(unit..'target')
 			if target and target ~= '' and target ~= UnitName(unit) then
-				self.Text:SetText(spellName..' > '..target)
+				local color = db.castbar.displayTargetClass and UF:GetCasterColor(target)
+				self.Text:SetFormattedText('%s: |c%s%s|r', name, color or 'FFdddddd', target)
+			elseif changed then
+				self.Text:SetText(name)
 			end
 		end
-	elseif spellRename then
-		self.Text:SetText(spellName)
+	elseif changed then
+		self.Text:SetText(name)
 	end
 
 	if self.channeling and db.castbar.ticks and parent.unitframeType == 'player' then

@@ -7,8 +7,8 @@ local Translit = E.Libs.Translit
 local translitMark = '!'
 
 local _G = _G
+local abs, ipairs, pairs, floor, ceil = abs, ipairs, pairs, floor, ceil
 local next, type, gmatch, gsub, format = next, type, gmatch, gsub, format
-local ipairs, pairs, wipe, floor, ceil = ipairs, pairs, wipe, floor, ceil
 local strsub, strfind, strmatch, strlower, strsplit = strsub, strfind, strmatch, strlower, strsplit
 local utf8lower, utf8sub, utf8len = string.utf8lower, string.utf8sub, string.utf8len
 
@@ -49,6 +49,7 @@ local UnitIsDND = UnitIsDND
 local UnitIsFeignDeath = UnitIsFeignDeath
 local UnitIsPlayer = UnitIsPlayer
 local UnitIsPVP = UnitIsPVP
+local UnitHonorLevel = UnitHonorLevel
 local UnitIsPVPFreeForAll = UnitIsPVPFreeForAll
 local UnitIsUnit = UnitIsUnit
 local UnitIsWildBattlePet = UnitIsWildBattlePet
@@ -81,7 +82,7 @@ local PVP = PVP
 -- GLOBALS: GetTitleNPC, Abbrev, GetClassPower, GetQuestData, UnitEffectiveLevel, NameHealthColor -- custom ones we made
 
 local RefreshNewTags -- will turn true at EOF
-function E:AddTag(tagName, eventsOrSeconds, func, block)
+function E:AddTag(tagName, eventsOrSeconds, func, block, spells)
 	if block then return end -- easy killer for tags
 
 	if type(eventsOrSeconds) == 'number' then
@@ -98,6 +99,13 @@ function E:AddTag(tagName, eventsOrSeconds, func, block)
 	-- when we set these the env will be from oUF
 	Tags.Methods[tagName] = func
 
+	-- if it uses UNIT_AURA we block spells unless allowed
+	if spells then
+		for spellID, allow in next, spells do
+			Tags.Spells[spellID] = allow
+		end
+	end
+
 	if RefreshNewTags then
 		Tags:RefreshEvents(tagName)
 		Tags:RefreshMethods(tagName)
@@ -106,9 +114,9 @@ end
 
 function E:CallTag(tag, ...)
 	local func = ElvUF.Tags.Methods[tag]
-	if func then
-		return func(...)
-	end
+	if not func then return end
+
+	return func(...)
 end
 
 function E:TagUpdateRate(second)
@@ -137,16 +145,19 @@ Tags.Env.UnitEffectiveLevel = function(unit)
 end
 
 Tags.Env.Abbrev = function(name)
-	local letters, lastWord = '', strmatch(name, '.+%s(.+)$')
+	local letters, text = '', gsub(name, '%s<.+>$', '') -- clean titles
+	local lastWord = strmatch(text, '.+%s(.+)$')
 	if lastWord then
-		for word in gmatch(name, '.-%s') do
+		for word in gmatch(text, '.-%s') do
 			local firstLetter = utf8sub(gsub(word, '^[%s%p]*', ''), 1, 1)
 			if firstLetter ~= utf8lower(firstLetter) then
 				letters = format('%s%s. ', letters, firstLetter)
 			end
 		end
+
 		name = format('%s%s', letters, lastWord)
 	end
+
 	return name
 end
 
@@ -156,24 +167,51 @@ local STAGGER_GREEN_INDEX = STAGGER_GREEN_INDEX or 1
 local STAGGER_YELLOW_INDEX = STAGGER_YELLOW_INDEX or 2
 local STAGGER_RED_INDEX = STAGGER_RED_INDEX or 3
 
-local SPEC_WARLOCK_DESTRUCTION = SPEC_WARLOCK_DESTRUCTION or 3
-local SPEC_WARLOCK_DEMONOLOGY = SPEC_WARLOCK_DEMONOLOGY or 2
-local SPEC_WARLOCK_AFFLICTION = SPEC_WARLOCK_AFFLICTION or 1
 local SPEC_MAGE_ARCANE = SPEC_MAGE_ARCANE or 1
+local SPEC_MAGE_FROST = SPEC_MAGE_FROST or 3
+local SPEC_SHAMAN_ENHANCEMENT = SPEC_SHAMAN_ENHANCEMENT or 2
+local SPEC_WARLOCK_DEMONOLOGY = SPEC_WARLOCK_DEMONOLOGY or 2
+local SPEC_WARLOCK_DESTRUCTION = SPEC_WARLOCK_DESTRUCTION or 3
 
+local POWERTYPE_SHADOW_ORBS = Enum.PowerType.ShadowOrbs or 28
 local POWERTYPE_ARCANE_CHARGES = Enum.PowerType.ArcaneCharges or 16
 local POWERTYPE_BURNING_EMBERS = Enum.PowerType.BurningEmbers or 14
 local POWERTYPE_DEMONIC_FURY = Enum.PowerType.DemonicFury or 15
 local POWERTYPE_SOUL_SHARDS = Enum.PowerType.SoulShards or 7
 
+-- these are not real class powers
+local POWERTYPE_ICICLES = -1
+local POWERTYPE_MAELSTROM = -2
+
+local SPELL_FROST_ICICLES = 205473
+local SPELL_ARCANE_CHARGE = 36032
+local SPELL_MAELSTROM = 344179
+
 local ClassPowers = {
 	MONK		= Enum.PowerType.Chi or 12,
-	MAGE		= Enum.PowerType.ArcaneCharges or 16,
 	PALADIN		= Enum.PowerType.HolyPower or 9,
 	DEATHKNIGHT	= Enum.PowerType.Runes or 5,
-	PRIEST		= Enum.PowerType.ShadowOrbs or 28,
 	WARLOCK		= POWERTYPE_SOUL_SHARDS
 }
+
+local ClassPowerMax = {
+	[POWERTYPE_MAELSTROM] = 10,
+	[POWERTYPE_ICICLES] = 5,
+}
+
+local function CurrentApplications(spellID, filter) -- same as in oUF
+	local info = GetPlayerAuraBySpellID(spellID)
+	local checkFilter = info and (not filter or (filter == 'HELPFUL' and info.isHelpful) or (filter == 'HARMFUL' and info.isHarmful))
+	return checkFilter and info.applications or 0
+end
+
+local function ClassPowerSpecial(unit, spellID, powerType, color, filter)
+	local current, r, g, b = CurrentApplications(spellID, filter)
+	local maximum = ClassPowerMax[powerType] or UnitPowerMax(unit, powerType)
+
+	if color then r, g, b = color.r, color.g, color.b end
+	return current or 0, maximum or 0, r or 1, g or 1, b or 1
+end
 
 Tags.Env.GetClassPower = function(unit)
 	local isme = UnitIsUnit(unit, 'player')
@@ -190,21 +228,17 @@ Tags.Env.GetClassPower = function(unit)
 		end
 	end
 
+	-- handle the fake powers (these use UNIT_AURA)
+	if E.Mists and unitClass == 'MAGE' and spec == SPEC_MAGE_ARCANE then
+		return ClassPowerSpecial(unit, SPELL_ARCANE_CHARGE, POWERTYPE_ARCANE_CHARGES, ElvUF.colors.ClassBars.MAGE.ARCANE_CHARGES, 'HARMFUL')
+	elseif E.Retail and unitClass == 'MAGE' and spec == SPEC_MAGE_FROST then
+		return ClassPowerSpecial(unit, SPELL_FROST_ICICLES, POWERTYPE_ICICLES, ElvUF.colors.ClassBars.MAGE.FROST_ICICLES, 'HELPFUL')
+	elseif E.Retail and unitClass == 'SHAMAN' and spec == SPEC_SHAMAN_ENHANCEMENT then
+		return ClassPowerSpecial(unit, SPELL_MAELSTROM, POWERTYPE_MAELSTROM, ElvUF.colors.ClassBars.SHAMAN.MAELSTROM, 'HELPFUL')
+	end
+
 	local monk = unitClass == 'MONK' -- checking brewmaster
-	local mistWarlock = E.Mists and unitClass == 'WARLOCK'
-	local mistPriest = E.Mists and unitClass == 'PRIEST'
-	local mistMage = E.Mists and unitClass == 'MAGE'
-
-	if mistMage and spec == SPEC_MAGE_ARCANE then -- mists arcane charges is weird
-		local info = GetPlayerAuraBySpellID(36032) -- this is kinda dumb but okay
-		Min = (info and info.isHarmful and info.applications) or 0
-		Max = UnitPowerMax(unit, POWERTYPE_ARCANE_CHARGES)
-
-		local color = ElvUF.colors.power[POWERTYPE_ARCANE_CHARGES]
-		local r, g, b = color.r, color.g, color.b
-
-		return Min or 0, Max or 0, r or 1, g or 1, b or 1
-	elseif monk and spec == SPEC_MONK_BREWMASTER then -- try to handle others
+	if monk and spec == SPEC_MONK_BREWMASTER then
 		Min = UnitStagger(unit) or 0
 		Max = UnitHealthMax(unit)
 
@@ -217,12 +251,13 @@ Tags.Env.GetClassPower = function(unit)
 	end
 
 	-- try special powers or combo points
+	local mistWarlock = E.Mists and unitClass == 'WARLOCK'
 	if mistWarlock then -- little gremlins
 		barType = (spec == SPEC_WARLOCK_DEMONOLOGY and POWERTYPE_DEMONIC_FURY) or (spec == SPEC_WARLOCK_DESTRUCTION and POWERTYPE_BURNING_EMBERS) or POWERTYPE_SOUL_SHARDS
-	elseif mistPriest then -- only shadow orbs
-		if spec == SPEC_PRIEST_SHADOW then
-			barType = ClassPowers[unitClass]
-		end
+	elseif E.Mists and unitClass == 'PRIEST' then -- only shadow orbs
+		barType = spec == SPEC_PRIEST_SHADOW and POWERTYPE_SHADOW_ORBS
+	elseif unitClass == 'MAGE' then
+		barType = spec == SPEC_MAGE_ARCANE and POWERTYPE_ARCANE_CHARGES
 	else
 		barType = ClassPowers[unitClass]
 	end
@@ -272,7 +307,17 @@ end
 --	Looping
 ------------------------------------------------------------------------
 
-local classSpecificEvents = (E.myclass == 'DEATHKNIGHT' and 'RUNE_POWER_UPDATE ') or ((E.myclass == 'MONK' or (E.Mists and E.myclass == 'MAGE')) and 'UNIT_AURA ') or ''
+local classSpecificAura = { MAGE = E.Retail or E.Mists, SHAMAN = E.Retail, MONK = true }
+local classSpecificEvents = (E.myclass == 'DEATHKNIGHT' and 'RUNE_POWER_UPDATE ') or (classSpecificAura[E.myclass] and 'UNIT_AURA ') or ''
+local classSpecificMonk = not E.Classic and E.myclass == 'MONK'
+local classSpecificSpells = { -- stagger IDs also in oUF stagger element
+	[124275] = classSpecificMonk or nil, -- [GREEN]  Light Stagger
+	[124274] = classSpecificMonk or nil, -- [YELLOW] Moderate Stagger
+	[124273] = classSpecificMonk or nil, -- [RED]    Heavy Stagger
+	[SPELL_ARCANE_CHARGE] = (E.Mists and E.myclass == 'MAGE') or nil,
+	[SPELL_FROST_ICICLES] = (E.Retail and E.myclass == 'MAGE') or nil,
+	[SPELL_MAELSTROM] = (E.Retail and E.myclass == 'SHAMAN') or nil
+}
 
 for textFormat in pairs(E.GetFormattedTextStyles) do
 	local tagFormat = strlower(gsub(textFormat, '_', '-'))
@@ -338,7 +383,7 @@ for textFormat in pairs(E.GetFormattedTextStyles) do
 		if min ~= 0 then
 			return E:GetFormattedText(textFormat, min, max)
 		end
-	end, E.Classic)
+	end, E.Classic, classSpecificSpells)
 
 	E:AddTag(format('altpower:%s', tagFormat), 'UNIT_POWER_UPDATE UNIT_POWER_BAR_SHOW UNIT_POWER_BAR_HIDE', function(unit)
 		local cur = UnitPower(unit, POWERTYPE_ALTERNATE)
@@ -407,7 +452,7 @@ for textFormat in pairs(E.GetFormattedTextStyles) do
 			if min ~= 0 then
 				return E:GetFormattedText(textFormat, min, max, nil, true)
 			end
-		end, E.Classic)
+		end, E.Classic, classSpecificSpells)
 	end
 end
 
@@ -593,6 +638,34 @@ E:AddTag('health:percent-with-absorbs:nostatus', 'UNIT_HEALTH UNIT_MAXHEALTH UNI
 	local healthTotalIncludingAbsorbs = UnitHealth(unit) + absorb
 	return E:GetFormattedText('PERCENT', healthTotalIncludingAbsorbs, UnitHealthMax(unit))
 end, E.Classic)
+
+do
+	local function FormatPercent(value, maximum, dec)
+		local perc = value / maximum * 100
+		return E:GetFormattedText('PERCENT', perc, 100, dec)
+	end
+
+	E:AddTag('health:deficit-percent-absorbs', 'UNIT_HEALTH UNIT_MAXHEALTH UNIT_ABSORB_AMOUNT_CHANGED UNIT_CONNECTION PLAYER_FLAGS_CHANGED', function(unit)
+		local status = not UnitIsFeignDeath(unit) and UnitIsDead(unit) and L["Dead"] or UnitIsGhost(unit) and L["Ghost"] or not UnitIsConnected(unit) and L["Offline"]
+
+		if status then
+			return status
+		end
+
+		local current = UnitHealth(unit)
+		local maximum = UnitHealthMax(unit)
+		local absorb = UnitGetTotalAbsorbs(unit) or 0
+		local effective = current + absorb
+
+		if maximum == 0 or effective == maximum then
+			return
+		end
+
+		local deficit = maximum - effective
+		local percentage = FormatPercent(abs(deficit), maximum, 1)
+		return (deficit < 0 and '+' or '-') .. percentage
+	end, E.Classic)
+end
 
 E:AddTag('health:deficit-percent:name', 'UNIT_HEALTH UNIT_MAXHEALTH UNIT_NAME_UPDATE', function(unit)
 	local currentHealth = UnitHealth(unit)
@@ -845,9 +918,8 @@ E:AddTag('incomingheals', 'UNIT_HEAL_PREDICTION', function(unit)
 	end
 end)
 
-E:AddTag('distance', 0.1, function(realUnit)
-	if UnitIsConnected(realUnit) and not UnitIsUnit(realUnit, 'player') then
-		local unit = E:GetGroupUnit(realUnit) or realUnit
+E:AddTag('distance', 0.1, function(unit)
+	if UnitIsConnected(unit) and not UnitIsUnit(unit, 'player') then
 		local distance = E:GetDistance('player', unit)
 		if distance then
 			return format('%.1f', distance)
@@ -865,9 +937,9 @@ E:AddTag('classificationcolor', 'UNIT_CLASSIFICATION_CHANGED', function(unit)
 end)
 
 E:AddTag('guild', 'UNIT_NAME_UPDATE PLAYER_GUILD_UPDATE', function(unit)
-	if UnitIsPlayer(unit) then
-		return GetGuildInfo(unit)
-	end
+	if not UnitIsPlayer(unit) then return end
+
+	return GetGuildInfo(unit)
 end)
 
 E:AddTag('group:raid', 'GROUP_ROSTER_UPDATE', function(unit)
@@ -893,11 +965,11 @@ E:AddTag('guild:brackets', 'PLAYER_GUILD_UPDATE', function(unit)
 end)
 
 E:AddTag('guild:translit', 'UNIT_NAME_UPDATE PLAYER_GUILD_UPDATE', function(unit)
-	if UnitIsPlayer(unit) then
-		local guildName = GetGuildInfo(unit)
-		if guildName then
-			return Translit:Transliterate(guildName, translitMark)
-		end
+	if not UnitIsPlayer(unit) then return end
+
+	local guildName = GetGuildInfo(unit)
+	if guildName then
+		return Translit:Transliterate(guildName, translitMark)
 	end
 end)
 
@@ -909,11 +981,11 @@ E:AddTag('guild:brackets:translit', 'PLAYER_GUILD_UPDATE', function(unit)
 end)
 
 E:AddTag('guild:rank', 'UNIT_NAME_UPDATE', function(unit)
-	if UnitIsPlayer(unit) then
-		local _, rank = GetGuildInfo(unit)
-		if rank then
-			return rank
-		end
+	if not UnitIsPlayer(unit) then return end
+
+	local _, rank = GetGuildInfo(unit)
+	if rank then
+		return rank
 	end
 end)
 
@@ -940,9 +1012,9 @@ E:AddTag('name:title', 'UNIT_NAME_UPDATE INSTANCE_ENCOUNTER_ENGAGE_UNIT', functi
 end)
 
 E:AddTag('title', 'UNIT_NAME_UPDATE INSTANCE_ENCOUNTER_ENGAGE_UNIT', function(unit)
-	if UnitIsPlayer(unit) then
-		return GetTitleName(GetCurrentTitle())
-	end
+	if not UnitIsPlayer(unit) then return end
+
+	return GetTitleName(GetCurrentTitle())
 end)
 
 E:AddTag('altpowercolor', 'UNIT_POWER_UPDATE UNIT_POWER_BAR_SHOW UNIT_POWER_BAR_HIDE', function(unit)
@@ -1080,7 +1152,7 @@ do
 	-- the third arg here is added from the user as like [name:health{ff00ff:00ff00}] or [name:health{class:00ff00}]
 	E:AddTag('name:health', 'UNIT_NAME_UPDATE UNIT_FACTION UNIT_HEALTH UNIT_MAXHEALTH', function(unit, _, args)
 		local name = UnitName(unit)
-		if not name then return '' end
+		if not name then return end
 
 		local min, max, bco, fco = UnitHealth(unit), UnitHealthMax(unit), strsplit(':', args or '')
 		local to = ceil(utf8len(name) * (min / max))
@@ -1133,54 +1205,27 @@ do
 	end)
 end
 
-do
-	local GroupUnits = {}
-	local frame = CreateFrame('Frame')
-	frame:RegisterEvent('GROUP_ROSTER_UPDATE')
-	frame:SetScript('OnEvent', function()
-		wipe(GroupUnits)
+for _, var in ipairs({4,8,10,15,20,25,30,35,40}) do
+	E:AddTag(format('nearbyplayers:%s', var), 0.25, function(unit)
+		local inRange = 0
 
-		local groupType, groupSize
-		if IsInRaid() then
-			groupType = 'raid'
-			groupSize = GetNumGroupMembers()
-		elseif IsInGroup() then
-			groupType = 'party'
-			groupSize = GetNumGroupMembers()
-		else
-			groupType = 'solo'
-			groupSize = 1
-		end
-
-		for index = 1, groupSize do
-			local groupUnit = groupType..index
-			if not UnitIsUnit(groupUnit, 'player') then
-				GroupUnits[groupUnit] = true
-			end
-		end
-	end)
-
-	for _, var in ipairs({4,8,10,15,20,25,30,35,40}) do
-		E:AddTag(format('nearbyplayers:%s', var), 0.25, function(realUnit)
-			local inRange = 0
-
-			if UnitIsConnected(realUnit) then
-				local unit = E:GetGroupUnit(realUnit) or realUnit
-				for groupUnit in pairs(GroupUnits) do
-					if UnitIsConnected(groupUnit) and not UnitIsUnit(unit, groupUnit) then
-						local distance = E:GetDistance(unit, groupUnit)
+		if UnitIsConnected(unit) then
+			for _, units in next, E.GroupUnitsByRole do
+				for _, unitToken in next, units do
+					if UnitIsConnected(unitToken) and not UnitIsUnit(unit, unitToken) then
+						local distance = E:GetDistance(unit, unitToken)
 						if distance and distance <= var then
 							inRange = inRange + 1
 						end
 					end
 				end
 			end
+		end
 
-			if inRange > 0 then
-				return inRange
-			end
-		end)
-	end
+		if inRange > 0 then
+			return inRange
+		end
+	end)
 end
 
 do
@@ -1238,6 +1283,7 @@ do
 	local typeIcon = { elite = gold, worldboss = gold, rareelite = silver, rare = silver }
 	E:AddTag('classification:icon', 'UNIT_NAME_UPDATE', function(unit)
 		if UnitIsPlayer(unit) then return end
+
 		return typeIcon[UnitClassification(unit)]
 	end)
 
@@ -1487,36 +1533,42 @@ if E.Classic then
 	end)
 end
 
-if not E.Retail then
-	E:AddTag('pvp:title', 'UNIT_NAME_UPDATE', function(unit)
-		if UnitIsPlayer(unit) then
-			local rank = UnitPVPRank(unit)
-			local title = GetPVPRankInfo(rank, unit)
+if E.Retail then
+	E:AddTag('pvp:honorlevel', 'UNIT_NAME_UPDATE', function(unit)
+		if not UnitIsPlayer(unit) then return end
 
-			return title
-		end
+	    return UnitHonorLevel(unit)
+	end)
+else
+	E:AddTag('pvp:title', 'UNIT_NAME_UPDATE', function(unit)
+		if not UnitIsPlayer(unit) then return end
+
+		local rank = UnitPVPRank(unit)
+		local title = GetPVPRankInfo(rank, unit)
+
+		return title
 	end)
 
 	E:AddTag('pvp:rank', 'UNIT_NAME_UPDATE', function(unit)
-		if UnitIsPlayer(unit) then
-			local rank = UnitPVPRank(unit)
-			local _, num = GetPVPRankInfo(rank, unit)
+		if not UnitIsPlayer(unit) then return end
 
-			if num > 0 then
-				return num
-			end
+		local rank = UnitPVPRank(unit)
+		local _, num = GetPVPRankInfo(rank, unit)
+
+		if num > 0 then
+			return num
 		end
 	end)
 
 	local rankIcon = [[|TInterface\PvPRankBadges\PvPRank%02d:12:12:0:0:12:12:0:12:0:12|t]]
 	E:AddTag('pvp:icon', 'UNIT_NAME_UPDATE', function(unit)
-		if UnitIsPlayer(unit) then
-			local rank = UnitPVPRank(unit)
-			local _, num = GetPVPRankInfo(rank, unit)
+		if not UnitIsPlayer(unit) then return end
 
-			if num > 0 then
-				return format(rankIcon, num)
-			end
+		local rank = UnitPVPRank(unit)
+		local _, num = GetPVPRankInfo(rank, unit)
+
+		if num > 0 then
+			return format(rankIcon, num)
 		end
 	end)
 end
@@ -1626,6 +1678,7 @@ E.TagInfo = {
 		['health:current'] = { category = 'Health', description = "Displays the current health of the unit" },
 		['health:deficit-nostatus:shortvalue'] = { category = 'Health', description = "Shortvalue of the health deficit, without status" },
 		['health:deficit-nostatus'] = { category = 'Health', description = "Displays the health of the unit as a deficit, without status" },
+		['health:deficit-percent-absorbs'] = { hidden = E.Classic, category = 'Health', description = "Displays the percentage deficit health including absorb values. If greater than max health that will be reflected." },
 		['health:deficit-percent:name-long'] = { category = 'Health', description = "Displays the health deficit as a percentage and the name of the unit (limited to 20 letters)" },
 		['health:deficit-percent:name-medium'] = { category = 'Health', description = "Displays the health deficit as a percentage and the name of the unit (limited to 15 letters)" },
 		['health:deficit-percent:name-short'] = { category = 'Health', description = "Displays the health deficit as a percentage and the name of the unit (limited to 10 letters)" },
@@ -1764,6 +1817,7 @@ E.TagInfo = {
 		['faction'] = { category = 'PvP', description = "Displays 'Alliance' or 'Horde'" },
 		['pvp'] = { category = 'PvP', description = "Displays 'PvP' if the unit is pvp flagged" },
 		['pvptimer'] = { category = 'PvP', description = "Displays remaining time on pvp-flagged status" },
+		['pvp:honorlevel'] = { hidden = not E.Retail, category = 'PvP', description = "Displays honor level of the unit" },
 		['pvp:icon'] = { hidden = E.Retail, category = 'PvP', description = "Displays player pvp rank icon" },
 		['pvp:rank'] = { hidden = E.Retail, category = 'PvP', description = "Displays player pvp rank number" },
 		['pvp:title'] = { hidden = E.Retail, category = 'PvP', description = "Displays player pvp title" },

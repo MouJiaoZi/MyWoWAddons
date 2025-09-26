@@ -48,12 +48,11 @@ OnEnter and OnLeave script handlers will be set to display a Tooltip if the `Tot
 local _, ns = ...
 local oUF = ns.oUF
 
+local GetTime = GetTime
 local GameTooltip = GameTooltip
 local GetTotemInfo = GetTotemInfo
-local GetTime = GetTime
 
-local _, playerClass = UnitClass('player')
-local priority = playerClass == 'SHAMAN' and SHAMAN_TOTEM_PRIORITIES or STANDARD_TOTEM_PRIORITIES
+local priority = (oUF.myclass == 'SHAMAN' and SHAMAN_TOTEM_PRIORITIES) or STANDARD_TOTEM_PRIORITIES
 
 local function UpdateTooltip(self)
 	if GameTooltip:IsForbidden() then return end
