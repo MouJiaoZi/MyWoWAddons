@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
 ["lastSanitation"] = 3,
-["session"] = 813,
+["session"] = 817,
 ["errors"] = {
 {
 ["message"] = "光环'Inverse/Crushing Gravity positions'的Lua错误：init\nWeakAuras 版本：5.20.2\n光环版本：1.0.96\n堆栈追踪：\n[string \"return function() local INVERSE_SIZE = Weak...\"]:66: attempt to index global 'LiquidWeakAuras' (a nil value)",

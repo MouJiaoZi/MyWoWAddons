@@ -31,7 +31,7 @@ MythicDungeonToolsDB = {
 },
 ["selectedDungeonList"] = 3,
 ["maximized"] = false,
-["currentDungeonIdx"] = 111,
+["nonFullscreenScale"] = 0.900000879786036,
 ["presets"] = {
 [19] = {
 {
@@ -5418,6 +5418,10 @@ nil,
 27,
 },
 ["color"] = "3eff9e",
+[9] = {
+4,
+5,
+},
 [16] = {
 3,
 },
@@ -5425,10 +5429,6 @@ nil,
 30,
 29,
 33,
-},
-[9] = {
-4,
-5,
 },
 },
 {
@@ -5657,6 +5657,12 @@ nil,
 27,
 },
 ["color"] = "ff3eff",
+[9] = {
+4,
+5,
+6,
+7,
+},
 [16] = {
 4,
 1,
@@ -5666,12 +5672,6 @@ nil,
 29,
 30,
 33,
-},
-[9] = {
-4,
-5,
-6,
-7,
 },
 },
 {
@@ -6110,7 +6110,15 @@ nil,
 },
 },
 ["toolbarExpanded"] = false,
-["nonFullscreenScale"] = 0.900000879786036,
+["latestSeenDungeonList"] = 9,
+["minimap"] = {
+["minimapPos"] = 330.881463262169,
+["showInCompartment"] = true,
+["hide"] = true,
+},
+["version"] = 550,
+["xoffset"] = -149.5548095703125,
+["currentDungeonIdx"] = 111,
 ["colorPaletteInfo"] = {
 ["customPaletteValues"] = {
 {
@@ -6175,14 +6183,6 @@ nil,
 },
 },
 },
-["version"] = 550,
-["xoffset"] = -149.5548095703125,
-["minimap"] = {
-["minimapPos"] = 330.881463262169,
-["showInCompartment"] = true,
-["hide"] = true,
-},
-["latestSeenDungeonList"] = 9,
 ["yoffset"] = 0.4726259112358093,
 },
 }

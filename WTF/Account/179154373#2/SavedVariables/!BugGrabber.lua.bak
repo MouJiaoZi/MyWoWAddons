@@ -1,6 +1,6 @@
 
 BugGrabberDB = {
-["session"] = 812,
+["session"] = 816,
 ["lastSanitation"] = 3,
 ["errors"] = {
 {
@@ -100,14 +100,6 @@ BugGrabberDB = {
 ["counter"] = 1,
 },
 {
-["message"] = "[ADDON_ACTION_BLOCKED] 插件 'MeetingStone' 尝试调用保护功能 'Frame:SetPropagateKeyboardInput()'。",
-["time"] = "2025/09/12 08:01:02",
-["locals"] = "self = Frame {\n}\nkey = \"R\"\nfound = false\nAutoHideController = <table> {\n ESCHandler = Frame {\n }\n _Objects = <table> {\n }\n _Meta = <table> {\n }\n}\n",
-["stack"] = "[Interface/AddOns/MeetingStone/Libs/NetEaseGUI-2.0-3/Widget/AutoHideController.lua]:26: in function <...ne/Libs/NetEaseGUI-2.0/Widget/AutoHideController.lua:15>",
-["session"] = 782,
-["counter"] = 5,
-},
-{
 ["message"] = "Interface/AddOns/JST/core/api.lua:2743: table index is nil",
 ["time"] = "2025/09/21 20:42:03",
 ["locals"] = "self = Frame {\n PixelSnapDisabled = true\n t = 0.021000\n count = FontString {\n }\n tex = Texture {\n }\n style = true\n cooldown = Cooldown {\n }\n sd = Frame {\n }\n}\n(*temporary) = <table> {\n 231626 = Frame {\n }\n}\n(*temporary) = nil\n(*temporary) = \"OnUpdate\"\n(*temporary) = nil\n(*temporary) = \"table index is nil\"\nbar = StatusBar {\n GUID = \"Creature-0-3039-2657-16527-218884-00004FF289\"\n absorb_bar = StatusBar {\n }\n max = 33891487\n PixelSnapDisabled = true\n right = FontString {\n }\n left = FontString {\n }\n rm_text = FontString {\n }\n update_rate = 0.020000\n rt_icon = Texture {\n }\n sd = Frame {\n }\n ficon_text = FontString {\n }\n absorb = 40038414\n t = 0\n icons = <table> {\n }\n npcID = \"218884\"\n min = 11565737\n value_text = FontString {\n }\n style = true\n ind_text = FontString {\n }\n}\n",
@@ -161,6 +153,22 @@ BugGrabberDB = {
 ["locals"] = "keystate = \"down\"\n",
 ["stack"] = "[TOGGLECHARACTER0]:1: in function <[string \"TOGGLECHARACTER0\"]:1>",
 ["session"] = 811,
+["counter"] = 1,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 'MeetingStone' 尝试调用保护功能 'Frame:SetPropagateKeyboardInput()'。",
+["time"] = "2025/09/12 08:01:02",
+["locals"] = "self = Frame {\n}\nkey = \"R\"\nfound = false\nAutoHideController = <table> {\n ESCHandler = Frame {\n }\n _Objects = <table> {\n }\n _Meta = <table> {\n }\n}\n",
+["stack"] = "[Interface/AddOns/MeetingStone/Libs/NetEaseGUI-2.0-3/Widget/AutoHideController.lua]:26: in function <...ne/Libs/NetEaseGUI-2.0/Widget/AutoHideController.lua:15>",
+["session"] = 813,
+["counter"] = 6,
+},
+{
+["message"] = "[ADDON_ACTION_BLOCKED] 插件 'BlizzMove' 尝试调用保护功能 'Frame:SetPassThroughButtons()'。",
+["time"] = "2025/09/25 23:02:40",
+["locals"] = "self = WorldQuestTrackerZonePOIWidget9 {\n blackBackground = Texture {\n }\n Shadow = WorldQuestTrackerZonePOIWidget9Shadow {\n }\n BountyRing = Texture {\n }\n worldQuest = true\n PosX = 0.529380\n criteriaIndicatorGlow = Texture {\n }\n bgFlag = Texture {\n }\n onStartTrackAnimation = AnimationGroup {\n }\n squareBorder = Texture {\n }\n timeBlipOrange = Texture {\n }\n flagText = FontString {\n }\n flagCriteriaMatchGlow = Texture {\n }\n highlight = Texture {\n }\n PixelSnapDisabled = true\n isSelected = false\n onEndTrackAnimation = AnimationGroup {\n }\n SelectedGlow = WorldQuestTrackerZonePOIWidget9SelectedGlow {\n }\n CriteriaMatchGlow = WorldQuestTrackerZonePOIWidget9CriteriaMatchGlow {\n }\n OnEnterAnimation = AnimationGroup {\n }\n FactionPulseAnimation = AnimationGroup {\n }\n isSpellTarget = false\n questName = \"相位潜行：试验性灭除\"\n OnShowAlphaAnimation = AnimationGroup {\n }\n Currency_Gold = 10059500\n OnLeaveAnimation = AnimationGroup {\n }\n IconTexture = \"Interface\\AddOns\\WorldQuestTracker\\media\\icon_gold\"\n circleBorder = Texture {\n }\n IconText = \"1.0K\"\n SupportFrame = Frame {\n }\n rarity = 0\n isCriteria = false\n selected = false\n inProgress = false\n isElite = false\n TimeLeft = 4079\n Texture = WorldQuestTrackerZonePOIWidget9Texture {\n }\n worldQuestType = 2\n flagTextShadow = FontString {\n }\n PosY = 0.618829\n Amount = 10059500\n QuestType = 1\n FactionID = 2658\n Currency_ArtifactPower = 0\n questData = <table> {\n }\n miscBorder = Texture {\n }\n Currency_Resources = 0\n AnchorFrame = WorldQuestTrackerZonePOIWidget9Anchor {\n }\n mapID = 2371\n IsTrackingRareGlow = WorldQuestTrackerZonePOIWidget9IsTrackingRareGlow {\n }\n Order = 8\n OriginalFrameLevel = 5019\n numObjectives = 3\n questID = 86872\n rareGlow = Texture {\n }\n IsZoneQuestButton = true\n CriteriaAnimation = AnimationGroup {\n }\n overlayBorder = Texture {\n }\n colorBlindTrackerIcon = Texture {\n }\n AddedToTrackerAnimation = AnimationGroup {\n }\n criteriaIndicator = Texture {\n }\n overlayBorder2 = Texture {\n }\n TextureCustom = WorldQuestTrackerZonePOIWidget9TextureCustom {\n }\n blackGradient = Texture {\n }\n timeBlipGreen = Texture {\n }\n questTypeBlip = Texture {\n }\n timeBlipYellow = Texture {\n }\n timeBlipRed = Texture {\n }\n IsTrackingGlow = WorldQuestTrackerZonePOIWidget9IsTrackingGlow {\n }\n rareSerpent = WorldQuestTrackerZonePOIWidget9RareSerpent {\n }\n RareOverlay = WorldQuestTrackerZonePOIWidget9RareOverlay {\n }\n SpellTargetGlow = WorldQuestTrackerZonePOIWidget9SpellTargetGlow {\n }\n}\nbutton = \"LeftButton\"\nWorldQuestTracker = <table> {\n LastUpdate = 0\n modules = <table> {\n }\n Cache_ShownQuestOnWorldMap = <table> {\n }\n mapTables = <table> {\n }\n CommFunctions = <table> {\n }\n CurrentHoverQuest = 86872\n db = <table> {\n }\n QuestTrackList = <table> {\n }\n ZoneWidgetPool = <table> {\n }\n MapChangedTime = 1758812462\n POIPins = <table> {\n }\n ParentTapFrame = WorldQuestTrackerParentTapFrame {\n }\n name = \"WorldQuestTrackerAddon\"\n QuestData_Zone = <table> {\n }\n ChangeLogTable = <table> {\n }\n WorldMapSupportWidgets = <table> {\n }\n TaxyZoneWidgets = <table> {\n }\n COMM_PREFIX = \"WQTC\"\n defaultModuleState = true\n MapData = <table> {\n }\n PartyQuestsPool = <table> {\n }\n eyeFrameBuilt = true\n dbChr = <table> {\n }\n __debug = false\n AnchoringFrame = Frame {\n }\n DefaultWorldQuestPin = <table> {\n }\n JustAddedToTracker = <table> {\n }\n WorldWidgets_NeedFullRefresh = true\n FilterToQuestType = <table> {\n }\n QueuedPinsToRefresh = <table> {\n }\n DotLineScale = <table> {\n }\n Taxy_CurrentShownBlips = <table> {\n }\n QuestSummaryShown = true\n CachedQuestData = <table> {\n }\n ExtraMapTextures = <table> {\n }\n ZoneSummaryToogleButton = Button {\n }\n HideZoneWidgetsOnNextTick = true\n CurrentZoneQuestsMapID = 2371\n InitAt = 687321.759000\n Cache_ShownWidgetsOnZoneMap = <table> {\n }\n WorldMap_APowerIndicatorTexture = <table> {\n }\n WorldMap_PetIndicator = <table> {\n }\n WorldMap_APowerIndicator = <table> {\n }\n WorldMapSmallWidgets = <table> {\n }\n WorldMap_ResourceIndicator = <table> {\n }\n Cache_ShownQuestOnZoneMap = <table> {\n }\n IndicatorsAnchor = <table> {\n }\n Constants = <table> {\n }\n DoubleTapFrame = WorldQuestTrackerDoubleTapFrame {\n }\n Togg",
+["stack"] = "[Interface/AddOns/WorldQuestTracker/WorldQuestTracker_FrameAPI.lua]:776: in function <...Ons/WorldQuestTracker/WorldQuestTracker_FrameAPI.lua:728>",
+["session"] = 813,
 ["counter"] = 1,
 },
 },

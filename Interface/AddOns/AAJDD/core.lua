@@ -12,9 +12,12 @@ local addon = {}
 
 addon.eventframe = CreateFrame('Frame')
 
---自定义体API，启用描边禁用阴影，可读性较佳
+---自定义体API，启用描边禁用阴影，可读性较佳
+---@param obj any
+---@param optSize any
 local function SetFont(obj, optSize)
-    local fontName, _, fontFlags = obj:GetFont()
+    local fontName, _, fontFlags = ChatFrame1:GetFont()
+    -- local fontName, _, fontFlags = obj:GetFont()
     obj:SetFont(fontName, optSize, "OUTLINE")
     obj:SetShadowOffset(0, 0)
 end

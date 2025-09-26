@@ -36,13 +36,6 @@ BAGANATOR_CONFIG = {
 },
 ["凤凰基友之二-凤凰之神"] = {
 },
-["凤凰基友之五-凤凰之神"] = {
-},
-["这只是饺子-伊森利恩"] = {
-{
-["currencyID"] = 1560,
-},
-},
 ["某餃子-伊森利恩"] = {
 {
 ["currencyID"] = 3008,
@@ -51,7 +44,14 @@ BAGANATOR_CONFIG = {
 ["currencyID"] = 3290,
 },
 },
+["这只是饺子-伊森利恩"] = {
+{
+["currencyID"] = 1560,
+},
+},
 ["我们完蛋啦-伊森利恩"] = {
+},
+["凤凰基友之五-凤凰之神"] = {
 },
 ["开门的搞-伊森利恩"] = {
 },
@@ -297,11 +297,25 @@ BAGANATOR_CONFIG = {
 ["view_alpha"] = 1,
 ["disabled_skins"] = {
 },
-["sort_ignore_slots_count_2"] = {
-["某餃子-伊森利恩"] = 0,
-},
+["setting_anchors"] = false,
 ["upgrade_plugin"] = "none",
 ["guild_bank_sort_method"] = "unset",
+["skins"] = {
+["elvui"] = {
+["use_bag_font"] = false,
+},
+["blizzard"] = {
+["no_frame_borders"] = false,
+["view_transparency"] = 0,
+["empty_slot_background"] = false,
+},
+["dark"] = {
+["view_transparency"] = 0.3,
+["square_icons"] = false,
+["no_frame_borders"] = false,
+["empty_slot_background"] = false,
+},
+},
 ["recent_characters_main_view"] = {
 "某餃子-伊森利恩",
 "某饺子-伊森利恩",
@@ -320,26 +334,12 @@ BAGANATOR_CONFIG = {
 "Afdfaf-苏拉玛",
 },
 ["debug_keywords"] = false,
-["skins"] = {
-["elvui"] = {
-["use_bag_font"] = false,
-},
-["blizzard"] = {
-["no_frame_borders"] = false,
-["view_transparency"] = 0,
-["empty_slot_background"] = false,
-},
-["dark"] = {
-["view_transparency"] = 0.3,
-["square_icons"] = false,
-["no_frame_borders"] = false,
-["empty_slot_background"] = false,
-},
-},
 ["auto_sort_on_open"] = false,
 ["guild_current_tab"] = 0,
-["setting_anchors"] = false,
 ["bag_view_width"] = 12,
+["sort_ignore_slots_count_2"] = {
+["某餃子-伊森利恩"] = 0,
+},
 ["currencies_tracked"] = {
 ["三减竖式-伊森利恩"] = {
 },
