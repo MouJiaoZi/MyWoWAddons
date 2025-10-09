@@ -752,51 +752,17 @@ G.Encounters[2641] = {
 						frame.color = {0, .45, 1}
 						frame.raid_glow = "pixel"
 						frame.raid_index = true						
-						frame.bar_num = 4
 						
 						function frame:custom_sort(cache)
 							T.SortTable(cache)
 						end
 						
-						frame.total_info = {
-							{"近战", "稍后远程"}, -- 1
-							{"近战", "不消"}, -- 2
-							{"近战", "远程"}, -- 3
-							
-							{"近战", "稍后远程"}, -- 1
-							{"近战", "不消"}, -- 2
-							{"近战", "远程"}, -- 3
-							
-							{"近战", "不消"}, -- 1
-							{"近战", "远程"}, -- 2
-							{"近战", "远程"}, -- 3
-						}
-						
 						frame.info = {
-							{text = "", msg_applied = "", msg = ""},
-							{text = "", msg_applied = "", msg = ""},
-							{text = "", msg_applied = "", msg = ""},
-							{text = "", msg_applied = "", msg = ""},
+							{text = L["近战"], msg_applied = L["近战"]},
+							{text = L["近战"], msg_applied = L["近战"]},
+							{text = L["远程"], msg_applied = L["远程"]},
+							{text = L["远程"], msg_applied = L["远程"]},
 						}
-						
-						function frame:update_spell_info(count)
-							if self.total_info[count] then
-								for i = 1, 2 do
-									local tag = self.total_info[count][1]
-									self.info[i].text = T.MsgtoStr(tag)
-									self.info[i].msg_applied = "%name"..tag
-									self.info[i].msg = tag
-								end
-								for i = 3, 4 do
-									local tag = self.total_info[count][2]
-									self.info[i].text = T.MsgtoStr(tag)
-									self.info[i].msg_applied = "%name"..tag
-									self.info[i].msg = tag
-								end
-							end
-						end
-						
-						frame:update_spell_info(1)
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
 						
@@ -816,21 +782,8 @@ G.Encounters[2641] = {
 					end,
 					update = function(frame, event, ...)
 						T.UpdateAuraMods_ByMrt(frame, event, ...)
-						
-						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
-							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
-							if sub_event == "SPELL_CAST_SUCCESS" and spellID == 466979 then -- 下一轮 故障震击 
-								frame.spell_count = frame.spell_count + 1
-								frame:update_spell_info(frame.spell_count)
-							end
-						elseif event == "ENCOUNTER_START" then
-							frame.spell_count = 1
-							frame:update_spell_info(frame.spell_count)
-						end
 					end,
 					reset = function(frame, event)
-						frame.spell_count = 1
-						frame:update_spell_info(frame.spell_count)
 						T.ResetAuraMods_ByMrt(frame)
 					end,
 				},

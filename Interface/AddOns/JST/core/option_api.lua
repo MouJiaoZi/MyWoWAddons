@@ -1,4 +1,5 @@
 ﻿local T, C, L, G = unpack(select(2, ...))
+local addon_name = G.addon_name
 
 local enable_tags = {
 	rl		 = { tag = L["RL加载"], 		tip = L["RL加载tip"]},
@@ -26,7 +27,7 @@ local PhaseTriggerEvents  = {
 }
 
 --====================================================--
---[[                -- 通用按钮 --                  ]]--
+--[[                   -- API --                    ]]--
 --====================================================--
 -- 声音预览按钮
 local CreateSoundPreviewButton = function(button, sound, points)
@@ -134,6 +135,107 @@ local function HideScorllBar(scrollframe)
 	scrollBar.ThumbTexture:EnableMouse(false)
 end
 T.HideScorllBar = HideScorllBar
+
+--====================================================--
+--[[                -- 推荐设置 --                  ]]--
+--====================================================--
+local function AddRecommondTooltip(frame)
+	frame:HookScript("OnEnter", function(self) 
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", 0, 0)
+		GameTooltip:AddLine(L["发送该配置给队友"])
+		GameTooltip:Show()
+	end)
+	
+	frame:SetScript("OnLeave", function(self)
+		GameTooltip:Hide()
+	end)
+end
+
+local link = "|cnIQ4:|HJSTR:%1$s:%2$s:%3$s:%4$s:%5$s|h[%4$s>%5$s]|h|r"
+
+local function FormatPath(path)
+	local str, matched, only_character
+	str = T.PathToString(path)
+	str, matched = gsub(str, "-<only_character>", "")
+	only_character = matched > 0 and 1 or 0
+	
+	return str, only_character
+end
+
+local function RemoveStrFormat(text)
+	text = text:gsub("|T[^|]+|t", "")	
+	text = text:gsub("|c%x%x%x%x%x%x%x%x", "")
+	text = text:gsub("|r", "")
+	text = text:gsub("|TInterface\\TargetingFrame\\UI-RaidTargetingIcon_[.]+:0|t", "")
+	text = text:gsub(string.format(L["使用标记%s"], ""), "")
+	text = text:gsub(" >", ">")
+	text = text:gsub("[\(](.+)[\)]", "")
+	
+	return text
+end
+
+-- 推荐设置
+local function RecommondOptions(path, value, text, value_text)
+	if not UnitInAnyGroup("player") then
+		T.msg(L["不在队伍中"])
+		return
+	end
+	
+	local path_str, only_character = FormatPath(path)
+	local value_str = T.ValueToString(value)
+	local description = RemoveStrFormat(text)	
+	local value_msg = value_text and gsub(value_text, "[\(](.+)[\)]", "") or T.ValueToMsg(value)
+	local str = string.format(link, path_str, only_character, value_str, description, value_msg)
+	
+	T.addon_msg(string.format("Rec,%s", str), "GROUP")
+end
+
+local function FilterRecommond(event, ...)
+	local channel, sender, GUID, message, str = ...
+	if message == "Rec" and str then
+		local name = T.GetNameByGUID(GUID)
+		T.msg(name .."-".. str)
+	end
+end
+
+T.RegisterCallback("ADDON_MSG", FilterRecommond)
+
+hooksecurefunc("SetItemRef", function(link)
+	if link:find("JSTR") then
+		local _, path_str, only_character, value_str, description, value_msg = string.split(":", link)	
+		StaticPopupDialogs[addon_name.."Accept Settings Confirm"].text = string.format(L["确认载入推荐设置"], description, value_msg)
+		StaticPopupDialogs[addon_name.."Accept Settings Confirm"].OnAccept = function()
+			local path = T.StringToPath(path_str)
+			local value = T.StringToValue(value_str)
+			
+			if tonumber(only_character) == 1 then
+				T.ValueToPath(JST_CDB, path, value)
+			else
+				T.ValueToDB(path, value)
+			end
+			
+			T.msg(string.format(L["配置已载入"], description, value_msg))
+			
+			local GUI = G.GUI
+			local detailFrame = G.detailFrame -- 刷新
+			
+			local show_GUI = GUI:IsShown()
+			local show_detail = detailFrame:IsShown()
+			
+			if show_GUI then
+				GUI:Hide()
+				GUI:Show()
+			end
+			
+			if show_detail then
+				detailFrame:Hide()
+				detailFrame:Show()
+			end			
+		end
+		StaticPopup_Show(addon_name.."Accept Settings Confirm")
+	end
+end)
+
 --====================================================--
 --[[                -- 依赖关系 --                  ]]--
 --====================================================--
@@ -482,23 +584,34 @@ local Checkbutton = function(parent, text)
 end
 T.Checkbutton = Checkbutton
 
-local Checkbutton_DB = function(parent, path)
+local Checkbutton_DB = function(parent, path, category_text)
 	local info = T.GetOptionInfo(path)
 	local bu = Checkbutton(parent, info.text)	
+	
+	AddRecommondTooltip(bu)
 	
 	bu:SetScript("OnShow", function(self)
 		self:SetChecked(T.ValueFromDB(path))
 	end)
 	
 	bu:SetScript("OnClick", function(self)
-		local value = self:GetChecked()
-		if ( value ) then
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+		if not IsLeftShiftKeyDown() and not IsRightShiftKeyDown() then
+			local value = self:GetChecked()
+			if ( value ) then
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+			else
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+			end
+			T.ValueToDB(path, value)
+			if info.apply then info.apply() end
 		else
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+			local value = T.ValueFromDB(path)
+			self:SetChecked(value)
+			
+			local arg1 = category_text
+			local arg2 = info.text
+			RecommondOptions(path, value, string.format("%s>%s", arg1, arg2))
 		end
-		T.ValueToDB(path, value)
-		if info.apply then info.apply() end
 	end)
 
 	return bu
@@ -509,21 +622,32 @@ local Checkbutton_Detail_DB = function(info, key_path, button, alert)
 	local detailFrame = G.detailFrame
 	local bu = Checkbutton(detailFrame, info.text)
 	
+	AddRecommondTooltip(bu)
+	
 	bu:SetScript("OnShow", function(self)
 		self:SetChecked(T.ValueFromDB(key_path))
 	end)
 	
 	bu:SetScript("OnClick", function(self)
-		local value = self:GetChecked()
-		if ( value ) then
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+		if not IsLeftShiftKeyDown() and not IsRightShiftKeyDown() then
+			local value = self:GetChecked()
+			if ( value ) then
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+			else
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+			end
+			T.ValueToDB(key_path, value)
+			if info.apply then
+				info.apply(value, alert, button)
+			end
 		else
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+			local value = T.ValueFromDB(key_path)
+			self:SetChecked(value)
+			
+			local arg1 = button.Text:GetText()
+			local arg2 = info.text
+			RecommondOptions(key_path, value, string.format("%s>%s", arg1, arg2))
 		end
-		T.ValueToDB(key_path, value)
-		if info.apply then
-			info.apply(value, alert, button)
-		end		
 	end)
 	
 	table.insert(detailFrame.options, bu)
@@ -566,20 +690,30 @@ local Checkbutton_Encounter_DB = function(parent, path, text, enable_tag, ficon)
 	
 	CreateTagFrame(bu, enable_tag, ficon)	
 	SetGUIPoint(parent, 1, bu, nil, nil, 80)
-		
+	AddRecommondTooltip(bu)
+	
 	bu:SetScript("OnShow", function(self)
 		self:SetChecked(T.ValueFromDB(path))
 	end)
 	
 	bu:SetScript("OnClick", function(self)
-		local value = self:GetChecked()
-		if ( value ) then
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+		if not IsLeftShiftKeyDown() and not IsRightShiftKeyDown() then
+			local value = self:GetChecked()
+			if ( value ) then
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+			else
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+			end
+			T.ValueToDB(path, value)
+			if self.apply then self.apply() end
 		else
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
+			local value = T.ValueFromDB(path)
+			self:SetChecked(value)
+			
+			local arg1 = parent.title:GetText()
+			local arg2 = text
+			RecommondOptions(path, value, string.format("%s>%s", arg1, arg2))
 		end
-		T.ValueToDB(path, value)
-		if self.apply then self.apply() end
 	end)
 	
 	return bu
@@ -672,7 +806,7 @@ T.EditFrame = EditFrame
 --[[                 -- 滑动条 --                   ]]--
 --====================================================--
 local SliderWithValueText = function(parent, name, points, min, max, step, tip, button)
-	local slider = CreateFrame("Slider", name and (G.addon_name..name.."MiniSlider"), parent, "MinimalSliderTemplate")
+	local slider = CreateFrame("Slider", name and (addon_name..name.."MiniSlider"), parent, "MinimalSliderTemplate")
 	slider:SetSize(120, 12)
 	if points then
 		slider:SetPoint(unpack(points))
@@ -791,16 +925,27 @@ local SliderWithSteppers = function(parent, text, points, min, max, step, tip, b
 	return frame
 end
 
-local Slider_DB = function(parent, path)
+local Slider_DB = function(parent, path, category_text)
 	local info = T.GetOptionInfo(path)
 	local multipler = (info.min < 1 and info.min > 0 and 100) or 1
 
 	local frame = SliderWithSteppers(parent, info.text, nil, info.min*multipler, info.max*multipler, info.step*multipler, info.tip)
 	
+	AddRecommondTooltip(frame.Slider)
+	
 	frame.Slider:SetScript("OnShow", function(self)		
 		local value = T.ValueFromDB(path)
 		self:SetValue(value*multipler)
 		frame.RightText:SetText(floor(value*multipler)..((multipler == 100 and "%") or ""))
+	end)
+	
+	frame.Slider:HookScript("OnMouseDown", function(self)
+		if IsLeftShiftKeyDown() or IsRightShiftKeyDown() then
+			local value = T.ValueFromDB(path)
+			local arg1 = category_text
+			local arg2 = info.text
+			RecommondOptions(path, value, string.format("%s>%s", arg1, arg2))
+		end
 	end)
 	
 	frame.Slider:SetScript("OnValueChanged", function(self, getvalue)
@@ -821,6 +966,8 @@ local Slider_Detail_DB = function(info, key_path, button, alert)
 	local detailFrame = G.detailFrame
 	local frame = SliderWithSteppers(detailFrame, info.text, nil, info.min, info.max, 1)
 	
+	AddRecommondTooltip(frame.Slider)
+	
 	frame.Slider:SetScript("OnShow", function(self)
 		local value = T.ValueFromDB(key_path)
 		self:SetValue(value)
@@ -828,6 +975,15 @@ local Slider_Detail_DB = function(info, key_path, button, alert)
 			frame.RightText:SetText(value/info.div)
 		else
 			frame.RightText:SetText(value)
+		end
+	end)
+	
+	frame.Slider:HookScript("OnMouseDown", function(self)
+		if IsLeftShiftKeyDown() or IsRightShiftKeyDown() then
+			local value = T.ValueFromDB(key_path)
+			local arg1 = button.Text:GetText()
+			local arg2 = info.text
+			RecommondOptions(key_path, value, string.format("%s>%s", arg1, arg2))
 		end
 	end)
 	
@@ -902,27 +1058,20 @@ local UIDropDownMenuFrame = function(parent, text, points)
 end
 T.UIDropDownMenuFrame = UIDropDownMenuFrame
 
-local UIDropDownMenuFrame_DB = function(parent, path, only_character)
+local UIDropDownMenuFrame_DB = function(parent, path, category_text)
 	local info = T.GetOptionInfo(path)
 	local option_table = info.option_table
 	local frame = UIDropDownMenuFrame(parent, info.text)
 	
+	AddRecommondTooltip(frame.dd)
+	
 	local function DD_UpdateChecked(self, arg1)
-		local value
-		if only_character then
-			value = T.ValueFromPath(JST_CDB, path)
-		else
-			value = T.ValueFromDB(path)
-		end
-		return (value == arg1)
+		local value = T.ValueFromDB(path)
+		return value == arg1
 	end
 	
 	local function DD_SetChecked(self, arg1, arg2)
-		if only_character then
-			T.ValueToPath(JST_CDB, path, arg1)
-		else
-			T.ValueToDB(path, arg1)
-		end
+		T.ValueToDB(path, arg1)
 		UIDropDownMenu_SetSelectedValueText(frame.dd, option_table, arg1)
 		if info.apply then info.apply() end
 		if frame.visible_apply then frame.visible_apply() end
@@ -941,13 +1090,71 @@ local UIDropDownMenuFrame_DB = function(parent, path, only_character)
 	end)
 	
 	frame:SetScript("OnShow", function()
-		local value
-		if only_character then
-			value = T.ValueFromPath(JST_CDB, path)
-		else
-			value = T.ValueFromDB(path)
-		end
+		local value = T.ValueFromDB(path)
 		UIDropDownMenu_SetSelectedValueText(frame.dd, option_table, value)
+	end)
+	
+	frame.dd:HookScript("OnMouseDown", function(self)
+		if IsLeftShiftKeyDown() or IsRightShiftKeyDown() then
+			local value = T.ValueFromDB(path)
+			local value_str = self.Text:GetText()
+			local arg1 = category_text
+			local arg2 = info.text
+			RecommondOptions(path, value, string.format("%s>%s", arg1, arg2), value_str)
+		end
+	end)
+	
+	return frame
+end
+
+local UIDropDownMenuFrame_SettingOption = function(parent, path, category_text)
+	local info = T.GetOptionInfo(path)
+	local option_table = info.option_table
+	local frame = UIDropDownMenuFrame(parent, info.text)
+	
+	AddRecommondTooltip(frame.dd)
+	
+	local function DD_UpdateChecked(self, arg1)
+		local value = T.ValueFromPath(JST_CDB, path)
+		return (value == arg1)
+	end
+	
+	local function DD_SetChecked(self, arg1, arg2)
+		T.ValueToPath(JST_CDB, path, arg1)
+		UIDropDownMenu_SetSelectedValueText(frame.dd, option_table, arg1)
+		if info.apply then info.apply() end
+		if frame.visible_apply then frame.visible_apply() end
+	end
+	
+	UIDropDownMenu_Initialize(frame.dd, function(self, level)
+		local dd_info = UIDropDownMenu_CreateInfo()
+		for i = 1, #option_table do
+			dd_info.value = option_table[i][1]
+			dd_info.arg1 = option_table[i][1]
+			dd_info.text = option_table[i][2]
+			dd_info.checked = DD_UpdateChecked
+			dd_info.func = DD_SetChecked
+			UIDropDownMenu_AddButton(dd_info)
+		end
+	end)
+	
+	frame:SetScript("OnShow", function()
+		local value = T.ValueFromPath(JST_CDB, path)
+		UIDropDownMenu_SetSelectedValueText(frame.dd, option_table, value)
+	end)
+	
+	frame.dd:HookScript("OnMouseDown", function(self)
+		if IsLeftShiftKeyDown() or IsRightShiftKeyDown() then
+			local value = T.ValueFromPath(JST_CDB, path)
+			local value_str = self.Text:GetText()
+			
+			local new_path = CopyTable(path)
+			table.insert(new_path, "<only_character>")
+			
+			local arg1 = category_text
+			local arg2 = info.text
+			RecommondOptions(new_path, value, string.format("%s>%s", arg1, arg2), value_str)
+		end
 	end)
 	
 	return frame
@@ -957,6 +1164,8 @@ local UIDropDownMenuFrame_Detail_DB = function(info, key_path, button, alert)
 	local detailFrame = G.detailFrame
 	local option_table = info.key_table
 	local frame = UIDropDownMenuFrame(detailFrame, info.text)
+	
+	AddRecommondTooltip(frame.dd)
 	
 	local function DD_UpdateChecked(self, arg1)
 		return (T.ValueFromDB(key_path) == arg1)
@@ -984,6 +1193,17 @@ local UIDropDownMenuFrame_Detail_DB = function(info, key_path, button, alert)
 	
 	frame:SetScript("OnShow", function()
 		UIDropDownMenu_SetSelectedValueText(frame.dd, option_table, T.ValueFromDB(key_path))		
+	end)
+	
+	frame.dd:HookScript("OnMouseDown", function(self)
+		if IsLeftShiftKeyDown() or IsRightShiftKeyDown() then
+			local value = T.ValueFromDB(key_path)
+			local value_str = self.Text:GetText()
+			
+			local arg1 = button.Text:GetText()
+			local arg2 = info.text
+			RecommondOptions(key_path, value, string.format("%s>%s", arg1, arg2), value_str)
+		end
 	end)
 	
 	table.insert(detailFrame.options, frame)
@@ -1330,11 +1550,11 @@ local function CreateGUITab(index, text)
 		self:LineUpTabs()
 	end)
 	
-	tab.sf = CreateFrame("ScrollFrame", G.addon_name.."tab"..index.."ScrollFrame", tab, "UIPanelScrollFrameTemplate")
+	tab.sf = CreateFrame("ScrollFrame", addon_name.."tab"..index.."ScrollFrame", tab, "UIPanelScrollFrameTemplate")
 	tab.sf:SetAllPoints(G.GUI_TabFrame)
 	HideScorllBar(tab.sf)
 	
-	tab.sfa = CreateFrame("Frame", G.addon_name.."tab"..index.."ScrollAnchor", tab.sf)
+	tab.sfa = CreateFrame("Frame", addon_name.."tab"..index.."ScrollAnchor", tab.sf)
 	tab.sfa:SetPoint("TOPLEFT", tab.sf, "TOPLEFT", 0, 0)
 	tab.sfa:SetWidth(tab.sf:GetWidth())
 	tab.sfa:SetHeight(tab.sf:GetHeight())
@@ -1363,19 +1583,19 @@ T.CreateGUITab = CreateGUITab
 
 -- 选项页面
 local function CreateOptionPage(tab_type, collect_id, name, title)
-	local frame = CreateFrame("Frame", G.addon_name..name.."OptionPage", GUITabs[tab_type].page)
+	local frame = CreateFrame("Frame", addon_name..name.."OptionPage", GUITabs[tab_type].page)
 	frame:SetAllPoints()
 	
 	local tab = CreateFrameTab(tab_type, collect_id, title)
 	tab.setting_page = frame
 	tab:SetSelected(false)
 	
-	frame.sf = CreateFrame("ScrollFrame", G.addon_name..name.."ScrollFrame", frame, "UIPanelScrollFrameTemplate")
+	frame.sf = CreateFrame("ScrollFrame", addon_name..name.."ScrollFrame", frame, "UIPanelScrollFrameTemplate")
 	frame.sf:SetAllPoints()
 	frame.sf:SetFrameLevel(frame:GetFrameLevel()+1)
 	HideScorllBar(frame.sf)
 	
-	frame.sfa = CreateFrame("Frame", G.addon_name..name.."ScrollAnchor", frame.sf)
+	frame.sfa = CreateFrame("Frame", addon_name..name.."ScrollAnchor", frame.sf)
 	frame.sfa:SetPoint("TOPLEFT", frame.sf, "TOPLEFT", 0, 0)
 	frame.sfa:SetWidth(frame.sf:GetWidth())
 	frame.sfa:SetHeight(frame.sf:GetHeight())
@@ -1391,7 +1611,7 @@ T.CreateOptionPage = CreateOptionPage
 --[[                -- 细节选项 --                  ]]--
 --====================================================--
 -- 刷新细节选项
-local UpdateDetailFrame = function(button, path, text, detail_options, alert)
+local UpdateDetailFrame = function(button, path, description, detail_options, alert)
 	local detailFrame = G.detailFrame
 	
 	if not button.detail_options then
@@ -1437,7 +1657,7 @@ local UpdateDetailFrame = function(button, path, text, detail_options, alert)
 	
 	detailFrame:SetHeight(detailFrame.sfa.option_y + 80)
 	
-	detailFrame.title:SetText(text)
+	detailFrame.title:SetText(description)
 	
 	detailFrame.reset:SetScript("OnClick", function()
 		for i, info in pairs(detail_options) do
@@ -1457,7 +1677,7 @@ local UpdateDetailFrame = function(button, path, text, detail_options, alert)
 end
 
 -- 细节选项按钮
-local CreateDetailOptionButton = function(button, path, text, detail_options, alert)
+local CreateDetailOptionButton = function(button, path, description, detail_options, alert)
 	local detailFrame = G.detailFrame
 	local bu = CreateFrame("Button", nil, button.cover or button)
 	bu:SetSize(25, 25)
@@ -1491,7 +1711,7 @@ local CreateDetailOptionButton = function(button, path, text, detail_options, al
 			detailFrame:Hide()
 		else
 			detailFrame.lastbutton = self
-			UpdateDetailFrame(button, path, text, detail_options, alert)
+			UpdateDetailFrame(button, path, description, detail_options, alert)
 			self:SetScript("OnHide", function(self)
 				if self == detailFrame.lastbutton then
 					detailFrame:Hide()
@@ -1579,7 +1799,7 @@ end
 -- 专精列表
 local SpecTable = {}
 
-for classID = 1, 13 do
+for classID = 1, GetNumClasses() do
 	local className, class = GetClassInfo(classID)
 	table.insert(SpecTable, {class, FormatClassName(class, className), spec = {}})
 	
@@ -2060,7 +2280,7 @@ T.Create_PlateAlert_Options = function(option_page, category, path, args, detail
 		if args.type == "PlateInterrupt" then
 			local enable = T.ValueFromDB(path)["enable"]
 			local interrupt_sl = T.ValueFromDB(path)["interrupt_sl"]
-			local npcIDs = {string.split(",", args.mobID)}		
+			local npcIDs = {string.split(",", args.mobID)}
 			for i, npcID in pairs(npcIDs) do			
 				if not G.Npc[npcID] then
 					G.Npc[npcID] = {}
@@ -2251,6 +2471,7 @@ end
 local CreateGUIOpitons = function(parent, OptionCategroy, start_ind, end_ind)
 	local start_ = start_ind or 1
 	local end_ = end_ind or #G.Options[OptionCategroy]
+	local category_text = ""
 	
 	if not parent.option_y then
 		parent.option_y = -10
@@ -2260,18 +2481,23 @@ local CreateGUIOpitons = function(parent, OptionCategroy, start_ind, end_ind)
 		local info = G.Options[OptionCategroy][i]
 		local path = {OptionCategroy, info.key}
 		local obj
-		
+
 		if (not info.class or info.class[G.myClass]) then
 			if info.option_type == "title" then
 				obj = CreateGUITitle(parent, info.text)
+				category_text = info.text
 			elseif info.option_type == "string" then
 				obj = CreateGUIDesciption(parent, info.text)				
 			elseif info.option_type == "ddmenu" then
-				obj = UIDropDownMenuFrame_DB(parent, path, OptionCategroy == "SettingOption")	
+				if OptionCategroy == "SettingOption" then
+					obj = UIDropDownMenuFrame_SettingOption(parent, path, category_text)
+				else
+					obj = UIDropDownMenuFrame_DB(parent, path, category_text)
+				end
 			elseif info.option_type == "check" then
-				obj = Checkbutton_DB(parent, path)
+				obj = Checkbutton_DB(parent, path, category_text)
 			elseif info.option_type == "slider" then
-				obj = Slider_DB(parent, path)
+				obj = Slider_DB(parent, path, category_text)
 			elseif info.option_type == "button" then
 				obj = ClickButton_DB(parent, path)
 			elseif info.option_type == "color" then

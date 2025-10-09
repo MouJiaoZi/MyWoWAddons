@@ -103,7 +103,6 @@ local GroupDefensiveSpells = {
 	209426, -- 黑暗
 }
 
-
 -- 个人减伤法术
 local playerPersonalSpellData = {}
 for _, data in pairs(PersonalSpell_class[G.myClass]) do
@@ -161,7 +160,7 @@ end
 ----------------------------------------------------------
 local checking_hp_tags = {}
 
-local PersonalSpellFrame = T.CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"],  40, "CENTER", 0, 100)
+local PersonalSpellFrame = T.CreateSpellLineFrame("PersonalSpellFrame", L["玩家自保技能提示"], 40, "CENTER", "CENTER", 0, 100)
 
 PersonalSpellFrame.text = T.createtext(PersonalSpellFrame, "OVERLAY", 30, "OUTLINE", "LEFT")
 
@@ -216,8 +215,8 @@ function PersonalSpellFrame:lineup()
 	end
 	
 	local size = C.DB["GeneralOption"]["personal_spell_size"]
-	PersonalSpellFrame:SetHeight(size)
-	PersonalSpellFrame:SetWidth(self.text:GetWidth()+(abs(space)+size)*count)
+	self:SetHeight(size)
+	self:SetWidth(self.text:GetWidth()+(abs(space)+size)*count)
 end
 
 function PersonalSpellFrame:ShowCheck(perc)	

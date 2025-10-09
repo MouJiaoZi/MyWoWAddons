@@ -214,12 +214,18 @@ T.CreateDragFrame = function(frame)
 			frame:PreviewHide()
 		end
 		if frame.config_id then -- 首领模块
-			if frame.npcID and T.CheckEncounter(frame.npcID, frame.ficon) then
-				frame:Show()
-			elseif frame.mapID and T.CheckDungeon(frame.mapID) then
-				frame:Show()
-			else
-				frame:Hide()
+			if frame.npcID then
+				if IsEncounterInProgress() and T.CheckEncounter(frame.npcID, frame.ficon) then
+					frame:Show()
+				else
+					frame:Hide()
+				end
+			elseif frame.mapID then
+				if T.CheckDungeon(frame.mapID) then
+					frame:Show()
+				else
+					frame:Hide()
+				end
 			end
 		end
 	end)

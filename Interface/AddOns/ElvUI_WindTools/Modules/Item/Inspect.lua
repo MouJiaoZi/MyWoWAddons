@@ -101,6 +101,7 @@ local INVSLOT_ENCHANT = {
 ---@param slotIndex number The inventory slot index
 ---@param itemQuality Enum.ItemQuality The quality of the enchantment
 ---@param itemClass Enum.ItemClass The class ID of the enchantment
+---@return boolean
 local function CheckEnchantmentSlot(slotIndex, itemQuality, itemClass)
 	if not INVSLOT_ENCHANT[slotIndex] then
 		return false
@@ -153,7 +154,10 @@ function circleIconPrototype:OnLeave()
 end
 
 function circleIconPrototype:Reset()
-	self.link = nil
+	self.name = nil
+	self.itemLink = nil
+	self.itemID = nil
+	self.spellID = nil
 	self.Texture:SetTexture(nil)
 	self.Border:SetVertexColor(1, 1, 1, 1)
 	self:Hide()
@@ -284,11 +288,11 @@ function circleIconPrototype:UpdateStyle(texture, quality, colorTemplate, crafti
 
 	if craftingTier then
 		self.CraftingTierText:SetText(tostring(craftingTier))
-		local colorTemplate = "amber-300" ---@type ColorTemplate
+		local tierColorTemplate = "amber-300" ---@type ColorTemplate
 		if craftingTier < 3 then
-			colorTemplate = "yellow-600"
+			tierColorTemplate = "yellow-600"
 		end
-		self.CraftingTierText:SetTextColor(C.ExtractRGBFromTemplate(colorTemplate))
+		self.CraftingTierText:SetTextColor(C.ExtractRGBFromTemplate(tierColorTemplate))
 		self.CraftingTierText:Show()
 	else
 		self.CraftingTierText:Hide()
@@ -559,8 +563,8 @@ function I:CreatePanel(parent)
 	frame.CloseButton = CreateFrame("Button", nil, frame, "UIPanelCloseButton, BackdropTemplate") --[[@as Button]]
 	frame.CloseButton:Point("TOPRIGHT", frame, "TOPRIGHT", 0, 0)
 	S:Proxy("HandleCloseButton", frame.CloseButton)
-	frame.CloseButton:SetScript("OnClick", function(self)
-		self:GetParent():Hide()
+	frame.CloseButton:SetScript("OnClick", function(_)
+		frame:Hide()
 	end)
 
 	hooksecurefunc(parent, "Hide", function()

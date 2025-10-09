@@ -21,15 +21,7 @@ G.Encounters["c392"] = {
 				{355048},
 			},
 			options = {				
-				{ -- 打坦计时条 破壳猛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355048,
-					group = 1,
-					ficon = "0",
-					text = L["击退"],
-					sound = "[knockback]cast",
-				},
+				T.Temp_TankCastBar(355048, "[knockback]cast"),
 			},
 		},
 		{ -- 浊盐碎壳者:鱼人战吼
@@ -37,15 +29,8 @@ G.Encounters["c392"] = {
 				{355057},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(355057), -- 鱼人战吼（✓）
-				{ -- 姓名板打断图标 鱼人战吼（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 355057,
-					mobID = "178139",
-					interrupt = 2,
-					ficon = "6",
-				},
+				T.Temp_ImportantInterruptBar(355057),
+				T.Temp_PlateInterrupt(355057, "178139", 2),
 			},
 		},
 		{ -- 浊盐缚鳞者:活力鱼串
@@ -53,12 +38,7 @@ G.Encounters["c392"] = {
 				{355132},
 			},
 			options = {
-				{ -- 姓名板NPC高亮 活力鱼串（✓）
-					category = "PlateAlert",
-					type = "PlateNpcID",
-					mobID = "179733",
-					hl_np = true,
-				},
+				T.Temp_PlateNpcGlow("179733"),
 			},
 		},
 		{ -- 浊盐鱼术师:不稳定的河豚
@@ -66,12 +46,7 @@ G.Encounters["c392"] = {
 				{355234},
 			},
 			options = {
-				{ -- 声音 不稳定的河豚（✓）
-					category = "Sound",
-					sub_event = "SPELL_CAST_SUCCESS",
-					spellID = 355234,
-					file = "[outcircle]",
-				},
+				T.Temp_CLEUSound(355234, "SPELL_CAST_SUCCESS", "[outcircle]"),
 			},
 		},
 		{ -- 浊盐鱼术师:水箭
@@ -79,28 +54,12 @@ G.Encounters["c392"] = {
 				{355225},
 			},
 			options = {
-				T.Temp_SubInterruptBar(355225, { -- 水箭（✓）
+				T.Temp_SubInterruptBar(355225, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 水箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 355225,
-					mobID = "178142",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 水箭（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 355225,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 水箭（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 355225,
-				},
+				T.Temp_PlateInterrupt(355225, "178142", 2),
+				T.Temp_ComIcon(355225),
+				T.Temp_RaidCastIcon(355225),
 			},
 		},
 		{ -- 踏滨巨人:投掷巨石
@@ -108,12 +67,9 @@ G.Encounters["c392"] = {
 				{355464},
 			},
 			options = {
-				{ -- 计时条 投掷巨石（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355464,
+				T.Temp_NormalCastBar(355464, {
 					sound = "[mindstep]cast",
-				},
+				}),
 			},
 		},
 		{ -- 踏滨巨人:海潮践踏
@@ -153,23 +109,11 @@ G.Encounters["c392"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 海潮践踏（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355429,
+				T.Temp_ImportantCastBar(355429, {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 海潮践踏（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 355429,
-					event = "SPELL_CAST_START",
-					dur = 2,
-					threshold = 80,
-				},
+				}),
+				T.Temp_HPWatchCLEU(355429, "SPELL_CAST_START", 2, 80),
 			},
 		},
 		{ -- 雷铸守护者:充能脉冲
@@ -177,12 +121,9 @@ G.Encounters["c392"] = {
 				{355584},
 			},
 			options = {
-				{ -- 计时条 充能脉冲（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355584,
+				T.Temp_NormalCastBar(355584, {
 					sound = "[outcircle]cast",
-				},
+				}),
 			},
 		},
 		{ -- 雷铸守护者:连环爆裂
@@ -190,21 +131,10 @@ G.Encounters["c392"] = {
 				{355577},
 			},
 			options = {
-				{ -- 计时条 连环爆裂（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 355577,
+				T.Temp_NormalCastBar(355577, {
 					sound = "[mindstep]cast",
-				},
-				{ -- 图标 连环爆裂（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 355581,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				}),
+				T.Temp_OnFireIcon(355581),
 			},
 		},
 		{ -- 时沙号海潮贤者:盐渍飞弹
@@ -212,28 +142,12 @@ G.Encounters["c392"] = {
 				{356843},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(356843, { -- 盐渍飞弹（✓）
+				T.Temp_NormalInterruptBar(356843, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 盐渍飞弹（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 356843,
-					mobID = "179388",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 盐渍飞弹（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 356843,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 盐渍飞弹（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 356843,
-				},
+				T.Temp_PlateInterrupt(356843, "179388", 2),
+				T.Temp_ComIcon(356843),
+				T.Temp_RaidCastIcon(356843),
 			},
 		},
 		{ -- 肌肉虬结的水手:超级塞松啤酒
@@ -241,15 +155,10 @@ G.Encounters["c392"] = {
 				{356133},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(356133, { -- 超级塞松啤酒（✓）
+				T.Temp_NormalInterruptBar(356133, {
 					ficon = "14",
 				}),
-				{ -- 姓名板光环 超级塞松啤酒（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 356133,
-				},
+				T.Temp_PlateAura(356133),
 			},
 		},
 		{ -- 专心的祭师:不稳定的裂隙
@@ -257,15 +166,8 @@ G.Encounters["c392"] = {
 				{357260},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(357260), -- 不稳定的裂隙（✓）
-				{ -- 姓名板打断图标 不稳定的裂隙（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 357260,
-					mobID = "180431",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_ImportantInterruptBar(357260),
+				T.Temp_PlateInterrupt(357260, "180431", 1),
 			},
 		},
 		{ -- 盛装的星辰先知:游移之星
@@ -273,12 +175,9 @@ G.Encounters["c392"] = {
 				{357226},
 			},
 			options = {
-				{ -- 计时条 游移之星（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 357226,
+				T.Temp_NormalCastBar(357226, {
 					sound = "[frontal]cast",
-				},
+				}),
 			},
 		},
 		{ -- 盛装的星辰先知:流浪的脉冲星
@@ -319,18 +218,10 @@ G.Encounters["c392"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 流浪的脉冲星（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 357238,
+				T.Temp_NormalCastBar(357238, {
 					sound = "[add]cast",
-				},
-				{ -- 姓名板NPC高亮 流浪的脉冲星（✓）
-					category = "PlateAlert",
-					type = "PlateNpcID",
-					mobID = "180433",
-					hl_np = true,
-				},
+				}),
+				T.Temp_PlateNpcGlow("180433"),
 				{ -- 首领模块 流浪的脉冲星 玩家自保技能提示（✓）
 					category = "BossMod",
 					spellID = 357256,

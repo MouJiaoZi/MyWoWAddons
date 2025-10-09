@@ -10,33 +10,12 @@ local UnitFrames = {}
 local newest = G.Version
 local last_scan = 0
 
-local LS = LibStub:GetLibrary("LibSpecializationEdit")
-local My_mrtNoteHash, My_ilvl, My_raidBuff = 0, 0, 0
+local LS = LibStub:GetLibrary("LibSpecialization")
+local My_nickName, My_mrtNoteHash, My_ilvl, My_raidBuff = "", 0, 0, 0
 local mrtUpdateTimer, equipmentUpdateTimer, raidBuffUpdateTimer
 --====================================================--
 --[[                 -- API --                      ]]--
 --====================================================--
-
-local function IsTalentSpellKnown(importText, spellID)
-	local importStream = ExportUtil.MakeImportDataStream(importText)
-	local headerValid, serializationVersion, specID = PlayerSpellsFrame.TalentsFrame:ReadLoadoutHeader(importStream)
-	
-	local configID = Constants.TraitConsts.VIEW_TRAIT_CONFIG_ID
-	local treeID = C_ClassTalents.GetTraitTreeForSpec(specID)
-
-	local loadoutContent = PlayerSpellsFrame.TalentsFrame:ReadLoadoutContent(importStream, treeID)
-	local loadoutEntryInfo = PlayerSpellsFrame.TalentsFrame:ConvertToImportLoadoutEntryInfo(configID, treeID, loadoutContent)
-	
-	for i, info in pairs(loadoutEntryInfo) do
-		local EntryInfo = C_Traits.GetEntryInfo(configID, info.selectionEntryID)
-		if EntryInfo and EntryInfo.definitionID then
-			local DefinitionInfo = C_Traits.GetDefinitionInfo(EntryInfo.definitionID)
-			if DefinitionInfo and DefinitionInfo.spellID and DefinitionInfo.spellID == spellID then
-				return true
-			end
-		end			
-	end
-end
 
 -- Calculates checksum for the player's public MRT note
 -- Original code by Mikk (https://warcraft.wiki.gg/wiki/StringHash)
@@ -143,13 +122,27 @@ local ColorNameText = function(name_text, player)
 end
 T.ColorNameText = ColorNameText
 
--- 生成用于MRT战术板的名字格式
-local ColorNameForMrt = function(name)
-	local str = ColorNameText(name, name)
-	local mrt_str = string.gsub(str, "|", "||")
-	return mrt_str
+-- 获取团队信息
+local RequestGroupInfo = function()
+	LS.RequestGroupSpecialization()
+	T.addon_msg("ver", "GROUP")
 end
-T.ColorNameForMrt = ColorNameForMrt
+
+-- 获取队友信息
+local RequestGroupInfoFromPlayer = function(GUID)
+	local target = Ambiguate(GroupInfo[GUID].full_name, "none")
+	T.addon_msg("ver", "WHISPER", target)
+end
+
+-- 发送自己的信息
+local function SendMyInfo(target)	
+	local msg = string.format("send_ver,%s,%s,%s,%s,%s", G.Version, My_nickName, My_ilvl, My_raidBuff, My_mrtNoteHash)
+	if target then
+		T.addon_msg(msg, "WHISPER", target)
+	else
+		T.addon_msg(msg, "GROUP")
+	end
+end
 
 ----------------------------------------------------------
 -----------------[[     团队信息 API     ]]---------------
@@ -297,21 +290,6 @@ local GetGroupGUIDbyName = function(name)
 end
 T.GetGroupGUIDbyName = GetGroupGUIDbyName
 
--- 朗读文本中获取玩家名字
-local GetNameByName = function(name)
-	local info = GetGroupInfobyName(name)
-	if info then
-		if C.DB.GeneralOption.name_format == "nickname" and info.nick_name then
-			return info.nick_name
-		else
-			return info.real_name
-		end
-	else
-		return name
-	end
-end
-T.GetNameByName = GetNameByName
-
 ----------------------------------------------------------
 -------------------[[     排序 API     ]]-----------------
 ----------------------------------------------------------
@@ -423,6 +401,7 @@ end
 ----------------------------------------------------------
 local OP = G.raid_options
 local player_lines = {}
+local player_lines_byGUID = {}
 
 local function FormatNickNames(GUID)
 	local info = GroupInfo[GUID]
@@ -441,10 +420,8 @@ local function LineUpRaidInfoLines()
 	local num = 1
 	for i, frame in pairs(player_lines) do
 		frame:ClearAllPoints()
-		if frame:IsShown() then
-			frame:SetPoint("TOPLEFT", 20, -45-num*25)
-			num = num + 1
-		end
+		frame:SetPoint("TOPLEFT", 20, -45-num*25)
+		num = num + 1
 	end
 end
 
@@ -472,7 +449,7 @@ local function CreateRefreshButton(frame)
 		frame.str6:SetText("...")
 		
 		self:Disable()
-		T.addon_msg("ver", "WHISPER", Ambiguate(GroupInfo[GUID].full_name, "none"))
+		RequestGroupInfoFromPlayer(GUID)
 
 		C_Timer.After(2, function()
 			local info = GetGroupInfobyGUID(GUID)
@@ -487,7 +464,33 @@ local function CreateRefreshButton(frame)
 	return btn
 end
 
-local function CreateRaidInfoLine(istitle)
+local function EditGroupNickName(GUID)
+	local name = GroupInfo[GUID].real_name
+	local unit = GroupInfo[GUID].unit
+	
+	StaticPopupDialogs[G.addon_name.."Group Nickname Input"].text = string.format(L["输入队友昵称"], ColorNameText(name, unit))
+	
+	StaticPopupDialogs[G.addon_name.."Group Nickname Input"].OnShow = function(self, data)
+		
+		local editBox = _G[self:GetName().."EditBox"]
+		local name = GroupInfo[GUID].nick_name or ""
+		if editBox then
+			editBox:SetText(name)
+		end
+	end
+	
+	StaticPopupDialogs[G.addon_name.."Group Nickname Input"].OnAccept = function(self)
+		local editBox = _G[self:GetName().."EditBox"]
+		if editBox then
+			local str = editBox:GetText()
+			T.addon_msg(string.format("set_nickname,%s,%s", GUID, str), "GROUP")
+		end
+	end
+	
+	StaticPopup_Show(G.addon_name.."Group Nickname Input")
+end
+
+local function CreateRaidInfoLine(GUID)
 	local frame = CreateFrame("Frame", nil, OP.sfa)
 	frame:SetSize(850, 20)
 
@@ -502,10 +505,34 @@ local function CreateRaidInfoLine(istitle)
 	frame.str3 = T.createtext(frame, "OVERLAY", 14, "OUTLINE", "LEFT")
 	frame.str3:SetPoint("LEFT", frame.str2, "RIGHT", 0, 0)
 	frame.str3:SetWidth(80)
+
+	frame.nick_name_f = CreateFrame("Frame", nil, frame)
+	frame.nick_name_f:SetSize(80, 20)
+	frame.nick_name_f:SetPoint("LEFT", frame.str3, "RIGHT", 0, 0)
+	frame.nick_name_f.parent = frame
+	T.createborder(frame.nick_name_f, 1, 1, 0, 1)
+	frame.nick_name_f.sd:Hide()
+	
+	frame.nick_name_f:EnableMouse(true)
+	
+	frame.nick_name_f:SetScript("OnEnter", function(self)
+		if IsInRaid() and UnitIsGroupLeader("player") and self.parent.playerGUID then
+			self.sd:Show()
+		end
+	end)
+	
+	frame.nick_name_f:SetScript("OnLeave", function(self)
+		self.sd:Hide()
+	end)
+	
+	frame.nick_name_f:SetScript("OnMouseDown", function(self)
+		if IsInRaid() and UnitIsGroupLeader("player") and self.parent.playerGUID then
+			EditGroupNickName(self.parent.playerGUID)
+		end
+	end)
 	
 	frame.str4 = T.createtext(frame, "OVERLAY", 14, "OUTLINE", "LEFT")
-	frame.str4:SetPoint("LEFT", frame.str3, "RIGHT", 0, 0)
-	frame.str4:SetWidth(80)
+	frame.str4:SetAllPoints(frame.nick_name_f)
 	
 	frame.str5 = T.createtext(frame, "OVERLAY", 14, "OUTLINE", "LEFT")
 	frame.str5:SetPoint("LEFT", frame.str4, "RIGHT", 0, 0)
@@ -515,40 +542,24 @@ local function CreateRaidInfoLine(istitle)
 	frame.str6:SetPoint("LEFT", frame.str5, "RIGHT", 0, 0)
 	frame.str6:SetWidth(150)
 	
-	if not istitle then
+	if GUID then
 		frame:Hide()
-		frame.refresh_btn = CreateRefreshButton(frame)	
+		frame.refresh_btn = CreateRefreshButton(frame)
+		
+		frame:SetScript("OnShow", LineUpRaidInfoLines)
+		frame:SetScript("OnHide", LineUpRaidInfoLines)
+		
+		frame.playerGUID = GUID
 		table.insert(player_lines, frame)
+		player_lines_byGUID[GUID] = frame		
 	end
 	
 	return frame
 end
 
-local function GetAvailableRaidInfoLine()
-	local available
-	for i, frame in pairs(player_lines) do
-		if not frame.playerGUID then
-			available = frame
-			break
-		end
-	end
-	if not available then
-		available = CreateRaidInfoLine()
-	end
-	return available
-end
-
-local function GetRaidInfoLineForPlayerGUID(GUID)
-	for i, frame in pairs(player_lines) do
-		if frame.playerGUID == GUID then
-			return frame
-		end
-	end
-end
-
 local function UpdateRaidInfoLineByPlayerGUID(GUID)
 	if not OP:IsShown() then return end
-	local frame = GetRaidInfoLineForPlayerGUID(GUID) or GetAvailableRaidInfoLine()
+	local frame = player_lines_byGUID[GUID] or CreateRaidInfoLine(GUID)
 	local info = GetGroupInfobyGUID(GUID)
 	
 	frame.str1:SetText(ColorNameText(info.real_name, info.unit))
@@ -557,12 +568,7 @@ local function UpdateRaidInfoLineByPlayerGUID(GUID)
 	frame.str4:SetText(FormatNickNames(info.GUID)) -- 冲突染色
 	frame.str5:SetText(FormatVersionText(info.ver))
 	frame.str6:SetText(GetMrtDifferent(info.mrtHash))
-	
-	frame.playerGUID = GUID
-	if not frame:IsShown() then
-		frame:Show()
-		LineUpRaidInfoLines()
-	end
+	frame:Show()
 end
 
 local function UpdateLinesByNickName(nick_name)
@@ -581,13 +587,13 @@ end
 
 local function RemoveRaidInfoLineByPlayerGUID(GUID)
 	if not OP:IsShown() then return end
-	local frame = GetRaidInfoLineForPlayerGUID(GUID)
+	
+	local frame = player_lines_byGUID[GUID]
 	if frame then
-		if frame:IsShown() then
-			frame:Hide()
-			LineUpRaidInfoLines()
-		end
+		frame:Hide()
 		frame.playerGUID = nil
+		tDeleteItem(player_lines, frame)
+		player_lines_byGUID[GUID] = nil
 	end
 end
 
@@ -597,6 +603,8 @@ local function RemoveAllRaidInfoLine()
 		frame:Hide()
 		frame.playerGUID = nil
 	end
+	player_lines = table.wipe(player_lines)
+	player_lines_byGUID = table.wipe(player_lines_byGUID)
 end
 
 -- 刷新按钮
@@ -625,8 +633,7 @@ refresh_btn:SetScript("OnClick", function()
 			UpdateRaidInfoLineByPlayerGUID(GUID)
 		end
 		
-		LS:RequestSpecialization()
-		T.addon_msg("ver", "GROUP")
+		RequestGroupInfo()
 	end
 	
 	C_Timer.After(2, function()
@@ -652,7 +659,7 @@ export_btn:SetScript("OnClick", function(self)
 end)
 
 -- 标题行
-local title = CreateRaidInfoLine(true)
+local title = CreateRaidInfoLine()
 title:SetPoint("TOPLEFT", OP.sfa, "TOPLEFT", 20, -45)
 
 title.str1:SetText(L["角色名"])
@@ -665,16 +672,12 @@ title.str6:SetText(L["MRT战术板对比"])
 ----------------------------------------------------------
 --------------------[[     Event     ]]-------------------
 ----------------------------------------------------------
+-- 更新昵称信息
 local function UpdateNickNameByPlayerGUID(GUID, nick_name_str)
 	GroupInfo[GUID].nick_name = nil
 	
 	for nick_name, GUIDs in pairs(NickNameInfo) do
-		for i, source in pairs(GUIDs) do
-			if source == GUID then
-				table.remove(NickNameInfo[nick_name], i)
-				break
-			end
-		end
+		tDeleteItem(GUIDs, GUID)
 	end
 		
 	if nick_name_str ~= "" then
@@ -697,40 +700,9 @@ local function UpdateNickNameByPlayerGUID(GUID, nick_name_str)
 	GroupInfo[GUID].format_name = ColorNickNameByGUID(GUID)
 	
 	UpdateRaidInfoLineByPlayerGUID(GUID)
-	
-	T.FireEvent("GROUP_INFO_UPDATE", GUID)
 end
 
-local function SendMyInfo(target)
-	if target then
-		T.addon_msg("send_ver,"..G.Version..","..C.DB["GeneralOption"]["mynickname"]..","..My_ilvl..","..My_raidBuff..","..My_mrtNoteHash, "WHISPER", target)
-	else
-		T.addon_msg("send_ver,"..G.Version..","..C.DB["GeneralOption"]["mynickname"]..","..My_ilvl..","..My_raidBuff..","..My_mrtNoteHash, "GROUP")
-	end
-end
-
-local function UpdateMyInfo()
-	GroupInfo[G.PlayerGUID].ver = G.Version
-	GroupInfo[G.PlayerGUID].mrtHash = My_mrtNoteHash
-	GroupInfo[G.PlayerGUID].ilvl = My_ilvl
-	GroupInfo[G.PlayerGUID].buff = My_raidBuff
-	UpdateNickNameByPlayerGUID(G.PlayerGUID, C.DB["GeneralOption"]["mynickname"])
-	
-	local specId, role, position = LS:MySpecialization()
-	if specId and role and position then
-		GroupInfo[G.PlayerGUID].role = role
-		GroupInfo[G.PlayerGUID].spec_id = specId
-		GroupInfo[G.PlayerGUID].spec_icon = select(4, GetSpecializationInfoByID(specId))
-		GroupInfo[G.PlayerGUID].pos = position
-	end
-end
-
-local function UpdateMrtNoteForAll()
-	for GUID in pairs(GroupInfo) do
-		UpdateRaidInfoLineByPlayerGUID(GUID)
-	end
-end
-
+-- 更新名字信息
 local function UpdateNameByGUID(GUID)
 	local unit = GUID and GroupInfo[GUID] and GroupInfo[GUID].unit
 	if unit then
@@ -750,9 +722,41 @@ local function UpdateNameByGUID(GUID)
 			
 			table.insert(CharNameInfo[name], GUID)
 			FullNameInfo[full_name] = GUID
-			
-			T.FireEvent("GROUP_INFO_UPDATE", GUID)
 		end
+	end
+end
+
+-- 更新自己的昵称
+local function UpdateMyNickName()
+	if My_nickName ~= C.DB["GeneralOption"]["mynickname"] then
+		My_nickName = C.DB["GeneralOption"]["mynickname"]
+		UpdateNickNameByPlayerGUID(G.PlayerGUID, My_nickName)
+		SendMyInfo()
+	end
+end
+T.UpdateMyNickName = UpdateMyNickName
+
+-- 更新自己的信息
+local function UpdateMyInfo()
+	GroupInfo[G.PlayerGUID].ver = G.Version
+	GroupInfo[G.PlayerGUID].mrtHash = My_mrtNoteHash
+	GroupInfo[G.PlayerGUID].ilvl = My_ilvl
+	GroupInfo[G.PlayerGUID].buff = My_raidBuff
+	UpdateNickNameByPlayerGUID(G.PlayerGUID, My_nickName)
+	
+	local specId, role, position = LS:MySpecialization()
+	if specId and role and position then
+		GroupInfo[G.PlayerGUID].role = role
+		GroupInfo[G.PlayerGUID].spec_id = specId
+		GroupInfo[G.PlayerGUID].spec_icon = select(4, GetSpecializationInfoByID(specId))
+		GroupInfo[G.PlayerGUID].pos = position
+	end
+end
+
+-- 更新所有MRT信息
+local function UpdateMrtNoteForAll()
+	for GUID in pairs(GroupInfo) do
+		UpdateRaidInfoLineByPlayerGUID(GUID)
 	end
 end
 
@@ -802,22 +806,16 @@ local function RemovePlayer(GUID)
 	RemoveRaidInfoLineByPlayerGUID(GUID)
 	
 	for nick_name, GUIDs in pairs(NickNameInfo) do
-		for i, source in pairs(GUIDs) do
-			if source == GUID then
-				table.remove(NickNameInfo[nick_name], i)
-				UpdateLinesByNickName(nick_name)
-				break
-			end
+		if tContains(GUIDs, GUID) then
+			tDeleteItem(GUIDs, GUID)
+			UpdateLinesByNickName(nick_name)
 		end
 	end
 	
 	for real_name, GUIDs in pairs(CharNameInfo) do
-		for i, source in pairs(GUIDs) do
-			if source == GUID then
-				table.remove(CharNameInfo[real_name], i)
-				break
-			end
-		end
+		if tContains(GUIDs, GUID) then
+			tDeleteItem(GUIDs, GUID)
+		end		
 	end
 
 	for full_name, source in pairs(FullNameInfo) do	
@@ -825,12 +823,10 @@ local function RemovePlayer(GUID)
 			FullNameInfo[source] = nil
 		end
 	end
-	
-	T.FireEvent("GROUP_INFO_REMOVED", GUID)
 end
 
 local function ScanGroupMembers()
-	if GetTime() - last_scan >= .5 then
+	if GetTime() - last_scan >= 1 then
 		for GUID, info in pairs(GroupInfo) do
 			local unit = UnitTokenFromGUID(GUID)
 			if not unit or not UnitInAnyGroup(unit) then
@@ -842,36 +838,34 @@ local function ScanGroupMembers()
 			ScanUnit(unit)
 		end
 		
-		T.addon_msg("ver", "GROUP")
+		RequestGroupInfo()
 		
 		last_scan = GetTime()
 	else
-		T.DelayFunc(.5, ScanGroupMembers)
+		T.DelayFunc(1, ScanGroupMembers)
 	end
 end
 
 local eventframe = CreateFrame("Frame")
 
 eventframe:SetScript("OnEvent", function(self, event, ...)
-	if event == "GROUP_FORMED" then
-		SendMyInfo()
-	elseif event == "PLAYER_LOGIN" or event == "GROUP_ROSTER_UPDATE" then
-		
+	if event == "GROUP_ROSTER_UPDATE" then
 		ScanGroupMembers()
 		T.DelayFunc(1, function()
 			if IsInGroup() and not JST_DB.active_all then
 				T.addon_msg("ask_pm", "GROUP")
 			end
 		end)
+		
 	elseif event == "UNIT_NAME_UPDATE" then
 		local unit = ...
 		local GUID = unit and UnitGUID(unit)
 		UpdateNameByGUID(GUID)
+		
 	elseif event == "ADDON_MSG" then
-		--if InCombatLockdown() then return end
 		local channel, sender, GUID, message = ...
 		if message == "ver" then
-			SendMyInfo(channel == "WHISPER" and Ambiguate(sender, "none"))				
+			SendMyInfo(channel == "WHISPER" and Ambiguate(sender, "none"))			
 		elseif message == "send_ver" then
 			local ver, nick_name_str, item_lvl, buff_value, mrtHash = select(5, ...)
 			if ver and nick_name_str and GroupInfo[GUID] then
@@ -882,7 +876,27 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				GroupInfo[GUID].mrtHash = mrtHash or 0
 				UpdateNickNameByPlayerGUID(GUID, nick_name_str)
 			end
+		elseif message == "set_nickname" then
+			local unit = T.GUIDToUnit(GUID)
+			if not IsInRaid() or not unit or not UnitIsGroupLeader(unit) then return end
+			local ChangedGUID, str = select(5, ...)
+			if ChangedGUID == G.PlayerGUID then
+				C.DB["GeneralOption"]["mynickname"] = str
+				G.GUI.name:SetText(string.format(L["我的昵称"], str))
+				T.UpdateMyNickName()
+				T.msg(string.format(L["你的昵称被团长修改为"], str))
+			end
 		end
+		
+	elseif event == "GROUP_FORMED" then
+	
+		SendMyInfo()
+		
+	elseif event == "PLAYER_ENTERING_WORLD" then
+	
+		UpdateMyInfo()
+		SendMyInfo()
+		
 	elseif event == "PLAYER_EQUIPMENT_CHANGED" then
 		if equipmentUpdateTimer and not equipmentUpdateTimer:IsCancelled() then
 			equipmentUpdateTimer:Cancel()
@@ -896,8 +910,11 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				SendMyInfo()
 			end
 		end)
+		
 	elseif event == "UNIT_AURA" then
-		if InCombatLockdown() then return end
+		local unit = ...
+		
+		if unit ~= "player" or InCombatLockdown() then return end
 		
 		if raidBuffUpdateTimer and not raidBuffUpdateTimer:IsCancelled() then
 			raidBuffUpdateTimer:Cancel()
@@ -911,47 +928,47 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				SendMyInfo()
 			end
 		end)
-	elseif event == "ADDON_LOADED" then
-		local addon = ...
-		if addon == G.addon_name then
-			UpdateMRTNoteHash()
-			UpdateEquipmentLevel()
-			
-			if MRTNote and MRTNote.text then
-				hooksecurefunc(MRTNote.text, "SetText", function()
-					if mrtUpdateTimer and not mrtUpdateTimer:IsCancelled() then
-						mrtUpdateTimer:Cancel()
-					end
 		
-					mrtUpdateTimer = C_Timer.NewTimer(3, function()
-						local shouldBroadcast = UpdateMRTNoteHash()
-		
-						if shouldBroadcast then
-							UpdateMrtNoteForAll()
-							SendMyInfo()
-						end
-					end)
-				end)
-			end
+	elseif event == "MRT_NOTE_EDIT" then
+		if mrtUpdateTimer and not mrtUpdateTimer:IsCancelled() then
+			mrtUpdateTimer:Cancel()
 		end
+	
+		mrtUpdateTimer = C_Timer.NewTimer(3, function()
+			local shouldBroadcast = UpdateMRTNoteHash()
+	
+			if shouldBroadcast then
+				UpdateMrtNoteForAll()
+				SendMyInfo()
+			end
+		end)
 	end
+end)
+
+T.RegisterInitCallback(function()
+	ScanGroupMembers()
+	UpdateMyNickName()
+	UpdateEquipmentLevel()
+	UpdateMRTNoteHash()
 end)
 
 local update_events = {
 	["GROUP_FORMED"] = true,
-	["PLAYER_LOGIN"] = true,
 	["GROUP_ROSTER_UPDATE"] = true,
 	["UNIT_NAME_UPDATE"] = true,
 	["ADDON_MSG"] = true,
-	["ADDON_LOADED"] = true,
 	["PLAYER_EQUIPMENT_CHANGED"] = true,
+	["PLAYER_ENTERING_WORLD"] = true,
 	["UNIT_AURA"] = true,
+	["MRT_NOTE_EDIT"] = true,
 }
 
 T.RegisterEventAndCallbacks(eventframe, update_events)
 
-local function GroupSpecUpdate(specId, role, position, GUID)
-	if GroupInfo[GUID] then
+local function GroupSpecUpdate(specId, role, position, pName)
+	if not pName then return end
+	local GUID = UnitGUID(pName)
+	if GUID and GroupInfo[GUID] then
 		GroupInfo[GUID].role = role
 		GroupInfo[GUID].spec_id = specId
 		GroupInfo[GUID].spec_icon = select(4, GetSpecializationInfoByID(specId))
@@ -961,38 +978,8 @@ local function GroupSpecUpdate(specId, role, position, GUID)
 	end
 end
 
-LS:Register("JST", GroupSpecUpdate)
-----------------------------------------------------------
----------------[[     GUI 昵称按钮     ]]-----------------
-----------------------------------------------------------
-local GUI = G.GUI
-
-GUI.name = T.ClickButton(GUI, 150, {"LEFT", GUI.updatebutton, "RIGHT", 5, 0})
-GUI.name:SetScript("OnShow", function(self)
-	self:SetText(string.format(L["我的昵称"], C.DB["GeneralOption"]["mynickname"]))
-end)
-
-GUI.name:SetScript("OnClick", function(self)	
-	StaticPopup_Show(G.addon_name.."Nickname Input")
-end)
-
-StaticPopupDialogs[G.addon_name.."Nickname Input"].OnShow = function(self, data)
-	local editBox = _G[self:GetName().."EditBox"]
-	if editBox then
-		editBox:SetText(C.DB["GeneralOption"]["mynickname"])
-	end
-end
-
-StaticPopupDialogs[G.addon_name.."Nickname Input"].OnAccept = function(self)
-	local editBox = _G[self:GetName().."EditBox"]
-	if editBox then
-		local str = editBox:GetText()
-		C.DB["GeneralOption"]["mynickname"] = str
-		G.GUI.name:SetText(string.format(L["我的昵称"], str))
-		UpdateNickNameByPlayerGUID(G.PlayerGUID, str)
-		SendMyInfo()
-	end
-end	
+LS.RegisterGroup(eventframe, GroupSpecUpdate)
+LS.RegisterPlayerSpecChange(eventframe, GroupSpecUpdate)
 --====================================================--
 --[[               -- 昵称检测 --                   ]]--
 --====================================================--
@@ -1044,8 +1031,9 @@ end)
 
 RaidStatusCheckFrame.refresh_btn:SetScript("OnClick", function(self)	
 	self:GetNormalTexture():SetVertexColor(1, 0, 0)
-	self:EnableMouse(false)	
-	T.addon_msg("ver", "GROUP")
+	self:EnableMouse(false)
+	
+	RequestGroupInfo()
 	
 	C_Timer.After(1, function()
 		RaidStatusCheckFrame.text:SetText(GetGroupNickNameInfo())

@@ -122,7 +122,7 @@ function core._2810:PlexusSentinel()
             InfoFrame_SetPlayerComplete(core.destName)
         elseif core.destName ~= nil and holdingMouseUID[core.spawn_uid_dest_Player] ~= nil then
             -- Player has picked up another mouse when they should only be able to pick up 1
-            core:sendMessage(core.destName .. " " .. L["ManaforgeOmega_CollectedMultipleMice"], true)
+            --core:sendMessage(core.destName .. " " .. L["ManaforgeOmega_CollectedMultipleMice"], true)
             -- Still count for intermission as technically they have picked up a mouse
             collectedMiceDuringIntermissionCounter = collectedMiceDuringIntermissionCounter + 1
             totalMouseCounter = totalMouseCounter + 1
@@ -139,7 +139,7 @@ function core._2810:PlexusSentinel()
                 if UnitIsDeadOrGhost(UnitTokenFromGUID(playerLostMouseGUID)) == false then
                     holdingMouseCounter = holdingMouseCounter - 1
                     InfoFrame_SetPlayerIncomplete(playerLostMouse)
-                    core:sendMessage(playerLostMouse .. " " .. L["ManaforgeOmega_UsedImmunity"],true)
+                    --core:sendMessage(playerLostMouse .. " " .. L["ManaforgeOmega_UsedImmunity"],true)
                     table.insert(immunityPlayers, playerLostMouse)
                 end
             end
@@ -150,7 +150,8 @@ function core._2810:PlexusSentinel()
     if core.type == "UNIT_DIED" and core.destName ~= nil and core.currentUnit == "Player" then
         if InfoFrame_GetPlayerComplete(core.destName) == false then
             InfoFrame_SetPlayerIncomplete(core.destName)
-            core:sendMessage(core.destName .. " " .. L["Shared_DiedWithoutBuff"],true)
+
+            --core:sendMessage(core.destName .. " " .. L["Shared_DiedWithoutBuff"],true)
         end
     end
 
@@ -171,7 +172,7 @@ function core._2810:PlexusSentinel()
                     -- Player has accepted the ress
                     holdingMouseCounter = holdingMouseCounter - 1
                     InfoFrame_SetPlayerIncomplete(currentName)
-                    core:sendMessage(currentName .. " " .. L["ManaforgeOmega_RessedAfterCollectingMice"],true)
+                    --core:sendMessage(currentName .. " " .. L["ManaforgeOmega_RessedAfterCollectingMice"],true)
                     table.insert(playersRessedAfterDeath, currentName)
                     ticker:Cancel()
                 end
@@ -658,7 +659,22 @@ function core._2810:Fractillus()
                     if wallFound == true then
                         core:sendDebugMessage("Fourth wall broken in lane " .. lane)
                         fourthWallsBroken = fourthWallsBroken + 1
-                        core:sendMessage(core:getAchievement() .. " " .. L["Shared_WallBroken"] .. " (" .. fourthWallsBroken .. "/18)",true)
+
+                        -- If the fourth wall is the 18th to break, then check blizzard tracker is white before announcing as
+                        -- Players always seem to just kill the boss regardless of warning them of a tracker error, so if we don't
+                        -- announce the 18th wall broken unless 100% sure, this should stop people killing the boss by mistake
+                        -- The blizzard tracker might not be instant, so we will check initially, then again after 3 seconds
+                        if fourthWallsBroken >= 18 then
+                            -- Do initial announce
+                            C_Timer.After(1, function()
+                                if core:getBlizzardTrackingStatus(41617) == true then
+                                    core:sendMessage(core:getAchievement() .. " " .. L["Shared_WallBroken"] .. " (" .. fourthWallsBroken .. "/18)",true)
+                                end
+                            end)
+                        else
+                            -- Not an 18th wall so just announce
+                            core:sendMessage(core:getAchievement() .. " " .. L["Shared_WallBroken"] .. " (" .. fourthWallsBroken .. "/18)",true)
+                        end
                     end
                 end
 
@@ -677,15 +693,15 @@ function core._2810:Fractillus()
     end
 
     -- If the fourth wall counte equals 18, and the blizzard tracker is not complete we need to warn players not to kill boss as something has gone wrong
-    if fourthWallsBroken == 18 and fourthWallCompleteCheck == false then
-        fourthWallCompleteCheck = true
-        -- Wait 1 second then check blizzard tracker
-        C_Timer.After(1, function()
-            if core:getBlizzardTrackingStatus(41617) == false then
-                core:sendMessage(L["Core_WaitForTrackerToConfirm"],true)
-            end
-        end)
-    end
+    -- if fourthWallsBroken == 18 and fourthWallCompleteCheck == false then
+    --     fourthWallCompleteCheck = true
+    --     -- Wait 1 second then check blizzard tracker
+    --     C_Timer.After(1, function()
+    --         if core:getBlizzardTrackingStatus(41617) == false then
+    --             core:sendMessage(L["Core_WaitForTrackerToConfirm"],true)
+    --         end
+    --     end)
+    -- end
 
     if core:getBlizzardTrackingStatus(41617) == true then
         -- If our fourth wall broken counter is less than 18 then announce achievement is successfull but our tracker has encounted an error

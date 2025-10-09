@@ -52,3 +52,22 @@ StaticPopupDialogs[G.addon_name.."Reset Confirm"] = {
 	whileDead = true,
 	preferredIndex = 3,
 }
+
+StaticPopupDialogs[G.addon_name.."Accept Settings Confirm"] = {
+	text = "",
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	hideOnEscape = 1, 
+	whileDead = true,
+	preferredIndex = 3,
+}
+
+StaticPopupDialogs[G.addon_name.."Group Nickname Input"] = {
+	text = L["输入队友昵称"],
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	hideOnEscape = 1, 
+	whileDead = true,
+	preferredIndex = 5,
+	hasEditBox = true,
+}

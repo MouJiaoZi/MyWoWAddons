@@ -1,0 +1,693 @@
+
+SYNDICATOR_CONFIG = {
+["show_inventory_tooltips"] = true,
+["debug"] = false,
+["show_tooltips_on_shift"] = false,
+["show_currency_tooltips"] = true,
+["show_equipped_items_in_tooltips"] = true,
+["tooltips_connected_realms_only_2"] = false,
+["show_character_race_icons"] = true,
+["tooltips_character_limit"] = 4,
+["show_blank_line_before_inventory"] = false,
+["tooltips_faction_only"] = false,
+["tooltips_sort_by_name"] = false,
+["debug_timers"] = false,
+["show_total_line_after_characters"] = false,
+["auction_value_source"] = "none",
+["show_guild_banks_in_tooltips"] = true,
+["no_auction_value_source"] = false,
+}
+SYNDICATOR_DATA = {
+["Characters"] = {
+["我都等的-凤凰之神"] = {
+["containerInfo"] = {
+["bags"] = {
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+},
+["bankTabs"] = {
+},
+["details"] = {
+["class"] = 1,
+["realmNormalized"] = "凤凰之神",
+["show"] = {
+["inventory"] = true,
+["gold"] = true,
+},
+["race"] = "Orc",
+["faction"] = "Horde",
+["sex"] = 3,
+["character"] = "我都等的",
+["className"] = "WARRIOR",
+["realm"] = "凤凰之神",
+},
+["bags"] = {
+{
+{
+["itemCount"] = 1,
+["itemID"] = 6948,
+["isBound"] = true,
+["hasLoot"] = false,
+["quality"] = 1,
+["itemLink"] = "|cnIQ1:|Hitem:6948::::::::1:71:::::::::|h[炉石]|h|r",
+["iconTexture"] = 134414,
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+["auctions"] = {
+},
+["currencyByHeader"] = {
+{
+["name"] = "未知",
+["currencies"] = {
+},
+},
+{
+["header"] = "其它",
+["currencies"] = {
+2032,
+},
+},
+},
+["currencies"] = {
+[2032] = 2800,
+},
+["void"] = {
+},
+["mail"] = {
+},
+["money"] = 0,
+["equipped"] = {
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+["itemCount"] = 1,
+["itemID"] = 58245,
+["isBound"] = true,
+["quality"] = 1,
+["itemLink"] = "|cnIQ1:|Hitem:58245::::::::1:71:::::::::|h[争吵者外衣]|h|r",
+["iconTexture"] = 132719,
+},
+{
+},
+{
+["itemCount"] = 1,
+["itemID"] = 139,
+["isBound"] = true,
+["quality"] = 1,
+["itemLink"] = "|cnIQ1:|Hitem:139::::::::1:71:::::::::|h[打斗者短裤]|h|r",
+["iconTexture"] = 134582,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 140,
+["isBound"] = true,
+["quality"] = 1,
+["itemLink"] = "|cnIQ1:|Hitem:140::::::::1:71:::::::::|h[打斗者之靴]|h|r",
+["iconTexture"] = 132538,
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+["itemCount"] = 1,
+["itemID"] = 12282,
+["isBound"] = true,
+["quality"] = 1,
+["itemLink"] = "|cnIQ1:|Hitem:12282::::::::1:71:::::::::|h[用旧的战斧]|h|r",
+["iconTexture"] = 132400,
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+["bank"] = {
+},
+},
+["专杀饺子王-雷霆之怒"] = {
+["containerInfo"] = {
+["bags"] = {
+{
+["itemCount"] = 1,
+["itemID"] = 57247,
+["isBound"] = true,
+["iconTexture"] = 133639,
+["itemLink"] = "|cnIQ1:|Hitem:57247::::::::19:66:::::::::|h[葡萄采摘袋]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 4496,
+["isBound"] = false,
+["iconTexture"] = 133634,
+["itemLink"] = "|cnIQ1:|Hitem:4496::::::::19:66:::::::::|h[棕色小袋]|h|r",
+["quality"] = 1,
+},
+{
+},
+{
+},
+{
+},
+},
+},
+["bankTabs"] = {
+},
+["details"] = {
+["class"] = 2,
+["realmNormalized"] = "雷霆之怒",
+["show"] = {
+["inventory"] = true,
+["gold"] = true,
+},
+["race"] = "Human",
+["faction"] = "Alliance",
+["sex"] = 3,
+["className"] = "PALADIN",
+["character"] = "专杀饺子王",
+["realm"] = "雷霆之怒",
+},
+["bags"] = {
+{
+{
+["itemCount"] = 1,
+["itemID"] = 6948,
+["isBound"] = true,
+["hasLoot"] = false,
+["iconTexture"] = 134414,
+["itemLink"] = "|cnIQ1:|Hitem:6948::::::::19:66:::::::::|h[炉石]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 14160,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132610,
+["itemLink"] = "|cnIQ2:|Hitem:14160::::::::19:66:::1:1708::::::|h[曙光之异教徒护腕]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 2,
+["itemID"] = 774,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 134106,
+["itemLink"] = "|cnIQ2:|Hitem:774::::::::19:66:::::::::|h[孔雀石]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 4338,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132892,
+["itemLink"] = "|cnIQ1:|Hitem:4338::::::::19:66:::::::::|h[魔纹布]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 818,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 134118,
+["itemLink"] = "|cnIQ2:|Hitem:818::::::::19:66:::::::::|h[虎眼石]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 6211,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 134939,
+["itemLink"] = "|cnIQ1:|Hitem:6211::::::::19:66:::::::::|h[配方：食人魔力量药剂]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 3873,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 134942,
+["itemLink"] = "|cnIQ2:|Hitem:3873::::::::19:66:::::::::|h[设计图：金鳞胸甲]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 6344,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 134327,
+["itemLink"] = "|cnIQ2:|Hitem:6344::::::::19:66:::::::::|h[公式：附魔护腕 - 初级全能]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 20,
+["itemID"] = 4306,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132905,
+["itemLink"] = "|cnIQ1:|Hitem:4306::::::::19:66:::::::::|h[丝绸]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 2,
+["itemID"] = 4306,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132905,
+["itemLink"] = "|cnIQ1:|Hitem:4306::::::::19:66:::::::::|h[丝绸]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 20,
+["itemID"] = 2592,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132911,
+["itemLink"] = "|cnIQ1:|Hitem:2592::::::::19:66:::::::::|h[毛料]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 19,
+["itemID"] = 2592,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132911,
+["itemLink"] = "|cnIQ1:|Hitem:2592::::::::19:66:::::::::|h[毛料]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 8,
+["itemID"] = 2589,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132889,
+["itemLink"] = "|cnIQ1:|Hitem:2589::::::::19:66:::::::::|h[亚麻布]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 20,
+["itemID"] = 2589,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132889,
+["itemLink"] = "|cnIQ1:|Hitem:2589::::::::19:66:::::::::|h[亚麻布]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 20,
+["itemID"] = 2589,
+["isBound"] = false,
+["hasLoot"] = false,
+["iconTexture"] = 132889,
+["itemLink"] = "|cnIQ1:|Hitem:2589::::::::19:66:::::::::|h[亚麻布]|h|r",
+["quality"] = 1,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 205456,
+["isBound"] = true,
+["hasLoot"] = false,
+["iconTexture"] = 134309,
+["itemLink"] = "|cnIQ1:|Hitem:205456::::::::19:66::11::1:28:2573:::::|h[失落的龙鳞]|h|r",
+["quality"] = 1,
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+{
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+{
+{
+},
+{
+},
+{
+["itemCount"] = 1,
+["itemID"] = 18539,
+["isBound"] = true,
+["hasLoot"] = false,
+["iconTexture"] = 132595,
+["itemLink"] = "|cnIQ1:|Hitem:18539::::::::19:66:::::::::|h[净化之匣]|h|r",
+["quality"] = 1,
+},
+{
+},
+{
+},
+{
+},
+},
+{
+},
+{
+},
+{
+},
+},
+["auctions"] = {
+},
+["currencyByHeader"] = {
+{
+["name"] = "未知",
+["currencies"] = {
+},
+},
+{
+["header"] = "其它",
+["currencies"] = {
+2032,
+},
+},
+},
+["money"] = 812754,
+["mail"] = {
+},
+["void"] = {
+},
+["currencies"] = {
+[2032] = 2800,
+},
+["equipped"] = {
+{
+},
+{
+["itemCount"] = 1,
+["itemID"] = 88351,
+["isBound"] = true,
+["iconTexture"] = 457914,
+["itemLink"] = "|cnIQ3:|Hitem:88351::::::::19:66:::::::::|h[燃魂之冠]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 18397,
+["isBound"] = true,
+["iconTexture"] = 133294,
+["itemLink"] = "|cnIQ3:|Hitem:18397::::::::19:66:::::::::|h[法师长老饰物]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 51984,
+["isBound"] = true,
+["iconTexture"] = 135096,
+["itemLink"] = "|cnIQ3:|Hitem:51984::::::::19:66:::1:1694::::::|h[燎火之坚定肩垫]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 2575,
+["isBound"] = true,
+["iconTexture"] = 135029,
+["itemLink"] = "|cnIQ2:|Hitem:2575::::::::19:66:::::::::|h[红色亚麻衬衣]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 88268,
+["isBound"] = true,
+["iconTexture"] = 457826,
+["itemLink"] = "|cnIQ3:|Hitem:88268::::::::19:66:::::::::|h[驭犬者胸甲]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 14827,
+["isBound"] = true,
+["iconTexture"] = 132520,
+["itemLink"] = "|cnIQ2:|Hitem:14827::::::::19:66:::::::::|h[符记腰带]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 18390,
+["isBound"] = true,
+["iconTexture"] = 134594,
+["itemLink"] = "|cnIQ3:|Hitem:18390::::::::19:66:::::::::|h[苔藓护腿]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 88348,
+["isBound"] = true,
+["iconTexture"] = 368552,
+["itemLink"] = "|cnIQ3:|Hitem:88348::::::::19:66:::::::::|h[怨灵板甲护足]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 88337,
+["isBound"] = true,
+["iconTexture"] = 457799,
+["itemLink"] = "|cnIQ3:|Hitem:88337::::::::19:66:::::::::|h[皮影护腕]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 9780,
+["isBound"] = true,
+["iconTexture"] = 132949,
+["itemLink"] = "|cnIQ2:|Hitem:9780::::::::19:66:::1:1705::::::|h[曙光之歹徒手套]|h|r",
+["quality"] = 2,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 51992,
+["isBound"] = true,
+["iconTexture"] = 133376,
+["itemLink"] = "|cnIQ3:|Hitem:51992::::::::19:66:::1:1677::::::|h[快刀之混乱之戒]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 51992,
+["isBound"] = true,
+["iconTexture"] = 133376,
+["itemLink"] = "|cnIQ3:|Hitem:51992::::::::19:66:::1:1692::::::|h[燎火之混乱之戒]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 88294,
+["isBound"] = true,
+["iconTexture"] = 236303,
+["itemLink"] = "|cnIQ3:|Hitem:88294::::::::19:66:::::::::|h[炫目精钢护符]|h|r",
+["quality"] = 3,
+},
+{
+},
+{
+["itemCount"] = 1,
+["itemID"] = 18389,
+["isBound"] = true,
+["iconTexture"] = 133753,
+["itemLink"] = "|cnIQ3:|Hitem:18389::::::::19:66:::::::::|h[和谐披风]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 18347,
+["isBound"] = true,
+["iconTexture"] = 132402,
+["itemLink"] = "|cnIQ3:|Hitem:18347::::::::19:66:::::::::|h[精衡战斧]|h|r",
+["quality"] = 3,
+},
+{
+["itemCount"] = 1,
+["itemID"] = 65993,
+["isBound"] = true,
+["iconTexture"] = 134953,
+["itemLink"] = "|cnIQ3:|Hitem:65993::::::::19:66:::::::::|h[扭木之盾]|h|r",
+["quality"] = 3,
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+{
+},
+},
+["bank"] = {
+},
+},
+},
+["Guilds"] = {
+},
+["Version"] = 2,
+["Warband"] = {
+{
+["money"] = 0,
+["details"] = {
+["inventory"] = true,
+["gold"] = true,
+},
+["bank"] = {
+},
+},
+},
+}
+SYNDICATOR_SUMMARIES = {
+["Characters"] = {
+["Pending"] = {
+["我都等的-凤凰之神"] = 1,
+["专杀饺子王-雷霆之怒"] = 1,
+},
+["ByRealm"] = {
+},
+},
+["Guilds"] = {
+["Pending"] = {
+},
+["ByRealm"] = {
+},
+},
+["Version"] = 5,
+["Warband"] = {
+["Summary"] = {
+},
+["Pending"] = {
+true,
+},
+},
+}

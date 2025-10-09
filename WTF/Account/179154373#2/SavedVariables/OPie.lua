@@ -71,8 +71,8 @@ OPie_SavedData = {
 ["sliceToken"] = "ABueQntX/Iw",
 },
 {
-["id"] = 50977,
 ["sliceToken"] = "ABueQcKpFbw",
+["id"] = 50977,
 },
 {
 "item",
@@ -98,6 +98,11 @@ OPie_SavedData = {
 "toy",
 230850,
 ["sliceToken"] = "ABue7lmZ50w",
+},
+{
+"toy",
+243056,
+["sliceToken"] = "ABue7X7C1Ow",
 },
 ["name"] = "传送",
 ["save"] = true,

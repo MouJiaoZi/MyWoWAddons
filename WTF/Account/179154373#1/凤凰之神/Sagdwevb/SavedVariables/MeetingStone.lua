@@ -1,0 +1,11 @@
+
+MEETINGSTONE_CHARACTER_DB = {
+["profileKeys"] = {
+["Sagdwevb - 凤凰之神"] = "Sagdwevb - 凤凰之神",
+},
+["profiles"] = {
+["Sagdwevb - 凤凰之神"] = {
+["version"] = "11.2.0",
+},
+},
+}

@@ -21,29 +21,11 @@ G.Encounters["c525"] = {
 				{465813},
 			},
 			options = {
-				{ -- 图标 昏睡毒液（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 465813,
-					hl = "gre",
-					tip = L["减速"].."40%",
+				T.Temp_ImportantDebuffIcon(465813, "gre", L["减速"].."40%", {
 					ficon = "9",
-				},
-				{ -- 团队框架高亮 昏睡毒液（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 465813,
-					color = "gre",
-				},
-				{ -- 驱散提示音 昏睡毒液（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 465813,
-					file = "[dispel]",
-					ficon = "9",
-				},
+				}),
+				T.Temp_RaidAuraGlow(465813, "gre"),
+				T.Temp_DispelDebuffSound(465813, "9"),
 			},
 		},
 		{ -- 暗索士兵:黑血创伤
@@ -51,31 +33,9 @@ G.Encounters["c525"] = {
 				{462737},
 			},
 			options = {
-				{ -- 图标 黑血创伤（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 462737,
-					hl = "blu",
-					tip = L["DOT"],
-					ficon = "7",
-				},
-				{ -- 驱散提示音 黑血创伤（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 462737,
-					file = "[dispel]",
-					ficon = "7",
-					amount = 5,
-				},
-				{ -- 团队框架高亮 黑血创伤（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 462737,
-					color = "blu",
-					amount = 5,
-				},
+				T.Temp_DoTIcon(462737, "7", "blu"),
+				T.Temp_DispelDebuffSound(462737, "7", 5),
+				T.Temp_RaidAuraGlow(462737, "blu", 5),
 			},
 		},
 		{ -- 无人机狙击手:狙击
@@ -83,21 +43,12 @@ G.Encounters["c525"] = {
 				{464655},
 			},
 			options = {
-				T.Temp_SubInterruptBar(464655, { -- 狙击（✓）
+				T.Temp_SubInterruptBar(464655, {
 					show_tar = true,
 					ficon = "14",
 				}),
-				{ -- 对我施法图标 狙击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 464655,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 狙击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 464655,
-				},
+				T.Temp_ComIcon(464655),
+				T.Temp_RaidCastIcon(464655),
 			},
 		},
 		{ -- 无人机狙击手:特技射击
@@ -105,22 +56,11 @@ G.Encounters["c525"] = {
 				{1214468},
 			},
 			options = {
-				T.Temp_SubInterruptBar(1214468, { -- 特技射击（✓）
+				T.Temp_SubInterruptBar(1214468, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 特技射击（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 1214468,
-					mobID = "229069",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 团队框架图标 特技射击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1214468,
-				},
+				T.Temp_PlateInterrupt(1214468, "229069", 2),
+				T.Temp_RaidCastIcon(1214468),
 			},
 		},
 		{ -- 撕碎王3000型:碎切
@@ -128,23 +68,10 @@ G.Encounters["c525"] = {
 				{474337},
 			},
 			options = {
-				{ -- 计时条 碎切（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 474337,
+				T.Temp_ImportantCastBar(474337, {
 					sound = "[change_pos]cast,cd2",
-					glow = true,
-					group = 1,
-				},
-				{ -- 图标 碎切（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 474351,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				}),
+				T.Temp_OnFireIcon(474351),
 			},
 		},
 		{ -- 撕碎王3000型:火焰喷射器
@@ -152,21 +79,10 @@ G.Encounters["c525"] = {
 				{465754},
 			},
 			options = {
-				{ -- 计时条 火焰喷射器（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 465754,
+				T.Temp_NormalCastBar(465754, {
 					sound = "[avoidfront]cast",
-				},
-				{ -- 图标 火焰喷射器（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 474388,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				}),
+				T.Temp_OnFireIcon(474388),
 			},
 		},
 		{ -- 载货机器人:上紧发条
@@ -174,27 +90,14 @@ G.Encounters["c525"] = {
 				{465120},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(465120, { -- 上紧发条（✓）
+				T.Temp_NormalInterruptBar(465120, {
 					show_tar = true,
 					ficon = "14",
 				}),
-				{ -- 图标 上紧发条（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 465120,
-					hl = "red_flash",
-					tip = L["锁定"],
+				T.Temp_ImportantDebuffIcon(465120, "red_flash", L["锁定"], {
 					sound = "[focusyou]",
-				},
-				{ -- 姓名板法术来源图标 上紧发条（✓）
-					category = "PlateAlert",
-					type = "PlayerAuraSource",
-					aura_type = "HARMFUL",
-					spellID = 465120,
-					hl_np = true,
-				},
+				}),
+				T.Temp_PlateAuraSourceGlow(465120),
 			},
 		},
 		{ -- 风险投资公司勘探员:“易投”炸弹 III
@@ -202,21 +105,12 @@ G.Encounters["c525"] = {
 				{463169},
 			},
 			options = {
-				T.Temp_SubInterruptBar(463169, { -- “易投”炸弹 III（✓）
+				T.Temp_SubInterruptBar(463169, {
 					show_tar = true,
 					ficon = "14",
 				}),
-				{ -- 对我施法图标 “易投”炸弹 III（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 463169,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 “易投”炸弹 III（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 463169,
-				},
+				T.Temp_ComIcon(463169),
+				T.Temp_RaidCastIcon(463169),
 			},
 		},
 		{ -- 风险投资公司勘探员:勘测光束
@@ -224,53 +118,15 @@ G.Encounters["c525"] = {
 				{462771},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(462771, { -- 勘测光束（✓）
+				T.Temp_NormalInterruptBar(462771, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 勘测光束（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 462771,
-					mobID = "229686",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 团队框架图标 勘测光束（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 462771,
-				},				
-				{ -- 图标 勘测光束（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 462771,
-					tip = L["强力DOT"],
-					hl = "red",
-					sound = "[defense]",
-				},
-				{ -- 自保技能提示 勘测光束（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 462771,
-					threshold = 70,
-				},
-				{ -- 团队框架高亮 勘测光束（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 462771,
-					color = "red",
-				},
-				{ -- 图标 勘探之地（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 472338,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				T.Temp_PlateInterrupt(462771, "229686", 2),
+				T.Temp_RaidCastIcon(462771),
+				T.Temp_BigDoTIcon(462771, nil, "red"),
+				T.Temp_HPWatchAura(462771, nil, 70),
+				T.Temp_RaidAuraGlow(462771, "red"),
+				T.Temp_OnFireIcon(472338),
 			},
 		},
 		{ -- 风险投资公司建筑师:射钉枪
@@ -278,42 +134,15 @@ G.Encounters["c525"] = {
 				{1213805},
 			},
 			options = {
-				T.Temp_SubInterruptBar(1213805, { -- 射钉枪 III（✓）
+				T.Temp_SubInterruptBar(1213805, {
 					show_tar = true,
 					ficon = "14",
 				}),
-				{ -- 对我施法图标 射钉枪（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 1213805,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 射钉枪（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1213805,
-				},
-				{ -- 图标 钉伤（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1213803,
-					tip = L["定身"].."+"..L["DOT"],
-					hl = "",
-				},
-				{ -- 自保技能提示 钉伤（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 1213803,
-					threshold = 65,
-				},
-				{ -- 团队框架高亮 钉伤（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1213803,
-					color = "red",
-				},
+				T.Temp_ComIcon(1213805),
+				T.Temp_RaidCastIcon(1213805),
+				T.Temp_DoTIcon(1213803, "13", "red"),
+				T.Temp_HPWatchAura(1213803),
+				T.Temp_RaidAuraGlow(1213803, "red"),
 			},
 		},
 		{ -- 风险管理公司潜水员:鱼叉
@@ -321,31 +150,13 @@ G.Encounters["c525"] = {
 				{468631},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(468631, { -- 鱼叉（✓）
+				T.Temp_NormalInterruptBar(468631, {
 					show_tar = true,
 					ficon = "14",
 				}),
-				{ -- 图标 鱼叉（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 468631,
-					tip = L["DOT"],
-					hl = "red",
-				},
-				{ -- 自保技能提示 鱼叉（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 468631,
-					threshold = 75,
-				},
-				{ -- 团队框架高亮 鱼叉（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 468631,
-					color = "red",
-				},
+				T.Temp_BigDoTIcon(468631, "13", "red"),
+				T.Temp_HPWatchAura(468631, nil, 75),
+				T.Temp_RaidAuraGlow(468631, "red"),
 			},
 		},
 		{ -- 风险管理公司潜水员:安放爆盐炸弹
@@ -353,12 +164,9 @@ G.Encounters["c525"] = {
 				{468726},
 			},
 			options = {
-				{ -- 计时条 安放爆盐炸弹（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 468726,
+				T.Temp_NormalCastBar(468726, {
 					sound = "[bomb]cast",
-				},
+				}),
 			},
 		},
 		{ -- 暗索爆破手:R.P.G.G.
@@ -367,13 +175,10 @@ G.Encounters["c525"] = {
 				{461796},
 			},
 			options = {
-				{ -- 计时条 R.P.G.G.（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1216039,
+				T.Temp_NormalCastBar(1216039, {
 					sound = "[dodge_circle]cast",
-				},
-				T.Temp_NormalInterruptBar(461796, { -- 重新装填（✓）
+				}),
+				T.Temp_NormalInterruptBar(461796, { -- 重新装填
 					ficon = "14",
 				}),
 			},
@@ -383,22 +188,11 @@ G.Encounters["c525"] = {
 				{465871},
 			},
 			options = {
-				T.Temp_SubInterruptBar(465871, { -- 鲜血冲击（✓）
+				T.Temp_SubInterruptBar(465871, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 鲜血冲击（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 465871,
-					mobID = "230748",
-					interrupt = 3,
-					ficon = "6",
-				},
-				{ -- 团队框架图标 鲜血冲击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 465871,
-				},
+				T.Temp_PlateInterrupt(465871, "230748", 3),
+				T.Temp_RaidCastIcon(465871),
 			},
 		},
 		{ -- 暗索扭血者:扭曲精华
@@ -438,31 +232,12 @@ G.Encounters["c525"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 扭曲精华（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 465827,
+				T.Temp_ImportantCastBar(465827, {
+					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 扭曲精华（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 465827,
-					event = "SPELL_CAST_START",
-					dur = 8.5,
-					threshold = 65,
-				},
-				{ -- 图标 扭曲精华（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 465830,
-					tip = L["DOT"],
-					hl = "",
-				},
+				}),
+				T.Temp_HPWatchCLEU(465827, "SPELL_CAST_START", 8.5),
+				T.Temp_DoTIcon(465830),				
 			},
 		},
 		{ -- 爆壳螃蟹:钳夹
@@ -470,21 +245,10 @@ G.Encounters["c525"] = {
 				{468672},
 			},
 			options = {
-				{ -- 对我施法图标 钳夹（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 468672,
-					hl = "yel_flash",
-				},
-				{ -- 图标 钳夹（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 468672,
-					tip = L["减速"].."%s10%",
+				T.Temp_ComIcon(468672),
+				T.Temp_NormalDebuff(468672, L["减速"].."%s10%", {
 					hl = "",
-				},
+				}),
 			},
 		},
 		{ -- 爆壳螃蟹:炸蟹
@@ -492,22 +256,8 @@ G.Encounters["c525"] = {
 				{468680},
 			},
 			options = {
-				{ -- 图标 炸蟹（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 468680,
-					tip = L["DOT"],
-					hl = "red_flash",
-				},
-				{ -- 自保技能提示 炸蟹（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 468680,
-					threshold = 65,
-					amount = 2,
-				},
+				T.Temp_DoTIcon(468680, nil, "red_flash"),
+				T.Temp_HPWatchAura(468680, 2),				
 			},
 		},
 		{ -- 被惊扰的海藻:回春水藻
@@ -515,15 +265,8 @@ G.Encounters["c525"] = {
 				{471733},
 			},
 			options = {
-				T.Temp_SubInterruptBar(471733), -- 回春水藻（✓）
-				{ -- 姓名板打断图标 回春水藻（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 471733,
-					mobID = "231223",
-					interrupt = 2,
-					ficon = "6",
-				},
+				T.Temp_SubInterruptBar(471733),
+				T.Temp_PlateInterrupt(471733, "231223", 2),
 			},
 		},
 		{ -- 被惊扰的海藻:投弃海藻
@@ -531,7 +274,7 @@ G.Encounters["c525"] = {
 				{471736},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(471736, { -- 投弃海藻（✓）
+				T.Temp_NormalInterruptBar(471736, {
 					ficon = "14",
 				}),
 			},
@@ -541,12 +284,9 @@ G.Encounters["c525"] = {
 				{465682},
 			},
 			options = {
-				{ -- 计时条 突击调查（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 465682,
+				T.Temp_NormalCastBar(465682, {
 					sound = "[dodge]cast",
-				},
+				}),
 			},
 		},
 		{ -- 风险投资公司电工:闪电箭
@@ -554,28 +294,12 @@ G.Encounters["c525"] = {
 				{465595},
 			},
 			options = {
-				T.Temp_SubInterruptBar(465595, { -- 闪电箭（✓）
+				T.Temp_SubInterruptBar(465595, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 闪电箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 465595,
-					mobID = "231312",
-					interrupt = 3,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 闪电箭（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 465595,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 闪电箭（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 465595,
-				},	
+				T.Temp_PlateInterrupt(465595, "231312", 3),
+				T.Temp_ComIcon(465595),				
+				T.Temp_RaidCastIcon(465595),
 			},
 		},
 		{ -- 风险投资公司电工:过载
@@ -583,29 +307,9 @@ G.Encounters["c525"] = {
 				{469799},
 			},
 			options = {				
-				{ -- 图标 过载（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 469799,
-					tip = L["DOT"],
-					hl = "blu",
-					ficon = "7",
-				},
-				{ -- 驱散提示音 过载（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 469799,
-					file = "[dispel]",
-					ficon = "7",
-				},
-				{ -- 团队框架高亮 过载（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 469799,
-					color = "blu",
-				},
+				T.Temp_DoTIcon(469799, "7", "blu"),
+				T.Temp_DispelDebuffSound(469799, "7"),
+				T.Temp_RaidAuraGlow(469799, "blu"),
 			},
 		},
 		{ -- 暗索接线者:火花猛击
@@ -613,14 +317,7 @@ G.Encounters["c525"] = {
 				{465666},
 			},
 			options = {
-				{ -- 打坦计时条 火花猛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 465666,
-					group = 1,
-					ficon = "0",
-					sound = "[minddefense]cast",
-				},
+				T.Temp_TankCastBar(465666, "[minddefense]cast"),
 			},
 		},
 		{ -- 暗索接线者:电池释能

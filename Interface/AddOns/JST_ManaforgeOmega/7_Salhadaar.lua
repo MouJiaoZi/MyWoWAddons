@@ -382,12 +382,6 @@ G.Encounters[2690] = {
 					},
 					custom = {
 						{
-							key = "mrt_custom_btn", 
-						},
-						{
-							key = "mrt_analysis_btn",
-						},
-						{
 							key = "scale_sl",
 							text = L["尺寸"],
 							default = 100,
@@ -403,40 +397,7 @@ G.Encounters[2690] = {
 						frame.vanquishSpellID = 1224812 -- 主宰
 						frame.bars = {}
 						frame.order = {}
-						frame.count = 0
-						
-						function frame:copy_mrt()
-							local str = [[
-								#%dstart%s
-								player player player player player player player player player
-								player player player player player player player player player
-								end
-							]]
-							
-							str = gsub(str, "	", "")
-							return string.format(str, self.config_id, C_Spell.GetSpellName(self.config_id))
-						end
-						
-						function frame:ReadNote(display)
-							if display then
-								T.divideline(self.config_name)
-							end
-							
-							for lineCount, line in T.IterateNoteAssignment(self.config_id) do
-								if lineCount > 2 then return end
-								
-								local GUIDs, containsPlayerGUID = T.LineToGUIDArray(line)
-								
-								if display then
-									local str = T.GetColoredNameListByArray(GUIDs, lineCount)
-									T.msg(str)
-								end
-								
-								if containsPlayerGUID then
-									self.my_index = lineCount
-								end
-							end
-						end
+						frame.count = 0												
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
@@ -488,18 +449,6 @@ G.Encounters[2690] = {
 							bar:Show()
 						end
 						
-						function frame:GetConquerIndex(index)
-							local conquerIndex = 0
-							for i, bar in pairs(frame.bars) do
-								if bar.castType == "CONQUER" then
-									conquerIndex = conquerIndex + 1
-									if i == index then
-										return conquerIndex
-									end
-								end
-							end
-						end
-						
 						function frame:SetConquer(index)
 							local isTank = UnitGroupRolesAssigned("player") == "TANK"
 							local isTanking = UnitDetailedThreatSituation("player", "boss1")
@@ -523,11 +472,10 @@ G.Encounters[2690] = {
 									end
 								end
 							else
-								local soak_index = self:GetConquerIndex(index)
-								if soak_index == self.my_index then
-									assigned = true
+								if self.order[1] == "CONQUER" then
+									assigned = index == 1
 								else
-									assigned = false
+									assigned = index == 3
 								end
 							end
 							
@@ -607,6 +555,14 @@ G.Encounters[2690] = {
 							end
 						end
 						
+						function frame:Stop()
+							self.order = table.wipe(self.order)
+							self.count = 0
+							for _, bar in pairs(self.bars) do
+								T.StopTimerBar(bar, true, true)
+							end
+						end
+						
 						function frame:PreviewShow()
 							local orders = {
 								{"VANQUISH", "VANQUISH", "CONQUER", "CONQUER"},
@@ -620,64 +576,77 @@ G.Encounters[2690] = {
 							self:UpdateStates()
 							self:Start(self.count)
 						end
+						
+						function frame:PreviewHide()
+							self:Stop()
+						end
 					end,
 					update = function(frame, event, ...)
 						if event == "UNIT_SPELLCAST_START" then
 							local unit, castGUID, spellID = ...
-							if string.find(unit, "boss") and castGUID and (spellID == frame.conquerSpellID or spellID == frame.vanquishSpellID) then
-								frame.count = frame.count + 1
-								frame.order[frame.count] = spellID == frame.conquerSpellID and "CONQUER" or "VANQUISH"
-								
-								frame:UpdateOrder()
-								frame:UpdateStates()
-								frame:Start(frame.count)
-								
-								if spellID == frame.conquerSpellID and frame.my_index then
-									frame.soak_count = frame.soak_count + 1
-									local soak_index = (frame.soak_count+1)%2 + 1
-									if soak_index == frame.my_index then
-										T.PlaySound("sharedmg")
-										if AuraUtil.FindAuraBySpellID(1227549, "player", "HARMFUL") then
-											T.Start_Text_Timer(frame.text_frame, 4, string.format("|cffffba27%s|r", L["高危分担"]), true)
-											
-											T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, 90, {"TANK"})
-											C_Timer.After(4, function()
-												T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
-											end)
+							if string.find(unit, "boss") and castGUID then
+								if spellID == frame.conquerSpellID or spellID == frame.vanquishSpellID then
+									frame.count = frame.count + 1
+									frame.order[frame.count] = spellID == frame.conquerSpellID and "CONQUER" or "VANQUISH"
+									
+									frame:UpdateOrder()
+									frame:UpdateStates()
+									frame:Start(frame.count)
+									
+									if spellID == frame.conquerSpellID then
+										local soak
+									
+										if frame.order[1] == "CONQUER" then
+											soak = frame.count == 1
 										else
-											T.Start_Text_Timer(frame.text_frame, 4, string.format("|cff00ff00%s|r", L["分担"]), true)
-											
-											T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, 70, 	{"TANK"})
-											C_Timer.After(4, function()
-												T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
-											end)
+											soak = frame.count == 3
 										end
-									else
-										T.PlaySound("dontsharedmg")
-										T.Start_Text_Timer(frame.text_frame, 4, string.format("|cffff0000%s|r", L["不分担"]), true)
+										
+										if soak then
+											T.PlaySound("sharedmg")
+											if AuraUtil.FindAuraBySpellID(1227549, "player", "HARMFUL") then
+												T.Start_Text_Timer(frame.text_frame, 4, string.format("|cffffba27%s|r", L["高危分担"]), true)
+												
+												T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, 90, {"TANK"})
+												C_Timer.After(4, function()
+													T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+												end)
+											else
+												T.Start_Text_Timer(frame.text_frame, 4, string.format("|cff00ff00%s|r", L["分担"]), true)
+												
+												T.AddPersonalSpellCheckTag("bossmod"..frame.config_id, 70, 	{"TANK"})
+												C_Timer.After(4, function()
+													T.RemovePersonalSpellCheckTag("bossmod"..frame.config_id)
+												end)
+											end
+										else
+											T.PlaySound("dontsharedmg")
+											T.Start_Text_Timer(frame.text_frame, 4, string.format("|cffff0000%s|r", L["不分担"]), true)
+										end
 									end
+									
+									if frame.count == 4 then
+										local wait = spellID == frame.conquerSpellID and 4 or 2.5
+										C_Timer.After(wait, function()
+											frame:Stop()
+										end)
+									end
+									
+								elseif spellID == 1227734 then -- 融合虚空之翼								
+									frame:Stop()
 								end
 							end
-
 						elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
 							local unit, castGUID, spellID = ...
 							if string.find(unit, "boss") and castGUID and (spellID == frame.conquerSpellID or spellID == frame.vanquishSpellID) then
 								if frame.count == 4 then
-									frame.order = table.wipe(frame.order)
-									frame.count = 0
-									for _, bar in pairs(frame.bars) do
-										T.StopTimerBar(bar, true, true)
-									end
+									frame:Stop()
 								end
 							end
 							
 						elseif event == "ENCOUNTER_START" then
-							frame.my_index = nil
 							frame.order = table.wipe(frame.order)
 							frame.count = 0
-							frame.soak_count = 0
-							
-							frame:ReadNote()
 						end
 					end,
 					reset = function(frame, event)

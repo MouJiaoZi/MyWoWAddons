@@ -5483,6 +5483,7 @@ addon.FilePaths = {
 	[426787] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 晦影腐朽
 	--[426860] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 暗黑法球（私有）
 	[427001] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 恐惧猛击
+	[427378] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 黑暗伤痕
 	[452127] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 活化暗影
 	  -- Rasha'nan Dawnbreaker  拉夏南
 	--[434089] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 喷射丝线（私有）
@@ -5516,6 +5517,7 @@ addon.FilePaths = {
 	[451112] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 战略家之怒	
 	[451117] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 恐惧猛击
 	[451119] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 深渊轰击
+	[460135] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 黑暗伤痕
 	[1242074] = "TheWarWithin\\Dungeon\\TheDawnbreaker\\",  -- 激化侵袭	
     -- Cinderbrew Meadery   燧酿酒庄
 	  -- Brew Master Aldryr  酿造大师阿德里尔

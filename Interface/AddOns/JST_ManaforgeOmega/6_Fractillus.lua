@@ -544,8 +544,8 @@ G.Encounters[2747] = {
 							table.sort(bar.players)
 							for i, GUID in pairs(bar.players) do
 								local info = T.GetGroupInfobyGUID(GUID)
-								local role = info.role == "TANK" and T.GetFlagIconStr("0") or ""
-								local format_name = info.format_name or "?"
+								local role = info and info.role == "TANK" and T.GetFlagIconStr("0") or ""
+								local format_name = info and info.format_name or "?"
 								if i == 1 then
 									str = str..role..format_name
 								else

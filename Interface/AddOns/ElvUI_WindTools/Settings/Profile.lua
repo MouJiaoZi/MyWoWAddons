@@ -1315,4 +1315,20 @@ P.misc = {
 		width = 81,
 		height = 50,
 	},
+	achievementTracker = {
+		enable = true,
+		show = true,
+		width = 500,
+		height = 500,
+		threshold = 75,
+		scan = {
+			batchSize = 20,
+			batchInterval = 0.01,
+			automation = {
+				enable = true,
+				onShow = true,
+				onLogin = false,
+			},
+		},
+	},
 }

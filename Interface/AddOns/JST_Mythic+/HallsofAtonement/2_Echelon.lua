@@ -58,6 +58,50 @@ G.Encounters[2387] = {
 				{21508},
 			},
 			options = {
+				{ -- 文字 不死石精 数量（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["小怪"]..L["数量"],
+					data = {
+						spellID = 328124,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_AURA_APPLIED" and spellID == 328124 then -- 不死之石
+								if not tContains(self.GUIDs, destGUID) then
+									table.insert(self.GUIDs, destGUID)
+									self.count = #self.GUIDs
+								end
+								
+								if self.count > 0 then
+									self:Show()
+									self.text:SetText(string.format("%s %d", L["小怪"], self.count))
+								end
+							elseif sub_event == "UNIT_DIED" then -- 天降神雷
+								if tContains(self.GUIDs, destGUID) then
+									tDeleteItem(self.GUIDs, destGUID)
+									self.count = #self.GUIDs
+								end
+								
+								if self.count == 0 then
+									self:Hide()
+									self.text:SetText("")
+								end
+							end
+						
+						elseif event == "ENCOUNTER_START" then
+							if not self.GUIDs then
+								self.GUIDs = {}
+							else
+								self.GUIDs = table.wipe(self.GUIDs)
+							end
+						end
+					end,
+				},
 				{ -- 对我施法图标 罪邪箭（✓）
 					category = "AlertIcon",
 					type = "com",

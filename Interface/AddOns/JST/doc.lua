@@ -1,3 +1,9 @@
+-- 【【   To do list  】】---
+--[[
+ColorNameForMrt
+UIDropDownMenu_SetSelectedValue
+]]
+
 -- 【【   API  】】---
 --[[
 	EJ_GetInstanceByIndex(index, isRaid)
@@ -17,11 +23,10 @@
 	CopyTable(settings, shallow)
 	tInvert(tbl)
 	
-	tInsertUnique(table, element)
-	tDeleteItem(table, element)
-	
 	tIndexOf(table, element)
 	tContains(table, element)
+	tInsertUnique(table, element)
+	tDeleteItem(table, element)
 	
 	CountTable(tbl)
 	TableUtil.FindMin(tbl, op)

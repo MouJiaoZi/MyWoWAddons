@@ -28,6 +28,65 @@ G.Encounters[2649] = {
 					spellID = 460867,
 					sound = "[bomb]cast",
 				},
+				{ -- 文字 天降神雷 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["炸弹"]..L["倒计时"],
+					data = {
+						spellID = 460867,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_START" and spellID == 460867 then -- 天降神雷
+								if not self.GUIDs then
+									self.GUIDs = {}
+								else
+									self.GUIDs = table.wipe(self.GUIDs)
+								end
+								
+							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 460781 then -- 天降神雷
+								if not tContains(self.GUIDs, destGUID) then
+									table.insert(self.GUIDs, destGUID)
+									self.count = #self.GUIDs
+								end
+								
+								if self.count == 1 then
+									self:Show()
+									self.exp_time = GetTime() + 30
+								
+									self:SetScript("OnUpdate", function(s, e)
+										s.t = s.t + e
+										if s.t > 0.05 then
+											s.remain = s.exp_time - GetTime()
+											if s.remain > 0 then
+												s.text:SetText(string.format("%s%d/6 %.1f", L["炸弹"], s.count, s.remain))	
+											else
+												s:Hide()
+												s:SetScript("OnUpdate", nil)
+											end
+											s.t = 0
+										end
+									end)
+								end
+							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == 460781 then -- 天降神雷
+								if tContains(self.GUIDs, destGUID) then
+									tDeleteItem(self.GUIDs, destGUID)
+									self.count = #self.GUIDs
+								end
+								
+								if self.count == 0 then
+									self:Hide()
+									self:SetScript("OnUpdate", nil)
+									self.text:SetText("")
+								end
+							end
+						end
+					end,
+				},	
 				{ -- 图标 爆燃（✓）
 					category = "AlertIcon",
 					type = "aura",

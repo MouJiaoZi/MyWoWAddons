@@ -22,12 +22,7 @@ G.Encounters["c499"] = {
 				{427342},
 			},
 			options = {
-				{ -- 姓名板光环 防御（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 427342,
-				},
+				T.Temp_PlateAura(427342),
 			},
 		},
 		{ -- 热诚的神射手:射击
@@ -35,12 +30,7 @@ G.Encounters["c499"] = {
 				{427629},
 			},
 			options = {
-				{ -- 对我施法图标 射击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 427629,
-					hl = "yel_flash",
-				},
+				T.Temp_ComIcon(427629),
 			},
 		},
 		{ -- 热诚的神射手:随意射击
@@ -48,21 +38,12 @@ G.Encounters["c499"] = {
 				{462859},
 			},
 			options = {
-				T.Temp_SubInterruptBar(462859, { -- 随意射击（✓）
+				T.Temp_SubInterruptBar(462859, {
 					show_tar = true,
 					ficon = "14",
 				}),
-				{ -- 对我施法图标 随意射击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 462859,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 随意射击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 462859,
-				},
+				T.Temp_ComIcon(462859),
+				T.Temp_RaidCastIcon(462859),
 			},
 		},
 		{ -- 热诚的神射手:铁蒺藜
@@ -70,41 +51,11 @@ G.Encounters["c499"] = {
 				{453458},
 			},
 			options = {
-				{ -- 声音 铁蒺藜（✓）
-					category = "Sound",
-					sub_event = "SPELL_CAST_SUCCESS",
-					spellID = 453458,
-					file = "[mindstep]",
-				},
-				{ -- 图标 铁蒺藜（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 453461,
-					hl = "red",
-					tip = L["DOT"],
-					ficon = "13",
-				},
-				{ -- 自保技能提示 铁蒺藜（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 453461,
-					threshold = 65,
-				},
-				{ -- 驱散提示音 铁蒺藜（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 453461,
-					file = "[dispel]",
-					ficon = "13",
-				},
-				{ -- 团队框架高亮 铁蒺藜（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 453461,
-					color = "red",
-				},
+				T.Temp_CLEUSound(453458, "SPELL_CAST_SUCCESS", "[mindstep]"),
+				T.Temp_DoTIcon(453461, "13", "red"),
+				T.Temp_HPWatchAura(453461),
+				T.Temp_DispelDebuffSound(453461, "13"),
+				T.Temp_RaidAuraGlow(453461, "red"),
 			},
 		},
 		{ -- 阿拉希骑士:穿刺
@@ -112,36 +63,10 @@ G.Encounters["c499"] = {
 				{444296},
 			},
 			options = {
-				{ -- 图标 穿刺（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 427621,
-					hl = "red",
-					tip = L["强力DOT"],
-					ficon = "13",
-					sound = "[defense]",
-				},
-				{ -- 自保技能提示 穿刺（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 427621,
-					threshold = 65,
-				},
-				{ -- 驱散提示音 穿刺（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 427621,
-					file = "[dispel]",
-					ficon = "13",
-				},
-				{ -- 团队框架高亮 穿刺（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 427621,
-					color = "red",
-				},
+				T.Temp_BigDoTIcon(427621, "13", "red"),
+				T.Temp_HPWatchAura(427621),
+				T.Temp_DispelDebuffSound(427621, "13"),
+				T.Temp_RaidAuraGlow(427621, "red"),
 			},
 		},		
 		{ -- 阿拉希骑士:瓦解怒吼
@@ -275,14 +200,7 @@ G.Encounters["c499"] = {
 						frame.cast_exp = nil
 					end,
 				},
-				{ -- 自保技能提示 瓦解怒吼（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 427609,
-					event = "SPELL_CAST_START",
-					dur = 3,
-					threshold = 75,
-				},
+				T.Temp_HPWatchCLEU(427609, "SPELL_CAST_START", 3, 75),
 			},
 		},
 		{ -- 狂热的咒术师 亡灵法师 火球术
@@ -290,22 +208,11 @@ G.Encounters["c499"] = {
 				{427469},
 			},
 			options = {
-				T.Temp_SubInterruptBar(427469, { -- 火球术（✓）
+				T.Temp_SubInterruptBar(427469, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 火球术（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 427469,
-					mobID = "206698,221760",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 团队框架图标 火球术（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 427469,
-				},		
+				T.Temp_PlateInterrupt(427469, "206698,221760", 2),
+				T.Temp_RaidCastIcon(427469),
 			},
 		},
 		{ -- 狂热的咒术师:烈焰风暴
@@ -313,12 +220,9 @@ G.Encounters["c499"] = {
 				{427484},
 			},
 			options = {
-				{ -- 计时条 烈焰风暴（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 427484,
+				T.Temp_NormalCastBar(427484, {
 					sound = "[dodge_circle]cast",
-				},
+				}),
 			},
 		},
 		{ -- 虔诚的牧师:强效治疗术
@@ -326,15 +230,8 @@ G.Encounters["c499"] = {
 				{427356},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(427356), -- 强效治疗术（✓）
-				{ -- 姓名板打断图标 强效治疗术（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 427356,
-					mobID = "206697",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_ImportantInterruptBar(427356),
+				T.Temp_PlateInterrupt(427356, "206697", 1),
 			},
 		},
 		{ -- 虔诚的牧师:神圣惩击
@@ -342,28 +239,12 @@ G.Encounters["c499"] = {
 				{427357},
 			},
 			options = {
-				T.Temp_SubInterruptBar(427357, { -- 神圣惩击（✓）
+				T.Temp_SubInterruptBar(427357, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 神圣惩击（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 427357,
-					mobID = "206697,212827",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 神圣惩击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 427357,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 神圣惩击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 427357,
-				},
+				T.Temp_PlateInterrupt(427357, "206697,212827", 2),
+				T.Temp_ComIcon(427357),
+				T.Temp_RaidCastIcon(427357),				
 			},
 		},
 		{ -- 作战山猫:飞扑 痛苦撕裂
@@ -372,35 +253,10 @@ G.Encounters["c499"] = {
 				{427635},
 			},
 			options = {
-				{ -- 图标 痛苦撕裂（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 427635,
-					hl = "red",
-					tip = L["强力DOT"],
-					ficon = "13",
-				},
-				{ -- 自保技能提示 痛苦撕裂（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 427635,
-					threshold = 65,
-				},
-				{ -- 驱散提示音 痛苦撕裂（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 427635,
-					file = "[dispel]",
-					ficon = "13",
-				},
-				{ -- 团队框架高亮 痛苦撕裂（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 427635,
-					color = "red",
-				},
+				T.Temp_BigDoTIcon(427635, "13", "red"),
+				T.Temp_HPWatchAura(427635),
+				T.Temp_DispelDebuffSound(427635, "13"),
+				T.Temp_RaidAuraGlow(427635, "red"),				
 			},
 		},	
 		{ -- 高阶牧师艾姆雅:反射护盾
@@ -408,22 +264,10 @@ G.Encounters["c499"] = {
 				{464240},
 			},
 			options = {
-				{ -- 计时条 反射护盾（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 464240,
-					spellIDs = {428150},
+				T.Temp_ImportantCastBar(428150, {
 					sound = "[reflect_shield]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 姓名板光环 反射护盾（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 464240,
-					spellIDs = {428150},
-				},
+				}),
+				T.Temp_PlateAura(428150),
 			},
 		},
 		{ -- 守卫队长苏雷曼:盾牌猛击
@@ -431,14 +275,7 @@ G.Encounters["c499"] = {
 				{448485},
 			},
 			options = {
-				{ -- 打坦计时条 盾牌猛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 448485,
-					group = 1,
-					ficon = "0",
-					sound = "[knockoff]cast",
-				},
+				T.Temp_TankCastBar(448485, "[knockoff]cast"),
 			},
 		},
 		{ -- 守卫队长苏雷曼:雷霆一击
@@ -479,20 +316,10 @@ G.Encounters["c499"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},				
-				{ -- 计时条 雷霆一击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 448492,
+				T.Temp_NormalCastBar(448492, {
 					sound = "[aoe]cast",
-				},
-				{ -- 图标 雷霆一击（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 448492,
-					tip = L["减速"].."50%",
-				},
+				}),
+				T.Temp_NormalDebuff(448492, L["减速"].."50%"),				
 			},
 		},
 		{ -- 铸炉大师达米安:烈焰圣印
@@ -500,22 +327,11 @@ G.Encounters["c499"] = {
 				{427950},
 			},
 			options = {
-				{ -- 计时条 烈焰圣印（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 427950,
+				T.Temp_NormalCastBar(427950, {
 					text = L["躲地板"],
 					sound = "[mindstep]cast",
-				},
-				{ -- 图标 熔岩池（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 427900,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				}),
+				T.Temp_OnFireIcon(427900),				
 			},
 		},
 		{ -- 铸炉大师达米安:热浪
@@ -555,38 +371,16 @@ G.Encounters["c499"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 热浪（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 427897,
+				T.Temp_ImportantCastBar(427897, {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 热浪（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 427897,
-					event = "SPELL_CAST_START",
-					dur = 5,
-					threshold = 75,
-				},
-				{ -- 图标 热浪（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 427897,
-					tip = L["减速"].."70%",
+				}),
+				T.Temp_HPWatchCLEU(427897, "SPELL_CAST_START", 5, 75),
+				T.Temp_NormalDebuff(427897, L["减速"].."70%", {
 					ficon = "7",
-				},
-				{ -- 团队框架高亮 热浪（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 427897,
-					color = "blu",
-				},
+					hl = "blu",
+				}),
+				T.Temp_RaidAuraGlow(427897, "blu"),
 			},
 		},
 		{ -- 艾蕾娜·安博兰兹
@@ -717,21 +511,10 @@ G.Encounters["c499"] = {
 				{424429},
 			},
 			options = {
-				{ -- 计时条 奉献（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 424429,
+				T.Temp_NormalCastBar(424429, {
 					sound = "[outcircle]cast",
-				},
-				{ -- 图标 奉献（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 424430,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				}),
+				T.Temp_OnFireIcon(424430),
 			},
 		},
 		{ -- 热切的圣骑士:神圣鸣罪
@@ -771,23 +554,11 @@ G.Encounters["c499"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},				
-				{ -- 计时条 神圣鸣罪（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 448791,
+				T.Temp_ImportantCastBar(448791, {
 					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 神圣鸣罪（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 448791,
-					event = "SPELL_CAST_START",
-					dur = 2.5,
-					threshold = 75,
-				},
+				}),
+				T.Temp_HPWatchCLEU(448791, "SPELL_CAST_START", 2.5, 75),
 			},
 		},
 		{ -- 热心的圣殿骑士:圣殿骑士之怒
@@ -795,21 +566,8 @@ G.Encounters["c499"] = {
 				{444728},
 			},
 			options = {
-				{ -- 姓名板光环 圣殿骑士之怒（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 444728,
-					ficon = "7",
-				},
-				{ -- 驱散提示音 圣殿骑士之怒（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 444728,
-					aura_type = "HELPFUL",
-					file = "[dispel]",
-					ficon = "7",
-				},
+				T.Temp_PlateAura(444728),			
+				T.Temp_DispelBuffSound(444728, "7"),
 			},
 		},		
 		{ -- 光耀之子:纯净
@@ -817,39 +575,11 @@ G.Encounters["c499"] = {
 				{448787},
 			},
 			options = {
-				{ -- 对我施法图标 纯净（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 448787,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 纯净（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 448787,
-				},
-				{ -- 图标 纯净（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 448787,
-					hl = "red",
-					tip = L["强力DOT"],
-					sound = "[defense]",
-				},
-				{ -- 自保技能提示 纯净（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 448787,
-					threshold = 80,
-				},
-				{ -- 团队框架高亮 纯净（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 448787,
-					color = "red",
-				},
+				T.Temp_ComIcon(448787),
+				T.Temp_RaidCastIcon(448787),
+				T.Temp_BigDoTIcon(448787, nil, "red"),
+				T.Temp_HPWatchAura(448787, nil, 80),
+				T.Temp_RaidAuraGlow(448787, "red"),
 			},
 		},
 		{ -- 光耀之子:强光迸发
@@ -857,12 +587,9 @@ G.Encounters["c499"] = {
 				{427601},
 			},
 			options = {
-				{ -- 计时条 强光迸发（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 427601,
+				T.Temp_NormalCastBar(427601, {
 					sound = "[outcircle]cast",
-				},
+				}),
 			},
 		},
 		{ -- 亡灵法师:连珠火球
@@ -870,15 +597,8 @@ G.Encounters["c499"] = {
 				{444743},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(444743), -- 连珠火球（✓）
-				{ -- 姓名板打断图标 连珠火球（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 444743,
-					mobID = "221760",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_ImportantInterruptBar(444743),
+				T.Temp_PlateInterrupt(444743, "221760", 1),
 			},
 		},
 		{ -- 布朗派克爵士:辉耀烈焰
@@ -886,20 +606,8 @@ G.Encounters["c499"] = {
 				{451763},
 			},
 			options = {
-				{ -- 声音 辉耀烈焰（✓）
-					category = "Sound",
-					sub_event = "SPELL_CAST_SUCCESS",
-					spellID = 451763,
-					file = "[defense]",
-				},
-				{ -- 图标 辉耀烈焰（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 451764,
-					tip = L["DOT"],
-				},
+				T.Temp_CLEUSound(451763, "SPELL_CAST_SUCCESS", "[defense]"),
+				T.Temp_DoTIcon(451764),
 			},
 		},
 		{ -- 布朗派克爵士:炽热打击
@@ -907,23 +615,8 @@ G.Encounters["c499"] = {
 				{435165},
 			},
 			options = {
-				{ -- 打坦计时条 炽热打击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 435165,
-					group = 1,
-					ficon = "0",
-					sound = "[minddefense]cast",
-				},
-				{ -- 图标 炽热打击（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 435165,
-					hl = "",
-					tip = L["DOT"],
-				},
+				T.Temp_TankCastBar(435165, "[minddefense]cast"),
+				T.Temp_DoTIcon(435165),
 			},
 		},
 	},

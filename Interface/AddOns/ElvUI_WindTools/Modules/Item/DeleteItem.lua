@@ -46,14 +46,14 @@ function DI:AddKeySupport(dialog)
 	end
 
 	-- 按键删除
-	targetFrame:SetScript("OnKeyDown", function(self, key)
+	targetFrame:SetScript("OnKeyDown", function(_, key)
 		if key == "DELETE" then
 			dialog:GetButton1():Enable()
 		end
 	end)
 
-	targetFrame:HookScript("OnHide", function(self)
-		self:SetScript("OnKeyDown", nil)
+	targetFrame:HookScript("OnHide", function(_)
+		targetFrame:SetScript("OnKeyDown", nil)
 	end)
 end
 
@@ -79,9 +79,9 @@ function DI:ShowFillInButton(dialog)
 
 	-- 点击后填入 Delete
 	self.fillInButton:SetText(C.StringByTemplate(L["Click to confirm"], "rose-500"))
-	self.fillInButton:SetScript("OnClick", function(self)
+	self.fillInButton:SetScript("OnClick", function(_)
 		yesButton:Enable()
-		self:SetText("|cff2ecc71" .. L["Confirmed"] .. "|r")
+		self.fillInButton:SetText("|cff2ecc71" .. L["Confirmed"] .. "|r")
 	end)
 	self.fillInButton:Show()
 end
@@ -93,12 +93,35 @@ function DI.HideFillInButton()
 	end
 end
 
+function DI:ResizeQuestItemPopup(dialog)
+	local isQuestItem = dialog.which == "DELETE_QUEST_ITEM" or dialog.which == "DELETE_GOOD_QUEST_ITEM"
+
+	if isQuestItem then
+		dialog:SetSize(400, 180)
+
+		local button1 = dialog:GetButton1()
+		local button2 = dialog:GetButton2()
+
+		if button1 then
+			button1:ClearAllPoints()
+			button1:SetPoint("BOTTOMRIGHT", dialog, "BOTTOM", -10, 20)
+		end
+
+		if button2 then
+			button2:ClearAllPoints()
+			button2:SetPoint("BOTTOMLEFT", dialog, "BOTTOM", 10, 20)
+		end
+	end
+end
+
 function DI:DELETE_ITEM_CONFIRM()
 	StaticPopup_ForEachShownDialog(function(dialog)
 		local type = dialog.which
 		if not dialogs[type] then
 			return
 		end
+
+		self:ResizeQuestItemPopup(dialog)
 
 		if self.db.delKey then
 			self:AddKeySupport(dialog)

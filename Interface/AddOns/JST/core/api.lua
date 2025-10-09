@@ -4421,13 +4421,13 @@ local Copy_Mrt_Raidlist = function(frame, rev, custom)
 		local name = UnitName(unit)
 		
 		if rev and mod(i, 2) == 0 then
-			table.insert(rev_player, T.ColorNameForMrt(name))
+			table.insert(rev_player, name)
 		else
-			table.insert(players, T.ColorNameForMrt(name))
+			table.insert(players, name)
 		end
 			
 		if i <= 3 then
-			table.insert(custom_players, T.ColorNameForMrt(name))
+			table.insert(custom_players, name)
 		end
 	end
 	
@@ -5059,7 +5059,7 @@ T.InitAuraMods_ByMrt = function(frame)
 	
 	function frame:Update(GUID)
 		if self.actives[GUID] then
-			local unit_id = T.GetGroupInfobyGUID(GUID)["unit"]
+			local unit_id = T.GUIDToUnit(GUID)
 			local count, _, dur, exp_time = select(3, AuraUtil.FindAuraBySpellID(self.aura_id, unit_id, G.TestMod and "HELPFUL" or "HARMFUL"))
 			self.actives[GUID]:update(count, dur, exp_time)
 		end
@@ -5214,7 +5214,7 @@ T.InitAuraMods_ByTime = function(frame)
 	
 	function frame:Update(GUID)
 		if self.actives[GUID] then
-			local unit_id = T.GetGroupInfobyGUID(GUID)["unit"]
+			local unit_id = T.GUIDToUnit(GUID)
 			local count, _, dur, exp_time = select(3, AuraUtil.FindAuraBySpellID(self.aura_id, unit_id, G.TestMod and "HELPFUL" or "HARMFUL"))
 			self.actives[GUID]:update(count, dur, exp_time)
 		end
@@ -5446,7 +5446,7 @@ local function Copy_Mrt_Spelllist(frame)
 			i = i + 1
 			if i <= 3 then
 				local name = UnitName(unit)
-				raidlist = raidlist.." "..T.ColorNameForMrt(name)
+				raidlist = raidlist.." "..name
 			end
 		end
 	end
@@ -5510,7 +5510,7 @@ T.InitSpellBars = function(frame)
 			else
 				name = T.ColorNickNameByGUID(GUID)
 			end
-			local unit = T.GetGroupInfobyGUID(GUID)["unit"]
+			local unit = T.GUIDToUnit(GUID)
 			if UnitIsDeadOrGhost(unit) then
 				name = "|cff969696[D]|r"..name
 			end
@@ -5588,7 +5588,7 @@ T.InitSpellBars = function(frame)
 						
 			for index, GUID in pairs(self.assignment[self.display_count]) do
 				if self.raid_glow and C.DB["BossMod"][self.config_id]["raid_glow_bool"] then
-					local unit_id = T.GetGroupInfobyGUID(GUID)["unit"]
+					local unit_id = T.GUIDToUnit(GUID)
 					GlowRaidFramebyUnit_Show(self.raid_glow, "debuff"..self.config_id, unit_id, self.raid_glow_color or {.2, .4, 1}, self.alert_dur or 5) -- 团队框架动画
 				end
 				
@@ -6396,7 +6396,6 @@ end
 
 T.IterateNoteAssignment = function(tag, noteOverride)
 	local tag = string.format("#%sstart", tag)
-	
 	local note = noteOverride or (VMRT and VMRT.Note and VMRT.Note.Text1)
 	local lineCount = 1
     local lines = {}

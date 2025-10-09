@@ -4,8 +4,8 @@ FrameLevel: 2
 Anchor: TOPLEFT
 X: 20
 Y: -20
-W: 197
-H: 112
+W: 96
+H: 20
 Frame: JSTTimerbarFrame
 FrameLevel: 2
 Anchor: CENTER
@@ -36,9 +36,9 @@ W: 260
 H: 150
 Frame: WorldMapFrame
 FrameLevel: 1
-Anchor: TOPLEFT
-X: 45
-Y: -23
+Anchor: TOP
+X: -74
+Y: -33
 W: 1004
 H: 689
 Frame: MRTNote
@@ -51,8 +51,8 @@ H: 605
 Frame: JST_GUI
 FrameLevel: 2
 Anchor: CENTER
-X: -20
-Y: -26
+X: 71
+Y: 20
 W: 1150
 H: 730
 Frame: JSTTLFrame

@@ -12,6 +12,7 @@ G.TestBossModFrames = {
 -----------------[[    Frame Holder    ]]-----------------
 ----------------------------------------------------------
 local FrameHolder = CreateFrame("Frame", addon_name.."FrameHolder", UIParent)
+G.FrameHolder = FrameHolder
 
 local update_rate = .05
 
@@ -51,12 +52,16 @@ local function CheckConditions(self, register_events, args, event, ...)
 			T.RegisterEventAndCallbacks(self, register_events)
 		else
 			if self.enable and T.CheckRole(args.ficon) then
-				if self.npcID and T.CheckEncounter(self.npcID, args.ficon) then
-					T.RegisterEventAndCallbacks(self, register_events)
-					if args.points and not args.points.hide then
-						self:Show()
+				if IsEncounterInProgress() then
+					if self.npcID and T.CheckEncounter(self.npcID, args.ficon) then
+						T.RegisterEventAndCallbacks(self, register_events)
+						if args.points and not args.points.hide then
+							self:Show()
+						end
 					end
-				elseif self.mapID then
+				end
+				
+				if self.mapID then
 					if T.CheckDungeon(self.mapID) then
 						T.RegisterEventAndCallbacks(self, register_events)
 						if args.points and not args.points.hide then
@@ -510,7 +515,7 @@ end
 local GetAuraMsg = function(str, spellID)
 	local spellName = C_Spell.GetSpellName(spellID)
 	local msg
-	msg = T.MsgtoStr(str)
+	msg = T.MarkMsgtoStr(str)
 	msg = gsub(msg, "%%name", G.PlayerName)
 	msg = gsub(msg, "%%spell", spellName)
 	msg = gsub(msg, "%%stack", 2)

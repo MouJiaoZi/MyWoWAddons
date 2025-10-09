@@ -1,0 +1,13 @@
+
+MythicDungeonToolsDB = {
+["profileKeys"] = {
+["专杀饺子王 - 雷霆之怒"] = "专杀饺子王 - 雷霆之怒",
+["我都等的 - 凤凰之神"] = "我都等的 - 凤凰之神",
+["Sagdwevb - 凤凰之神"] = "Sagdwevb - 凤凰之神",
+},
+["global"] = {
+["minimap"] = {
+["showInCompartment"] = true,
+},
+},
+}

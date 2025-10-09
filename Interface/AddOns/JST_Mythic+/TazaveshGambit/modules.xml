@@ -1,4 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="data.lua"/>
 	<Script file="0_Trash.lua"/>
 	<Script file="1_Hylbrande.lua"/>	
 	<Script file="2_Hooktail.lua"/>

@@ -21,8 +21,6 @@ local tremove = tremove
 local type = type
 local unpack = unpack
 
-local GetClassColor = GetClassColor
-
 ---@cast F Functions
 
 ---Set font style from database settings
@@ -82,47 +80,6 @@ function F.SetFontOutline(text, font, size)
 	text:FontTemplate(font or fontName, size or fontHeight, "OUTLINE")
 	text:SetShadowColor(0, 0, 0, 0)
 	text.SetShadowColor = E.noop
-end
-
----Create colored string from database settings
----@param text string The text to colorize
----@param db RGB Color database containing r, g, b values
----@return string? coloredText The colored string or nil if parameters are invalid
-function F.CreateColorString(text, db)
-	if not text or type(text) ~= "string" then
-		F.Developer.LogDebug("Functions.CreateColorString: text not found")
-		return
-	end
-
-	if not db or type(db) ~= "table" then
-		F.Developer.LogDebug("Functions.CreateColorString: db not found")
-		return
-	end
-
-	local hex = db.r and db.g and db.b and E:RGBToHex(db.r, db.g, db.b) or "|cffffffff"
-
-	return hex .. text .. "|r"
-end
-
----Create class colored string
----@param text string The text to colorize
----@param classFile ClassFile? The English class name (e.g., "WARRIOR", "MAGE")
----@return string? coloredText The class colored string or nil if parameters are invalid
-function F.CreateClassColorString(text, classFile)
-	if not text or type(text) ~= "string" then
-		F.Developer.LogDebug("Functions.CreateClassColorString: text not found")
-		return
-	end
-
-	if not classFile or type(classFile) ~= "string" then
-		F.Developer.LogDebug("Functions.CreateClassColorString: class not found")
-		return
-	end
-
-	local r, g, b = GetClassColor(classFile)
-	local hex = r and g and b and E:RGBToHex(r, g, b) or "|cffffffff"
-
-	return hex .. text .. "|r"
 end
 
 ---Set font outline for all FontString regions in a frame
@@ -431,8 +388,6 @@ function F.Move(frame, x, y)
 		return
 	end
 
-	local setPoint = frame.__SetPoint or frame.SetPoint
-
 	---@type table[] Store all current anchor points
 	local pointsData = {}
 
@@ -445,8 +400,41 @@ function F.Move(frame, x, y)
 
 	for _, data in pairs(pointsData) do
 		local point, relativeTo, relativePoint, xOfs, yOfs = unpack(data)
-		setPoint(frame, point, relativeTo, relativePoint, xOfs + x, yOfs + y)
+		F.CallMethod(frame, "SetPoint", point, relativeTo, relativePoint, xOfs + x, yOfs + y)
 	end
+end
+
+---@param fontFile string Font path or name
+---@param fontSize number Font size
+---@param fontStyle string Font style (e.g., "OUTLINE")
+---@param texts string | string[] Text or array of texts to measure
+---@return number maxWidth The maximum width among the provided texts
+function F.GetAdaptiveTextWidth(fontFile, fontSize, fontStyle, texts)
+	if not F.__GetAdaptiveTextWidthFont then
+		F.__GetAdaptiveTextWidthFont = E.UIParent:CreateFontString(nil, "OVERLAY")
+		F.__GetAdaptiveTextWidthFont:Hide()
+		F.InternalizeMethod(F.__GetAdaptiveTextWidthFont, "Show", true)
+	end
+
+	local font = F.__GetAdaptiveTextWidthFont
+	font:FontTemplate(fontFile or E.media.normFont, fontSize or E.db.general.fontSize, fontStyle or "NONE")
+
+	if type(texts) == "string" then
+		texts = { texts }
+	end
+
+	local maxWidth = 0
+	for _, text in pairs(texts) do
+		if type(text) == "string" then
+			font:SetText(text)
+			local width = font:GetStringWidth()
+			if width > maxWidth then
+				maxWidth = width
+			end
+		end
+	end
+
+	return maxWidth
 end
 
 ---Check if two numbers are approximately equal

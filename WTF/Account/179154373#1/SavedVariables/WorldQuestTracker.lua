@@ -1,0 +1,59 @@
+
+WQTrackerDB = {
+["profileKeys"] = {
+["专杀饺子王 - 雷霆之怒"] = "Default",
+["我都等的 - 凤凰之神"] = "Default",
+["Sagdwevb - 凤凰之神"] = "Default",
+},
+["profiles"] = {
+["Default"] = {
+["world_map_hubscale"] = {
+[875] = 0.9,
+[947] = 1,
+[2274] = 0.95,
+[1550] = 1,
+[876] = 0.9,
+[1978] = 0.85,
+[619] = 0.3,
+},
+["world_map_hubenabled"] = {
+[875] = true,
+[947] = true,
+[2274] = true,
+[1550] = true,
+[876] = true,
+[1978] = true,
+[619] = true,
+},
+["player_names"] = {
+["Player-1694-0164A741"] = {
+["class"] = "PALADIN",
+["name"] = "专杀饺子王",
+["realm"] = "雷霆之怒",
+},
+["Player-1515-04D5125A"] = {
+["class"] = "WARRIOR",
+["name"] = "我都等的",
+["realm"] = "凤凰之神",
+},
+["Player-1515-05637606"] = {
+["class"] = "WARRIOR",
+["name"] = "Sagdwevb",
+["realm"] = "凤凰之神",
+},
+},
+["quests_tracked"] = {
+["Player-1694-0164A741"] = {
+},
+["Player-1515-04D5125A"] = {
+},
+["Player-1515-05637606"] = {
+},
+},
+},
+},
+}
+WQTrackerLanguage = {
+["language"] = "zhCN",
+["version"] = 1,
+}

@@ -10,17 +10,6 @@ local LRC = LibStub("LibRangeCheck-3.0")
 --[[                 -- 公用功能 --                 ]]--
 --====================================================--
 
--- 通过ID查找光环
-do
-	local function SpellIDPredicate(auraSpellIDToFind, _, _, _, _, _, _, _, _, _, _, _, spellID)
-		return auraSpellIDToFind == spellID
-	end
-	
-	function AuraUtil.FindAuraBySpellID(spellID, unit, filter)
-		return AuraUtil.FindAura(SpellIDPredicate, unit, filter, spellID)
-	end
-end
-
 -- 上标记
 T.SetRaidTarget = function(unit, rm)
 	if not C.DB["GeneralOption"]["disable_rmark"] then
@@ -89,11 +78,66 @@ T.GetMyRole = function()
 	return role
 end
 
+local Spec_Pos = {
+	-- Death Knight
+	[250] = "MELEE", -- Blood (Tank)
+	[251] = "MELEE", -- Frost (DPS)
+	[252] = "MELEE", -- Unholy (DPS)
+	-- Demon Hunter
+	[577] = "MELEE", -- Havoc (DPS)
+	[581] = "MELEE", -- Vengeance (Tank)
+	-- Druid
+	[102] = "RANGED", -- Balance (DPS Owl)
+	[103] = "MELEE", -- Feral (DPS Cat)
+	[104] = "MELEE", -- Guardian (Tank Bear)
+	[105] = "RANGED", -- Restoration (Heal)
+	-- Evoker
+	[1467] = "RANGED", -- Devastation (DPS)
+	[1468] = "RANGED", -- Preservation (Heal)
+	[1473] = "RANGED", -- Augmentation (DPS)
+	-- Hunter
+	[253] = "RANGED", -- Beast Mastery
+	[254] = "RANGED", -- Marksmanship
+	[255] = "MELEE", -- Survival
+	-- Mage
+	[62] = "RANGED", -- Arcane
+	[63] = "RANGED", -- Fire
+	[64] = "RANGED", -- Frost
+	-- Monk
+	[268] = "MELEE", -- Brewmaster (Tank)
+	[269] = "MELEE", -- Windwalker (DPS)
+	[270] = "MELEE", -- Mistweaver (Heal)
+	-- Paladin
+	[65] = "MELEE", -- Holy (Heal)
+	[66] = "MELEE", -- Protection (Tank)
+	[70] = "MELEE", -- Retribution (DPS)
+	-- Priest
+	[256] = "RANGED", -- Discipline (Heal)
+	[257] = "RANGED", -- Holy (Heal)
+	[258] = "RANGED", -- Shadow (DPS)
+	-- Rogue
+	[259] = "MELEE", -- Assassination
+	[260] = "MELEE", -- Outlaw
+	[261] = "MELEE", -- Subtlety
+	-- Shaman
+	[262] = "RANGED", -- Elemental (DPS)
+	[263] = "MELEE", -- Enhancement (DPS)
+	[264] = "RANGED", -- Restoration (Heal)
+	-- Warlock
+	[265] = "RANGED", -- Affliction
+	[266] = "RANGED", -- Demonology
+	[267] = "RANGED", -- Destruction
+	-- Warrior
+	[71] = "MELEE", -- Arms (DPS)
+	[72] = "MELEE", -- Fury (DPS)
+	[73] = "MELEE", -- Protection (Tank)
+}
+
 -- 根据专精获取我的当前位置
 T.GetMyPos = function()
 	local my_spec_index = GetSpecialization()
 	local my_spec_ID = GetSpecializationInfo(my_spec_index)
-	local pos = G.Spec_Pos[my_spec_ID]
+	local pos = Spec_Pos[my_spec_ID]
 	return pos
 end
 
@@ -127,6 +171,41 @@ local DelayFunc = function(delay, func)
 	end
 end
 T.DelayFunc = DelayFunc
+
+--====================================================--
+--[[                   -- 法术 --                   ]]--
+--====================================================--
+
+-- 通过ID查找光环
+do
+	local function SpellIDPredicate(auraSpellIDToFind, _, _, _, _, _, _, _, _, _, _, _, spellID)
+		return auraSpellIDToFind == spellID
+	end
+	
+	function AuraUtil.FindAuraBySpellID(spellID, unit, filter)
+		return AuraUtil.FindAura(SpellIDPredicate, unit, filter, spellID)
+	end
+end
+
+-- 检查自身法术可用
+T.MySpellCheck = function(spellID, isPet)
+	local spellBank = isPet and 1 or 0
+	if not C_SpellBook.IsSpellKnown(spellID, spellBank) then
+		return
+	end
+	
+	local charges = C_Spell.GetSpellCharges(spellID)	
+	if charges and charges.currentCharges > 0 then
+		return true, charges.currentCharges
+	else
+		local cd_info = C_Spell.GetSpellCooldown(spellID)
+		local start, dur = cd_info.startTime, cd_info.duration
+		if start and dur < 2 then
+			return true, 1
+		end
+	end
+end
+
 --====================================================--
 --[[                -- 首领和副本 --                ]]--
 --====================================================--
@@ -348,69 +427,6 @@ T.GetTableNum = function(t)
 	return num
 end
 
--- 获取路径值
-do
-	local ValueFromPath
-	ValueFromPath = function(data, path)
-		if not data then
-			return nil
-		end
-		if (#path == 0) then
-			return data
-		elseif(#path == 1) then
-			return data[path[1]]
-		else
-			local reducedPath = {}
-			for i= 2, #path do
-				reducedPath[i-1] = path[i]
-			end
-			return ValueFromPath(data[path[1]], reducedPath)
-		end
-	end
-	T.ValueFromPath = ValueFromPath
-end
-
--- 路径赋值
-do
-	local ValueToPath
-	function ValueToPath(data, path, value)
-		if not data then
-			return
-		end
-		if(#path == 1) then
-			data[path[1]] = value
-		else
-			local reducedPath = {}
-			for i= 2, #path do
-				reducedPath[i-1] = path[i]
-			end
-			if data[path[1]] == nil then
-				data[path[1]] = {}
-			end
-			ValueToPath(data[path[1]], reducedPath, value)
-		end
-	end
-	T.ValueToPath = ValueToPath
-end
-
-T.ValueFromDB = function(path)
-	local value
-	if C.UseAccountSettings then
-		value = T.ValueFromPath(JST_DB.CDB, path)
-	else
-		value = T.ValueFromPath(JST_CDB, path)
-	end
-	return value
-end
-
-T.ValueToDB = function(path, value)
-	if C.UseAccountSettings then
-		T.ValueToPath(JST_DB.CDB, path, value)
-	else
-		T.ValueToPath(JST_CDB, path, value)
-	end
-end
-
 -- 复制并插入表格
 T.CopyTableInsertElement = function(copy_t, new_element)
 	local target_t = {}
@@ -421,30 +437,6 @@ T.CopyTableInsertElement = function(copy_t, new_element)
 	return target_t
 end
 
-local ClassIDs = {
-	WARRIOR		= 1,
-	PALADIN 	= 2,
-	HUNTER		= 3,
-	ROGUE		= 4,	
-	PRIEST		= 5,
-	DEATHKNIGHT	= 6,
-	SHAMAN		= 7,
-	MAGE	    = 8,
-	WARLOCK	    = 9,
-	MONK        = 10,
-	DRUID	    = 11,
-	DEMONHUNTER = 12,
-	EVOKER		= 13,
-}
-
-T.GetClassMrtStr = function(classFile)
-	local classID = ClassIDs[classFile]
-	if classID then
-		local className = GetClassInfo(classID)
-		local str = string.format("||c%s%s||r", G.Ccolors[classFile].colorStr, className)
-		return str
-	end
-end
 --====================================================--
 --[[                 -- 音效/朗读 --                ]]--
 --====================================================--
@@ -858,7 +850,7 @@ local GetChannel = function(str)
 	elseif IsInRaid() and str == "RAID" then
 		CHANNEL = (IsInRaid(1) and "RAID") or (IsInRaid(2) and "INSTANCE_CHAT")
 	elseif IsInGroup() and str == "PARTY" then
-		CHANNEL = (IsInGroup(1) and "PARTY") or (IsInGroup(2) and "INSTANCE_CHAT") 
+		CHANNEL = (IsInGroup(1) and "PARTY") or (IsInGroup(2) and "INSTANCE_CHAT")
 	elseif str == "WHISPER" then
 		CHANNEL = str
 	end
@@ -974,6 +966,30 @@ T.GetInterruptStr = function(mobID, spellID, rt, interrupt, backup)
 	return result
 end
 
+local ClassIDs = {
+	WARRIOR		= 1,
+	PALADIN 	= 2,
+	HUNTER		= 3,
+	ROGUE		= 4,	
+	PRIEST		= 5,
+	DEATHKNIGHT	= 6,
+	SHAMAN		= 7,
+	MAGE	    = 8,
+	WARLOCK	    = 9,
+	MONK        = 10,
+	DRUID	    = 11,
+	DEMONHUNTER = 12,
+	EVOKER		= 13,
+}
+
+T.GetClassMrtStr = function(classFile)
+	local classID = ClassIDs[classFile]
+	if classID then
+		local className = GetClassInfo(classID)
+		local str = string.format("||c%s%s||r", G.Ccolors[classFile].colorStr, className)
+		return str
+	end
+end
 --====================================================--
 --[[                 -- 团队标记 --                  ]]--
 --====================================================--
@@ -992,15 +1008,8 @@ T.FormatRaidMark = function(text)
 end
 
 -- 标记喊话转文本
-T.MsgtoStr = function(text)
+T.MarkMsgtoStr = function(text)
 	local result = gsub(text, "{rt(%d)}", function(e) return string.format("|TInterface\\TargetingFrame\\UI-RaidTargetingIcon_%d:0|t", e) end)
-	return result
-end
-
--- 标记喊话转朗读文本
-local RTScriptList = {"星星","大饼","紫菱","三角","月亮","方块","叉叉","骷髅"}
-T.MsgtoScript = function(text)
-	local result = gsub(text, "{rt(%d)}", function(e) return RTScriptList[tonumber(e)] end)
 	return result
 end
 
@@ -1275,6 +1284,16 @@ T.createGUIbd = function(f, a)
 	f.sd:SetBackdropBorderColor(.5, .5, .5)
 end
 
+-- 彩色边框
+local hl_colors = {
+	["red"] = {1, 0, 0},
+	["gre"] = {.23, .96, .23},
+	["blu"] = {.32, .65, .93},
+	["pur"] = {.77, .45, 1},
+	["org"] = {1, .5, 0},
+	["yel"] = {1, .89, .12},
+}
+
 -- 图标粗边框
 T.SetHighLightBorderColor = function(frame, anchor, color, edgeSize)
 	local size = edgeSize or 5
@@ -1294,7 +1313,7 @@ T.SetHighLightBorderColor = function(frame, anchor, color, edgeSize)
 		frame.innerBD:SetBackdropBorderColor(unpack(color))
 	else
 		local color_key = gsub(color, "_flash", "")
-		frame.innerBD:SetBackdropBorderColor(unpack(G.hl_colors[color_key]))
+		frame.innerBD:SetBackdropBorderColor(unpack(hl_colors[color_key]))
 	end
 end
 
@@ -1312,4 +1331,123 @@ T.createtext = function(frame, layer, fontsize, flag, justifyh, justifyv)
 	end
 	
 	return text
+end
+
+--====================================================--
+--[[                    -- 配置 --                  ]]--
+--====================================================--
+
+-- 获取路径值
+do
+	local ValueFromPath
+	ValueFromPath = function(data, path)
+		if not data then
+			return nil
+		end
+		if (#path == 0) then
+			return data
+		elseif(#path == 1) then
+			return data[path[1]]
+		else
+			local reducedPath = {}
+			for i= 2, #path do
+				reducedPath[i-1] = path[i]
+			end
+			return ValueFromPath(data[path[1]], reducedPath)
+		end
+	end
+	T.ValueFromPath = ValueFromPath
+end
+
+-- 路径赋值
+do
+	local ValueToPath
+	function ValueToPath(data, path, value)
+		if not data then
+			return
+		end
+		if(#path == 1) then
+			data[path[1]] = value
+		else
+			local reducedPath = {}
+			for i= 2, #path do
+				reducedPath[i-1] = path[i]
+			end
+			if data[path[1]] == nil then
+				data[path[1]] = {}
+			end
+			ValueToPath(data[path[1]], reducedPath, value)
+		end
+	end
+	T.ValueToPath = ValueToPath
+end
+
+T.ValueFromDB = function(path)
+	local value
+	if C.UseAccountSettings then
+		value = T.ValueFromPath(JST_DB.CDB, path)
+	else
+		value = T.ValueFromPath(JST_CDB, path)
+	end
+	return value
+end
+
+T.ValueToDB = function(path, value)
+	if C.UseAccountSettings then
+		T.ValueToPath(JST_DB.CDB, path, value)
+	else
+		T.ValueToPath(JST_CDB, path, value)
+	end
+end
+
+T.ValueToString = function(value)
+	local valuetext
+	if value == false then
+		return "false"
+	elseif value == true then
+		return "true"
+	elseif type(value) == "number" then
+		return string.format("<num%d>", value)
+	else
+		return value
+	end
+end
+
+T.StringToValue = function(str_value)
+	if str_value == "true" then
+		return true	
+	elseif str_value == "false" then
+		return false	
+	elseif string.match(str_value, "<num(%d+)>") then
+		return tonumber(string.match(str_value, "<num(%d+)>"))
+	else
+		return str_value
+	end
+end
+
+T.ValueToMsg = function(value)
+	local valuetext
+	if value == false then
+		return L["不启用"]
+	elseif value == true then
+		return L["启用"]
+	else
+		return value
+	end
+end
+
+T.PathToString = function(path)
+	local t = CopyTable(path)
+	for k, v in pairs(t) do
+		t[k] = T.ValueToString(v)
+	end
+	return table.concat(t, "-")
+end
+
+T.StringToPath = function(str)
+	local path = {string.split("-", str)}
+	for k, v in pairs(path) do
+		path[k] = T.StringToValue(v)
+	end
+	return path
 end

@@ -71,9 +71,6 @@ local CallbackEvents = {
 	["DATA_ADDED"] = true,
 	["DATA_REMOVED"] = true,
 	["DB_UPDATE"] = true,
-	["GROUP_INFO_UPDATE"] = true,
-	["GROUP_INFO_REMOVED"] = true,
-	["GROUP_SPELL_COOLDOWN_UPDATE"] = true,
 	["UNIT_ENTERING_COMBAT"] = true,
 	["GROUP_LEAVING_COMBAT"] = true,
 	["UNIT_AURA_ADD"] = true,
@@ -84,6 +81,7 @@ local CallbackEvents = {
 	["ENCOUNTER_HIDE_BOSS_UNIT"] = true,
 	["UNIT_RAID_BOSS_WHISPER"] = true,
 	["JST_UNIT_ALIVE"] = true,
+	["JST_UNIT_DEAD"] = true,
 	["JST_MACRO_PRESSED"] = true,
 	["JST_PRIVATE_AURA_EVENT"] = true,
 	["JST_PRIVATE_AURA_CANCEL_EVENT"] = true,
@@ -92,9 +90,12 @@ local CallbackEvents = {
 	["JST_CooldownListWipe"] = true,
 	["JST_CooldownUpdate"] = true,
 	["JST_CooldownAdded"] = true,
+	["JST_CooldownRemoved"] = true,
 	["JST_GROUP_CD_UPDATE"] = true,
 	["JST_GROUP_CC_NEXT"] = true,
+	["JST_DUNGEON_CC_NEXT"] = true,
 	["UNIT_SPELLCAST_TARGET"] = true,
+	["MRT_NOTE_EDIT"] = true,
 }
 
 T.RegisterEventAndCallbacks = function(frame, events, update)
@@ -219,6 +220,14 @@ eventframe:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end)
+	elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+		local _, sub_event, _, sourceGUID, _, _, _, destGUID = CombatLogGetCurrentEventInfo()
+		if sub_event == "UNIT_DIED" then
+			local unit = T.GUIDToUnit(destGUID)
+			if unit then
+				T.FireEvent("JST_UNIT_DEAD", unit, destGUID)
+			end
+		end
 	end
 end)
 
@@ -227,58 +236,114 @@ eventframe:RegisterEvent("CHAT_MSG_RAID_BOSS_WHISPER")
 eventframe:RegisterEvent("PLAYER_ALIVE")
 eventframe:RegisterEvent("ENCOUNTER_START")
 eventframe:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT")
+eventframe:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
 ----------------------------------------------------------
 -----------------[[    队伍技能事件    ]]-----------------
 ----------------------------------------------------------
 local LibOpenRaid = LibStub:GetLibrary("LibOpenRaid-1.0", true)
 
+--[[
+	local unitData = openRaidLib.GetAllUnitsCooldown()
+	return a table with unit names as key and a table with unit cooldowns as the value
+	table format: [playerName] = {[spellId] = cooldownInfo}
+
+	local unitCooldowns = openRaidLib.GetUnitCooldowns(unit[, filter])
+	return a table with all the unit cooldowns
+	table format: [spellId] = cooldownInfo
+
+	local cooldownInfo = openRaidLib.GetUnitCooldownInfo(unit, spellId)
+	return a table containing values about the cooldown time
+	values returned: {timeLeft, charges, timeOffset, duration, updateTime, auraDuration}
+]]
+
 local callbacks = {
     CooldownListUpdate = function(...)
-		T.FireEvent("JST_CooldownListUpdate", ...) 
+		T.FireEvent("JST_CooldownListUpdate", ...)
+		-- unit, unitCooldowns, unitData = ...
 	end,
     CooldownListWipe = function(...) 
 		T.FireEvent("JST_CooldownListWipe", ...)
+		-- unitData = ...
 	end,
     CooldownUpdate = function(...)
 		T.FireEvent("JST_CooldownUpdate", ...)
+		-- unit, spellID, cooldownInfo, unitCooldownTable, unitData = ...
 	end,
     CooldownAdded = function(...)
 		T.FireEvent("JST_CooldownAdded", ...)
-	end
+		-- unit, spellID, cooldownInfo, unitCooldownTable, unitData = ...
+	end,
+	CooldownRemoved = function(...)
+		T.FireEvent("JST_CooldownRemoved", ...)
+		-- unit, spellID, unitCooldownTable, unitData = ...
+	end,
 }
 
 LibOpenRaid.RegisterCallback(callbacks, "CooldownListUpdate", "CooldownListUpdate")
 LibOpenRaid.RegisterCallback(callbacks, "CooldownListWipe", "CooldownListWipe")
 LibOpenRaid.RegisterCallback(callbacks, "CooldownUpdate", "CooldownUpdate")
 LibOpenRaid.RegisterCallback(callbacks, "CooldownAdded", "CooldownAdded")
+LibOpenRaid.RegisterCallback(callbacks, "CooldownRemoved", "CooldownRemoved")
 
 G.GroupTrackedSpellsbySpellID = {}
 G.GroupTrackedSpellsbyName = {}
 
-G.GroupTrackedSpellsbyIndex = {	
-	CC = { -- 控制
-		372048, -- 压迫怒吼
-		368970, -- 扫尾
-		358385, -- 山崩
-		108199, -- 血魔之握
-		179057, -- 混乱新星
-		202138, -- 锁链咒符
-		207684, -- 悲苦咒符
-		119381, -- 扫堂腿
-		116844, -- 平心之环
-		102793, -- 乌索尔旋风
-		102359, -- 群体缠绕
-		192058, -- 电能图腾
-		30283, -- 暗影之怒
-		109248, -- 束缚射击
-		46968, -- 震荡波
-		357214, -- 飞翼打击
-		132469, -- 台风
-		376079, -- 勇士之矛
-		458513, -- 引力失效
-		115750, -- 盲目之光
-		51490, -- 雷霆风暴
+G.GroupTrackedSpellsbyIndex = {
+	CC_Other = {
+		372048, -- 压迫怒吼（✓）
+	},
+	
+	CC_Stun = {
+		179057, -- 混乱新星（✓）
+		119381, -- 扫堂腿（✓）
+		30283, -- 暗影之怒（✓）
+		192058, -- 电能图腾（✓）
+		46968, -- 震荡波（✓）
+		109248, -- 束缚射击（✓）
+	},
+	
+	CC_Disorient = {
+		31661,  -- 龙息术（✓）
+		207167, -- 致盲冰雨（✓）
+		115750, -- 盲目之光（✓）
+		99, -- 夺魂咆哮（✓）
+	},
+	
+	CC_Fear = {
+		8122, -- 心灵尖啸（✓）
+		5246, -- 破胆怒吼（✓）
+		5484, -- 恐惧嚎叫（✓）
+		207684, -- 悲苦咒符（✓）
+	},
+	
+	CC_Grip = {
+		108199, -- 血魔之握（✓）
+		202138, -- 锁链咒符（✓）
+	},
+	
+	CC_Root = {
+		358385, -- 山崩（✓）
+		102359, -- 群体缠绕（✓）
+		376079, -- 勇士之矛（✓）
+	},
+	
+	CC_Silence = {
+		202137, -- 沉默符咒（✓）
+		78675,  -- 日光术（✓）
+	},
+	
+	CC_KnockOff = {
+		368970, -- 扫尾（✓）
+		51490, -- 雷霆风暴（✓）
+		458513, -- 引力失效（✓）
+	},
+	
+	CC_KnockBack = {
+		357214, -- 飞翼打击（✓）
+		132469, -- 台风（✓）
+		116844, -- 平心之环（✓）
+		102793, -- 乌索尔旋风（✓）
 	},
 	
 	Immuse = { -- 免疫
@@ -294,13 +359,85 @@ G.GroupTrackedSpellsbyIndex = {
 		22812, -- 树皮术
 		108271, -- 星界转移
 	},
+	
+	DefenseSupport = { -- 队伍技能
+		357170, -- 时间膨胀
+		116849, -- 作茧缚命
+		33206, -- 痛苦压制
+		47788, -- 守护之魂
+		102342, -- 铁木树皮
+		6940, -- 牺牲祝福
+	},
+	
+	OtherSupport = {
+		--73325, -- 信仰飞跃
+		--370665, -- 营救
+		--1044, -- 自由祝福
+		--1022, -- 保护祝福
+		--204018, -- 破咒祝福
+	},
+}
+
+G.RaidCCSpells = {}
+local RaidCCPro = {
+	"CC_Other",
+	"CC_Grip",
+	"CC_Root",
+	"CC_Stun",
+	"CC_KnockOff",
+	"CC_KnockBack",
+}
+
+for _, SpellType in ipairs(RaidCCPro) do
+	local data = G.GroupTrackedSpellsbyIndex[SpellType]
+	for _, spellID in ipairs(data) do
+		table.insert(G.RaidCCSpells, spellID)
+	end
+end
+
+G.DungeonCCSpells = {}
+local DungeonCCPro = {
+	"CC_Grip",
+	"CC_Stun",
+	"CC_Silence",
+	"CC_Disorient",
+	"CC_Fear",
+	"CC_KnockOff",
+	"CC_KnockBack",
+}
+
+for _, SpellType in ipairs(DungeonCCPro) do
+	local data = G.GroupTrackedSpellsbyIndex[SpellType]
+	for _, spellID in ipairs(data) do
+		table.insert(G.DungeonCCSpells, spellID)
+	end
+end
+
+local GroupTrackedSpellTypePro = {
+	"CC_Grip",
+	"CC_Other",
+	"CC_Stun",
+	"CC_Silence",
+	"CC_Disorient",
+	"CC_Fear",
+	"CC_KnockOff",
+	"CC_KnockBack",
+	"CC_Root",
+	"Immuse",
+	"Defense",
+	"DefenseSupport",
+	"OtherSupport",
 }
 
 local index = 0
-for spellType, data in pairs(G.GroupTrackedSpellsbyIndex) do
+for _, SpellType in ipairs(GroupTrackedSpellTypePro) do
+	local data = G.GroupTrackedSpellsbyIndex[SpellType]
 	for _, spellID in pairs(data) do
 		index = index + 1
-		G.GroupTrackedSpellsbySpellID[spellID] = index
+		G.GroupTrackedSpellsbySpellID[spellID] = {
+			index = index,
+			spell_type = SpellType, 
+		}
 		
 		local spell = C_Spell.GetSpellName(spellID)
 		G.GroupTrackedSpellsbyName[spell] = spellID
@@ -320,7 +457,8 @@ function GSFrame:GetEntry(GUID, spellID)
 end
 
 function GSFrame:UpdateEntry(GUID, spellID, cooldownInfo)
-    if not GUID or not cooldownInfo or not spellID or not G.GroupTrackedSpellsbySpellID[spellID] then return false end
+	if not spellID or not G.GroupTrackedSpellsbySpellID[spellID] then return end
+    if not GUID or not cooldownInfo then return end
     
     local entry = self:GetEntry(GUID, spellID)
     
@@ -349,16 +487,35 @@ function GSFrame:UpdateEntry(GUID, spellID, cooldownInfo)
     entry.expirationTime = expirationTime
 end
 
-function GSFrame:UpdateAllEntries()
+function GSFrame:RemoveEntry(GUID, spellID)
+	if not GUID then return end
+	
+	for i, entry in ipairs(self.entries) do
+        if entry.GUID == GUID and entry.spellID == spellID then
+            table.remove(self.entries, i)
+			break
+        end
+    end
+end
+
+function GSFrame:RemoveEntriesByGUID(GUID)
+	if not GUID then return end
+	
+	for i, entry in ipairs(self.entries) do
+        if entry.GUID == GUID then
+			table.remove(self.entries, i)
+        end
+    end
+end
+
+function GSFrame:UpdateAllEntries(allUnitsCooldown)
     -- Wipe all info
     self.entries = table.wipe(self.entries)
     
     -- Update entries
-    local allUnitsCooldown = LibOpenRaid.GetAllUnitsCooldown()
-    
     if allUnitsCooldown then
-        for unit, unitCooldowns in pairs(allUnitsCooldown) do
-            local GUID = UnitGUID(unit)
+        for playerName, unitCooldowns in pairs(allUnitsCooldown) do
+            local GUID = UnitGUID(playerName)
 
 			for spellID, cooldownInfo in pairs(unitCooldowns) do
 				self:UpdateEntry(GUID, spellID, cooldownInfo)
@@ -372,8 +529,8 @@ function GSFrame:UpdateAllEntries()
             local spellA = entryA.spellID
             local spellB = entryB.spellID
             
-            local indexA = G.GroupTrackedSpellsbySpellID[spellA]
-            local indexB = G.GroupTrackedSpellsbySpellID[spellB]
+            local indexA = G.GroupTrackedSpellsbySpellID[spellA].index
+            local indexB = G.GroupTrackedSpellsbySpellID[spellB].index
             
             if indexA ~= indexB then
                 return indexA < indexB
@@ -396,46 +553,53 @@ GSFrame:SetScript("OnEvent", function(self, event, ...)
 	if event == "JST_CooldownListUpdate" then
         local unit, unitCooldowns = ...  
         local GUID = UnitGUID(unit)
-        
+		
+        self:RemoveEntriesByGUID(GUID)
+		
         if unitCooldowns then
             for spellID, cooldownInfo in pairs(unitCooldowns) do
                 self:UpdateEntry(GUID, spellID, cooldownInfo)
             end
-        end 
+        end
+		
         self:Notify()
 		
     elseif event == "JST_CooldownListWipe" then
-	
-        self:UpdateAllEntries()
+		local unitData = ...
+		
+        self:UpdateAllEntries(unitData)
         self:Notify()
 		
-    elseif event == "JST_CooldownUpdate" or event == "JST_CooldownAdded" then
+	elseif event == "JST_CooldownAdded" then
+		local unit, spellID, cooldownInfo = ...
+		local GUID = UnitGUID(unit)
+		
+		self:UpdateEntry(GUID, spellID, cooldownInfo)
+		self:Notify()
+		
+    elseif event == "JST_CooldownUpdate" then
         local unit, spellID, cooldownInfo = ...
         local GUID = UnitGUID(unit)
         
         self:UpdateEntry(GUID, spellID, cooldownInfo)
         self:Notify()
 		
-    elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
-        local _, subEvent, _, _, _, _, _, destGUID = ...
-        
-        if subEvent == "UNIT_DIED" and T.GUIDToUnit(destGUID) then
-            self:UpdateAllEntries()
-            self:Notify()
-        end
+	elseif event == "JST_CooldownRemoved" then		
+		local unit, spellID = ...
+		local GUID = UnitGUID(unit)
 		
-    elseif event == "JST_UNIT_ALIVE" then
-        self:UpdateAllEntries()
+		self:RemoveEntry(GUID, spellID)
         self:Notify()
 		
     elseif event == "ENCOUNTER_START" then
-        self:UpdateAllEntries()
+		local unitData = LibOpenRaid.GetAllUnitsCooldown()
+        self:UpdateAllEntries(unitData)
         self:Notify()
 		
 	elseif event == "PLAYER_ENTERING_WORLD" then
-        self:UpdateAllEntries()
+        local unitData = LibOpenRaid.GetAllUnitsCooldown()
+		self:UpdateAllEntries(unitData)
         self:Notify()
-		
     end
 end)
 
@@ -444,30 +608,42 @@ T.RegisterEventAndCallbacks(GSFrame, {
 	["JST_CooldownListWipe"] = true,
 	["JST_CooldownUpdate"] = true,
 	["JST_CooldownAdded"] = true,
-	["COMBAT_LOG_EVENT_UNFILTERED"] = true,	
-	["JST_UNIT_ALIVE"] = true,
+	["JST_CooldownRemoved"] = true,
 	["ENCOUNTER_START"] = true,
 	["PLAYER_ENTERING_WORLD"] = true,
 })
 
 T.GroupSpellForceUpdate = function()
-	GSFrame:UpdateAllEntries()
+	local unitData = LibOpenRaid.GetAllUnitsCooldown()
+	GSFrame:UpdateAllEntries(unitData)
 	GSFrame:Notify()
 end
 
 T.GetGroupCooldown = function(GUID, spellID)
-	local entry = GSFrame:GetEntry(GUID, spellID)
+	local unit = T.GUIDToUnit(GUID)
+	
+	if not unit then return end
+	
+	local cooldownInfo = LibOpenRaid.GetUnitCooldownInfo(unit, spellID)
 
-	if entry then
-		local exp_time = entry.expirationTime
-		local duration = entry.duration
+	if cooldownInfo then
+		local remain, charges, timeOffset, duration, updateTime, auraDuration = unpack(cooldownInfo)
+		local exp_time = GetTime() + remain
 		local start = exp_time - duration
-		local remain = exp_time - GetTime()
-		local charges = entry.charges
 		local ready = remain <= 0 and true or false
 		
 		return ready, exp_time, duration, remain, start, charges
 	end
+end
+
+T.GetCCSpellCount = function()
+	local count = 0
+	for key, data in pairs(G.GroupTrackedSpellsbyIndex) do
+		if string.find(key, "CC") then
+			count = count + #data
+		end
+	end
+	return count
 end
 
 --引力失效
@@ -611,6 +787,7 @@ end)
 ----------------------------------------------------------
 ---------------[[    重要单位光环事件    ]]---------------
 ----------------------------------------------------------
+
 local auraUtilityFrame = CreateFrame("Frame")
 auraUtilityFrame:RegisterEvent("UNIT_AURA")
 
@@ -746,5 +923,17 @@ castUtilityFrame:SetScript("OnEvent", function(self, event, ...)
 				end
 			end
 		end
+	end
+end)
+
+----------------------------------------------------------
+-------------[[    MRT战术板编辑事件    ]]----------------
+----------------------------------------------------------
+
+T.RegisterInitCallback(function()
+	if MRTNote and MRTNote.text then	
+		hooksecurefunc(MRTNote.text, "SetText", function()
+			T.FireEvent("MRT_NOTE_EDIT")
+		end)
 	end
 end)

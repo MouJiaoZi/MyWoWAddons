@@ -1,0 +1,201 @@
+
+ElvDB = {
+["profileKeys"] = {
+["专杀饺子王 - 雷霆之怒"] = "Default",
+["我都等的 - 凤凰之神"] = "Default",
+["Sagdwevb - 凤凰之神"] = "Default",
+},
+["DisabledAddOns"] = {
+},
+["serverID"] = {
+[1515] = {
+["凤凰之神"] = true,
+},
+[1694] = {
+["雷霆之怒"] = true,
+},
+},
+["class"] = {
+["雷霆之怒"] = {
+["专杀饺子王"] = "PALADIN",
+},
+["凤凰之神"] = {
+["Sagdwevb"] = "WARRIOR",
+["我都等的"] = "WARRIOR",
+},
+},
+["profiles"] = {
+["Default"] = {
+["chat"] = {
+["panelSnapLeftID"] = 1,
+},
+["dbConverted"] = 14.01,
+["WT"] = {
+["social"] = {
+["chatBar"] = {
+["channels"] = {
+["world"] = {
+["enable"] = true,
+},
+},
+},
+},
+["version"] = "4.00",
+},
+["actionbar"] = {
+["microbar"] = {
+["buttons"] = 11,
+},
+["bar6"] = {
+["enabled"] = true,
+["buttonsPerRow"] = 6,
+["buttons"] = 6,
+},
+["bar5"] = {
+["enabled"] = false,
+["buttonsPerRow"] = 12,
+["buttons"] = 12,
+},
+},
+["convertPages"] = true,
+},
+},
+["WT"] = {
+["DisabledAddOns"] = {
+},
+},
+["gold"] = {
+["雷霆之怒"] = {
+["专杀饺子王"] = 812754,
+},
+["凤凰之神"] = {
+["Sagdwevb"] = 10000,
+["我都等的"] = 0,
+},
+},
+["global"] = {
+["ignoreIncompatible"] = true,
+["datatexts"] = {
+["settings"] = {
+["Currencies"] = {
+["tooltipData"] = {
+{
+nil,
+nil,
+nil,
+true,
+},
+},
+},
+},
+},
+["nameplates"] = {
+["filters"] = {
+["ElvUI_Boss"] = {
+},
+["ElvUI_NonTarget"] = {
+},
+["ElvUI_Below20_Players"] = {
+},
+["ElvUI_Target"] = {
+},
+["ElvUI_Below20"] = {
+},
+},
+},
+["WT"] = {
+["misc"] = {
+["lfgList"] = {
+["凤凰之神"] = {
+["Sagdwevb"] = {
+["dungeonFilter"] = {
+},
+},
+["我都等的"] = {
+["dungeonFilter"] = {
+},
+},
+},
+},
+},
+["item"] = {
+["contacts"] = {
+["alts"] = {
+["雷霆之怒"] = {
+["Alliance"] = {
+["专杀饺子王"] = "PALADIN",
+},
+},
+["凤凰之神"] = {
+["Horde"] = {
+["Sagdwevb"] = "WARRIOR",
+["我都等的"] = "WARRIOR",
+},
+},
+},
+},
+},
+["version"] = "4.00",
+},
+},
+["faction"] = {
+["雷霆之怒"] = {
+["专杀饺子王"] = "Alliance",
+},
+["凤凰之神"] = {
+["Sagdwevb"] = "Horde",
+["我都等的"] = "Horde",
+},
+},
+["namespaces"] = {
+},
+}
+ElvPrivateDB = {
+["profileKeys"] = {
+["专杀饺子王 - 雷霆之怒"] = "专杀饺子王 - 雷霆之怒",
+["我都等的 - 凤凰之神"] = "我都等的 - 凤凰之神",
+["Sagdwevb - 凤凰之神"] = "Sagdwevb - 凤凰之神",
+},
+["profiles"] = {
+["专杀饺子王 - 雷霆之怒"] = {
+["skins"] = {
+["parchmentRemoverEnable"] = true,
+},
+["WT"] = {
+["skins"] = {
+["addons"] = {
+["worldQuestTab"] = false,
+},
+},
+},
+["install_complete"] = 14.01,
+},
+["我都等的 - 凤凰之神"] = {
+["skins"] = {
+["parchmentRemoverEnable"] = true,
+},
+["WT"] = {
+["skins"] = {
+["addons"] = {
+["worldQuestTab"] = false,
+},
+},
+["version"] = "4.00",
+},
+["install_complete"] = 14.01,
+},
+["Sagdwevb - 凤凰之神"] = {
+["WT"] = {
+["skins"] = {
+["addons"] = {
+["worldQuestTab"] = false,
+},
+},
+},
+["skins"] = {
+["parchmentRemoverEnable"] = true,
+},
+["install_complete"] = 14.01,
+},
+},
+}

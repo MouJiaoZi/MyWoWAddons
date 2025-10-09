@@ -21,30 +21,9 @@ G.Encounters["c378"] = {
 				{1235060},
 			},
 			options = {
-				{ -- 图标 心能蚀甲（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1235060,
-					hl = "",
-					tip = L["DOT"],
-				},
-				{ -- 团队框架高亮 心能蚀甲（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1235060,
-					color = "blu",
-					amount = 7,
-				},
-				{ -- 驱散提示音 心能蚀甲（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1235060,
-					file = "[dispel]",
-					ficon = "7",
-					amount = 7,
-				},
+				T.Temp_DoTIcon(1235060, "7", "blu"),
+				T.Temp_RaidAuraGlow(1235060, "blu", 7),
+				T.Temp_DispelDebuffSound(1235060, "7", 7),
 			},
 		},
 		{ -- 堕落的驯犬者:射击
@@ -52,17 +31,8 @@ G.Encounters["c378"] = {
 				{325535},
 			},
 			options = {
-				{ -- 对我施法图标 射击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 325535,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 射击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 325535,
-				},
+				T.Temp_ComIcon(325535),
+				T.Temp_RaidCastIcon(325535),
 			},
 		},
 		{ -- 堕落的驯犬者:忠心的野兽
@@ -70,15 +40,8 @@ G.Encounters["c378"] = {
 				{326450},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(326450), -- 忠心的野兽（✓）
-				{ -- 姓名板打断图标 忠心的野兽（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 326450,
-					mobID = "164562",
-					interrupt = 2,
-					ficon = "6",
-				},
+				T.Temp_ImportantInterruptBar(326450),
+				T.Temp_PlateInterrupt(326450, "164562", 2),
 			},
 		},
 		{ -- 邪恶的加尔贡:龟裂创伤
@@ -86,31 +49,8 @@ G.Encounters["c378"] = {
 				{1237602},
 			},
 			options = {
-				{ -- 图标 龟裂创伤（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1237602,
-					hl = "red",
-					tip = L["DOT"],
-					ficon = "13",
-				},
-				{ -- 驱散提示音 龟裂创伤（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1237602,
-					file = "[dispel]",
-					ficon = "13",
-					amount = 3,
-				},
-				{ -- 团队框架高亮 龟裂创伤（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1237602,
-					color = "red",
-					amount = 3,
-				},
+				T.Temp_DoTIcon(1237602, "13", "red"),
+				T.Temp_DispelDebuffSound(1237602, "13", 3),
 			},
 		},
 		{ -- 劳苦的管理员:快逃！
@@ -118,12 +58,7 @@ G.Encounters["c378"] = {
 				{1235121},
 			},
 			options = {
-				{ -- 姓名板光环 快逃！（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1235121,
-				},
+				T.Temp_PlateAura(1235121),
 			},
 		},
 		{ -- 哈尔吉亚斯的碎片:痛击
@@ -163,22 +98,11 @@ G.Encounters["c378"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 痛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 326409,
+				T.Temp_ImportantCastBar(326409, {
+					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 痛击（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 326409,
-					event = "SPELL_CAST_START",
-					dur = 10,
-					threshold = 65,
-				},
+				}),
+				T.Temp_HPWatchCLEU(326409, "SPELL_CAST_START", 10),
 			},
 		},
 		{ -- 哈尔吉亚斯的碎片:罪孽震击
@@ -186,12 +110,9 @@ G.Encounters["c378"] = {
 				{326441},
 			},
 			options = {
-				{ -- 计时条 罪孽震击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 326441,
+				T.Temp_NormalCastBar(326441, {	
 					sound = "[dodge_circle]cast",
-				},
+				}),
 			},
 		},		
 		{ -- 堕落的搜集者:生命虹吸
@@ -199,28 +120,13 @@ G.Encounters["c378"] = {
 				{325701},
 			},
 			options = {
-				{ -- 图标 生命虹吸（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 325701,
-					hl = "red",
-					tip = L["强力DOT"],
-					sound = "[defense]",
-				},
-				{ -- 团队框架高亮 生命虹吸（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 325701,
-					color = "red",
-				},
-				{ -- 自保技能提示 生命虹吸（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 325701,
-					threshold = 65,
-				},
+				T.Temp_SubInterruptBar(325701, {
+					show_tar = true,
+				}),	
+				T.Temp_PlateInterrupt(325701, "165529", 2),
+				T.Temp_BigDoTIcon(325701, nil, "red"),
+				T.Temp_RaidAuraGlow(325701, "red"),
+				T.Temp_HPWatchAura(325701),
 			},
 		},
 		{ -- 堕落的歼灭者:邪恶箭矢
@@ -228,28 +134,12 @@ G.Encounters["c378"] = {
 				{338003},
 			},
 			options = {
-				T.Temp_SubInterruptBar(338003, { -- 邪恶箭矢（✓）
+				T.Temp_SubInterruptBar(338003, {
 					show_tar = true,
 				}),	
-				{ -- 姓名板打断图标 邪恶箭矢（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 338003,
-					mobID = "165414",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 邪恶箭矢（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 338003,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 邪恶箭矢（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 338003,
-				},
+				T.Temp_PlateInterrupt(338003, "165414", 2),
+				T.Temp_ComIcon(338003),
+				T.Temp_RaidCastIcon(338003),
 			},
 		},
 		{ -- 堕落的歼灭者:湮灭诅咒
@@ -257,29 +147,9 @@ G.Encounters["c378"] = {
 				{325876},
 			},
 			options = {
-				{ -- 图标 湮灭诅咒（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 325876,
-					hl = "blu",
-					tip = L["DOT"],
-					ficon = "7",
-				},
-				{ -- 驱散提示音 湮灭诅咒（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 325876,
-					file = "[dispel]",
-					ficon = "7",
-				},
-				{ -- 团队框架高亮 湮灭诅咒（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 325876,
-					color = "blu",
-				},
+				T.Temp_DoTIcon(325876, "7", "blu"),
+				T.Temp_DispelDebuffSound(325876, "7"),
+				T.Temp_RaidAuraGlow(325876, "blu"),
 			},
 		},
 		{ -- 石裔切割者:岩石监视者
@@ -287,12 +157,7 @@ G.Encounters["c378"] = {
 				{1235808},
 			},
 			options = {
-				{ -- 姓名板光环 岩石监视者（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1235809,
-				},
+				T.Temp_PlateAura(1235809),
 			},
 		},
 		{ -- 石裔切割者:猛力横扫
@@ -300,12 +165,9 @@ G.Encounters["c378"] = {
 				{326997},
 			},
 			options = {
-				{ -- 计时条 猛力横扫（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 326997,
+				T.Temp_NormalCastBar(326997, {	
 					sound = "[dodge]cast",
-				},
+				}),
 			},
 		},
 		{ -- 石裔切割者:瓦解尖叫
@@ -370,7 +232,8 @@ G.Encounters["c378"] = {
 						function frame:UpdateCastState(start)
 							if self.cast_exp then
 								if UnitCastingInfo("player") then
-									local endTimeMS = select(5, UnitCastingInfo("player"))
+									local startTimeMS, endTimeMS = select(4, UnitCastingInfo("player"))
+									if startTimeMS > self.cast_exp then return end
 									if endTimeMS < self.cast_exp then
 										self.bar.mid:SetText(string.format("|cff00ff00%s|r", L["安全施法"]))
 										T.PlaySound("safecasting")
@@ -379,7 +242,8 @@ G.Encounters["c378"] = {
 										T.PlaySound("stopcasting")
 									end
 								elseif UnitChannelInfo("player") then
-									local endTimeMS = select(5, UnitChannelInfo("player"))
+									local startTimeMS, endTimeMS = select(4, UnitChannelInfo("player"))
+									if startTimeMS > self.cast_exp then return end
 									if endTimeMS < self.cast_exp then
 										self.bar.mid:SetText(string.format("|cff00ff00%s|r", L["安全施法"]))
 										T.PlaySound("safecasting")
@@ -447,14 +311,7 @@ G.Encounters["c378"] = {
 				{1237071},
 			},
 			options = {
-				{ -- 打坦计时条 石拳（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1237071,
-					group = 1,
-					ficon = "0",
-					sound = "[knockback]cast",
-				},
+				T.Temp_TankCastBar(1237071, "[knockback]cast"),
 			},
 		},
 		{ -- 石精噬踝者:脚踝撕咬
@@ -462,29 +319,9 @@ G.Encounters["c378"] = {
 				{1235245},
 			},
 			options = {
-				{ -- 图标 脚踝撕咬（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1235245,
-					hl = "",
-					tip = L["DOT"].."+"..L["减速"].."%s20%",
-				},
-				{ -- 团队框架高亮 脚踝撕咬（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1235245,
-					color = "red",
-					amount = 5,
-				},
-				{ -- 自保技能提示 脚踝撕咬（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 1235245,
-					threshold = 75,
-					amount = 3,
-				},
+				T.Temp_NormalDebuff(1235245, L["DOT"].."+"..L["减速"].."%s20%"),
+				T.Temp_RaidAuraGlow(1235245, "red", 5),
+				T.Temp_HPWatchAura(1235245, 3, 75),
 			},
 		},		
 		{ -- 石裔剔骨者:投掷战刃
@@ -492,14 +329,9 @@ G.Encounters["c378"] = {
 				{326638},
 			},
 			options = {
-				{ -- 对我施法图标 投掷战刃（✓）
-					category = "AlertTimerbar",
-					type = "cleu",
-					event = "SPELL_CAST_SUCCESS",
-					spellID = 326638,
-					dur = 1,
+				T.Temp_NormalCLEUBar(326638, "SPELL_CAST_SUCCESS", 1, {
 					show_tar = true,
-				},
+				}),
 				{ -- 首领模块 投掷战刃 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 326638,
@@ -535,12 +367,9 @@ G.Encounters["c378"] = {
 				{1235762},
 			},
 			options = {
-				{ -- 计时条 变为石头（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1235762,
+				T.Temp_NormalCastBar(1235762, {
 					sound = "[outcircle]cast",
-				},
+				}),
 			},
 		},
 		{ -- 石裔掠夺者:致死打击
@@ -548,29 +377,9 @@ G.Encounters["c378"] = {
 				{1235766},
 			},
 			options = {
-				{ -- 打坦计时条 致死打击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1235766,
-					group = 1,
-					ficon = "0",
-					sound = "[minddefense]cast",
-				},
-				{ -- 图标 致死打击（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1235766,
-					hl = "red",
-					tip = L["致死"].."50%",
-				},
-				{ -- 团队框架高亮 致死打击（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1235766,
-					color = "red",
-				},
+				T.Temp_TankCastBar(1235766, "[minddefense]cast"),
+				T.Temp_ImportantDebuffIcon(1235766, "red", L["致死"].."50%"),
+				T.Temp_RaidAuraGlow(1235766, "red"),
 			},
 		},
 		{ -- 审判官西加尔:耀武扬威
@@ -578,22 +387,12 @@ G.Encounters["c378"] = {
 				{1236614},
 			},
 			options = {
-				{ -- 计时条 耀武扬威（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1236614,
+				T.Temp_NormalCastBar(1236614, {
 					text = L["增加伤害/治疗"],
-				},
-				{ -- 图标 耀武扬威（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1236614,
-					hl = "gre",
-					tip = L["增加伤害/治疗"].."30%",
+				}),
+				T.Temp_ImportantDebuffIcon(1236614, "gre", L["增加伤害/治疗"].."30%", {
 					sound = "[spread]",
-				},
+				}),
 				{ -- 首领模块 耀武扬威 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1236614,
@@ -626,28 +425,12 @@ G.Encounters["c378"] = {
 				{326829},
 			},
 			options = {
-				T.Temp_SubInterruptBar(326829, { -- 邪恶箭矢（✓）
+				T.Temp_SubInterruptBar(326829, {
 					show_tar = true,
 				}),	
-				{ -- 姓名板打断图标 邪恶箭矢（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 326829,
-					mobID = "167876",
-					interrupt = 3,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 邪恶箭矢（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 326829,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 邪恶箭矢（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 326829,
-				},
+				T.Temp_PlateInterrupt(326829, "167876", 3),
+				T.Temp_ComIcon(326829),
+				T.Temp_RaidCastIcon(326829),
 			},
 		},
 		{ -- 审判官西加尔:驱散罪孽
@@ -655,21 +438,10 @@ G.Encounters["c378"] = {
 				{326847},
 			},
 			options = {
-				{ -- 计时条 驱散罪孽（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 326847,
+				T.Temp_NormalCastBar(326847, {
 					sound = "[dodge_circle]cast",
-				},
-				{ -- 图标 痛楚（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 326891,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				}),
+				T.Temp_OnFireIcon(326891),
 			},
 		},
 		{ -- 审判官西加尔:黑暗圣餐
@@ -709,13 +481,10 @@ G.Encounters["c378"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 黑暗圣餐（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 326794,
-					sound = "[add]cast",
+				T.Temp_NormalCastBar(326794, {
 					text = L["召唤小怪"],
-				},
+					sound = "[add]cast",
+				}),
 			},
 		},
 		{ -- 嫉妒具象:嫉妒之印
@@ -723,28 +492,11 @@ G.Encounters["c378"] = {
 				{340446},
 			},
 			options = {				
-				{ -- 图标 嫉妒之印（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 340446,
-					tip = L["锁定"],
-					hl = "red",
+				T.Temp_ImportantDebuffIcon(340446, "red", L["锁定"], {
 					sound = "[focusyou]",
-				},
-				{ -- 团队框架高亮 嫉妒之印（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 340446,
-					color = "red",
-				},
-				{ -- 自保技能提示 嫉妒之印（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 340446,
-					threshold = 75,
-				},
+				}),
+				T.Temp_RaidAuraGlow(340446, "red"),
+				T.Temp_HPWatchAura(340446, 75),
 			},
 		},
 	},

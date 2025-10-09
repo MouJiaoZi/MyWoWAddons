@@ -4,6 +4,7 @@
 
 -- 共用
 L["启用"] 					= "Enable"
+L["不启用"] 				= "Disable"
 L["加载失败"]				= "The name of s% s failed to load, please reload UI."
 L["复制粘贴"]				= "Select All Ctrl+A Copy Ctrl+C Paste Ctrl+V"
 
@@ -22,7 +23,6 @@ L["喊话"]					= "Chat Massage"
 L["标记"]					= "Raid Mark"
 L["使用标记%s"]				= "Use Raid Marks %s"
 L["倒数语音"]				= "Countdown Voice"
-L["大秘境"]					= "Mythic+"
 
 -- 更新日志
 L["更新日志"]				= "Update Logs"
@@ -50,7 +50,7 @@ L["MRT该轮次数据未找到"]	= "Data for round %2$d of %1$s not found"
 
 -- 交互宏
 L["交互宏按钮"]				= "Interactive Macro Button"
-L["宏"]						= "|cffFFFFFF（Macro：%s）|r"
+L["宏"]						= "|cffFFFFFF(Macro：%s)|r"
 L["点宏"]					= "Use Macro"
 
 -- 战斗记录
@@ -96,6 +96,7 @@ L["远程小怪"]				= "Ranged add"
 L["近战小怪"]				= "Melee add"
 L["小怪强化"]				= "Add Buffed"
 L["最强一波"]				= "The Strongest Wave"
+L["数量"]					= "Quantity"
 
 -- 法术相关：模型
 L["圆环"]					= "Ring"
@@ -265,8 +266,12 @@ L["导出"]					= "Export character specific configuration"
 L["导入"]					= "Import character specific configuration"
 L["无法导入"]				= "Wrong string, unable to import."
 L["导入确认"]				= "Do you want to import all %s settings\n"
-L["版本不符合"] 			= "\nVersion %s（Current version %s）"
+L["版本不符合"] 			= "\nVersion %s(Current version %s)"
 L["不完整导入"] 			= "\nThe import may be incomplete."
+L["确认载入推荐设置"] 		= "Load the configuration:\n %s>%s"
+L["发送该配置给队友"]		= "SHIFT+LeftButton to send the configuration to teammates."
+L["配置已载入"]				= "Configuration loaded %s>%s"
+L["不在队伍中"] 			= "Not in any group."
 
 -- 控制台
 L["选项"]					= "Settings"
@@ -310,6 +315,8 @@ L["小工具"]					= "Raid Tools"
 L["团队信息"]				= "Group Information"
 L["我的昵称"]		    	= "My nickname:%s"
 L["输入昵称"]				= "To recognize you in the tactical board, enter your nickname. Only recognize the current character name when there is no nickname."
+L["输入队友昵称"]			= "Input %s's nickname"
+L["你的昵称被团长修改为"]	= "Your nickname has been changed to |cffffff00%s|r by group learder."
 L["刷新"]					= "Refresh"
 L["昵称冲突"]				= "Nickname |cffFF0000%s|r is being used by multiple people (%s) and needs to be modified."
 L["昵称错误"]				= "Nickname %s is incorrect, this person is not found in the team."
@@ -481,7 +488,11 @@ L["名字错误"]				= "Incorrect name"
 L["法术ID错误"]				= "SpellID error"
 L["请使用法术ID"]			= "can't get spell info by default, use spellID instead."
 L["总是显示全部控制技能"]	= "Always show all assigned spells"
+L["自动分配控制技能"]		= "Automatically assign CC in Mythic+(Alpha)"
+L["战斗外隐藏"]				= "Hide when out of combat in Mythic+"
+L["首领战斗时隐藏"]			= "Hide during BOSS fights in Mythic+"
 L["可以继续写"]				= "You can continue writing"
+L["大秘境控制法术"]			= "CC Spell in Mythic+"
 
 -- AlertIcon
 L["图标提示"]				= "Icon alert"
@@ -622,8 +633,8 @@ L["团队框架数值%s"]			= "Show %s's value on raid frames"
 L["团队框架吸收治疗数值"]		= "Show heal absorb value on raid frames"
 
 L["NAME多人光环提示"]		= "Raid monitor：%s"
-L["NAME多人光环层数提示"]	= "Raid monitor：%s（aura stack）"
-L["NAME多人光环数值提示"]	= "Raid monitor：%s（effect value）"
+L["NAME多人光环层数提示"]	= "Raid monitor：%s(aura stack)"
+L["NAME多人光环数值提示"]	= "Raid monitor：%s(effect value)"
 L["进度"] 					= "Progress"
 
 L["NAME点名排序"]			= "assign players for %s"

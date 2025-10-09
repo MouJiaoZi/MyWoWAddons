@@ -30,17 +30,10 @@ G.Encounters["c542"] = {
 				{1229474},
 			},
 			options = {
-				T.Temp_SubInterruptBar(1229474, { -- 啃噬（✓）
+				T.Temp_SubInterruptBar(1229474, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 啃噬（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 1229474,
-					mobID = "242209",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_PlateInterrupt(1229474, "242209", 1),				
 			},
 		},
 		{ -- 吃撑的幼虫:吃撑爆发
@@ -49,14 +42,7 @@ G.Encounters["c542"] = {
 				{1231494},
 			},
 			options = {
-				{ -- 图标 吃撑爆发（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1231494,
-					tip = L["DOT"],
-				},
+				T.Temp_DoTIcon(1231494),
 			},
 		},
 		{ -- 肆虐的食腐者:饥饿狂怒
@@ -64,20 +50,8 @@ G.Encounters["c542"] = {
 				{1221133},
 			},
 			options = {
-				{ -- 姓名板光环 饥饿狂怒（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1221133,
-					ficon = "11",
-				},
-				{ -- 驱散提示音 饥饿狂怒（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1221133,
-					file = "[dispel]",
-					ficon = "11",
-				},
+				T.Temp_PlateAura(1221133),
+				T.Temp_DispelBuffSound(1221133, "11"),		
 			},
 		},
 		{ -- 贪婪的毁灭者:不稳定的喷发
@@ -85,20 +59,8 @@ G.Encounters["c542"] = {
 				{1226111},
 			},
 			options = {
-				{ -- 计时条 不稳定的喷发（✓）
-					category = "AlertTimerbar",
-					type = "aura",
-					aura_type = "HARMFUL",
-					spellID = 1226110,
-					unit = "group",
-					show_tar = true,
-				},
-				{ -- 自保技能提示 不稳定的喷发（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 1226110,
-					threshold = 65,
-				},
+				T.Temp_NormalGroupAuraBar(1226110),
+				T.Temp_HPWatchAura(1226110),
 				{ -- 首领模块 不稳定的喷发 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1226110,
@@ -131,25 +93,11 @@ G.Encounters["c542"] = {
 				{1221190},
 			},
 			options = {				
-				{ -- 计时条 暴食瘴气（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1221190,
+				T.Temp_NormalCastBar(1221190, {	
 					show_tar = true,
-				},
-				{ -- 对我施法图标 暴食瘴气（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 1221190,
-					hl = "yel_flash",
-					msg = {str_applied = "%name %spell"},
-					sound = "[spread]cast",
-				},
-				{ -- 团队框架高亮 暴食瘴气（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1221190,
-				},
+				}),
+				T.Temp_ComIcon(1221190),
+				T.Temp_RaidCastIcon(1221190),				
 				{ -- 首领模块 暴食瘴气 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1221190,
@@ -175,18 +123,8 @@ G.Encounters["c542"] = {
 						T.ResetUnitAuraCircleTimers(frame)
 					end,
 				},
-				{ -- 自保技能提示 暴食瘴气（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 1221190,
-					threshold = 65,
-				},
-				{ -- 团队框架高亮 暴食瘴气（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1221190,
-					color = "red",
-				},
+				T.Temp_HPWatchAura(1221190),
+				T.Temp_RaidAuraGlow(1221190, "red"),
 			},
 		},
 		{ -- 贪食的饕餮者:暴食猛击
@@ -226,15 +164,10 @@ G.Encounters["c542"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 暴食猛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1221152,
+				T.Temp_ImportantCastBar(1221152, {	
 					text = L["全团AE"].."+"..L["躲圈"],
 					sound = "[mindstep]cast",
-					glow = true,
-					group = 1,
-				},
+				}),	
 			},
 		},
 		{ -- 过载的哨兵:不稳定的核心
@@ -242,18 +175,8 @@ G.Encounters["c542"] = {
 				{1231244},
 			},
 			options = {
-				{ -- 姓名板光环 不稳定的核心（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1231244,
-				},
-				{ -- 声音 不稳定的核心（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1231244,
-					file = "[mindstep]",
-				},
+				T.Temp_PlateAura(1231244),
+				T.Temp_CLEUSound(1231244, "SPELL_AURA_APPLIED", "[mindstep]"),
 			},
 		},
 		{ -- 过载的哨兵:奥术猛袭
@@ -261,20 +184,10 @@ G.Encounters["c542"] = {
 				{1235368},
 			},
 			options = {
-				{ -- 计时条 奥术猛袭（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1235368,
+				T.Temp_NormalCastBar(1231224, {	
 					sound = "[avoidfront]cast,notank",
-				},				
-				{ -- 图标 奥术猛袭（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1231224,
-					tip = L["DOT"],
-				},
+				}),
+				T.Temp_DoTIcon(1231224),
 			},
 		},
 		{ -- 过载的哨兵:奥术燃烧
@@ -282,15 +195,7 @@ G.Encounters["c542"] = {
 				{1222202},
 			},
 			options = {
-				{ -- 图标 奥术燃烧（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1222202,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				T.Temp_OnFireIcon(1222202),
 			},
 		},
 		{ -- 驯服的废墟追猎者:迁跃
@@ -298,12 +203,9 @@ G.Encounters["c542"] = {
 				{1222356},
 			},
 			options = {
-				{ -- 计时条 迁跃（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1222356,
+				T.Temp_NormalCastBar(1222356, {	
 					sound = "[ray]cast",
-				},
+				}),
 			},
 		},
 		{ -- 废土遗民远遁者:弧光震击
@@ -311,15 +213,8 @@ G.Encounters["c542"] = {
 				{1229510},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(1229510), -- 弧光震击（✓）
-				{ -- 姓名板打断图标 弧光震击（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 1229510,
-					mobID = "234962",
-					interrupt = 2,
-					ficon = "6",
-				},
+				T.Temp_NormalInterruptBar(1229510),
+				T.Temp_PlateInterrupt(1229510, "234962", 6),
 			},
 		},
 		{ -- 废土遗民相位剑士:敏锐
@@ -327,21 +222,8 @@ G.Encounters["c542"] = {
 				{1231608},
 			},
 			options = {
-				{ -- 姓名板光环 敏锐（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1231608,
-					ficon = "7",
-				},
-				{ -- 驱散提示音 敏锐（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1231608,
-					aura_type = "HELPFUL",
-					file = "[dispel]",
-					ficon = "7",
-				},
+				T.Temp_PlateAura(1231608),
+				T.Temp_DispelBuffSound(1231608, "7")
 			},
 		},
 		{ -- 废土遗民祭师:奥术箭(废土遗民诉契者)
@@ -349,28 +231,12 @@ G.Encounters["c542"] = {
 				{1222815},
 			},
 			options = {
-				T.Temp_SubInterruptBar(1222815, { -- 奥术箭（✓）
+				T.Temp_SubInterruptBar(1222815, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 奥术箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 1222815,
-					mobID = "234957,234955",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 奥术箭（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 1222815,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 奥术箭（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1222815,
-				},
+				T.Temp_PlateInterrupt(1222815, "234957,234955", 2),
+				T.Temp_ComIcon(1222815),
+				T.Temp_RaidCastIcon(1222815),
 			},
 		},
 		{ -- 废土遗民祭师:电弧能量
@@ -378,40 +244,11 @@ G.Encounters["c542"] = {
 				{1221483},
 			},
 			options = {
-				{ -- 对我施法图标 电弧能量（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 1221483,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 电弧能量（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1221483,
-				},
-				{ -- 图标 电弧能量（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1221483,
-					tip = L["强力DOT"],
-					hl = "blu",
-					ficon = "7",
-				},
-				{ -- 驱散提示音 电弧能量（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1221483,
-					file = "[dispel]",
-					ficon = "7",
-				},
-				{ -- 团队框架高亮 电弧能量（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1221483,
-					color = "blu",
-				},
+				T.Temp_ComIcon(1221483),
+				T.Temp_RaidCastIcon(1221483),
+				T.Temp_DoTIcon(1221483, "7", "blu"),
+				T.Temp_DispelDebuffSound(1221483, "7"),
+				T.Temp_RaidAuraGlow(1221483, "blu"),
 			},
 		},
 		{ -- 废土遗民诉契者:异变仪式
@@ -451,23 +288,11 @@ G.Encounters["c542"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 异变仪式（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1221532,		
+				T.Temp_ImportantCastBar(1221532, {	
 					text = L["全团AE"],
-					glow = true,
-					group = 1,
 					sound = "[aoe]cast",
-				},
-				{ -- 自保技能提示 异变仪式（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 1221532,
-					event = "SPELL_CAST_START",
-					dur = 8.5,
-					threshold = 65,
-				},
+				}),
+				T.Temp_HPWatchCLEU(1221532, "SPELL_CAST_START", 8.5),
 			},
 		},
 		{ -- 废土遗民诉契者:吞噬灵魂
@@ -475,32 +300,13 @@ G.Encounters["c542"] = {
 				{1248701},
 			},
 			options = {
-				{ -- 计时条 吞噬灵魂（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1248699,		
+				T.Temp_NormalCastBar(1248699, {	
 					text = L["转火"],
 					sound = "[target]cast",
-				},
-				{ -- 姓名板光环 灵魂防护（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1248702,
-				},
-				{ -- 姓名板NPC高亮 挑衅之灵（✓）
-					category = "PlateAlert",
-					type = "PlateNpcID",
-					mobID = "240952",
-					hl_np = true,
-				},
-				{ -- 姓名板光环 干扰仪式（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HARMFUL",
-					spellID = 1226492,
-					hl_np = true,
-				},
+				}),
+				T.Temp_PlateAura(1248702), -- 灵魂防护
+				T.Temp_PlateNpcGlow("240952"),
+				T.Temp_PlateAuraWithGlow(1226492), -- 干扰仪式
 			},
 		},
 		{ -- 卡雷什元素:卡雷什之拥
@@ -508,21 +314,8 @@ G.Encounters["c542"] = {
 				{1223000},
 			},
 			options = {
-				{ -- 姓名板光环 卡雷什之拥（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 1223000,
-					ficon = "7",
-				},
-				{ -- 驱散提示音 卡雷什之拥（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1223000,
-					aura_type = "HELPFUL",
-					file = "[dispel]",
-					ficon = "7",
-				},
+				T.Temp_PlateAura(1223000),
+				T.Temp_DispelBuffSound(1223000, "7"),
 			},
 		},
 		{ -- 废土蠕行者:幽暗之咬
@@ -530,20 +323,8 @@ G.Encounters["c542"] = {
 				{1222341},
 			},
 			options = {
-				{ -- 对我施法图标 幽暗之咬（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 1222341,
-					hl = "yel_flash",
-				},
-				{ -- 图标 幽暗之咬（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1222341,
-					tip = L["DOT"],
-				},
+				T.Temp_ComIcon(1222341),
+				T.Temp_DoTIcon(1222341),				
 			},
 		},
 		{ -- 废土蠕行者:掘进喷发
@@ -551,12 +332,9 @@ G.Encounters["c542"] = {
 				{1223007},
 			},
 			options = {
-				{ -- 计时条 掘进喷发（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1223007,
+				T.Temp_NormalCastBar(1223007, {		
 					sound = "[dodge_circle]cast",
-				},
+				}),
 			},
 		},
 		{ -- 掘地蠕行者:碾地猛击
@@ -597,15 +375,10 @@ G.Encounters["c542"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 碾地猛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1215850,		
+				T.Temp_ImportantCastBar(1215850, {
 					text = L["全团AE"].."+"..L["躲圈"],
-					glow = true,
-					group = 1,
 					sound = "[mindstep]cast",
-				},
+				}),
 			},
 		},
 		{ -- 掘地蠕行者:钻地冲击
@@ -613,18 +386,11 @@ G.Encounters["c542"] = {
 				{1237195},
 			},
 			options = {
-				{ -- 计时条 钻地冲击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1237195,
+				T.Temp_NormalCastBar(1237195, {	
 					show_tar = true,
 					sound = "[getout]cast",
-				},
-				{ -- 团队框架图标 钻地冲击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 1237195,
-				},
+				}),
+				T.Temp_RaidCastIcon(1237195),
 				{ -- 首领模块 钻地冲击 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 1237195,
@@ -689,23 +455,11 @@ G.Encounters["c542"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 猛烈沙暴（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1237220,		
+				T.Temp_ImportantCastBar(1237220, {
 					text = L["全团AE"],
-					glow = true,
-					group = 1,
 					sound = "[aoe]cast",
-				},
-				{ -- 自保技能提示 猛烈沙暴（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 1237220,
-					event = "SPELL_CAST_START",
-					dur = 4,
-					threshold = 65,
-				},
+				}),
+				T.Temp_HPWatchCLEU(1237220, "SPELL_CAST_START", 4),
 			},
 		},
 		{ -- 卡雷什涌动
@@ -713,14 +467,7 @@ G.Encounters["c542"] = {
 				{1239229},
 			},
 			options = {
-				{ -- 图标 卡雷什涌动（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1239229,
-					tip = L["加速"].."+"..L["加急速"],
-				},
+				T.Temp_PositiveIcon(1239229, L["加速"].."+"..L["加急速"]),
 				{ -- 首领模块 奥尔达尼沙地滤镜（✓）
 					category = "BossMod",
 					spellID = 1239229,
@@ -776,3 +523,4 @@ G.Encounters["c542"] = {
 		},
 	},
 }
+

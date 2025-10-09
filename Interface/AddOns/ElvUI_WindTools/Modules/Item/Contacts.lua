@@ -3,6 +3,7 @@ local CT = W:NewModule("Contacts", "AceHook-3.0")
 local S = W.Modules.Skins ---@type Skins
 local ES = E.Skins
 local MF = W.Modules.MoveFrames ---@type MoveFrames
+local C = W.Utilities.Color
 
 local _G = _G
 local floor = floor
@@ -287,27 +288,27 @@ function CT:ConstructNameButtons()
 		button:RegisterForClicks("LeftButtonDown", "RightButtonDown")
 		F.SetFontOutline(button.Text)
 
-		button:SetScript("OnClick", function(self, mouseButton)
+		button:SetScript("OnClick", function(_, mouseButton)
 			if mouseButton == "LeftButton" then
 				if _G.SendMailNameEditBox then
-					local playerName = self.name
+					local playerName = button.name
 					if playerName then
-						if self.realm and self.realm ~= E.myrealm then
-							playerName = playerName .. "-" .. self.realm
+						if button.realm and button.realm ~= E.myrealm then
+							playerName = playerName .. "-" .. button.realm
 						end
 						_G.SendMailNameEditBox:SetText(playerName)
 					end
 				end
 			elseif mouseButton == "RightButton" then
-				CT:ShowContextText(self)
+				CT:ShowContextText(button)
 			end
 		end)
 
-		button:SetScript("OnEnter", function(self)
-			CT:SetButtonTooltip(self)
+		button:SetScript("OnEnter", function(_)
+			CT:SetButtonTooltip(button)
 		end)
 
-		button:SetScript("OnLeave", function(self)
+		button:SetScript("OnLeave", function(_)
 			GameTooltip:Hide()
 		end)
 
@@ -453,7 +454,7 @@ function CT:UpdatePage(pageIndex)
 					button.faction = temp.faction
 					button.BNName = temp.BNName
 				end
-				button:SetText(button.class and F.CreateClassColorString(button.name, button.class) or button.name)
+				button:SetText(button.class and C.StringWithClassColor(button.name, button.class) or button.name)
 				button:Show()
 			else
 				button.dType = nil

@@ -26,6 +26,9 @@ G.Encounters[2448] = {
 					category = "AlertTimerbar",
 					type = "cast",
 					spellID = 353312,
+					group = 1,
+					glow = true,
+					sound = "[minddefense]cast,notank",
 				},
 				{ -- 自保技能提示 净化爆发（✓）
 					category = "HPWatch",

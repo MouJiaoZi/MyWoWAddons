@@ -1,0 +1,33 @@
+VER 3 000000000000000F " " "INV_MISC_QUESTIONMARK"
+#showtooltip item:142542
+#macro version 1
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","城镇传送之书") end
+/click RHTB LeftButton
+END
+VER 3 0000000000000007 "1" "ABILITY_DUALWIELD"
+/目标 复生的大法师
+END
+VER 3 0000000000000008 "2" "ABILITY_RACIAL_BESTDEALSANYWHERE"
+/目标 镇压者
+END
+VER 3 0000000000000009 "BF_Mount" "ability_mount_charger"
+/bfmount
+END
+VER 3 000000000000000A "BF_Pet" "achievement_worldevent_brewmaster"
+/BFPET
+END
+VER 3 000000000000000B "Decursive" "INV_MISC_QUESTIONMARK"
+/stopcasting
+/cast [@mouseover,nomod,exists] 冰冷触摸;  [@mouseover,exists,mod:ctrl] 冰冷触摸; [@mouseover,exists,mod:shift] 冰冷触摸
+END
+VER 3 000000000000000C "MillHelper" "Ability_Miling"
+/click MillHelperButton
+END
+VER 3 000000000000000E "RHS" "INV_MISC_QUESTIONMARK"
+#showtooltip 复活节的炉石
+/click RandomHearthStone
+/rhs check
+END
+VER 3 000000000000000D "坐骑" "Ability_Mount_Charger"
+/RandomMount
+END

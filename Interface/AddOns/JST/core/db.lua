@@ -55,6 +55,7 @@ local Character_default_Settings = {
 		group_spell_enable = false,
 		group_spell_msg = false,
 		group_spell_size = 40,
+		group_spell_dir = "LEFT",
 		personal_spell_enable = true,
 		personal_spell_size = 40,
 		personal_spell_dir = "LEFT",
@@ -71,6 +72,10 @@ local Character_default_Settings = {
 		control_always_show = false,
 		control_spell_size = 55,
 		control_tts = true,
+		control_oochide = true,
+		control_bossfighthide = true,
+		control_assign = true,
+		control_spells = {},
 	},
 	IconAlertOption = {		
 		test = false,
@@ -143,6 +148,10 @@ local Character_default_Settings = {
 		y_offset = 4,
 	},
 }
+
+for _, spellID in pairs(G.DungeonCCSpells) do
+	Character_default_Settings.GeneralOption.control_spells[spellID] = true
+end
 
 local Character_alert_Settings = {}
 
@@ -378,30 +387,8 @@ T.AccountToCharacter = function()
 	StaticPopup_Show(G.addon_name.."Reset Confirm")
 end
 
-local ValueToString = function(value)
-	local valuetext
-	if value == false then
-		return "false"
-	elseif value == true then
-		return "true"
-	elseif type(value) == "number" then
-		return string.format("num:%d", value)
-	else
-		return value
-	end
-end
-
-local StringToValue = function(str_value)
-	if str_value == "true" then
-		return true	
-	elseif str_value == "false" then
-		return false	
-	elseif string.match(str_value, "num:(%d+)") then
-		return tonumber(string.match(str_value, "num:(%d+)"))
-	else
-		return str_value
-	end
-end
+local ValueToString = T.ValueToString
+local StringToValue = T.StringToValue
 
 T.ExportSettings = function()
 	local str = G.addon_name.." Export".."~"..G.Version

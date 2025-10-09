@@ -22,29 +22,13 @@ G.Encounters["c505"] = {
 				{431303},
 			},
 			options = {
-				T.Temp_SubInterruptBar(431303, { -- 暗夜箭（✓）
+				T.Temp_SubInterruptBar(431303, {
 					show_tar = true,
 					threat_ck = true,
 				}),
-				{ -- 姓名板打断图标 暗夜箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 431303,
-					mobID = "213892",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 暗夜箭（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 431303,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 暗夜箭（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 431303,
-				},
+				T.Temp_PlateInterrupt(431303, "213892", 2),
+				T.Temp_ComIcon(431303),
+				T.Temp_RaidCastIcon(431303),
 			},
 		},
 		{ -- 夜幕影法师:诱捕暗影
@@ -52,29 +36,11 @@ G.Encounters["c505"] = {
 				{431309},
 			},
 			options = {
-				{ -- 图标 诱捕暗影（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 431309,
-					hl = "pur",
-					tip = L["减速"].."+"..L["DOT"],
+				T.Temp_ImportantDebuffIcon(431309, "pur", L["减速"].."+"..L["DOT"], {
 					ficon = "8",
-				},
-				{ -- 团队框架高亮 诱捕暗影（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 431309,
-					color = "pur",
-				},
-				{ -- 驱散提示音 诱捕暗影（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 431309,
-					file = "[dispel]",
-					ficon = "8",
-				},
+				}),
+				T.Temp_RaidAuraGlow(431309, "pur"),
+				T.Temp_DispelDebuffSound(431309, "8"),
 			},
 		},
 		{ -- 夜幕祭师:折磨光束
@@ -114,38 +80,12 @@ G.Encounters["c505"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 折磨光束（✓）
-					category = "AlertTimerbar",
-					type = "cleu",
-					spellID = 431364,
-					event = "SPELL_CAST_START",
-					dur = 2.5,
-					glow = true,
-					group = 1,
+				T.Temp_ImportantCLEUBar(431364, "SPELL_CAST_START", 2.5, {
 					text = L["强力DOT"],
-				},
-				{ -- 图标 折磨光束（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 431365,
-					hl = "red",
-					tip = L["强力DOT"],
-					sound = "[defense]",
-				},
-				{ -- 自保技能提示 折磨光束（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 431365,
-					threshold = 65,
-				},
-				{ -- 团队框架高亮 折磨光束（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 431365,
-					color = "red",
-				},
+				}),
+				T.Temp_BigDoTIcon(431365, nil, "red"),
+				T.Temp_HPWatchAura(431365),
+				T.Temp_RaidAuraGlow(431365, "red"),
 			},
 		},
 		{ -- 夜幕祭师:冥河之种
@@ -153,42 +93,17 @@ G.Encounters["c505"] = {
 				{432448},
 			},
 			options = {
-				{ -- 计时条 冥河之种（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 432448,
+				T.Temp_NormalCastBar(432448, {
 					show_tar = true,
 					ficon = "7",
-				},
-				{ -- 驱散提示音 冥河之种（✓）
-					category = "Sound",
-					sub_event = "SPELL_CAST_START",
-					spellID = 432448,
-					file = "[prepare_dispel]",
+				}),
+				T.Temp_DispelDebuffCastSound(432448, "7"),
+				T.Temp_RaidCastIcon(432448),
+				T.Temp_ImportantDebuffIcon(432448, "org_flash", L["离开人群"], {
 					ficon = "7",
-				},
-				{ -- 团队框架图标 冥河之种（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 432448,
-				},
-				{ -- 图标 冥河之种（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 432448,
-					hl = "org_flash",
-					tip = L["离开人群"],
-					ficon = "7",					
 					msg = {str_applied = "%name %spell"},
-				},				
-				{ -- 团队框架高亮 冥河之种（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 432448,
-					color = "blu",
-				},
+				}),
+				T.Temp_RaidAuraGlow(432448, "blu"),
 			},
 		},
 		{ -- 夜幕司令官:污邪斩击
@@ -196,30 +111,9 @@ G.Encounters["c505"] = {
 				{431491},
 			},
 			options = {
-				{ -- 打坦计时条 污邪斩击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 431491,
-					group = 1,
-					ficon = "0",
-					sound = "[minddefense]cast",
-				},
-				{ -- 图标 污邪斩击（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 431491,
-					tip = L["DOT"],
-					ficon = "13",
-				},
-				{ -- 驱散提示音 污邪斩击（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 431491,
-					file = "[dispel]",
-					ficon = "13",
-				},
+				T.Temp_TankCastBar(431491, "[minddefense]cast"),
+				T.Temp_DoTIcon(431491, "13"),
+				T.Temp_DispelDebuffSound(431491, "13"),				
 			},
 		},
 		{ -- 夜幕司令官:深渊嗥叫
@@ -227,19 +121,10 @@ G.Encounters["c505"] = {
 				{450756},
 			},
 			options = {
-				{ -- 计时条 深渊嗥叫（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 450756,
+				T.Temp_NormalCastBar(450756, {
 					ficon = "7",
-				},
-				{ -- 姓名板光环 深渊嗥叫（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 450756,
-					ficon = "7",
-				},
+				}),
+				T.Temp_PlateAura(450756),
 			},
 		},
 		{ -- 苏雷吉网法师:迸发虫茧
@@ -247,28 +132,12 @@ G.Encounters["c505"] = {
 				{451107},
 			},
 			options = {				
-				{ -- 对我施法图标 迸发虫茧（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 451107,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 迸发虫茧（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 451107,
-				},
-				{ -- 图标 迸发虫茧（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 451107,
-					hl = "red",
-					tip = L["强力DOT"],
+				T.Temp_ComIcon(451107),
+				T.Temp_RaidCastIcon(451107),
+				T.Temp_ImportantDebuffIcon(451107, "red", L["强力DOT"], {
 					sound = "[defense]cd3",
 					msg = {str_applied = "%name %spell", str_rep = "%spell %dur"},
-				},
+				}),				
 				{ -- 首领模块 迸发虫茧 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 451107,
@@ -294,18 +163,8 @@ G.Encounters["c505"] = {
 						T.ResetUnitAuraCircleTimers(frame)			
 					end,
 				},
-				{ -- 自保技能提示 迸发虫茧（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 451107,
-					threshold = 65,
-				},
-				{ -- 团队框架高亮 迸发虫茧（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 451107,
-					color = "red",
-				},
+				T.Temp_HPWatchAura(451107),
+				T.Temp_RaidAuraGlow(451107, "red"),
 			},
 		},
 		{ -- 苏雷吉网法师:蛛网箭
@@ -313,67 +172,26 @@ G.Encounters["c505"] = {
 				{451113},
 			},
 			options = {
-				T.Temp_SubInterruptBar(451113, { -- 蛛网箭（✓）
+				T.Temp_SubInterruptBar(451113, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 蛛网箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 451113,
-					mobID = "210966",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 蛛网箭（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 451113,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 蛛网箭（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 451113,
-				},
+				T.Temp_PlateInterrupt(451113, "210966", 2),
+				T.Temp_ComIcon(451113),
+				T.Temp_RaidCastIcon(451113),
 			},
-		},		
+		},
 		{ -- 夜幕暗法师:折磨射线
 			spells = {
 				{431333},
 			},
 			options = {				
-				T.Temp_NormalInterruptBar(431333, { -- 折磨射线（✓）
+				T.Temp_NormalInterruptBar(431333, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 折磨射线（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 431333,
-					mobID = "213893,228539",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 图标 折磨射线（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 431333,
-					hl = "red",
-					tip = L["强力DOT"],
-				},
-				{ -- 自保技能提示 折磨射线（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 431333,
-					threshold = 65,
-				},
-				{ -- 团队框架高亮 折磨射线（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 431333,
-					color = "red",
-				},
+				T.Temp_PlateInterrupt(431333, "213893,228539", 2),
+				T.Temp_BigDoTIcon(431333, nil, "red"),
+				T.Temp_HPWatchAura(431333),
+				T.Temp_RaidAuraGlow(431333, "red"),
 			},
 		},
 		{ -- 夜幕暗法师:暗影屏障
@@ -381,15 +199,8 @@ G.Encounters["c505"] = {
 				{432520},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(432520), -- 暗影屏障（✓）
-				{ -- 姓名板打断图标 暗影屏障（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 432520,
-					mobID = "213893,228539",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_NormalInterruptBar(432520),
+				T.Temp_PlateInterrupt(432520, "213893,228539", 1),
 			},
 		},
 		{ -- 暗影具象:黑暗之霰
@@ -451,27 +262,9 @@ G.Encounters["c505"] = {
 				{453345, "2"},
 			},
 			options = {
-				{ -- 图标 深渊朽烂（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 453345,
-					tip = L["强力DOT"],
-					hl = "red",
-				},
-				{ -- 自保技能提示 深渊朽烂（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 453345,
-					threshold = 75,
-				},
-				{ -- 团队框架高亮 深渊朽烂（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 453345,
-					color = "red",
-				},
+				T.Temp_BigDoTIcon(453345, nil, "red"),				
+				T.Temp_HPWatchAura(453345, nil, 75),
+				T.Temp_RaidAuraGlow(453345, "red"),
 			},
 		},
 		{ -- 夜幕战略家:黑刃之锋
@@ -479,36 +272,15 @@ G.Encounters["c505"] = {
 				{431494},
 			},
 			options = {
-				{ -- 计时条 黑刃之锋（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 431494,
+				T.Temp_NormalCastBar(431494, {
 					sound = "[dodge]cast",
 					text = L["冲击波"],
-				},
-				{ -- 图标 黑刃之锋（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 431494,
-					tip = L["诱捕"],
+				}),
+				T.Temp_ImportantDebuffIcon(431494, "blu", L["诱捕"], {
 					ficon = "7",
-					hl = "blu",
-				},
-				{ -- 团队框架高亮 黑刃之锋（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 431494,
-					color = "blu",
-				},
-				{ -- 驱散提示音 黑刃之锋（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 431494,
-					file = "[dispel]",
-					ficon = "7",
-				},
+				}),
+				T.Temp_RaidAuraGlow(431494, "blu"),
+				T.Temp_DispelDebuffSound(431494, "7"),
 			},
 		},
 		{ -- 夜幕战略家:战略家之怒
@@ -516,20 +288,8 @@ G.Encounters["c505"] = {
 				{451112},
 			},
 			options = {
-				{ -- 姓名板光环 战略家之怒（✓）
-					category = "PlateAlert",
-					type = "PlateAuras",
-					aura_type = "HELPFUL",
-					spellID = 451112,
-					ficon = "11",
-				},
-				{ -- 驱散提示音 战略家之怒（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 451112,
-					file = "[dispel]",
-					ficon = "11",
-				},
+				T.Temp_PlateAura(451112),
+				T.Temp_DispelBuffSound(451112, "11"),
 			},
 		},
 		{ -- 夜幕影行者:暗影之刃
@@ -537,15 +297,7 @@ G.Encounters["c505"] = {
 				{1242681},
 			},
 			options = {
-				{ -- 图标 暗影之刃（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 1242681,
-					hl = "",
-					tip = L["致死"].."%s1%",
-				},
+				T.Temp_NormalDebuff(1242681, L["致死"].."%s1%"),
 			},
 		},		
 		{ -- 扬升者维斯可里亚:深渊轰击（死亡尖啸者艾肯塔克 坚不可摧的伊克斯雷腾）
@@ -553,45 +305,16 @@ G.Encounters["c505"] = {
 				{451119},
 			},
 			options = {				
-				{ -- 计时条 深渊轰击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 451119,
+				T.Temp_NormalCastBar(451119, {
 					show_tar = true,
-				},
-				{ -- 对我施法图标 深渊轰击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 451119,
-					hl = "yel_flash",
+				}),
+				T.Temp_ComIcon(451119, {
 					sound = "[defense]",
-				},
-				{ -- 团队框架图标 深渊轰击（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 451119,
-				},
-				{ -- 图标 深渊轰击（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 451119,
-					tip = L["强力DOT"],	
-					hl = "red",
-				},
-				{ -- 自保技能提示 深渊轰击（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 451119,
-					threshold = 75,
-				},
-				{ -- 团队框架高亮 深渊轰击（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 451119,
-					color = "red",
-				},
+				}),
+				T.Temp_RaidCastIcon(451119),
+				T.Temp_BigDoTIcon(451119, nil, "red"),
+				T.Temp_HPWatchAura(451119, nil, 75),
+				T.Temp_RaidAuraGlow(451119, "red"),
 			},
 		},
 		{ -- 扬升者维斯可里亚:晦影腐朽
@@ -631,23 +354,11 @@ G.Encounters["c505"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 晦影腐朽（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 451102,
-					text = L["全团AE"],				
-					glow = true,
-					group = 1,
+				T.Temp_ImportantCastBar(451102, {
+					text = L["全团AE"],
 					sound = "[aoe]cast",
-				},
-				{ -- 自保技能提示 晦影腐朽（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 451102,
-					event = "SPELL_CAST_START",
-					dur = 5,
-					threshold = 65,
-				},
+				}),
+				T.Temp_HPWatchCLEU(451102, "SPELL_CAST_START", 5),
 			},
 		},
 		{ -- 死亡尖啸者艾肯塔克:暗黑法球
@@ -655,35 +366,14 @@ G.Encounters["c505"] = {
 				{450854},
 			},
 			options = {
-				{ -- 计时条 暗黑法球（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 450854,	
-					glow = true,
-					group = 1,
+				T.Temp_ImportantCastBar(450854, {
 					sound = "[ball]cast,cd3",
-				},
-				{ -- 图标 黑暗伤痕（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 460135,
-					tip = L["强力DOT"],
+				}),
+				T.Temp_ImportantDebuffIcon(460135, "red", L["强力DOT"], {
 					sound = "[defense]",
-				},
-				{ -- 自保技能提示 黑暗伤痕（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 460135,
-					threshold = 85,
-				},
-				{ -- 团队框架高亮 黑暗伤痕（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 460135,
-					color = "red",
-				},
+				}),
+				T.Temp_HPWatchAura(460135, nil, 85),
+				T.Temp_RaidAuraGlow(460135, "red"),
 			},
 		},
 		{ -- 坚不可摧的伊克斯雷腾:恐惧猛击
@@ -691,13 +381,10 @@ G.Encounters["c505"] = {
 				{451117},
 			},
 			options = {
-				{ -- 计时条 恐惧猛击（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 451117,
+				T.Temp_NormalCastBar(451117, {
 					text = L["大圈"],
-					sound = "[outcircle]cast,notank",
-				},
+					sound = "[outcircle]cast,notank",	
+				}),
 				{ -- 首领模块 恐惧猛击 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 451117,
@@ -762,25 +449,13 @@ G.Encounters["c505"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 折磨喷发（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 431349,
+				T.Temp_ImportantCastBar(431349, {
 					text = L["分散"].."+"..L["注意治疗"],
-					glow = true,
-					group = 1,
 					sound = "[spread]cast",
-				},
-				{ -- 图标 折磨喷发（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 431350,
-					hl = "red",
-					tip = L["分散"].."+"..L["强力DOT"],
+				}),
+				T.Temp_ImportantDebuffIcon(431350, "red", L["分散"].."+"..L["强力DOT"], {
 					sound = "[defense]",
-				},
+				}),
 				{ -- 首领模块 折磨喷发 计时圆圈（✓）
 					category = "BossMod",
 					spellID = 431350,
@@ -806,18 +481,8 @@ G.Encounters["c505"] = {
 						T.ResetUnitAuraCircleTimers(frame)			
 					end,
 				},
-				{ -- 自保技能提示 折磨喷发（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 431350,
-					threshold = 65,
-				},
-				{ -- 团队框架高亮 折磨喷发（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 431350,
-					color = "red",
-				},
+				T.Temp_HPWatchAura(431350),
+				T.Temp_RaidAuraGlow(431350, "red"),
 			},
 		},
 		{ -- 夜幕筑暗师:招引增援
@@ -859,13 +524,10 @@ G.Encounters["c505"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 招引增援（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 446615,
+				T.Temp_NormalCastBar(446615, {
 					text = L["召唤小怪"],
 					sound = "[add]cast",
-				},
+				}),
 			},
 		},		
 		{ -- 渗透暗影
@@ -873,14 +535,7 @@ G.Encounters["c505"] = {
 				{449332},
 			},
 			options = {
-				{ -- 图标 渗透暗影（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 449332,
-					hl = "yel",
-				},
+				T.Temp_ImportantDebuffIcon(449332, "yel"),
 			},
 		},
 	},

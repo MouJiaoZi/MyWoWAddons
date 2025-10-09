@@ -10,6 +10,7 @@ local GB = W:GetModule("GameBar")
 local AM = W:GetModule("Automation")
 local SA = W:GetModule("SpellActivationAlert")
 local LL = W:GetModule("LFGList")
+local AT = W:GetModule("AchievementTracker")
 
 ---@cast SA SpellActivationAlert
 
@@ -133,7 +134,7 @@ options.general = {
 			desc = format(
 				"%s\n%s",
 				L["Show keybinds above the ElvUI cooldown and glow effect on the action buttons."],
-				F.CreateColorString(L["Only works with ElvUI action bar and ElvUI cooldowns."], E.db.general.valuecolor)
+				C.StringWithRGB(L["Only works with ElvUI action bar and ElvUI cooldowns."], E.db.general.valuecolor)
 			),
 		},
 		guildNewsItemLevel = {
@@ -539,7 +540,7 @@ options.moveFrames = {
 					type = "description",
 					name = C.StringByTemplate(L["Notice"], "rose-500") .. " " .. format(
 						L["%s may cause some frames to get messed, but you can use %s button to reset frames."],
-						L["Remember Positions"],
+						C.StringByTemplate(L["Remember Positions"], "amber-400"),
 						C.StringByTemplate(L["Clear History"], "sky-500")
 					),
 					fontSize = "medium",
@@ -669,15 +670,18 @@ do
 		},
 	}
 
-	for name, data in pairs(itemList) do
+	for _, data in pairs(itemList) do
 		async.WithItemID(data.id, function(item)
 			local icon = item:GetItemIcon()
 			local itemName = item:GetItemName()
 			local color = item:GetItemQualityColor()
 
-			local iconString = F.GetIconString(icon)
-			local nameString = F.CreateColorString(itemName, color)
+			if not itemName then
+				return
+			end
 
+			local iconString = F.GetIconString(icon)
+			local nameString = C.StringWithRGB(itemName, color or { 1, 1, 1 })
 			options.mute.args.other.args[itemName] = {
 				order = data.id,
 				type = "toggle",
@@ -2397,6 +2401,150 @@ options.exitPhaseDiving = {
 			disabled = function()
 				return not E.db.WT.misc.exitPhaseDiving.enable
 			end,
+		},
+	},
+}
+
+options.achievementTracker = {
+	order = 13,
+	type = "group",
+	name = L["Achievement Tracker"],
+	get = function(info)
+		return E.db.WT.misc.achievementTracker[info[#info]]
+	end,
+	set = function(info, value)
+		E.db.WT.misc.achievementTracker[info[#info]] = value
+		AT:ProfileUpdate()
+	end,
+	args = {
+		desc = {
+			order = 1,
+			type = "group",
+			inline = true,
+			name = L["Description"],
+			args = {
+				feature = {
+					order = 1,
+					type = "description",
+					name = L["Show an enhanced achievement tracker with filtering and detailed progress information."],
+					fontSize = "medium",
+				},
+			},
+		},
+		enable = {
+			order = 2,
+			type = "toggle",
+			name = L["Enable"],
+		},
+		size = {
+			order = 3,
+			type = "group",
+			name = L["Size"],
+			inline = true,
+			disabled = function()
+				return not E.db.WT.misc.achievementTracker.enable
+			end,
+			args = {
+				width = {
+					order = 1,
+					type = "range",
+					name = L["Width"],
+					min = 400,
+					max = 1200,
+					step = 1,
+				},
+				height = {
+					order = 2,
+					type = "range",
+					name = L["Height"],
+					min = 300,
+					max = 1200,
+					step = 1,
+				},
+			},
+		},
+		scan = {
+			order = 4,
+			type = "group",
+			name = L["Scan"],
+			inline = true,
+			disabled = function()
+				return not E.db.WT.misc.achievementTracker.enable
+			end,
+			get = function(info)
+				return E.db.WT.misc.achievementTracker.scan[info[#info]]
+			end,
+			set = function(info, value)
+				E.db.WT.misc.achievementTracker.scan[info[#info]] = value
+			end,
+			args = {
+				batchSize = {
+					order = 1,
+					type = "range",
+					name = L["Batch Size"],
+					desc = L["Number of achievements to scan per batch."],
+					min = 1,
+					max = 2000,
+					step = 1,
+				},
+				batchInterval = {
+					order = 2,
+					type = "range",
+					name = L["Batch Interval"],
+					desc = L["Interval between each batch scan in seconds."],
+					min = 0.01,
+					max = 1,
+					step = 0.01,
+				},
+				betterAlign = {
+					order = 3,
+					type = "description",
+					width = "full",
+					name = " ",
+				},
+				automation = {
+					order = 4,
+					type = "toggle",
+					name = L["Automation"],
+					desc = L["Automatically scan achievements when certain events occur."],
+					get = function()
+						return E.db.WT.misc.achievementTracker.scan.automation.enable
+					end,
+					set = function(info, value)
+						E.db.WT.misc.achievementTracker.scan.automation.enable = value
+					end,
+				},
+				automationOnShow = {
+					order = 5,
+					type = "toggle",
+					name = L["Auto Scan on Show"],
+					desc = L["Scan achievements automatically when the tracker is shown."],
+					get = function()
+						return E.db.WT.misc.achievementTracker.scan.automation.onShow
+					end,
+					set = function(info, value)
+						E.db.WT.misc.achievementTracker.scan.automation.onShow = value
+					end,
+					disabled = function()
+						return not E.db.WT.misc.achievementTracker.scan.automation.enable
+					end,
+				},
+				automationOnLogin = {
+					order = 6,
+					type = "toggle",
+					name = L["Auto Scan on Login"],
+					desc = L["Scan achievements automatically when you log in."],
+					get = function()
+						return E.db.WT.misc.achievementTracker.scan.automation.onLogin
+					end,
+					set = function(info, value)
+						E.db.WT.misc.achievementTracker.scan.automation.onLogin = value
+					end,
+					disabled = function()
+						return not E.db.WT.misc.achievementTracker.scan.automation.enable
+					end,
+				},
+			},
 		},
 	},
 }

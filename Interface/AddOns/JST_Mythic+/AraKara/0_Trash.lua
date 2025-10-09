@@ -22,23 +22,8 @@ G.Encounters["c503"] = {
 				{436401},
 			},
 			options = {
-				{ -- 图标 啊呃！（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",					
-					spellID = 436401,
-					hl = "red",
-					tip = L["DOT"],
-					ficon = "13",
-				},
-				{ -- 团队框架高亮 啊呃！（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 436401,
-					color = "red",
-					amount = 3,
-				},
+				T.Temp_DoTIcon(436401, "13", "red"),
+				T.Temp_RaidAuraGlow(436401, "red", 3),
 			},
 		},
 		{ -- 戳刺飞虫:放血戳刺
@@ -46,23 +31,8 @@ G.Encounters["c503"] = {
 				{438599},
 			},
 			options = {
-				{ -- 图标 放血戳刺（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",					
-					spellID = 438599,
-					hl = "red",
-					tip = L["DOT"],
-					ficon = "13",
-				},
-				{ -- 团队框架高亮 放血戳刺（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 438599,
-					color = "red",
-					amount = 2,
-				},
+				T.Temp_DoTIcon(438599, "13", "red"),
+				T.Temp_RaidAuraGlow(438599, "red", 2),
 			},
 		},
 		{ -- 颤声侍从:蛛网箭（纳克特 伊克辛 沾血的网法师）
@@ -70,28 +40,12 @@ G.Encounters["c503"] = {
 				{434786},
 			},
 			options = {				
-				T.Temp_SubInterruptBar(434786, { -- 蛛网箭 
+				T.Temp_SubInterruptBar(434786, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 蛛网箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 434786,
-					mobID = "216293,218324,217531,223253",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 对我施法图标 蛛网箭（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 434786,
-					hl = "yel_flash",
-				},
-				{ -- 团队框架图标 蛛网箭（✓）
-					category = "RFIcon",
-					type = "Cast",
-					spellID = 434786,
-				},
+				T.Temp_PlateInterrupt(434786, "216293,218324,217531,223253", 2),
+				T.Temp_ComIcon(434786),
+				T.Temp_RaidCastIcon(434786),
 			},
 		},
 		{ -- 颤声侍从:共振弹幕
@@ -99,17 +53,10 @@ G.Encounters["c503"] = {
 				{434793},
 			},
 			options = {
-				T.Temp_NormalInterruptBar(434793, { -- 共振弹幕（✓）
+				T.Temp_NormalInterruptBar(434793, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 共振弹幕（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 434793,
-					mobID = "216293",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_PlateInterrupt(434793, "216293", 1),
 			},
 		},
 		{ -- 充血的爬行者:毒性喷吐
@@ -117,31 +64,9 @@ G.Encounters["c503"] = {
 				{438618},
 			},
 			options = {				
-				{ -- 图标 毒性喷吐（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 438618,
-					hl = "gre",
-					tip = L["DOT"],
-					ficon = "9",
-				},
-				{ -- 团队框架高亮 毒性喷吐（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 438618,
-					color = "gre",
-					amount = 2,
-				},
-				{ -- 驱散提示音 毒性喷吐（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 438618,
-					file = "[dispel]",
-					ficon = "9",
-					amount = 2,
-				},
+				T.Temp_DoTIcon(438618, "9", "gre"),
+				T.Temp_RaidAuraGlow(438618, "gre", 2),
+				T.Temp_DispelDebuffSound(438618, "9", 2),				
 			},
 		},
 		{ -- 阿提克:蛛网喷射（纳克特 伊克辛）
@@ -149,12 +74,9 @@ G.Encounters["c503"] = {
 				{434824},
 			},
 			options = {				
-				{ -- 计时条 蛛网喷射（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 434824,
+				T.Temp_NormalCastBar(434824, {	
 					sound = "[dodge]cast",
-				},
+				}),
 			},
 		},
 		{ -- 阿提克:毒液箭
@@ -162,34 +84,12 @@ G.Encounters["c503"] = {
 				{436322},
 			},
 			options = {				
-				T.Temp_ImportantInterruptBar(436322, { -- 毒液箭（✓）
+				T.Temp_ImportantInterruptBar(436322, {
 					show_tar = true,
 				}),
-				{ -- 姓名板打断图标 毒液箭（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 436322,
-					mobID = "217533",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 图标 毒液箭（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 436322,
-					hl = "gre",
-					tip = L["强力DOT"],
-					sound = "[defense]",
-					ficon = "9",
-				},
-				{ -- 团队框架高亮 毒液箭（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 436322,
-					color = "gre",
-				},
+				T.Temp_PlateInterrupt(436322, "217533", 2),
+				T.Temp_BigDoTIcon(436322, "9", "gre"),
+				T.Temp_RaidAuraGlow(436322, "gre"),
 			},
 		},
 		{ -- 阿提克:毒云
@@ -197,21 +97,10 @@ G.Encounters["c503"] = {
 				{438826},
 			},
 			options = {				
-				{ -- 计时条 毒云（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 438826,
-					sound = "[mindstep]cast",			
-				},
-				{ -- 图标 毒云（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 438825,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				T.Temp_NormalCastBar(438826, {	
+					sound = "[dodge]cast",
+				}),
+				T.Temp_OnFireIcon(438825),
 			},
 		},
 		{ -- 纳克特:巢穴的召唤
@@ -251,23 +140,12 @@ G.Encounters["c503"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 巢穴的召唤（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 438877,
-					spellIDs = {438883},
+				T.Temp_ImportantCastBar(438877, {
+					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 巢穴的召唤（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 438877,
-					event = "SPELL_CAST_START",
-					dur = 4,
-					threshold = 75,
-				},
+					spellIDs = {438883},
+				}),
+				T.Temp_HPWatchCLEU(438877, "SPELL_CAST_START", 4, 75),
 			},
 		},
 		{ -- 伊克辛:惊惧尖鸣
@@ -275,15 +153,8 @@ G.Encounters["c503"] = {
 				{434802},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(434802), -- 惊惧尖鸣（✓）
-				{ -- 姓名板打断图标 惊惧尖鸣（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 434802,
-					mobID = "217531",
-					interrupt = 1,
-					ficon = "6",
-				},
+				T.Temp_ImportantInterruptBar(434802),
+				T.Temp_PlateInterrupt(434802, "217531", 1),
 			},
 		},
 		{ -- 沾血的助手:深掘打击
@@ -291,12 +162,7 @@ G.Encounters["c503"] = {
 				{433002},
 			},
 			options = {			
-				{ -- 对我施法图标 深掘打击（✓）
-					category = "AlertIcon",
-					type = "com",
-					spellID = 433002,
-					hl = "yel_flash",
-				},
+				T.Temp_ComIcon(433002),
 			},
 		},
 		{ -- 沾血的网法师:恶臭齐射
@@ -304,33 +170,10 @@ G.Encounters["c503"] = {
 				{448248},
 			},
 			options = {				
-				T.Temp_ImportantInterruptBar(448248), -- 恶臭齐射（✓）
-				{ -- 姓名板打断图标 恶臭齐射（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 448248,
-					mobID = "223253",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 图标 恶臭齐射（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",					
-					spellID = 448248,
-					effect = 2,
-					hl = "gre",
-					tip = L["强力DOT"],
-					ficon = "9",
-				},
-				{ -- 驱散提示音 恶臭齐射（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 448248,
-					file = "[dispel]",
-					ficon = "9",
-				},
+				T.Temp_ImportantInterruptBar(448248),
+				T.Temp_PlateInterrupt(448248, "223253", 2),
+				T.Temp_BigDoTIcon(448248, "9", "gre"),
+				T.Temp_DispelDebuffSound(448248, "9"),
 			},
 		},
 		{ -- 魁梧的血卫:穿刺
@@ -338,12 +181,9 @@ G.Encounters["c503"] = {
 				{453161},
 			},
 			options = {
-				{ -- 计时条 穿刺（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 453161,
+				T.Temp_NormalCastBar(453161, {	
 					sound = "[dodge]cast",
-				},
+				}),
 			},
 		},
 		{ -- 魁梧的血卫:虫群风暴
@@ -383,30 +223,12 @@ G.Encounters["c503"] = {
 						T.ResetMobCooldownText(frame)
 					end,
 				},
-				{ -- 计时条 虫群风暴（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 1241693,
+				T.Temp_ImportantCastBar(1241693, {
+					text = L["全团AE"],
 					sound = "[aoe]cast",
-					glow = true,
-					group = 1,
-				},
-				{ -- 自保技能提示 虫群风暴（✓）
-					category = "HPWatch",
-					type = "CLEU",
-					spellID = 1241693,
-					event = "SPELL_CAST_START",
-					dur = 10,
-					threshold = 65,
-				},
-				{ -- 图标 虫群风暴（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",					
-					spellID = 1241694,
-					tip = L["DOT"],
-				},
+				}),
+				T.Temp_HPWatchCLEU(1241693, "SPELL_CAST_START", 10),
+				T.Temp_DoTIcon(1241694),
 			},
 		},		
 		{ -- 哨兵鹿壳虫:预警尖鸣
@@ -417,12 +239,7 @@ G.Encounters["c503"] = {
 				T.Temp_ImportantInterruptBar(432967, { -- 预警尖鸣（✓）
 					ficon = "14",
 				}),
-				{ -- 姓名板施法图标 预警尖鸣（✓）
-					category = "PlateAlert",
-					type = "PlateSpells",
-					spellID = 432967,
-					hl_np = true,
-				},
+				T.Temp_PlateCastGlow(432967),
 			},
 		},
 		{ -- 鲜血监督者:爆发蛛网
@@ -430,12 +247,9 @@ G.Encounters["c503"] = {
 				{433845},
 			},
 			options = {
-				{ -- 计时条 爆发蛛网（✓）
-					category = "AlertTimerbar",
-					type = "cast",
-					spellID = 433845,
+				T.Temp_NormalCastBar(433845, {	
 					sound = "[mindstep]cast",
-				},
+				}),
 			},
 		},
 		{ -- 鲜血监督者:毒液箭雨
@@ -443,32 +257,10 @@ G.Encounters["c503"] = {
 				{433841},
 			},
 			options = {
-				T.Temp_ImportantInterruptBar(433841), -- 毒液箭雨（✓）
-				{ -- 姓名板打断图标 毒液箭雨（✓）
-					category = "PlateAlert",
-					type = "PlateInterrupt",
-					spellID = 433841,
-					mobID = "216364",
-					interrupt = 2,
-					ficon = "6",
-				},
-				{ -- 图标 毒液箭雨（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",					
-					spellID = 433841,
-					hl = "gre",
-					tip = L["强力DOT"],
-					ficon = "9",
-				},
-				{ -- 驱散提示音 毒液箭雨（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 433841,
-					file = "[dispel]",
-					ficon = "9",
-				},
+				T.Temp_ImportantInterruptBar(433841),
+				T.Temp_PlateInterrupt(433841, "216364", 2),
+				T.Temp_BigDoTIcon(433841, "9", "gre"),
+				T.Temp_DispelDebuffSound(433841, "9"),
 			},
 		},
 		{ -- 强化雄虫:污血
@@ -476,31 +268,9 @@ G.Encounters["c503"] = {
 				{1241785},
 			},
 			options = {
-				{ -- 图标 污血（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",					
-					spellID = 1241785,
-					tip = L["DOT"],
-					ficon = "7",
-					hl = "blu",
-				},
-				{ -- 团队框架高亮 污血（✓）
-					category = "RFIcon",
-					type = "Aura",
-					spellID = 1241785,
-					color = "blu",
-					amount = 10,
-				},
-				{ -- 驱散提示音 污血（✓）
-					category = "Sound",
-					sub_event = "SPELL_AURA_APPLIED",
-					spellID = 1241785,
-					file = "[dispel]",
-					ficon = "7",
-					amount = 10,
-				},
+				T.Temp_DoTIcon(1241785, "7", "blu"),
+				T.Temp_RaidAuraGlow(1241785, "blu", 10),
+				T.Temp_DispelDebuffSound(1241785, "7", 10),
 			},
 		},
 		{ -- 血腥迷瘴
@@ -508,15 +278,7 @@ G.Encounters["c503"] = {
 				{439832},
 			},
 			options = {
-				{ -- 图标 血腥迷瘴（✓）
-					category = "AlertIcon",
-					type = "aura",
-					aura_type = "HARMFUL",
-					unit = "player",
-					spellID = 439832,
-					tip = L["快走开"],
-					sound = "[sound_dd]",
-				},
+				T.Temp_OnFireIcon(439832),
 			},
 		},	
 	},

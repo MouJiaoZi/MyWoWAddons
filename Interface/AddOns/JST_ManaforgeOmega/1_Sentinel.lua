@@ -651,7 +651,7 @@ G.Encounters[2684] = {
 					type = "cast",
 					spellID = 1220553,
 					spellIDs = {1220555, 1220489},
-					text = L["吸收盾"],
+					sound = soundfile("1220553cast", "cast"),
 				},
 				{ -- 文字 协议：净化 倒计时（✓）
 					category = "TextAlert",

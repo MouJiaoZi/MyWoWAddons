@@ -553,14 +553,23 @@ G.Encounters[2691] = {
 							local GUIDs = T.LineToGUIDArray(line)
 									
 							if next(GUIDs) then
-								self.count_left = self.count_left + 1 
-								self.assignments[set][self.count_left] = {}
+								local count
 								
-								local str = string.format("[%d] %s ", self.count_left, tag)
+								if set == 1 then
+									self.count_left = self.count_left + 1
+									count = self.count_left
+								else
+									self.count_right = self.count_right + 1
+									count = self.count_right
+								end
+								
+								self.assignments[set][count] = {}
+								
+								local str = string.format("[%d] %s ", count, tag)
 								
 								for index, GUID in pairs(GUIDs) do
 									if index <= 2 then
-										self.assignments[set][self.count_left][index] = GUID
+										self.assignments[set][count][index] = GUID
 										local name = T.ColorNickNameByGUID(GUID)
 										str = str.." "..name
 									end

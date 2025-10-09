@@ -505,27 +505,8 @@ G.Options = {
 			text = L["启用"],
 			apply = function()
 				T.EditGroupCCFrame("enable")
+				T.UpdateCCSpellPanelStatus()
 			end,
-		},
-		{ -- 控制战术板模板
-			key = "CCnote_copy",
-			option_type = "button",
-			width = .5,
-			text = L["MRT时间轴模板"],
-			apply = function()
-				T.CopyGroupCCNote()
-			end,
-			rely = "control_spell_enable",
-		},
-		{ -- 控制战术板解析
-			key = "control_mrt_read",
-			option_type = "button",
-			width = .5,
-			text = L["MRT战术板解析"],
-			apply = function()
-				T.ReadGroupCCNote()
-			end,
-			rely = "control_spell_enable",
 		},
 		{ -- 图标尺寸
 			key = "control_spell_size",
@@ -557,6 +538,33 @@ G.Options = {
 			text = L["音效"],
 			rely = "control_spell_enable",
 		},
+		{ -- 战斗外隐藏
+			key = "control_oochide",
+			option_type = "check",
+			width = .5,
+			text = L["战斗外隐藏"],
+			apply = function()
+				T.EditGroupCCFrame("visible")
+			end,
+			rely = "control_spell_enable",
+		},
+		{ -- 首领战斗时隐藏
+			key = "control_bossfighthide",
+			option_type = "check",
+			width = .5,
+			text = L["首领战斗时隐藏"],
+			apply = function()
+				T.EditGroupCCFrame("visible")
+			end,
+			rely = "control_spell_enable",
+		},
+		{ -- 自动分配控制技能
+			key = "control_assign",
+			option_type = "check",
+			width = 9,
+			text = L["自动分配控制技能"],
+			rely = "control_spell_enable",
+		},
 		{ -- 标题:团队单体减伤技能监控和分配
 			option_type = "title",
 			text = L["团队单体减伤技能监控和分配"],
@@ -580,13 +588,27 @@ G.Options = {
 		{ -- 图标尺寸
 			key = "group_spell_size",
 			option_type = "slider",
-			width = 1,
+			width = .5,
 			text = L["图标大小"],
 			min = 25,
 			max = 60,
 			step = 1,
 			apply = function()
 				T.EditGroupSpellFrame("icon_size")
+			end,
+			rely = "group_spell_enable",
+		},
+		{ -- 排列方向
+			key = "group_spell_dir",
+			option_type = "ddmenu",
+			width = .5,
+			text = L["排列方向"],
+			option_table = {
+				{"RIGHT", L["向左延申"]},
+				{"LEFT", L["向右延申"]},
+			},
+			apply = function()
+				T.EditGroupSpellFrame("grow_dir")
 			end,
 			rely = "group_spell_enable",
 		},
@@ -755,7 +777,7 @@ G.Options = {
 			width = .5,
 			text = L["粘贴MRT模板"],
 			apply = function()
-				T.GetMrtForPrivateAuraRaidFrame()
+				T.CopyGroupPANote()
 			end,
 			rely = "raid_pa",
 		},

@@ -45,6 +45,32 @@ GUI.updatebutton:SetScript("OnClick", function(self)
 	T.DisplayCopyString(self, G.link, L["下载网址"].." "..L["复制粘贴"])
 end)
 
+GUI.name = T.ClickButton(GUI, 150, {"LEFT", GUI.updatebutton, "RIGHT", 5, 0})
+GUI.name:SetScript("OnShow", function(self)
+	self:SetText(string.format(L["我的昵称"], C.DB["GeneralOption"]["mynickname"]))
+end)
+
+GUI.name:SetScript("OnClick", function(self)	
+	StaticPopup_Show(G.addon_name.."Nickname Input")
+end)
+
+StaticPopupDialogs[G.addon_name.."Nickname Input"].OnShow = function(self, data)
+	local editBox = _G[self:GetName().."EditBox"]
+	if editBox then
+		editBox:SetText(C.DB["GeneralOption"]["mynickname"])
+	end
+end
+
+StaticPopupDialogs[G.addon_name.."Nickname Input"].OnAccept = function(self)
+	local editBox = _G[self:GetName().."EditBox"]
+	if editBox then
+		local str = editBox:GetText()
+		C.DB["GeneralOption"]["mynickname"] = str
+		GUI.name:SetText(string.format(L["我的昵称"], str))
+		T.UpdateMyNickName()
+	end
+end
+
 GUI.lock = T.ClickButton(GUI, 120, {"BOTTOMRIGHT", GUI, "BOTTOMRIGHT", -10, 10}, L["锁定框体"])
 GUI.lock:SetScript("OnClick", function()
 	T.LockAll()
@@ -522,7 +548,7 @@ T.CreateGUIOpitons(interrupt_options.sfa, "PlateAlertOption", 5)
 local mark_panel = CreateFrame("Frame", nil, interrupt_options.sfa)
 
 mark_panel:SetSize(30, 30)
-mark_panel:SetPoint("TOPLEFT", JSTinterruptScrollAnchor.interrupt_auto_mark, "BOTTOMLEFT", 0, 5)
+mark_panel:SetPoint("TOPLEFT", JSTinterruptScrollAnchor.interrupt_auto_mark, "BOTTOMLEFT", 0, 0)
 
 mark_panel.text = T.createtext(mark_panel, "OVERLAY", 14, "OUTLINE", "LEFT")
 mark_panel.text:SetPoint("LEFT", mark_panel, "LEFT", 0, 0)
@@ -587,6 +613,68 @@ mark_panel:SetScript("OnShow", UpdateMarkPanelStatus)
 local tool_options = T.CreateOptionPage(1, nil, "tools", L["小工具"])
 
 T.CreateGUIOpitons(tool_options.sfa, "GeneralOption", 42)
+
+local cc_panel = CreateFrame("Frame", nil, tool_options.sfa)
+
+cc_panel:SetSize(30, 30)
+cc_panel:SetPoint("TOPLEFT", JSTtoolsScrollAnchor.control_assign, "BOTTOMLEFT", 0, -15)
+
+cc_panel.text = T.createtext(cc_panel, "OVERLAY", 14, "OUTLINE", "LEFT")
+cc_panel.text:SetPoint("TOPLEFT", cc_panel, "TOPLEFT", 0, 0)
+cc_panel.text:SetText(L["大秘境控制法术"])
+
+cc_panel.buttons = {}
+
+for index, spellID in pairs(G.DungeonCCSpells) do
+	local bu = T.Checkbutton(cc_panel, T.GetSpellIcon(spellID)..C_Spell.GetSpellName(spellID))
+	
+	local column = mod((index-1), 4)+1
+	local row = ceil(index/4)
+	
+	bu:SetPoint("TOPLEFT", cc_panel, "TOPLEFT", (column-1)*225, -row*28+10)
+	bu.spellID = spellID
+	bu.path = {"GeneralOption", "control_spells", spellID}
+	
+	function bu:UpdateTex()
+		if C.DB["GeneralOption"]["control_spell_enable"] then
+			self:Enable()
+		else
+			self:Disable()
+		end
+	end
+	
+	bu:SetScript("OnShow", function(self)
+		self:UpdateTex()
+		self:SetChecked(T.ValueFromDB(self.path))
+	end)
+	
+	bu:SetScript("OnClick", function(self)
+		local value = self:GetChecked()
+		T.ValueToDB(self.path, value)
+		T.UpdateCCFrameSpells()
+		if value then
+			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+		else
+			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)		
+		end
+	end)
+	
+	table.insert(cc_panel.buttons, bu)
+end
+
+local UpdateCCSpellPanelStatus = function()
+	if C.DB["GeneralOption"]["control_spell_enable"] then
+		cc_panel.text:SetTextColor(1, 1, 1)
+	else
+		cc_panel.text:SetTextColor(.5, .5, .5)
+	end
+	for _, bu in pairs(cc_panel.buttons) do
+		bu:UpdateTex()
+	end
+end
+T.UpdateCCSpellPanelStatus = UpdateCCSpellPanelStatus
+
+cc_panel:SetScript("OnShow", UpdateCCSpellPanelStatus)
 --====================================================--
 --[[                  -- 团队信息 --                ]]--
 --====================================================--
@@ -665,22 +753,29 @@ T.LoadData = function(instance_type)
 				-- 副本
 				local name, _, _, _, _, bgImage, _, _, _, mapID = EJ_GetInstanceInfo(EJ_InstanceID)
 				local instance_option_page = T.CreateCollectTab(2, EJ_InstanceID, name, bgImage)
+				
 				-- 首领
 				for ind, ENCID in pairs(info) do
 					local name = T.GetEncounterName(ENCID)
 					local option_page = T.CreateOptionPage(2, EJ_InstanceID, "encounter"..ENCID, T.hex_str(ind, {1, .82, 0}).." "..T.GetEncounterName(ENCID))
 					T.CreateEncounterOptions(instance_type, option_page.sfa, ENCID, EJ_InstanceID, mapID)
 				end
+				
 				loaded_instance[EJ_InstanceID] = true
 			end
 		end
+		
 	else
 		for ChallengeMapID, info in pairs(G.ChallengeMap_Order) do
 			if not loaded_mythicplus[ChallengeMapID] then
 				-- 副本
 				local name, _, _, bgImage, _, mapID = C_ChallengeMode.GetMapUIInfo(ChallengeMapID)
 				local EJ_InstanceID = C_EncounterJournal.GetInstanceForGameMap(mapID)	
-				local instance_option_page = T.CreateCollectTab(3, ChallengeMapID, name, bgImage)			
+				local instance_option_page = T.CreateCollectTab(3, ChallengeMapID, name, bgImage)		
+				
+				-- 小怪数据
+				T.LoadMobData(ChallengeMapID)
+				
 				-- 首领
 				for ind, ENCID in pairs(info) do
 					local option_page = T.CreateOptionPage(3, ChallengeMapID, "encounter"..ENCID, T.hex_str(ind, {1, .82, 0}).." "..T.GetEncounterName(ENCID))

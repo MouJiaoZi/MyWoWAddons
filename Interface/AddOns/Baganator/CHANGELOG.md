@@ -1,7 +1,7 @@
 # Baganator
 
-## [755](https://github.com/TheMouseNest/Baganator/tree/755) (2025-09-24)
-[Full Changelog](https://github.com/TheMouseNest/Baganator/compare/754...755) 
+## [763](https://github.com/TheMouseNest/Baganator/tree/763) (2025-10-07)
+[Full Changelog](https://github.com/TheMouseNest/Baganator/compare/762...763) 
 
-- Integrate with "Item Upgrade Quality Icons" to show icons for upgrade tracks  
-- Move Masque code into Skins callback  
+- Retail: Update toc for 11.2.5  
+- Midnight: Update for moved ChatEdit\_InsertLink function  

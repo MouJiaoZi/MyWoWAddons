@@ -81,6 +81,7 @@ G.ChallengeMap_Order = {}
 G.Encounter_Data = {}
 G.Current_Data = {}
 G.Timeline_Data = {}
+G.MobData = {}
 
 local RegisterAddonMessageResults = {
 	--[0] = "成功 Success",

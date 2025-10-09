@@ -17,6 +17,60 @@ G.Encounters[2411] = {
 	engage_id = 2403,
 	npc_id = {"165410"},
 	alerts = {
+		{ -- 赎罪容器
+			spells = {
+				{323848},
+			},
+			options = {
+				{ -- 文字 赎罪容器 倒计时（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = C_Spell.GetSpellName(323749)..L["倒计时"],
+					data = {
+						spellID = 323749,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},					
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_SUCCESS" and spellID == 323749 then
+								self.count = self.count + 1
+								local dur = self.count == 2 and 41 or 21
+								T.Start_Text_DelayTimer(self, dur, C_Spell.GetSpellName(323749), true)
+							end
+						elseif event == "ENCOUNTER_START" then
+							self.round = true
+							self.count = 1
+							
+							T.Start_Text_DelayTimer(self, 71, C_Spell.GetSpellName(323749), true)
+						end
+					end,
+				},
+				{ -- 文字 赎罪容器 出现提醒（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = T.GetIconLink(323848),
+					data = {
+						spellID = 323848,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+						sound = "tool",
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, _, _, _, _, _, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_SUCCESS" and spellID == 323749 then
+								T.Start_Text_DelayTimer(self, 2, T.GetIconLink(323848))
+								T.PlaySound("tool")
+							end
+						end
+					end,
+				},
+			},	
+		},
 		{ -- 心能箭矢
 			spells = {
 				{323538, "0,6"},
@@ -86,17 +140,56 @@ G.Encounters[2411] = {
 					hl = "blu",
 					tip = L["DOT"],
 				},
+				{ -- 自保技能提示 不稳定的心能（✓）
+					category = "HPWatch",
+					type = "Aura",
+					spellID = 1236513,
+					threshold = 65,
+				},
 				{ -- 团队框架高亮 不稳定的心能（✓）
 					category = "RFIcon",
 					type = "Aura",
 					spellID = 1236513,
 					color = "blu",
 				},
-				{ -- 自保技能提示 不稳定的心能（✓）
-					category = "HPWatch",
-					type = "Aura",
-					spellID = 1236513,
-					threshold = 65,
+				{ -- 文字 不稳定的心能 驱散提示（✓）
+					category = "TextAlert",
+					type = "spell",
+					preview = L["驱散"]..L["倒计时"],
+					ficon = "2",
+					data = {
+						spellID = 1236513,
+						events =  {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+						count = 0,
+						sound = "[dispel]",
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, sourceGUID, _, _, _, _, _, _, _, spellID, _, _, extraSpellId = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_DISPEL" and extraSpellId == 1236513 and sourceGUID == G.PlayerGUID and self.count > 0 then
+								T.Start_Text_DelayTimer(self, 8, L["驱散"], true)
+							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 1236513 then
+								self.count = self.count + 1
+							elseif sub_event == "SPELL_AURA_REMOVED" and spellID == 1236513 then
+								self.count = self.count - 1
+								if self.count == 0 then
+									T.Stop_Text_Timer(self)
+								end
+							end
+						elseif event == "ENCOUNTER_START" then
+							self.count = 0
+							self.count_down_start = 1
+							self.mute_count_down = true
+							
+							if C.DB["TextAlert"]["spell"][self.data.spellID]["sound_bool"] then
+								self.prepare_sound = "dispel"
+							else
+								self.prepare_sound = nil								
+							end
+						end
+					end,
 				},
 			},
 		},
