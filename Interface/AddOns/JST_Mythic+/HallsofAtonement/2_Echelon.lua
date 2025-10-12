@@ -81,13 +81,15 @@ G.Encounters[2387] = {
 									self:Show()
 									self.text:SetText(string.format("%s %d", L["小怪"], self.count))
 								end
-							elseif sub_event == "UNIT_DIED" then -- 天降神雷
+							elseif sub_event == "UNIT_DIED" then
 								if tContains(self.GUIDs, destGUID) then
 									tDeleteItem(self.GUIDs, destGUID)
 									self.count = #self.GUIDs
 								end
 								
-								if self.count == 0 then
+								if self.count > 0 then
+									self.text:SetText(string.format("%s %d", L["小怪"], self.count))
+								else
 									self:Hide()
 									self.text:SetText("")
 								end

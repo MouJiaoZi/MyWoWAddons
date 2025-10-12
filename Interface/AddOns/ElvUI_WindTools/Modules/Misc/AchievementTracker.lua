@@ -279,7 +279,11 @@ function AT:UpdateView()
 
 	local dataProvider = CreateDataProvider()
 	dataProvider:InsertTable(results)
-	self.MainFrame.ScrollFrame.ScrollView:SetDataProvider(dataProvider)
+	self
+		.MainFrame
+		.ScrollFrame
+		.ScrollBox--[[@as ScrollBoxListMixin]]
+		:SetDataProvider(dataProvider)
 	self.MainFrame:UpdateDropdowns()
 end
 
@@ -345,7 +349,7 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		frame.PercentageFrame = PercentageFrame
 
 		local PercentageText = PercentageFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(PercentageText, F.GetCompatibleFont("Accidental Presidency"), 20)
+		F.SetFont(PercentageText, F.GetCompatibleFont("Accidental Presidency"), 20)
 		PercentageText:SetJustifyH("LEFT")
 		PercentageText:SetJustifyV("BOTTOM")
 		PercentageText:Size(24, PercentageFrame:GetHeight())
@@ -354,7 +358,7 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		frame.PercentageFrame.PercentageText = PercentageText
 
 		local ValueText = PercentageFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(ValueText, F.GetCompatibleFont("Accidental Presidency"), 40)
+		F.SetFont(ValueText, F.GetCompatibleFont("Accidental Presidency"), 40)
 		ValueText:SetJustifyH("RIGHT")
 		ValueText:SetJustifyV("BOTTOM")
 		ValueText:Height(PercentageFrame:GetHeight())
@@ -367,7 +371,7 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		frame.IndicatorFrame = IndicatorFrame
 
 		local TrackingText = IndicatorFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(TrackingText, E.db.general.font, 10)
+		F.SetFont(TrackingText, E.db.general.font, 10)
 		TrackingText:SetJustifyH("CENTER")
 		TrackingText:SetJustifyV("MIDDLE")
 		TrackingText:Point("CENTER", IndicatorFrame, "BOTTOM", 0, 1)
@@ -380,11 +384,11 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		RewardsIcon:Point("RIGHT", -REWARDS_ICON_OFFSET_X, 0)
 		RewardsIcon:CreateBackdrop()
 		RewardsIcon:SetTexCoord(unpack(E.TexCoords))
-		RewardsIcon:SetScript("OnEnter", function(self)
+		RewardsIcon:SetScript("OnEnter", function(icon)
 			if not frame.data.reward.itemID then
 				return
 			end
-			GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+			GameTooltip:SetOwner(icon, "ANCHOR_RIGHT")
 			GameTooltip:SetItemByID(frame.data.reward.itemID)
 			GameTooltip:Show()
 		end)
@@ -399,14 +403,14 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		frame.TextFrame = TextFrame
 
 		local Name = TextFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(Name, E.db.general.font, 15)
+		F.SetFont(Name, E.db.general.font, 15)
 		Name:SetTextColor(C.ExtractRGBAFromTemplate("amber-400"))
 		Name:SetJustifyH("LEFT")
 		Name:Point("TOPLEFT", TextFrame, "TOPLEFT", 0, 0)
 		frame.TextFrame.Name = Name
 
 		local Category = TextFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(Category, E.db.general.font, 12)
+		F.SetFont(Category, E.db.general.font, 12)
 		Category:SetJustifyH("LEFT")
 		Category:SetTextColor(C.ExtractRGBAFromTemplate("neutral-300"))
 		Category:Point("TOPLEFT", Name, "BOTTOMLEFT", 0, -3)
@@ -421,7 +425,7 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		frame.DetailFrame.Criteria = {}
 
 		local Description = DetailFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(Description, E.db.general.font, 12)
+		F.SetFont(Description, E.db.general.font, 13, "NONE")
 		Description:Point("TOP", DetailFrame, "TOP", 0, -ELEMENT_PADDING)
 		Description:Width(frame:GetWidth() - 4 * ELEMENT_PADDING)
 		Description:SetJustifyH("CENTER")
@@ -432,28 +436,28 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 		frame.DetailFrame.Description = Description
 		frame:EnableMouse(true)
 
-		frame.UpdateHeight = function(self)
-			self.data.height = 2 + self.ProgressBackdrop:GetHeight()
+		frame.UpdateHeight = function(f)
+			f.data.height = 2 + f.ProgressBackdrop:GetHeight()
 
-			if self.data.isExpanded then
-				self.data.height = self.data.height + self.DetailFrame:GetHeight()
+			if f.data.isExpanded then
+				f.data.height = f.data.height + f.DetailFrame:GetHeight()
 			end
 
-			self:Height(self.data.height)
+			f:Height(f.data.height)
 		end
 
-		frame:SetScript("OnMouseDown", function(self, button)
+		frame:SetScript("OnMouseDown", function(f, button)
 			if button == "LeftButton" then
-				self.data.isExpanded = not self.data.isExpanded
-				self.DetailFrame:SetShown(self.data.isExpanded)
-				self:UpdateHeight()
+				f.data.isExpanded = not f.data.isExpanded
+				f.DetailFrame:SetShown(f.data.isExpanded)
+				f:UpdateHeight()
 
 				scrollBox:FullUpdate(ScrollBoxConstants.UpdateImmediately)
-				if self.data.isLastElement then
+				if f.data.isLastElement then
 					scrollBox:ScrollToEnd()
 				end
 			elseif button == "MiddleButton" then
-				if not C_ContentTracking_IsTracking(Enum_ContentTrackingType.Achievement, self.data.id) then
+				if not C_ContentTracking_IsTracking(Enum_ContentTrackingType.Achievement, f.data.id) then
 					local trackedCount = #C_ContentTracking_GetTrackedIDs(Enum_ContentTrackingType.Achievement)
 					if trackedCount >= Constants_ContentTrackingConsts.MaxTrackedAchievements then
 						_G.UIErrorsFrame:AddMessage(
@@ -466,7 +470,7 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 						return
 					end
 
-					local err = C_ContentTracking_StartTracking(Enum_ContentTrackingType.Achievement, self.data.id)
+					local err = C_ContentTracking_StartTracking(Enum_ContentTrackingType.Achievement, f.data.id)
 					if not err then
 						PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
 						IndicatorFrame.TrackingText:SetShown(true)
@@ -474,14 +478,14 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 				else
 					C_ContentTracking_StopTracking(
 						Enum_ContentTrackingType.Achievement,
-						self.data.id,
+						f.data.id,
 						Enum_ContentTrackingStopType.Manual
 					)
 					PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
 					IndicatorFrame.TrackingText:SetShown(false)
 				end
 			elseif button == "RightButton" then
-				_G.AchievementFrame_SelectAchievement(self.data.id)
+				_G.AchievementFrame_SelectAchievement(f.data.id)
 			end
 		end)
 
@@ -501,7 +505,7 @@ function AT:ScrollElementInitializer(frame, data, scrollBox)
 
 				if not line.Text then
 					line.Text = line:CreateFontString(nil, "OVERLAY")
-					F.SetFontOutline(line.Text, E.db.general.font, 11)
+					F.SetFont(line.Text, E.db.general.font, 12, "SHADOW")
 					line.Text:Point("LEFT", line.StatusIcon, "RIGHT", 4, 0)
 					line.Text:Point("RIGHT", line, "RIGHT", 0, 0)
 					line.Text:SetJustifyH("LEFT")
@@ -656,7 +660,7 @@ function AT:Construct()
 	ThresholdSlider.Text:Point("BOTTOM", ThresholdSlider, "TOP", 0, 2)
 	ThresholdSlider.Text:SetText(L["Threshold"] .. ": " .. self.db.threshold .. "%")
 	ThresholdSlider.Text:SetTextColor(C.ExtractRGBAFromTemplate("neutral-50"))
-	F.SetFontOutline(ThresholdSlider.Text)
+	F.SetFont(ThresholdSlider.Text)
 	ThresholdSlider:SetScript("OnValueChanged", function(slider, value)
 		self.db.threshold = floor(value)
 		slider.Text:SetText(L["Threshold"] .. ": " .. self.db.threshold .. "%")
@@ -670,7 +674,7 @@ function AT:Construct()
 	ShowAllButton:Size(80, 25)
 	ShowAllButton:Point("LEFT", ThresholdSlider, "RIGHT", 15, 8)
 	ShowAllButton:SetText(L["All"])
-	F.SetFontOutline(ShowAllButton.Text, E.db.general.font)
+	F.SetFont(ShowAllButton.Text, E.db.general.font)
 	S:Proxy("HandleButton", ShowAllButton)
 	ShowAllButton:SetScript("OnClick", function()
 		self.states.filters.pattern = ""
@@ -687,7 +691,7 @@ function AT:Construct()
 	NearlyCompleteButton:Size(80, 25)
 	NearlyCompleteButton:Point("LEFT", ShowAllButton, "RIGHT", 8, 0)
 	NearlyCompleteButton:SetText("95%+")
-	F.SetFontOutline(NearlyCompleteButton.Text)
+	F.SetFont(NearlyCompleteButton.Text)
 	S:Proxy("HandleButton", NearlyCompleteButton)
 	NearlyCompleteButton:SetScript("OnClick", function()
 		self.db.threshold = 95
@@ -707,8 +711,8 @@ function AT:Construct()
 	RefreshButton:SetScript("OnClick", function()
 		self:ScanAchievements()
 	end)
-	RefreshButton:SetScript("OnEnter", function(self)
-		GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+	RefreshButton:SetScript("OnEnter", function(btn)
+		GameTooltip:SetOwner(btn, "ANCHOR_RIGHT")
 		GameTooltip:SetText(L["Rescan All Achievements"], 1, 1, 1)
 		GameTooltip:Show()
 	end)
@@ -790,7 +794,7 @@ function AT:Construct()
 	RewardsCheckButton:Point("LEFT", CategoryDropdown, "RIGHT", 15, 0)
 	RewardsCheckButton.Text:SetText(L["Rewards"])
 	RewardsCheckButton.Text:SetTextColor(1, 1, 1)
-	F.SetFontOutline(RewardsCheckButton.Text)
+	F.SetFont(RewardsCheckButton.Text)
 	S:Proxy("HandleCheckBox", RewardsCheckButton)
 	RewardsCheckButton:SetChecked(self.states.filters.hasRewards)
 	RewardsCheckButton:SetScript("OnClick", function()
@@ -862,13 +866,12 @@ function AT:Construct()
 	ScrollBox:SetClipsChildren(true)
 	ScrollFrame.ScrollBox = ScrollBox
 
-	local ScrollView = CreateScrollBoxListLinearView()
+	local ScrollView = CreateScrollBoxListLinearView() --[[@as ScrollBoxLinearBaseViewMixin]]
 
 	local DataProvider = CreateDataProvider()
 	DataProvider:InsertTable({})
 
-	ScrollView--[[@as ScrollBoxLinearBaseViewMixin]]:SetPadding(8, 8, 8, 8, 8)
-	ScrollView:SetDataProvider(DataProvider)
+	ScrollView:SetPadding(8, 8, 8, 8, 8)
 	ScrollView:SetElementInitializer("BackdropTemplate", function(frame, data)
 		self:ScrollElementInitializer(frame, data, ScrollBox)
 	end)
@@ -879,6 +882,7 @@ function AT:Construct()
 		self:ScrollElementResetter(frame)
 	end)
 	ScrollUtil.InitScrollBoxListWithScrollBar(ScrollBox, ScrollBar, ScrollView)
+	ScrollBox--[[@as ScrollBoxListMixin]]:SetDataProvider(DataProvider)
 	ScrollFrame.ScrollView = ScrollView
 
 	local ProgressFrame = CreateFrame("Frame", nil, MainFrame)
@@ -902,14 +906,14 @@ function AT:Construct()
 	ProgressFrame.Bar = ProgressBar
 
 	local ProgressLabel = ProgressFrame:CreateFontString(nil, "OVERLAY")
-	F.SetFontOutline(ProgressLabel, E.db.general.font, E.db.general.fontSize + 12)
+	F.SetFont(ProgressLabel, E.db.general.font, E.db.general.fontSize + 12)
 	ProgressLabel:Point("BOTTOM", ProgressBar, "TOP", 0, 20)
 	ProgressLabel:SetText(L["Scanning"])
 	ProgressLabel:SetTextColor(C.ExtractRGBAFromTemplate("amber-400"))
 	ProgressFrame.Label = ProgressLabel
 
 	local ProgressBarProgressText = ProgressBar:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-	F.SetFontOutline(ProgressBarProgressText, F.GetCompatibleFont("Chivo Mono"), 14)
+	F.SetFont(ProgressBarProgressText, F.GetCompatibleFont("Chivo Mono"), 14)
 	ProgressBarProgressText:SetTextColor(C.ExtractRGBAFromTemplate("neutral-50"))
 	ProgressBarProgressText:Point("CENTER", ProgressBar, "CENTER", 0, -1)
 	ProgressBar.ProgressText = ProgressBarProgressText
@@ -933,6 +937,10 @@ function AT:Construct()
 	end
 
 	MainFrame:SetScript("OnShow", function()
+		if not MainFrame:IsVisible() or not MainFrame.positionUpdated then
+			return
+		end
+
 		if self.states.isScanning then
 			MainFrame.ProgressFrame:Show()
 			return
@@ -956,7 +964,7 @@ end
 ---@param id number
 ---@param alreadyEarned boolean
 function AT:ACHIEVEMENT_EARNED(id, alreadyEarned)
-	if alreadyEarned then
+	if alreadyEarned and #self.states.results > 0 then
 		return
 	end
 
@@ -1000,12 +1008,13 @@ function AT:UpdatePosition()
 	self.MainFrame:ClearAllPoints()
 	self.MainFrame:Point("TOPLEFT", _G.AchievementFrame, "TOPRIGHT", 4, 0)
 	self.MainFrame:SetParent(_G.AchievementFrame)
+	self.MainFrame.positionUpdated = true
 	MF:InternalHandle(self.MainFrame, _G.AchievementFrame)
 
 	self.ToggleButton = CreateFrame("Button", nil, _G.AchievementFrame, "UIPanelButtonTemplate")
 	self.ToggleButton:Point("BOTTOMRIGHT", _G.AchievementFrame, "BOTTOMRIGHT", -4, 4)
 	self.ToggleButton:SetText(F.GetWindStyleText(L["Achievement Tracker"]))
-	F.SetFontOutline(self.ToggleButton.Text, E.db.general.font, 10)
+	F.SetFont(self.ToggleButton.Text, E.db.general.font, 10)
 	local buttonWidth = 20 + max(40, F.GetAdaptiveTextWidth(E.media.normFont, 10, "OUTLINE", L["Achievement Tracker"]))
 	self.ToggleButton:Size(buttonWidth, 18)
 	self.ToggleButton:SetScript("OnClick", function()

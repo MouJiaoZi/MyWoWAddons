@@ -3,21 +3,23 @@ OneRing_Config = nil
 OPie_SavedData = {
 ["CharProfiles"] = {
 },
-["_OPieVersion"] = "Ånd 7.3a (4.136)",
+["_OPieVersion"] = "Ånd 7.4 (4.136)",
 ["_StoreVersion"] = 122,
 ["_GameLocale"] = "zhCN",
 ["CenterActions"] = {
 ["x"] = "ABueQGMzXcw",
+["x4"] = "ABue7V8PHj1",
 },
 ["_StoreVersion2"] = 122,
 ["ProfileStorage"] = {
 ["default"] = {
 ["IndicatorFactory"] = "elvui",
 ["Bindings"] = {
-["x2"] = "ALT-B",
 ["x"] = "BUTTON5",
-["x1"] = "ALT-N",
 ["OPieTracking"] = false,
+["x2"] = "ALT-B",
+["x4"] = "ALT-F",
+["x1"] = "ALT-N",
 },
 ["CenterAction"] = true,
 ["XTPointerSnap"] = true,
@@ -64,6 +66,46 @@ OPie_SavedData = {
 ["name"] = "坐骑",
 ["save"] = true,
 },
+["x4"] = {
+{
+"item",
+243191,
+["sliceToken"] = "ABue7V8PHj1",
+["fastClick"] = true,
+},
+{
+"item",
+212283,
+["sliceToken"] = "ABue7V8DZpw",
+},
+{
+"item",
+212277,
+["sliceToken"] = "ABue7V8PHjw",
+},
+{
+"item",
+224107,
+["sliceToken"] = "ABue7V8PHjt",
+},
+{
+"item",
+222728,
+["sliceToken"] = "ABue7V8PHje",
+},
+{
+"item",
+113509,
+["sliceToken"] = "ABue7V8PHjr",
+},
+{
+"item",
+144341,
+["sliceToken"] = "ABue7V8DZpe",
+},
+["name"] = "消耗品",
+["save"] = true,
+},
 ["x2"] = {
 {
 "macro",
@@ -99,16 +141,21 @@ OPie_SavedData = {
 230850,
 ["sliceToken"] = "ABue7lmZ50w",
 },
+{
+"toy",
+243056,
+["sliceToken"] = "ABue7X7C1Ow",
+},
 ["name"] = "传送",
 ["save"] = true,
 },
 ["OPieDeletedRings"] = {
 ["RaidSymbols"] = true,
 ["SpecMenu"] = true,
-["WorldMarkers"] = true,
-["CommonTrades"] = true,
 ["OPieAutoQuest"] = true,
+["CommonTrades"] = true,
 ["DKCombat"] = true,
+["WorldMarkers"] = true,
 ["CommonHearth"] = true,
 },
 ["OPieFlagStore"] = {
@@ -154,5 +201,5 @@ OPie_SavedData = {
 },
 },
 },
-["_GameVersion"] = "11.2.0",
+["_GameVersion"] = "11.2.5",
 }

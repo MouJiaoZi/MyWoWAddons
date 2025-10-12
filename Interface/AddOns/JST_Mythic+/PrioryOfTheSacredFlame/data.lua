@@ -77,7 +77,7 @@ G.MobData[499] = {
 			["CC_Stun"] = true,
 			["CC_Silence"] = true,
 			["CC_Disorient"] = true,
-			["CC_Fear"] = true,
+			--["CC_Fear"] = true,
 			["CC_KnockOff"] = true,
 			["CC_KnockBack"] = true,
 		},

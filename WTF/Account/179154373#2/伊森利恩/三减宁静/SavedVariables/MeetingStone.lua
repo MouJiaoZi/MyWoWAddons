@@ -22,6 +22,8 @@ MEETINGSTONE_CHARACTER_DB = {
 ["scale"] = 1,
 },
 },
+["lastSearchCode"] = "3-319-1251-0",
+["version"] = "11.2.0",
 ["searchHistoryList"] = {
 "3-319-1251-0",
 "3-310-1190-0",
@@ -41,8 +43,6 @@ MEETINGSTONE_CHARACTER_DB = {
 "3-0-1146-0",
 "3-310-1191-0",
 },
-["version"] = "11.2.0",
-["lastSearchCode"] = "3-319-1251-0",
 },
 },
 }

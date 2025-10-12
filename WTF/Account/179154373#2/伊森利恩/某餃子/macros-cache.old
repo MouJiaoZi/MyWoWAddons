@@ -11,7 +11,6 @@ VER 3 0100000000000080 " 骨髓分裂" "INV_Misc_QuestionMark"
 #showtooltip
 /cast 精髓分裂
 /cast 亡者复生
-/cancleaura 203812
 /use 偷来的清扫器
 /use 荣誉旗帜
 /use 部落战争旌旗
@@ -19,11 +18,6 @@ VER 3 0100000000000080 " 骨髓分裂" "INV_Misc_QuestionMark"
 /use 地精天气制造机 - 原型机01-B
 /use 可链接的罪碑
 /use 可链接的瓦格里王冠
-/use 暗月永久烟火
-/use 泡泡棒
-/use 洞穴探索者的火炬
-/use 艾泽里特焰火发射器
-/use 烟花之帽
 END
 VER 3 0100000000000081 "1" "INV_Misc_QuestionMark"
 #showtooltip

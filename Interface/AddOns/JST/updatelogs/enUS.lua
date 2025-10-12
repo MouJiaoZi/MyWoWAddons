@@ -3,6 +3,13 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+6.10
+Halls of Atonement Echelon Stonefiend quantity monitor bug fix.
+The Dawnbreaker Nightfall Tactician removes the Black Edge dispeling sound prompt.
+The Dawnbreaker adds Nightfall Darkcaster control data and removes Sureki Webmage control data.
+Delete the fear control data for Undead and Mechanical monsters.
+The CC Spells options add related spell tooltips.
+
 6.09
 Halls of Atonement Aleez added Unstable Anima dispel text prompt.
 New Feature: Raid leaders can modify the nicknames of team members(Requires member version 6.09 or above).

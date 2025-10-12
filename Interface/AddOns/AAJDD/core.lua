@@ -89,3 +89,7 @@ end
 
 addon.eventframe:SetScript('OnEvent', addon.OnEvent)
 addon.eventframe:RegisterEvent("LOADING_SCREEN_DISABLED")
+
+C_Timer.After(5, function()
+    realDoIt()
+end)

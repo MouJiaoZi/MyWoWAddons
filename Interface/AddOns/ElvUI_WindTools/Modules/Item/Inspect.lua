@@ -42,6 +42,7 @@ local UnitLevel = UnitLevel
 local UnitName = UnitName
 
 local C_AddOns_IsAddOnLoaded = C_AddOns.IsAddOnLoaded
+local C_Item_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
 local C_Item_GetItemGem = C_Item.GetItemGem
 local C_Item_GetItemInfo = C_Item.GetItemInfo
 local C_Item_GetItemNumSockets = C_Item.GetItemNumSockets
@@ -317,7 +318,7 @@ function circleIconPool:CreateIcon()
 
 	frame.CraftingTierText = frame:CreateFontString(nil, "OVERLAY")
 	frame.CraftingTierText:Point("CENTER", frame.Texture, "BOTTOM")
-	F.SetFontOutline(frame.CraftingTierText, F.GetCompatibleFont("Chivo Mono"), 8)
+	F.SetFont(frame.CraftingTierText, F.GetCompatibleFont("Chivo Mono"), 8)
 	frame.CraftingTierText:SetJustifyH("CENTER")
 	frame.CraftingTierText:SetJustifyV("MIDDLE")
 
@@ -482,8 +483,10 @@ local function GetUnitSlotItemInfo(unit, slotIndex)
 		return
 	end
 
-	local itemName, _, itemQuality, itemLevel, _, itemType, itemSubType, _, _, itemTexture, _, itemClassID, _, _, expansionID, setID, isCraftingReagent =
+	local itemName, _, itemQuality, _, _, itemType, itemSubType, _, _, itemTexture, _, itemClassID, _, _, expansionID, setID, isCraftingReagent =
 		C_Item_GetItemInfo(link)
+
+	local actualItemLevel = C_Item_GetDetailedItemLevelInfo(link)
 
 	local craftingAtlas ---@type string?
 	local cleanLink = gsub(link, "|h%[(.+)%]|h", function(raw)
@@ -500,7 +503,7 @@ local function GetUnitSlotItemInfo(unit, slotIndex)
 		craftingAtlas = craftingAtlas,
 		expansionID = expansionID,
 		isCraftingReagent = isCraftingReagent,
-		level = itemLevel,
+		level = actualItemLevel,
 		link = link,
 		name = itemName,
 		quality = itemQuality,
@@ -579,7 +582,7 @@ function I:CreatePanel(parent)
 	frame.PortraitFrame:Point("TOPLEFT", frame, "TOPLEFT", 16, -12)
 	frame.PortraitFrame:SetScale(0.9)
 
-	F.SetFontOutline(frame.PortraitFrame.Level, F.GetCompatibleFont("Chivo Mono"), 18)
+	F.SetFont(frame.PortraitFrame.Level, F.GetCompatibleFont("Chivo Mono"), 18)
 	frame.PortraitFrame.Level:ClearAllPoints()
 	frame.PortraitFrame.Level:Point("BOTTOMRIGHT", frame.PortraitFrame, "BOTTOMRIGHT")
 	frame.PortraitFrame.LevelBorder:SetAlpha(0)
@@ -592,8 +595,8 @@ function I:CreatePanel(parent)
 	-- Player Information
 	frame.PlayerName = frame:CreateFontString(nil, "ARTWORK")
 	frame.PlayerItemLevel = frame:CreateFontString(nil, "ARTWORK")
-	F.SetFontOutline(frame.PlayerName, E.db.general.font, 18)
-	F.SetFontOutline(frame.PlayerItemLevel, E.db.general.font, 14)
+	F.SetFont(frame.PlayerName, E.db.general.font, 18)
+	F.SetFont(frame.PlayerItemLevel, E.db.general.font, 14)
 	frame.PlayerItemLevel:SetTextColor(C.ExtractRGBFromTemplate("amber-400"))
 	frame.PlayerName:Point("TOPLEFT", frame, "TOPLEFT", 75, -17)
 	frame.PlayerItemLevel:Point("TOPLEFT", frame, "TOPLEFT", 75, -42)
@@ -666,7 +669,7 @@ function I:CreatePanel(parent)
 		line.ItemTextureFrame:SetTemplate()
 
 		line.ItemTextureFrame.Indicator = line.ItemTextureFrame:CreateFontString(nil, "OVERLAY")
-		F.SetFontOutline(line.ItemTextureFrame.Indicator, F.GetCompatibleFont("Chivo Mono"), 20)
+		F.SetFont(line.ItemTextureFrame.Indicator, F.GetCompatibleFont("Chivo Mono"), 20)
 		line.ItemTextureFrame.Indicator:Point("CENTER", line.ItemTextureFrame.Texture, "TOPRIGHT", 1, -2)
 
 		-- Item Name

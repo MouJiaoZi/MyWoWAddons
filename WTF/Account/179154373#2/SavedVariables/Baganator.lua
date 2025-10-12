@@ -8,10 +8,10 @@ BAGANATOR_CONFIG = {
 ["currencies_tracked"] = {
 ["某饺子-伊森利恩"] = {
 {
-["currencyID"] = 3290,
+["currencyID"] = 3008,
 },
 {
-["currencyID"] = 3008,
+["currencyID"] = 3290,
 },
 },
 ["三减竖式-伊森利恩"] = {
@@ -35,13 +35,6 @@ BAGANATOR_CONFIG = {
 },
 ["凤凰基友之二-凤凰之神"] = {
 },
-["凤凰基友之五-凤凰之神"] = {
-},
-["这只是饺子-伊森利恩"] = {
-{
-["currencyID"] = 1560,
-},
-},
 ["某餃子-伊森利恩"] = {
 {
 ["currencyID"] = 3008,
@@ -50,7 +43,14 @@ BAGANATOR_CONFIG = {
 ["currencyID"] = 3290,
 },
 },
+["这只是饺子-伊森利恩"] = {
+{
+["currencyID"] = 1560,
+},
+},
 ["我们完蛋啦-伊森利恩"] = {
+},
+["凤凰基友之五-凤凰之神"] = {
 },
 ["开门的搞-伊森利恩"] = {
 },
@@ -206,7 +206,6 @@ BAGANATOR_CONFIG = {
 30,
 -235,
 },
-["debug_timers"] = false,
 ["category_sections"] = {
 ["1"] = {
 ["name"] = "EQUIPMENT",
@@ -215,6 +214,7 @@ BAGANATOR_CONFIG = {
 ["name"] = "CRAFTING",
 },
 },
+["debug_timers"] = false,
 ["seen_welcome"] = 1,
 ["hide_special_container"] = {
 },
@@ -230,19 +230,25 @@ BAGANATOR_CONFIG = {
 ["category_horizontal_spacing_2"] = 0.3,
 ["category_group_empty_slots"] = true,
 ["category_default_import"] = 2,
-["debug_categories"] = false,
-["character_bank_current_tab"] = 0,
+["bag_view_position"] = {
+"BOTTOMRIGHT",
+-327.3170166015625,
+191.4919738769531,
+},
+["character_bank_current_tab"] = 3,
 ["sort_start_at_bottom"] = false,
 ["bag_empty_space_at_top"] = false,
 ["recent_timeout"] = 300,
 ["sort_ignore_bank_slots_count"] = {
 ["某餃子-伊森利恩"] = 0,
 },
+["sort_ignore_slots_at_end"] = false,
+["saved_searches"] = {
+},
 ["category_section_toggled"] = {
 ["装备"] = false,
+["2"] = false,
 },
-["category_migration"] = 5,
-["sort_ignore_slots_at_end"] = false,
 ["category_modifications"] = {
 ["default_gem"] = {
 ["addedItems"] = {
@@ -322,14 +328,31 @@ BAGANATOR_CONFIG = {
 },
 },
 ["icon_text_font_size"] = 14,
+["bag_view_width"] = 12,
 ["setting_anchors"] = false,
+["disabled_skins"] = {
+},
 ["sort_ignore_slots_count_2"] = {
 ["某餃子-伊森利恩"] = 0,
 },
-["view_alpha"] = 1,
-["bag_view_width"] = 12,
 ["guild_current_tab"] = 0,
 ["guild_bank_sort_method"] = "unset",
+["skins"] = {
+["elvui"] = {
+["use_bag_font"] = false,
+},
+["blizzard"] = {
+["no_frame_borders"] = false,
+["view_transparency"] = 0,
+["empty_slot_background"] = false,
+},
+["dark"] = {
+["view_transparency"] = 0.3,
+["square_icons"] = false,
+["no_frame_borders"] = false,
+["empty_slot_background"] = false,
+},
+},
 ["recent_characters_main_view"] = {
 "某饺子-伊森利恩",
 "某餃子-伊森利恩",
@@ -348,26 +371,9 @@ BAGANATOR_CONFIG = {
 "Afdfaf-苏拉玛",
 },
 ["debug_keywords"] = false,
-["skins"] = {
-["elvui"] = {
-["use_bag_font"] = false,
-},
-["blizzard"] = {
-["no_frame_borders"] = false,
-["view_transparency"] = 0,
-["empty_slot_background"] = false,
-},
-["dark"] = {
-["view_transparency"] = 0.3,
-["square_icons"] = false,
-["no_frame_borders"] = false,
-["empty_slot_background"] = false,
-},
-},
 ["auto_sort_on_open"] = false,
 ["upgrade_plugin"] = "none",
-["disabled_skins"] = {
-},
+["view_alpha"] = 1,
 ["show_buttons_on_alt"] = false,
 ["currencies_tracked_imported"] = {
 },
@@ -378,8 +384,7 @@ BAGANATOR_CONFIG = {
 0,
 0,
 },
-["saved_searches"] = {
-},
+["category_migration"] = 5,
 ["bank_only_view_position"] = {
 "LEFT",
 20,
@@ -388,11 +393,7 @@ BAGANATOR_CONFIG = {
 ["bag_icon_size"] = 37,
 ["show_sort_button_2"] = true,
 ["bag_view_show_bag_slots"] = true,
-["bag_view_position"] = {
-"BOTTOMRIGHT",
--354.7457275390625,
-223.9999542236328,
-},
+["debug_categories"] = false,
 ["currency_panel_position"] = {
 "RIGHT",
 "Baganator_CategoryViewBackpackViewFrameelvui",

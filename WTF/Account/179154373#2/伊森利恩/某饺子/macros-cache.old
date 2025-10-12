@@ -36,6 +36,12 @@ VER 3 01000000000000B1 "分身" "INV_Misc_QuestionMark"
 #showtooltips
 /castsequence reset=1000 魂体双分,魂体双分：转移
 END
+VER 3 01000000000000B3 "牛牛" "134400"
+#showtooltip 玄牛下凡
+/use 13
+/use 14
+/cast 玄牛下凡
+END
 VER 3 01000000000000B2 "猛虎掌" "INV_Misc_QuestionMark"
 #showtooltip
 /cast 猛虎掌

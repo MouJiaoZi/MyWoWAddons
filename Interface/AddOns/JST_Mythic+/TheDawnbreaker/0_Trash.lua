@@ -280,7 +280,6 @@ G.Encounters["c505"] = {
 					ficon = "7",
 				}),
 				T.Temp_RaidAuraGlow(431494, "blu"),
-				T.Temp_DispelDebuffSound(431494, "7"),
 			},
 		},
 		{ -- 夜幕战略家:战略家之怒

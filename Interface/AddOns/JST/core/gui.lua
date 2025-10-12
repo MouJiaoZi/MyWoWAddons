@@ -659,6 +659,16 @@ for index, spellID in pairs(G.DungeonCCSpells) do
 		end
 	end)
 	
+	bu:SetScript("OnEnter", function(self) 
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT", -20, 10)
+		GameTooltip:SetSpellByID(spellID)
+		GameTooltip:Show() 
+	end)
+	
+	bu:SetScript("OnLeave", function(self)
+		GameTooltip:Hide()
+	end)
+	
 	table.insert(cc_panel.buttons, bu)
 end
 

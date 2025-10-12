@@ -120,6 +120,10 @@ local clientData = {
 	},
 }
 
+local timerunningSeasonIcon = {
+	[2] = MediaPath .. "GameIcons\\WOW_LEG",
+}
+
 local expansionData = {
 	[WOW_PROJECT_MAINLINE] = {
 		name = "Retail",
@@ -315,7 +319,7 @@ function FL:UpdateFriendButton(button)
 		-- name
 		local classColor = self.db.useClassColor and GetClassColor(class)
 		local nameString = name and classColor and C.StringWithRGB(name, classColor) or name
-		if timerunningSeasonID ~= "" and nameString ~= nil then
+		if timerunningSeasonID and timerunningSeasonID ~= "" and nameString ~= nil then
 			nameString = TimerunningUtil_AddSmallIcon(nameString) or nameString -- add timerunning tag
 		end
 
@@ -364,6 +368,9 @@ function FL:UpdateFriendButton(button)
 
 			if self.db.textures.gameIcon == "PATCH" and wowID and expansionData[wowID] then
 				texOrAtlas = expansionData[wowID].icon
+				if wowID == WOW_PROJECT_MAINLINE and timerunningSeasonID and timerunningSeasonIcon[timerunningSeasonID] then
+					texOrAtlas = timerunningSeasonIcon[timerunningSeasonID]
+				end
 			end
 
 			if self.db.textures.gameIcon == "FACTION" and faction and factionIcons[faction] then
@@ -401,10 +408,10 @@ function FL:UpdateFriendButton(button)
 		}
 	end
 
-	F.SetFontOutline(button.name)
+	F.SetFont(button.name)
 	F.SetFontWithDB(button.name, self.db.nameFont)
 
-	F.SetFontOutline(button.info)
+	F.SetFont(button.info)
 	F.SetFontWithDB(button.info, self.db.infoFont)
 
 	-- favorite icon
