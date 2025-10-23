@@ -1,4 +1,4 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable, PrivateDB, ProfileDB, GlobalDB
 local options = W.options.skins.args
 local LSM = E.Libs.LSM
 local S = W.Modules.Skins ---@type Skins
@@ -240,8 +240,24 @@ options.general = {
 					type = "description",
 					name = L["The middle top errors / messages frame (also used for quest progress text)."],
 				},
-				normalTextClassColor = {
+				width = {
 					order = 2,
+					type = "range",
+					name = L["Width"],
+					desc = L["Set the width of UIErrorsFrame."],
+					min = 256,
+					max = 2048,
+					step = 1,
+					get = function()
+						return E.private.WT.skins.uiErrors.width
+					end,
+					set = function(_, value)
+						E.private.WT.skins.uiErrors.width = value
+						_G.UIErrorsFrame:SetWidth(value)
+					end,
+				},
+				normalTextClassColor = {
+					order = 3,
 					type = "toggle",
 					name = L["Class Color"],
 					desc = L["Replace the default color used for messages with class color."],
@@ -253,7 +269,7 @@ options.general = {
 					end,
 				},
 				normalTextColor = {
-					order = 3,
+					order = 4,
 					type = "color",
 					name = L["Default"],
 					desc = L["Replace the default color used for messages."],
@@ -272,7 +288,7 @@ options.general = {
 					end,
 				},
 				redTextColor = {
-					order = 4,
+					order = 5,
 					type = "color",
 					name = L["Red"],
 					desc = L["Replace the default color used for error messages."],
@@ -288,7 +304,7 @@ options.general = {
 					end,
 				},
 				yellowTextColor = {
-					order = 4,
+					order = 6,
 					type = "color",
 					name = L["Yellow"],
 					desc = L["Replace the default color used for warning messages."],
@@ -304,7 +320,7 @@ options.general = {
 					end,
 				},
 				testButton = {
-					order = 6,
+					order = 7,
 					type = "execute",
 					name = L["Test"],
 					func = function()
@@ -635,6 +651,11 @@ options.blizzard = {
 			type = "toggle",
 			name = L["Communities"],
 		},
+		cooldownViewer = {
+			order = 10,
+			type = "toggle",
+			name = L["Cooldown Viewer"],
+		},
 		covenantRenown = {
 			order = 10,
 			type = "toggle",
@@ -854,6 +875,11 @@ options.blizzard = {
 			order = 10,
 			type = "toggle",
 			name = L["Raid Info"],
+		},
+		remixArtifact = {
+			order = 10,
+			type = "toggle",
+			name = L["Remix Artifact"],
 		},
 		scenario = {
 			order = 10,
@@ -1143,6 +1169,9 @@ for key, value in pairs(options.elvui.args) do
 	end
 end
 
+-- WIP label
+-- "addon" .. " " .. C.StringByTemplate(L["WIP"], "rose-500"),
+
 options.addons = {
 	order = 6,
 	type = "group",
@@ -1241,6 +1270,12 @@ options.addons = {
 			addonName = "BugSack",
 			addonskinsKey = "BugSack",
 		},
+		collectionator = {
+			order = 10,
+			type = "toggle",
+			name = L["Collectionator"],
+			addonName = "Collectionator",
+		},
 		hekili = {
 			order = 10,
 			type = "toggle",
@@ -1254,6 +1289,12 @@ options.addons = {
 			name = L["Immersion"],
 			addonName = "Immersion",
 			addonskinsKey = "Immersion",
+		},
+		legionRemixHelper = {
+			order = 10,
+			type = "toggle",
+			name = L["Legion Remix Helper"],
+			addonName = "LegionRemixHelper",
 		},
 		manuscriptsJournal = {
 			order = 10,
@@ -1325,6 +1366,12 @@ options.addons = {
 			name = L["Paragon Reputation"],
 			addonName = "ParagonReputation",
 		},
+		plumber = {
+			order = 10,
+			type = "toggle",
+			name = L["Plumber"],
+			addonName = "Plumber",
+		},
 		postal = {
 			order = 10,
 			type = "toggle",
@@ -1355,7 +1402,7 @@ options.addons = {
 		rematch = {
 			order = 10,
 			type = "toggle",
-			name = L["Rematch"] .. " " .. C.StringByTemplate(L["WIP"], "rose-500"),
+			name = L["Rematch"],
 			addonName = "Rematch",
 			addonskinsKey = "Rematch",
 		},
@@ -1396,6 +1443,13 @@ options.addons = {
 			type = "toggle",
 			name = L["TomCat's Tours"],
 			addonName = "TomCats",
+		},
+		tomTom = {
+			order = 10,
+			type = "toggle",
+			name = L["TomTom"],
+			addonName = "TomTom",
+			addonskinsKey = "TomTom",
 		},
 		warpDeplete = {
 			order = 10,

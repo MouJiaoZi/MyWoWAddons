@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local S = W.Modules.Skins ---@type Skins
 local C = W.Utilities.Color
 local OF = W.Utilities.ObjectFinder
@@ -345,7 +345,7 @@ function S:BigWigs_Keystone()
 		return
 	end
 
-	local finder = OF:New()
+	local finder = OF.New()
 	finder:Find("Frame", function(frame)
 		-- Because the function is run on any type objects, need to ensure the safety
 		local text = frame and frame.TitleContainer and frame.TitleContainer.TitleText

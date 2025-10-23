@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local UF = E:GetModule("UnitFrames")
 local T = W.Modules.Tooltips
 local LFGPI = W.Utilities.LFGPlayerInfo
@@ -103,6 +103,9 @@ function T:AddGroupInfo(tooltip, resultID)
 	local foundDelisted = false
 	if config.hideBlizzard then
 		foundDelisted = cleanupBlizzardGroupInfo(tooltip)
+		if config.mode == "COMPACT" then
+			tooltip:AddLine(" ")
+		end
 	else
 		tooltip:AddLine(" ")
 	end

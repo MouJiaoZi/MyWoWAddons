@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local C = W.Utilities.Color
 local CL = W:NewModule("ChatLink") ---@class ChatLink : AceModule
 
@@ -17,6 +17,7 @@ local GetTalentInfoByID = GetTalentInfoByID
 
 local C_ChallengeMode_GetMapUIInfo = C_ChallengeMode.GetMapUIInfo
 local C_CurrencyInfo_GetCurrencyInfo = C_CurrencyInfo.GetCurrencyInfo
+local C_Item_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
 local C_Item_GetItemIconByID = C_Item.GetItemIconByID
 local C_Item_GetItemInfoInstant = C_Item.GetItemInfoInstant
 local C_Item_GetItemNameByID = C_Item.GetItemNameByID
@@ -89,7 +90,7 @@ local function AddItemInfo(link)
 
 	-- item Level
 	if CL.db.level then
-		level = F.GetRealItemLevelByLink(link)
+		level = C_Item_GetDetailedItemLevelInfo(link)
 	end
 
 	-- armor
@@ -136,7 +137,8 @@ local function AddKeystoneIcon(link)
 	end
 
 	if CL.db.icon then
-		local texture = select(4, C_ChallengeMode_GetMapUIInfo(tonumber(mapID)))
+		local mapIDNum = tonumber(mapID)
+		local texture = mapIDNum and select(4, C_ChallengeMode_GetMapUIInfo(mapIDNum))
 		local icon = texture and F.GetIconString(texture, CL.db.iconHeight, CL.db.iconWidth, CL.db.keepRatio)
 		if icon then
 			link = icon .. " " .. link
@@ -176,7 +178,8 @@ local function AddSpellInfo(link)
 	end
 
 	if CL.db.icon then
-		local texture = C_Spell_GetSpellTexture(tonumber(id))
+		local spellIDNum = tonumber(id)
+		local texture = spellIDNum and C_Spell_GetSpellTexture(spellIDNum)
 		local icon = texture and F.GetIconString(texture, CL.db.iconHeight, CL.db.iconWidth, CL.db.keepRatio)
 		if icon then
 			link = icon .. C.StringByTemplate(link, "sky-400")
@@ -194,7 +197,8 @@ local function AddEnchantInfo(link)
 	end
 
 	if CL.db.icon then
-		local texture = C_Spell_GetSpellTexture(tonumber(id))
+		local enchantIDNum = tonumber(id)
+		local texture = enchantIDNum and C_Spell_GetSpellTexture(enchantIDNum)
 		local icon = texture and F.GetIconString(texture, CL.db.iconHeight, CL.db.iconWidth, CL.db.keepRatio)
 		if icon then
 			link = icon .. " " .. link
@@ -212,7 +216,8 @@ local function AddPvPTalentInfo(link)
 	end
 
 	if CL.db.icon then
-		local texture = select(3, GetPvpTalentInfoByID(tonumber(id)))
+		local pvpTalentIDNum = tonumber(id)
+		local texture = pvpTalentIDNum and select(3, GetPvpTalentInfoByID(pvpTalentIDNum))
 		local icon = texture and F.GetIconString(texture, CL.db.iconHeight, CL.db.iconWidth, CL.db.keepRatio)
 		if icon then
 			link = icon .. " " .. link
@@ -230,7 +235,8 @@ local function AddTalentInfo(link)
 	end
 
 	if CL.db.icon then
-		local texture = select(3, GetTalentInfoByID(tonumber(id)))
+		local talentIDNum = tonumber(id)
+		local texture = talentIDNum and select(3, GetTalentInfoByID(talentIDNum))
 		local icon = texture and F.GetIconString(texture, CL.db.iconHeight, CL.db.iconWidth, CL.db.keepRatio)
 		if icon then
 			link = icon .. " " .. link
@@ -248,7 +254,8 @@ local function AddAchievementInfo(link)
 	end
 
 	if CL.db.icon then
-		local texture = select(10, GetAchievementInfo(tonumber(id)))
+		local achievementIDNum = tonumber(id)
+		local texture = achievementIDNum and select(10, GetAchievementInfo(achievementIDNum))
 		local icon = texture and F.GetIconString(texture, CL.db.iconHeight, CL.db.iconWidth, CL.db.keepRatio)
 		if icon then
 			link = icon .. " " .. link

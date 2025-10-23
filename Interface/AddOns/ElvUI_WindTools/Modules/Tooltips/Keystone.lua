@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local T = W.Modules.Tooltips
 local KI = W:GetModule("KeystoneInfo")
 local C = W.Utilities.Color
@@ -11,11 +11,10 @@ function T:AddKeystone(tt, unit)
 	if not db or not db.enable then
 		return
 	end
-
 	local data = KI:UnitData(unit)
-	local mapID = data and data.challengeMapID
-	if mapID and W.MythicPlusMapData[mapID] then
-		local mapData = W.MythicPlusMapData[mapID]
+	local mythicPlusMapData = W:GetMythicPlusMapData()
+	local mapData = data and data.challengeMapID and mythicPlusMapData[data.challengeMapID]
+	if mapData then
 		local right = C.StringWithKeystoneLevel(
 			format("%s (%d)", db.useAbbreviation and mapData.abbr or mapData.name, data.level),
 			data.level

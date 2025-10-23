@@ -171,8 +171,8 @@ function ControlSpellFrame:PreviewHide()
 	self:Hide()
 end
 
-local function CreateControlSpellIcon(updater, group, tag)	
-	local icon = T.CreateSpellIconBase(ControlSpellFrame, tag)
+local function CreateControlSpellIcon(updater, parent, tag)	
+	local icon = T.CreateSpellIconBase(parent, tag)
 	
 	T.SetHighLightBorderColor(icon, icon, {0, 1, 0}, 3)
 	
@@ -630,7 +630,7 @@ function DungeonCC_Updater:NotifyNext(GUID)
 			end
 		end
 	else
-		T.msg(npcID, "群控数据缺失")
+		--T.msg(npcID, "群控数据缺失")
 	end
 end
 

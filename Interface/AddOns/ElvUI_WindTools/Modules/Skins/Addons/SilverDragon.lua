@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local S = W.Modules.Skins ---@type Skins
 local TT = E:GetModule("Tooltip")
 
@@ -255,6 +255,7 @@ local function StyleWorldNavFrame()
 	for _, child in pairs({ _G.WorldMapFrame.navBar:GetChildren() }) do
 		if child and child.options and child.texture then
 			S:Proxy("HandleIcon", child.texture, true)
+			return
 		end
 	end
 end
@@ -394,6 +395,27 @@ local function SetupSilverDragonHistory(silverDragon)
 	end
 end
 
+local function SetupMountCountButton(silverDragon)
+	local module = silverDragon:GetModule("LDB", true)
+	if not module then
+		return
+	end
+
+	hooksecurefunc(module, "SetupMounts", function()
+		if not _G.MountJournal or not _G.MountJournal.MountCount then
+			return
+		end
+
+		for _, child in pairs({ _G.MountJournal.MountCount:GetChildren() }) do
+			local texture = child and child.texture
+			if texture and S:IsTexturePathEqual(texture, [[Interface\Icons\INV_Misc_Head_Dragon_01]]) then
+				S:Proxy("HandleIcon", texture, true)
+				return
+			end
+		end
+	end)
+end
+
 function S:SilverDragon()
 	if not E.private.WT.skins.enable or not E.private.WT.skins.addons.silverDragon then
 		return
@@ -410,6 +432,7 @@ function S:SilverDragon()
 	SetupSilverDragonPopups(SilverDragon)
 	SetupSilverDragonHistory(SilverDragon)
 	SetupSilverDragonOverlay(SilverDragon)
+	SetupMountCountButton(SilverDragon)
 	StyleWorldNavFrame()
 end
 

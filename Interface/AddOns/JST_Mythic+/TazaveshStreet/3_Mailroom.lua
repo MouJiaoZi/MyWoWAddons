@@ -296,6 +296,10 @@ G.Encounters[2436] = {
 							local unit = info.unit
 							local spellID = self.immuse_class[info.class]
 							
+							if bar.spell_icon then
+								bar.spell_icon:Hide()
+							end
+							
 							if spellID then
 								if not bar.spell_icon then
 									local texture = C_Spell.GetSpellTexture(spellID)
@@ -325,8 +329,6 @@ G.Encounters[2436] = {
 										bar.spell_icon:Hide()
 									end
 								end
-							elseif bar.spell_icon then
-								bar.spell_icon:Hide()
 							end
 						end
 					

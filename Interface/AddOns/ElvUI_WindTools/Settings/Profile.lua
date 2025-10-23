@@ -1,5 +1,5 @@
 local P ---@class ProfileDB
-local W, F, E, L, V, G ---@type WindTools, Functions, ElvUI, table, PrivateDB, GlobalDB
+local W, F, E, L, V, G ---@type WindTools, Functions, ElvUI, LocaleTable, PrivateDB, GlobalDB
 W, F, E, L, V, P, G = unpack((select(2, ...)))
 
 ---@cast W WindTools
@@ -647,7 +647,6 @@ P.item = {
 		enable = true,
 		player = true,
 		inspect = true,
-		stats = true,
 		playerOnInspect = true,
 		itemIcon = {
 			enable = true,
@@ -698,10 +697,19 @@ P.item = {
 			size = 14,
 			style = "OUTLINE",
 		},
-		statsText = {
-			name = E.db.general.font,
-			size = 14,
-			style = "OUTLINE",
+		statistics = {
+			enable = true,
+			text = {
+				name = E.db.general.font,
+				size = 13,
+				style = "OUTLINE",
+			},
+			comparison = {
+				enable = true,
+				hideIfBothZero = true,
+				higherColor = C.GetRGBFromTemplate("green-400"),
+				lowerColor = C.GetRGBFromTemplate("rose-400"),
+			},
 		},
 	},
 	itemLevel = {
@@ -1062,7 +1070,7 @@ P.social = {
 		},
 		infoFont = {
 			name = E.db.general.font,
-			size = 12,
+			size = 11,
 			style = "OUTLINE",
 		},
 	},
@@ -1321,6 +1329,7 @@ P.misc = {
 		width = 500,
 		height = 500,
 		threshold = 75,
+		tooltip = true,
 		scan = {
 			batchSize = 20,
 			batchInterval = 0.01,

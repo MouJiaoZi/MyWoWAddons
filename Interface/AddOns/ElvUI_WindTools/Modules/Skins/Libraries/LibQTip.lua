@@ -1,15 +1,16 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local S = W.Modules.Skins ---@type Skins
 local TT = E:GetModule("Tooltip")
 
 local type = type
 local select = select
 
-function S:LibQTip_UpdateScrolling(tooltip)
+function S:LibQTip_UpdateScrolling(tooltip, ...)
 	local slider = tooltip and tooltip.slider
 	if slider and not slider.__windSkin then
 		self:Proxy("HandleSliderFrame", slider)
 	end
+	self.hooks[tooltip].UpdateScrolling(tooltip, ...)
 end
 
 function S:LibQTip_SetCell(tooltip, ...)

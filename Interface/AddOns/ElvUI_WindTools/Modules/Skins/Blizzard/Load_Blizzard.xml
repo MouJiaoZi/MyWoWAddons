@@ -22,6 +22,7 @@
 	<Script file='ClickBinding.lua'/>
 	<Script file='Collections.lua'/>
 	<Script file='Communities.lua'/>
+	<Script file='CooldownViewer.lua'/>
 	<Script file='CovenantRenown.lua'/>
 	<Script file='CovenantPreview.lua'/>
 	<Script file='CovenantSanctum.lua'/>
@@ -69,6 +70,7 @@
 	<Script file='ProfessionsCustomerOrders.lua'/>
 	<Script file='Quest.lua'/>
 	<Script file='RaidInfo.lua'/>
+	<Script file='RemixArtifact.lua'/>
 	<Script file='Scenario.lua'/>
 	<Script file='ScrappingMachine.lua'/>
 	<Script file='SettingsPanel.lua'/>
@@ -86,7 +88,6 @@
 	<Script file='Tutorial.lua'/>
 	<Script file='UIErrors.lua'/>
 	<Script file='UIWidget.lua'/>
-	<Script file='Warboard.lua'/>
 	<Script file='WeeklyRewards.lua'/>
 	<Script file='WorldMap.lua'/>
 </Ui>

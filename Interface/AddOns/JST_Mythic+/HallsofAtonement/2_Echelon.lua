@@ -152,6 +152,106 @@ G.Encounters[2387] = {
 					glow = true,
 					group = 1,
 				},
+				{ -- 首领模块 石化血肉 点名计时条（✓）
+					category = "BossMod",
+					spellID = 319603,
+					name = string.format(L["计时条%s"], T.GetIconLink(319603).."(Debuff)"),
+					points = {hide = true},
+					events = {
+						["UNIT_AURA_ADD"] = true,
+					},
+					init = function(frame)
+						frame.trackedspellIDs = {}
+						
+						frame.immuse_class = {
+							MAGE = 45438, -- Ice Block
+							DEMONHUNTER = 196555, -- Netherwalk
+							HUNTER = 186265, -- Turtle
+							PALADIN = 642, -- Divine Shield
+							ROGUE = 31224, -- Cloak of Shadows
+						}
+						
+						for _, spellID in pairs(frame.immuse_class) do
+							frame.trackedspellIDs[spellID] = true
+						end
+						
+						local icon = C_Spell.GetSpellTexture(319603)
+						local spell = C_Spell.GetSpellName(319603)
+						frame.bar = T.CreateAlertBarShared(1, "bossmod"..frame.config_id, icon, spell)
+						
+						function frame:UpdateImmuseBuff()
+							local bar = self.bar
+							local GUID = bar.GUID
+							local info = GUID and T.GetGroupInfobyGUID(GUID)
+							
+							if not info then return end
+							
+							local unit = info.unit
+							local spellID = self.immuse_class[info.class]
+							
+							if bar.spell_icon then
+								bar.spell_icon:Hide()
+							end
+							
+							if spellID then
+								if not bar.spell_icon then
+									local texture = C_Spell.GetSpellTexture(spellID)
+									local size =  bar:GetHeight()
+									bar.spell_icon = T.CreateIcon(bar, texture, size)
+									bar.spell_icon:SetPoint("LEFT", bar, "RIGHT", 2, 0)	
+								end
+								
+								local buffed = AuraUtil.FindAuraBySpellID(spellID, unit, "HELPFUL")
+								
+								if buffed then
+									local exp_time = select(6, AuraUtil.FindAuraBySpellID(spellID, unit, "HELPFUL"))
+									bar.spell_icon:stop_cooldown(true)
+									bar.spell_icon:start(exp_time, true)
+									bar.spell_icon:Show()
+								else
+									local ready, exp_time, duration, remain = T.GetGroupCooldown(GUID, spellID)
+									if ready then
+										bar.spell_icon:stop(true)
+										bar.spell_icon:stop_cooldown(true)
+										bar.spell_icon:Show()
+									elseif remain and remain <= 4 then
+										bar.spell_icon:stop(true)
+										bar.spell_icon:start_cooldown(duration, exp_time, true)
+										bar.spell_icon:Show()
+									else
+										bar.spell_icon:Hide()
+									end
+								end
+							end
+						end
+					
+						function frame:Start(GUID)
+							local bar = self.bar
+							bar.GUID = GUID
+							
+							local info = T.GetGroupInfobyGUID(GUID)
+							bar.mid:SetText(info and info.format_name or "")
+							
+							self:UpdateImmuseBuff()
+							T.StartTimerBar(bar, 5, true, true)
+						end
+						
+						frame.aura_spellID = 319603
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_AURA_ADD" then
+							local unit, spellID = ...
+							if spellID == 319603 then -- 石化血肉
+								local GUID = UnitGUID(unit)
+							end
+						elseif event == "ENCOUNTER_START" then
+							T.RegisterWatchAuraSpellID(319603)
+						end
+					end,
+					reset = function(frame, event)
+						T.UnregisterWatchAuraSpellID(319603)
+					end,
+				},
 				{ -- 首领模块 石化血肉 对我施法计时圆圈（✓）
 					category = "BossMod",
 					spellID = 328206,
@@ -181,13 +281,15 @@ G.Encounters[2387] = {
 						function frame:TargetCheck(unit)
 							if not unit then return end
 							
+							
 							if UnitIsUnit(unit, "player") then
 								self.figure:begin(self.exp_time, 6, {
 									{dur = 2, color = {0, 1, 1}},
 								})
 								
 								T.AddPersonalSpellCheckTag("bossmod"..self.config_id, C.DB["BossMod"][self.config_id]["hp_perc_sl"], {"TANK"})
-								C_Timer.After(6, function()
+								local remain = self.exp_time - GetTime()
+								C_Timer.After(remain, function()
 									T.RemovePersonalSpellCheckTag("bossmod"..self.config_id)
 								end)
 							else
@@ -239,7 +341,7 @@ G.Encounters[2387] = {
 						T.UnregisterWatchAuraSpellID(frame.aura_spellID)
 						frame.figure:stop()
 					end,
-				},	
+				},
 				{ -- 图标 变成石头（✓）
 					category = "AlertIcon",
 					type = "aura",

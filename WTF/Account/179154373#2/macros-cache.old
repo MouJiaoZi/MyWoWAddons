@@ -1,8 +1,14 @@
 VER 3 0000000000000142 " " "INV_MISC_QUESTIONMARK"
-#showtooltip item:165670
+#showtooltip item:163045
 #macro version 1
-/run if not InCombatLockdown() then RHT.b:SetAttribute("item","小匹德菲特的可爱炉石") end
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","无头骑士的炉石") end
 /click RHTB LeftButton 1
+END
+VER 3 000000000000014D "1" "413580"
+/inv Sagdwevb-凤凰之神
+/inv Afawfg-军团要塞
+/inv Aaffwf-军团要塞
+/inv Asgaef-军团要塞
 END
 VER 3 000000000000014C "1" "236851"
 END

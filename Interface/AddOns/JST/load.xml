@@ -33,6 +33,7 @@
 	<Script file="elements\arrow.lua"/>
 	<Script file="elements\iconline.lua"/>
 	
+	<Script file="mods\icon.lua"/>
 	<Script file="mods\raidmark.lua"/>
 	<Script file="mods\askspell.lua"/>
 	<Script file="mods\privateaura.lua"/>

@@ -24,8 +24,8 @@ PLAYER_INFO_SAVED = {
 ["凤凰基友之一-凤凰之神"] = {
 ["class"] = "DEMONHUNTER",
 },
-["我们完蛋啦-伊森利恩"] = {
-["class"] = "EVOKER",
+["凤凰基友之五-凤凰之神"] = {
+["class"] = "DEMONHUNTER",
 },
 ["这只是饺子-伊森利恩"] = {
 ["class"] = "WARRIOR",
@@ -33,8 +33,8 @@ PLAYER_INFO_SAVED = {
 ["某餃子-伊森利恩"] = {
 ["class"] = "DEATHKNIGHT",
 },
-["凤凰基友之五-凤凰之神"] = {
-["class"] = "DEMONHUNTER",
+["我们完蛋啦-伊森利恩"] = {
+["class"] = "EVOKER",
 },
 ["开门的搞-伊森利恩"] = {
 ["class"] = "MAGE",

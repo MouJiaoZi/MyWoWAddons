@@ -74,6 +74,12 @@ VER 3 0100000000000088 "符文分流" "INV_Misc_QuestionMark"
 /cast 活力分流
 /cast 符文分流
 END
+VER 3 010000000000008C "符文剑" "134400"
+#showtooltip 符文刃舞
+/cast 符文刃舞
+/use 飞逝淬火药水
+/use 淬火药水
+END
 VER 3 010000000000008A "群拉白骨" "134400"
 #showtooltip
 /cast [known:108199] 血魔之握;[known:194844] 白骨风暴

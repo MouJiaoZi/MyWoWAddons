@@ -158,7 +158,9 @@ G.Encounters[2690] = {
 							
 						elseif event == "ENCOUNTER_START" then
 							frame.check = false		
-							C_Timer.After(112, function() T.FireEvent("JST_CUSTOM", frame.config_id) end)
+							C_Timer.After(112, function()
+								T.FireEvent("JST_CUSTOM", frame.config_id)
+							end)
 						end
 					end,
 					reset = function(frame, event)
@@ -705,6 +707,31 @@ G.Encounters[2690] = {
 					type = "Aura",
 					spellID = 1227549,
 					threshold = 65,
+				},
+				{ -- 首领模块 放逐 计时圆圈（✓）
+					category = "BossMod",
+					spellID = 1227549,
+					name = T.GetIconLink(1227549)..L["计时圆圈"],
+					points = {a1 = "CENTER", a2 = "CENTER", x = 0, y = -25},
+					events = {
+						["UNIT_AURA"] = true,
+					},
+					init = function(frame)
+						frame.spellIDs = {
+							[1227549] = { -- 放逐
+								unit = "player",
+								aura_type = "HARMFUL",
+								color = {1, 0, 1},
+							},
+						}
+						T.InitUnitAuraCircleTimers(frame)
+					end,
+					update = function(frame, event, ...)
+						T.UpdateUnitAuraCircleTimers(frame, event, ...)
+					end,
+					reset = function(frame, event)
+						T.ResetUnitAuraCircleTimers(frame)
+					end,
 				},
 				{ -- 团队框架高亮 放逐（✓）
 					category = "RFIcon",

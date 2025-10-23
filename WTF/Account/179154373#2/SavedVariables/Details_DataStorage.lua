@@ -259,20 +259,20 @@ DetailsDataStorage = {
 ["itemLevel"] = 703.6666666666666,
 ["classId"] = 1,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 989655685,
-["itemLevel"] = 698.375,
-["classId"] = 4,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1083439348,
+["itemLevel"] = 700.4375,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 908370497,
 ["itemLevel"] = 696.2666666666667,
 ["classId"] = 6,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 1223822499,
-["itemLevel"] = 704.25,
-["classId"] = 6,
+["超超越越丶-血色十字军"] = {
+["total"] = 989655685,
+["itemLevel"] = 698.375,
+["classId"] = 4,
 },
 ["某餃子"] = {
 ["total"] = 540378192,
@@ -284,10 +284,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 693.875,
 ["classId"] = 10,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 1083439348,
-["itemLevel"] = 700.4375,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 1223822499,
+["itemLevel"] = 704.25,
+["classId"] = 6,
 },
 ["小城故事多丶-影之哀伤"] = {
 ["total"] = 945322608,
@@ -558,20 +558,20 @@ DetailsDataStorage = {
 ["itemLevel"] = 704.875,
 ["classId"] = 1,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 807135582,
-["itemLevel"] = 698.375,
-["classId"] = 4,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 619194465,
+["itemLevel"] = 698.8125,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 589242789,
 ["itemLevel"] = 697.75,
 ["classId"] = 6,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 814638078,
-["itemLevel"] = 704.25,
-["classId"] = 6,
+["超超越越丶-血色十字军"] = {
+["total"] = 807135582,
+["itemLevel"] = 698.375,
+["classId"] = 4,
 },
 ["某餃子"] = {
 ["total"] = 302255249,
@@ -583,10 +583,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 693.875,
 ["classId"] = 10,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 619194465,
-["itemLevel"] = 698.8125,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 814638078,
+["itemLevel"] = 704.25,
+["classId"] = 6,
 },
 ["小城故事多丶-影之哀伤"] = {
 ["total"] = 535740982,
@@ -863,20 +863,20 @@ DetailsDataStorage = {
 ["itemLevel"] = 702.625,
 ["classId"] = 2,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 601823065,
-["itemLevel"] = 698.375,
-["classId"] = 4,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 638107455,
+["itemLevel"] = 698.8125,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 636229148,
 ["itemLevel"] = 697.75,
 ["classId"] = 6,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 689567891,
-["itemLevel"] = 704.25,
-["classId"] = 6,
+["超超越越丶-血色十字军"] = {
+["total"] = 601823065,
+["itemLevel"] = 698.375,
+["classId"] = 4,
 },
 ["Direction-金色平原"] = {
 ["total"] = 664296101,
@@ -888,10 +888,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 693.875,
 ["classId"] = 10,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 638107455,
-["itemLevel"] = 698.8125,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 689567891,
+["itemLevel"] = 704.25,
+["classId"] = 6,
 },
 ["小城故事多丶-影之哀伤"] = {
 ["total"] = 428289702,
@@ -1173,20 +1173,20 @@ DetailsDataStorage = {
 ["itemLevel"] = 704.875,
 ["classId"] = 1,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 513198062,
-["itemLevel"] = 698.375,
-["classId"] = 4,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 662290775,
+["itemLevel"] = 700.4375,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 503941692,
 ["itemLevel"] = 696.2666666666667,
 ["classId"] = 6,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 595231414,
-["itemLevel"] = 703.2,
-["classId"] = 6,
+["超超越越丶-血色十字军"] = {
+["total"] = 513198062,
+["itemLevel"] = 698.375,
+["classId"] = 4,
 },
 ["某餃子"] = {
 ["total"] = 308651414,
@@ -1198,10 +1198,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 693.6666666666666,
 ["classId"] = 10,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 662290775,
-["itemLevel"] = 700.4375,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 595231414,
+["itemLevel"] = 703.2,
+["classId"] = 6,
 },
 ["小城故事多丶-影之哀伤"] = {
 ["total"] = 527918041,
@@ -1483,20 +1483,20 @@ DetailsDataStorage = {
 ["itemLevel"] = 704.875,
 ["classId"] = 1,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 471165033,
-["itemLevel"] = 698.375,
-["classId"] = 4,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 491177645,
+["itemLevel"] = 700.4375,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 506817602,
 ["itemLevel"] = 697.75,
 ["classId"] = 6,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 495352855,
-["itemLevel"] = 704.25,
-["classId"] = 6,
+["超超越越丶-血色十字军"] = {
+["total"] = 471165033,
+["itemLevel"] = 698.375,
+["classId"] = 4,
 },
 ["某餃子"] = {
 ["total"] = 173172560,
@@ -1508,10 +1508,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 693.875,
 ["classId"] = 10,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 491177645,
-["itemLevel"] = 700.4375,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 495352855,
+["itemLevel"] = 704.25,
+["classId"] = 6,
 },
 ["小城故事多丶-影之哀伤"] = {
 ["total"] = 410714192,
@@ -2828,6 +2828,11 @@ DetailsDataStorage = {
 ["itemLevel"] = 709.0625,
 ["classId"] = 3,
 },
+["某饺子"] = {
+["total"] = 887522595,
+["itemLevel"] = 709.8125,
+["classId"] = 10,
+},
 ["埃忒耳-燃烧之刃"] = {
 ["total"] = 1965635206,
 ["itemLevel"] = 711,
@@ -2837,11 +2842,6 @@ DetailsDataStorage = {
 ["total"] = 1515516135,
 ["itemLevel"] = 708.375,
 ["classId"] = 3,
-},
-["某饺子"] = {
-["total"] = 887522595,
-["itemLevel"] = 709.8125,
-["classId"] = 10,
 },
 },
 ["servertime"] = 1757145072,
@@ -3091,6 +3091,117 @@ DetailsDataStorage = {
 },
 ["date"] = "19:56 10/10/25",
 },
+{
+["date"] = "20:04 17/10/25",
+["guild"] = "岁岁平安",
+["DAMAGER"] = {
+["Direction-金色平原"] = {
+["total"] = 1393722468,
+["itemLevel"] = 722.875,
+["classId"] = 1,
+},
+["小奶糖糖-燃烧之刃"] = {
+["total"] = 1803508606,
+["itemLevel"] = 725.125,
+["classId"] = 7,
+},
+["顶级龟男-熊猫酒仙"] = {
+["total"] = 1699172648,
+["itemLevel"] = 723.3333333333334,
+["classId"] = 8,
+},
+["Nigachu-死亡之翼"] = {
+["total"] = 1513309616,
+["itemLevel"] = 721,
+["classId"] = 8,
+},
+["Septet-白银之手"] = {
+["total"] = 1265035380,
+["itemLevel"] = 722.125,
+["classId"] = 8,
+},
+["伍适骑仕-冰风岗"] = {
+["total"] = 1316047561,
+["itemLevel"] = 725.4375,
+["classId"] = 2,
+},
+["糊汤粉丶-死亡之翼"] = {
+["total"] = 1171546472,
+["itemLevel"] = 723.8125,
+["classId"] = 12,
+},
+["两升瓶装-血色十字军"] = {
+["total"] = 531022268,
+["itemLevel"] = 715.9375,
+["classId"] = 13,
+},
+["嘶密达-罗宁"] = {
+["total"] = 1411123730,
+["itemLevel"] = 723.5,
+["classId"] = 11,
+},
+["春日野大淀-白银之手"] = {
+["total"] = 1255915440,
+["itemLevel"] = 722.625,
+["classId"] = 6,
+},
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 1426029534,
+["itemLevel"] = 722.8,
+["classId"] = 6,
+},
+["真气波本酒-白银之手"] = {
+["total"] = 879901162,
+["itemLevel"] = 722.375,
+["classId"] = 10,
+},
+["上尉排长-影之哀伤"] = {
+["total"] = 1385109781,
+["itemLevel"] = 719.25,
+["classId"] = 7,
+},
+["很红的角色-霜之哀伤"] = {
+["total"] = 1324062130,
+["itemLevel"] = 723.9375,
+["classId"] = 6,
+},
+["祖妮玛莎-影之哀伤"] = {
+["total"] = 1249807872,
+["itemLevel"] = 721.8,
+["classId"] = 9,
+},
+["某餃子"] = {
+["total"] = 630947135,
+["itemLevel"] = 723.75,
+["classId"] = 6,
+},
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1422114105,
+["itemLevel"] = 721.125,
+["classId"] = 8,
+},
+},
+["elapsed"] = 255.7480000000214,
+["servertime"] = 1760702657,
+["HEALER"] = {
+["凛茉-死亡之翼"] = {
+["total"] = 1239267343,
+["itemLevel"] = 720.6875,
+["classId"] = 11,
+},
+["Fattybombus-影之哀伤"] = {
+["total"] = 1325011462,
+["itemLevel"] = 720.8125,
+["classId"] = 5,
+},
+["小猫不要哭-白银之手"] = {
+["total"] = 1383755201,
+["itemLevel"] = 720.5625,
+["classId"] = 7,
+},
+},
+["time"] = 1760702655,
+},
 },
 [3122] = {
 {
@@ -3203,6 +3314,117 @@ DetailsDataStorage = {
 },
 },
 ["guild"] = "岁岁平安",
+},
+{
+["date"] = "21:21 17/10/25",
+["guild"] = "岁岁平安",
+["DAMAGER"] = {
+["某餃子"] = {
+["total"] = 1810711047,
+["itemLevel"] = 723.75,
+["classId"] = 6,
+},
+["嘶密达-罗宁"] = {
+["total"] = 3324846664,
+["itemLevel"] = 723.6875,
+["classId"] = 11,
+},
+["糊汤粉丶-死亡之翼"] = {
+["total"] = 2821049519,
+["itemLevel"] = 723.8125,
+["classId"] = 12,
+},
+["两升瓶装-血色十字军"] = {
+["total"] = 1282959704,
+["itemLevel"] = 715.9375,
+["classId"] = 13,
+},
+["小奶糖糖-燃烧之刃"] = {
+["total"] = 3765335533,
+["itemLevel"] = 725.125,
+["classId"] = 7,
+},
+["顶级龟男-熊猫酒仙"] = {
+["total"] = 3379470382,
+["itemLevel"] = 722.5625,
+["classId"] = 8,
+},
+["Nigachu-死亡之翼"] = {
+["total"] = 2930170098,
+["itemLevel"] = 721.4375,
+["classId"] = 8,
+},
+["Septet-白银之手"] = {
+["total"] = 1712989507,
+["itemLevel"] = 722.75,
+["classId"] = 8,
+},
+["春日野大淀-白银之手"] = {
+["total"] = 2975839210,
+["itemLevel"] = 724.0625,
+["classId"] = 6,
+},
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 3463468174,
+["itemLevel"] = 723.25,
+["classId"] = 6,
+},
+["伍适骑仕-冰风岗"] = {
+["total"] = 2641619555,
+["itemLevel"] = 725.4375,
+["classId"] = 2,
+},
+["Direction-金色平原"] = {
+["total"] = 3129764876,
+["itemLevel"] = 722.875,
+["classId"] = 1,
+},
+["很红的角色-霜之哀伤"] = {
+["total"] = 1864057669,
+["itemLevel"] = 723.9375,
+["classId"] = 6,
+},
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 2835263094,
+["itemLevel"] = 720.9375,
+["classId"] = 8,
+},
+["樱桃琥珀-影之哀伤"] = {
+["total"] = 1369868717,
+["itemLevel"] = 720.375,
+["classId"] = 1,
+},
+["圭圭-影之哀伤"] = {
+["total"] = 3753446724,
+["itemLevel"] = 721.8125,
+["classId"] = 9,
+},
+},
+["elapsed"] = 365.5040000000736,
+["servertime"] = 1760707267,
+["HEALER"] = {
+["凛茉-死亡之翼"] = {
+["total"] = 2569711072,
+["itemLevel"] = 720.6875,
+["classId"] = 11,
+},
+["上尉排长-影之哀伤"] = {
+["total"] = 2062638376,
+["itemLevel"] = 719.25,
+["classId"] = 7,
+},
+["Fattybombus-影之哀伤"] = {
+["total"] = 2398593928,
+["itemLevel"] = 720.8125,
+["classId"] = 5,
+},
+["小猫不要哭-白银之手"] = {
+["total"] = 2257827623,
+["itemLevel"] = 721.1875,
+["classId"] = 7,
+},
+},
+["time"] = 1760707265,
 },
 },
 [3130] = {
@@ -3463,6 +3685,11 @@ DetailsDataStorage = {
 ["itemLevel"] = 709.0625,
 ["classId"] = 3,
 },
+["某饺子"] = {
+["total"] = 1070366192,
+["itemLevel"] = 710.1875,
+["classId"] = 10,
+},
 ["埃忒耳-燃烧之刃"] = {
 ["total"] = 3049212057,
 ["itemLevel"] = 711,
@@ -3472,11 +3699,6 @@ DetailsDataStorage = {
 ["total"] = 2193958389,
 ["itemLevel"] = 708.0666666666667,
 ["classId"] = 3,
-},
-["某饺子"] = {
-["total"] = 1070366192,
-["itemLevel"] = 710.1875,
-["classId"] = 10,
 },
 },
 ["servertime"] = 1757146595,
@@ -3837,6 +4059,117 @@ DetailsDataStorage = {
 },
 ["date"] = "20:21 10/10/25",
 },
+{
+["date"] = "20:15 17/10/25",
+["guild"] = "岁岁平安",
+["DAMAGER"] = {
+["Direction-金色平原"] = {
+["total"] = 1980800793,
+["itemLevel"] = 722.875,
+["classId"] = 1,
+},
+["小奶糖糖-燃烧之刃"] = {
+["total"] = 2132922212,
+["itemLevel"] = 725.125,
+["classId"] = 7,
+},
+["顶级龟男-熊猫酒仙"] = {
+["total"] = 2076034044,
+["itemLevel"] = 723.75,
+["classId"] = 8,
+},
+["Nigachu-死亡之翼"] = {
+["total"] = 1913450058,
+["itemLevel"] = 721,
+["classId"] = 8,
+},
+["Septet-白银之手"] = {
+["total"] = 1906731137,
+["itemLevel"] = 722.125,
+["classId"] = 8,
+},
+["伍适骑仕-冰风岗"] = {
+["total"] = 1932780740,
+["itemLevel"] = 725.4375,
+["classId"] = 2,
+},
+["糊汤粉丶-死亡之翼"] = {
+["total"] = 1932592223,
+["itemLevel"] = 723.8125,
+["classId"] = 12,
+},
+["两升瓶装-血色十字军"] = {
+["total"] = 844455321,
+["itemLevel"] = 715.9375,
+["classId"] = 13,
+},
+["嘶密达-罗宁"] = {
+["total"] = 1640485335,
+["itemLevel"] = 723.0666666666667,
+["classId"] = 11,
+},
+["春日野大淀-白银之手"] = {
+["total"] = 1839873367,
+["itemLevel"] = 722.625,
+["classId"] = 6,
+},
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 2203919867,
+["itemLevel"] = 723.25,
+["classId"] = 6,
+},
+["真气波本酒-白银之手"] = {
+["total"] = 1284033172,
+["itemLevel"] = 722.375,
+["classId"] = 10,
+},
+["上尉排长-影之哀伤"] = {
+["total"] = 1804317335,
+["itemLevel"] = 719.25,
+["classId"] = 7,
+},
+["很红的角色-霜之哀伤"] = {
+["total"] = 1955121166,
+["itemLevel"] = 723.9375,
+["classId"] = 6,
+},
+["祖妮玛莎-影之哀伤"] = {
+["total"] = 1886514552,
+["itemLevel"] = 721.125,
+["classId"] = 9,
+},
+["某餃子"] = {
+["total"] = 1102059249,
+["itemLevel"] = 723.75,
+["classId"] = 6,
+},
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1839541544,
+["itemLevel"] = 721.125,
+["classId"] = 8,
+},
+},
+["elapsed"] = 260.8730000000214,
+["servertime"] = 1760703360,
+["HEALER"] = {
+["凛茉-死亡之翼"] = {
+["total"] = 1684187722,
+["itemLevel"] = 720.6875,
+["classId"] = 11,
+},
+["Fattybombus-影之哀伤"] = {
+["total"] = 1787623253,
+["itemLevel"] = 720.8125,
+["classId"] = 5,
+},
+["小猫不要哭-白银之手"] = {
+["total"] = 1657764322,
+["itemLevel"] = 720.5625,
+["classId"] = 7,
+},
+},
+["time"] = 1760703358,
+},
 },
 [2898] = {
 },
@@ -3977,20 +4310,20 @@ DetailsDataStorage = {
 ["itemLevel"] = 712,
 ["classId"] = 12,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 1840071204,
-["itemLevel"] = 713.3125,
-["classId"] = 4,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 2042672341,
+["itemLevel"] = 713.5333333333333,
+["classId"] = 6,
 },
 ["顶级龟男-熊猫酒仙"] = {
 ["total"] = 2078537334,
 ["itemLevel"] = 711.4666666666667,
 ["classId"] = 8,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 1961383501,
-["itemLevel"] = 713.75,
-["classId"] = 8,
+["超超越越丶-血色十字军"] = {
+["total"] = 1840071204,
+["itemLevel"] = 713.3125,
+["classId"] = 4,
 },
 ["黑曜石大魔王-凤凰之神"] = {
 ["total"] = 1962383877,
@@ -4002,10 +4335,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 712.75,
 ["classId"] = 8,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 2042672341,
-["itemLevel"] = 713.5333333333333,
-["classId"] = 6,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1961383501,
+["itemLevel"] = 713.75,
+["classId"] = 8,
 },
 ["嘶密达-罗宁"] = {
 ["total"] = 1827441967,
@@ -4088,10 +4421,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 716.3125,
 ["classId"] = 6,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 2066133772,
-["itemLevel"] = 714.125,
-["classId"] = 6,
+["超超越越丶-血色十字军"] = {
+["total"] = 2137877539,
+["itemLevel"] = 715.125,
+["classId"] = 4,
 },
 ["顶级龟男-熊猫酒仙"] = {
 ["total"] = 2475469793,
@@ -4113,10 +4446,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.125,
 ["classId"] = 6,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 2003770819,
-["itemLevel"] = 714.5,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 2066133772,
+["itemLevel"] = 714.125,
+["classId"] = 6,
 },
 ["猫猫的坏心眼-燃烧之刃"] = {
 ["total"] = 1109494072,
@@ -4133,10 +4466,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.5625,
 ["classId"] = 2,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 2137877539,
-["itemLevel"] = 715.125,
-["classId"] = 4,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 2003770819,
+["itemLevel"] = 714.5,
+["classId"] = 8,
 },
 ["上尉排长-影之哀伤"] = {
 ["total"] = 1930322366,
@@ -4390,6 +4723,117 @@ DetailsDataStorage = {
 },
 },
 ["date"] = "20:09 10/10/25",
+},
+{
+["date"] = "20:30 17/10/25",
+["guild"] = "岁岁平安",
+["DAMAGER"] = {
+["某餃子"] = {
+["total"] = 934216762,
+["itemLevel"] = 723.75,
+["classId"] = 6,
+},
+["小奶糖糖-燃烧之刃"] = {
+["total"] = 2193344822,
+["itemLevel"] = 725.125,
+["classId"] = 7,
+},
+["顶级龟男-熊猫酒仙"] = {
+["total"] = 2134250477,
+["itemLevel"] = 722.5625,
+["classId"] = 8,
+},
+["Nigachu-死亡之翼"] = {
+["total"] = 1647169666,
+["itemLevel"] = 721,
+["classId"] = 8,
+},
+["Septet-白银之手"] = {
+["total"] = 1708764907,
+["itemLevel"] = 722.125,
+["classId"] = 8,
+},
+["伍适骑仕-冰风岗"] = {
+["total"] = 1570318204,
+["itemLevel"] = 725.4375,
+["classId"] = 2,
+},
+["糊汤粉丶-死亡之翼"] = {
+["total"] = 1592057824,
+["itemLevel"] = 723.4375,
+["classId"] = 12,
+},
+["两升瓶装-血色十字军"] = {
+["total"] = 778635983,
+["itemLevel"] = 715.9375,
+["classId"] = 13,
+},
+["嘶密达-罗宁"] = {
+["total"] = 1969735656,
+["itemLevel"] = 723.5,
+["classId"] = 11,
+},
+["春日野大淀-白银之手"] = {
+["total"] = 1733547916,
+["itemLevel"] = 722.625,
+["classId"] = 6,
+},
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 1854571606,
+["itemLevel"] = 722.8,
+["classId"] = 6,
+},
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1604616056,
+["itemLevel"] = 721.125,
+["classId"] = 8,
+},
+["Direction-金色平原"] = {
+["total"] = 1924536673,
+["itemLevel"] = 722.875,
+["classId"] = 1,
+},
+["很红的角色-霜之哀伤"] = {
+["total"] = 1716991923,
+["itemLevel"] = 723.9375,
+["classId"] = 6,
+},
+["上尉排长-影之哀伤"] = {
+["total"] = 1564849553,
+["itemLevel"] = 719.25,
+["classId"] = 7,
+},
+["樱桃琥珀-影之哀伤"] = {
+["total"] = 835241064,
+["itemLevel"] = 720.1875,
+["classId"] = 1,
+},
+["圭圭-影之哀伤"] = {
+["total"] = 2121441802,
+["itemLevel"] = 721.8125,
+["classId"] = 9,
+},
+},
+["elapsed"] = 291.5339999999851,
+["servertime"] = 1760704230,
+["HEALER"] = {
+["小猫不要哭-白银之手"] = {
+["total"] = 1760598007,
+["itemLevel"] = 720.5625,
+["classId"] = 7,
+},
+["Fattybombus-影之哀伤"] = {
+["total"] = 1860713645,
+["itemLevel"] = 720.8125,
+["classId"] = 5,
+},
+["凛茉-死亡之翼"] = {
+["total"] = 1692542254,
+["itemLevel"] = 720.0666666666667,
+["classId"] = 11,
+},
+},
+["time"] = 1760704228,
 },
 },
 [3132] = {
@@ -4832,6 +5276,117 @@ DetailsDataStorage = {
 },
 ["date"] = "20:36 10/10/25",
 },
+{
+["date"] = "20:49 17/10/25",
+["guild"] = "岁岁平安",
+["DAMAGER"] = {
+["Direction-金色平原"] = {
+["total"] = 2045652327,
+["itemLevel"] = 722.875,
+["classId"] = 1,
+},
+["小奶糖糖-燃烧之刃"] = {
+["total"] = 2834945434,
+["itemLevel"] = 725.125,
+["classId"] = 7,
+},
+["顶级龟男-熊猫酒仙"] = {
+["total"] = 2101599158,
+["itemLevel"] = 722.5625,
+["classId"] = 8,
+},
+["Nigachu-死亡之翼"] = {
+["total"] = 2230058728,
+["itemLevel"] = 721,
+["classId"] = 8,
+},
+["Septet-白银之手"] = {
+["total"] = 2084470749,
+["itemLevel"] = 722.125,
+["classId"] = 8,
+},
+["伍适骑仕-冰风岗"] = {
+["total"] = 2006692012,
+["itemLevel"] = 725.4375,
+["classId"] = 2,
+},
+["糊汤粉丶-死亡之翼"] = {
+["total"] = 2192820901,
+["itemLevel"] = 723.8125,
+["classId"] = 12,
+},
+["两升瓶装-血色十字军"] = {
+["total"] = 873560765,
+["itemLevel"] = 715.9375,
+["classId"] = 13,
+},
+["嘶密达-罗宁"] = {
+["total"] = 2000004248,
+["itemLevel"] = 723.5,
+["classId"] = 11,
+},
+["春日野大淀-白银之手"] = {
+["total"] = 2303475965,
+["itemLevel"] = 722.3333333333334,
+["classId"] = 6,
+},
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 2631552387,
+["itemLevel"] = 723.25,
+["classId"] = 6,
+},
+["真气波本酒-白银之手"] = {
+["total"] = 988240217,
+["itemLevel"] = 722.375,
+["classId"] = 10,
+},
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 2266250606,
+["itemLevel"] = 720.7333333333333,
+["classId"] = 8,
+},
+["很红的角色-霜之哀伤"] = {
+["total"] = 2291819805,
+["itemLevel"] = 723.9375,
+["classId"] = 6,
+},
+["上尉排长-影之哀伤"] = {
+["total"] = 2031663680,
+["itemLevel"] = 719.25,
+["classId"] = 7,
+},
+["某餃子"] = {
+["total"] = 1057398710,
+["itemLevel"] = 723.3333333333334,
+["classId"] = 6,
+},
+["圭圭-影之哀伤"] = {
+["total"] = 2291400085,
+["itemLevel"] = 721.8125,
+["classId"] = 9,
+},
+},
+["elapsed"] = 293.576999999932,
+["servertime"] = 1760705358,
+["HEALER"] = {
+["小猫不要哭-白银之手"] = {
+["total"] = 1215768506,
+["itemLevel"] = 720.5625,
+["classId"] = 7,
+},
+["Fattybombus-影之哀伤"] = {
+["total"] = 1375320893,
+["itemLevel"] = 720.2,
+["classId"] = 5,
+},
+["凛茉-死亡之翼"] = {
+["total"] = 1240677428,
+["itemLevel"] = 720.6875,
+["classId"] = 11,
+},
+},
+["time"] = 1760705356,
+},
 },
 [3133] = {
 {
@@ -4854,15 +5409,15 @@ DetailsDataStorage = {
 ["itemLevel"] = 714.0625,
 ["classId"] = 11,
 },
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1614030106,
+["itemLevel"] = 714.5,
+["classId"] = 8,
+},
 ["超超越越丶-血色十字军"] = {
 ["total"] = 1384520231,
 ["itemLevel"] = 715.875,
 ["classId"] = 4,
-},
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 1809407978,
-["itemLevel"] = 716.5333333333333,
-["classId"] = 6,
 },
 ["顶级龟男-熊猫酒仙"] = {
 ["total"] = 1402428668,
@@ -4884,10 +5439,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.0666666666667,
 ["classId"] = 8,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 1614030106,
-["itemLevel"] = 714.5,
-["classId"] = 8,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 1809407978,
+["itemLevel"] = 716.5333333333333,
+["classId"] = 6,
 },
 ["猫猫的坏心眼-燃烧之刃"] = {
 ["total"] = 1366052034,
@@ -5091,10 +5646,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 721.2666666666667,
 ["classId"] = 11,
 },
-["次级龟男-熊猫酒仙"] = {
-["total"] = 1384471392,
-["itemLevel"] = 721.75,
-["classId"] = 12,
+["祖妮玛莎-影之哀伤"] = {
+["total"] = 1388943711,
+["itemLevel"] = 721.8,
+["classId"] = 9,
 },
 ["小红手忆娅-贫瘠之地"] = {
 ["total"] = 1584538989,
@@ -5126,15 +5681,15 @@ DetailsDataStorage = {
 ["itemLevel"] = 721.8125,
 ["classId"] = 6,
 },
-["祖妮玛莎-影之哀伤"] = {
-["total"] = 1388943711,
-["itemLevel"] = 721.8,
-["classId"] = 9,
-},
 ["Nigachu-死亡之翼"] = {
 ["total"] = 1313289415,
 ["itemLevel"] = 720.625,
 ["classId"] = 8,
+},
+["次级龟男-熊猫酒仙"] = {
+["total"] = 1384471392,
+["itemLevel"] = 721.75,
+["classId"] = 12,
 },
 ["糊汤粉丶-死亡之翼"] = {
 ["total"] = 1370737161,
@@ -5167,6 +5722,117 @@ DetailsDataStorage = {
 },
 ["date"] = "21:06 10/10/25",
 },
+{
+["date"] = "21:03 17/10/25",
+["guild"] = "岁岁平安",
+["DAMAGER"] = {
+["Direction-金色平原"] = {
+["total"] = 1433528428,
+["itemLevel"] = 722.875,
+["classId"] = 1,
+},
+["小奶糖糖-燃烧之刃"] = {
+["total"] = 1819118806,
+["itemLevel"] = 725.125,
+["classId"] = 7,
+},
+["顶级龟男-熊猫酒仙"] = {
+["total"] = 1309880712,
+["itemLevel"] = 722.5625,
+["classId"] = 8,
+},
+["Nigachu-死亡之翼"] = {
+["total"] = 1337462643,
+["itemLevel"] = 721.4375,
+["classId"] = 8,
+},
+["Septet-白银之手"] = {
+["total"] = 1393409460,
+["itemLevel"] = 722.75,
+["classId"] = 8,
+},
+["伍适骑仕-冰风岗"] = {
+["total"] = 1280714114,
+["itemLevel"] = 725.4375,
+["classId"] = 2,
+},
+["糊汤粉丶-死亡之翼"] = {
+["total"] = 1325203736,
+["itemLevel"] = 723.4375,
+["classId"] = 12,
+},
+["两升瓶装-血色十字军"] = {
+["total"] = 610824848,
+["itemLevel"] = 715.9375,
+["classId"] = 13,
+},
+["嘶密达-罗宁"] = {
+["total"] = 1521357796,
+["itemLevel"] = 723.5,
+["classId"] = 11,
+},
+["春日野大淀-白银之手"] = {
+["total"] = 1194591248,
+["itemLevel"] = 722.625,
+["classId"] = 6,
+},
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 1519781385,
+["itemLevel"] = 723.25,
+["classId"] = 6,
+},
+["真气波本酒-白银之手"] = {
+["total"] = 967408615,
+["itemLevel"] = 722.375,
+["classId"] = 10,
+},
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1207987333,
+["itemLevel"] = 721.125,
+["classId"] = 8,
+},
+["很红的角色-霜之哀伤"] = {
+["total"] = 1356210771,
+["itemLevel"] = 723.9375,
+["classId"] = 6,
+},
+["上尉排长-影之哀伤"] = {
+["total"] = 1244329110,
+["itemLevel"] = 719.875,
+["classId"] = 7,
+},
+["某餃子"] = {
+["total"] = 811587002,
+["itemLevel"] = 723.75,
+["classId"] = 6,
+},
+["圭圭-影之哀伤"] = {
+["total"] = 1369505220,
+["itemLevel"] = 721.8125,
+["classId"] = 9,
+},
+},
+["elapsed"] = 237.9930000000168,
+["servertime"] = 1760706183,
+["HEALER"] = {
+["小猫不要哭-白银之手"] = {
+["total"] = 1257786458,
+["itemLevel"] = 720.5625,
+["classId"] = 7,
+},
+["Fattybombus-影之哀伤"] = {
+["total"] = 1212651847,
+["itemLevel"] = 720.8125,
+["classId"] = 5,
+},
+["凛茉-死亡之翼"] = {
+["total"] = 1396996786,
+["itemLevel"] = 720.6875,
+["classId"] = 11,
+},
+},
+["time"] = 1760706181,
+},
 },
 [2902] = {
 },
@@ -5191,10 +5857,10 @@ DetailsDataStorage = {
 },
 [3122] = {
 ["heroic"] = {
-["time_incombat"] = 3777.006999999911,
+["time_incombat"] = 4095.540999999896,
 ["time_fasterkill"] = 266.859999999986,
 ["wipes"] = 0,
-["kills"] = 11,
+["kills"] = 12,
 ["dps_best"] = 4767226.459887517,
 ["dps_best_raid"] = 151902513.9904805,
 ["time_fasterkill_when"] = 1757679434,
@@ -5202,14 +5868,14 @@ DetailsDataStorage = {
 ["dps_best_raid_when"] = 1760013820,
 },
 ["mythic"] = {
-["time_incombat"] = 335.9369999999999,
+["time_incombat"] = 1093.122999999987,
 ["time_fasterkill"] = 335.9369999999999,
 ["wipes"] = 0,
-["kills"] = 1,
-["dps_best"] = 4726931.061497833,
+["kills"] = 3,
+["dps_best"] = 4954011.575805479,
 ["dps_best_raid"] = 128701360.1716989,
 ["time_fasterkill_when"] = 1760105653,
-["dps_best_when"] = 1760105653,
+["dps_best_when"] = 1760707265,
 ["dps_best_raid_when"] = 1760105653,
 },
 ["normal"] = {
@@ -5263,7 +5929,7 @@ DetailsDataStorage = {
 [3122] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 64,
+["wipes"] = 66,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_raid_when"] = 0,
@@ -5274,7 +5940,7 @@ DetailsDataStorage = {
 [3130] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 16,
+["wipes"] = 17,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_raid"] = 0,
@@ -5307,7 +5973,7 @@ DetailsDataStorage = {
 [3132] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 65,
+["wipes"] = 68,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_raid"] = 0,
@@ -5318,7 +5984,7 @@ DetailsDataStorage = {
 [3133] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 43,
+["wipes"] = 44,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_raid"] = 0,
@@ -5329,7 +5995,7 @@ DetailsDataStorage = {
 [3134] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 52,
+["wipes"] = 101,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_raid"] = 0,
@@ -5469,10 +6135,10 @@ DetailsDataStorage = {
 },
 [3131] = {
 ["heroic"] = {
-["time_incombat"] = 2576.074999999977,
+["time_incombat"] = 2789.275999999978,
 ["time_fasterkill"] = 188.2099999999919,
 ["wipes"] = 0,
-["kills"] = 10,
+["kills"] = 11,
 ["dps_best"] = 3087620.981927513,
 ["dps_best_raid_when"] = 1760012000,
 ["time_fasterkill_when"] = 1760012000,
@@ -5491,15 +6157,15 @@ DetailsDataStorage = {
 ["dps_best_raid_when"] = 1755864411,
 },
 ["mythic"] = {
-["time_incombat"] = 2625.436000000001,
-["time_fasterkill"] = 304.7640000000247,
+["time_incombat"] = 3243.115000000005,
+["time_fasterkill"] = 291.5339999999851,
 ["wipes"] = 0,
-["kills"] = 7,
-["dps_best"] = 3170817.115715246,
-["dps_best_raid"] = 91953889.88528085,
-["time_fasterkill_when"] = 1760098163,
-["dps_best_when"] = 1760251917,
-["dps_best_raid_when"] = 1760098163,
+["kills"] = 9,
+["dps_best"] = 3307650.229215875,
+["dps_best_raid"] = 95955129.37085016,
+["time_fasterkill_when"] = 1760704228,
+["dps_best_when"] = 1760762279,
+["dps_best_raid_when"] = 1760704228,
 },
 ["raidfinder"] = {
 ["time_incombat"] = 301.4809999999998,
@@ -5565,10 +6231,10 @@ DetailsDataStorage = {
 },
 [3132] = {
 ["heroic"] = {
-["time_incombat"] = 2471.993999999957,
+["time_incombat"] = 2740.169999999935,
 ["time_fasterkill"] = 230.1389999999956,
 ["wipes"] = 0,
-["kills"] = 8,
+["kills"] = 9,
 ["dps_best"] = 3894069.258171637,
 ["dps_best_raid"] = 122656869.0704337,
 ["time_fasterkill_when"] = 1760013267,
@@ -5576,15 +6242,15 @@ DetailsDataStorage = {
 ["dps_best_raid_when"] = 1760013267,
 },
 ["mythic"] = {
-["time_incombat"] = 1982.341000000015,
-["time_fasterkill"] = 333.5489999999991,
+["time_incombat"] = 2622.824999999953,
+["time_fasterkill"] = 293.576999999932,
 ["wipes"] = 0,
-["kills"] = 5,
-["dps_best"] = 3454287.285356937,
-["dps_best_raid"] = 111207643.5756069,
-["time_fasterkill_when"] = 1760099788,
-["dps_best_raid_when"] = 1760099788,
-["dps_best_when"] = 1760254495,
+["kills"] = 7,
+["dps_best"] = 3674161.354504035,
+["dps_best_raid"] = 117004149.5110583,
+["time_fasterkill_when"] = 1760705356,
+["dps_best_raid_when"] = 1760705356,
+["dps_best_when"] = 1760764447,
 },
 ["normal"] = {
 ["time_incombat"] = 1079.223000000045,
@@ -5685,10 +6351,10 @@ DetailsDataStorage = {
 },
 [3133] = {
 ["heroic"] = {
-["time_incombat"] = 3322.223000000049,
+["time_incombat"] = 3550.221000000012,
 ["time_fasterkill"] = 192.4070000000065,
 ["wipes"] = 0,
-["kills"] = 14,
+["kills"] = 15,
 ["dps_best"] = 2995338.927398189,
 ["dps_best_raid"] = 104841824.7516947,
 ["time_fasterkill_when"] = 1760014280,
@@ -5696,15 +6362,15 @@ DetailsDataStorage = {
 ["dps_best_raid_when"] = 1760014280,
 },
 ["mythic"] = {
-["time_incombat"] = 1139.287000000033,
-["time_fasterkill"] = 266.1600000000035,
+["time_incombat"] = 1647.10500000012,
+["time_fasterkill"] = 237.9930000000168,
 ["wipes"] = 0,
-["kills"] = 4,
-["dps_best"] = 3087752.38956524,
-["dps_best_raid_when"] = 1760101604,
-["time_fasterkill_when"] = 1760101604,
-["dps_best_when"] = 1760101604,
-["dps_best_raid"] = 82111016.57649426,
+["kills"] = 6,
+["dps_best"] = 3410129.718119818,
+["dps_best_raid_when"] = 1760706181,
+["time_fasterkill_when"] = 1760706181,
+["dps_best_when"] = 1760706181,
+["dps_best_raid"] = 91531616.05172616,
 },
 ["normal"] = {
 ["time_incombat"] = 895.7320000000364,
@@ -5945,7 +6611,7 @@ DetailsDataStorage = {
 [3135] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 15,
+["wipes"] = 18,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_when"] = 0,
@@ -5986,10 +6652,10 @@ DetailsDataStorage = {
 ["dps_best_when"] = 0,
 ["dps_best_raid_when"] = 0,
 },
-[2917] = {
+[2824] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
-["wipes"] = 7,
+["wipes"] = 6,
 ["kills"] = 0,
 ["dps_best"] = 0,
 ["dps_best_when"] = 0,
@@ -6019,17 +6685,6 @@ DetailsDataStorage = {
 ["dps_best_when"] = 0,
 ["dps_best_raid_when"] = 0,
 },
-[2824] = {
-["time_incombat"] = 0,
-["time_fasterkill"] = 0,
-["wipes"] = 6,
-["kills"] = 0,
-["dps_best"] = 0,
-["dps_best_when"] = 0,
-["time_fasterkill_when"] = 0,
-["dps_best_raid_when"] = 0,
-["dps_best_raid"] = 0,
-},
 [3134] = {
 ["time_incombat"] = 0,
 ["time_fasterkill"] = 0,
@@ -6040,6 +6695,17 @@ DetailsDataStorage = {
 ["time_fasterkill_when"] = 0,
 ["dps_best_when"] = 0,
 ["dps_best_raid_when"] = 0,
+},
+[2917] = {
+["time_incombat"] = 0,
+["time_fasterkill"] = 0,
+["wipes"] = 7,
+["kills"] = 0,
+["dps_best"] = 0,
+["dps_best_when"] = 0,
+["time_fasterkill_when"] = 0,
+["dps_best_raid_when"] = 0,
+["dps_best_raid"] = 0,
 },
 },
 [2709] = {
@@ -6068,15 +6734,15 @@ DetailsDataStorage = {
 ["dps_best_raid_when"] = 1760012577,
 },
 ["mythic"] = {
-["time_incombat"] = 3534.047000000058,
-["time_fasterkill"] = 283.5880000000179,
+["time_incombat"] = 4082.197000000081,
+["time_fasterkill"] = 260.8730000000214,
 ["wipes"] = 0,
-["kills"] = 10,
-["dps_best"] = 4570658.253598277,
-["dps_best_raid_when"] = 1760252667,
-["time_fasterkill_when"] = 1760098894,
-["dps_best_when"] = 1760252667,
-["dps_best_raid"] = 117992859.849816,
+["kills"] = 12,
+["dps_best"] = 5013574.403828036,
+["dps_best_raid_when"] = 1760762977,
+["time_fasterkill_when"] = 1760703358,
+["dps_best_when"] = 1760762977,
+["dps_best_raid"] = 120842245.1153409,
 },
 ["normal"] = {
 ["time_incombat"] = 959.5720000000329,
@@ -6284,26 +6950,26 @@ DetailsDataStorage = {
 ["dps_best_raid"] = 81084728.93461025,
 },
 ["mythic"] = {
-["time_incombat"] = 3934.152000000024,
-["time_fasterkill"] = 295.6619999999821,
+["time_incombat"] = 4471.018000000062,
+["time_fasterkill"] = 255.7480000000214,
 ["wipes"] = 0,
-["kills"] = 10,
-["dps_best"] = 2657627.478908808,
-["dps_best_raid"] = 73730433.29883894,
-["time_fasterkill_when"] = 1760097408,
-["dps_best_when"] = 1760250985,
-["dps_best_raid_when"] = 1760097408,
+["kills"] = 12,
+["dps_best"] = 2984333.962991651,
+["dps_best_raid"] = 85008583.21862997,
+["time_fasterkill_when"] = 1760702655,
+["dps_best_when"] = 1760761520,
+["dps_best_raid_when"] = 1760702655,
 },
 ["raidfinder"] = {
-["time_incombat"] = 303.778999999995,
-["time_fasterkill"] = 303.778999999995,
+["time_incombat"] = 450.2590000000928,
+["time_fasterkill"] = 146.4800000000978,
 ["wipes"] = 0,
-["kills"] = 1,
+["kills"] = 2,
 ["dps_best"] = 1914186.711397413,
-["dps_best_raid"] = 26436241.21812282,
-["time_fasterkill_when"] = 1757847746,
+["dps_best_raid"] = 50589437.1586227,
+["time_fasterkill_when"] = 1760752597,
 ["dps_best_when"] = 1757847746,
-["dps_best_raid_when"] = 1757847746,
+["dps_best_raid_when"] = 1760752597,
 },
 },
 ["normal"] = {
@@ -9325,10 +9991,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 716.3125,
 ["classId"] = 6,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 2156638599,
-["itemLevel"] = 715.9375,
-["classId"] = 4,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 2210274249,
+["itemLevel"] = 714.6,
+["classId"] = 6,
 },
 ["顶级龟男-熊猫酒仙"] = {
 ["total"] = 2703681726,
@@ -9350,10 +10016,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.3125,
 ["classId"] = 8,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 1827132463,
-["itemLevel"] = 714.125,
-["classId"] = 8,
+["超超越越丶-血色十字军"] = {
+["total"] = 2156638599,
+["itemLevel"] = 715.9375,
+["classId"] = 4,
 },
 ["猫猫的坏心眼-燃烧之刃"] = {
 ["total"] = 2319318862,
@@ -9370,10 +10036,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.75,
 ["classId"] = 2,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 2210274249,
-["itemLevel"] = 714.6,
-["classId"] = 6,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1827132463,
+["itemLevel"] = 714.125,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 2024433752,
@@ -11184,10 +11850,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 716.3125,
 ["classId"] = 6,
 },
-["超超越越丶-血色十字军"] = {
-["total"] = 957012428,
+["佐巴扬的救赎-燃烧之刃"] = {
+["total"] = 971773240,
 ["itemLevel"] = 715.125,
-["classId"] = 4,
+["classId"] = 6,
 },
 ["顶级龟男-熊猫酒仙"] = {
 ["total"] = 1169079960,
@@ -11209,10 +11875,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.3125,
 ["classId"] = 8,
 },
-["小红手忆娅-贫瘠之地"] = {
-["total"] = 1061237968,
-["itemLevel"] = 714.125,
-["classId"] = 8,
+["超超越越丶-血色十字军"] = {
+["total"] = 957012428,
+["itemLevel"] = 715.125,
+["classId"] = 4,
 },
 ["猫猫的坏心眼-燃烧之刃"] = {
 ["total"] = 1082494527,
@@ -11229,10 +11895,10 @@ DetailsDataStorage = {
 ["itemLevel"] = 715.5625,
 ["classId"] = 2,
 },
-["佐巴扬的救赎-燃烧之刃"] = {
-["total"] = 971773240,
-["itemLevel"] = 715.125,
-["classId"] = 6,
+["小红手忆娅-贫瘠之地"] = {
+["total"] = 1061237968,
+["itemLevel"] = 714.125,
+["classId"] = 8,
 },
 ["春日野大淀-白银之手"] = {
 ["total"] = 1108816998,

@@ -1,14 +1,14 @@
 ------------------------------------------------------------------------
-r333 | funkehdude | 2025-09-23 21:28:41 +0000 (Tue, 23 Sep 2025) | 1 line
+r338 | funkehdude | 2025-10-15 15:53:40 +0000 (Wed, 15 Oct 2025) | 1 line
 Changed paths:
    M /trunk/!BugGrabber.toc
 
 Bump toc
 ------------------------------------------------------------------------
-r332 | funkehdude | 2025-08-06 17:47:36 +0000 (Wed, 06 Aug 2025) | 1 line
+r337 | funkehdude | 2025-10-15 15:51:40 +0000 (Wed, 15 Oct 2025) | 1 line
 Changed paths:
-   M /trunk/locales.lua
+   M /trunk/BugGrabber.lua
 
-Update locale
+Add a fallback for when `GetErrorCallstackHeight` is nil
 ------------------------------------------------------------------------
 

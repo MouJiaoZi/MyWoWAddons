@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local I = W:NewModule("Inspect", "AceEvent-3.0", "AceHook-3.0") ---@class Inspect: AceModule, AceEvent-3.0, AceHook-3.0
 local C = W.Utilities.Color
 local S = W.Modules.Skins ---@type Skins
@@ -9,6 +9,7 @@ local EnchantLib = E.Libs.WTItemEnchant ---@type LibItemEnchantWT
 -- Core logic, utility functions are modified from TinyInspect.
 -- Credits & Copyright: loudsoul, Witnesscm
 local _G = _G
+local abs = abs
 local floor = floor
 local format = format
 local gsub = gsub
@@ -17,6 +18,7 @@ local ipairs = ipairs
 local math_pi = math.pi
 local max = max
 local pairs = pairs
+local select = select
 local strfind = strfind
 local strmatch = strmatch
 local tAppendAll = tAppendAll
@@ -38,6 +40,7 @@ local Mixin = Mixin
 local SetPortraitTexture = SetPortraitTexture
 local UnitClass = UnitClass
 local UnitGUID = UnitGUID
+local UnitHealthMax = UnitHealthMax
 local UnitLevel = UnitLevel
 local UnitName = UnitName
 
@@ -68,6 +71,9 @@ local CURRENT_EXPANSION_ID = GetServerExpansionLevel()
 local LABEL_COLOR = C.GetRGBFromTemplate("cyan-300")
 local PANEL_MIN_WIDTH = 250
 local PANEL_COMPONENT_SPACING = 4
+local STAT_ROW_SEPARATOR_SPACING = 3
+local STAT_ROW_HEIGHT = 20
+local STAT_PADDING = 10
 local ITEM_LEVEL_CHECK_INTERVAL = 0.08
 local INSPECT_WAIT_MAX_SECONDS = 3
 local INSPECT_WAIT_MAX_ROUNDS = floor(INSPECT_WAIT_MAX_SECONDS / ITEM_LEVEL_CHECK_INTERVAL)
@@ -96,6 +102,49 @@ local INVSLOT_ENCHANT = {
 	[INVSLOT_BACK] = true,
 	[INVSLOT_MAINHAND] = true,
 	[INVSLOT_OFFHAND] = true,
+}
+
+local STATS_CONFIG = {
+	groups = {
+		{
+			type = "header",
+			rows = {
+				{ key = "header", isHeader = true },
+			},
+		},
+		{
+			type = "basic",
+			color = "blue-400",
+			rows = {
+				{ key = "level", name = L["[ABBR] Level"] },
+				{ key = "health", name = L["[ABBR] Health"] },
+				{ key = "itemLevel", name = L["[ABBR] Item Level"], diffType = "value" },
+			},
+		},
+		{
+			type = "primary",
+			color = "amber-400",
+			rows = {
+				{ key = "stamina", name = L["[ABBR] Stamina"], diffType = "percent" },
+				{ key = "strength", name = L["[ABBR] Strength"], diffType = "percent" },
+				{ key = "agility", name = L["[ABBR] Agility"], diffType = "percent" },
+				{ key = "intellect", name = L["[ABBR] Intellect"], diffType = "percent" },
+			},
+		},
+		{
+			type = "combat",
+			color = "green-500",
+			rows = {
+				{ key = "crit", name = L["[ABBR] Critical Strike"], diffType = "percent" },
+				{ key = "haste", name = L["[ABBR] Haste"], diffType = "percent" },
+				{ key = "mastery", name = L["[ABBR] Mastery"], diffType = "percent" },
+				{ key = "versatility", name = L["[ABBR] Versatility"], diffType = "percent" },
+				{ key = "leech", name = L["[ABBR] Leech"], diffType = "percent" },
+				{ key = "speed", name = L["[ABBR] Speed"], diffType = "percent" },
+				{ key = "avoidance", name = L["[ABBR] Avoidance"], diffType = "percent", color = "green-400" },
+			},
+		},
+	},
 }
 
 ---Checks if an enchantment can be applied to a specific slot based on quality and class
@@ -525,6 +574,81 @@ local function GetUnitSpecializationInfo(unit)
 	return { icon = icon, name = name }
 end
 
+---@class EquipmentStats
+---@field stamina number
+---@field strength number
+---@field agility number
+---@field intellect number
+---@field crit number
+---@field haste number
+---@field mastery number
+---@field versatility number
+---@field leech number
+---@field speed number
+---@field avoidance number
+
+---Calculates stats from all equipped items
+---@param unit UnitToken The unit to collect stats from
+---@return EquipmentStats stats Table containing all stats from equipment
+local function CalculateStatsFromEquipment(unit)
+	---@type EquipmentStats
+	local stats = {
+		stamina = 0,
+		strength = 0,
+		agility = 0,
+		intellect = 0,
+		crit = 0,
+		haste = 0,
+		mastery = 0,
+		versatility = 0,
+		leech = 0,
+		speed = 0,
+		avoidance = 0,
+	}
+	for _, slotInfo in ipairs(DISPLAY_SLOTS) do
+		local itemLink = GetInventoryItemLink(unit, slotInfo.index)
+		if itemLink then
+			local itemStats = C_Item_GetItemStats(itemLink)
+			if itemStats then
+				stats.stamina = stats.stamina + (itemStats["ITEM_MOD_STAMINA_SHORT"] or 0)
+				stats.strength = stats.strength + (itemStats["ITEM_MOD_STRENGTH_SHORT"] or 0)
+				stats.agility = stats.agility + (itemStats["ITEM_MOD_AGILITY_SHORT"] or 0)
+				stats.intellect = stats.intellect + (itemStats["ITEM_MOD_INTELLECT_SHORT"] or 0)
+				stats.crit = stats.crit + (itemStats["ITEM_MOD_CRIT_RATING_SHORT"] or 0)
+				stats.haste = stats.haste + (itemStats["ITEM_MOD_HASTE_RATING_SHORT"] or 0)
+				stats.mastery = stats.mastery + (itemStats["ITEM_MOD_MASTERY_RATING_SHORT"] or 0)
+				stats.versatility = stats.versatility + (itemStats["ITEM_MOD_VERSATILITY"] or 0)
+				stats.leech = stats.leech + (itemStats["ITEM_MOD_CR_LIFESTEAL_SHORT"] or 0)
+				stats.speed = stats.speed + (itemStats["ITEM_MOD_CR_SPEED_SHORT"] or 0)
+				stats.avoidance = stats.avoidance + (itemStats["ITEM_MOD_CR_AVOIDANCE_SHORT"] or 0)
+			end
+		end
+	end
+
+	return stats
+end
+
+---@class UnitStatistics : EquipmentStats
+---@field level number
+---@field health number
+---@field itemLevel number
+
+---Collects unit statistics for comparison
+---@param unit UnitToken The unit to collect stats from
+---@param itemLevel number? The item level of the unit
+---@return UnitStatistics stats Table containing all collected statistics
+local function GetUnitStats(unit, itemLevel)
+	local result = CalculateStatsFromEquipment(unit)
+
+	result.level = UnitLevel(unit)
+	result.health = UnitHealthMax(unit)
+	result.itemLevel = itemLevel or 0
+
+	---@cast result UnitStatistics
+
+	return result
+end
+
 function I:ShouldShowPanel(unit, parent)
 	if not self.db or not self.db.enable or not parent or not parent:IsShown() then
 		return false
@@ -553,12 +677,12 @@ function I:CreatePanel(parent)
 	end
 
 	local frame = CreateFrame("Frame", nil, parent)
-	local height = parent:GetHeight()
 
 	-- Frame
-	frame:Size(PANEL_MIN_WIDTH, height)
+	frame:Width(PANEL_MIN_WIDTH)
 	frame:SetFrameLevel(0)
-	frame:Point("LEFT", parent, "RIGHT", 5, 0)
+	frame:Point("TOPLEFT", parent, "TOPRIGHT", 3, 0)
+	frame:Point("BOTTOMLEFT", parent, "BOTTOMRIGHT", 3, 0)
 	frame:SetTemplate("Transparent")
 	S:CreateShadowModule(frame)
 	S:MerathilisUISkin(frame)
@@ -622,7 +746,7 @@ function I:CreatePanel(parent)
 
 	-- Lines
 	frame.Lines = {}
-	frame.lineHeight = (height - 82) / #DISPLAY_SLOTS
+	frame.lineHeight = (parent:GetHeight() - 82) / #DISPLAY_SLOTS
 
 	for displayIndex, slotInfo in ipairs(DISPLAY_SLOTS) do
 		-- Line
@@ -656,8 +780,8 @@ function I:CreatePanel(parent)
 		-- Item Level
 		line.ItemLevel = line:CreateFontString(nil, "ARTWORK")
 		F.SetFontWithDB(line.ItemLevel, self.db.levelText)
-		line.ItemLevel:Point("LEFT", line.Label, "RIGHT", PANEL_COMPONENT_SPACING, 0)
-		line.ItemLevel:SetJustifyH("RIGHT")
+		line.ItemLevel:Point("LEFT", line.Label, "RIGHT", PANEL_COMPONENT_SPACING + 2, 0)
+		line.ItemLevel:SetJustifyH("CENTER")
 
 		-- Item Texture
 		line.ItemTextureFrame = CreateFrame("Frame", nil, line, "BackdropTemplate")
@@ -743,9 +867,47 @@ function I:ShowPanel(unit, parent, ilevel)
 
 	local maxLabelTextWidth, maxItemLevelTextWidth, maxItemNameTextWidth = 30, 0, 0
 
+	-- Artifact weapon item levels
+	local artifactMainHandItemLevel ---@type number?
+	local artifactOffHandItemLevel ---@type number?
+
+	for _, slotInfo in ipairs(DISPLAY_SLOTS) do
+		if slotInfo.index == INVSLOT_MAINHAND or slotInfo.index == INVSLOT_OFFHAND then
+			local itemInfo = GetUnitSlotItemInfo(unit, slotInfo.index)
+			if itemInfo and itemInfo.quality == Enum_ItemQuality.Artifact then
+				if slotInfo.index == INVSLOT_MAINHAND then
+					artifactMainHandItemLevel = itemInfo.level
+				else
+					artifactOffHandItemLevel = itemInfo.level
+				end
+			end
+		end
+	end
+
+	-- Determine correct artifact level: use the non-13 value if one exists
+	local correctArtifactLevel ---@type number?
+	if artifactMainHandItemLevel and artifactOffHandItemLevel then
+		if artifactMainHandItemLevel == 13 and artifactOffHandItemLevel ~= 13 then
+			correctArtifactLevel = artifactOffHandItemLevel
+		elseif artifactOffHandItemLevel == 13 and artifactMainHandItemLevel ~= 13 then
+			correctArtifactLevel = artifactMainHandItemLevel
+		end
+	end
+
 	for displayIndex, slotInfo in ipairs(DISPLAY_SLOTS) do
 		local line = frame.Lines[displayIndex]
 		local itemInfo = GetUnitSlotItemInfo(unit, slotInfo.index)
+
+		-- Legion Remix Temp Fix: Artifact weapon item level showing wrong value (13)
+		if
+			correctArtifactLevel
+			and itemInfo
+			and itemInfo.quality == Enum_ItemQuality.Artifact
+			and itemInfo.level == 13
+			and (slotInfo.index == INVSLOT_MAINHAND or slotInfo.index == INVSLOT_OFFHAND)
+		then
+			itemInfo.level = correctArtifactLevel
+		end
 
 		line.name = itemInfo and itemInfo.name
 		line.link = itemInfo and itemInfo.link
@@ -760,7 +922,7 @@ function I:ShowPanel(unit, parent, ilevel)
 		F.SetFontWithDB(line.ItemName, self.db.itemNameText)
 		line.ItemName:Height(self.db.itemNameText.size + 2)
 
-		if itemInfo and itemInfo.level > 0 then
+		if itemInfo and itemInfo.level and itemInfo.level > 0 then
 			line.ItemLevel:SetText(format("%d", itemInfo.level))
 			line.ItemName:SetText(itemInfo.cleanLink or itemInfo.link or itemInfo.name)
 		else
@@ -876,7 +1038,7 @@ function I:ShowPanel(unit, parent, ilevel)
 		end
 
 		-- Width adjustment for dynamic font size
-		local BETTER_GETSTRING_WIDTH = 1
+		local BETTER_GETSTRING_WIDTH = 3
 		maxLabelTextWidth = max(maxLabelTextWidth, line.Label.Text:GetStringWidth())
 		maxItemLevelTextWidth = max(maxItemLevelTextWidth, line.ItemLevel:GetStringWidth() + BETTER_GETSTRING_WIDTH)
 		local itemNameTextWidth = line.ItemName:GetStringWidth() + BETTER_GETSTRING_WIDTH
@@ -908,10 +1070,236 @@ function I:ShowPanel(unit, parent, ilevel)
 	frame:Width(lineWidth + 15 * 2)
 	frame:Show()
 
-	-- TODO:
-	-- [ ] Stats
+	return frame
+end
+
+function I:CreateStatsComparePanel(parent)
+	if parent.WTInspectStatsCompare then
+		return parent.WTInspectStatsCompare
+	end
+
+	local frame = CreateFrame("Frame", nil, parent)
+	frame:SetFrameLevel(0)
+	frame:Point("TOPLEFT", parent, "TOPRIGHT", 3, 0)
+	frame:SetTemplate("Transparent")
+	S:CreateShadowModule(frame)
+	S:MerathilisUISkin(frame)
+
+	frame.rows = {}
+	frame.separators = {}
+
+	for groupIndex, group in ipairs(STATS_CONFIG.groups) do
+		for _, def in ipairs(group.rows) do
+			local row = CreateFrame("Frame", nil, frame, "BackdropTemplate")
+			row:Height(STAT_ROW_HEIGHT)
+			row:SetPassThroughButtons("LeftButton")
+
+			if not def.isHeader then
+				row:SetScript("OnEnter", function(self)
+					self:SetBackdrop({ bgFile = E.media.normTex })
+					self:SetBackdropColor(1, 1, 1, 0.15)
+				end)
+				row:SetScript("OnLeave", function(self)
+					self:SetBackdrop(nil)
+				end)
+			end
+
+			row.label = row:CreateFontString(nil, "OVERLAY")
+			row.label:Point("LEFT", 5, 0)
+			row.label:SetJustifyH("LEFT")
+
+			row.inspectedValue = row:CreateFontString(nil, "OVERLAY")
+			row.inspectedValue:Point("CENTER", 0, 0)
+			row.inspectedValue:SetJustifyH("RIGHT")
+
+			row.playerValue = row:CreateFontString(nil, "OVERLAY")
+			row.playerValue:Point("RIGHT", -5, 0)
+			row.playerValue:SetJustifyH("RIGHT")
+
+			row.def = def
+			row.groupColor = group.color
+			row.groupIndex = groupIndex
+
+			tinsert(frame.rows, row)
+		end
+
+		if groupIndex < #STATS_CONFIG.groups then
+			local separator = frame:CreateTexture(nil, "ARTWORK")
+			separator:SetTexture(E.media.normTex)
+			separator:SetVertexColor(0.5, 0.5, 0.5, 0.5)
+			separator:Height(1)
+			tinsert(frame.separators, separator)
+		end
+	end
+
+	hooksecurefunc(parent, "Hide", function()
+		frame:Hide()
+	end)
+	MF:InternalHandle(frame, parent.MoveFrame or parent)
+	parent.WTInspectStatsCompare = frame
 
 	return frame
+end
+
+function I:UpdateStatsComparePanel(frame, inspectedUnit, inspectedItemLevel)
+	if not frame or not frame.rows then
+		return
+	end
+
+	local inspectedStats = GetUnitStats(inspectedUnit, inspectedItemLevel)
+	local playerStats = GetUnitStats("player", E:GetUnitItemLevel("player"))
+
+	local inspectedName = UnitName(inspectedUnit)
+	local playerName = UnitName("player")
+	local inspectedClassColor = E:ClassColor(select(2, UnitClass(inspectedUnit)), true)
+	local playerClassColor = E:ClassColor(E.myclass, true)
+
+	local maxWidths = { label = 0, inspected = 0, player = 0 }
+	local visibleRows = {}
+
+	for _, row in ipairs(frame.rows) do
+		local def = row.def
+
+		F.SetFontWithDB(row.label, self.db.statistics.text)
+		F.SetFontWithDB(row.inspectedValue, self.db.statistics.text)
+		F.SetFontWithDB(row.playerValue, self.db.statistics.text)
+
+		local isVisible = false
+		local inspectedWidth, playerWidth = 0, 0
+
+		if def.isHeader then
+			row.label:Hide()
+			row.inspectedValue:SetText(inspectedName)
+			row.playerValue:SetText(playerName)
+			row.label:SetTextColor(C.ExtractRGBFromTemplate("cyan-300"))
+			row.inspectedValue:SetTextColor(inspectedClassColor.r, inspectedClassColor.g, inspectedClassColor.b)
+			row.playerValue:SetTextColor(playerClassColor.r, playerClassColor.g, playerClassColor.b)
+
+			isVisible = true
+			inspectedWidth = row.inspectedValue:GetStringWidth()
+			playerWidth = row.playerValue:GetStringWidth()
+		else
+			local inspectedValue = inspectedStats[def.key] or 0
+			local playerValue = playerStats[def.key] or 0
+
+			isVisible = not (self.db.statistics.comparison.hideIfBothZero and inspectedValue == 0 and playerValue == 0)
+
+			if isVisible then
+				row.label:SetText(def.name)
+
+				local inspectedText, playerText = E:ShortValue(inspectedValue, 1), E:ShortValue(playerValue, 1)
+
+				if self.db.statistics.comparison.enable and playerValue > 0 and inspectedValue > 0 then
+					local diffText, isPositive = "", false
+
+					if def.diffType == "value" then
+						local diff = inspectedValue - playerValue
+						if diff ~= 0 then
+							isPositive = diff > 0
+							diffText = (isPositive and "+" or "") .. E:ShortValue(diff, 1)
+						end
+					elseif def.diffType == "percent" then
+						local diffPercent = ((inspectedValue - playerValue) / playerValue) * 100
+						if abs(diffPercent) >= 0.1 then
+							isPositive = diffPercent > 0
+							diffText = (isPositive and "+" or "") .. format("%.1f%%", diffPercent)
+						end
+					end
+
+					if diffText ~= "" then
+						local colorConfig = isPositive and self.db.statistics.comparison.higherColor
+							or self.db.statistics.comparison.lowerColor
+						inspectedText = format("%s %s", C.StringWithRGB(diffText, colorConfig), inspectedText)
+					end
+				end
+
+				row.inspectedValue:SetText(inspectedText)
+				row.playerValue:SetText(playerText)
+
+				local colorTemplate = def.color or row.groupColor ---@type ColorTemplate
+				row.label:SetTextColor(C.ExtractRGBFromTemplate(colorTemplate))
+				local inspectedColorTemplate = inspectedValue == 0 and "gray-500" or "neutral-50" ---@type ColorTemplate
+				row.inspectedValue:SetTextColor(C.ExtractRGBFromTemplate(inspectedColorTemplate))
+				local playerColorTemplate = playerValue == 0 and "gray-500" or "neutral-50" ---@type ColorTemplate
+				row.playerValue:SetTextColor(C.ExtractRGBFromTemplate(playerColorTemplate))
+
+				inspectedWidth, playerWidth = row.inspectedValue:GetStringWidth(), row.playerValue:GetStringWidth()
+			end
+		end
+
+		if isVisible then
+			tinsert(visibleRows, { row = row, groupIndex = row.groupIndex })
+
+			maxWidths.label = max(maxWidths.label, row.label:GetStringWidth())
+			maxWidths.inspected = max(maxWidths.inspected, inspectedWidth)
+			maxWidths.player = max(maxWidths.player, playerWidth)
+		end
+	end
+
+	maxWidths.label = maxWidths.label + 10
+	maxWidths.inspected = maxWidths.inspected + 10
+	maxWidths.player = maxWidths.player + 10
+
+	local yOffset = -STAT_PADDING
+	local separatorIndex = 1
+	local previousGroupIndex = nil
+
+	for _, rowData in ipairs(visibleRows) do
+		local row = rowData.row
+		local currentGroupIndex = rowData.groupIndex
+
+		local needsSeparator = previousGroupIndex and currentGroupIndex ~= previousGroupIndex
+
+		if needsSeparator and frame.separators[separatorIndex] then
+			yOffset = yOffset - STAT_ROW_SEPARATOR_SPACING
+			local separator = frame.separators[separatorIndex]
+			separator:ClearAllPoints()
+			separator:Point("TOPLEFT", frame, "TOPLEFT", STAT_PADDING, yOffset)
+			separator:Point("TOPRIGHT", frame, "TOPRIGHT", -STAT_PADDING, yOffset)
+			separator:Show()
+			separatorIndex = separatorIndex + 1
+			yOffset = yOffset - 1 - STAT_ROW_SEPARATOR_SPACING
+		end
+
+		row:ClearAllPoints()
+		row:Point("TOPLEFT", frame, "TOPLEFT", STAT_PADDING, yOffset)
+		row:Point("TOPRIGHT", frame, "TOPRIGHT", -STAT_PADDING, yOffset)
+
+		row.label:Width(maxWidths.label)
+		row.inspectedValue:Width(maxWidths.inspected)
+		row.playerValue:Width(maxWidths.player)
+
+		row.inspectedValue:ClearAllPoints()
+		row.playerValue:ClearAllPoints()
+		row.inspectedValue:Point("LEFT", row.label, "RIGHT", 5, 0)
+		row.playerValue:Point("LEFT", row.inspectedValue, "RIGHT", 5, 0)
+
+		row:Show()
+		yOffset = yOffset - STAT_ROW_HEIGHT
+		previousGroupIndex = currentGroupIndex
+	end
+
+	for i = separatorIndex, #frame.separators do
+		frame.separators[i]:Hide()
+	end
+
+	for _, row in ipairs(frame.rows) do
+		local isVisible = false
+		for _, rowData in ipairs(visibleRows) do
+			if row == rowData.row then
+				isVisible = true
+				break
+			end
+		end
+		if not isVisible then
+			row:Hide()
+		end
+	end
+
+	local contentHeight = -yOffset + STAT_PADDING
+	local totalWidth = maxWidths.label + maxWidths.inspected + maxWidths.player + 40
+	frame:Size(totalWidth, contentHeight)
+	frame:Show()
 end
 
 function I:ShowAllPlayerPanels()
@@ -920,8 +1308,13 @@ function I:ShowAllPlayerPanels()
 end
 
 function I:ShowInspectPanels(unit, itemLevel)
-	local frame = self:ShowPanel(unit, _G.InspectFrame, itemLevel)
-	self:ShowPanel("player", frame, E:GetUnitItemLevel("player"))
+	local inspectedFrame = self:ShowPanel(unit, _G.InspectFrame, itemLevel)
+	local playerFrame = self:ShowPanel("player", inspectedFrame, E:GetUnitItemLevel("player"))
+
+	if self.db.statistics.enable and playerFrame then
+		local statsFrame = self:CreateStatsComparePanel(playerFrame)
+		self:UpdateStatsComparePanel(statsFrame, unit, itemLevel)
+	end
 end
 
 function I:NotifyInspect(unit)

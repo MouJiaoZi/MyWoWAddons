@@ -1,7 +1,6 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable, PrivateDB, ProfileDB, GlobalDB
 local options = W.options.tooltips.args
 local C = W.Utilities.Color
-local T = W.Modules.Tooltips
 local LFGPI = W.Utilities.LFGPlayerInfo
 
 local format = format
@@ -9,6 +8,8 @@ local ipairs = ipairs
 local pairs = pairs
 local strsplit = strsplit
 local tonumber = tonumber
+
+local PlayerIsTimerunning = PlayerIsTimerunning
 
 local cache = {
 	groupInfo = {},
@@ -526,6 +527,13 @@ do
 		end
 	end
 end
+
+F.TaskManager:AfterLogin(function()
+	if PlayerIsTimerunning() then
+		-- Remove options for Legion Remix
+		options.progression.args.mythicPlus = nil
+	end
+end)
 
 options.keystone = {
 	order = 5,

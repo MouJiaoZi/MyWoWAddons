@@ -2,7 +2,7 @@ local E, _, V, P, G = unpack(ElvUI)
 local addonName, addon = ...
 local EP = E.Libs.EP
 local AceAddon = E.Libs.AceAddon
-local L = E.Libs.ACL:GetLocale("ElvUI", E.global.general.locale)
+local L = E.Libs.ACL--[[@as AceLocale-3.0]]:GetLocale("ElvUI", E.global.general.locale)
 
 local _G = _G
 local collectgarbage = collectgarbage
@@ -25,7 +25,7 @@ G.WT = {} ---@class GlobalDB
 addon[1] = W
 addon[2] = {} ---@class Functions
 addon[3] = E
-addon[4] = L
+addon[4] = L ---@alias LocaleTable table<string, string>
 addon[5] = V.WT
 addon[6] = P.WT
 addon[7] = G.WT
@@ -118,8 +118,15 @@ function W:Initialize()
 	self:UpdateScripts()
 	self:InitializeModules()
 
-	-- To avoid the update tips from ElvUI when alpha/beta version is used
+	-- To avoid the update tips from ElvUI when alpha/beta versions are used
 	EP:RegisterPlugin(addonName, W.OptionsCallback, false, xVersionString)
+
+	-- Fix the bug that locale files loaded after option table is created
+	local pluginTitle = L["Plugins"]
+	W:SecureHook(EP, "GetPluginOptions", function()
+		E.Options.args.plugins.name = pluginTitle
+	end)
+
 	self:SecureHook(E, "UpdateAll", "UpdateModules")
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 end
@@ -166,6 +173,7 @@ do
 			end
 		end
 
+		self:HookUIError()
 		self:GameFixing()
 
 		E:Delay(1, collectgarbage, "collect")

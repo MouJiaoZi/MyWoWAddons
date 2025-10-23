@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local OT = W:NewModule("ObjectiveTracker", "AceHook-3.0", "AceEvent-3.0") ---@class ObjectiveTracker : AceModule, AceHook-3.0, AceEvent-3.0
 local C = W.Utilities.Color
 local S = W.Modules.Skins
@@ -384,10 +384,6 @@ function OT:ObjectiveTrackerModule_AddBlock(tracker, block)
 
 	if not self:IsHooked(block, "AddObjective") then
 		self:SecureHook(block, "AddObjective", "ObjectiveTrackerBlock_AddObjective")
-	end
-
-	if not (block.HeaderText or block.Text) then
-		F.Developer.LogDebug("Tracker block has no header or text:", tracker and tracker:GetDebugName())
 	end
 
 	self:HandleBlockHeader(block)

@@ -168,7 +168,11 @@ G.Encounters[2411] = {
 					update = function(self, event, ...)
 						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, sourceGUID, _, _, _, _, _, _, _, spellID, _, _, extraSpellId = CombatLogGetCurrentEventInfo()
-							if sub_event == "SPELL_DISPEL" and extraSpellId == 1236513 and sourceGUID == G.PlayerGUID and self.count > 0 then
+							if sub_event == "SPELL_CAST_SUCCESS" and spellID == 1236512 then
+								C_Timer.After(12, function()
+									T.Stop_Text_Timer(self)
+								end)
+							elseif sub_event == "SPELL_DISPEL" and extraSpellId == 1236513 and sourceGUID == G.PlayerGUID and self.count > 0 then
 								T.Start_Text_DelayTimer(self, 8, L["驱散"], true)
 							elseif sub_event == "SPELL_AURA_APPLIED" and spellID == 1236513 then
 								self.count = self.count + 1

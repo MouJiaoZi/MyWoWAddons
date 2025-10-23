@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local C = W.Utilities.Color
 local M = W.Modules.Misc ---@class Misc
 
@@ -6,6 +6,8 @@ local _G = _G
 local gsub = gsub
 local hooksecurefunc = hooksecurefunc
 local strmatch = strmatch
+
+local C_Item_GetDetailedItemLevelInfo = C_Item.GetDetailedItemLevelInfo
 
 local cache = {}
 
@@ -23,7 +25,7 @@ local function ModifyGuildNews(button, _, text, name, link, ...)
 	end
 
 	if not cache[link] then
-		cache[link] = F.GetRealItemLevelByLink(link)
+		cache[link] = C_Item_GetDetailedItemLevelInfo(link)
 	end
 
 	if cache[link] then

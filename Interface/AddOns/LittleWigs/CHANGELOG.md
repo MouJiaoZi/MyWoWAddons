@@ -1,9 +1,8 @@
 # LittleWigs
 
-## [v11.2.37](https://github.com/BigWigsMods/LittleWigs/tree/v11.2.37) (2025-10-09)
-[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.2.36...v11.2.37) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
+## [v11.2.39](https://github.com/BigWigsMods/LittleWigs/tree/v11.2.39) (2025-10-22)
+[Full Changelog](https://github.com/BigWigsMods/LittleWigs/compare/v11.2.38...v11.2.39) [Previous Releases](https://github.com/BigWigsMods/LittleWigs/releases)
 
-- Legion/VaultOfTheWardens/Ashgolm: Fix invalid journal ID error  
-- Legion/EyeOfAzshara/Trash: Filter RP casts, sound updates  
-- Legion/HallsOfValor/Trash: Throttle Charged Pulse  
-- Legion/HallsOfValor/God-KingSkovald: Delay Odyn enablement on win, fixes #1433  
+- Bump min version  
+- Bump toc  
+- Conditionally load locale files on Vanilla (#1434)  

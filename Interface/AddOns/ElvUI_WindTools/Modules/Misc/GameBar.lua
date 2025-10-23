@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local S = W.Modules.Skins ---@type Skins
 local GB = W:NewModule("GameBar", "AceEvent-3.0", "AceHook-3.0")
 local DT = E:GetModule("DataTexts")
@@ -42,6 +42,7 @@ local IsModifierKeyDown = IsModifierKeyDown
 local IsShiftKeyDown = IsShiftKeyDown
 local PlaySound = PlaySound
 local PlayerHasToy = PlayerHasToy
+local PlayerIsTimerunning = PlayerIsTimerunning
 local RegisterStateDriver = RegisterStateDriver
 local ResetCPUUsage = ResetCPUUsage
 local Screenshot = Screenshot
@@ -67,17 +68,16 @@ local C_Timer_NewTicker = C_Timer.NewTicker
 local C_ToyBox_IsToyUsable = C_ToyBox.IsToyUsable
 local C_UI_Reload = C_UI.Reload
 
+local Enum_CovenantType = Enum.CovenantType
 local FollowerType_8_0 = Enum.GarrisonFollowerType.FollowerType_8_0_GarrisonFollower
 local FollowerType_9_0 = Enum.GarrisonFollowerType.FollowerType_9_0_GarrisonFollower
-local Enum_CovenantType = Enum.CovenantType
+local RED_FONT_COLOR = RED_FONT_COLOR
 
 local NUM_PANEL_BUTTONS = 7
-local IconString = "|T%s:16:18:0:0:64:64:4:60:7:57"
-local LeftButtonIcon = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:230:307|t"
-local RightButtonIcon = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:333:410|t"
-local ScrollButtonIcon = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:127:204|t"
-
-local RED_FONT_COLOR = RED_FONT_COLOR
+local ICON_STRING = "|T%s:16:18:0:0:64:64:4:60:7:57"
+local LEFT_BUTTON_ICON = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:230:307|t"
+local RIGHT_BUTTON_ICON = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:333:410|t"
+local SCROLL_BUTTON_ICON = "|TInterface\\TUTORIALFRAME\\UI-TUTORIAL-FRAME:13:11:0:-1:512:512:12:66:127:204|t"
 
 local friendOnline = gsub(_G.ERR_FRIEND_ONLINE_SS, "\124Hplayer:%%s\124h%[%%s%]\124h", "")
 local friendOffline = gsub(_G.ERR_FRIEND_OFFLINE_S, "%%s", "")
@@ -157,6 +157,7 @@ local hearthstoneAndToyIDList = {
 	140192, -- 達拉然爐石
 	141605, -- 飛行管理員的哨子
 	180817, -- 移轉暗語
+	250411, -- 時光奔走者的爐石 (Remix)
 	-- Engineering Wormholes
 	-- https://www.wowhead.com/items/name:Generator?filter=86:195;5:2;0:0
 	18984, -- 空間撕裂器 - 永望鎮
@@ -321,7 +322,7 @@ local function AddDoubleLineForItem(itemID, prefix)
 		return
 	end
 
-	local icon = format(IconString .. ":255:255:255|t", data.icon)
+	local icon = format(ICON_STRING .. ":255:255:255|t", data.icon)
 	local startTime, duration = C_Item_GetItemCooldown(itemID)
 	local cooldownTime = startTime + duration - GetTime()
 	local canUse = cooldownTime <= 0
@@ -455,8 +456,8 @@ local ButtonTypes = {
 		tooltips = {
 			L["Collections"],
 			"\n",
-			LeftButtonIcon .. " " .. L["Show Collections"],
-			RightButtonIcon .. " " .. L["Random Favorite Mount"],
+			LEFT_BUTTON_ICON .. " " .. L["Show Collections"],
+			RIGHT_BUTTON_ICON .. " " .. L["Random Favorite Mount"],
 		},
 	},
 	ENCOUNTER_JOURNAL = {
@@ -467,8 +468,8 @@ local ButtonTypes = {
 			RightButton = "/run WeeklyRewards_ShowUI()",
 		},
 		tooltips = {
-			LeftButtonIcon .. " " .. L["Encounter Journal"],
-			RightButtonIcon .. " " .. L["Weekly Rewards"],
+			LEFT_BUTTON_ICON .. " " .. L["Encounter Journal"],
+			RIGHT_BUTTON_ICON .. " " .. L["Weekly Rewards"],
 		},
 	},
 	FRIENDS = {
@@ -578,7 +579,7 @@ local ButtonTypes = {
 		icon = W.Media.Icons.barGuild,
 		macro = {
 			LeftButton = "/click GuildMicroButton",
-			RightButton = "/script if not InCombatLockdown() then if not GuildFrame or not GuildFrame:IsShown() then ToggleGuildFrame() end end",
+			RightButton = "/script if not InCombatLockdown() then ToggleGuildFrame() end",
 		},
 		additionalText = function()
 			return IsInGuild() and select(2, GetNumGuildMembers()) or ""
@@ -598,21 +599,20 @@ local ButtonTypes = {
 		icon = W.Media.Icons.barHome,
 		item = {},
 		tooltips = function(button)
-			DT.tooltip:ClearLines()
-			DT.tooltip:SetText(L["Home"])
-			DT.tooltip:AddLine("\n")
-			AddDoubleLineForItem(GB.db.home.left, LeftButtonIcon)
-			AddDoubleLineForItem(GB.db.home.right, RightButtonIcon)
-			DT.tooltip:Show()
-
-			button.tooltipsUpdateTimer = C_Timer_NewTicker(1, function()
+			local function Update()
 				DT.tooltip:ClearLines()
 				DT.tooltip:SetText(L["Home"])
 				DT.tooltip:AddLine("\n")
-				AddDoubleLineForItem(GB.db.home.left, LeftButtonIcon)
-				AddDoubleLineForItem(GB.db.home.right, RightButtonIcon)
+				AddDoubleLineForItem(GB.db.home.left, LEFT_BUTTON_ICON)
+				if PlayerIsTimerunning() then
+					AddDoubleLineForItem(250411, SCROLL_BUTTON_ICON)
+				end
+				AddDoubleLineForItem(GB.db.home.right, RIGHT_BUTTON_ICON)
 				DT.tooltip:Show()
-			end)
+			end
+
+			button.tooltipsUpdateTimer = C_Timer_NewTicker(1, Update)
+			Update()
 		end,
 		tooltipsLeave = function(button)
 			if button.tooltipsUpdateTimer and button.tooltipsUpdateTimer.Cancel then
@@ -648,8 +648,8 @@ local ButtonTypes = {
 		tooltips = {
 			L["Pet Journal"],
 			"\n",
-			LeftButtonIcon .. " " .. L["Show Pet Journal"],
-			RightButtonIcon .. " " .. L["Random Favorite Pet"],
+			LEFT_BUTTON_ICON .. " " .. L["Show Pet Journal"],
+			RIGHT_BUTTON_ICON .. " " .. L["Random Favorite Pet"],
 		},
 	},
 	PROFESSION = {
@@ -685,8 +685,8 @@ local ButtonTypes = {
 		tooltips = {
 			L["Screenshot"],
 			"\n",
-			LeftButtonIcon .. " " .. L["Screenshot immediately"],
-			RightButtonIcon .. " " .. L["Screenshot after 2 secs"],
+			LEFT_BUTTON_ICON .. " " .. L["Screenshot immediately"],
+			RIGHT_BUTTON_ICON .. " " .. L["Screenshot after 2 secs"],
 		},
 	},
 	SPELLBOOK = {
@@ -756,9 +756,9 @@ local ButtonTypes = {
 			DT.tooltip:ClearLines()
 			DT.tooltip:SetText(L["Volume"] .. format(": %d%%", volNum * 100))
 			DT.tooltip:AddLine("\n")
-			DT.tooltip:AddLine(LeftButtonIcon .. " " .. L["Increase the volume"] .. " (+10%)", 1, 1, 1)
-			DT.tooltip:AddLine(RightButtonIcon .. " " .. L["Decrease the volume"] .. " (-10%)", 1, 1, 1)
-			DT.tooltip:AddLine(ScrollButtonIcon .. " " .. L["Sound ON/OFF"], 1, 1, 1)
+			DT.tooltip:AddLine(LEFT_BUTTON_ICON .. " " .. L["Increase the volume"] .. " (+10%)", 1, 1, 1)
+			DT.tooltip:AddLine(RIGHT_BUTTON_ICON .. " " .. L["Decrease the volume"] .. " (-10%)", 1, 1, 1)
+			DT.tooltip:AddLine(SCROLL_BUTTON_ICON .. " " .. L["Sound ON/OFF"], 1, 1, 1)
 			DT.tooltip:Show()
 
 			button.tooltipsUpdateTimer = C_Timer_NewTicker(0.3, function()
@@ -767,9 +767,9 @@ local ButtonTypes = {
 				DT.tooltip:ClearLines()
 				DT.tooltip:SetText(L["Volume"] .. format(": %d%%", _volNum * 100))
 				DT.tooltip:AddLine("\n")
-				DT.tooltip:AddLine(LeftButtonIcon .. " " .. L["Increase the volume"] .. " (+10%)", 1, 1, 1)
-				DT.tooltip:AddLine(RightButtonIcon .. " " .. L["Decrease the volume"] .. " (-10%)", 1, 1, 1)
-				DT.tooltip:AddLine(ScrollButtonIcon .. " " .. L["Sound ON/OFF"], 1, 1, 1)
+				DT.tooltip:AddLine(LEFT_BUTTON_ICON .. " " .. L["Increase the volume"] .. " (+10%)", 1, 1, 1)
+				DT.tooltip:AddLine(RIGHT_BUTTON_ICON .. " " .. L["Decrease the volume"] .. " (-10%)", 1, 1, 1)
+				DT.tooltip:AddLine(SCROLL_BUTTON_ICON .. " " .. L["Sound ON/OFF"], 1, 1, 1)
 				DT.tooltip:Show()
 			end)
 		end,
@@ -930,9 +930,9 @@ function GB:ConstructTimeArea()
 			end)
 
 			DT.tooltip:AddLine("\n")
-			DT.tooltip:AddDoubleLine(format("%s %s", LeftButtonIcon, L["Left Button"]), L["Calendar"], 1, 1, 1)
-			DT.tooltip:AddDoubleLine(format("%s %s", RightButtonIcon, L["Right Button"]), L["Time Manager"], 1, 1, 1)
-			DT.tooltip:AddDoubleLine(format("%s %s", ScrollButtonIcon, L["Middle Button"]), L["Reload UI"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("%s %s", LEFT_BUTTON_ICON, L["Left Button"]), L["Calendar"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("%s %s", RIGHT_BUTTON_ICON, L["Right Button"]), L["Time Manager"], 1, 1, 1)
+			DT.tooltip:AddDoubleLine(format("%s %s", SCROLL_BUTTON_ICON, L["Middle Button"]), L["Reload UI"], 1, 1, 1)
 			DT.tooltip:AddDoubleLine(format("Shift + %s", L["Any"]), L["Collect Garbage"], 1, 1, 1)
 			DT.tooltip:AddDoubleLine(format("Ctrl + Shift + %s", L["Any"]), L["Toggle CPU Profiling"], 1, 1, 1)
 
@@ -1180,11 +1180,14 @@ function GB:UpdateButton(button, buttonType)
 		button:SetAttribute("type*", "macro")
 		self:UpdateHomeButtonMacro(button, "left", config.item.item1)
 		self:UpdateHomeButtonMacro(button, "right", config.item.item2)
+		-- Legion Remix Hearthstone (250411)
+		button:SetAttribute("macrotext3", PlayerIsTimerunning() and "/use item:250411" or "")
 		tinsert(self.HomeButtons, button)
 	elseif config.macro then
 		button:SetAttribute("type*", "macro")
 		button:SetAttribute("macrotext1", config.macro.LeftButton or "")
 		button:SetAttribute("macrotext2", config.macro.RightButton or config.macro.LeftButton or "")
+		button:SetAttribute("macrotext3", "")
 	elseif config.click then
 		button.Click = function(_, mouseButton)
 			local func = mouseButton and config.click[mouseButton] or config.click.LeftButton

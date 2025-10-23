@@ -22,7 +22,7 @@ VER 3 01000000000000AD "1" "INV_Misc_QuestionMark"
 END
 VER 3 01000000000000AE "1" "INV_Misc_QuestionMark"
 #showtooltip
-/cast 迅如猛虎
+/cast [@mouseover,exists]迅如猛虎; [@player] 迅如猛虎
 END
 VER 3 01000000000000AF "1" "INV_Misc_QuestionMark"
 #showtooltips

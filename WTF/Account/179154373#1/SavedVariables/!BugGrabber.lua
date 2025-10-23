@@ -1,7 +1,7 @@
 
 BugGrabberDB = {
-["session"] = 4,
 ["lastSanitation"] = 3,
+["session"] = 7,
 ["errors"] = {
 {
 ["message"] = "|cff5385edW|r|cff5192ebi|r|cff4e9fe8n|r|cff4bace5d|r |cff49b8e3工|r|cff42d3dd具|r|cff41d7dd箱|r |cffff2457[ERROR]|r\n...ls/Modules/Skins/Addons/AdvancedInterfaceOptions.lua:28: attempt to index local 'frame' (a nil value)",

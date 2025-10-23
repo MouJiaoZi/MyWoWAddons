@@ -5,8 +5,10 @@
 	<Script file='BigWigs.lua'/>
 	<Script file='BtWQuests.lua'/>
 	<Script file='BugSack.lua'/>
+	<Script file='Collectionator.lua'/>
 	<Script file='Hekili.lua'/>
 	<Script file='Immersion.lua'/>
+	<Script file='LegionRemixHelper.lua'/>
 	<Script file='ManuscriptsJournal.lua'/>
 	<Script file='MountRoutePlanner.lua'/>
 	<Script file='MultiLanguage.lua'/>
@@ -14,6 +16,7 @@
 	<Script file='MythicDungeonTools.lua'/>
 	<Script file='OmniCD.lua'/>
 	<Script file='ParagonReputation.lua'/>
+	<Script file='Plumber.lua'/>
 	<Script file='Postal.lua'/>
 	<Script file='PremadeGroupFilter.lua'/>
 	<Script file='RaiderIO.lua'/>
@@ -25,6 +28,7 @@
 	<Script file='TalentLoadoutsEx.lua'/>
 	<Script file='TinyInspect.lua'/>
 	<Script file='TomCats.lua'/>
+	<Script file='TomTom.lua'/>
 	<Script file='WarpDeplete.lua'/>
 	<Script file='WeakAuras.lua'/>
 	<Script file='WeakAurasOptions.lua'/>

@@ -1,4 +1,4 @@
-local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table
+local W, F, E, L = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable
 local S = W.Modules.Skins ---@type Skins
 local MF = W.Modules.MoveFrames
 local ES = E:GetModule("Skins")
@@ -1057,6 +1057,13 @@ local function ReskinCanvas(frame)
 			GroupPicker.List.ScrollBox:ForEachFrame(ReskinButton)
 		end)
 		GroupPicker.List.ScrollBox:ForEachFrame(ReskinButton)
+	end
+
+	local Team = frame.Team
+	if Team and Team.ListButtonTeam then
+		Team.ListButtonTeam.Back:Kill()
+		Team.ListButtonTeam.Border:Kill()
+		Team.ListButtonTeam:CreateBackdrop("Transparent")
 	end
 
 	local TeamWithAbilities = frame.TeamWithAbilities

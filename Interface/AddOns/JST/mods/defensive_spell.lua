@@ -77,8 +77,8 @@ function GroupSpellFrame:lineup()
 	self:SetWidth(size*count + abs(space)*(count-1))
 end
 
-local function CreateGroupSpellIcon(updater, group, tag)
-	local icon = T.CreateSpellIconBase(GroupSpellFrame, tag)
+local function CreateGroupSpellIcon(updater, parent, tag)
+	local icon = T.CreateSpellIconBase(parent, tag)
 	
 	icon.target_text = T.createtext(icon, "OVERLAY", 12, "OUTLINE", "CENTER") -- 玩家名字
 	icon.target_text:SetPoint("BOTTOMLEFT", icon, "TOPLEFT", -2, -2)

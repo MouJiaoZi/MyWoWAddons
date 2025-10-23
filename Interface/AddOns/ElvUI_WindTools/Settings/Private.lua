@@ -1,5 +1,5 @@
 local V ---@class PrivateDB
-local W, F, E, L, P, G ---@type WindTools, Functions, ElvUI, table, ProfileDB, GlobalDB
+local W, F, E, L, P, G ---@type WindTools, Functions, ElvUI, LocaleTable, ProfileDB, GlobalDB
 W, F, E, L, V, P, G = unpack((select(2, ...)))
 
 ---@cast W WindTools
@@ -136,9 +136,10 @@ V.maps = {
 		backdropSpacing = 3,
 		spacing = 2,
 		inverseDirection = false,
+		reverseOrder = false,
 		orientation = "HORIZONTAL",
-		-- calendar = false,
 		expansionLandingPage = false,
+		sortingPriority = "^Expansion, _BugSack, WeakAuras$, _Saved, _Wind",
 	},
 }
 
@@ -346,6 +347,7 @@ V.skins = {
 	},
 	uiErrors = {
 		normalTextClassColor = false,
+		width = 1024,
 		normalTextColor = C.GetRGBFromTemplate("neutral-50"),
 		redTextColor = C.GetRGBFromTemplate("red-500"),
 		yellowTextColor = C.GetRGBFromTemplate("yellow-300"),
@@ -498,8 +500,10 @@ V.skins = {
 		bigWigsQueueTimer = true,
 		btWQuests = true,
 		bugSack = true,
+		collectionator = true,
 		hekili = true,
 		immersion = true,
+		legionRemixHelper = true,
 		manuscriptsJournal = true,
 		mountRoutePlanner = true,
 		multiLanguage = true,
@@ -510,6 +514,7 @@ V.skins = {
 		omniCDIcon = true,
 		omniCDStatusBar = true,
 		paragonReputation = true,
+		plumber = true,
 		postal = true,
 		premadeGroupsFilter = true,
 		raiderIO = true,
@@ -521,6 +526,7 @@ V.skins = {
 		talentLoadoutsEx = true,
 		tinyInspect = true,
 		tomCats = true,
+		tomTom = true,
 		warpDeplete = true,
 		weakAuras = true,
 		weakAurasOptions = true,
@@ -558,6 +564,7 @@ V.skins = {
 		clickBinding = true,
 		collections = true,
 		communities = true,
+		cooldownViewer = true,
 		covenantPreview = true,
 		covenantRenown = true,
 		covenantSanctum = true,
@@ -603,6 +610,7 @@ V.skins = {
 		professionsCustomerOrders = true,
 		quest = true,
 		raidInfo = true,
+		remixArtifact = true,
 		scenario = true,
 		scrappingMachine = true,
 		settingsPanel = true,

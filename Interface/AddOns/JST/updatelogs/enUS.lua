@@ -3,6 +3,24 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+6.18
+Dimensius Big/small circles assignment Phase 3 add "Pull against" or "Don't move" prompts.
+
+6.17
+Dimensius Big/small circles assignment adds option Phase 2 assignments rotate 90 degrees counterclockwise.
+Dimensius Big/small circles assignment Update Phase 3 map.
+
+6.15
+Salhadaar added Banishment timing circle.
+Dimensius Reverse Gravity arrangement prioritizes healers in the front row.
+Dimensius Excess Mass assignment bug fix.
+Text Alert (General) Font Size Correction.
+
+6.13
+Dimensius Excess Mass assignment bug fix.
+Dimensius The Airborne quantity is only displayed when player has Excess Mass.
+Other error corrections.
+
 6.10
 Halls of Atonement Echelon Stonefiend quantity monitor bug fix.
 The Dawnbreaker Nightfall Tactician removes the Black Edge dispeling sound prompt.

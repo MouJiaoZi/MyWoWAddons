@@ -1,7 +1,7 @@
 VER 3 000000000000000F " " "INV_MISC_QUESTIONMARK"
-#showtooltip item:142542
+#showtooltip item:54452
 #macro version 1
-/run if not InCombatLockdown() then RHT.b:SetAttribute("item","城镇传送之书") end
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","虚灵之门") end
 /click RHTB LeftButton
 END
 VER 3 0000000000000007 "1" "ABILITY_DUALWIELD"

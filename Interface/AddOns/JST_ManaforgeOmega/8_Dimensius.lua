@@ -17,6 +17,9 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["救人"] = "救人"
 	L["完成"] = "完成"
 	L["躲避"] = "躲避"
+	L["P2图形旋转90度"] = "P2图形逆时针旋转90度"
+	L["对抗"] = "对抗"
+	L["不对抗"] = "不对抗"
 elseif G.Client == "ruRU" then
 	L["易伤前喊话"] = "Атакуем его! Сейчас!"
 	--L["捡球"] = "Pickup"
@@ -29,6 +32,9 @@ elseif G.Client == "ruRU" then
 	--L["救人"] = "Rescue"
 	--L["完成"] = "Done"
 	--L["躲避"] = "Hide"
+	--L["P2图形旋转90度"] = "Phase 2 assignments rotate 90 degrees counterclockwise."
+	--L["对抗"] = "Pull against"
+	--L["不对抗"] = "Don't move"
 else
 	L["易伤前喊话"] = "We must strike--now!"
 	L["捡球"] = "Pickup"
@@ -41,6 +47,9 @@ else
 	L["救人"] = "Rescue"
 	L["完成"] = "Done"
 	L["躲避"] = "Hide"
+	L["P2图形旋转90度"] = "Phase 2 assignments rotate 90 degrees counterclockwise."
+	L["对抗"] = "Pull against"
+	L["不对抗"] = "Don't move"
 end
 ---------------------------------Notes--------------------------------
 
@@ -348,6 +357,7 @@ G.Encounters[2691] = {
 					points = {a1 = "TOPLEFT", a2 = "CENTER", x = -700, y = 190},
 					events = {
 						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						["JST_CUSTOM"] = true,
 					},
 					custom = {
 						{
@@ -395,6 +405,7 @@ G.Encounters[2691] = {
 						frame.debuff1 = 1243577
 						frame.debuff2 = 1243609
 						frame.debuff3 = 1228206
+						frame.phase2 = false
 						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
@@ -720,6 +731,7 @@ G.Encounters[2691] = {
 						end
 						
 						function frame:InitAssignment()
+							if frame.phase2 then return end
 							for unit in T.IterateGroupMembers() do
 								if AuraUtil.FindAuraBySpellID(self.debuff3, unit, "HARMFUL") then
 									local GUID = UnitGUID(unit)
@@ -739,6 +751,7 @@ G.Encounters[2691] = {
 							for GUID, bar in pairs(self.bars) do
 								bar:Hide()
 							end
+							self.bars = table.wipe(self.bars)
 							self:lineup()
 						end
 						
@@ -749,7 +762,8 @@ G.Encounters[2691] = {
 												
 						function frame:PreAssign()
 							self.pre_assigned = table.wipe(self.pre_assigned)
-        
+							
+							if frame.phase2 then return end
 							for set = 1, 2 do
 								self.pre_assigned[set] = {}
 								
@@ -788,6 +802,7 @@ G.Encounters[2691] = {
 						end
 						
 						function frame:BackupAssign()
+							if frame.phase2 then return end
 							for set = 1, 2 do
 								local need = self.count%2 == 1 and 2 or 4
 								local current = self:GetActiveNum(set)
@@ -842,7 +857,15 @@ G.Encounters[2691] = {
 						end
 					end,
 					update = function(frame, event, ...)
-						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+						if event == "JST_CUSTOM" then
+							local id = ...
+							
+							if id == frame.config_id then
+								frame:InitAssignment()
+								frame:PreAssign() -- 第一次分配
+							end
+							
+						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
 							local _, sub_event, _, _, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()							
 							if sub_event == "SPELL_CAST_START" and spellID == 1230087 then -- 千钧猛击
 								frame.count = frame.count + 1
@@ -850,11 +873,11 @@ G.Encounters[2691] = {
 								frame:Remove()
 								
 								C_Timer.After(12, function()
-									frame:InitAssignment()
-									frame:PreAssign() -- 第一次分配
+									T.FireEvent("JST_CUSTOM", frame.config_id)
 								end)
 								
 							elseif sub_event == "SPELL_CAST_START" and spellID == 1234898 then -- 黑洞视界
+								frame.phase2 = true
 								frame:ClearAssignments()
 								frame:Remove()
 							
@@ -909,6 +932,7 @@ G.Encounters[2691] = {
 							frame.count = 0
 							frame.last_cast = 0
 							frame.my_set = 0
+							frame.phase2 = false
 							frame.bars = table.wipe(frame.bars)
 							
 							frame:ReadNote()
@@ -934,20 +958,25 @@ G.Encounters[2691] = {
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 1)
 						
 						function frame:UpdateCount()
-							if self.count == 3 then
-								self.sound_enable = true
-							end
-							
-							if self.count > 0 then
-								self.text_frame.text:SetText(string.format("%s |cffffff00%d|r", L["救人"], self.count))
-								self.text_frame:Show()
-								if self.sound_enable then
-									T.PlaySound("count\\"..self.count)
+							if AuraUtil.FindAuraBySpellID(1228206, "player", "HARMFUL") then
+								if self.count == 3 then
+									self.sound_enable = true
 								end
-							else
-								T.Start_Text_Timer(self.text_frame, 1, string.format("%s |cff00ff00%s|r", L["救人"], L["完成"]))
-								T.PlaySound("1302\\done")
+								
+								if self.count > 0 then
+									self.text_frame.text:SetText(string.format("%s |cffffff00%d|r", L["救人"], self.count))
+									self.text_frame:Show()
+									if self.sound_enable then
+										T.PlaySound("count\\"..self.count)
+									end
+								else
+									T.Start_Text_Timer(self.text_frame, 1, string.format("%s |cff00ff00%s|r", L["救人"], L["完成"]))
+									T.PlaySound("1302\\done")
+									self.sound_enable = false
+								end
+							elseif self.text_frame:IsShown() then
 								self.sound_enable = false
+								self.text_frame:Hide()
 							end
 						end
 					end,
@@ -1545,7 +1574,27 @@ G.Encounters[2691] = {
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
 						function frame:Assign()
-							T.SortTableMobility(self.affected)
+							 table.sort(self.affected, function (GUID1, GUID2)
+								if not GUID1 then return false end
+								if not GUID2 then return true end
+								
+								local info1 = T.GetGroupInfobyGUID(GUID1)
+								local info2 = T.GetGroupInfobyGUID(GUID2)
+								
+								local class1, role1 = info1.class, info1.role
+								local class2, role2 = info2.class, info2.role
+								
+								local mobility1 = G.classMobility[class1]
+								local mobility2 = G.classMobility[class2]
+								
+								if role1 ~= role2 then
+									return role1 > role2 -- T H D
+								elseif mobility1 ~= mobility2 then
+									return mobility1 < mobility2
+								else
+									return GUID1 < GUID2
+								end
+							end)
 							
 							for index, GUID in pairs(self.affected) do
 								local data = self.info[index]
@@ -1899,7 +1948,7 @@ G.Encounters[2691] = {
 		{ -- 倾压引力/引力倒转
 			spells = {				
 				{1234243},--【倾压引力】
-				{1234244},--【引力倒转】	
+				{1234244},--【引力倒转】
 			},
 			options = {
 				{ -- 文字 引力倒转 倒计时（?）
@@ -1934,7 +1983,7 @@ G.Encounters[2691] = {
 							
 						elseif event == "UNIT_AURA_ADD" then
 							local unit, spellID = ...
-							if spellID == 1243577 and GetTime() - self.last_cast > 1 then
+							if spellID == 1234244 and GetTime() - self.last_cast > 1 then
 								self.last_cast = GetTime()
 								self.next_count = self.next_count + 1
 								
@@ -2058,6 +2107,14 @@ G.Encounters[2691] = {
 								alert:SetScale(value/100)
 							end,
 						},
+						{
+							key = "rotate_bool",
+							text = L["P2图形旋转90度"],
+							default = false,
+							apply = function(value, alert)
+								alert:UpdatePreviewInfo()
+							end,
+						},
 					},
 					init = function(frame)
 						frame.affected = {}
@@ -2096,6 +2153,75 @@ G.Encounters[2691] = {
 									H = {0 , 0},
 									R = {0 , -1.1},
 									bg = {-.6, 1.6, .6, -1.6},
+								},
+							},
+							[3] = {
+								{ -- 1
+									M = {-1.1 , 0.3},
+									H = {0, -0.3},
+									R = {1.1 , 0.3},
+									bg = {-1.7, 1, 1.7, -1},
+								},
+								{ -- 2
+									M = {1.2 , 0.6},
+									H = {1.2, -0.6},
+									R = {0, -0.6},
+									arrow = {-1.3, 0, 270},
+									bg = {-2, 1.2, 2, -1.2},
+								},
+								{ -- 3
+									M = {1.2 , 0.6},
+									H = {1.2, -0.6},
+									R = {0 , -0.6},
+									arrow = {-1.3, 0, 270},
+									bg = {-2, 1.2, 2, -1.2},
+								},
+								{ -- 4
+									M = {1.8 , 0.4},
+									H = {0, -0.4},
+									R = {-1.8, 0.4},
+									arrow = {.3, .9, 150},
+									circle1 = {-.9, .1},
+									circle2 = {.9, .1},
+									bg = {-2.4, 1.5, 2.4, -1.1},
+								},
+								{ -- 5
+									M = {1.8 , 0.4},
+									H = {0, -0.4},
+									R = {-1.8 , 0.4},
+									arrow = {.3, .9, 150},
+									circle1 = {-.9, .1},
+									circle2 = {.9, .1},
+									bg = {-2.4, 1.5, 2.4, -1.1},
+								},
+							},
+						}
+						
+						local INVERSE_POSITIONS_ROTATE = {
+							[2] = {
+								{ -- 1
+									M = {-1.1 , 0},
+									H = {0 , 0},
+									R = {1.1 , 0},
+									bg = {-1.6, .6, 1.6, -.6},
+								},
+								{ -- 2
+									M = {-0.55, 0.55},
+									H = {-0.55, -0.55},
+									R = {0.55, 0.55},
+									bg = {-1.2, 1.2, 1.2, -1.2},
+								},    
+								{ -- 3
+									M = {-0.6, 0.45},
+									H = {0, -0.45},
+									R = {0.6, 0.45},
+									bg = {-1.5, 1.1, 1.5, -1.1},
+								},
+								{ -- 4
+									M = {-1.1, 0},
+									H = {0, 0},
+									R = {1.1, 0},
+									bg = {-1.6, 0.6, 1.6, -0.6},
 								},
 							},
 							[3] = {
@@ -2139,7 +2265,7 @@ G.Encounters[2691] = {
 								},
 							},
 						}
-					
+						
 						frame.text_frame = T.CreateAlertTextShared("bossmod"..frame.config_id, 2)
 						
 						frame.graph_bg = CreateFrame("Frame", nil, frame)
@@ -2177,7 +2303,10 @@ G.Encounters[2691] = {
 							tex:SetTexture(info.tex)
 							frame.graphs[k] = tex
 						end
-												
+						
+						frame.tip_text = T.createtext(frame.graph_bg, "OVERLAY", 26, "OUTLINE", "CENTER")
+						frame.tip_text:SetPoint("TOP", frame.graphs.bg, "BOTTOM", 0, 0)
+						
 						function frame:ReadPhaseNote(tag, display)
 							local indexNumber = 0
 							
@@ -2253,7 +2382,13 @@ G.Encounters[2691] = {
 						end
 						
 						function frame:Display(isInverse, phase, set, myIndex, preview)
-							local inversePositions = INVERSE_POSITIONS[phase][set]
+							local inversePositions
+							
+							if C.DB["BossMod"][self.config_id]["rotate_bool"] then
+								inversePositions = INVERSE_POSITIONS_ROTATE[phase][set]
+							else
+								inversePositions = INVERSE_POSITIONS[phase][set]
+							end
 							
 							if inversePositions then
 								for index, data in ipairs(self.info) do
@@ -2305,6 +2440,8 @@ G.Encounters[2691] = {
 											local y1 = info[2]*INVERSE_SIZE
 											local x2 = info[3]*INVERSE_SIZE
 											local y2 = info[4]*INVERSE_SIZE
+											
+											tex:ClearAllPoints()
 											tex:SetPoint("TOPLEFT", self.graph_bg, "CENTER", x1, y1)
 											tex:SetPoint("BOTTOMRIGHT", self.graph_bg, "CENTER", x2, y2)
 										end
@@ -2313,6 +2450,35 @@ G.Encounters[2691] = {
 									else
 										tex:Hide()
 									end
+								end
+								
+								local action
+								
+								if phase == 3 then
+									if set == 1 then
+										if myIndex == 3 then
+											action = "dontmove" -- 远程
+										else
+											action = "pullagainst" -- 近战 治疗
+										end
+									elseif set == 2 or set == 3 then
+										action = "dontmove"
+									elseif set == 4 or set == 5 then
+										action = "pullagainst"
+									end
+								end
+								
+								if action then
+									frame.tip_text:SetText(action == "dontmove" and L["不对抗"] or L["对抗"])
+									frame.tip_text:Show()
+									
+									if not preview then
+										C_Timer.After(.8, function()
+											T.PlaySound("1302\\"..action)
+										end)
+									end
+								else
+									frame.tip_text:Hide()
 								end
 								
 								return true

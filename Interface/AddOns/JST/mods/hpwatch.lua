@@ -59,6 +59,7 @@ local PersonalSpell_class = {
 	DEATHKNIGHT = {
 		48707, -- 反魔法护罩
 		48792, -- 冰封之韧
+		49039, -- 巫妖之躯
 	},
 	MONK = {
 		116849, -- 作茧缚命
@@ -328,8 +329,8 @@ T.AddGeneralHPCheck = function()
 	end
 end
 
-local function CreatePersonalSpellIcon(updater, group, tag)
-	local icon = T.CreateSpellIconBase(PersonalSpellFrame, tag)
+local function CreatePersonalSpellIcon(updater, parent, tag)
+	local icon = T.CreateSpellIconBase(parent, tag)
 
 	icon.dur_text = T.createtext(icon, "OVERLAY", 14, "OUTLINE", "CENTER") -- 持续时间
 	icon.dur_text:SetPoint("TOP", icon, "BOTTOM", 0, -2)
@@ -600,8 +601,10 @@ PersonalBuff_Updater:SetScript("OnEvent", function(self, event, ...)
 			if not self.actives_bytag["buff"..auraID] then
 				local icon = self:GetAlert(1, "buff"..auraID)
 				local aura_data = C_UnitAuras.GetAuraDataByAuraInstanceID("player", auraID)
-				icon:init_buff_display(spellID)
-				icon:display_dur(aura_data.expirationTime)
+				if aura_data then
+					icon:init_buff_display(spellID)
+					icon:display_dur(aura_data.expirationTime)
+				end
 			end
 		end
 	elseif event == "UNIT_AURA_UPDATE" then

@@ -1,4 +1,4 @@
-﻿## Interface: 110200
+﻿## Interface: 110205
 ## Title: |cffff0000Jingsi|r Tools SoundPack CN
 ## Title-zhCN: |cffff0000静思|r 副本助手 中文语音包
 ## Version: 1.00

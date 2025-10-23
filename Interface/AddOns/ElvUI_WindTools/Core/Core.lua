@@ -1,5 +1,5 @@
 local W ---@class WindTools
-local F, E, L ---@type Functions, ElvUI, table
+local F, E, L ---@type Functions, ElvUI, LocaleTable
 W, F, E, L = unpack((select(2, ...)))
 local C = W.Utilities.Color ---@type ColorUtility
 
@@ -245,6 +245,11 @@ function W:GameFixing()
 		else
 			self:RegisterEvent("ADDON_LOADED")
 		end
+	end
+
+	if E.global.WT.core.fixSetPassThroughButtons then
+		_G.QuestPinMixin.SetPassThroughButtons = E.noop
+		_G.BonusObjectivePinMixin.SetPassThroughButtons = E.noop
 	end
 end
 

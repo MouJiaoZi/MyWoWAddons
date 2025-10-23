@@ -1,4 +1,4 @@
-﻿## Interface: 110200
+﻿## Interface: 110205
 ## Title: |cffff0000Jingsi|r Tools Mythic+
 ## Title-zhCN: |cffff0000静思|r 副本助手 大秘境
 ## Version: 1.20

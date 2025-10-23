@@ -1,4 +1,4 @@
-local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, table, PrivateDB, ProfileDB, GlobalDB
+local W, F, E, L, V, P, G = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI, LocaleTable, PrivateDB, ProfileDB, GlobalDB
 local C = W.Utilities.Color
 local async = W.Utilities.Async
 local options = W.options.misc.args
@@ -2436,8 +2436,17 @@ options.achievementTracker = {
 			type = "toggle",
 			name = L["Enable"],
 		},
-		size = {
+		tooltip = {
 			order = 3,
+			type = "toggle",
+			name = L["Tooltip"],
+			desc = L["Show tips when hovering over the achievements."],
+			disabled = function()
+				return not E.db.WT.misc.achievementTracker.enable
+			end,
+		},
+		size = {
+			order = 4,
 			type = "group",
 			name = L["Size"],
 			inline = true,
@@ -2464,7 +2473,7 @@ options.achievementTracker = {
 			},
 		},
 		scan = {
-			order = 4,
+			order = 5,
 			type = "group",
 			name = L["Scan"],
 			inline = true,
