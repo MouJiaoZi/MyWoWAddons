@@ -77,8 +77,7 @@ END
 VER 3 010000000000008C "符文剑" "134400"
 #showtooltip 符文刃舞
 /cast 符文刃舞
-/use 飞逝淬火药水
-/use 淬火药水
+/use 刚性虚空棱镜
 END
 VER 3 010000000000008A "群拉白骨" "134400"
 #showtooltip

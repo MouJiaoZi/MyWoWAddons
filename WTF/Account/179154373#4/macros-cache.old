@@ -1,0 +1,6 @@
+VER 3 0000000000000001 " " "INV_MISC_QUESTIONMARK"
+#showtooltip item:228940
+#macro version 1
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","恶名丝线炉石") end
+/click RHTB LeftButton
+END

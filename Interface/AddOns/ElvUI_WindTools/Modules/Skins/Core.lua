@@ -1,4 +1,4 @@
-local W, F, E = unpack((select(2, ...))) ---@type WindTools, Functions, table
+local W, F, E = unpack((select(2, ...))) ---@type WindTools, Functions, ElvUI
 local LSM = E.Libs.LSM
 local S = W.Modules.Skins ---@class Skins
 local ES = E.Skins
@@ -685,7 +685,7 @@ function S:ReskinIconButton(button, icon, size, rotate)
 	button:StripTextures()
 	button.Icon = button:CreateTexture(nil, "ARTWORK")
 	button.Icon:SetTexture(icon)
-	button.Icon:Size(size, size)
+	button.Icon:Size(size)
 	button.Icon:Point("CENTER")
 	if rotate then
 		button.Icon:SetRotation(rotate)

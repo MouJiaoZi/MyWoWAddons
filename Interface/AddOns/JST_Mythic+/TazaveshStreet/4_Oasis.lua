@@ -5,7 +5,13 @@ local function soundfile(filename, arg)
 end
 
 --------------------------------Locals--------------------------------
-
+if G.Client == "zhCN" or G.Client == "zhTW" then
+	L["音符"] = "音符"
+elseif G.Client == "ruRU" then
+	--L["音符"] = "Notes"
+else
+	L["音符"] = "Notes"
+end
 ---------------------------------Notes--------------------------------
 
 ---------------------------------Data--------------------------------
@@ -39,6 +45,38 @@ G.Encounters[2452] = {
 					spellID = 359019,
 					hl = "gre",
 					tip = L["加急速"].."25%",
+				},
+				{ -- 文字 音符 倒计时
+					category = "TextAlert",
+					type = "spell",
+					preview = L["音符"]..L["倒计时"],
+					data = {
+						spellID = 359019,
+						events = {
+							["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+						},
+						sound = "[note]",
+					},
+					update = function(self, event, ...)
+						if event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, sourceGUID, _, _, _, destGUID, _, _, _, spellID, _, _, _, amount = CombatLogGetCurrentEventInfo()
+							if sub_event == "SPELL_CAST_START" and spellID == 355438 then -- 压制冲击
+								T.Start_Text_Timer(self, 5, L["音符"], true)
+							elseif sub_event == "SPELL_CAST_START" and spellID == 1241032 then -- 最终警告
+								T.Start_Text_Timer(self, 5, L["音符"], true)
+							end
+						elseif event == "ENCOUNTER_START" then
+							self.round = true
+							
+							if C.DB["TextAlert"]["spell"][self.data.spellID]["sound_bool"] then
+								self.prepare_sound = "note"
+								self.count_down_start = 4
+							else
+								self.prepare_sound = nil		
+								self.count_down_start = nil								
+							end
+						end
+					end,
 				},
 			},
 		},		

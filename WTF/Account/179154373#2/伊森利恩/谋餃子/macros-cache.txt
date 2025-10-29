@@ -1,0 +1,4 @@
+VER 3 0100000000000001 "大跳" "134400"
+#showtooltip
+/cast [@cursor] 英勇飞跃
+END

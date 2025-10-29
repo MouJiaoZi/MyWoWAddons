@@ -98,7 +98,7 @@ G.Encounters["c503"] = {
 			},
 			options = {				
 				T.Temp_NormalCastBar(438826, {	
-					sound = "[dodge]cast",
+					sound = "[dodge_circle]cast",
 				}),
 				T.Temp_OnFireIcon(438825),
 			},

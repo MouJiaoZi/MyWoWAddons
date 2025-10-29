@@ -3767,7 +3767,7 @@ G.Encounters[2691] = {
 				{ -- 团队框架高亮 虚空之握（✓）
 					category = "RFIcon",
 					type = "Aura",
-					spellID = 1250054,
+					spellID = 1250055,
 					color = "red",
 				},
 			},

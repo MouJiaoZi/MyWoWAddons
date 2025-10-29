@@ -6,13 +6,6 @@ BigWigs3DB = {
 ["Sagdwevb - 凤凰之神"] = "Default",
 },
 ["namespaces"] = {
-["BattleRes"] = {
-["profiles"] = {
-["Default"] = {
-["imported"] = true,
-},
-},
-},
 },
 ["myKeystones"] = {
 ["Player-1515-05637606"] = {
@@ -24,7 +17,7 @@ BigWigs3DB = {
 ["realm"] = "凤凰之神",
 },
 },
-["prevWeeklyReset"] = 1760569200,
+["prevWeeklyReset"] = 1761174000,
 ["profiles"] = {
 ["Default"] = {
 },

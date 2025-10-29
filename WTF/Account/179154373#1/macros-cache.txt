@@ -1,7 +1,7 @@
 VER 3 000000000000000F " " "INV_MISC_QUESTIONMARK"
-#showtooltip item:166747
+#showtooltip item:165802
 #macro version 1
-/run if not InCombatLockdown() then RHT.b:SetAttribute("item","美酒节狂欢者的炉石") end
+/run if not InCombatLockdown() then RHT.b:SetAttribute("item","复活节的炉石") end
 /click RHTB LeftButton
 END
 VER 3 0000000000000007 "1" "ABILITY_DUALWIELD"

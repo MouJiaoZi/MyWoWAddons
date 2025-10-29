@@ -26,8 +26,8 @@ DejaCharacterStatsDB = {
 ["ShowDuraSetChecked"] = true,
 },
 ["DCS_CenterItemTooltips"] = {
-["DCS_CenterItemTooltipScale"] = 1,
 ["centerItemTooltips"] = true,
+["DCS_CenterItemTooltipScale"] = 1,
 },
 ["DCS_SettingsShowCharacterChecked"] = {
 ["settingsShowCharacterChecked"] = true,
@@ -35,18 +35,18 @@ DejaCharacterStatsDB = {
 ["dejacharacterstatsItemLevelChecked"] = {
 ["ItemLevelTwoDecimalsSetChecked"] = true,
 ["ItemLevelEQ_AV_SetChecked"] = true,
-["ItemLevelClassColorSetChecked"] = true,
 ["ItemLevelDecimalsSetChecked"] = false,
+["ItemLevelClassColorSetChecked"] = true,
 },
-["dejacharacterstatsShowDuraTextureChecked"] = {
-["ShowDuraTextureSetChecked"] = true,
+["dejacharacterstatsHideMasteryChecked"] = {
+["SetChecked"] = true,
 },
 ["dejacharacterstatsSimpleItemColorChecked"] = {
 ["SimpleItemColorChecked"] = false,
 ["DarkerItemColorChecked"] = false,
 },
-["dejacharacterstatsHideMasteryChecked"] = {
-["SetChecked"] = true,
+["dejacharacterstatsShowDuraTextureChecked"] = {
+["ShowDuraTextureSetChecked"] = true,
 },
 ["dejacharacterstatsShowItemLevelChecked"] = {
 ["ShowItemLevelSetChecked"] = true,
@@ -197,11 +197,11 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hidden"] = false,
-["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
+["hideAt"] = 0,
+["hidden"] = false,
 },
 {
 ["statKey"] = "RatingCategory",
@@ -476,11 +476,11 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
-["hideAt"] = 0,
-["hidden"] = true,
 ["roles"] = {
 "TANK",
 },
+["hidden"] = true,
+["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -701,11 +701,11 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
+["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
-["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",
@@ -926,11 +926,11 @@ DCS_ClassSpecDB = {
 },
 {
 ["statKey"] = "STAGGER",
+["hidden"] = true,
+["hideAt"] = 0,
 ["roles"] = {
 "TANK",
 },
-["hidden"] = true,
-["hideAt"] = 0,
 },
 {
 ["statKey"] = "HonorCategory",

@@ -16,12 +16,12 @@ ElvDB = {
 },
 },
 ["class"] = {
+["雷霆之怒"] = {
+["专杀饺子王"] = "PALADIN",
+},
 ["凤凰之神"] = {
 ["Sagdwevb"] = "WARRIOR",
 ["我都等的"] = "WARRIOR",
-},
-["雷霆之怒"] = {
-["专杀饺子王"] = "PALADIN",
 },
 },
 ["profiles"] = {
@@ -40,7 +40,7 @@ ElvDB = {
 },
 },
 },
-["version"] = "4.01",
+["version"] = "4.02",
 },
 ["actionbar"] = {
 ["microbar"] = {
@@ -65,23 +65,12 @@ ElvDB = {
 },
 },
 ["gold"] = {
-["凤凰之神"] = {
-["Sagdwevb"] = 139033,
-["我都等的"] = 0,
-},
 ["雷霆之怒"] = {
 ["专杀饺子王"] = 812754,
 },
-},
-["namespaces"] = {
-},
-["faction"] = {
 ["凤凰之神"] = {
-["Sagdwevb"] = "Horde",
-["我都等的"] = "Horde",
-},
-["雷霆之怒"] = {
-["专杀饺子王"] = "Alliance",
+["Sagdwevb"] = 171633,
+["我都等的"] = 0,
 },
 },
 ["global"] = {
@@ -145,25 +134,36 @@ true,
 },
 },
 },
-["version"] = "4.01",
 ["item"] = {
 ["contacts"] = {
 ["alts"] = {
+["雷霆之怒"] = {
+["Alliance"] = {
+["专杀饺子王"] = "PALADIN",
+},
+},
 ["凤凰之神"] = {
 ["Horde"] = {
 ["Sagdwevb"] = "WARRIOR",
 ["我都等的"] = "WARRIOR",
 },
 },
+},
+},
+},
+["version"] = "4.02",
+},
+},
+["faction"] = {
 ["雷霆之怒"] = {
-["Alliance"] = {
-["专杀饺子王"] = "PALADIN",
+["专杀饺子王"] = "Alliance",
+},
+["凤凰之神"] = {
+["Sagdwevb"] = "Horde",
+["我都等的"] = "Horde",
 },
 },
-},
-},
-},
-},
+["namespaces"] = {
 },
 }
 ElvPrivateDB = {
@@ -210,14 +210,14 @@ ElvPrivateDB = {
 ["social"] = {
 ["smartTab"] = {
 ["whisperTargets"] = {
-["|Kp15|k"] = {
-1760973823,
+["|Kp14|k"] = {
+1761566639,
 "BN_WHISPER",
 },
 },
 },
 },
-["version"] = "4.01",
+["version"] = "4.02",
 },
 ["skins"] = {
 ["parchmentRemoverEnable"] = true,

@@ -37,7 +37,7 @@ MasqueDB = {
 ["ElvUI_ActionBar 10"] = {
 ["Inherit"] = false,
 },
-["ElvUI_ActionBar 9"] = {
+["ElvUI_Debuffs"] = {
 ["Inherit"] = false,
 },
 ["ElvUI_ActionBar Flyouts"] = {
@@ -46,19 +46,19 @@ MasqueDB = {
 ["ElvUI_ActionBar 5"] = {
 ["Inherit"] = false,
 },
-["ElvUI_ActionBar 15"] = {
+["Baganator_Bag"] = {
 ["Inherit"] = false,
 },
-["ElvUI_Debuffs"] = {
+["ElvUI_ActionBar 9"] = {
 ["Inherit"] = false,
 },
 ["ElvUI_ActionBar 8"] = {
 ["Inherit"] = false,
 },
-["Baganator_Bag"] = {
+["ElvUI_ActionBar 15"] = {
 ["Inherit"] = false,
 },
-["ElvUI_ActionBar 7"] = {
+["ElvUI"] = {
 ["Inherit"] = false,
 },
 ["ElvUI_ActionBar 6"] = {
@@ -70,7 +70,7 @@ MasqueDB = {
 ["ElvUI_Stance Bar"] = {
 ["Inherit"] = false,
 },
-["ElvUI"] = {
+["ElvUI_ActionBar 7"] = {
 ["Inherit"] = false,
 },
 ["ElvUI_Pet Bar"] = {

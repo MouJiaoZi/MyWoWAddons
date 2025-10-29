@@ -1,6 +1,11 @@
 
 MEETINGSTONE_UI_DB = {
 ["FILTER_TANK"] = false,
+["profileKeys"] = {
+["专杀饺子王 - 雷霆之怒"] = "Default",
+["我都等的 - 凤凰之神"] = "Default",
+["Sagdwevb - 凤凰之神"] = "Default",
+},
 ["global"] = {
 ["dataBrokerStorage"] = {
 },
@@ -10,19 +15,19 @@ MEETINGSTONE_UI_DB = {
 ["text"] = "%d+元",
 },
 {
-["pain"] = true,
 ["text"] = "5173",
+["pain"] = true,
 },
 {
-["pain"] = true,
 ["text"] = "lfg:",
+["pain"] = true,
 },
 {
 ["text"] = "tao.*bao",
 },
 {
-["pain"] = true,
 ["text"] = "平台",
+["pain"] = true,
 },
 {
 ["text"] = "支.*付.*宝",
@@ -31,22 +36,17 @@ MEETINGSTONE_UI_DB = {
 ["text"] = "淘.*宝",
 },
 {
-["pain"] = true,
 ["text"] = "门票",
+["pain"] = true,
 },
 ["default"] = true,
 },
 },
-["profileKeys"] = {
-["专杀饺子王 - 雷霆之怒"] = "Default",
-["我都等的 - 凤凰之神"] = "Default",
-["Sagdwevb - 凤凰之神"] = "Default",
-},
 ["FILTER_MULTY"] = true,
-["FILTER_HEALTH"] = false,
+["IGNORE_TIPS_LOG"] = true,
 ["IGNORE_LIST"] = {
 },
-["IGNORE_TIPS_LOG"] = true,
+["FILTER_HEALTH"] = false,
 ["FILTER_DAMAGE"] = false,
 }
 MEETINGSTONE_UI_E_POINTS = {

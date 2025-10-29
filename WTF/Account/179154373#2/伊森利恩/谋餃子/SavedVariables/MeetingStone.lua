@@ -1,0 +1,25 @@
+
+MEETINGSTONE_CHARACTER_DB = {
+["profileKeys"] = {
+["谋餃子 - 伊森利恩"] = "谋餃子 - 伊森利恩",
+},
+["profiles"] = {
+["谋餃子 - 伊森利恩"] = {
+["version"] = "11.2.5",
+["lastSearchCode"] = "2-0-0-0",
+["settings"] = {
+["storage"] = {
+["y"] = -1.7142333984375,
+["x"] = -48.76177978515625,
+["scale"] = 1,
+},
+},
+["searchHistoryList"] = {
+"2-0-0-0",
+"mplus",
+"3-0-0-0",
+"3-122-1666-0",
+},
+},
+},
+}

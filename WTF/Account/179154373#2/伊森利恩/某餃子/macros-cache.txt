@@ -54,6 +54,11 @@ VER 3 010000000000008B "死握" "134400"
 #showtooltip
 /cast [@mouseover,exists,nodead,harm]死亡之握; 死亡之握
 END
+VER 3 010000000000008D "灵打" "134400"
+#showtooltip 灵界打击
+/cast 灵界打击
+/use 刚性虚空棱镜
+END
 VER 3 0100000000000085 "爆发" "INV_Misc_QuestionMark"
 #showtooltip 爆发
 /click LFDRoleCheckPopupAcceptButton

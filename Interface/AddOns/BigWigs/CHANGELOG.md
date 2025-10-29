@@ -1,10 +1,10 @@
 # BigWigs
 
-## [v401.2](https://github.com/BigWigsMods/BigWigs/tree/v401.2) (2025-10-23)
-[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v401.1...v401.2) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
+## [v401.3](https://github.com/BigWigsMods/BigWigs/tree/v401.3) (2025-10-27)
+[Full Changelog](https://github.com/BigWigsMods/BigWigs/compare/v401.2...v401.3) [Previous Releases](https://github.com/BigWigsMods/BigWigs/releases)
 
-- Cleanups  
-- Update deDE (#2287)  
-- Update zhCN (#2286)  
-- Loader: Cleanup  
-- Loader: Remove the SV initialization delay on vanilla now that it supports `LoadSavedVariablesFirst`  
+- Some quick fixes for wow 12  
+- Core/BossPrototype: Add vanilla interrupts & dispels  
+- Update koKR (#2288)  
+- Core/BossPrototype: Make the dispel list easier to maintain  
+- Plugins/BossBlock: Add a missing waystone ID  

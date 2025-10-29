@@ -15,17 +15,20 @@ PLAYER_INFO_SAVED = {
 ["凤凰基友之三-凤凰之神"] = {
 ["class"] = "DEMONHUNTER",
 },
-["Afdfaf-苏拉玛"] = {
-["class"] = "MAGE",
-},
 ["凤凰基友之二-凤凰之神"] = {
 ["class"] = "DEMONHUNTER",
+},
+["Afdfaf-苏拉玛"] = {
+["class"] = "MAGE",
 },
 ["凤凰基友之一-凤凰之神"] = {
 ["class"] = "DEMONHUNTER",
 },
 ["凤凰基友之五-凤凰之神"] = {
 ["class"] = "DEMONHUNTER",
+},
+["谋餃子-伊森利恩"] = {
+["class"] = "WARRIOR",
 },
 ["这只是饺子-伊森利恩"] = {
 ["class"] = "WARRIOR",

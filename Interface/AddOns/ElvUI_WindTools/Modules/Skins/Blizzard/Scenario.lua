@@ -8,6 +8,7 @@ local pairs = pairs
 local select = select
 local unpack = unpack
 
+local CreateFrame = CreateFrame
 local GetInstanceInfo = GetInstanceInfo
 
 local C_ChallengeMode_GetAffixInfo = C_ChallengeMode.GetAffixInfo
@@ -24,7 +25,7 @@ local function SkinMawBuffsContainer(container)
 	container:SetPushedTexture(pushed)
 	container.SetHighlightAtlas = E.noop
 	container.SetPushedAtlas = E.noop
-	container.SetWidth = E.noop
+	container.Width = E.noop
 	container.SetPushedTextOffset = E.noop
 
 	container:CreateBackdrop("Transparent")
@@ -45,8 +46,8 @@ local function ScenarioObjectiveTrackerStage_UpdateStageBlock(block)
 	if not block.backdrop then
 		block:CreateBackdrop("Transparent")
 		block.backdrop:ClearAllPoints()
-		block.backdrop:SetPoint("TOPLEFT", block.GlowTexture, 6, -4)
-		block.backdrop:SetPoint("BOTTOMRIGHT", block.GlowTexture, 12, 3)
+		block.backdrop:Point("TOPLEFT", block.GlowTexture, 6, -4)
+		block.backdrop:Point("BOTTOMRIGHT", block.GlowTexture, 12, 3)
 		S:CreateShadow(block.backdrop)
 	end
 
@@ -94,7 +95,7 @@ local function ScenarioObjectiveTrackerChallengeMode_Activate(block)
 	block.StatusBar.backdrop:SetBackdropBorderColor(0.2, 0.2, 0.2, 0.6)
 	block.StatusBar:SetStatusBarTexture(E.media.normTex)
 	block.StatusBar:SetStatusBarColor(unpack(E.media.rgbvaluecolor))
-	block.StatusBar:SetHeight(12)
+	block.StatusBar:Height(12)
 
 	select(3, block:GetRegions()):Hide()
 
@@ -196,14 +197,117 @@ local function ScenarioObjectiveTracker_Update(tracker)
 	end
 end
 
+local handledSpellFrames, iconBackdrops = {}, {}
+local function ReskinSpellFrame(frame)
+	if not frame or handledSpellFrames[frame] then
+		return
+	end
+
+	local SpellName = frame.SpellName
+	if SpellName then
+		F.SetFont(SpellName)
+	end
+
+	local SpellButton = frame.SpellButton
+	if SpellButton then
+		local normalTex = SpellButton:GetNormalTexture()
+		if normalTex then
+			normalTex:SetAlpha(0)
+		end
+
+		local highlightTex = SpellButton:GetHighlightTexture()
+		if highlightTex then
+			highlightTex:SetTexture(E.media.blankTex)
+			highlightTex:SetTexCoord(unpack(E.TexCoords))
+			highlightTex:SetVertexColor(1, 1, 1, 0.25)
+		end
+
+		local pushedTex = SpellButton:GetPushedTexture()
+		if pushedTex then
+			pushedTex:SetTexture(E.media.blankTex)
+			pushedTex:SetTexCoord(unpack(E.TexCoords))
+			pushedTex:SetVertexColor(1, 1, 1, 0.4)
+		end
+
+		local SpellIcon = SpellButton.Icon
+		if SpellIcon then
+			if not iconBackdrops[SpellIcon] then
+				local backdrop = CreateFrame("Frame", nil, E.UIParent)
+				backdrop:SetTemplate("Default")
+				backdrop.Center:Kill()
+				iconBackdrops[SpellIcon] = backdrop
+				S:CreateShadow(backdrop)
+
+				-- Handle the release / reuse of the frame
+				frame:HookScript("OnHide", function()
+					backdrop:Hide()
+				end)
+
+				frame:HookScript("OnShow", function()
+					backdrop:Show()
+				end)
+			end
+
+			local backdrop = iconBackdrops[SpellIcon]
+			backdrop:ClearAllPoints()
+			backdrop:SetOutside(SpellIcon)
+			SpellIcon:SetTexCoord(unpack(E.TexCoords))
+
+			SpellButton:HookScript("OnEnter", function()
+				backdrop:SetBackdropBorderColor(unpack(E.media.rgbvaluecolor))
+			end)
+
+			SpellButton:HookScript("OnLeave", function()
+				backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
+			end)
+		end
+	end
+
+	handledSpellFrames[frame] = true
+end
+
+local function HookSpellFramePool()
+	if not _G.ScenarioObjectiveTracker or not _G.ScenarioObjectiveTracker.spellFramePool then
+		return
+	end
+
+	hooksecurefunc(_G.ScenarioObjectiveTracker.spellFramePool, "Acquire", function(self)
+		for frame in self:EnumerateActive() do
+			ReskinSpellFrame(frame)
+		end
+	end)
+
+	for frame in _G.ScenarioObjectiveTracker.spellFramePool:EnumerateActive() do
+		ReskinSpellFrame(frame)
+	end
+end
+
 function S:ScenarioStage()
 	if not self:CheckDB(nil, "scenario") then
 		return
 	end
 
-	hooksecurefunc(_G.ScenarioObjectiveTracker, "Update", ScenarioObjectiveTracker_Update)
-	hooksecurefunc(_G.ScenarioObjectiveTracker, "AddBlock", ScenarioObjectiveTracker_AddBlock)
-	SkinMawBuffsContainer(_G.ScenarioObjectiveTracker.MawBuffsBlock.Container)
+	local ScenarioObjectiveTracker = _G.ScenarioObjectiveTracker
+	if not ScenarioObjectiveTracker then
+		return
+	end
+
+	hooksecurefunc(ScenarioObjectiveTracker, "Update", ScenarioObjectiveTracker_Update)
+	hooksecurefunc(ScenarioObjectiveTracker, "AddBlock", ScenarioObjectiveTracker_AddBlock)
+
+	if ScenarioObjectiveTracker.spellFramePool then
+		HookSpellFramePool()
+	else
+		hooksecurefunc(ScenarioObjectiveTracker, "InitModule", function(self)
+			if self.spellFramePool then
+				HookSpellFramePool()
+			end
+		end)
+	end
+
+	if ScenarioObjectiveTracker.MawBuffsBlock then
+		SkinMawBuffsContainer(ScenarioObjectiveTracker.MawBuffsBlock.Container)
+	end
 end
 
 S:AddCallback("ScenarioStage")

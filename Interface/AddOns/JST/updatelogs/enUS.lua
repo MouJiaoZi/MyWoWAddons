@@ -3,6 +3,15 @@
 --if G.Client ~= "zhTW" then return end
 
 L["更新日志内容"]			= [[
+6.21
+Salhadaar Subjugation Rule soak prompt bug fix.
+
+6.20
+Salhadaar Count the number of Vengeful Oath missed.
+Salhadaar Subjugation Rule supports the tactic of 'Sock 1st Conquer'.(You need to click on the small gear button and manually turn it on in the detailed settings)
+Dimensius Voidgrasp raid frame glow bug fix(H).
+Streets of Wonder Myza's Oasis add notes countdown.
+
 6.18
 Dimensius Big/small circles assignment Phase 3 add "Pull against" or "Don't move" prompts.
 

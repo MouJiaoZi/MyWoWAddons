@@ -19,6 +19,12 @@ if G.Client == "zhCN" or G.Client == "zhTW" then
 	L["不要写坦克"] = "除坦克外都写在这里，顺序从左到右。"
 	L["连招计时条及分担分配"] = "%s%s连招计时条及分担分配"
 	L["高危分担"] = "高危分担"
+	L["非一则三"] = "有一则一，非一则三"
+	L["首次征服"] = "首次征服"
+	L["失误统计"] = "%s失误次数统计"
+	L["万象拳失误"] = "%s的%s未命中(第%d轮)。"
+	L["轮次失误"] = "第%d轮%d次。"
+	L["全团无失误"] = "全团的%s都没失误，厉害！"
 elseif G.Client == "ruRU" then
 	--L["显示所有点位"] = "Show all positions"
 	--L["过地刺序号"] = "Pass Index"
@@ -33,6 +39,12 @@ elseif G.Client == "ruRU" then
 	--L["不要写坦克"] = "All except tanks are written here, in order from left to right."
 	--L["连招计时条及分担分配"] = "%s %s timimg bars and soak assignment."
 	--L["高危分担"] = "DANGER SOAK"
+	--L["非一则三"] = "Soak Conquer of index 1 or 3"
+	--L["首次征服"] = "Soak 1st Conquer"
+	--L["失误统计"] = "Count the number of %s missed."
+	--L["万象拳失误"] = "%s's %s missed(set %d)."
+	--L["轮次失误"] = "set %d:%d."
+	--L["全团无失误"] = "All %s of the group made no mistakes, impressive!"
 else
 	L["显示所有点位"] = "Show all positions"
 	L["过地刺序号"] = "Pass Index"
@@ -47,6 +59,12 @@ else
 	L["不要写坦克"] = "All except tanks are written here, in order from left to right."
 	L["连招计时条及分担分配"] = "%s %s timimg bars and soak assignment."
 	L["高危分担"] = "DANGER SOAK"
+	L["非一则三"] = "Soak Conquer of index 1 or 3"
+	L["首次征服"] = "Soak 1st Conquer"
+	L["失误统计"] = "Count the number of %s missed."
+	L["万象拳失误"] = "%s's %s missed(set %d)."
+	L["轮次失误"] = "set %d:%d."
+	L["全团无失误"] = "All %s of the group made no mistakes, impressive!"
 end
 ---------------------------------Notes--------------------------------
 
@@ -305,6 +323,96 @@ G.Encounters[2690] = {
 						end
 					end,
 				},
+				{ -- 首领模块 复仇誓言 失误统计（待测试）
+					category = "BossMod",
+					spellID = 1238985,
+					ficon = "12",
+					name = string.format(L["失误统计"], T.GetIconLink(1238975)),
+					points = {hide = true},
+					events = {
+						["UNIT_SPELLCAST_SUCCEEDED"] = true,
+						["COMBAT_LOG_EVENT_UNFILTERED"] = true,
+					},
+					init = function(frame)
+						frame.set = 0
+						frame.count = 0
+						frame.data = {}
+						
+						function frame:GetTotalCountByGUID(GUID)
+							local count = 0
+							if self.data[GUID] then
+								for set, number in pairs(self.data[GUID]) do
+									count = count + number
+								end
+							end
+							return count
+						end
+						
+						function frame:DisplayAll()
+							local group_total = 0
+							local title = string.format(L["失误统计"], T.GetIconLink(1238975))
+							T.divideline(title)
+							for GUID, info in pairs(self.data) do
+								local total = 0
+								local detail = ""
+								for set, number in pairs(info) do
+									total = total + number
+									detail = detail .. string.format(L["轮次失误"], set, number)
+								end
+								if total > 0 then
+									local format_name = T.ColorNickNameByGUID(GUID)
+									if format_name then
+										T.msg(string.format("%s %d (%s)", format_name, total, detail))
+									end
+									group_total = group_total + total
+								end
+							end
+							if group_total == 0 then
+								local spell = C_Spell.GetSpellName(1238975)
+								T.msg(string.format(L["全团无失误"], spell))
+							end
+						end
+					end,
+					update = function(frame, event, ...)
+						if event == "UNIT_SPELLCAST_SUCCEEDED" then
+							local unit, _, spellID = ...
+							if string.find(unit, "boss") and spellID == 1224776 then -- 镇压统治
+								frame.set = frame.set + 1
+							end
+							
+						elseif event == "COMBAT_LOG_EVENT_UNFILTERED" then
+							local _, sub_event, _, sourceGUID, _, _, _, destGUID, _, _, _, spellID = CombatLogGetCurrentEventInfo()
+							if frame.set > 0 and (sub_event == "SPELL_AURA_APPLIED" or sub_event == "SPELL_AURA_APPLIED_DOSE") and spellID == 1224737 then -- 誓言约束
+								local set = frame.set
+								
+								if not frame.data[destGUID] then
+									frame.data[destGUID] = {}
+								end
+								
+								if not frame.data[destGUID][set] then
+									frame.data[destGUID][set] = 0
+								end
+								
+								frame.data[destGUID][set] = frame.data[destGUID][set] + 1
+								
+								local format_name = T.ColorNickNameByGUID(destGUID)
+								local spell = C_Spell.GetSpellName(1238975)
+								local total = frame:GetTotalCountByGUID(destGUID)
+								if format_name and spell and total and total > 0 then
+									T.msg(string.format(L["万象拳失误"], format_name, spell, set))
+								end
+							end
+							
+						elseif event == "ENCOUNTER_START" then
+							frame.set = 0
+							frame.count = 0
+						end
+					end,
+					reset = function(frame, event)
+						frame:DisplayAll()
+						frame.data = table.wipe(frame.data)
+					end,
+				},		
 			},
 		},
 		{ -- 镇压统治
@@ -384,6 +492,18 @@ G.Encounters[2690] = {
 					},
 					custom = {
 						{
+							key = "assignment_dd",
+							text = L["分配"],
+							default = "1stor3rd",
+							key_table = {
+								{"1stor3rd", L["非一则三"]},
+								{"1stconquer", L["首次征服"]},
+							},
+							apply = function(value, alert)
+								alert:UpdatePreviewInfo()
+							end,
+						},
+						{
 							key = "scale_sl",
 							text = L["尺寸"],
 							default = 100,
@@ -419,7 +539,7 @@ G.Encounters[2690] = {
 						end
 						
 						function frame:update_bar(index, spell, assigned)
-							local bar = frame.bars[index]
+							local bar = self.bars[index]
 							bar.castType = spell
 							
 							bar:SetMinMaxValues(0, 1)
@@ -458,26 +578,59 @@ G.Encounters[2690] = {
 							
 							if isTank then
 								if isTanking then
-									local othersAssigned
-									if self.order[1] == "CONQUER" and index == 1 then
-										othersAssigned = true
-									elseif self.order[1] == "VANQUISH" and index == 3 then
-										othersAssigned = true
-									end
+									if C.DB["BossMod"][self.config_id]["assignment_dd"] == "1stor3rd" then
+										local othersAssigned
+										if self.order[1] == "CONQUER" and index == 1 then
+											othersAssigned = true
+										elseif self.order[1] == "VANQUISH" and index == 3 then
+											othersAssigned = true
+										end
 									
-									assigned = not othersAssigned
+										assigned = not othersAssigned
+									else
+										local soak_index
+										for i = 1, 4 do
+											if self.order[i] == "CONQUER" then
+												soak_index = i
+												break
+											end
+										end
+										assigned = index ~= soak_index
+									end
 								else -- Non-active tank
-									if self.order[1] == "CONQUER" and index == 1 then
-										assigned = true
-									elseif self.order[1] == "VANQUISH" and index == 3 then
-										assigned = true
+									if C.DB["BossMod"][self.config_id]["assignment_dd"] == "1stor3rd" then
+										if self.order[1] == "CONQUER" and index == 1 then
+											assigned = true
+										elseif self.order[1] == "VANQUISH" and index == 3 then
+											assigned = true
+										end
+									else
+										local soak_index
+										for i = 1, 4 do
+											if self.order[i] == "CONQUER" then
+												soak_index = i
+												break
+											end
+										end
+										assigned = index == soak_index
 									end
 								end
 							else
-								if self.order[1] == "CONQUER" then
-									assigned = index == 1
+								if C.DB["BossMod"][self.config_id]["assignment_dd"] == "1stor3rd" then
+									if self.order[1] == "CONQUER" then
+										assigned = index == 1
+									else
+										assigned = index == 3
+									end
 								else
-									assigned = index == 3
+									local soak_index
+									for i = 1, 4 do
+										if self.order[i] == "CONQUER" then
+											soak_index = i
+											break
+										end
+									end
+									assigned = index == soak_index
 								end
 							end
 							
@@ -493,7 +646,7 @@ G.Encounters[2690] = {
 						end
 						
 						function frame:Start(index)
-							local bar = frame.bars[index]
+							local bar = self.bars[index]
 							local castType = bar.castType
 							local duration = castType == "CONQUER" and 4 or 2.5
 							
@@ -565,7 +718,7 @@ G.Encounters[2690] = {
 							end
 						end
 						
-						function frame:PreviewShow()
+						function frame:UpdatePreviewInfo()
 							local orders = {
 								{"VANQUISH", "VANQUISH", "CONQUER", "CONQUER"},
 								{"CONQUER", "CONQUER", "VANQUISH", "VANQUISH"},
@@ -577,6 +730,10 @@ G.Encounters[2690] = {
 							self.count = 2 + math.random(2)
 							self:UpdateStates()
 							self:Start(self.count)
+						end
+						
+						function frame:PreviewShow()
+							self:UpdatePreviewInfo()
 						end
 						
 						function frame:PreviewHide()
@@ -598,10 +755,21 @@ G.Encounters[2690] = {
 									if spellID == frame.conquerSpellID then
 										local soak
 									
-										if frame.order[1] == "CONQUER" then
-											soak = frame.count == 1
+										if C.DB["BossMod"][frame.config_id]["assignment_dd"] == "1stor3rd" then
+											if frame.order[1] == "CONQUER" then
+												soak = frame.count == 1
+											else
+												soak = frame.count == 3
+											end
 										else
-											soak = frame.count == 3
+											local soak_index
+											for i = 1, 4 do
+												if frame.order[i] == "CONQUER" then
+													soak_index = i
+													break
+												end
+											end
+											soak = frame.count == soak_index
 										end
 										
 										if soak then
@@ -647,8 +815,7 @@ G.Encounters[2690] = {
 							end
 							
 						elseif event == "ENCOUNTER_START" then
-							frame.order = table.wipe(frame.order)
-							frame.count = 0
+							frame:Stop()
 						end
 					end,
 					reset = function(frame, event)

@@ -4,6 +4,7 @@ local C = W.Utilities.Color
 
 local _G = _G
 local pairs = pairs
+local hooksecurefunc = hooksecurefunc
 
 local RED_FONT_COLOR = RED_FONT_COLOR
 local YELLOW_FONT_COLOR = YELLOW_FONT_COLOR
@@ -20,7 +21,17 @@ function S:UIErrors()
 		return
 	end
 
-	_G.UIErrorsFrame:SetWidth(E.private.WT.skins.uiErrors.width)
+	_G.UIErrorsFrame:Width(E.private.WT.skins.uiErrors.width)
+
+	hooksecurefunc(_G.UIErrorsFrame, "SetWidth", function(frame, _, skip)
+		if not skip then
+			frame:Width(E.private.WT.skins.uiErrors.width, true)
+		end
+	end)
+
+	hooksecurefunc(_G.UIErrorsFrame, "SetSize", function(frame)
+		frame:Width(E.private.WT.skins.uiErrors.width, true)
+	end)
 
 	W:RegisterUIErrorHandler(function(params)
 		if params.r == nil or params.g == nil or params.b == nil then

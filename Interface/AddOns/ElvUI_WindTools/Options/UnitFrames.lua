@@ -68,6 +68,43 @@ options.quickFocus = {
 				BUTTON5 = L["Side Button 5"],
 			},
 		},
+		setMark = {
+			order = 5,
+			type = "toggle",
+			name = L["Set Mark"],
+			desc = L["Set the raid marker on the quick focused target if possible."],
+			disabled = function()
+				return not E.private.WT.unitFrames.quickFocus.enable
+			end,
+		},
+		markNumber = {
+			order = 6,
+			type = "select",
+			name = L["Mark"],
+			disabled = function()
+				return not E.private.WT.unitFrames.quickFocus.enable or not E.private.WT.unitFrames.quickFocus.setMark
+			end,
+			values = {
+				[1] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_1"),
+				[2] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_2"),
+				[3] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_3"),
+				[4] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_4"),
+				[5] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_5"),
+				[6] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_6"),
+				[7] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_7"),
+				[8] = F.GetIconString("Interface\\TargetingFrame\\UI-RaidTargetingIcon_8"),
+			},
+		},
+		notice = {
+			order = 7,
+			type = "description",
+			name = format(
+				"%s %s",
+				C.StringByTemplate(L["Notice"], "rose-500"),
+				L["Blizzard not allow setting raid markers on enemy faction players."]
+			),
+			fontSize = "medium",
+		},
 	},
 }
 
@@ -309,6 +346,12 @@ do
 	icons = icons .. E:TextureString(W.Media.Icons.elvUIOldHealer, ":16:16") .. " "
 	icons = icons .. E:TextureString(W.Media.Icons.elvUIOldDPS, ":16:16")
 	SampleStrings.elvui_old = icons
+
+	icons = ""
+	icons = icons .. E:TextureString(W.Media.Icons.blizzardTank, ":16:16") .. " "
+	icons = icons .. E:TextureString(W.Media.Icons.blizzardHealer, ":16:16") .. " "
+	icons = icons .. E:TextureString(W.Media.Icons.blizzardDPS, ":16:16")
+	SampleStrings.blizzard = icons
 end
 
 options.roleIcon = {
@@ -355,6 +398,7 @@ options.roleIcon = {
 				SUNUI = SampleStrings.sunui,
 				LYNUI = SampleStrings.lynui,
 				ELVUI_OLD = SampleStrings.elvui_old,
+				BLIZZARD = SampleStrings.blizzard,
 				DEFAULT = SampleStrings.elvui,
 			},
 		},

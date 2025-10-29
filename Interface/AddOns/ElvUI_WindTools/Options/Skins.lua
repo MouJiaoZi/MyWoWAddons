@@ -246,14 +246,14 @@ options.general = {
 					name = L["Width"],
 					desc = L["Set the width of UIErrorsFrame."],
 					min = 256,
-					max = 2048,
+					max = 4096,
 					step = 1,
 					get = function()
 						return E.private.WT.skins.uiErrors.width
 					end,
 					set = function(_, value)
 						E.private.WT.skins.uiErrors.width = value
-						_G.UIErrorsFrame:SetWidth(value)
+						_G.UIErrorsFrame:Width(value, true)
 					end,
 				},
 				normalTextClassColor = {
@@ -486,8 +486,674 @@ options.font = {
 	},
 }
 
-options.blizzard = {
+options.cooldownViewer = {
 	order = 4,
+	type = "group",
+	name = L["Cooldown Viewer"],
+	args = {
+		notice = {
+			order = 1,
+			type = "group",
+			name = " ",
+			inline = true,
+			args = {
+				desc = {
+					order = 1,
+					type = "description",
+					name = C.StringByTemplate(L["Notice"], "rose-500")
+						.. " "
+						.. L["This module will override ElvUI's Cooldown Manager count font settings."],
+					width = "full",
+					fontSize = "medium",
+				},
+				desc2 = {
+					order = 2,
+					type = "description",
+					hidden = function()
+						return E.private.WT.skins.blizzard.enable
+							and E.private.skins.blizzard.cooldownManager
+							and E.private.WT.skins.blizzard.cooldownViewer
+					end,
+					name = format(
+						L["To enable the modifications below, you need to enable [%s] - [%s] skin first."],
+						L["Blizzard"],
+						F.GetWindStyleText(L["Cooldown Viewer"])
+					),
+					width = "full",
+					fontSize = "medium",
+				},
+			},
+		},
+		enable = {
+			order = 2,
+			type = "toggle",
+			name = L["Enable"],
+			get = function(info)
+				return E.private.WT.skins.cooldownViewer[info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.skins.cooldownViewer[info[#info]] = value
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+		},
+
+		general = {
+			order = 10,
+			type = "group",
+			inline = true,
+			name = L["General"],
+			get = function(info)
+				return E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+			disabled = function()
+				return not E.private.WT.skins.cooldownViewer.enable
+			end,
+			args = {
+				barShadow = {
+					order = 1,
+					type = "toggle",
+					name = L["Shadow"] .. " - " .. L["Bar"],
+				},
+				iconShadow = {
+					order = 2,
+					type = "toggle",
+					name = L["Shadow"] .. " - " .. L["Icon"],
+				},
+				useBlizzardGlow = {
+					order = 3,
+					type = "toggle",
+					name = L["Use Blizzard Glow"],
+					desc = L["Disable ElvUI's LibCustomGlow for fixing cooldown animations."],
+				},
+			},
+		},
+		essential = {
+			order = 11,
+			type = "group",
+			name = L["Essential"],
+			get = function(info)
+				return E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+				S:CooldownManager_HandleViewer(_G.EssentialCooldownViewer)
+			end,
+			disabled = function()
+				return not E.private.WT.skins.cooldownViewer.enable
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Enable"],
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+						E:StaticPopup_Show("PRIVATE_RL")
+					end,
+				},
+				frameStrata = {
+					order = 2,
+					type = "select",
+					name = L["Frame Strata"],
+					values = {
+						BACKGROUND = "BACKGROUND",
+						LOW = "LOW",
+						MEDIUM = "MEDIUM",
+						HIGH = "HIGH",
+						DIALOG = "DIALOG",
+						TOOLTIP = "TOOLTIP",
+					},
+				},
+				frameLevel = {
+					order = 3,
+					type = "range",
+					name = L["Frame Level"],
+					min = 1,
+					max = 2000,
+					step = 1,
+				},
+				iconHeightRatio = {
+					order = 4,
+					type = "range",
+					name = L["Icon Height Ratio"],
+					desc = L["Set the height ratio of icons inside Cooldown Viewer."],
+					min = 0.1,
+					max = 2,
+					step = 0.01,
+				},
+				chargeCountText = {
+					order = 5,
+					type = "group",
+					inline = true,
+					name = L["Charge Count Text"],
+					get = function(info)
+						return E.private.WT.skins.cooldownViewer[info[#info - 2]][info[#info - 1]][info[#info]]
+					end,
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 2]][info[#info - 1]][info[#info]] = value
+						S:CooldownManager_HandleViewer(_G.EssentialCooldownViewer)
+					end,
+					args = {
+						name = {
+							order = 1,
+							type = "select",
+							dialogControl = "LSM30_Font",
+							name = L["Font"],
+							values = LSM:HashTable("font"),
+						},
+						style = {
+							order = 2,
+							type = "select",
+							name = L["Outline"],
+							values = {
+								NONE = L["None"],
+								OUTLINE = L["Outline"],
+								THICKOUTLINE = L["Thick"],
+								SHADOW = L["|cff888888Shadow|r"],
+								SHADOWOUTLINE = L["|cff888888Shadow|r Outline"],
+								SHADOWTHICKOUTLINE = L["|cff888888Shadow|r Thick"],
+								MONOCHROME = L["|cFFAAAAAAMono|r"],
+								MONOCHROMEOUTLINE = L["|cFFAAAAAAMono|r Outline"],
+								MONOCHROMETHICKOUTLINE = L["|cFFAAAAAAMono|r Thick"],
+							},
+						},
+						size = {
+							order = 3,
+							name = L["Size"],
+							type = "range",
+							min = 5,
+							max = 60,
+							step = 1,
+						},
+						justifyH = {
+							order = 4,
+							type = "select",
+							name = L["Horizontal Justify"],
+							values = {
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+							},
+						},
+						point = {
+							order = 5,
+							type = "select",
+							name = L["Anchor Point"],
+							values = {
+								TOPLEFT = L["TOPLEFT"],
+								TOP = L["TOP"],
+								TOPRIGHT = L["TOPRIGHT"],
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+								BOTTOMLEFT = L["BOTTOMLEFT"],
+								BOTTOM = L["BOTTOM"],
+								BOTTOMRIGHT = L["BOTTOMRIGHT"],
+							},
+						},
+						relativePoint = {
+							order = 6,
+							type = "select",
+							name = L["Relative Point"],
+							values = {
+								TOPLEFT = L["TOPLEFT"],
+								TOP = L["TOP"],
+								TOPRIGHT = L["TOPRIGHT"],
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+								BOTTOMLEFT = L["BOTTOMLEFT"],
+								BOTTOM = L["BOTTOM"],
+								BOTTOMRIGHT = L["BOTTOMRIGHT"],
+							},
+						},
+						offsetX = {
+							order = 4,
+							name = L["X-Offset"],
+							type = "range",
+							min = -100,
+							max = 100,
+							step = 1,
+						},
+						offsetY = {
+							order = 5,
+							name = L["Y-Offset"],
+							type = "range",
+							min = -100,
+							max = 100,
+							step = 1,
+						},
+					},
+				},
+			},
+		},
+		utility = {
+			order = 13,
+			type = "group",
+			name = L["Utility"],
+			get = function(info)
+				return E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+				S:CooldownManager_HandleViewer(_G.UtilityCooldownViewer)
+			end,
+			disabled = function()
+				return not E.private.WT.skins.cooldownViewer.enable
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Enable"],
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+						E:StaticPopup_Show("PRIVATE_RL")
+					end,
+				},
+				frameStrata = {
+					order = 2,
+					type = "select",
+					name = L["Frame Strata"],
+					values = {
+						BACKGROUND = "BACKGROUND",
+						LOW = "LOW",
+						MEDIUM = "MEDIUM",
+						HIGH = "HIGH",
+						DIALOG = "DIALOG",
+						TOOLTIP = "TOOLTIP",
+					},
+				},
+				frameLevel = {
+					order = 3,
+					type = "range",
+					name = L["Frame Level"],
+					min = 1,
+					max = 2000,
+					step = 1,
+				},
+				iconHeightRatio = {
+					order = 4,
+					type = "range",
+					name = L["Icon Height Ratio"],
+					desc = L["Set the height ratio of icons inside Cooldown Viewer."],
+					min = 0.1,
+					max = 2,
+					step = 0.01,
+				},
+				chargeCountText = {
+					order = 5,
+					type = "group",
+					inline = true,
+					name = L["Charge Count Text"],
+					get = function(info)
+						return E.private.WT.skins.cooldownViewer[info[#info - 2]][info[#info - 1]][info[#info]]
+					end,
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 2]][info[#info - 1]][info[#info]] = value
+						S:CooldownManager_HandleViewer(_G.EssentialCooldownViewer)
+					end,
+					args = {
+						name = {
+							order = 1,
+							type = "select",
+							dialogControl = "LSM30_Font",
+							name = L["Font"],
+							values = LSM:HashTable("font"),
+						},
+						style = {
+							order = 2,
+							type = "select",
+							name = L["Outline"],
+							values = {
+								NONE = L["None"],
+								OUTLINE = L["Outline"],
+								THICKOUTLINE = L["Thick"],
+								SHADOW = L["|cff888888Shadow|r"],
+								SHADOWOUTLINE = L["|cff888888Shadow|r Outline"],
+								SHADOWTHICKOUTLINE = L["|cff888888Shadow|r Thick"],
+								MONOCHROME = L["|cFFAAAAAAMono|r"],
+								MONOCHROMEOUTLINE = L["|cFFAAAAAAMono|r Outline"],
+								MONOCHROMETHICKOUTLINE = L["|cFFAAAAAAMono|r Thick"],
+							},
+						},
+						size = {
+							order = 3,
+							name = L["Size"],
+							type = "range",
+							min = 5,
+							max = 60,
+							step = 1,
+						},
+						justifyH = {
+							order = 4,
+							type = "select",
+							name = L["Horizontal Justify"],
+							values = {
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+							},
+						},
+						point = {
+							order = 5,
+							type = "select",
+							name = L["Anchor Point"],
+							values = {
+								TOPLEFT = L["TOPLEFT"],
+								TOP = L["TOP"],
+								TOPRIGHT = L["TOPRIGHT"],
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+								BOTTOMLEFT = L["BOTTOMLEFT"],
+								BOTTOM = L["BOTTOM"],
+								BOTTOMRIGHT = L["BOTTOMRIGHT"],
+							},
+						},
+						relativePoint = {
+							order = 6,
+							type = "select",
+							name = L["Relative Point"],
+							values = {
+								TOPLEFT = L["TOPLEFT"],
+								TOP = L["TOP"],
+								TOPRIGHT = L["TOPRIGHT"],
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+								BOTTOMLEFT = L["BOTTOMLEFT"],
+								BOTTOM = L["BOTTOM"],
+								BOTTOMRIGHT = L["BOTTOMRIGHT"],
+							},
+						},
+						offsetX = {
+							order = 4,
+							name = L["X-Offset"],
+							type = "range",
+							min = -100,
+							max = 100,
+							step = 1,
+						},
+						offsetY = {
+							order = 5,
+							name = L["Y-Offset"],
+							type = "range",
+							min = -100,
+							max = 100,
+							step = 1,
+						},
+					},
+				},
+			},
+		},
+		buffIcon = {
+			order = 14,
+			type = "group",
+			name = L["Buff Icon"],
+			get = function(info)
+				return E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+				S:CooldownManager_HandleViewer(_G.BuffIconCooldownViewer)
+			end,
+			disabled = function()
+				return not E.private.WT.skins.cooldownViewer.enable
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Enable"],
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+						E:StaticPopup_Show("PRIVATE_RL")
+					end,
+				},
+				frameStrata = {
+					order = 2,
+					type = "select",
+					name = L["Frame Strata"],
+					values = {
+						BACKGROUND = "BACKGROUND",
+						LOW = "LOW",
+						MEDIUM = "MEDIUM",
+						HIGH = "HIGH",
+						DIALOG = "DIALOG",
+						TOOLTIP = "TOOLTIP",
+					},
+				},
+				frameLevel = {
+					order = 3,
+					type = "range",
+					name = L["Frame Level"],
+					min = 1,
+					max = 2000,
+					step = 1,
+				},
+				iconHeightRatio = {
+					order = 4,
+					type = "range",
+					name = L["Icon Height Ratio"],
+					desc = L["Set the height ratio of icons inside Cooldown Viewer."],
+					min = 0.1,
+					max = 2,
+					step = 0.01,
+				},
+				chargeCountText = {
+					order = 5,
+					type = "group",
+					inline = true,
+					name = L["Charge Count Text"],
+					get = function(info)
+						return E.private.WT.skins.cooldownViewer[info[#info - 2]][info[#info - 1]][info[#info]]
+					end,
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 2]][info[#info - 1]][info[#info]] = value
+						S:CooldownManager_HandleViewer(_G.EssentialCooldownViewer)
+					end,
+					args = {
+						name = {
+							order = 1,
+							type = "select",
+							dialogControl = "LSM30_Font",
+							name = L["Font"],
+							values = LSM:HashTable("font"),
+						},
+						style = {
+							order = 2,
+							type = "select",
+							name = L["Outline"],
+							values = {
+								NONE = L["None"],
+								OUTLINE = L["Outline"],
+								THICKOUTLINE = L["Thick"],
+								SHADOW = L["|cff888888Shadow|r"],
+								SHADOWOUTLINE = L["|cff888888Shadow|r Outline"],
+								SHADOWTHICKOUTLINE = L["|cff888888Shadow|r Thick"],
+								MONOCHROME = L["|cFFAAAAAAMono|r"],
+								MONOCHROMEOUTLINE = L["|cFFAAAAAAMono|r Outline"],
+								MONOCHROMETHICKOUTLINE = L["|cFFAAAAAAMono|r Thick"],
+							},
+						},
+						size = {
+							order = 3,
+							name = L["Size"],
+							type = "range",
+							min = 5,
+							max = 60,
+							step = 1,
+						},
+						justifyH = {
+							order = 4,
+							type = "select",
+							name = L["Horizontal Justify"],
+							values = {
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+							},
+						},
+						point = {
+							order = 5,
+							type = "select",
+							name = L["Anchor Point"],
+							values = {
+								TOPLEFT = L["TOPLEFT"],
+								TOP = L["TOP"],
+								TOPRIGHT = L["TOPRIGHT"],
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+								BOTTOMLEFT = L["BOTTOMLEFT"],
+								BOTTOM = L["BOTTOM"],
+								BOTTOMRIGHT = L["BOTTOMRIGHT"],
+							},
+						},
+						relativePoint = {
+							order = 6,
+							type = "select",
+							name = L["Relative Point"],
+							values = {
+								TOPLEFT = L["TOPLEFT"],
+								TOP = L["TOP"],
+								TOPRIGHT = L["TOPRIGHT"],
+								LEFT = L["LEFT"],
+								CENTER = L["CENTER"],
+								RIGHT = L["RIGHT"],
+								BOTTOMLEFT = L["BOTTOMLEFT"],
+								BOTTOM = L["BOTTOM"],
+								BOTTOMRIGHT = L["BOTTOMRIGHT"],
+							},
+						},
+						offsetX = {
+							order = 4,
+							name = L["X-Offset"],
+							type = "range",
+							min = -100,
+							max = 100,
+							step = 1,
+						},
+						offsetY = {
+							order = 5,
+							name = L["Y-Offset"],
+							type = "range",
+							min = -100,
+							max = 100,
+							step = 1,
+						},
+					},
+				},
+			},
+		},
+		buffBar = {
+			order = 15,
+			type = "group",
+			name = L["Buff Bar"],
+			get = function(info)
+				return E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]]
+			end,
+			set = function(info, value)
+				E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+				S:CooldownManager_HandleViewer(_G.BuffBarCooldownViewer)
+			end,
+			disabled = function()
+				return not E.private.WT.skins.cooldownViewer.enable
+			end,
+			args = {
+				enable = {
+					order = 1,
+					type = "toggle",
+					name = L["Enable"],
+					set = function(info, value)
+						E.private.WT.skins.cooldownViewer[info[#info - 1]][info[#info]] = value
+						E:StaticPopup_Show("PRIVATE_RL")
+					end,
+				},
+				frameStrata = {
+					order = 2,
+					type = "select",
+					name = L["Frame Strata"],
+					values = {
+						BACKGROUND = "BACKGROUND",
+						LOW = "LOW",
+						MEDIUM = "MEDIUM",
+						HIGH = "HIGH",
+						DIALOG = "DIALOG",
+						TOOLTIP = "TOOLTIP",
+					},
+				},
+				frameLevel = {
+					order = 3,
+					type = "range",
+					name = L["Frame Level"],
+					min = 1,
+					max = 2000,
+					step = 1,
+				},
+				iconHeightRatio = {
+					order = 4,
+					type = "range",
+					name = L["Icon Height Ratio"],
+					desc = L["Set the height ratio of icons inside Cooldown Viewer."],
+					min = 0.1,
+					max = 2,
+					step = 0.01,
+				},
+				smooth = {
+					order = 5,
+					type = "toggle",
+					name = L["Smooth Bars"],
+				},
+				barTexture = {
+					order = 6,
+					type = "select",
+					dialogControl = "LSM30_Statusbar",
+					name = L["Bar Texture"],
+					values = LSM:HashTable("statusbar"),
+				},
+				colorLeft = {
+					order = 7,
+					type = "color",
+					name = L["Left Color"],
+					hasAlpha = true,
+					get = function(info)
+						local db = E.private.WT.skins.cooldownViewer.buffBar.colorLeft
+						local default = V.skins.cooldownViewer.buffBar.colorLeft
+						return db.r, db.g, db.b, db.a, default.r, default.g, default.b, default.a
+					end,
+					set = function(info, r, g, b, a)
+						local db = E.private.WT.skins.cooldownViewer.buffBar.colorLeft
+						db.r, db.g, db.b, db.a = r, g, b, a
+					end,
+				},
+				colorRight = {
+					order = 8,
+					type = "color",
+					name = L["Right Color"],
+					hasAlpha = true,
+					get = function(info)
+						local db = E.private.WT.skins.cooldownViewer.buffBar.colorRight
+						local default = V.skins.cooldownViewer.buffBar.colorRight
+						return db.r, db.g, db.b, db.a, default.r, default.g, default.b, default.a
+					end,
+					set = function(info, r, g, b, a)
+						local db = E.private.WT.skins.cooldownViewer.buffBar.colorRight
+						db.r, db.g, db.b, db.a = r, g, b, a
+					end,
+				},
+			},
+		},
+	},
+}
+
+options.blizzard = {
+	order = 5,
 	type = "group",
 	name = L["Blizzard"],
 	get = function(info)
@@ -616,6 +1282,11 @@ options.blizzard = {
 			type = "toggle",
 			name = L["Calendar"],
 		},
+		catalogShop = {
+			order = 10,
+			type = "toggle",
+			name = L["Shop"],
+		},
 		challenges = {
 			order = 10,
 			type = "toggle",
@@ -654,7 +1325,7 @@ options.blizzard = {
 		cooldownViewer = {
 			order = 10,
 			type = "toggle",
-			name = L["Cooldown Viewer"],
+			name = F.GetWindStyleText(L["Cooldown Viewer"]),
 		},
 		covenantRenown = {
 			order = 10,
@@ -994,7 +1665,7 @@ for key, value in pairs(options.blizzard.args) do
 end
 
 options.elvui = {
-	order = 5,
+	order = 6,
 	type = "group",
 	name = L["ElvUI"],
 	get = function(info)
@@ -1173,7 +1844,7 @@ end
 -- "addon" .. " " .. C.StringByTemplate(L["WIP"], "rose-500"),
 
 options.addons = {
-	order = 6,
+	order = 7,
 	type = "group",
 	name = L["Addons"],
 	get = function(info)
@@ -1546,75 +2217,6 @@ for _, option in pairs(options.addons.args) do
 		option.hidden = option.hidden or false
 	end
 end
-
-options.libraries = {
-	order = 7,
-	type = "group",
-	name = L["Libraries"],
-	get = function(info)
-		return E.private.WT.skins.libraries[info[#info]]
-	end,
-	set = function(info, value)
-		E.private.WT.skins.libraries[info[#info]] = value
-		E:StaticPopup_Show("PRIVATE_RL")
-	end,
-	disabled = function()
-		return not E.private.WT.skins.enable
-	end,
-	args = {
-		enableAll = {
-			order = 1,
-			type = "execute",
-			name = L["Enable All"],
-			func = function()
-				for key in pairs(V.skins.libraries) do
-					E.private.WT.skins.libraries[key] = true
-				end
-				E:StaticPopup_Show("PRIVATE_RL")
-			end,
-		},
-		disableAll = {
-			order = 2,
-			type = "execute",
-			name = L["Disable All"],
-			func = function()
-				for key in pairs(V.skins.libraries) do
-					E.private.WT.skins.libraries[key] = false
-				end
-				E:StaticPopup_Show("PRIVATE_RL")
-			end,
-		},
-		betterOption = {
-			order = 9,
-			type = "description",
-			name = " ",
-			width = "full",
-		},
-		ace3 = {
-			order = 10,
-			type = "toggle",
-			name = L["Ace3"],
-		},
-		ace3Dropdown = {
-			order = 10,
-			type = "toggle",
-			name = L["Ace3 Dropdown"],
-			disabled = function()
-				return not E.private.WT.skins.libraries.ace3
-			end,
-		},
-		libQTip = {
-			order = 10,
-			type = "toggle",
-			name = L["LibQTip"],
-		},
-		secureTabs = {
-			order = 10,
-			type = "toggle",
-			name = L["SecureTabs"],
-		},
-	},
-}
 
 options.widgets = {
 	order = 8,
@@ -2767,8 +3369,77 @@ for _, widget in pairs({ "button", "treeGroupButton", "tab" }) do
 	}
 end
 
-options.bigWigsSkin = {
+options.libraries = {
 	order = 9,
+	type = "group",
+	name = L["Libraries"],
+	get = function(info)
+		return E.private.WT.skins.libraries[info[#info]]
+	end,
+	set = function(info, value)
+		E.private.WT.skins.libraries[info[#info]] = value
+		E:StaticPopup_Show("PRIVATE_RL")
+	end,
+	disabled = function()
+		return not E.private.WT.skins.enable
+	end,
+	args = {
+		enableAll = {
+			order = 1,
+			type = "execute",
+			name = L["Enable All"],
+			func = function()
+				for key in pairs(V.skins.libraries) do
+					E.private.WT.skins.libraries[key] = true
+				end
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+		},
+		disableAll = {
+			order = 2,
+			type = "execute",
+			name = L["Disable All"],
+			func = function()
+				for key in pairs(V.skins.libraries) do
+					E.private.WT.skins.libraries[key] = false
+				end
+				E:StaticPopup_Show("PRIVATE_RL")
+			end,
+		},
+		betterOption = {
+			order = 9,
+			type = "description",
+			name = " ",
+			width = "full",
+		},
+		ace3 = {
+			order = 10,
+			type = "toggle",
+			name = L["Ace3"],
+		},
+		ace3Dropdown = {
+			order = 10,
+			type = "toggle",
+			name = L["Ace3 Dropdown"],
+			disabled = function()
+				return not E.private.WT.skins.libraries.ace3
+			end,
+		},
+		libQTip = {
+			order = 10,
+			type = "toggle",
+			name = L["LibQTip"],
+		},
+		secureTabs = {
+			order = 10,
+			type = "toggle",
+			name = L["SecureTabs"],
+		},
+	},
+}
+
+options.bigWigsSkin = {
+	order = 10,
 	type = "group",
 	name = L["BigWigs Skin"],
 	disabled = function()

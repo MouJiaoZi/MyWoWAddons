@@ -3,56 +3,9 @@ local S = W.Modules.Skins ---@type Skins
 
 local _G = _G
 local pairs = pairs
+local hooksecurefunc = hooksecurefunc
 
-function S:BugSack_InterfaceOptionOnShow(frame)
-	if frame.__windSkin then
-		return
-	end
-
-	if _G.BugSackFontSize then
-		local dropdown = _G.BugSackFontSize
-		self:Proxy("HandleDropDownBox", dropdown, nil, nil, true)
-
-		local point, relativeTo, relativePoint, xOffset, yOffset = dropdown:GetPoint(1)
-		dropdown:ClearAllPoints()
-		dropdown:SetPoint(point, relativeTo, relativePoint, xOffset - 1, yOffset)
-
-		dropdown.__windSkinMarked = true
-	end
-
-	if _G.BugSackSoundDropdown then
-		local dropdown = _G.BugSackSoundDropdown
-		self:Proxy("HandleDropDownBox", dropdown, nil, nil, true)
-
-		local point, relativeTo, relativePoint = dropdown:GetPoint(1)
-		dropdown:ClearAllPoints()
-		dropdown:SetPoint(point, relativeTo, relativePoint)
-
-		dropdown.__windSkinMarked = true
-	end
-
-	for _, child in pairs({ frame:GetChildren() }) do
-		if child.__windSkinMarked then
-			child.__windSkinMarked = nil
-		else
-			local objectType = child:GetObjectType()
-			if objectType == "Button" then
-				self:Proxy("HandleButton", child)
-			elseif objectType == "CheckButton" then
-				self:Proxy("HandleCheckBox", child)
-
-				-- fix master channel checkbox position
-				local point, relativeTo, relativePoint = child:GetPoint(1)
-				if point == "LEFT" and relativeTo == _G.BugSackSoundDropdown then
-					child:ClearAllPoints()
-					child:SetPoint(point, relativeTo, relativePoint, 0, 3)
-				end
-			end
-		end
-	end
-
-	frame.__windSkin = true
-end
+local SettingsPanel = SettingsPanel
 
 function S:BugSack_OpenSack()
 	if _G.BugSackFrame.__windSkin then
@@ -88,10 +41,10 @@ function S:BugSack_OpenSack()
 
 	if _G.BugSackNextButton and _G.BugSackPrevButton and _G.BugSackSendButton then
 		local width, height = _G.BugSackSendButton:GetSize()
-		_G.BugSackSendButton:SetSize(width - 8, height)
+		_G.BugSackSendButton:Size(width - 8, height)
 		_G.BugSackSendButton:ClearAllPoints()
-		_G.BugSackSendButton:SetPoint("LEFT", _G.BugSackPrevButton, "RIGHT", 4, 0)
-		_G.BugSackSendButton:SetPoint("RIGHT", _G.BugSackNextButton, "LEFT", -4, 0)
+		_G.BugSackSendButton:Point("LEFT", _G.BugSackPrevButton, "RIGHT", 4, 0)
+		_G.BugSackSendButton:Point("RIGHT", _G.BugSackNextButton, "LEFT", -4, 0)
 
 		self:Proxy("HandleButton", _G.BugSackNextButton)
 		self:Proxy("HandleButton", _G.BugSackPrevButton)
@@ -116,7 +69,7 @@ function S:BugSack_OpenSack()
 			yOffset = -2
 		end
 
-		tab:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset)
+		tab:Point(point, relativeTo, relativePoint, xOffset, yOffset)
 	end
 
 	bugSackFrame.__windSkin = true
@@ -131,9 +84,18 @@ function S:BugSack()
 		return
 	end
 
-	self:SecureHookScript(_G.BugSack.frame, "OnShow", "BugSack_InterfaceOptionOnShow")
-	self:SecureHook(_G.BugSack, "OpenSack", "BugSack_OpenSack")
 	self:DisableAddOnSkin("BugSack")
+
+	self:SecureHook(_G.BugSack, "OpenSack", "BugSack_OpenSack")
+
+	-- Handle the special dropdown in settings
+	hooksecurefunc(SettingsPanel.Container.SettingsList.ScrollBox, "Update", function(scrollBox)
+		scrollBox:ForEachFrame(function(frame)
+			if frame.soundDropdown and frame.soundDropdown.intrinsic == "DropdownButton" then
+				self:Proxy("HandleDropDownBox", frame.soundDropdown)
+			end
+		end)
+	end)
 end
 
 S:AddCallbackForAddon("BugSack")

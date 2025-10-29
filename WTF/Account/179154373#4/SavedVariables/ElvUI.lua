@@ -1,0 +1,160 @@
+
+ElvDB = {
+["profileKeys"] = {
+["Afawfg - 军团要塞"] = "Default",
+},
+["DisabledAddOns"] = {
+},
+["serverID"] = {
+[1934] = {
+["军团要塞"] = true,
+},
+},
+["class"] = {
+["军团要塞"] = {
+["Afawfg"] = "SHAMAN",
+},
+},
+["profiles"] = {
+["Default"] = {
+["chat"] = {
+["panelSnapLeftID"] = 1,
+},
+["dbConverted"] = 14.02,
+["WT"] = {
+["social"] = {
+["chatBar"] = {
+["channels"] = {
+["world"] = {
+["enable"] = true,
+},
+},
+},
+},
+["version"] = "4.02",
+},
+["actionbar"] = {
+["microbar"] = {
+["buttons"] = 11,
+},
+["bar6"] = {
+["enabled"] = true,
+["buttonsPerRow"] = 6,
+["buttons"] = 6,
+},
+["bar5"] = {
+["enabled"] = false,
+["buttonsPerRow"] = 12,
+["buttons"] = 12,
+},
+},
+["convertPages"] = true,
+},
+},
+["WT"] = {
+["DisabledAddOns"] = {
+},
+},
+["gold"] = {
+["军团要塞"] = {
+["Afawfg"] = 32300,
+},
+},
+["namespaces"] = {
+},
+["faction"] = {
+["军团要塞"] = {
+["Afawfg"] = "Horde",
+},
+},
+["global"] = {
+["datatexts"] = {
+["settings"] = {
+["Currencies"] = {
+["tooltipData"] = {
+nil,
+{
+nil,
+nil,
+nil,
+true,
+},
+nil,
+{
+nil,
+nil,
+nil,
+true,
+},
+nil,
+{
+nil,
+nil,
+nil,
+true,
+},
+},
+},
+},
+},
+["nameplates"] = {
+["filters"] = {
+["ElvUI_Boss"] = {
+},
+["ElvUI_NonTarget"] = {
+},
+["ElvUI_Below20_Players"] = {
+},
+["ElvUI_Target"] = {
+},
+["ElvUI_Below20"] = {
+},
+},
+},
+["WT"] = {
+["misc"] = {
+["lfgList"] = {
+["军团要塞"] = {
+["Afawfg"] = {
+["dungeonFilter"] = {
+},
+},
+},
+},
+},
+["version"] = "4.02",
+["item"] = {
+["contacts"] = {
+["alts"] = {
+["军团要塞"] = {
+["Horde"] = {
+["Afawfg"] = "SHAMAN",
+},
+},
+},
+},
+},
+},
+},
+}
+ElvPrivateDB = {
+["profileKeys"] = {
+["Afawfg - 军团要塞"] = "Afawfg - 军团要塞",
+},
+["profiles"] = {
+["Afawfg - 军团要塞"] = {
+["WT"] = {
+["skins"] = {
+["addons"] = {
+["worldQuestTab"] = false,
+},
+},
+["version"] = "4.02",
+},
+["skins"] = {
+["parchmentRemoverEnable"] = true,
+},
+["install_complete"] = 14.02,
+},
+},
+}

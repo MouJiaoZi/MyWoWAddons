@@ -56,7 +56,7 @@ do
 	local ALPHA = "ALPHA"
 
 	local releaseType
-	local myGitHash = "701d320" -- The ZIP packager will replace this with the Git hash.
+	local myGitHash = "85476ad" -- The ZIP packager will replace this with the Git hash.
 	local releaseString
 	--[=[@alpha@
 	-- The following code will only be present in alpha ZIPs.
@@ -281,6 +281,9 @@ do
 			zones = {},
 		}
 	elseif public.isBeta then -- Retail Beta
+		EncounterTimeline:Hide() -- XXX temp
+		EncounterTimeline:SetScript("OnShow", function(f) f:Hide() end)
+		C_CVar.SetCVar("encounterTimelineEnabled", "1") -- If disabled, events wont fire atm.
 		public.currentExpansion = { -- Change on new expansion releases
 			name = mn,
 			bigWigsBundled = {

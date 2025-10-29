@@ -1,200 +1,190 @@
-# Version: 4.01
-2025/10/16 Released
+# Version: 4.02
+2025/10/25 Released
 ## ❗ Important
-- Some core code has been refactored to improve stability and performance.
-- A new game fix option has been added to solve the SetPassThroughButtons Lua error that occurs in some cases. Enabled by default.
-- Special handling of the 'Plugins' name in ElvUI settings, which can now be displayed correctly as a localized string.
-- Cleaned up some deprecated code.
+- Cleaned up code, removed some outdated features and functions.
+- Optimize Korean translation. Thanks to Crazyyoungs
+- Fix issue where 'not in a party' error message may appear when party composition changes.
+- Library files updated. Now better exchange keystone information with BigWigs and Details.
+- [Advanced] - [Reset] Fix issue where configuration may not reset correctly in some cases.
+- The colored quest progress info feature from [Announcements] - [Quest] is now separated into an independent module [Quests] - [Progress].
 ## ✳️ New
-- [Skins] Add skin for Collectionator.
-- [Skins] Add skin for Plumber.
-- [Skins] Add skin for TomTom.
-- [Skins] Add skin for Legion Remix Helper.
-- [Skins] Add skin for Cooldown Viewer.
-- [Skins] Add skin for Remix Artifact.
-- [Skins] Add an option to allow extending the UI error frame to display longer text information in a single line.
-- [Minimap Buttons] Add function to sort by button name priority.
-- [Inspect] Add player stats comparison feature.
-- [Game Bar] Home button adds middle mouse button to use Legion Remix hearthstone.
+- New Module: [Quests] - [Progress]. Enhances quest progress info content while supporting templating and custom gradients.
+- [Skins] Add separate styling options tab for Blizzard Cooldown Viewer. Supports modifying icon ratio, text, textures, etc.
+- [Skins] Add styling for the new Blizzard Catalog Shop. (Supported in ElvUI version 14.03 Dev and above)
+- [Objective Tracker] New text style option to set whether text is forced to display in a single line (exceeding part abbreviated as ...).
+- [Unit Frames] - [Role Icons] Added Blizzard style icon set.
+- [Unit Frames] - [Quick Focus] Added option to set raid marker when focusing, disabled by default.
+- [Chat Text] New [Trim Edit Box Header] option, disabled by default. (Only for Simplified Chinese client)
 ## 💪 Improvement
-- [Skins] Update Auctionator skin.
-- [Skins] Update SilverDragon skin.
-- [Skins] Update Rematch skin.
-- [Skins] Update Adventure Map skin.
-- [Skins] Update Friend List skin, especially Recent Allies section.
-- [Skins] Update some text style in widgets.
-- [Combat Alert] Refactor the module for better performance.
-- [Minimap Buttons] Improve support for some buttons.
-- [LFG List] Add support for Legion Remix Mythic+.
-- [LFG List] Hide the weekly vault button in Legion Remix.
-- [LFG List] Fix the issue where the dungeon score for group leaders is not sorted correctly.
-- [Friend List] Support Recent Allies section in Friend List.
-- [Announcements] - [Quests] When 'Remove Blizzard' is enabled, the current Blizzard quest progress will now be cleaned up more thoroughly (no empty lines anymore).
-- [Inspect] Optimize the issue where off-hand item level shows as 13 in Legion Remix.
-- [Inspect] Optimize the display width and position of item level.
-- [Move Frames] Update the frames list, add support for some frames.
-- [Achievement Tracker] Optimize performance during scanning and some UI elements.
-- [Quest TurnIn] Will no longer auto accept quests when some skipable quest option exist.
-- [Extra Item Bar] Add some Legion Remix items.
+- [Skins] Optimize spell button frames in scenarios.
+- [Skins] Add shadow for creating new talent specializations.
+- [Skins] Fix possible error with Rematch skin in standalone mode.
+- [Skins] Optimize background effect of Rematch skin. Thanks to gizzmo
+- [Skins] Improve stability of Legion Remix Helper collection page styling.
+- [Skins] Optimize Auctionator skin.
+- [Skins] Optimize RareScanner skin.
+- [Skins] Optimize SilverDragon skin.
+- [Skins] Optimize World Quest Tab skin.
+- [Skins] Optimize BugSack skin.
+- [Skins] Optimize UIErrorsFrame skin.
+- [Minimap Buttons] Optimize texture cleanup for Rematch and WIM minimap buttons.
+- [Extra Item Bar] Add some openable items.
+- [Game Bar] Attempt to fix issue where system info may not refresh correctly in some cases.
+- [Inspect] Optimize stability of automatic layout.
+- [Objective Tracker] Improve safety of styling to prevent taints in some cases.
+- [Combat Alert] Support different gradient color configurations for entering and leaving combat.
+- [Extend Merchant Pages] Optimize item button skins in extended pages.
 
 ------
-# 版本: 4.01
-2025/10/16 发布
+# 版本: 4.02
+2025/10/25 发布
 ## ❗ 重要
-- 进行了一些核心代码的重构, 提升了稳定性和性能.
-- 新增一项游戏修复功能, 可以修复某些情况下出现 SetPassThroughButtons Lua 报错的问题.默认开启
-- 特别处理了 ElvUI 设定中的'插件'名称, 现在可以正确显示为本地化字符串.
-- 清除了一些过期代码.
+- 清理代码, 移除一些过时的功能和函数.
+- 优化了韩语翻译. 感谢 Crazyyoungs
+- 修复了队伍组成变化时可能产生的 '不在队伍中' 错误提示问题.
+- 库文件更新. 现在能够更好的和 BigWigs 及 Details 互相交换钥石信息.
+- [高级] - [重置] 修复了某些情况下无法正确重置配置的问题.
+- [通告] - [任务] 中的任务信息功能现在分离为了一个独立模块 [任务] - [进度].
 ## ✳️ 新增
-- [美化外观] 新增了 Collectionator 皮肤.
-- [美化外观] 新增了 Plumber 皮肤.
-- [美化外观] 新增了 TomTom 皮肤.
-- [美化外观] 新增了 Legion Remix Helper 皮肤.
-- [美化外观] 新增了冷却技能监控皮肤.
-- [美化外观] 新增了 Remix 神器界面皮肤.
-- [美化外观] 新增一个选项, 可以允许扩展 UI 错误框架以单行展示较长文本信息.
-- [小地图按钮] 新增了根据按钮名称优先度排序功能.
-- [装备观察] 新增了玩家属性对比功能.
-- [游戏条] 家按钮新增鼠标中键使用军团 Remix 炉石.
+- 新增模块: [任务] - [进度]. 增强任务进度信息内容的同时, 支持模板化和自定义渐变色.
+- [美化外观] 新增了暴雪冷却技能监控的美化设定页. 支持修改图标的比例, 文字, 材质等.
+- [美化外观] 新增了新暴雪商店美化. (ElvUI 版本 14.03 开发版及以上支持此功能)
+- [任务列表] 新增文字风格选项, 可设定文字是否强制在单行内显示 (超出部分缩写为 ...).
+- [单位框体] - [职责图标] 新增了暴雪风格的图标组.
+- [单位框体] - [快速焦点] 新增了焦点时设定团队标记的功能, 默认关闭.
+- [聊天文字] 新增了 [清理编辑框开头] 选项, 默认关闭. (仅限简体中文客户端)
 ## 💪 改善
-- [美化外观] 优化了 Auctionator 的皮肤.
-- [美化外观] 优化了 SilverDragon 的皮肤.
-- [美化外观] 优化了 Rematch 的皮肤.
-- [美化外观] 优化了冒险地图皮肤.
-- [美化外观] 优化了好友界面中近期往来的皮肤.
-- [美化外观] 优化了一些 UI 组件中的文字显示.
-- [小地图按钮] 增强了对部分按钮的支持.
-- [战斗提示] 重构了模块, 提升性能.
-- [预组建队伍] 新增了军团 Remix 的史诗钥石地下城支持.
-- [预组建队伍] 在军团 Remix 中, 隐藏周常奖励按钮.
-- [预组建队伍] 修复了队长地下城分数无法正常排序的问题.
-- [好友列表] 支持了好友界面中近期往来界面.
-- [通告] - [任务] 移除暴雪选项开启时, 现在的暴雪任务进度将会被清除得更加干净（无空行产生）.
-- [装备观察] 优化了军团 Remix 中副手等级显示为 13 的问题.
-- [装备观察] 优化了装备等级的显示宽度和位置.
-- [移动框体] 更新了移动框体列表, 新增一些框体支持.
-- [成就追踪] 优化了扫描时的性能和部分界面元素.
-- [任务交接] 部分可跳过任务提示存在时，将不再自动接取任务.
-- [额外物品条] 新增一些军团 Remix 物品.
+- [美化外观] 优化了场景中的法术按钮.
+- [美化外观] 优化了新建天赋配置的界面.
+- [美化外观] 修复了 Rematch 皮肤在独立模式下可能的报错问题.
+- [美化外观] 优化了 Rematch 皮肤的背景效果. 感谢 gizzmo
+- [美化外观] 优化了 Legion Remix Helper 收藏页面美化的稳定性.
+- [美化外观] 优化了 Auctionator 皮肤.
+- [美化外观] 优化了 RareScanner 皮肤.
+- [美化外观] 优化了 SilverDragon 皮肤.
+- [美化外观] 优化了 World Quest Tab 皮肤.
+- [美化外观] 优化了 BugSack 皮肤.
+- [美化外观] 优化了 UIErrorsFrame 宽度调整的稳定性.
+- [小地图按钮] 优化了 Rematch 和 WIM 小地图按钮的材质清理.
+- [额外物品条] 新增了一些可开启物品.
+- [游戏条] 尝试修复在某些情况下系统信息无法正确刷新的问题.
+- [装备观察] 优化了自动布局的稳定性.
+- [任务列表] 改善了美化的安全性, 防止某些情况下的污染问题.
+- [战斗提示] 支持进入战斗和离开战斗时的不同渐变色配置.
+- [商人页面扩展] 优化了扩展页面中的物品按钮美化.
 
 ------
-# 版本: 4.01
-2025/10/16 發布
+# 版本: 4.02
+2025/10/25 發布
 ## ❗ 重要
-- 進行了一些核心代碼的重構, 提升了穩定性和效能.
-- 新增一項遊戲修復功能, 可以修復某些情況下出現 SetPassThroughButtons Lua 報錯的問題.預設開啟
-- 特別處理了 ElvUI 設定中的'插件'名稱, 現在可以正確顯示為本地化字串.
-- 清除了一些過期代碼.
+- 清理代碼, 移除一些過時的功能和函數.
+- 優化了韓語翻譯. 感謝 Crazyyoungs
+- 修復了隊伍組成變化時可能產生的 '不在隊伍中' 錯誤提示問題.
+- 庫文件更新. 現在能夠更好的和 BigWigs 及 Details 互相交換鑰石信息.
+- [進階] - [重置] 修復了某些情況下無法正確重置配置的問題.
+- [通告] - [任務] 中的任務信息功能現在分離為了一個獨立模組 [任務] - [進度].
 ## ✳️ 新增
-- [美化外觀] 新增了 Collectionator 皮膚.
-- [美化外觀] 新增了 Plumber 皮膚.
-- [美化外觀] 新增了 TomTom 皮膚.
-- [美化外觀] 新增了 Legion Remix Helper 皮膚.
-- [美化外觀] 新增了冷卻技能監控皮膚.
-- [美化外觀] 新增了 Remix 神器介面皮膚.
-- [美化外觀] 新增一個選項, 可以允許擴展 UI 錯誤框架以單行展示較長文本資訊.
-- [小地圖按鈕] 新增了根據按鈕名稱優先度排序功能.
-- [裝備觀察] 新增了玩家屬性比較功能.
-- [遊戲條] 家按鍵新增滑鼠中鍵使用軍團 Remix 爐石.
+- 新增模組: [任務] - [進度]. 增強任務進度信息內容的同時, 支援模板化和自訂漸變色.
+- [美化外觀] 新增了暴雪冷卻技能監控的美化設定頁. 支援修改圖示的比例, 文字, 材質等.
+- [美化外觀] 新增了新暴雪商店美化. (ElvUI 版本 14.03 開發版及以上支援此功能)
+- [任務列表] 新增文字風格選項, 可設定文字是否強制在單行內顯示 (超出部分縮寫為 ...).
+- [單位框架] - [職責圖示] 新增了暴雪風格的圖示組.
+- [單位框架] - [快速焦點] 新增了焦點時設定團隊標記的功能, 預設關閉.
+- [聊天文字] 新增了 [清理編輯框開頭] 選項, 預設關閉. (僅限簡體中文客戶端)
 ## 💪 改善
-- [美化外觀] 優化了 Auctionator 的皮膚.
-- [美化外觀] 優化了 SilverDragon 的皮膚.
-- [美化外觀] 優化了 Rematch 的皮膚.
-- [美化外觀] 優化了冒險地圖皮膚.
-- [美化外觀] 優化了好友介面中近期盟友的皮膚.
-- [美化外觀] 優化了一些 UI 組件中的文字顯示.
-- [小地圖按鈕] 增強了對部分按鈕的支援.
-- [戰鬥提示] 重構了模組, 提升效能.
-- [預組隊伍] 新增了軍團 Remix 的史詩鑰石地城支援.
-- [預組隊伍] 在軍團 Remix 中, 隱藏週常獎勵按鈕.
-- [預組隊伍] 修復了隊長地下城分數無法正常排序的問題.
-- [好友名單] 支援了好友介面中近期盟友介面.
-- [通告] - [任務] 移除暴雪選項開啟時, 現在的暴雪任務進度將會被清除得更加乾淨（無空行產生）.
-- [裝備觀察] 優化了軍團 Remix 中副手等級顯示為 13 的問題.
-- [裝備觀察] 優化了裝備等級的顯示寬度和位置.
-- [移動框架] 更新了移動框架列表, 新增一些框架支援.
-- [成就追蹤] 優化了掃描時的效能和部分介面元素.
-- [任務交接] 部分可跳過任務提示存在時，將不再自動接取任務.
-- [額外物品條] 新增一些軍團 Remix 物品.
+- [美化外觀] 優化了場景中的法術按鍵.
+- [美化外觀] 優化了新建天賦配置的介面.
+- [美化外觀] 修復了 Rematch 皮膚在獨立模式下可能的報錯問題.
+- [美化外觀] 優化了 Rematch 皮膚的背景效果. 感謝 gizzmo
+- [美化外觀] 優化了 Legion Remix Helper 收藏頁面美化的穩定性.
+- [美化外觀] 優化了 Auctionator 皮膚.
+- [美化外觀] 優化了 RareScanner 皮膚.
+- [美化外觀] 優化了 SilverDragon 皮膚.
+- [美化外觀] 優化了 World Quest Tab 皮膚.
+- [美化外觀] 優化了 BugSack 皮膚.
+- [美化外觀] 優化了 UIErrorsFrame 寬度調整的穩定性.
+- [小地圖按鍵] 優化了 Rematch 和 WIM 小地圖按鍵的材質清理.
+- [額外物品條] 新增了一些可開啟物品.
+- [遊戲條] 嘗試修復在某些情況下系統信息無法正確刷新的問題.
+- [裝備觀察] 優化了自動佈局的穩定性.
+- [任務列表] 改善了美化的安全性, 防止某些情況下的污染問題.
+- [戰鬥提示] 支援進入戰鬥和離開戰鬥時的不同漸變色配置.
+- [商人頁面擴展] 優化了擴展頁面中的物品按鈕美化.
 
 ------
-# 버전: 4.01
-2025/10/16 Released
+# 버전: 4.02
+2025/10/25 Released
 ## ❗ 중요 사항
-- 안정성과 성능을 향상시키기 위해 일부 핵심 코드가 리팩토링되었습니다.
-- 일부 경우에 발생하는 SetPassThroughButtons Lua 오류를 해결하기 위해 새로운 게임 수정 옵션이 추가되었습니다. 기본적으로 활성화되어 있습니다.
-- ElvUI 설정의 '플러그인' 이름을 특별히 처리하여 이제 현지화된 문자열로 올바르게 표시할 수 있습니다.
-- 일부 더 이상 사용되지 않는 코드를 정리했습니다.
+- 코드 정리, 일부 오래된 기능 및 함수 제거.
+- 한국어 번역을 최적화했습니다. Crazyyoungs에게 감사합니다
+- 파티 구성 변경 시 '파티에 없음' 오류 메시지가 나타날 수 있는 문제를 수정했습니다.
+- 라이브러리 파일이 업데이트되었습니다. 이제 BigWigs 및 Details와 더 나은 열쇠 정보 교환이 가능합니다.
+- [고급] - [재설정] 일부 경우에 구성이 올바르게 재설정되지 않을 수 있는 문제를 수정했습니다.
+- [공지사항] - [퀘스트]의 퀘스트 정보 기능이 독립 모듈 [퀘스트] - [진행 상황]으로 분리되었습니다.
 ## ✳️ 신규 사항
-- [스킨] Collectionator에 스킨이 추가되었습니다.
-- [스킨] Plumber에 스킨이 추가되었습니다.
-- [스킨] TomTom에 스킨이 추가되었습니다.
-- [스킨] Legion Remix Helper에 스킨이 추가되었습니다.
-- [스킨] 쿨다운 뷰어에 스킨이 추가되었습니다.
-- [스킨] 리믹스 아티팩트에 스킨이 추가되었습니다.
-- [스킨] UI 오류 프레임을 확장하여 더 긴 텍스트 정보를 한 줄로 표시할 수 있는 옵션이 추가되었습니다.
-- [미니맵 버튼] 버튼 이름 우선순위로 정렬하는 기능이 추가되었습니다.
-- [관찰] 플레이어 통계 비교 기능이 추가되었습니다.
-- [게임 바] 홈 버튼에 중간 마우스 버튼이 추가되어 Legion Remix 하스스톤을 사용할 수 있습니다.
+- 새로운 모듈: [퀘스트] - [진행 상황]. 퀘스트 진행 상황 정보 콘텐츠를 향상시키면서 템플릿화 및 사용자 지정 그라데이션을 지원합니다.
+- [스킨] 블리자드 쿨다운 뷰어를 위한 별도의 스타일링 옵션 탭을 추가했습니다. 아이콘 비율, 텍스트, 텍스처 등을 수정하는 것을 지원합니다.
+- [스킨] 새로운 블리자드 카탈로그 상점을 위한 스타일링을 추가했습니다. (ElvUI 버전 14.03 개발 버전 이상에서 지원됨)
+- [퀘스트 추적기] 텍스트가 단일 행에 표시되도록 강제할지 여부를 설정하는 새로운 텍스트 스타일 옵션 (초과 부분은 ...로 축약됨).
+- [유닛 프레임] - [역할 아이콘] 블리자드 스타일 아이콘 세트를 추가했습니다.
+- [유닛 프레임] - [빠른 집중] 집중할 때 공격대 표시기를 설정하는 옵션을 추가했으며 기본적으로 비활성화되어 있습니다.
+- [채팅 텍스트] 새로운 [편집 상자 헤더 다듬기] 옵션, 기본적으로 비활성화되어 있습니다. (간체 중국어 클라이언트 전용)
 ## 💪 개선 사항
-- [스킨] Auctionator 스킨이 업데이트되었습니다.
-- [스킨] SilverDragon 스킨이 업데이트되었습니다.
-- [스킨] Rematch 스킨이 업데이트되었습니다.
-- [스킨] 모험 지도 스킨이 업데이트되었습니다.
-- [스킨] 친구 목록 스킨이 업데이트되었으며, 특히 최근 동맹 섹션이 포함되었습니다.
-- [스킨] 일부 위젯의 텍스트 스타일이 업데이트되었습니다.
-- [전투 알림] 더 나은 성능을 위해 모듈이 리팩토링되었습니다.
-- [미니맵 버튼] 일부 버튼에 대한 지원이 개선되었습니다.
-- [파티 찾기 목록] 군단 리믹스 신화+ 지원이 추가되었습니다.
-- [파티 찾기 목록] 군단 리믹스에서 주간 금고 버튼이 숨겨졌습니다.
-- [파티 찾기 목록] 그룹 리더의 던전 점수가 올바르게 정렬되지 않는 문제를 수정했습니다.
-- [친구 목록] 친구 목록에서 최근 동맹 섹션을 지원합니다.
-- [공지사항] - [퀘스트] '블리자드 제거'가 활성화되면 현재 블리자드 퀘스트 진행 상황이 더 철저하게 정리됩니다(빈 줄 없음).
-- [관찰] 군단 리믹스에서 보조 무기 아이템 레벨이 13으로 표시되는 문제를 최적화했습니다.
-- [관찰] 아이템 레벨의 표시 너비와 위치를 최적화했습니다.
-- [이동 프레임] 프레임 목록을 업데이트하고 일부 프레임에 대한 지원을 추가했습니다.
-- [업적 추적기] 스캔 중 성능과 일부 UI 요소를 최적화했습니다.
-- [퀘스트 수락] 일부 건너뛸 수 있는 퀘스트 옵션이 존재할 때 더 이상 자동으로 퀘스트를 수락하지 않습니다.
-- [추가 아이템 바] 일부 Legion Remix 아이템이 추가되었습니다.
+- [스킨] 시나리오 내의 주문 버튼 프레임을 최적화했습니다.
+- [스킨] 새로운 특성 전문화를 생성할 때 그림자를 추가했습니다.
+- [스킨] 독립 모드에서 Rematch 스킨의 가능한 오류를 수정했습니다.
+- [스킨] Rematch 스킨의 배경 효과를 최적화했습니다. gizzmo에게 감사합니다
+- [스킨] Legion Remix Helper 컬렉션 페이지 스킬링의 안정성을 개선했습니다.
+- [스킨] Auctionator 스킨을 최적화했습니다.
+- [스킨] RareScanner 스킨을 최적화했습니다.
+- [스킨] SilverDragon 스킨을 최적화했습니다.
+- [스킨] World Quest Tab 스킨을 최적화했습니다.
+- [스킨] BugSack 스킨을 최적화했습니다.
+- [스킨] UIErrorsFrame 스킨을 최적화했습니다.
+- [미니맵 버튼] Rematch 및 WIM 미니맵 버튼의 텍스처 정리를 최적화했습니다.
+- [추가 아이템 바] 일부 열 수 있는 아이템을 추가했습니다.
+- [게임 바] 일부 경우에 시스템 정보가 올바르게 새로 고쳐지지 않는 문제를 수정하려고 시도했습니다.
+- [장비 살펴보기] 자동 레이아웃의 안정성을 최적화했습니다.
+- [퀘스트 추적기] 일부 경우에 오염을 방지하기 위해 스타일링의 안전성을 향상시켰습니다.
+- [전투 알림] 전투 진입 및 퇴장 시 서로 다른 그라데이션 색상 구성을 지원합니다.
+- [상인 페이지 확장] 확장된 페이지의 아이템 버튼 스킨을 최적화했습니다.
 
 ------
-# Версия: 4.01
-2025/10/16 Релиз
+# Версия: 4.02
+2025/10/25 Релиз
 ## ❗ Важные
-- Некоторый основной код был переработан для повышения стабильности и производительности.
-- Добавлена новая опция исправления игры, которая решает проблему с ошибкой SetPassThroughButtons Lua, возникающей в некоторых случаях. По умолчанию включено.
-- Особая обработка имени 'Плагины' в настройках ElvUI, которое теперь может отображаться правильно как локализованная строка.
-- Удален некоторый устаревший код.
+- Очистка кода, удаление некоторых устаревших функций и методов.
+- Оптимизирован перевод на корейский язык. Спасибо Crazyyoungs
+- Исправлена проблема, из-за которой при изменении состава группы могло появляться сообщение об ошибке 'не в группе'.
+- Обновлены файлы библиотеки. Теперь обмен информацией о ключах М+ с BigWigs и Details стал ещё лучше.
+- [Дополнительно] - [Сброс] Исправлена проблема, из-за которой конфигурация могла не сбрасываться правильно в некоторых случаях.
+- Функция цветной информации о прогрессе заданий из [Объявления] - [Задания] теперь выделена в независимый модуль [Задания] - [Прогресс].
 ## ✳️ Новые
-- [Скины] Добавлен скин для Collectionator.
-- [Скины] Добавлен скин для Plumber.
-- [Скины] Добавлен скин для TomTom.
-- [Скины] Добавлен скин для Legion Remix Helper.
-- [Скины] Добавлен скин для Cooldown Viewer.
-- [Скины] Добавлен скин для Remix Artifact.
-- [Скины] Добавлена опция, позволяющая расширить рамку ошибок UI для отображения более длинной текстовой информации в одной строке.
-- [Кнопки миникарты] Добавлена функция сортировки по приоритету имени кнопки.
-- [Осмотр] Добавлена функция сравнения характеристик игрока.
-- [Игровая панель] Кнопка 'Домой' добавляет среднюю кнопку мыши для использования камня возвращения Legion Remix.
+- Новый модуль: [Задания] - [Прогресс]. Улучшает содержимое информации о прогрессе заданий, поддерживая шаблоны и пользовательские градиенты.
+- [Скины] Добавлена отдельная вкладка параметров стилизации для Трекера Восстановлений Blizzard. Поддерживает изменение соотношения иконок, текста, текстур и т.д.
+- [Скины] Добавлена стилизация для нового магазина Blizzard. (Поддерживается в версии ElvUI 14.03 Dev и выше)
+- [Список заданий] Новая опция стиля текста для установки того, отображается ли текст в одной строке (превышающая часть сокращается как ...).
+- [Юнит-фреймы] - [Иконки ролей] Добавлен набор иконок в стиле Blizzard.
+- [Юнит-фреймы] - [Быстрый фокус] Добавлена опция установки рейдовой метки при фокусировке, по умолчанию отключена.
+- [Текст чата] Новая опция [Обрезать заголовок поля ввода], по умолчанию отключена. (Только для упрощённого китайского клиента)
 ## 💪 Улучшения
-- [Скины] Обновлен скин Auctionator.
-- [Скины] Обновлен скин SilverDragon.
-- [Скины] Обновлен скин Rematch.
-- [Скины] Обновлен скин карты приключений.
-- [Скины] Обновлен скин списка друзей, особенно раздел 'Недавние союзники'.
-- [Скины] Обновлен стиль текста в некоторых виджетах.
-- [Боевые оповещения] Модуль переработан для повышения производительности.
-- [Кнопки миникарты] Улучшена поддержка некоторых кнопок.
-- [Список поиска групп] Добавлена поддержка Легиона Remix Mythic+.
-- [Список поиска групп] Скрыта кнопка еженедельного хранилища в Легионе Remix.
-- [Список поиска групп] Исправлена проблема, из-за которой очки подземелий для лидеров групп не сортировались правильно.
-- [Список друзей] Поддержка раздела 'Недавние союзники' в списке друзей.
-- [Объявления] - [Задания] Когда включена опция 'Удалить Blizzard', текущий прогресс заданий Blizzard теперь будет очищаться более тщательно (без пустых строк).
-- [Осмотр] Оптимизирована проблема, когда уровень предмета в правой руке отображается как 13 в Legion Remix.
-- [Осмотр] Оптимизированы ширина и позиция отображения уровня предмета.
-- [Перемещение фреймов] Обновлен список фреймов, добавлена поддержка некоторых фреймов.
-- [Трекер достижений] Оптимизирована производительность при сканировании и некоторые элементы интерфейса.
-- [Завершение задания] Больше не будет автоматически принимать задания, когда существуют некоторые варианты пропускаемых заданий.
-- [Дополнительная панель предметов] Добавлены некоторые предметы Legion Remix.
+- [Скины] Оптимизированы кнопки заклинаний в сценариях.
+- [Скины] Добавлена тень для создания новых специализаций талантов.
+- [Скины] Исправлена возможная ошибка скина Rematch в автономном режиме.
+- [Скины] Оптимизирован фоновый эффект скина Rematch. Спасибо gizzmo
+- [Скины] Улучшена стабильность стилизации страницы коллекций Legion Remix Helper.
+- [Скины] Оптимизирован скин Auctionator.
+- [Скины] Оптимизирован скин RareScanner.
+- [Скины] Оптимизирован скин SilverDragon.
+- [Скины] Оптимизирован скин World Quest Tab.
+- [Скины] Оптимизирован скин BugSack.
+- [Скины] Оптимизирован скин UIErrorsFrame.
+- [Кнопки миникарты] Оптимизирована очистка текстур для кнопок миникарты Rematch и WIM.
+- [Дополнительная панель предметов] Добавлены некоторые открываемые предметы.
+- [Игровая панель] Попытка исправить проблему, из-за которой системная информация может некорректно обновляться в некоторых случаях.
+- [Осмотр] Оптимизирована стабильность автоматической компоновки.
+- [Список заданий] Повышена безопасность стилизации для предотвращения загрязнения в некоторых случаях.
+- [Оповещение в бою] Поддержка различных конфигураций градиентных цветов при входе и выходе из боя.
+- [Расширение страниц торговца] Оптимизированы скины кнопок предметов на расширенных страницах.
 
 ------
